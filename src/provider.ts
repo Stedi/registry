@@ -12,6 +12,7 @@ export type SchemaPackage = OpenAPI3Schema;
 export interface Provider {
   getVersions: () => Promise<string[]>;
   getSchema: (version: string) => Promise<SchemaPackage>;
+  shouldGenerateMock?: boolean;
 }
 
 export function openAPIUrlProvider(
@@ -34,5 +35,6 @@ export function openAPIUrlProvider(
         value: !!transform ? await transform(data) : data,
       };
     },
+    shouldGenerateMock: true
   };
 }

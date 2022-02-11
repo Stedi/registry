@@ -1,8 +1,13 @@
-import { SchemaPackage } from "./provider";
+import { Provider, SchemaPackage } from "./provider";
 import providers from "./providers";
 import openAPIParser from "@readme/openapi-parser";
 import path from "path";
 import fs from "fs";
+import { OpenAPIV3 } from "openapi-types";
+import { mock } from "./util";
+
+// CommonJS
+
 
 interface Schema {
   name: string;
@@ -34,7 +39,8 @@ async function unbundle(bundle: SchemaPackage): Promise<Schema[]> {
 export async function generateForVersion(
   rootPath: string,
   providerName: keyof typeof providers,
-  version: string
+  version: string,
+  shouldGenerateMock?: boolean,
 ) {
   const baseDir = path.join(rootPath, providerName, version);
   const folderExists = !fs.mkdirSync(baseDir, { recursive: true });
@@ -48,6 +54,9 @@ export async function generateForVersion(
   console.log(`Generating [${providerName}, ${version}]...`);
   for (const schema of schemas) {
     const target = path.join(baseDir, `${schema.name}.json`);
+    if ((providers[providerName] as Provider).shouldGenerateMock) {
+      (schema.schema as any)["default"] = mock(schema.schema as OpenAPIV3.SchemaObject);
+    }
     fs.writeFileSync(target, JSON.stringify(schema.schema, null, 2));
   }
 }
