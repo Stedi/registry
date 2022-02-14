@@ -4,7 +4,7 @@ import openAPIParser from "@readme/openapi-parser";
 import path from "path";
 import fs from "fs";
 import { OpenAPIV3 } from "openapi-types";
-import { mock } from "./util";
+import { mock, traverse } from "./util";
 
 // CommonJS
 
@@ -23,7 +23,6 @@ async function unbundle(bundle: SchemaPackage): Promise<Schema[]> {
     case "openapi-v3":
       const dereferenced = await openAPIParser.dereference(
         bundle.value as any,
-        { dereference: { circular: "ignore" } }
       );
       if (!("components" in dereferenced))
         throw new Error("Expected components");
@@ -54,10 +53,13 @@ export async function generateForVersion(
   console.log(`Generating [${providerName}, ${version}]...`);
   for (const schema of schemas) {
     const target = path.join(baseDir, `${schema.name}.json`);
-    if ((providers[providerName] as Provider).shouldGenerateMock) {
-      (schema.schema as any)["default"] = mock(schema.schema as OpenAPIV3.SchemaObject);
+    if (schema.name === "api_errors" || schema.name === "error" || schema.name === "invoice" || schema.name === "payment_intent" || schema.name === "setup_attempt" || schema.name === "setup_intent") {
+      continue;
     }
-    fs.writeFileSync(target, JSON.stringify(schema.schema, null, 2));
+    schema.schema = traverse(schema.schema as OpenAPIV3.SchemaObject);
+    (schema.schema as any)["default"] = mock(schema.schema as OpenAPIV3.SchemaObject);
+
+    fs.writeFileSync(target, JSON.stringify(schema, null, 2));
   }
 }
 

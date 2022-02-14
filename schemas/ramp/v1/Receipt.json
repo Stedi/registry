@@ -1,34 +1,37 @@
 {
-  "title": "Receipt",
-  "type": "object",
-  "properties": {
-    "id": {
-      "type": "string",
-      "format": "uuid"
+  "name": "Receipt",
+  "schema": {
+    "title": "Receipt",
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "transaction_id": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "user_id": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "receipt_url": {
+        "type": "string",
+        "format": "uri",
+        "description": "Pre-signed url to download receipt image"
+      },
+      "created_at": {
+        "type": "string",
+        "format": "date-time"
+      }
     },
-    "transaction_id": {
-      "type": "string",
-      "format": "uuid"
-    },
-    "user_id": {
-      "type": "string",
-      "format": "uuid"
-    },
-    "receipt_url": {
-      "type": "string",
-      "format": "uri",
-      "description": "Pre-signed url to download receipt image"
-    },
-    "created_at": {
-      "type": "string",
-      "format": "date-time"
+    "default": {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "transaction_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "receipt_url": "https://example.com/path",
+      "created_at": "1970-01-01T00:00:00.000Z"
     }
-  },
-  "default": {
-    "id": "952c9fa4-b171-401e-a4e4-23873ee6cbd6",
-    "transaction_id": "9db1036e-fe76-49a1-9463-82ab1435501c",
-    "user_id": "c95a204c-374f-4eb3-bd52-6ec65dc8fe71",
-    "receipt_url": "http://asperiores.info",
-    "created_at": "2022-02-12T04:06:23.211Z"
   }
 }

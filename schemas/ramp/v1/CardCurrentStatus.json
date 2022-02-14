@@ -1,21 +1,24 @@
 {
-  "title": "Card Current Status",
-  "type": "object",
-  "description": "Current status of a card that contains real-time info.",
-  "properties": {
-    "amount_spent_on_card": {
-      "type": "number"
+  "name": "CardCurrentStatus",
+  "schema": {
+    "title": "Card Current Status",
+    "type": "object",
+    "description": "Current status of a card that contains real-time info.",
+    "properties": {
+      "amount_spent_on_card": {
+        "type": "number"
+      },
+      "locked_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "format": "date-time"
+      }
     },
-    "locked_at": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "format": "date-time"
+    "default": {
+      "amount_spent_on_card": 0,
+      "locked_at": "1970-01-01T00:00:00.000Z"
     }
-  },
-  "default": {
-    "amount_spent_on_card": 797915,
-    "locked_at": "2022-02-12T03:17:21.301Z"
   }
 }

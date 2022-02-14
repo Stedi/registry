@@ -1,25 +1,25 @@
 {
-  "description": "",
-  "properties": {
-    "email": {
-      "description": "The customer’s email at time of checkout.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "tax_exempt": {
-      "description": "The customer’s tax exempt status at time of checkout.",
-      "enum": [
-        "exempt",
-        "none",
-        "reverse"
-      ],
-      "nullable": true,
-      "type": "string"
-    },
-    "tax_ids": {
-      "description": "The customer’s tax IDs at time of checkout.",
-      "items": {
+  "name": "payment_pages_checkout_session_customer_details",
+  "schema": {
+    "description": "",
+    "properties": {
+      "email": {
+        "description": "The customer’s email at time of checkout.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "tax_exempt": {
+        "description": "The customer’s tax exempt status at time of checkout.",
+        "enum": [
+          "exempt",
+          "none",
+          "reverse"
+        ],
+        "nullable": true,
+        "type": "string"
+      },
+      "tax_ids": {
         "description": "",
         "properties": {
           "type": {
@@ -81,14 +81,20 @@
         "title": "PaymentPagesCheckoutSessionTaxID",
         "type": "object",
         "x-expandableFields": []
-      },
-      "nullable": true,
-      "type": "array"
+      }
+    },
+    "title": "PaymentPagesCheckoutSessionCustomerDetails",
+    "type": "object",
+    "x-expandableFields": [
+      "tax_ids"
+    ],
+    "default": {
+      "email": "string",
+      "tax_exempt": "exempt",
+      "tax_ids": {
+        "type": "ae_trn",
+        "value": "string"
+      }
     }
-  },
-  "title": "PaymentPagesCheckoutSessionCustomerDetails",
-  "type": "object",
-  "x-expandableFields": [
-    "tax_ids"
-  ]
+  }
 }

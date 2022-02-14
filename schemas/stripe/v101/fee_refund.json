@@ -1,93 +1,67 @@
 {
-  "description": "`Application Fee Refund` objects allow you to refund an application fee that\nhas previously been created but not yet refunded. Funds will be refunded to\nthe Stripe account from which the fee was originally collected.\n\nRelated guide: [Refunding Application Fees](https://stripe.com/docs/connect/destination-charges#refunding-app-fee).",
-  "properties": {
-    "amount": {
-      "description": "Amount, in %s.",
-      "type": "integer"
-    },
-    "balance_transaction": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/balance_transaction"
-        }
-      ],
-      "description": "Balance transaction that describes the impact on your account balance.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/balance_transaction"
-          }
-        ]
-      }
-    },
-    "created": {
-      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-      "format": "unix-time",
-      "type": "integer"
-    },
-    "currency": {
-      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-      "type": "string"
-    },
-    "fee": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/application_fee"
-        }
-      ],
-      "description": "ID of the application fee that was refunded.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/application_fee"
-          }
-        ]
-      }
-    },
-    "id": {
-      "description": "Unique identifier for the object.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "metadata": {
-      "additionalProperties": {
-        "maxLength": 500,
+  "name": "fee_refund",
+  "schema": {
+    "description": "`Application Fee Refund` objects allow you to refund an application fee that\nhas previously been created but not yet refunded. Funds will be refunded to\nthe Stripe account from which the fee was originally collected.\n\nRelated guide: [Refunding Application Fees](https://stripe.com/docs/connect/destination-charges#refunding-app-fee).",
+    "properties": {
+      "amount": {
+        "description": "Amount, in %s.",
+        "type": "integer"
+      },
+      "balance_transaction": {
+        "maxLength": 5000,
         "type": "string"
       },
-      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-      "nullable": true,
-      "type": "object"
+      "created": {
+        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+        "format": "unix-time",
+        "type": "integer"
+      },
+      "currency": {
+        "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+        "type": "string"
+      },
+      "fee": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "id": {
+        "description": "Unique identifier for the object.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "metadata": {},
+      "object": {
+        "description": "String representing the object's type. Objects of the same type share the same value.",
+        "enum": [
+          "fee_refund"
+        ],
+        "type": "string"
+      }
     },
-    "object": {
-      "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "fee_refund"
-      ],
-      "type": "string"
+    "required": [
+      "amount",
+      "created",
+      "currency",
+      "fee",
+      "id",
+      "object"
+    ],
+    "title": "FeeRefund",
+    "type": "object",
+    "x-expandableFields": [
+      "balance_transaction",
+      "fee"
+    ],
+    "x-resourceId": "fee_refund",
+    "default": {
+      "amount": 0,
+      "balance_transaction": "string",
+      "created": 0,
+      "currency": "string",
+      "fee": "string",
+      "id": "string",
+      "metadata": {},
+      "object": "fee_refund"
     }
-  },
-  "required": [
-    "amount",
-    "created",
-    "currency",
-    "fee",
-    "id",
-    "object"
-  ],
-  "title": "FeeRefund",
-  "type": "object",
-  "x-expandableFields": [
-    "balance_transaction",
-    "fee"
-  ],
-  "x-resourceId": "fee_refund"
+  }
 }

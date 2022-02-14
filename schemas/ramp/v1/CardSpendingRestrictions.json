@@ -1,65 +1,54 @@
 {
-  "description": "Specifies the spend restrictions on a Ramp card.",
-  "type": "object",
-  "title": "Card Spending Restriction",
-  "properties": {
-    "amount": {
-      "type": "number",
-      "minimum": 0,
-      "description": "Amount limit total per interval."
-    },
-    "interval": {
-      "type": "string",
-      "minLength": 1,
-      "enum": [
-        "DAILY",
-        "MONTHLY",
-        "YEARLY",
-        "TOTAL"
-      ],
-      "description": "Time interval to apply limit to."
-    },
-    "lock_date": {
-      "type": "string",
-      "minLength": 1,
-      "format": "date-time",
-      "description": "Date to automatically lock the card. If lock date has passed, set to a future date or to null to unlock the card."
-    },
-    "categories": {
-      "type": "array",
-      "uniqueItems": true,
-      "description": "List of Ramp Category Codes to restrict this card to.",
-      "items": {
+  "name": "CardSpendingRestrictions",
+  "schema": {
+    "description": "Specifies the spend restrictions on a Ramp card.",
+    "type": "object",
+    "title": "Card Spending Restriction",
+    "properties": {
+      "amount": {
+        "type": "number",
+        "minimum": 0,
+        "description": "Amount limit total per interval."
+      },
+      "interval": {
+        "type": "string",
+        "minLength": 1,
+        "enum": [
+          "DAILY",
+          "MONTHLY",
+          "YEARLY",
+          "TOTAL"
+        ],
+        "description": "Time interval to apply limit to."
+      },
+      "lock_date": {
+        "type": "string",
+        "minLength": 1,
+        "format": "date-time",
+        "description": "Date to automatically lock the card. If lock date has passed, set to a future date or to null to unlock the card."
+      },
+      "categories": {
         "type": "number"
+      },
+      "blocked_categories": {
+        "type": "number"
+      },
+      "transaction_amount_limit": {
+        "type": "number",
+        "minimum": 0,
+        "description": "Max amount limit per transaction."
       }
     },
-    "blocked_categories": {
-      "type": "array",
-      "uniqueItems": true,
-      "description": "List of Ramp Category Codes blocked for this card.",
-      "items": {
-        "type": "number"
-      }
-    },
-    "transaction_amount_limit": {
-      "type": "number",
-      "minimum": 0,
-      "description": "Max amount limit per transaction."
+    "x-tags": [
+      "Card"
+    ],
+    "default": {
+      "amount": 0,
+      "interval": "DAILY",
+      "lock_date": "1970-01-01T00:00:00.000Z",
+      "categories": 0,
+      "blocked_categories": 0,
+      "transaction_amount_limit": 0
     }
-  },
-  "x-tags": [
-    "Card"
-  ],
-  "default": {
-    "amount": 863546,
-    "interval": "DAILY",
-    "lock_date": "2022-02-11T22:48:13.573Z",
-    "categories": [
-      978891
-    ],
-    "blocked_categories": [
-      369473
-    ],
-    "transaction_amount_limit": 239027
   }
 }

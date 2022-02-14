@@ -1,51 +1,26 @@
 {
-  "description": "",
-  "properties": {
-    "charge": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/charge"
-        }
-      ],
-      "description": "The ID of the Charge that generated this PaymentMethod, if any.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/charge"
-          }
-        ]
+  "name": "sepa_debit_generated_from",
+  "schema": {
+    "description": "",
+    "properties": {
+      "charge": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "setup_attempt": {
+        "maxLength": 5000,
+        "type": "string"
       }
     },
-    "setup_attempt": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/setup_attempt"
-        }
-      ],
-      "description": "The ID of the SetupAttempt that generated this PaymentMethod, if any.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/setup_attempt"
-          }
-        ]
-      }
+    "title": "sepa_debit_generated_from",
+    "type": "object",
+    "x-expandableFields": [
+      "charge",
+      "setup_attempt"
+    ],
+    "default": {
+      "charge": "string",
+      "setup_attempt": "string"
     }
-  },
-  "title": "sepa_debit_generated_from",
-  "type": "object",
-  "x-expandableFields": [
-    "charge",
-    "setup_attempt"
-  ]
+  }
 }

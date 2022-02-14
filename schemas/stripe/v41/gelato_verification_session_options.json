@@ -1,50 +1,25 @@
 {
-  "description": "",
-  "properties": {
-    "document": {
-      "description": "",
-      "properties": {
-        "allowed_types": {
-          "description": "Restrict the list of allowed document type to these types.",
-          "items": {
-            "enum": [
-              "driving_license",
-              "id_card",
-              "passport"
-            ],
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "require_id_number": {
-          "description": "Require that the user provide an id number which will be verified.",
-          "type": "boolean"
-        },
-        "require_live_capture": {
-          "description": "Require that the user capture documents live with their webcam or phone camera.",
-          "type": "boolean"
-        },
-        "require_matching_selfie": {
-          "description": "Require that the user provide a selfie to compare against the document photo.",
-          "type": "boolean"
-        }
+  "name": "gelato_verification_session_options",
+  "schema": {
+    "description": "",
+    "properties": {
+      "document": {
+        "allowed_types": "driving_license",
+        "require_id_number": true,
+        "require_live_capture": true,
+        "require_matching_selfie": true
       },
-      "title": "GelatoSessionDocumentOptions",
-      "type": "object",
-      "x-expandableFields": []
+      "id_number": {}
     },
-    "id_number": {
-      "description": "",
-      "properties": {},
-      "title": "GelatoSessionIdNumberOptions",
-      "type": "object",
-      "x-expandableFields": []
+    "title": "GelatoVerificationSessionOptions",
+    "type": "object",
+    "x-expandableFields": [
+      "document",
+      "id_number"
+    ],
+    "default": {
+      "document": {},
+      "id_number": {}
     }
-  },
-  "title": "GelatoVerificationSessionOptions",
-  "type": "object",
-  "x-expandableFields": [
-    "document",
-    "id_number"
-  ]
+  }
 }

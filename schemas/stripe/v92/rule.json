@@ -1,28 +1,36 @@
 {
-  "description": "",
-  "properties": {
-    "action": {
-      "description": "The action taken on the payment.",
-      "maxLength": 5000,
-      "type": "string"
+  "name": "rule",
+  "schema": {
+    "description": "",
+    "properties": {
+      "action": {
+        "description": "The action taken on the payment.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "id": {
+        "description": "Unique identifier for the object.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "predicate": {
+        "description": "The predicate to evaluate the payment against.",
+        "maxLength": 5000,
+        "type": "string"
+      }
     },
-    "id": {
-      "description": "Unique identifier for the object.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "predicate": {
-      "description": "The predicate to evaluate the payment against.",
-      "maxLength": 5000,
-      "type": "string"
+    "required": [
+      "action",
+      "id",
+      "predicate"
+    ],
+    "title": "RadarRule",
+    "type": "object",
+    "x-expandableFields": [],
+    "default": {
+      "action": "string",
+      "id": "string",
+      "predicate": "string"
     }
-  },
-  "required": [
-    "action",
-    "id",
-    "predicate"
-  ],
-  "title": "RadarRule",
-  "type": "object",
-  "x-expandableFields": []
+  }
 }

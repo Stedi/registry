@@ -1,89 +1,88 @@
 {
-  "description": "",
-  "properties": {
-    "additional_documentation": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/file"
-        }
-      ],
-      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
+  "name": "issuing_dispute_canceled_evidence",
+  "schema": {
+    "description": "",
+    "properties": {
+      "additional_documentation": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "canceled_at": {
+        "description": "Date when order was canceled.",
+        "format": "unix-time",
+        "nullable": true,
+        "type": "integer"
+      },
+      "cancellation_policy_provided": {
+        "description": "Whether the cardholder was provided with a cancellation policy.",
+        "nullable": true,
+        "type": "boolean"
+      },
+      "cancellation_reason": {
+        "description": "Reason for canceling the order.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "expected_at": {
+        "description": "Date when the cardholder expected to receive the product.",
+        "format": "unix-time",
+        "nullable": true,
+        "type": "integer"
+      },
+      "explanation": {
+        "description": "Explanation of why the cardholder is disputing this transaction.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "product_description": {
+        "description": "Description of the merchandise or service that was purchased.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "product_type": {
+        "description": "Whether the product was a merchandise or service.",
+        "enum": [
+          "merchandise",
+          "service"
+        ],
+        "nullable": true,
+        "type": "string"
+      },
+      "return_status": {
+        "description": "Result of cardholder's attempt to return the product.",
+        "enum": [
+          "merchant_rejected",
+          "successful"
+        ],
+        "nullable": true,
+        "type": "string"
+      },
+      "returned_at": {
+        "description": "Date when the product was returned or attempted to be returned.",
+        "format": "unix-time",
+        "nullable": true,
+        "type": "integer"
       }
     },
-    "canceled_at": {
-      "description": "Date when order was canceled.",
-      "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
-    },
-    "cancellation_policy_provided": {
-      "description": "Whether the cardholder was provided with a cancellation policy.",
-      "nullable": true,
-      "type": "boolean"
-    },
-    "cancellation_reason": {
-      "description": "Reason for canceling the order.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "expected_at": {
-      "description": "Date when the cardholder expected to receive the product.",
-      "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
-    },
-    "explanation": {
-      "description": "Explanation of why the cardholder is disputing this transaction.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "product_description": {
-      "description": "Description of the merchandise or service that was purchased.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "product_type": {
-      "description": "Whether the product was a merchandise or service.",
-      "enum": [
-        "merchandise",
-        "service"
-      ],
-      "nullable": true,
-      "type": "string"
-    },
-    "return_status": {
-      "description": "Result of cardholder's attempt to return the product.",
-      "enum": [
-        "merchant_rejected",
-        "successful"
-      ],
-      "nullable": true,
-      "type": "string"
-    },
-    "returned_at": {
-      "description": "Date when the product was returned or attempted to be returned.",
-      "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
+    "title": "IssuingDisputeCanceledEvidence",
+    "type": "object",
+    "x-expandableFields": [
+      "additional_documentation"
+    ],
+    "default": {
+      "additional_documentation": "string",
+      "canceled_at": 0,
+      "cancellation_policy_provided": true,
+      "cancellation_reason": "string",
+      "expected_at": 0,
+      "explanation": "string",
+      "product_description": "string",
+      "product_type": "merchandise",
+      "return_status": "merchant_rejected",
+      "returned_at": 0
     }
-  },
-  "title": "IssuingDisputeCanceledEvidence",
-  "type": "object",
-  "x-expandableFields": [
-    "additional_documentation"
-  ]
+  }
 }

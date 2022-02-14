@@ -1,176 +1,165 @@
 {
-  "description": "Card data that holds mostly static information about a card.",
-  "type": "object",
-  "title": "Card",
-  "properties": {
-    "id": {
-      "type": "string",
-      "minLength": 1,
-      "format": "uuid"
-    },
-    "is_physical": {
-      "type": "boolean"
-    },
-    "display_name": {
-      "type": "string",
-      "minLength": 1
-    },
-    "last_four": {
-      "type": "string",
-      "pattern": "[0-9]+",
-      "minLength": 4,
-      "maxLength": 4
-    },
-    "cardholder_id": {
-      "type": "string",
-      "format": "uuid"
-    },
-    "cardholder_name": {
-      "type": "string"
-    },
-    "card_program_id": {
-      "type": "string",
-      "format": "uuid"
-    },
-    "has_program_overridden": {
-      "description": "Whether the card has overridden the default settings from its card program.",
-      "type": "boolean"
-    },
-    "fulfillment": {
-      "title": "Card Fulfillment",
-      "description": "Details for shipping physical cards",
-      "type": "object",
-      "properties": {
-        "shipping": {
-          "type": "object",
-          "properties": {
-            "recipient_address": {
-              "type": "object",
-              "properties": {
-                "address1": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "city": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "country": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "first_name": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "last_name": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "postal_code": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "state": {
-                  "type": "string",
-                  "minLength": 1
+  "name": "Card",
+  "schema": {
+    "description": "Card data that holds mostly static information about a card.",
+    "type": "object",
+    "title": "Card",
+    "properties": {
+      "id": {
+        "type": "string",
+        "minLength": 1,
+        "format": "uuid"
+      },
+      "is_physical": {
+        "type": "boolean"
+      },
+      "display_name": {
+        "type": "string",
+        "minLength": 1
+      },
+      "last_four": {
+        "type": "string",
+        "pattern": "[0-9]+",
+        "minLength": 4,
+        "maxLength": 4
+      },
+      "cardholder_id": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "cardholder_name": {
+        "type": "string"
+      },
+      "card_program_id": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "has_program_overridden": {
+        "description": "Whether the card has overridden the default settings from its card program.",
+        "type": "boolean"
+      },
+      "fulfillment": {
+        "title": "Card Fulfillment",
+        "description": "Details for shipping physical cards",
+        "type": "object",
+        "properties": {
+          "shipping": {
+            "type": "object",
+            "properties": {
+              "recipient_address": {
+                "type": "object",
+                "properties": {
+                  "address1": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "city": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "country": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "first_name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "postal_code": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "state": {
+                    "type": "string",
+                    "minLength": 1
+                  }
                 }
               }
             }
           }
         }
+      },
+      "spending_restrictions": {
+        "description": "Specifies the spend restrictions on a Ramp card.",
+        "type": "object",
+        "title": "Card Spending Restriction",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Amount limit total per interval."
+          },
+          "interval": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "DAILY",
+              "MONTHLY",
+              "YEARLY",
+              "TOTAL"
+            ],
+            "description": "Time interval to apply limit to."
+          },
+          "lock_date": {
+            "type": "string",
+            "minLength": 1,
+            "format": "date-time",
+            "description": "Date to automatically lock the card. If lock date has passed, set to a future date or to null to unlock the card."
+          },
+          "categories": {
+            "type": "number"
+          },
+          "blocked_categories": {
+            "type": "number"
+          },
+          "transaction_amount_limit": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Max amount limit per transaction."
+          }
+        },
+        "x-tags": [
+          "Card"
+        ]
       }
     },
-    "spending_restrictions": {
-      "description": "Specifies the spend restrictions on a Ramp card.",
-      "type": "object",
-      "title": "Card Spending Restriction",
-      "properties": {
-        "amount": {
-          "type": "number",
-          "minimum": 0,
-          "description": "Amount limit total per interval."
-        },
-        "interval": {
-          "type": "string",
-          "minLength": 1,
-          "enum": [
-            "DAILY",
-            "MONTHLY",
-            "YEARLY",
-            "TOTAL"
-          ],
-          "description": "Time interval to apply limit to."
-        },
-        "lock_date": {
-          "type": "string",
-          "minLength": 1,
-          "format": "date-time",
-          "description": "Date to automatically lock the card. If lock date has passed, set to a future date or to null to unlock the card."
-        },
-        "categories": {
-          "type": "array",
-          "uniqueItems": true,
-          "description": "List of Ramp Category Codes to restrict this card to.",
-          "items": {
-            "type": "number"
+    "x-tags": [
+      "Card"
+    ],
+    "default": {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "is_physical": true,
+      "display_name": "string",
+      "last_four": "stri",
+      "cardholder_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "cardholder_name": "string",
+      "card_program_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "has_program_overridden": true,
+      "fulfillment": {
+        "shipping": {
+          "recipient_address": {
+            "address1": "string",
+            "city": "string",
+            "country": "string",
+            "first_name": "string",
+            "last_name": "string",
+            "postal_code": "string",
+            "state": "string"
           }
-        },
-        "blocked_categories": {
-          "type": "array",
-          "uniqueItems": true,
-          "description": "List of Ramp Category Codes blocked for this card.",
-          "items": {
-            "type": "number"
-          }
-        },
-        "transaction_amount_limit": {
-          "type": "number",
-          "minimum": 0,
-          "description": "Max amount limit per transaction."
         }
       },
-      "x-tags": [
-        "Card"
-      ]
-    }
-  },
-  "x-tags": [
-    "Card"
-  ],
-  "default": {
-    "id": "a0e49ab8-0b33-4716-8043-7e2e193db0c0",
-    "is_physical": true,
-    "display_name": "voluptatibus",
-    "last_four": "nece",
-    "cardholder_id": "7491114d-75cf-4cf3-87a7-1e82942c6d50",
-    "cardholder_name": "quos",
-    "card_program_id": "373af871-0cda-4237-9790-4bc28a8221bf",
-    "has_program_overridden": true,
-    "fulfillment": {
-      "shipping": {
-        "recipient_address": {
-          "address1": "error",
-          "city": "labore",
-          "country": "vel",
-          "first_name": "reiciendis",
-          "last_name": "consequatur",
-          "postal_code": "deserunt",
-          "state": "laborum"
-        }
+      "spending_restrictions": {
+        "amount": 0,
+        "interval": "DAILY",
+        "lock_date": "1970-01-01T00:00:00.000Z",
+        "categories": 0,
+        "blocked_categories": 0,
+        "transaction_amount_limit": 0
       }
-    },
-    "spending_restrictions": {
-      "amount": 970391,
-      "interval": "DAILY",
-      "lock_date": "2022-02-12T07:58:08.067Z",
-      "categories": [
-        849963
-      ],
-      "blocked_categories": [
-        622782
-      ],
-      "transaction_amount_limit": 625198
     }
   }
 }

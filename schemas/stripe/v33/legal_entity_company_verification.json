@@ -1,16 +1,55 @@
 {
-  "description": "",
-  "properties": {
-    "document": {
-      "$ref": "#/components/schemas/legal_entity_company_verification_document"
+  "name": "legal_entity_company_verification",
+  "schema": {
+    "description": "",
+    "properties": {
+      "document": {
+        "description": "",
+        "properties": {
+          "back": {
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "details": {
+            "description": "A user-displayable string describing the verification state of this document.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "details_code": {
+            "description": "One of `document_corrupt`, `document_expired`, `document_failed_copy`, `document_failed_greyscale`, `document_failed_other`, `document_failed_test_mode`, `document_fraudulent`, `document_incomplete`, `document_invalid`, `document_manipulated`, `document_not_readable`, `document_not_uploaded`, `document_type_not_supported`, or `document_too_large`. A machine-readable code specifying the verification state for this document.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "front": {
+            "maxLength": 5000,
+            "type": "string"
+          }
+        },
+        "title": "LegalEntityCompanyVerificationDocument",
+        "type": "object",
+        "x-expandableFields": [
+          "back",
+          "front"
+        ]
+      }
+    },
+    "required": [
+      "document"
+    ],
+    "title": "LegalEntityCompanyVerification",
+    "type": "object",
+    "x-expandableFields": [
+      "document"
+    ],
+    "default": {
+      "document": {
+        "back": "string",
+        "details": "string",
+        "details_code": "string",
+        "front": "string"
+      }
     }
-  },
-  "required": [
-    "document"
-  ],
-  "title": "LegalEntityCompanyVerification",
-  "type": "object",
-  "x-expandableFields": [
-    "document"
-  ]
+  }
 }

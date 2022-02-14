@@ -1,157 +1,153 @@
 {
-  "description": "You can add one or multiple tax IDs to a [customer](https://stripe.com/docs/api/customers).\nA customer's tax IDs are displayed on invoices and credit notes issued for the customer.\n\nRelated guide: [Customer Tax Identification Numbers](https://stripe.com/docs/billing/taxes/tax-ids).",
-  "properties": {
-    "country": {
-      "description": "Two-letter ISO code representing the country of the tax ID.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "created": {
-      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-      "format": "unix-time",
-      "type": "integer"
-    },
-    "customer": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/customer"
-        }
-      ],
-      "description": "ID of the customer.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/customer"
+  "name": "tax_id",
+  "schema": {
+    "description": "You can add one or multiple tax IDs to a [customer](https://stripe.com/docs/api/customers).\nA customer's tax IDs are displayed on invoices and credit notes issued for the customer.\n\nRelated guide: [Customer Tax Identification Numbers](https://stripe.com/docs/billing/taxes/tax-ids).",
+    "properties": {
+      "country": {
+        "description": "Two-letter ISO code representing the country of the tax ID.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "created": {
+        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+        "format": "unix-time",
+        "type": "integer"
+      },
+      "customer": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "id": {
+        "description": "Unique identifier for the object.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "livemode": {
+        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+        "type": "boolean"
+      },
+      "object": {
+        "description": "String representing the object's type. Objects of the same type share the same value.",
+        "enum": [
+          "tax_id"
+        ],
+        "type": "string"
+      },
+      "type": {
+        "description": "Type of the tax ID, one of `ae_trn`, `au_abn`, `au_arn`, `br_cnpj`, `br_cpf`, `ca_bn`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `ca_qst`, `ch_vat`, `cl_tin`, `es_cif`, `eu_vat`, `gb_vat`, `hk_br`, `id_npwp`, `il_vat`, `in_gst`, `jp_cn`, `jp_rn`, `kr_brn`, `li_uid`, `mx_rfc`, `my_frp`, `my_itn`, `my_sst`, `no_vat`, `nz_gst`, `ru_inn`, `ru_kpp`, `sa_vat`, `sg_gst`, `sg_uen`, `th_vat`, `tw_vat`, `us_ein`, or `za_vat`. Note that some legacy tax IDs have type `unknown`",
+        "enum": [
+          "ae_trn",
+          "au_abn",
+          "au_arn",
+          "br_cnpj",
+          "br_cpf",
+          "ca_bn",
+          "ca_gst_hst",
+          "ca_pst_bc",
+          "ca_pst_mb",
+          "ca_pst_sk",
+          "ca_qst",
+          "ch_vat",
+          "cl_tin",
+          "es_cif",
+          "eu_vat",
+          "gb_vat",
+          "hk_br",
+          "id_npwp",
+          "il_vat",
+          "in_gst",
+          "jp_cn",
+          "jp_rn",
+          "kr_brn",
+          "li_uid",
+          "mx_rfc",
+          "my_frp",
+          "my_itn",
+          "my_sst",
+          "no_vat",
+          "nz_gst",
+          "ru_inn",
+          "ru_kpp",
+          "sa_vat",
+          "sg_gst",
+          "sg_uen",
+          "th_vat",
+          "tw_vat",
+          "unknown",
+          "us_ein",
+          "za_vat"
+        ],
+        "type": "string"
+      },
+      "value": {
+        "description": "Value of the tax ID.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "verification": {
+        "description": "",
+        "properties": {
+          "status": {
+            "description": "Verification status, one of `pending`, `verified`, `unverified`, or `unavailable`.",
+            "enum": [
+              "pending",
+              "unavailable",
+              "unverified",
+              "verified"
+            ],
+            "type": "string"
+          },
+          "verified_address": {
+            "description": "Verified address.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "verified_name": {
+            "description": "Verified name.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
           }
-        ]
+        },
+        "required": [
+          "status"
+        ],
+        "title": "tax_id_verification",
+        "type": "object",
+        "x-expandableFields": []
       }
     },
-    "id": {
-      "description": "Unique identifier for the object.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "livemode": {
-      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-      "type": "boolean"
-    },
-    "object": {
-      "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "tax_id"
-      ],
-      "type": "string"
-    },
-    "type": {
-      "description": "Type of the tax ID, one of `ae_trn`, `au_abn`, `au_arn`, `br_cnpj`, `br_cpf`, `ca_bn`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `ca_qst`, `ch_vat`, `cl_tin`, `es_cif`, `eu_vat`, `gb_vat`, `hk_br`, `id_npwp`, `il_vat`, `in_gst`, `jp_cn`, `jp_rn`, `kr_brn`, `li_uid`, `mx_rfc`, `my_frp`, `my_itn`, `my_sst`, `no_vat`, `nz_gst`, `ru_inn`, `ru_kpp`, `sa_vat`, `sg_gst`, `sg_uen`, `th_vat`, `tw_vat`, `us_ein`, or `za_vat`. Note that some legacy tax IDs have type `unknown`",
-      "enum": [
-        "ae_trn",
-        "au_abn",
-        "au_arn",
-        "br_cnpj",
-        "br_cpf",
-        "ca_bn",
-        "ca_gst_hst",
-        "ca_pst_bc",
-        "ca_pst_mb",
-        "ca_pst_sk",
-        "ca_qst",
-        "ch_vat",
-        "cl_tin",
-        "es_cif",
-        "eu_vat",
-        "gb_vat",
-        "hk_br",
-        "id_npwp",
-        "il_vat",
-        "in_gst",
-        "jp_cn",
-        "jp_rn",
-        "kr_brn",
-        "li_uid",
-        "mx_rfc",
-        "my_frp",
-        "my_itn",
-        "my_sst",
-        "no_vat",
-        "nz_gst",
-        "ru_inn",
-        "ru_kpp",
-        "sa_vat",
-        "sg_gst",
-        "sg_uen",
-        "th_vat",
-        "tw_vat",
-        "unknown",
-        "us_ein",
-        "za_vat"
-      ],
-      "type": "string"
-    },
-    "value": {
-      "description": "Value of the tax ID.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "verification": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "status": {
-              "description": "Verification status, one of `pending`, `verified`, `unverified`, or `unavailable`.",
-              "enum": [
-                "pending",
-                "unavailable",
-                "unverified",
-                "verified"
-              ],
-              "type": "string"
-            },
-            "verified_address": {
-              "description": "Verified address.",
-              "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
-            },
-            "verified_name": {
-              "description": "Verified name.",
-              "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "required": [
-            "status"
-          ],
-          "title": "tax_id_verification",
-          "type": "object",
-          "x-expandableFields": []
-        }
-      ],
-      "description": "Tax ID verification information.",
-      "nullable": true
+    "required": [
+      "created",
+      "id",
+      "livemode",
+      "object",
+      "type",
+      "value"
+    ],
+    "title": "tax_id",
+    "type": "object",
+    "x-expandableFields": [
+      "customer",
+      "verification"
+    ],
+    "x-resourceId": "tax_id",
+    "default": {
+      "country": "string",
+      "created": 0,
+      "customer": "string",
+      "id": "string",
+      "livemode": true,
+      "object": "tax_id",
+      "type": "ae_trn",
+      "value": "string",
+      "verification": {
+        "status": "pending",
+        "verified_address": "string",
+        "verified_name": "string"
+      }
     }
-  },
-  "required": [
-    "created",
-    "id",
-    "livemode",
-    "object",
-    "type",
-    "value"
-  ],
-  "title": "tax_id",
-  "type": "object",
-  "x-expandableFields": [
-    "customer",
-    "verification"
-  ],
-  "x-resourceId": "tax_id"
+  }
 }

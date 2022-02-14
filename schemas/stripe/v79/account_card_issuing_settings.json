@@ -1,34 +1,44 @@
 {
-  "description": "",
-  "properties": {
-    "tos_acceptance": {
-      "description": "",
-      "properties": {
-        "date": {
-          "description": "The Unix timestamp marking when the account representative accepted the service agreement.",
-          "nullable": true,
-          "type": "integer"
+  "name": "account_card_issuing_settings",
+  "schema": {
+    "description": "",
+    "properties": {
+      "tos_acceptance": {
+        "description": "",
+        "properties": {
+          "date": {
+            "description": "The Unix timestamp marking when the account representative accepted the service agreement.",
+            "nullable": true,
+            "type": "integer"
+          },
+          "ip": {
+            "description": "The IP address from which the account representative accepted the service agreement.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "user_agent": {
+            "description": "The user agent of the browser from which the account representative accepted the service agreement.",
+            "maxLength": 5000,
+            "type": "string"
+          }
         },
-        "ip": {
-          "description": "The IP address from which the account representative accepted the service agreement.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
-        },
-        "user_agent": {
-          "description": "The user agent of the browser from which the account representative accepted the service agreement.",
-          "maxLength": 5000,
-          "type": "string"
-        }
-      },
-      "title": "CardIssuingAccountTermsOfService",
-      "type": "object",
-      "x-expandableFields": []
+        "title": "CardIssuingAccountTermsOfService",
+        "type": "object",
+        "x-expandableFields": []
+      }
+    },
+    "title": "AccountCardIssuingSettings",
+    "type": "object",
+    "x-expandableFields": [
+      "tos_acceptance"
+    ],
+    "default": {
+      "tos_acceptance": {
+        "date": 0,
+        "ip": "string",
+        "user_agent": "string"
+      }
     }
-  },
-  "title": "AccountCardIssuingSettings",
-  "type": "object",
-  "x-expandableFields": [
-    "tos_acceptance"
-  ]
+  }
 }

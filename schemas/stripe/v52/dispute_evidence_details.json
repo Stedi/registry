@@ -1,31 +1,40 @@
 {
-  "description": "",
-  "properties": {
-    "due_by": {
-      "description": "Date by which evidence must be submitted in order to successfully challenge dispute. Will be null if the customer's bank or credit card company doesn't allow a response for this particular dispute.",
-      "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
+  "name": "dispute_evidence_details",
+  "schema": {
+    "description": "",
+    "properties": {
+      "due_by": {
+        "description": "Date by which evidence must be submitted in order to successfully challenge dispute. Will be null if the customer's bank or credit card company doesn't allow a response for this particular dispute.",
+        "format": "unix-time",
+        "nullable": true,
+        "type": "integer"
+      },
+      "has_evidence": {
+        "description": "Whether evidence has been staged for this dispute.",
+        "type": "boolean"
+      },
+      "past_due": {
+        "description": "Whether the last evidence submission was submitted past the due date. Defaults to `false` if no evidence submissions have occurred. If `true`, then delivery of the latest evidence is *not* guaranteed.",
+        "type": "boolean"
+      },
+      "submission_count": {
+        "description": "The number of times evidence has been submitted. Typically, you may only submit evidence once.",
+        "type": "integer"
+      }
     },
-    "has_evidence": {
-      "description": "Whether evidence has been staged for this dispute.",
-      "type": "boolean"
-    },
-    "past_due": {
-      "description": "Whether the last evidence submission was submitted past the due date. Defaults to `false` if no evidence submissions have occurred. If `true`, then delivery of the latest evidence is *not* guaranteed.",
-      "type": "boolean"
-    },
-    "submission_count": {
-      "description": "The number of times evidence has been submitted. Typically, you may only submit evidence once.",
-      "type": "integer"
+    "required": [
+      "has_evidence",
+      "past_due",
+      "submission_count"
+    ],
+    "title": "DisputeEvidenceDetails",
+    "type": "object",
+    "x-expandableFields": [],
+    "default": {
+      "due_by": 0,
+      "has_evidence": true,
+      "past_due": true,
+      "submission_count": 0
     }
-  },
-  "required": [
-    "has_evidence",
-    "past_due",
-    "submission_count"
-  ],
-  "title": "DisputeEvidenceDetails",
-  "type": "object",
-  "x-expandableFields": []
+  }
 }

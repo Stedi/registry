@@ -1,305 +1,273 @@
 {
-  "description": "A Mandate is a record of the permission a customer has given you to debit their payment method.",
-  "properties": {
-    "customer_acceptance": {
-      "description": "",
-      "properties": {
-        "accepted_at": {
-          "description": "The time at which the customer accepted the Mandate.",
-          "format": "unix-time",
-          "nullable": true,
-          "type": "integer"
-        },
-        "offline": {
-          "description": "",
-          "properties": {},
-          "title": "offline_acceptance",
-          "type": "object",
-          "x-expandableFields": []
-        },
+  "name": "mandate",
+  "schema": {
+    "description": "A Mandate is a record of the permission a customer has given you to debit their payment method.",
+    "properties": {
+      "customer_acceptance": {
+        "accepted_at": 0,
+        "offline": {},
         "online": {
-          "description": "",
-          "properties": {
-            "ip_address": {
-              "description": "The IP address from which the Mandate was accepted by the customer.",
-              "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
-            },
-            "user_agent": {
-              "description": "The user agent of the browser from which the Mandate was accepted by the customer.",
-              "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "title": "online_acceptance",
-          "type": "object",
-          "x-expandableFields": []
+          "ip_address": "string",
+          "user_agent": "string"
         },
-        "type": {
-          "description": "The type of customer acceptance information included with the Mandate. One of `online` or `offline`.",
-          "enum": [
-            "offline",
-            "online"
-          ],
-          "type": "string"
-        }
+        "type": "offline"
       },
-      "required": [
-        "type"
-      ],
-      "title": "customer_acceptance",
-      "type": "object",
-      "x-expandableFields": [
-        "offline",
-        "online"
-      ]
-    },
-    "id": {
-      "description": "Unique identifier for the object.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "livemode": {
-      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-      "type": "boolean"
-    },
-    "multi_use": {
-      "description": "",
-      "properties": {},
-      "title": "mandate_multi_use",
-      "type": "object",
-      "x-expandableFields": []
-    },
-    "object": {
-      "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "mandate"
-      ],
-      "type": "string"
-    },
-    "payment_method": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/payment_method"
-        }
-      ],
-      "description": "ID of the payment method associated with this mandate.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/payment_method"
-          }
-        ]
-      }
-    },
-    "payment_method_details": {
-      "description": "",
-      "properties": {
-        "acss_debit": {
-          "description": "",
-          "properties": {
-            "default_for": {
-              "description": "List of Stripe products where this mandate can be selected automatically.",
-              "items": {
+      "id": {
+        "description": "Unique identifier for the object.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "livemode": {
+        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+        "type": "boolean"
+      },
+      "multi_use": {
+        "description": "",
+        "properties": {},
+        "title": "mandate_multi_use",
+        "type": "object",
+        "x-expandableFields": []
+      },
+      "object": {
+        "description": "String representing the object's type. Objects of the same type share the same value.",
+        "enum": [
+          "mandate"
+        ],
+        "type": "string"
+      },
+      "payment_method": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "payment_method_details": {
+        "description": "",
+        "properties": {
+          "acss_debit": {
+            "description": "",
+            "properties": {
+              "default_for": {
                 "enum": [
                   "invoice",
                   "subscription"
                 ],
                 "type": "string"
               },
-              "type": "array"
+              "interval_description": {
+                "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
+                "maxLength": 5000,
+                "nullable": true,
+                "type": "string"
+              },
+              "payment_schedule": {
+                "description": "Payment schedule for the mandate.",
+                "enum": [
+                  "combined",
+                  "interval",
+                  "sporadic"
+                ],
+                "type": "string"
+              },
+              "transaction_type": {
+                "description": "Transaction type of the mandate.",
+                "enum": [
+                  "business",
+                  "personal"
+                ],
+                "type": "string"
+              }
             },
-            "interval_description": {
-              "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
-              "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
-            },
-            "payment_schedule": {
-              "description": "Payment schedule for the mandate.",
-              "enum": [
-                "combined",
-                "interval",
-                "sporadic"
-              ],
-              "type": "string"
-            },
-            "transaction_type": {
-              "description": "Transaction type of the mandate.",
-              "enum": [
-                "business",
-                "personal"
-              ],
-              "type": "string"
-            }
+            "required": [
+              "payment_schedule",
+              "transaction_type"
+            ],
+            "title": "mandate_acss_debit",
+            "type": "object",
+            "x-expandableFields": []
           },
-          "required": [
-            "payment_schedule",
-            "transaction_type"
-          ],
-          "title": "mandate_acss_debit",
-          "type": "object",
-          "x-expandableFields": []
+          "au_becs_debit": {
+            "description": "",
+            "properties": {
+              "url": {
+                "description": "The URL of the mandate. This URL generally contains sensitive information about the customer and should be shared with them exclusively.",
+                "maxLength": 5000,
+                "type": "string"
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "title": "mandate_au_becs_debit",
+            "type": "object",
+            "x-expandableFields": []
+          },
+          "bacs_debit": {
+            "description": "",
+            "properties": {
+              "network_status": {
+                "description": "The status of the mandate on the Bacs network. Can be one of `pending`, `revoked`, `refused`, or `accepted`.",
+                "enum": [
+                  "accepted",
+                  "pending",
+                  "refused",
+                  "revoked"
+                ],
+                "type": "string"
+              },
+              "reference": {
+                "description": "The unique reference identifying the mandate on the Bacs network.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "url": {
+                "description": "The URL that will contain the mandate that the customer has signed.",
+                "maxLength": 5000,
+                "type": "string"
+              }
+            },
+            "required": [
+              "network_status",
+              "reference",
+              "url"
+            ],
+            "title": "mandate_bacs_debit",
+            "type": "object",
+            "x-expandableFields": []
+          },
+          "card": {},
+          "sepa_debit": {
+            "description": "",
+            "properties": {
+              "reference": {
+                "description": "The unique reference of the mandate.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "url": {
+                "description": "The URL of the mandate. This URL generally contains sensitive information about the customer and should be shared with them exclusively.",
+                "maxLength": 5000,
+                "type": "string"
+              }
+            },
+            "required": [
+              "reference",
+              "url"
+            ],
+            "title": "mandate_sepa_debit",
+            "type": "object",
+            "x-expandableFields": []
+          },
+          "type": {
+            "description": "The type of the payment method associated with this mandate. An additional hash is included on `payment_method_details` with a name matching this value. It contains mandate information specific to the payment method.",
+            "maxLength": 5000,
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "mandate_payment_method_details",
+        "type": "object",
+        "x-expandableFields": [
+          "acss_debit",
+          "au_becs_debit",
+          "bacs_debit",
+          "card",
+          "sepa_debit"
+        ]
+      },
+      "single_use": {
+        "description": "",
+        "properties": {
+          "amount": {
+            "description": "On a single use mandate, the amount of the payment.",
+            "type": "integer"
+          },
+          "currency": {
+            "description": "On a single use mandate, the currency of the payment.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount",
+          "currency"
+        ],
+        "title": "mandate_single_use",
+        "type": "object",
+        "x-expandableFields": []
+      },
+      "status": {
+        "description": "The status of the mandate, which indicates whether it can be used to initiate a payment.",
+        "enum": [
+          "active",
+          "inactive",
+          "pending"
+        ],
+        "type": "string"
+      },
+      "type": {
+        "description": "The type of the mandate.",
+        "enum": [
+          "multi_use",
+          "single_use"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "customer_acceptance",
+      "id",
+      "livemode",
+      "object",
+      "payment_method",
+      "payment_method_details",
+      "status",
+      "type"
+    ],
+    "title": "Mandate",
+    "type": "object",
+    "x-expandableFields": [
+      "customer_acceptance",
+      "multi_use",
+      "payment_method",
+      "payment_method_details",
+      "single_use"
+    ],
+    "x-resourceId": "mandate",
+    "default": {
+      "customer_acceptance": {},
+      "id": "string",
+      "livemode": true,
+      "multi_use": {},
+      "object": "mandate",
+      "payment_method": "string",
+      "payment_method_details": {
+        "acss_debit": {
+          "default_for": "invoice",
+          "interval_description": "string",
+          "payment_schedule": "combined",
+          "transaction_type": "business"
         },
         "au_becs_debit": {
-          "description": "",
-          "properties": {
-            "url": {
-              "description": "The URL of the mandate. This URL generally contains sensitive information about the customer and should be shared with them exclusively.",
-              "maxLength": 5000,
-              "type": "string"
-            }
-          },
-          "required": [
-            "url"
-          ],
-          "title": "mandate_au_becs_debit",
-          "type": "object",
-          "x-expandableFields": []
+          "url": "string"
         },
         "bacs_debit": {
-          "description": "",
-          "properties": {
-            "network_status": {
-              "description": "The status of the mandate on the Bacs network. Can be one of `pending`, `revoked`, `refused`, or `accepted`.",
-              "enum": [
-                "accepted",
-                "pending",
-                "refused",
-                "revoked"
-              ],
-              "type": "string"
-            },
-            "reference": {
-              "description": "The unique reference identifying the mandate on the Bacs network.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "url": {
-              "description": "The URL that will contain the mandate that the customer has signed.",
-              "maxLength": 5000,
-              "type": "string"
-            }
-          },
-          "required": [
-            "network_status",
-            "reference",
-            "url"
-          ],
-          "title": "mandate_bacs_debit",
-          "type": "object",
-          "x-expandableFields": []
+          "network_status": "accepted",
+          "reference": "string",
+          "url": "string"
         },
-        "card": {
-          "description": "",
-          "properties": {},
-          "title": "card_mandate_payment_method_details",
-          "type": "object",
-          "x-expandableFields": []
-        },
+        "card": {},
         "sepa_debit": {
-          "description": "",
-          "properties": {
-            "reference": {
-              "description": "The unique reference of the mandate.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "url": {
-              "description": "The URL of the mandate. This URL generally contains sensitive information about the customer and should be shared with them exclusively.",
-              "maxLength": 5000,
-              "type": "string"
-            }
-          },
-          "required": [
-            "reference",
-            "url"
-          ],
-          "title": "mandate_sepa_debit",
-          "type": "object",
-          "x-expandableFields": []
+          "reference": "string",
+          "url": "string"
         },
-        "type": {
-          "description": "The type of the payment method associated with this mandate. An additional hash is included on `payment_method_details` with a name matching this value. It contains mandate information specific to the payment method.",
-          "maxLength": 5000,
-          "type": "string"
-        }
+        "type": "string"
       },
-      "required": [
-        "type"
-      ],
-      "title": "mandate_payment_method_details",
-      "type": "object",
-      "x-expandableFields": [
-        "acss_debit",
-        "au_becs_debit",
-        "bacs_debit",
-        "card",
-        "sepa_debit"
-      ]
-    },
-    "single_use": {
-      "description": "",
-      "properties": {
-        "amount": {
-          "description": "On a single use mandate, the amount of the payment.",
-          "type": "integer"
-        },
-        "currency": {
-          "description": "On a single use mandate, the currency of the payment.",
-          "type": "string"
-        }
+      "single_use": {
+        "amount": 0,
+        "currency": "string"
       },
-      "required": [
-        "amount",
-        "currency"
-      ],
-      "title": "mandate_single_use",
-      "type": "object",
-      "x-expandableFields": []
-    },
-    "status": {
-      "description": "The status of the mandate, which indicates whether it can be used to initiate a payment.",
-      "enum": [
-        "active",
-        "inactive",
-        "pending"
-      ],
-      "type": "string"
-    },
-    "type": {
-      "description": "The type of the mandate.",
-      "enum": [
-        "multi_use",
-        "single_use"
-      ],
-      "type": "string"
+      "status": "active",
+      "type": "multi_use"
     }
-  },
-  "required": [
-    "customer_acceptance",
-    "id",
-    "livemode",
-    "object",
-    "payment_method",
-    "payment_method_details",
-    "status",
-    "type"
-  ],
-  "title": "Mandate",
-  "type": "object",
-  "x-expandableFields": [
-    "customer_acceptance",
-    "multi_use",
-    "payment_method",
-    "payment_method_details",
-    "single_use"
-  ],
-  "x-resourceId": "mandate"
+  }
 }

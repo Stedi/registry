@@ -1,34 +1,37 @@
 {
-  "title": "Business Current Status",
-  "type": "object",
-  "description": "Current data about the business.",
-  "properties": {
-    "statement_balance": {
-      "type": "number"
+  "name": "BusinessCurrentStatus",
+  "schema": {
+    "title": "Business Current Status",
+    "type": "object",
+    "description": "Current data about the business.",
+    "properties": {
+      "statement_balance": {
+        "type": "number"
+      },
+      "balance_including_pending": {
+        "type": "number"
+      },
+      "max_balance": {
+        "type": "number"
+      },
+      "next_billing_date": {
+        "type": "string",
+        "format": "date"
+      },
+      "prev_billing_date": {
+        "type": "string",
+        "format": "date"
+      }
     },
-    "balance_including_pending": {
-      "type": "number"
-    },
-    "max_balance": {
-      "type": "number"
-    },
-    "next_billing_date": {
-      "type": "string",
-      "format": "date"
-    },
-    "prev_billing_date": {
-      "type": "string",
-      "format": "date"
+    "x-tags": [
+      "Business"
+    ],
+    "default": {
+      "statement_balance": 0,
+      "balance_including_pending": 0,
+      "max_balance": 0,
+      "next_billing_date": "1970-01-01T00:00:00.000Z",
+      "prev_billing_date": "1970-01-01T00:00:00.000Z"
     }
-  },
-  "x-tags": [
-    "Business"
-  ],
-  "default": {
-    "statement_balance": 215865,
-    "balance_including_pending": 862228,
-    "max_balance": 229677,
-    "next_billing_date": "2022-02-12T00:02:18.154Z",
-    "prev_billing_date": "2022-02-12T10:49:28.953Z"
   }
 }

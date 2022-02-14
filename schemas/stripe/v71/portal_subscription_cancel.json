@@ -1,16 +1,16 @@
 {
-  "description": "",
-  "properties": {
-    "cancellation_reason": {
-      "description": "",
-      "properties": {
-        "enabled": {
-          "description": "Whether the feature is enabled.",
-          "type": "boolean"
-        },
-        "options": {
-          "description": "Which cancellation reasons will be given as options to the customer.",
-          "items": {
+  "name": "portal_subscription_cancel",
+  "schema": {
+    "description": "",
+    "properties": {
+      "cancellation_reason": {
+        "description": "",
+        "properties": {
+          "enabled": {
+            "description": "Whether the feature is enabled.",
+            "type": "boolean"
+          },
+          "options": {
             "enum": [
               "customer_service",
               "low_quality",
@@ -22,48 +22,56 @@
               "unused"
             ],
             "type": "string"
-          },
-          "type": "array"
-        }
+          }
+        },
+        "required": [
+          "enabled",
+          "options"
+        ],
+        "title": "PortalSubscriptionCancellationReason",
+        "type": "object",
+        "x-expandableFields": []
       },
-      "required": [
-        "enabled",
-        "options"
-      ],
-      "title": "PortalSubscriptionCancellationReason",
-      "type": "object",
-      "x-expandableFields": []
+      "enabled": {
+        "description": "Whether the feature is enabled.",
+        "type": "boolean"
+      },
+      "mode": {
+        "description": "Whether to cancel subscriptions immediately or at the end of the billing period.",
+        "enum": [
+          "at_period_end",
+          "immediately"
+        ],
+        "type": "string"
+      },
+      "proration_behavior": {
+        "description": "Whether to create prorations when canceling subscriptions. Possible values are `none` and `create_prorations`.",
+        "enum": [
+          "always_invoice",
+          "create_prorations",
+          "none"
+        ],
+        "type": "string"
+      }
     },
-    "enabled": {
-      "description": "Whether the feature is enabled.",
-      "type": "boolean"
-    },
-    "mode": {
-      "description": "Whether to cancel subscriptions immediately or at the end of the billing period.",
-      "enum": [
-        "at_period_end",
-        "immediately"
-      ],
-      "type": "string"
-    },
-    "proration_behavior": {
-      "description": "Whether to create prorations when canceling subscriptions. Possible values are `none` and `create_prorations`.",
-      "enum": [
-        "always_invoice",
-        "create_prorations",
-        "none"
-      ],
-      "type": "string"
+    "required": [
+      "enabled",
+      "mode",
+      "proration_behavior"
+    ],
+    "title": "PortalSubscriptionCancel",
+    "type": "object",
+    "x-expandableFields": [
+      "cancellation_reason"
+    ],
+    "default": {
+      "cancellation_reason": {
+        "enabled": true,
+        "options": "customer_service"
+      },
+      "enabled": true,
+      "mode": "at_period_end",
+      "proration_behavior": "always_invoice"
     }
-  },
-  "required": [
-    "enabled",
-    "mode",
-    "proration_behavior"
-  ],
-  "title": "PortalSubscriptionCancel",
-  "type": "object",
-  "x-expandableFields": [
-    "cancellation_reason"
-  ]
+  }
 }

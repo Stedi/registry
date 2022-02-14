@@ -1,54 +1,66 @@
 {
-  "description": "A session describes the instantiation of the customer portal for\na particular customer. By visiting the session's URL, the customer\ncan manage their subscriptions and billing details. For security reasons,\nsessions are short-lived and will expire if the customer does not visit the URL.\nCreate sessions on-demand when customers intend to manage their subscriptions and billing details.\n\nIntegration guide: [Billing customer portal](https://stripe.com/docs/billing/subscriptions/integrating-customer-portal).",
-  "properties": {
-    "created": {
-      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-      "format": "unix-time",
-      "type": "integer"
+  "name": "billing_portal.session",
+  "schema": {
+    "description": "A session describes the instantiation of the customer portal for\na particular customer. By visiting the session's URL, the customer\ncan manage their subscriptions and billing details. For security reasons,\nsessions are short-lived and will expire if the customer does not visit the URL.\nCreate sessions on-demand when customers intend to manage their subscriptions and billing details.\n\nIntegration guide: [Billing customer portal](https://stripe.com/docs/billing/subscriptions/integrating-customer-portal).",
+    "properties": {
+      "created": {
+        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+        "format": "unix-time",
+        "type": "integer"
+      },
+      "customer": {
+        "description": "The ID of the customer for this session.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "id": {
+        "description": "Unique identifier for the object.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "livemode": {
+        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+        "type": "boolean"
+      },
+      "object": {
+        "description": "String representing the object's type. Objects of the same type share the same value.",
+        "enum": [
+          "billing_portal.session"
+        ],
+        "type": "string"
+      },
+      "return_url": {
+        "description": "The URL to which Stripe should send customers when they click on the link to return to your website.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "url": {
+        "description": "The short-lived URL of the session giving customers access to the customer portal.",
+        "maxLength": 5000,
+        "type": "string"
+      }
     },
-    "customer": {
-      "description": "The ID of the customer for this session.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "id": {
-      "description": "Unique identifier for the object.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "livemode": {
-      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-      "type": "boolean"
-    },
-    "object": {
-      "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "billing_portal.session"
-      ],
-      "type": "string"
-    },
-    "return_url": {
-      "description": "The URL to which Stripe should send customers when they click on the link to return to your website.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "url": {
-      "description": "The short-lived URL of the session giving customers access to the customer portal.",
-      "maxLength": 5000,
-      "type": "string"
+    "required": [
+      "created",
+      "customer",
+      "id",
+      "livemode",
+      "object",
+      "return_url",
+      "url"
+    ],
+    "title": "PortalSession",
+    "type": "object",
+    "x-expandableFields": [],
+    "x-resourceId": "billing_portal.session",
+    "default": {
+      "created": 0,
+      "customer": "string",
+      "id": "string",
+      "livemode": true,
+      "object": "billing_portal.session",
+      "return_url": "string",
+      "url": "string"
     }
-  },
-  "required": [
-    "created",
-    "customer",
-    "id",
-    "livemode",
-    "object",
-    "return_url",
-    "url"
-  ],
-  "title": "PortalSession",
-  "type": "object",
-  "x-expandableFields": [],
-  "x-resourceId": "billing_portal.session"
+  }
 }

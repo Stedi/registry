@@ -1,102 +1,102 @@
 {
-  "title": "Transaction",
-  "description": "Ramp transaction",
-  "type": "object",
-  "properties": {
-    "amount": {
-      "type": "number"
-    },
-    "card_holder": {
-      "type": "object",
-      "required": [
-        "location_name",
-        "location_id",
-        "department_name",
-        "department_id",
-        "first_name",
-        "last_name"
-      ],
-      "properties": {
-        "location_name": {
-          "type": "string",
-          "minLength": 1
-        },
-        "location_id": {
-          "type": "string",
-          "minLength": 1,
-          "format": "uuid"
-        },
-        "department_name": {
-          "type": "string",
-          "minLength": 1
-        },
-        "department_id": {
-          "type": "string",
-          "minLength": 1,
-          "format": "uuid"
-        },
-        "first_name": {
-          "type": "string",
-          "minLength": 1
-        },
-        "last_name": {
-          "type": "string",
-          "minLength": 1
+  "name": "Transaction",
+  "schema": {
+    "title": "Transaction",
+    "description": "Ramp transaction",
+    "type": "object",
+    "properties": {
+      "amount": {
+        "type": "number"
+      },
+      "card_holder": {
+        "type": "object",
+        "required": [
+          "location_name",
+          "location_id",
+          "department_name",
+          "department_id",
+          "first_name",
+          "last_name"
+        ],
+        "properties": {
+          "location_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "location_id": {
+            "type": "string",
+            "minLength": 1,
+            "format": "uuid"
+          },
+          "department_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "department_id": {
+            "type": "string",
+            "minLength": 1,
+            "format": "uuid"
+          },
+          "first_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "last_name": {
+            "type": "string",
+            "minLength": 1
+          }
         }
-      }
-    },
-    "card_id": {
-      "type": "string",
-      "minLength": 1,
-      "format": "uuid"
-    },
-    "id": {
-      "type": "string",
-      "minLength": 1,
-      "format": "uuid"
-    },
-    "merchant_id": {
-      "type": "string",
-      "format": "uuid"
-    },
-    "merchant_name": {
-      "type": "string",
-      "minLength": 1
-    },
-    "sk_category_id": {
-      "description": "Ramp-internal category id",
-      "type": "number"
-    },
-    "sk_category_name": {
-      "description": "Ramp-internal category name",
-      "type": "string",
-      "minLength": 1
-    },
-    "state": {
-      "type": "string",
-      "minLength": 1
-    },
-    "user_transaction_time": {
-      "type": "string",
-      "minLength": 1,
-      "format": "date-time"
-    },
-    "receipts": {
-      "description": "Receipts listed in ascending order by their creation time, related to the transaction.",
-      "type": "array",
-      "items": {
+      },
+      "card_id": {
         "type": "string",
         "minLength": 1,
         "format": "uuid"
-      }
-    },
-    "memo": {
-      "type": "string"
-    },
-    "accounting_categories": {
-      "description": "Accounting categories related to the transaction.",
-      "type": "array",
-      "items": {
+      },
+      "id": {
+        "type": "string",
+        "minLength": 1,
+        "format": "uuid"
+      },
+      "merchant_id": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "merchant_name": {
+        "type": "string",
+        "minLength": 1
+      },
+      "sk_category_id": {
+        "description": "Ramp-internal category id",
+        "type": "number"
+      },
+      "sk_category_name": {
+        "description": "Ramp-internal category name",
+        "type": "string",
+        "minLength": 1
+      },
+      "state": {
+        "type": "string",
+        "minLength": 1,
+        "enum": [
+          "DECLINED",
+          "CLEARED",
+          "PENDING"
+        ]
+      },
+      "user_transaction_time": {
+        "type": "string",
+        "minLength": 1,
+        "format": "date-time"
+      },
+      "receipts": {
+        "type": "string",
+        "minLength": 1,
+        "format": "uuid"
+      },
+      "memo": {
+        "type": "string"
+      },
+      "accounting_categories": {
         "type": "object",
         "properties": {
           "category_id": {
@@ -108,12 +108,8 @@
             "type": "string"
           }
         }
-      }
-    },
-    "policy_violations": {
-      "description": "Policy violations listed in descending order by their creation time, related to the transaction.",
-      "type": "array",
-      "items": {
+      },
+      "policy_violations": {
         "type": "object",
         "properties": {
           "created_at": {
@@ -136,12 +132,8 @@
             "description": "Free form text regarding the policy violation."
           }
         }
-      }
-    },
-    "disputes": {
-      "description": "Disputes listed in descending order by their creation time, related to the transaction.",
-      "type": "array",
-      "items": {
+      },
+      "disputes": {
         "type": "object",
         "properties": {
           "created_at": {
@@ -167,66 +159,58 @@
           }
         }
       }
-    }
-  },
-  "required": [
-    "amount",
-    "card_holder",
-    "card_id",
-    "id",
-    "merchant_id",
-    "merchant_name",
-    "sk_category_id",
-    "sk_category_name",
-    "state",
-    "user_transaction_time"
-  ],
-  "x-tags": [
-    "Transaction"
-  ],
-  "default": {
-    "amount": 570296,
-    "card_holder": {
-      "location_name": "nostrum",
-      "location_id": "6208584a-0f4f-43e0-b367-ee74e34517ab",
-      "department_name": "sapiente",
-      "department_id": "e80ce856-59c0-4f61-8622-cf35a0fee213",
-      "first_name": "voluptate",
-      "last_name": "exercitationem"
     },
-    "card_id": "d0e60af1-4c65-46d4-835c-c6b7450f30e2",
-    "id": "d43b545e-8e06-4b13-989e-11527d183088",
-    "merchant_id": "3f7067e4-0217-443c-891e-f0908bfffc04",
-    "merchant_name": "vitae",
-    "sk_category_id": 246150,
-    "sk_category_name": "non",
-    "state": "vel",
-    "user_transaction_time": "2022-02-11T15:33:10.935Z",
-    "receipts": [
-      "c5326a15-0d47-4c04-8c79-6a5897493c19"
+    "required": [
+      "amount",
+      "card_holder",
+      "card_id",
+      "id",
+      "merchant_id",
+      "merchant_name",
+      "sk_category_id",
+      "sk_category_name",
+      "state",
+      "user_transaction_time"
     ],
-    "memo": "excepturi",
-    "accounting_categories": [
-      {
-        "category_id": "quos",
-        "category_name": "quos"
-      }
+    "x-tags": [
+      "Transaction"
     ],
-    "policy_violations": [
-      {
-        "created_at": "2022-02-12T04:03:15.276Z",
+    "default": {
+      "amount": 0,
+      "card_holder": {
+        "location_name": "string",
+        "location_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "department_name": "string",
+        "department_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "first_name": "string",
+        "last_name": "string"
+      },
+      "card_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "merchant_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "merchant_name": "string",
+      "sk_category_id": 0,
+      "sk_category_name": "string",
+      "state": "DECLINED",
+      "user_transaction_time": "1970-01-01T00:00:00.000Z",
+      "receipts": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "memo": "string",
+      "accounting_categories": {
+        "category_id": "string",
+        "category_name": "string"
+      },
+      "policy_violations": {
+        "created_at": "1970-01-01T00:00:00.000Z",
         "type": "POLICY_VIOLATION_FROM_ADMIN",
-        "id": "cd4ce64c-ccd4-492a-95df-1b7960b20133",
-        "memo": "labore"
-      }
-    ],
-    "disputes": [
-      {
-        "created_at": "2022-02-12T00:47:55.168Z",
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "memo": "string"
+      },
+      "disputes": {
+        "created_at": "1970-01-01T00:00:00.000Z",
         "type": "MERCHANT_ERROR",
-        "id": "83d241bb-ee88-4ed1-84f1-7493cf221580",
-        "memo": "blanditiis"
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "memo": "string"
       }
-    ]
+    }
   }
 }

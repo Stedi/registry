@@ -1,27 +1,35 @@
 {
-  "description": "",
-  "properties": {
-    "quantity": {
-      "description": "The count of inventory available. Will be present if and only if `type` is `finite`.",
-      "nullable": true,
-      "type": "integer"
+  "name": "sku_inventory",
+  "schema": {
+    "description": "",
+    "properties": {
+      "quantity": {
+        "description": "The count of inventory available. Will be present if and only if `type` is `finite`.",
+        "nullable": true,
+        "type": "integer"
+      },
+      "type": {
+        "description": "Inventory type. Possible values are `finite`, `bucket` (not quantified), and `infinite`.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "value": {
+        "description": "An indicator of the inventory available. Possible values are `in_stock`, `limited`, and `out_of_stock`. Will be present if and only if `type` is `bucket`.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      }
     },
-    "type": {
-      "description": "Inventory type. Possible values are `finite`, `bucket` (not quantified), and `infinite`.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "value": {
-      "description": "An indicator of the inventory available. Possible values are `in_stock`, `limited`, and `out_of_stock`. Will be present if and only if `type` is `bucket`.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+    "required": [
+      "type"
+    ],
+    "title": "SKUInventory",
+    "type": "object",
+    "x-expandableFields": [],
+    "default": {
+      "quantity": 0,
+      "type": "string",
+      "value": "string"
     }
-  },
-  "required": [
-    "type"
-  ],
-  "title": "SKUInventory",
-  "type": "object",
-  "x-expandableFields": []
+  }
 }

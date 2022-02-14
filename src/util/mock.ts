@@ -78,20 +78,24 @@ export function mock(schema: SchemaLike): any {
   if (type === 'string') {
     const { format } = schema;
     const formatExamples: { [format: string]: string } = {
-      email: randEmail(),
-      hostname: randDomainName(),
-      ipv4: randIp(),
-      ipv6: randIpv6(),
-      uri: randUrl(),
+      email: "user@example.com",
+      hostname: "http://example.com",
+      ipv4: "8.8.8.8",
+      ipv6: "2001:4860:4860::8888",
+      uri: "https://example.com/path",
+      "decimal": "0.0",
       'uri-reference': '/path#anchor',
       'uri-template': '/path/{param}',
       'json-pointer': '/foo/bar',
-      'date-time': randSoonDate().toJSON(),
-      'date': randSoonDate().toJSON(),
-      uuid: randUuid(),
-      _default: randWord(),
+      'date-time': new Date('1970-01-01').toJSON(),
+      'date': new Date('1970-01-01').toJSON(),
+      uuid: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+      _default: "string",
     };
     const val = format ? formatExamples[format] : formatExamples._default;
+    if (val === undefined) {
+      console.log(format);
+    }
     const minln = !_.isNil(schema.minLength) ? schema.minLength : 0;
     const maxln = !_.isNil(schema.maxLength) ? schema.maxLength : val.length;
     if (val === formatExamples._default && val.length < minln) {
@@ -101,11 +105,11 @@ export function mock(schema: SchemaLike): any {
   }
 
   if (type === 'number') {
-    return randNumber();
+    return 0;
   }
 
   if (type === 'integer') {
-    return Math.floor(randNumber());
+    return 0;
   }
 
   if (type === 'null') {
@@ -118,4 +122,52 @@ export function mock(schema: SchemaLike): any {
 
   // unknown type
   return {};
+}
+
+export function traverse(schema: SchemaLike): any {
+  // allOf, merge all subschemas
+  schema = resolveAllOf(schema);
+
+  // use default
+  if (schema.default !== undefined) {
+    return schema.default;
+  }
+  // oneOf, use first
+  if (schema.oneOf && schema.oneOf[0]) {
+
+    schema.oneOf = schema.oneOf.slice(0, 1);
+    return traverse(schema.oneOf[0] as SchemaLike);
+
+  }
+
+  // anyOf, use first
+  if (schema.anyOf && schema.anyOf[0]) {
+    schema.anyOf = schema.anyOf.slice(0, 1);
+    delete (schema as any)["x-expansionResources"];
+    return traverse(schema.anyOf[0] as SchemaLike);
+  }
+
+  // get type, use first if array
+  const type = _.isArray(schema.type) ? _.first(schema.type) : schema.type;
+
+  if (type === 'object') {
+    const obj = schema as OpenAPIV3.NonArraySchemaObject;
+    const { properties } = obj;
+    if (!properties) {
+      return {};
+    }
+    (schema as any)["properties"] = _.mapValues(properties, traverse);
+    return schema;
+  }
+
+  if (type === 'array') {
+    const array = schema as OpenAPIV3.ArraySchemaObject;
+    const items = array.items as SchemaLike;
+    if (!items) {
+      return [];
+    }
+    return traverse(items);
+  }
+
+  return schema;
 }

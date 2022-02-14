@@ -1,24 +1,31 @@
 {
-  "description": "",
-  "properties": {
-    "divide_by": {
-      "description": "Divide usage by this number.",
-      "type": "integer"
+  "name": "transform_usage",
+  "schema": {
+    "description": "",
+    "properties": {
+      "divide_by": {
+        "description": "Divide usage by this number.",
+        "type": "integer"
+      },
+      "round": {
+        "description": "After division, either round the result `up` or `down`.",
+        "enum": [
+          "down",
+          "up"
+        ],
+        "type": "string"
+      }
     },
-    "round": {
-      "description": "After division, either round the result `up` or `down`.",
-      "enum": [
-        "down",
-        "up"
-      ],
-      "type": "string"
+    "required": [
+      "divide_by",
+      "round"
+    ],
+    "title": "TransformUsage",
+    "type": "object",
+    "x-expandableFields": [],
+    "default": {
+      "divide_by": 0,
+      "round": "down"
     }
-  },
-  "required": [
-    "divide_by",
-    "round"
-  ],
-  "title": "TransformUsage",
-  "type": "object",
-  "x-expandableFields": []
+  }
 }

@@ -1,65 +1,77 @@
 {
-  "description": "",
-  "properties": {
-    "redirect_to_url": {
-      "description": "",
-      "properties": {
-        "return_url": {
-          "description": "If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+  "name": "setup_intent_next_action",
+  "schema": {
+    "description": "",
+    "properties": {
+      "redirect_to_url": {
+        "description": "",
+        "properties": {
+          "return_url": {
+            "description": "If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "url": {
+            "description": "The URL you must redirect your customer to in order to authenticate.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          }
         },
-        "url": {
-          "description": "The URL you must redirect your customer to in order to authenticate.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
-        }
+        "title": "SetupIntentNextActionRedirectToUrl",
+        "type": "object",
+        "x-expandableFields": []
       },
-      "title": "SetupIntentNextActionRedirectToUrl",
-      "type": "object",
-      "x-expandableFields": []
-    },
-    "type": {
-      "description": "Type of the next action to perform, one of `redirect_to_url`, `use_stripe_sdk`, `alipay_handle_redirect`, `oxxo_display_details`, or `verify_with_microdeposits`.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "use_stripe_sdk": {
-      "description": "When confirming a SetupIntent with Stripe.js, Stripe.js depends on the contents of this dictionary to invoke authentication flows. The shape of the contents is subject to change and is only intended to be used by Stripe.js.",
-      "type": "object"
-    },
-    "verify_with_microdeposits": {
-      "description": "",
-      "properties": {
-        "arrival_date": {
-          "description": "The timestamp when the microdeposits are expected to land.",
-          "format": "unix-time",
-          "type": "integer"
+      "type": {
+        "description": "Type of the next action to perform, one of `redirect_to_url`, `use_stripe_sdk`, `alipay_handle_redirect`, `oxxo_display_details`, or `verify_with_microdeposits`.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "use_stripe_sdk": {},
+      "verify_with_microdeposits": {
+        "description": "",
+        "properties": {
+          "arrival_date": {
+            "description": "The timestamp when the microdeposits are expected to land.",
+            "format": "unix-time",
+            "type": "integer"
+          },
+          "hosted_verification_url": {
+            "description": "The URL for the hosted verification page, which allows customers to verify their bank account.",
+            "maxLength": 5000,
+            "type": "string"
+          }
         },
-        "hosted_verification_url": {
-          "description": "The URL for the hosted verification page, which allows customers to verify their bank account.",
-          "maxLength": 5000,
-          "type": "string"
-        }
+        "required": [
+          "arrival_date",
+          "hosted_verification_url"
+        ],
+        "title": "SetupIntentNextActionVerifyWithMicrodeposits",
+        "type": "object",
+        "x-expandableFields": []
+      }
+    },
+    "required": [
+      "type"
+    ],
+    "title": "SetupIntentNextAction",
+    "type": "object",
+    "x-expandableFields": [
+      "redirect_to_url",
+      "verify_with_microdeposits"
+    ],
+    "default": {
+      "redirect_to_url": {
+        "return_url": "string",
+        "url": "string"
       },
-      "required": [
-        "arrival_date",
-        "hosted_verification_url"
-      ],
-      "title": "SetupIntentNextActionVerifyWithMicrodeposits",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "string",
+      "use_stripe_sdk": {},
+      "verify_with_microdeposits": {
+        "arrival_date": 0,
+        "hosted_verification_url": "string"
+      }
     }
-  },
-  "required": [
-    "type"
-  ],
-  "title": "SetupIntentNextAction",
-  "type": "object",
-  "x-expandableFields": [
-    "redirect_to_url",
-    "verify_with_microdeposits"
-  ]
+  }
 }

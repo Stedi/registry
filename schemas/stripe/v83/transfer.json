@@ -1,208 +1,233 @@
 {
-  "description": "A `Transfer` object is created when you move funds between Stripe accounts as\npart of Connect.\n\nBefore April 6, 2017, transfers also represented movement of funds from a\nStripe account to a card or bank account. This behavior has since been split\nout into a [Payout](https://stripe.com/docs/api#payout_object) object, with corresponding payout endpoints. For more\ninformation, read about the\n[transfer/payout split](https://stripe.com/docs/transfer-payout-split).\n\nRelated guide: [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers).",
-  "properties": {
-    "amount": {
-      "description": "Amount in %s to be transferred.",
-      "type": "integer"
-    },
-    "amount_reversed": {
-      "description": "Amount in %s reversed (can be less than the amount attribute on the transfer if a partial reversal was issued).",
-      "type": "integer"
-    },
-    "balance_transaction": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/balance_transaction"
-        }
-      ],
-      "description": "Balance transaction that describes the impact of this transfer on your account balance.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/balance_transaction"
-          }
-        ]
-      }
-    },
-    "created": {
-      "description": "Time that this record of the transfer was first created.",
-      "format": "unix-time",
-      "type": "integer"
-    },
-    "currency": {
-      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-      "type": "string"
-    },
-    "description": {
-      "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "destination": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/account"
-        }
-      ],
-      "description": "ID of the Stripe account the transfer was sent to.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/account"
-          }
-        ]
-      }
-    },
-    "destination_payment": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/charge"
-        }
-      ],
-      "description": "If the destination is a Stripe account, this will be the ID of the payment that the destination account received for the transfer.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/charge"
-          }
-        ]
-      }
-    },
-    "id": {
-      "description": "Unique identifier for the object.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "livemode": {
-      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-      "type": "boolean"
-    },
-    "metadata": {
-      "additionalProperties": {
-        "maxLength": 500,
+  "name": "transfer",
+  "schema": {
+    "description": "A `Transfer` object is created when you move funds between Stripe accounts as\npart of Connect.\n\nBefore April 6, 2017, transfers also represented movement of funds from a\nStripe account to a card or bank account. This behavior has since been split\nout into a [Payout](https://stripe.com/docs/api#payout_object) object, with corresponding payout endpoints. For more\ninformation, read about the\n[transfer/payout split](https://stripe.com/docs/transfer-payout-split).\n\nRelated guide: [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers).",
+    "properties": {
+      "amount": {
+        "description": "Amount in %s to be transferred.",
+        "type": "integer"
+      },
+      "amount_reversed": {
+        "description": "Amount in %s reversed (can be less than the amount attribute on the transfer if a partial reversal was issued).",
+        "type": "integer"
+      },
+      "balance_transaction": {
+        "maxLength": 5000,
         "type": "string"
       },
-      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-      "type": "object"
-    },
-    "object": {
-      "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "transfer"
-      ],
-      "type": "string"
-    },
-    "reversals": {
-      "description": "A list of reversals that have been applied to the transfer.",
-      "properties": {
-        "data": {
-          "description": "Details about each object.",
-          "items": {
-            "$ref": "#/components/schemas/transfer_reversal"
-          },
-          "type": "array"
-        },
-        "has_more": {
-          "description": "True if this list has another page of items after this one that can be fetched.",
-          "type": "boolean"
-        },
-        "object": {
-          "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
-          "enum": [
-            "list"
-          ],
-          "type": "string"
-        },
-        "url": {
-          "description": "The URL where this list can be accessed.",
-          "maxLength": 5000,
-          "type": "string"
-        }
+      "created": {
+        "description": "Time that this record of the transfer was first created.",
+        "format": "unix-time",
+        "type": "integer"
       },
-      "required": [
-        "data",
-        "has_more",
-        "object",
-        "url"
-      ],
-      "title": "TransferReversalList",
-      "type": "object",
-      "x-expandableFields": [
-        "data"
-      ]
-    },
-    "reversed": {
-      "description": "Whether the transfer has been fully reversed. If the transfer is only partially reversed, this attribute will still be false.",
-      "type": "boolean"
-    },
-    "source_transaction": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/charge"
-        }
-      ],
-      "description": "ID of the charge or payment that was used to fund the transfer. If null, the transfer was funded from the available balance.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/charge"
+      "currency": {
+        "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+        "type": "string"
+      },
+      "description": {
+        "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "destination": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "destination_payment": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "id": {
+        "description": "Unique identifier for the object.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "livemode": {
+        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+        "type": "boolean"
+      },
+      "metadata": {},
+      "object": {
+        "description": "String representing the object's type. Objects of the same type share the same value.",
+        "enum": [
+          "transfer"
+        ],
+        "type": "string"
+      },
+      "reversals": {
+        "description": "A list of reversals that have been applied to the transfer.",
+        "properties": {
+          "data": {
+            "description": "[Stripe Connect](https://stripe.com/docs/connect) platforms can reverse transfers made to a\nconnected account, either entirely or partially, and can also specify whether\nto refund any related application fees. Transfer reversals add to the\nplatform's balance and subtract from the destination account's balance.\n\nReversing a transfer that was made for a [destination\ncharge](/docs/connect/destination-charges) is allowed only up to the amount of\nthe charge. It is possible to reverse a\n[transfer_group](https://stripe.com/docs/connect/charges-transfers#transfer-options)\ntransfer only if the destination account has enough balance to cover the\nreversal.\n\nRelated guide: [Reversing Transfers](https://stripe.com/docs/connect/charges-transfers#reversing-transfers).",
+            "properties": {
+              "amount": {
+                "description": "Amount, in %s.",
+                "type": "integer"
+              },
+              "balance_transaction": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "created": {
+                "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                "format": "unix-time",
+                "type": "integer"
+              },
+              "currency": {
+                "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                "type": "string"
+              },
+              "destination_payment_refund": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique identifier for the object.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "metadata": {},
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "transfer_reversal"
+                ],
+                "type": "string"
+              },
+              "source_refund": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "transfer": {
+                "maxLength": 5000,
+                "type": "string"
+              }
+            },
+            "required": [
+              "amount",
+              "created",
+              "currency",
+              "id",
+              "object",
+              "transfer"
+            ],
+            "title": "TransferReversal",
+            "type": "object",
+            "x-expandableFields": [
+              "balance_transaction",
+              "destination_payment_refund",
+              "source_refund",
+              "transfer"
+            ],
+            "x-resourceId": "transfer_reversal"
+          },
+          "has_more": {
+            "description": "True if this list has another page of items after this one that can be fetched.",
+            "type": "boolean"
+          },
+          "object": {
+            "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
+            "enum": [
+              "list"
+            ],
+            "type": "string"
+          },
+          "url": {
+            "description": "The URL where this list can be accessed.",
+            "maxLength": 5000,
+            "type": "string"
           }
+        },
+        "required": [
+          "data",
+          "has_more",
+          "object",
+          "url"
+        ],
+        "title": "TransferReversalList",
+        "type": "object",
+        "x-expandableFields": [
+          "data"
         ]
+      },
+      "reversed": {
+        "description": "Whether the transfer has been fully reversed. If the transfer is only partially reversed, this attribute will still be false.",
+        "type": "boolean"
+      },
+      "source_transaction": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "source_type": {
+        "description": "The source balance this transfer came from. One of `card`, `fpx`, or `bank_account`.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "transfer_group": {
+        "description": "A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
       }
     },
-    "source_type": {
-      "description": "The source balance this transfer came from. One of `card`, `fpx`, or `bank_account`.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "transfer_group": {
-      "description": "A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+    "required": [
+      "amount",
+      "amount_reversed",
+      "created",
+      "currency",
+      "id",
+      "livemode",
+      "metadata",
+      "object",
+      "reversals",
+      "reversed"
+    ],
+    "title": "Transfer",
+    "type": "object",
+    "x-expandableFields": [
+      "balance_transaction",
+      "destination",
+      "destination_payment",
+      "reversals",
+      "source_transaction"
+    ],
+    "x-resourceId": "transfer",
+    "default": {
+      "amount": 0,
+      "amount_reversed": 0,
+      "balance_transaction": "string",
+      "created": 0,
+      "currency": "string",
+      "description": "string",
+      "destination": "string",
+      "destination_payment": "string",
+      "id": "string",
+      "livemode": true,
+      "metadata": {},
+      "object": "transfer",
+      "reversals": {
+        "data": {
+          "amount": 0,
+          "balance_transaction": "string",
+          "created": 0,
+          "currency": "string",
+          "destination_payment_refund": "string",
+          "id": "string",
+          "metadata": {},
+          "object": "transfer_reversal",
+          "source_refund": "string",
+          "transfer": "string"
+        },
+        "has_more": true,
+        "object": "list",
+        "url": "string"
+      },
+      "reversed": true,
+      "source_transaction": "string",
+      "source_type": "string",
+      "transfer_group": "string"
     }
-  },
-  "required": [
-    "amount",
-    "amount_reversed",
-    "created",
-    "currency",
-    "id",
-    "livemode",
-    "metadata",
-    "object",
-    "reversals",
-    "reversed"
-  ],
-  "title": "Transfer",
-  "type": "object",
-  "x-expandableFields": [
-    "balance_transaction",
-    "destination",
-    "destination_payment",
-    "reversals",
-    "source_transaction"
-  ],
-  "x-resourceId": "transfer"
+  }
 }

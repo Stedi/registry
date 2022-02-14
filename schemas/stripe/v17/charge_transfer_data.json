@@ -1,37 +1,29 @@
 {
-  "description": "",
-  "properties": {
-    "amount": {
-      "description": "The amount transferred to the destination account, if specified. By default, the entire charge amount is transferred to the destination account.",
-      "nullable": true,
-      "type": "integer"
-    },
-    "destination": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/account"
-        }
-      ],
-      "description": "ID of an existing, connected Stripe account to transfer funds to if `transfer_data` was specified in the charge request.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/account"
-          }
-        ]
+  "name": "charge_transfer_data",
+  "schema": {
+    "description": "",
+    "properties": {
+      "amount": {
+        "description": "The amount transferred to the destination account, if specified. By default, the entire charge amount is transferred to the destination account.",
+        "nullable": true,
+        "type": "integer"
+      },
+      "destination": {
+        "maxLength": 5000,
+        "type": "string"
       }
+    },
+    "required": [
+      "destination"
+    ],
+    "title": "ChargeTransferData",
+    "type": "object",
+    "x-expandableFields": [
+      "destination"
+    ],
+    "default": {
+      "amount": 0,
+      "destination": "string"
     }
-  },
-  "required": [
-    "destination"
-  ],
-  "title": "ChargeTransferData",
-  "type": "object",
-  "x-expandableFields": [
-    "destination"
-  ]
+  }
 }

@@ -1,24 +1,31 @@
 {
-  "description": "",
-  "properties": {
-    "code": {
-      "description": "A short machine-readable string giving the reason for the verification failure.",
-      "enum": [
-        "id_number_insufficient_document_data",
-        "id_number_mismatch",
-        "id_number_unverified_other"
-      ],
-      "nullable": true,
-      "type": "string"
+  "name": "gelato_id_number_report_error",
+  "schema": {
+    "description": "",
+    "properties": {
+      "code": {
+        "description": "A short machine-readable string giving the reason for the verification failure.",
+        "enum": [
+          "id_number_insufficient_document_data",
+          "id_number_mismatch",
+          "id_number_unverified_other"
+        ],
+        "nullable": true,
+        "type": "string"
+      },
+      "reason": {
+        "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      }
     },
-    "reason": {
-      "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+    "title": "GelatoIdNumberReportError",
+    "type": "object",
+    "x-expandableFields": [],
+    "default": {
+      "code": "id_number_insufficient_document_data",
+      "reason": "string"
     }
-  },
-  "title": "GelatoIdNumberReportError",
-  "type": "object",
-  "x-expandableFields": []
+  }
 }

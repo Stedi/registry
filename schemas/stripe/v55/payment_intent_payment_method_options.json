@@ -1,363 +1,402 @@
 {
-  "description": "",
-  "properties": {
-    "acss_debit": {
-      "description": "",
-      "properties": {
-        "mandate_options": {
-          "description": "",
-          "properties": {
-            "custom_mandate_url": {
-              "description": "A URL for custom mandate text",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "interval_description": {
-              "description": "Description of the interval. Only required if 'payment_schedule' parmeter is 'interval' or 'combined'.",
-              "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
-            },
-            "payment_schedule": {
-              "description": "Payment schedule for the mandate.",
-              "enum": [
-                "combined",
-                "interval",
-                "sporadic"
-              ],
-              "nullable": true,
-              "type": "string"
-            },
-            "transaction_type": {
-              "description": "Transaction type of the mandate.",
-              "enum": [
-                "business",
-                "personal"
-              ],
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "title": "payment_intent_payment_method_options_mandate_options_acss_debit",
-          "type": "object",
-          "x-expandableFields": []
-        },
-        "verification_method": {
-          "description": "Bank account verification method.",
-          "enum": [
-            "automatic",
-            "instant",
-            "microdeposits"
-          ],
-          "type": "string",
-          "x-stripeBypassValidation": true
-        }
-      },
-      "title": "payment_intent_payment_method_options_acss_debit",
-      "type": "object",
-      "x-expandableFields": [
-        "mandate_options"
-      ]
-    },
-    "afterpay_clearpay": {
-      "description": "",
-      "properties": {
-        "reference": {
-          "description": "Order identifier shown to the merchant in Afterpay’s online portal. We recommend using a value that helps you answer any questions a customer might have about\nthe payment. The identifier is limited to 128 characters and may contain only letters, digits, underscores, backslashes and dashes.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
-        }
-      },
-      "title": "payment_method_options_afterpay_clearpay",
-      "type": "object",
-      "x-expandableFields": []
-    },
-    "alipay": {
-      "description": "",
-      "properties": {},
-      "title": "payment_method_options_alipay",
-      "type": "object",
-      "x-expandableFields": []
-    },
-    "bancontact": {
-      "description": "",
-      "properties": {
-        "preferred_language": {
-          "description": "Preferred language of the Bancontact authorization page that the customer is redirected to.",
-          "enum": [
-            "de",
-            "en",
-            "fr",
-            "nl"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "preferred_language"
-      ],
-      "title": "payment_method_options_bancontact",
-      "type": "object",
-      "x-expandableFields": []
-    },
-    "boleto": {
-      "description": "",
-      "properties": {
-        "expires_after_days": {
-          "description": "The number of calendar days before a Boleto voucher expires. For example, if you create a Boleto voucher on Monday and you set expires_after_days to 2, the Boleto voucher will expire on Wednesday at 23:59 America/Sao_Paulo time.",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "expires_after_days"
-      ],
-      "title": "payment_method_options_boleto",
-      "type": "object",
-      "x-expandableFields": []
-    },
-    "card": {
-      "description": "",
-      "properties": {
-        "installments": {
-          "anyOf": [
-            {
-              "description": "",
-              "properties": {
-                "available_plans": {
-                  "description": "Installment plans that may be selected for this PaymentIntent.",
-                  "items": {
-                    "description": "",
-                    "properties": {
-                      "count": {
-                        "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
-                        "nullable": true,
-                        "type": "integer"
-                      },
-                      "interval": {
-                        "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
-                        "enum": [
-                          "month"
-                        ],
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "type": {
-                        "description": "Type of installment plan, one of `fixed_count`.",
-                        "enum": [
-                          "fixed_count"
-                        ],
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "type"
-                    ],
-                    "title": "payment_method_details_card_installments_plan",
-                    "type": "object",
-                    "x-expandableFields": []
-                  },
-                  "nullable": true,
-                  "type": "array"
-                },
-                "enabled": {
-                  "description": "Whether Installments are enabled for this PaymentIntent.",
-                  "type": "boolean"
-                },
-                "plan": {
-                  "anyOf": [
-                    {
-                      "description": "",
-                      "properties": {
-                        "count": {
-                          "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
-                          "nullable": true,
-                          "type": "integer"
-                        },
-                        "interval": {
-                          "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
-                          "enum": [
-                            "month"
-                          ],
-                          "nullable": true,
-                          "type": "string"
-                        },
-                        "type": {
-                          "description": "Type of installment plan, one of `fixed_count`.",
-                          "enum": [
-                            "fixed_count"
-                          ],
-                          "type": "string"
-                        }
-                      },
-                      "required": [
-                        "type"
-                      ],
-                      "title": "payment_method_details_card_installments_plan",
-                      "type": "object",
-                      "x-expandableFields": []
-                    }
-                  ],
-                  "description": "Installment plan selected for this PaymentIntent.",
-                  "nullable": true
-                }
+  "name": "payment_intent_payment_method_options",
+  "schema": {
+    "description": "",
+    "properties": {
+      "acss_debit": {
+        "description": "",
+        "properties": {
+          "mandate_options": {
+            "description": "",
+            "properties": {
+              "custom_mandate_url": {
+                "description": "A URL for custom mandate text",
+                "maxLength": 5000,
+                "type": "string"
               },
-              "required": [
-                "enabled"
-              ],
-              "title": "payment_method_options_card_installments",
-              "type": "object",
-              "x-expandableFields": [
-                "available_plans",
-                "plan"
-              ]
-            }
-          ],
-          "description": "Installment details for this payment (Mexico only).\n\nFor more information, see the [installments integration guide](https://stripe.com/docs/payments/installments).",
-          "nullable": true
+              "interval_description": {
+                "description": "Description of the interval. Only required if 'payment_schedule' parmeter is 'interval' or 'combined'.",
+                "maxLength": 5000,
+                "nullable": true,
+                "type": "string"
+              },
+              "payment_schedule": {
+                "description": "Payment schedule for the mandate.",
+                "enum": [
+                  "combined",
+                  "interval",
+                  "sporadic"
+                ],
+                "nullable": true,
+                "type": "string"
+              },
+              "transaction_type": {
+                "description": "Transaction type of the mandate.",
+                "enum": [
+                  "business",
+                  "personal"
+                ],
+                "nullable": true,
+                "type": "string"
+              }
+            },
+            "title": "payment_intent_payment_method_options_mandate_options_acss_debit",
+            "type": "object",
+            "x-expandableFields": []
+          },
+          "verification_method": {
+            "description": "Bank account verification method.",
+            "enum": [
+              "automatic",
+              "instant",
+              "microdeposits"
+            ],
+            "type": "string",
+            "x-stripeBypassValidation": true
+          }
         },
-        "network": {
-          "description": "Selected network to process this payment intent on. Depends on the available networks of the card attached to the payment intent. Can be only set confirm-time.",
-          "enum": [
-            "amex",
-            "cartes_bancaires",
-            "diners",
-            "discover",
-            "interac",
-            "jcb",
-            "mastercard",
-            "unionpay",
-            "unknown",
-            "visa"
-          ],
-          "nullable": true,
-          "type": "string"
+        "title": "payment_intent_payment_method_options_acss_debit",
+        "type": "object",
+        "x-expandableFields": [
+          "mandate_options"
+        ]
+      },
+      "afterpay_clearpay": {
+        "description": "",
+        "properties": {
+          "reference": {
+            "description": "Order identifier shown to the merchant in Afterpay’s online portal. We recommend using a value that helps you answer any questions a customer might have about\nthe payment. The identifier is limited to 128 characters and may contain only letters, digits, underscores, backslashes and dashes.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          }
         },
-        "request_three_d_secure": {
-          "description": "We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.",
-          "enum": [
-            "any",
-            "automatic",
-            "challenge_only"
-          ],
-          "nullable": true,
-          "type": "string"
-        }
+        "title": "payment_method_options_afterpay_clearpay",
+        "type": "object",
+        "x-expandableFields": []
       },
-      "title": "payment_intent_payment_method_options_card",
-      "type": "object",
-      "x-expandableFields": [
-        "installments"
-      ]
-    },
-    "card_present": {
-      "description": "",
-      "properties": {},
-      "title": "payment_method_options_card_present",
-      "type": "object",
-      "x-expandableFields": []
-    },
-    "oxxo": {
-      "description": "",
-      "properties": {
-        "expires_after_days": {
-          "description": "The number of calendar days before an OXXO invoice expires. For example, if you create an OXXO invoice on Monday and you set expires_after_days to 2, the OXXO invoice will expire on Wednesday at 23:59 America/Mexico_City time.",
-          "type": "integer"
-        }
+      "alipay": {
+        "description": "",
+        "properties": {},
+        "title": "payment_method_options_alipay",
+        "type": "object",
+        "x-expandableFields": []
       },
-      "required": [
-        "expires_after_days"
-      ],
-      "title": "payment_method_options_oxxo",
-      "type": "object",
-      "x-expandableFields": []
+      "bancontact": {
+        "description": "",
+        "properties": {
+          "preferred_language": {
+            "description": "Preferred language of the Bancontact authorization page that the customer is redirected to.",
+            "enum": [
+              "de",
+              "en",
+              "fr",
+              "nl"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "preferred_language"
+        ],
+        "title": "payment_method_options_bancontact",
+        "type": "object",
+        "x-expandableFields": []
+      },
+      "boleto": {
+        "description": "",
+        "properties": {
+          "expires_after_days": {
+            "description": "The number of calendar days before a Boleto voucher expires. For example, if you create a Boleto voucher on Monday and you set expires_after_days to 2, the Boleto voucher will expire on Wednesday at 23:59 America/Sao_Paulo time.",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "expires_after_days"
+        ],
+        "title": "payment_method_options_boleto",
+        "type": "object",
+        "x-expandableFields": []
+      },
+      "card": {
+        "description": "",
+        "properties": {
+          "installments": {
+            "description": "",
+            "properties": {
+              "available_plans": {
+                "description": "",
+                "properties": {
+                  "count": {
+                    "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
+                    "nullable": true,
+                    "type": "integer"
+                  },
+                  "interval": {
+                    "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
+                    "enum": [
+                      "month"
+                    ],
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "Type of installment plan, one of `fixed_count`.",
+                    "enum": [
+                      "fixed_count"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type"
+                ],
+                "title": "payment_method_details_card_installments_plan",
+                "type": "object",
+                "x-expandableFields": []
+              },
+              "enabled": {
+                "description": "Whether Installments are enabled for this PaymentIntent.",
+                "type": "boolean"
+              },
+              "plan": {
+                "description": "",
+                "properties": {
+                  "count": {
+                    "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
+                    "nullable": true,
+                    "type": "integer"
+                  },
+                  "interval": {
+                    "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
+                    "enum": [
+                      "month"
+                    ],
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "Type of installment plan, one of `fixed_count`.",
+                    "enum": [
+                      "fixed_count"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type"
+                ],
+                "title": "payment_method_details_card_installments_plan",
+                "type": "object",
+                "x-expandableFields": []
+              }
+            },
+            "required": [
+              "enabled"
+            ],
+            "title": "payment_method_options_card_installments",
+            "type": "object",
+            "x-expandableFields": [
+              "available_plans",
+              "plan"
+            ]
+          },
+          "network": {
+            "description": "Selected network to process this payment intent on. Depends on the available networks of the card attached to the payment intent. Can be only set confirm-time.",
+            "enum": [
+              "amex",
+              "cartes_bancaires",
+              "diners",
+              "discover",
+              "interac",
+              "jcb",
+              "mastercard",
+              "unionpay",
+              "unknown",
+              "visa"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "request_three_d_secure": {
+            "description": "We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.",
+            "enum": [
+              "any",
+              "automatic",
+              "challenge_only"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "title": "payment_intent_payment_method_options_card",
+        "type": "object",
+        "x-expandableFields": [
+          "installments"
+        ]
+      },
+      "card_present": {
+        "description": "",
+        "properties": {},
+        "title": "payment_method_options_card_present",
+        "type": "object",
+        "x-expandableFields": []
+      },
+      "oxxo": {
+        "description": "",
+        "properties": {
+          "expires_after_days": {
+            "description": "The number of calendar days before an OXXO invoice expires. For example, if you create an OXXO invoice on Monday and you set expires_after_days to 2, the OXXO invoice will expire on Wednesday at 23:59 America/Mexico_City time.",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "expires_after_days"
+        ],
+        "title": "payment_method_options_oxxo",
+        "type": "object",
+        "x-expandableFields": []
+      },
+      "p24": {
+        "description": "",
+        "properties": {},
+        "title": "payment_method_options_p24",
+        "type": "object",
+        "x-expandableFields": []
+      },
+      "sepa_debit": {
+        "description": "",
+        "properties": {
+          "mandate_options": {
+            "description": "",
+            "properties": {},
+            "title": "payment_intent_payment_method_options_mandate_options_sepa_debit",
+            "type": "object",
+            "x-expandableFields": []
+          }
+        },
+        "title": "payment_intent_payment_method_options_sepa_debit",
+        "type": "object",
+        "x-expandableFields": [
+          "mandate_options"
+        ]
+      },
+      "sofort": {
+        "description": "",
+        "properties": {
+          "preferred_language": {
+            "description": "Preferred language of the SOFORT authorization page that the customer is redirected to.",
+            "enum": [
+              "de",
+              "en",
+              "es",
+              "fr",
+              "it",
+              "nl",
+              "pl"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "title": "payment_method_options_sofort",
+        "type": "object",
+        "x-expandableFields": []
+      },
+      "wechat_pay": {
+        "description": "",
+        "properties": {
+          "app_id": {
+            "description": "The app ID registered with WeChat Pay. Only required when client is ios or android.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "client": {
+            "description": "The client type that the end customer will pay from",
+            "enum": [
+              "android",
+              "ios",
+              "web"
+            ],
+            "nullable": true,
+            "type": "string",
+            "x-stripeBypassValidation": true
+          }
+        },
+        "title": "payment_method_options_wechat_pay",
+        "type": "object",
+        "x-expandableFields": []
+      }
     },
-    "p24": {
-      "description": "",
-      "properties": {},
-      "title": "payment_method_options_p24",
-      "type": "object",
-      "x-expandableFields": []
-    },
-    "sepa_debit": {
-      "description": "",
-      "properties": {
+    "title": "PaymentIntentPaymentMethodOptions",
+    "type": "object",
+    "x-expandableFields": [
+      "acss_debit",
+      "afterpay_clearpay",
+      "alipay",
+      "bancontact",
+      "boleto",
+      "card",
+      "card_present",
+      "oxxo",
+      "p24",
+      "sepa_debit",
+      "sofort",
+      "wechat_pay"
+    ],
+    "default": {
+      "acss_debit": {
         "mandate_options": {
-          "description": "",
-          "properties": {},
-          "title": "payment_intent_payment_method_options_mandate_options_sepa_debit",
-          "type": "object",
-          "x-expandableFields": []
-        }
-      },
-      "title": "payment_intent_payment_method_options_sepa_debit",
-      "type": "object",
-      "x-expandableFields": [
-        "mandate_options"
-      ]
-    },
-    "sofort": {
-      "description": "",
-      "properties": {
-        "preferred_language": {
-          "description": "Preferred language of the SOFORT authorization page that the customer is redirected to.",
-          "enum": [
-            "de",
-            "en",
-            "es",
-            "fr",
-            "it",
-            "nl",
-            "pl"
-          ],
-          "nullable": true,
-          "type": "string"
-        }
-      },
-      "title": "payment_method_options_sofort",
-      "type": "object",
-      "x-expandableFields": []
-    },
-    "wechat_pay": {
-      "description": "",
-      "properties": {
-        "app_id": {
-          "description": "The app ID registered with WeChat Pay. Only required when client is ios or android.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "custom_mandate_url": "string",
+          "interval_description": "string",
+          "payment_schedule": "combined",
+          "transaction_type": "business"
         },
-        "client": {
-          "description": "The client type that the end customer will pay from",
-          "enum": [
-            "android",
-            "ios",
-            "web"
-          ],
-          "nullable": true,
-          "type": "string",
-          "x-stripeBypassValidation": true
-        }
+        "verification_method": "automatic"
       },
-      "title": "payment_method_options_wechat_pay",
-      "type": "object",
-      "x-expandableFields": []
+      "afterpay_clearpay": {
+        "reference": "string"
+      },
+      "alipay": {},
+      "bancontact": {
+        "preferred_language": "de"
+      },
+      "boleto": {
+        "expires_after_days": 0
+      },
+      "card": {
+        "installments": {
+          "available_plans": {
+            "count": 0,
+            "interval": "month",
+            "type": "fixed_count"
+          },
+          "enabled": true,
+          "plan": {
+            "count": 0,
+            "interval": "month",
+            "type": "fixed_count"
+          }
+        },
+        "network": "amex",
+        "request_three_d_secure": "any"
+      },
+      "card_present": {},
+      "oxxo": {
+        "expires_after_days": 0
+      },
+      "p24": {},
+      "sepa_debit": {
+        "mandate_options": {}
+      },
+      "sofort": {
+        "preferred_language": "de"
+      },
+      "wechat_pay": {
+        "app_id": "string",
+        "client": "android"
+      }
     }
-  },
-  "title": "PaymentIntentPaymentMethodOptions",
-  "type": "object",
-  "x-expandableFields": [
-    "acss_debit",
-    "afterpay_clearpay",
-    "alipay",
-    "bancontact",
-    "boleto",
-    "card",
-    "card_present",
-    "oxxo",
-    "p24",
-    "sepa_debit",
-    "sofort",
-    "wechat_pay"
-  ]
+  }
 }

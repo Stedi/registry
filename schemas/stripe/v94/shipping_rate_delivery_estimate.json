@@ -1,77 +1,78 @@
 {
-  "description": "",
-  "properties": {
-    "maximum": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "unit": {
-              "description": "A unit of time.",
-              "enum": [
-                "business_day",
-                "day",
-                "hour",
-                "month",
-                "week"
-              ],
-              "type": "string"
-            },
-            "value": {
-              "description": "Must be greater than 0.",
-              "type": "integer"
-            }
+  "name": "shipping_rate_delivery_estimate",
+  "schema": {
+    "description": "",
+    "properties": {
+      "maximum": {
+        "description": "",
+        "properties": {
+          "unit": {
+            "description": "A unit of time.",
+            "enum": [
+              "business_day",
+              "day",
+              "hour",
+              "month",
+              "week"
+            ],
+            "type": "string"
           },
-          "required": [
-            "unit",
-            "value"
-          ],
-          "title": "ShippingRateDeliveryEstimateBound",
-          "type": "object",
-          "x-expandableFields": []
-        }
-      ],
-      "description": "The upper bound of the estimated range. If empty, represents no upper bound i.e., infinite.",
-      "nullable": true
+          "value": {
+            "description": "Must be greater than 0.",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "unit",
+          "value"
+        ],
+        "title": "ShippingRateDeliveryEstimateBound",
+        "type": "object",
+        "x-expandableFields": []
+      },
+      "minimum": {
+        "description": "",
+        "properties": {
+          "unit": {
+            "description": "A unit of time.",
+            "enum": [
+              "business_day",
+              "day",
+              "hour",
+              "month",
+              "week"
+            ],
+            "type": "string"
+          },
+          "value": {
+            "description": "Must be greater than 0.",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "unit",
+          "value"
+        ],
+        "title": "ShippingRateDeliveryEstimateBound",
+        "type": "object",
+        "x-expandableFields": []
+      }
     },
-    "minimum": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "unit": {
-              "description": "A unit of time.",
-              "enum": [
-                "business_day",
-                "day",
-                "hour",
-                "month",
-                "week"
-              ],
-              "type": "string"
-            },
-            "value": {
-              "description": "Must be greater than 0.",
-              "type": "integer"
-            }
-          },
-          "required": [
-            "unit",
-            "value"
-          ],
-          "title": "ShippingRateDeliveryEstimateBound",
-          "type": "object",
-          "x-expandableFields": []
-        }
-      ],
-      "description": "The lower bound of the estimated range. If empty, represents no lower bound.",
-      "nullable": true
+    "title": "ShippingRateDeliveryEstimate",
+    "type": "object",
+    "x-expandableFields": [
+      "maximum",
+      "minimum"
+    ],
+    "default": {
+      "maximum": {
+        "unit": "business_day",
+        "value": 0
+      },
+      "minimum": {
+        "unit": "business_day",
+        "value": 0
+      }
     }
-  },
-  "title": "ShippingRateDeliveryEstimate",
-  "type": "object",
-  "x-expandableFields": [
-    "maximum",
-    "minimum"
-  ]
+  }
 }

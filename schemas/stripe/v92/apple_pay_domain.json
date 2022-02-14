@@ -1,41 +1,51 @@
 {
-  "description": "",
-  "properties": {
-    "created": {
-      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-      "format": "unix-time",
-      "type": "integer"
+  "name": "apple_pay_domain",
+  "schema": {
+    "description": "",
+    "properties": {
+      "created": {
+        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+        "format": "unix-time",
+        "type": "integer"
+      },
+      "domain_name": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "id": {
+        "description": "Unique identifier for the object.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "livemode": {
+        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+        "type": "boolean"
+      },
+      "object": {
+        "description": "String representing the object's type. Objects of the same type share the same value.",
+        "enum": [
+          "apple_pay_domain"
+        ],
+        "type": "string"
+      }
     },
-    "domain_name": {
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "id": {
-      "description": "Unique identifier for the object.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "livemode": {
-      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-      "type": "boolean"
-    },
-    "object": {
-      "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "apple_pay_domain"
-      ],
-      "type": "string"
+    "required": [
+      "created",
+      "domain_name",
+      "id",
+      "livemode",
+      "object"
+    ],
+    "title": "ApplePayDomain",
+    "type": "object",
+    "x-expandableFields": [],
+    "x-resourceId": "apple_pay_domain",
+    "default": {
+      "created": 0,
+      "domain_name": "string",
+      "id": "string",
+      "livemode": true,
+      "object": "apple_pay_domain"
     }
-  },
-  "required": [
-    "created",
-    "domain_name",
-    "id",
-    "livemode",
-    "object"
-  ],
-  "title": "ApplePayDomain",
-  "type": "object",
-  "x-expandableFields": [],
-  "x-resourceId": "apple_pay_domain"
+  }
 }

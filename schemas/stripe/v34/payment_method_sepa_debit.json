@@ -1,49 +1,73 @@
 {
-  "description": "",
-  "properties": {
-    "bank_code": {
-      "description": "Bank code of bank associated with the bank account.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+  "name": "payment_method_sepa_debit",
+  "schema": {
+    "description": "",
+    "properties": {
+      "bank_code": {
+        "description": "Bank code of bank associated with the bank account.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "branch_code": {
+        "description": "Branch code of bank associated with the bank account.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "country": {
+        "description": "Two-letter ISO code representing the country the bank account is located in.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "fingerprint": {
+        "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "generated_from": {
+        "description": "",
+        "properties": {
+          "charge": {
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "setup_attempt": {
+            "maxLength": 5000,
+            "type": "string"
+          }
+        },
+        "title": "sepa_debit_generated_from",
+        "type": "object",
+        "x-expandableFields": [
+          "charge",
+          "setup_attempt"
+        ]
+      },
+      "last4": {
+        "description": "Last four characters of the IBAN.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      }
     },
-    "branch_code": {
-      "description": "Branch code of bank associated with the bank account.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "country": {
-      "description": "Two-letter ISO code representing the country the bank account is located in.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "fingerprint": {
-      "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "generated_from": {
-      "anyOf": [
-        {
-          "$ref": "#/components/schemas/sepa_debit_generated_from"
-        }
-      ],
-      "description": "Information about the object that generated this PaymentMethod.",
-      "nullable": true
-    },
-    "last4": {
-      "description": "Last four characters of the IBAN.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+    "title": "payment_method_sepa_debit",
+    "type": "object",
+    "x-expandableFields": [
+      "generated_from"
+    ],
+    "default": {
+      "bank_code": "string",
+      "branch_code": "string",
+      "country": "string",
+      "fingerprint": "string",
+      "generated_from": {
+        "charge": "string",
+        "setup_attempt": "string"
+      },
+      "last4": "string"
     }
-  },
-  "title": "payment_method_sepa_debit",
-  "type": "object",
-  "x-expandableFields": [
-    "generated_from"
-  ]
+  }
 }

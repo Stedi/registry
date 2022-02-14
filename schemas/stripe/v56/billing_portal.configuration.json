@@ -1,64 +1,64 @@
 {
-  "description": "A portal configuration describes the functionality and behavior of a portal session.",
-  "properties": {
-    "active": {
-      "description": "Whether the configuration is active and can be used to create portal sessions.",
-      "type": "boolean"
-    },
-    "application": {
-      "description": "ID of the Connect Application that created the configuration.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "business_profile": {
-      "description": "",
-      "properties": {
-        "headline": {
-          "description": "The messaging shown to customers in the portal.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
-        },
-        "privacy_policy_url": {
-          "description": "A link to the business’s publicly available privacy policy.",
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "terms_of_service_url": {
-          "description": "A link to the business’s publicly available terms of service.",
-          "maxLength": 5000,
-          "type": "string"
-        }
+  "name": "billing_portal.configuration",
+  "schema": {
+    "description": "A portal configuration describes the functionality and behavior of a portal session.",
+    "properties": {
+      "active": {
+        "description": "Whether the configuration is active and can be used to create portal sessions.",
+        "type": "boolean"
       },
-      "required": [
-        "privacy_policy_url",
-        "terms_of_service_url"
-      ],
-      "title": "PortalBusinessProfile",
-      "type": "object",
-      "x-expandableFields": []
-    },
-    "created": {
-      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-      "format": "unix-time",
-      "type": "integer"
-    },
-    "default_return_url": {
-      "description": "The default URL to redirect customers to when they click on the portal's link to return to your website. This can be [overriden](https://stripe.com/docs/api/customer_portal/sessions/create#create_portal_session-return_url) when creating the session.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "features": {
-      "description": "",
-      "properties": {
-        "customer_update": {
-          "description": "",
-          "properties": {
-            "allowed_updates": {
-              "description": "The types of customer updates that are supported. When empty, customers are not updateable.",
-              "items": {
+      "application": {
+        "description": "ID of the Connect Application that created the configuration.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "business_profile": {
+        "description": "",
+        "properties": {
+          "headline": {
+            "description": "The messaging shown to customers in the portal.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "privacy_policy_url": {
+            "description": "A link to the business’s publicly available privacy policy.",
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "terms_of_service_url": {
+            "description": "A link to the business’s publicly available terms of service.",
+            "maxLength": 5000,
+            "type": "string"
+          }
+        },
+        "required": [
+          "privacy_policy_url",
+          "terms_of_service_url"
+        ],
+        "title": "PortalBusinessProfile",
+        "type": "object",
+        "x-expandableFields": []
+      },
+      "created": {
+        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+        "format": "unix-time",
+        "type": "integer"
+      },
+      "default_return_url": {
+        "description": "The default URL to redirect customers to when they click on the portal's link to return to your website. This can be [overriden](https://stripe.com/docs/api/customer_portal/sessions/create#create_portal_session-return_url) when creating the session.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "features": {
+        "description": "",
+        "properties": {
+          "customer_update": {
+            "description": "",
+            "properties": {
+              "allowed_updates": {
                 "enum": [
                   "address",
                   "email",
@@ -68,106 +68,102 @@
                 ],
                 "type": "string"
               },
-              "type": "array"
+              "enabled": {
+                "description": "Whether the feature is enabled.",
+                "type": "boolean"
+              }
             },
-            "enabled": {
-              "description": "Whether the feature is enabled.",
-              "type": "boolean"
-            }
+            "required": [
+              "allowed_updates",
+              "enabled"
+            ],
+            "title": "PortalCustomerUpdate",
+            "type": "object",
+            "x-expandableFields": []
           },
-          "required": [
-            "allowed_updates",
-            "enabled"
-          ],
-          "title": "PortalCustomerUpdate",
-          "type": "object",
-          "x-expandableFields": []
-        },
-        "invoice_history": {
-          "description": "",
-          "properties": {
-            "enabled": {
-              "description": "Whether the feature is enabled.",
-              "type": "boolean"
-            }
-          },
-          "required": [
-            "enabled"
-          ],
-          "title": "PortalInvoiceList",
-          "type": "object",
-          "x-expandableFields": []
-        },
-        "payment_method_update": {
-          "description": "",
-          "properties": {
-            "enabled": {
-              "description": "Whether the feature is enabled.",
-              "type": "boolean"
-            }
-          },
-          "required": [
-            "enabled"
-          ],
-          "title": "PortalPaymentMethodUpdate",
-          "type": "object",
-          "x-expandableFields": []
-        },
-        "subscription_cancel": {
-          "description": "",
-          "properties": {
-            "enabled": {
-              "description": "Whether the feature is enabled.",
-              "type": "boolean"
+          "invoice_history": {
+            "description": "",
+            "properties": {
+              "enabled": {
+                "description": "Whether the feature is enabled.",
+                "type": "boolean"
+              }
             },
-            "mode": {
-              "description": "Whether to cancel subscriptions immediately or at the end of the billing period.",
-              "enum": [
-                "at_period_end",
-                "immediately"
-              ],
-              "type": "string"
+            "required": [
+              "enabled"
+            ],
+            "title": "PortalInvoiceList",
+            "type": "object",
+            "x-expandableFields": []
+          },
+          "payment_method_update": {
+            "description": "",
+            "properties": {
+              "enabled": {
+                "description": "Whether the feature is enabled.",
+                "type": "boolean"
+              }
             },
-            "proration_behavior": {
-              "description": "Whether to create prorations when canceling subscriptions. Possible values are `none` and `create_prorations`.",
-              "enum": [
-                "always_invoice",
-                "create_prorations",
-                "none"
-              ],
-              "type": "string"
-            }
+            "required": [
+              "enabled"
+            ],
+            "title": "PortalPaymentMethodUpdate",
+            "type": "object",
+            "x-expandableFields": []
           },
-          "required": [
-            "enabled",
-            "mode",
-            "proration_behavior"
-          ],
-          "title": "PortalSubscriptionCancel",
-          "type": "object",
-          "x-expandableFields": []
-        },
-        "subscription_pause": {
-          "description": "",
-          "properties": {
-            "enabled": {
-              "description": "Whether the feature is enabled.",
-              "type": "boolean"
-            }
+          "subscription_cancel": {
+            "description": "",
+            "properties": {
+              "enabled": {
+                "description": "Whether the feature is enabled.",
+                "type": "boolean"
+              },
+              "mode": {
+                "description": "Whether to cancel subscriptions immediately or at the end of the billing period.",
+                "enum": [
+                  "at_period_end",
+                  "immediately"
+                ],
+                "type": "string"
+              },
+              "proration_behavior": {
+                "description": "Whether to create prorations when canceling subscriptions. Possible values are `none` and `create_prorations`.",
+                "enum": [
+                  "always_invoice",
+                  "create_prorations",
+                  "none"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "enabled",
+              "mode",
+              "proration_behavior"
+            ],
+            "title": "PortalSubscriptionCancel",
+            "type": "object",
+            "x-expandableFields": []
           },
-          "required": [
-            "enabled"
-          ],
-          "title": "PortalSubscriptionPause",
-          "type": "object",
-          "x-expandableFields": []
-        },
-        "subscription_update": {
-          "description": "",
-          "properties": {
-            "default_allowed_updates": {
-              "description": "The types of subscription updates that are supported for items listed in the `products` attribute. When empty, subscriptions are not updateable.",
-              "items": {
+          "subscription_pause": {
+            "description": "",
+            "properties": {
+              "enabled": {
+                "description": "Whether the feature is enabled.",
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "enabled"
+            ],
+            "title": "PortalSubscriptionPause",
+            "type": "object",
+            "x-expandableFields": []
+          },
+          "subscription_update": {
+            "description": "",
+            "properties": {
+              "default_allowed_updates": {
                 "enum": [
                   "price",
                   "promotion_code",
@@ -175,24 +171,16 @@
                 ],
                 "type": "string"
               },
-              "type": "array"
-            },
-            "enabled": {
-              "description": "Whether the feature is enabled.",
-              "type": "boolean"
-            },
-            "products": {
-              "description": "The list of products that support subscription updates.",
-              "items": {
+              "enabled": {
+                "description": "Whether the feature is enabled.",
+                "type": "boolean"
+              },
+              "products": {
                 "description": "",
                 "properties": {
                   "prices": {
-                    "description": "The list of price IDs which, when subscribed to, a subscription can be updated.",
-                    "items": {
-                      "maxLength": 5000,
-                      "type": "string"
-                    },
-                    "type": "array"
+                    "maxLength": 5000,
+                    "type": "string"
                   },
                   "product": {
                     "description": "The product ID.",
@@ -208,92 +196,135 @@
                 "type": "object",
                 "x-expandableFields": []
               },
-              "nullable": true,
-              "type": "array"
+              "proration_behavior": {
+                "description": "Determines how to handle prorations resulting from subscription updates. Valid values are `none`, `create_prorations`, and `always_invoice`.",
+                "enum": [
+                  "always_invoice",
+                  "create_prorations",
+                  "none"
+                ],
+                "type": "string"
+              }
             },
-            "proration_behavior": {
-              "description": "Determines how to handle prorations resulting from subscription updates. Valid values are `none`, `create_prorations`, and `always_invoice`.",
-              "enum": [
-                "always_invoice",
-                "create_prorations",
-                "none"
-              ],
-              "type": "string"
-            }
+            "required": [
+              "default_allowed_updates",
+              "enabled",
+              "proration_behavior"
+            ],
+            "title": "PortalSubscriptionUpdate",
+            "type": "object",
+            "x-expandableFields": [
+              "products"
+            ]
+          }
+        },
+        "required": [
+          "customer_update",
+          "invoice_history",
+          "payment_method_update",
+          "subscription_cancel",
+          "subscription_pause",
+          "subscription_update"
+        ],
+        "title": "PortalFeatures",
+        "type": "object",
+        "x-expandableFields": [
+          "customer_update",
+          "invoice_history",
+          "payment_method_update",
+          "subscription_cancel",
+          "subscription_pause",
+          "subscription_update"
+        ]
+      },
+      "id": {
+        "description": "Unique identifier for the object.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "is_default": {
+        "description": "Whether the configuration is the default. If `true`, this configuration can be managed in the Dashboard and portal sessions will use this configuration unless it is overriden when creating the session.",
+        "type": "boolean"
+      },
+      "livemode": {
+        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+        "type": "boolean"
+      },
+      "object": {
+        "description": "String representing the object's type. Objects of the same type share the same value.",
+        "enum": [
+          "billing_portal.configuration"
+        ],
+        "type": "string"
+      },
+      "updated": {
+        "description": "Time at which the object was last updated. Measured in seconds since the Unix epoch.",
+        "format": "unix-time",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "active",
+      "business_profile",
+      "created",
+      "features",
+      "id",
+      "is_default",
+      "livemode",
+      "object",
+      "updated"
+    ],
+    "title": "PortalConfiguration",
+    "type": "object",
+    "x-expandableFields": [
+      "business_profile",
+      "features"
+    ],
+    "x-resourceId": "billing_portal.configuration",
+    "default": {
+      "active": true,
+      "application": "string",
+      "business_profile": {
+        "headline": "string",
+        "privacy_policy_url": "string",
+        "terms_of_service_url": "string"
+      },
+      "created": 0,
+      "default_return_url": "string",
+      "features": {
+        "customer_update": {
+          "allowed_updates": "address",
+          "enabled": true
+        },
+        "invoice_history": {
+          "enabled": true
+        },
+        "payment_method_update": {
+          "enabled": true
+        },
+        "subscription_cancel": {
+          "enabled": true,
+          "mode": "at_period_end",
+          "proration_behavior": "always_invoice"
+        },
+        "subscription_pause": {
+          "enabled": true
+        },
+        "subscription_update": {
+          "default_allowed_updates": "price",
+          "enabled": true,
+          "products": {
+            "prices": "string",
+            "product": "string"
           },
-          "required": [
-            "default_allowed_updates",
-            "enabled",
-            "proration_behavior"
-          ],
-          "title": "PortalSubscriptionUpdate",
-          "type": "object",
-          "x-expandableFields": [
-            "products"
-          ]
+          "proration_behavior": "always_invoice"
         }
       },
-      "required": [
-        "customer_update",
-        "invoice_history",
-        "payment_method_update",
-        "subscription_cancel",
-        "subscription_pause",
-        "subscription_update"
-      ],
-      "title": "PortalFeatures",
-      "type": "object",
-      "x-expandableFields": [
-        "customer_update",
-        "invoice_history",
-        "payment_method_update",
-        "subscription_cancel",
-        "subscription_pause",
-        "subscription_update"
-      ]
-    },
-    "id": {
-      "description": "Unique identifier for the object.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "is_default": {
-      "description": "Whether the configuration is the default. If `true`, this configuration can be managed in the Dashboard and portal sessions will use this configuration unless it is overriden when creating the session.",
-      "type": "boolean"
-    },
-    "livemode": {
-      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-      "type": "boolean"
-    },
-    "object": {
-      "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "billing_portal.configuration"
-      ],
-      "type": "string"
-    },
-    "updated": {
-      "description": "Time at which the object was last updated. Measured in seconds since the Unix epoch.",
-      "format": "unix-time",
-      "type": "integer"
+      "id": "string",
+      "is_default": true,
+      "livemode": true,
+      "object": "billing_portal.configuration",
+      "updated": 0
     }
-  },
-  "required": [
-    "active",
-    "business_profile",
-    "created",
-    "features",
-    "id",
-    "is_default",
-    "livemode",
-    "object",
-    "updated"
-  ],
-  "title": "PortalConfiguration",
-  "type": "object",
-  "x-expandableFields": [
-    "business_profile",
-    "features"
-  ],
-  "x-resourceId": "billing_portal.configuration"
+  }
 }

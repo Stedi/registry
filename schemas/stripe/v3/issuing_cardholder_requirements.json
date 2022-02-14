@@ -1,19 +1,19 @@
 {
-  "description": "",
-  "properties": {
-    "disabled_reason": {
-      "description": "If `disabled_reason` is present, all cards will decline authorizations with `cardholder_verification_required` reason.",
-      "enum": [
-        "listed",
-        "rejected.listed",
-        "under_review"
-      ],
-      "nullable": true,
-      "type": "string"
-    },
-    "past_due": {
-      "description": "Array of fields that need to be collected in order to verify and re-enable the cardholder.",
-      "items": {
+  "name": "issuing_cardholder_requirements",
+  "schema": {
+    "description": "",
+    "properties": {
+      "disabled_reason": {
+        "description": "If `disabled_reason` is present, all cards will decline authorizations with `cardholder_verification_required` reason.",
+        "enum": [
+          "listed",
+          "rejected.listed",
+          "under_review"
+        ],
+        "nullable": true,
+        "type": "string"
+      },
+      "past_due": {
         "enum": [
           "company.tax_id",
           "individual.dob.day",
@@ -25,12 +25,14 @@
         ],
         "type": "string",
         "x-stripeBypassValidation": true
-      },
-      "nullable": true,
-      "type": "array"
+      }
+    },
+    "title": "IssuingCardholderRequirements",
+    "type": "object",
+    "x-expandableFields": [],
+    "default": {
+      "disabled_reason": "listed",
+      "past_due": "company.tax_id"
     }
-  },
-  "title": "IssuingCardholderRequirements",
-  "type": "object",
-  "x-expandableFields": []
+  }
 }

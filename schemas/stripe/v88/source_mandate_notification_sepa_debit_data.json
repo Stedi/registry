@@ -1,23 +1,31 @@
 {
-  "description": "",
-  "properties": {
-    "creditor_identifier": {
-      "description": "SEPA creditor ID.",
-      "maxLength": 5000,
-      "type": "string"
+  "name": "source_mandate_notification_sepa_debit_data",
+  "schema": {
+    "description": "",
+    "properties": {
+      "creditor_identifier": {
+        "description": "SEPA creditor ID.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "last4": {
+        "description": "Last 4 digits of the account number associated with the debit.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "mandate_reference": {
+        "description": "Mandate reference associated with the debit.",
+        "maxLength": 5000,
+        "type": "string"
+      }
     },
-    "last4": {
-      "description": "Last 4 digits of the account number associated with the debit.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "mandate_reference": {
-      "description": "Mandate reference associated with the debit.",
-      "maxLength": 5000,
-      "type": "string"
+    "title": "SourceMandateNotificationSepaDebitData",
+    "type": "object",
+    "x-expandableFields": [],
+    "default": {
+      "creditor_identifier": "string",
+      "last4": "string",
+      "mandate_reference": "string"
     }
-  },
-  "title": "SourceMandateNotificationSepaDebitData",
-  "type": "object",
-  "x-expandableFields": []
+  }
 }

@@ -1,29 +1,38 @@
 {
-  "description": "",
-  "properties": {
-    "description": {
-      "description": "The description of the item. The maximum length of this field is 26 characters.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+  "name": "issuing_transaction_receipt_data",
+  "schema": {
+    "description": "",
+    "properties": {
+      "description": {
+        "description": "The description of the item. The maximum length of this field is 26 characters.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "quantity": {
+        "description": "The quantity of the item.",
+        "nullable": true,
+        "type": "number"
+      },
+      "total": {
+        "description": "The total for this line item in cents.",
+        "nullable": true,
+        "type": "integer"
+      },
+      "unit_cost": {
+        "description": "The unit cost of the item in cents.",
+        "nullable": true,
+        "type": "integer"
+      }
     },
-    "quantity": {
-      "description": "The quantity of the item.",
-      "nullable": true,
-      "type": "number"
-    },
-    "total": {
-      "description": "The total for this line item in cents.",
-      "nullable": true,
-      "type": "integer"
-    },
-    "unit_cost": {
-      "description": "The unit cost of the item in cents.",
-      "nullable": true,
-      "type": "integer"
+    "title": "IssuingTransactionReceiptData",
+    "type": "object",
+    "x-expandableFields": [],
+    "default": {
+      "description": "string",
+      "quantity": 0,
+      "total": 0,
+      "unit_cost": 0
     }
-  },
-  "title": "IssuingTransactionReceiptData",
-  "type": "object",
-  "x-expandableFields": []
+  }
 }

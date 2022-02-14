@@ -1,129 +1,364 @@
 {
-  "description": "",
-  "properties": {
-    "au_becs_debit": {
-      "description": "",
-      "properties": {},
-      "title": "setup_attempt_payment_method_details_au_becs_debit",
-      "type": "object",
-      "x-expandableFields": []
-    },
-    "bacs_debit": {
-      "description": "",
-      "properties": {},
-      "title": "setup_attempt_payment_method_details_bacs_debit",
-      "type": "object",
-      "x-expandableFields": []
-    },
-    "bancontact": {
-      "$ref": "#/components/schemas/setup_attempt_payment_method_details_bancontact"
-    },
-    "card": {
-      "description": "",
-      "properties": {
-        "three_d_secure": {
-          "anyOf": [
-            {
-              "description": "",
-              "properties": {
-                "authentication_flow": {
-                  "description": "For authenticated transactions: how the customer was authenticated by\nthe issuing bank.",
-                  "enum": [
-                    "challenge",
-                    "frictionless"
-                  ],
-                  "nullable": true,
-                  "type": "string"
-                },
-                "result": {
-                  "description": "Indicates the outcome of 3D Secure authentication.",
-                  "enum": [
-                    "attempt_acknowledged",
-                    "authenticated",
-                    "failed",
-                    "not_supported",
-                    "processing_error"
-                  ],
-                  "type": "string"
-                },
-                "result_reason": {
-                  "description": "Additional information about why 3D Secure succeeded or failed based\non the `result`.",
-                  "enum": [
-                    "abandoned",
-                    "bypassed",
-                    "canceled",
-                    "card_not_enrolled",
-                    "network_not_supported",
-                    "protocol_error",
-                    "rejected"
-                  ],
-                  "nullable": true,
-                  "type": "string"
-                },
-                "version": {
-                  "description": "The version of 3D Secure that was used.",
-                  "enum": [
-                    "1.0.2",
-                    "2.1.0",
-                    "2.2.0"
-                  ],
-                  "type": "string"
-                }
+  "name": "setup_attempt_payment_method_details",
+  "schema": {
+    "description": "",
+    "properties": {
+      "au_becs_debit": {
+        "description": "",
+        "properties": {},
+        "title": "setup_attempt_payment_method_details_au_becs_debit",
+        "type": "object",
+        "x-expandableFields": []
+      },
+      "bacs_debit": {
+        "description": "",
+        "properties": {},
+        "title": "setup_attempt_payment_method_details_bacs_debit",
+        "type": "object",
+        "x-expandableFields": []
+      },
+      "bancontact": {
+        "description": "",
+        "properties": {
+          "bank_code": {
+            "description": "Bank code of bank associated with the bank account.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "bank_name": {
+            "description": "Name of the bank associated with the bank account.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "bic": {
+            "description": "Bank Identifier Code of the bank associated with the bank account.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "generated_sepa_debit": {
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "generated_sepa_debit_mandate": {
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "iban_last4": {
+            "description": "Last four characters of the IBAN.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "preferred_language": {
+            "description": "Preferred language of the Bancontact authorization page that the customer is redirected to.\nCan be one of `en`, `de`, `fr`, or `nl`",
+            "enum": [
+              "de",
+              "en",
+              "fr",
+              "nl"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "verified_name": {
+            "description": "Owner's verified full name. Values are verified or provided by Bancontact directly\n(if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "title": "setup_attempt_payment_method_details_bancontact",
+        "type": "object",
+        "x-expandableFields": [
+          "generated_sepa_debit",
+          "generated_sepa_debit_mandate"
+        ]
+      },
+      "card": {
+        "description": "",
+        "properties": {
+          "three_d_secure": {
+            "description": "",
+            "properties": {
+              "authentication_flow": {
+                "description": "For authenticated transactions: how the customer was authenticated by\nthe issuing bank.",
+                "enum": [
+                  "challenge",
+                  "frictionless"
+                ],
+                "nullable": true,
+                "type": "string"
               },
-              "required": [
-                "result",
-                "version"
-              ],
-              "title": "three_d_secure_details",
-              "type": "object",
-              "x-expandableFields": []
-            }
-          ],
-          "description": "Populated if this authorization used 3D Secure authentication.",
-          "nullable": true
+              "result": {
+                "description": "Indicates the outcome of 3D Secure authentication.",
+                "enum": [
+                  "attempt_acknowledged",
+                  "authenticated",
+                  "failed",
+                  "not_supported",
+                  "processing_error"
+                ],
+                "type": "string"
+              },
+              "result_reason": {
+                "description": "Additional information about why 3D Secure succeeded or failed based\non the `result`.",
+                "enum": [
+                  "abandoned",
+                  "bypassed",
+                  "canceled",
+                  "card_not_enrolled",
+                  "network_not_supported",
+                  "protocol_error",
+                  "rejected"
+                ],
+                "nullable": true,
+                "type": "string"
+              },
+              "version": {
+                "description": "The version of 3D Secure that was used.",
+                "enum": [
+                  "1.0.2",
+                  "2.1.0",
+                  "2.2.0"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "result",
+              "version"
+            ],
+            "title": "three_d_secure_details",
+            "type": "object",
+            "x-expandableFields": []
+          }
+        },
+        "title": "setup_attempt_payment_method_details_card",
+        "type": "object",
+        "x-expandableFields": [
+          "three_d_secure"
+        ]
+      },
+      "card_present": {
+        "description": "",
+        "properties": {
+          "generated_card": {
+            "maxLength": 5000,
+            "type": "string"
+          }
+        },
+        "title": "setup_attempt_payment_method_details_card_present",
+        "type": "object",
+        "x-expandableFields": [
+          "generated_card"
+        ]
+      },
+      "ideal": {
+        "description": "",
+        "properties": {
+          "bank": {
+            "description": "The customer's bank. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, or `van_lanschot`.",
+            "enum": [
+              "abn_amro",
+              "asn_bank",
+              "bunq",
+              "handelsbanken",
+              "ing",
+              "knab",
+              "moneyou",
+              "rabobank",
+              "regiobank",
+              "revolut",
+              "sns_bank",
+              "triodos_bank",
+              "van_lanschot"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "bic": {
+            "description": "The Bank Identifier Code of the customer's bank.",
+            "enum": [
+              "ABNANL2A",
+              "ASNBNL21",
+              "BUNQNL2A",
+              "FVLBNL22",
+              "HANDNL2A",
+              "INGBNL2A",
+              "KNABNL2H",
+              "MOYONL21",
+              "RABONL2U",
+              "RBRBNL21",
+              "REVOLT21",
+              "SNSBNL2A",
+              "TRIONL2U"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "generated_sepa_debit": {
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "generated_sepa_debit_mandate": {
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "iban_last4": {
+            "description": "Last four characters of the IBAN.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "verified_name": {
+            "description": "Owner's verified full name. Values are verified or provided by iDEAL directly\n(if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "title": "setup_attempt_payment_method_details_ideal",
+        "type": "object",
+        "x-expandableFields": [
+          "generated_sepa_debit",
+          "generated_sepa_debit_mandate"
+        ]
+      },
+      "sepa_debit": {
+        "description": "",
+        "properties": {},
+        "title": "setup_attempt_payment_method_details_sepa_debit",
+        "type": "object",
+        "x-expandableFields": []
+      },
+      "sofort": {
+        "description": "",
+        "properties": {
+          "bank_code": {
+            "description": "Bank code of bank associated with the bank account.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "bank_name": {
+            "description": "Name of the bank associated with the bank account.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "bic": {
+            "description": "Bank Identifier Code of the bank associated with the bank account.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "generated_sepa_debit": {
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "generated_sepa_debit_mandate": {
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "iban_last4": {
+            "description": "Last four characters of the IBAN.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "preferred_language": {
+            "description": "Preferred language of the Sofort authorization page that the customer is redirected to.\nCan be one of `en`, `de`, `fr`, or `nl`",
+            "enum": [
+              "de",
+              "en",
+              "fr",
+              "nl"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "verified_name": {
+            "description": "Owner's verified full name. Values are verified or provided by Sofort directly\n(if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "title": "setup_attempt_payment_method_details_sofort",
+        "type": "object",
+        "x-expandableFields": [
+          "generated_sepa_debit",
+          "generated_sepa_debit_mandate"
+        ]
+      },
+      "type": {
+        "description": "The type of the payment method used in the SetupIntent (e.g., `card`). An additional hash is included on `payment_method_details` with a name matching this value. It contains confirmation-specific information for the payment method.",
+        "maxLength": 5000,
+        "type": "string"
+      }
+    },
+    "required": [
+      "type"
+    ],
+    "title": "SetupAttemptPaymentMethodDetails",
+    "type": "object",
+    "x-expandableFields": [
+      "au_becs_debit",
+      "bacs_debit",
+      "bancontact",
+      "card",
+      "card_present",
+      "ideal",
+      "sepa_debit",
+      "sofort"
+    ],
+    "default": {
+      "au_becs_debit": {},
+      "bacs_debit": {},
+      "bancontact": {
+        "bank_code": "string",
+        "bank_name": "string",
+        "bic": "string",
+        "generated_sepa_debit": "string",
+        "generated_sepa_debit_mandate": "string",
+        "iban_last4": "string",
+        "preferred_language": "de",
+        "verified_name": "string"
+      },
+      "card": {
+        "three_d_secure": {
+          "authentication_flow": "challenge",
+          "result": "attempt_acknowledged",
+          "result_reason": "abandoned",
+          "version": "1.0.2"
         }
       },
-      "title": "setup_attempt_payment_method_details_card",
-      "type": "object",
-      "x-expandableFields": [
-        "three_d_secure"
-      ]
-    },
-    "card_present": {
-      "$ref": "#/components/schemas/setup_attempt_payment_method_details_card_present"
-    },
-    "ideal": {
-      "$ref": "#/components/schemas/setup_attempt_payment_method_details_ideal"
-    },
-    "sepa_debit": {
-      "description": "",
-      "properties": {},
-      "title": "setup_attempt_payment_method_details_sepa_debit",
-      "type": "object",
-      "x-expandableFields": []
-    },
-    "sofort": {
-      "$ref": "#/components/schemas/setup_attempt_payment_method_details_sofort"
-    },
-    "type": {
-      "description": "The type of the payment method used in the SetupIntent (e.g., `card`). An additional hash is included on `payment_method_details` with a name matching this value. It contains confirmation-specific information for the payment method.",
-      "maxLength": 5000,
+      "card_present": {
+        "generated_card": "string"
+      },
+      "ideal": {
+        "bank": "abn_amro",
+        "bic": "ABNANL2A",
+        "generated_sepa_debit": "string",
+        "generated_sepa_debit_mandate": "string",
+        "iban_last4": "string",
+        "verified_name": "string"
+      },
+      "sepa_debit": {},
+      "sofort": {
+        "bank_code": "string",
+        "bank_name": "string",
+        "bic": "string",
+        "generated_sepa_debit": "string",
+        "generated_sepa_debit_mandate": "string",
+        "iban_last4": "string",
+        "preferred_language": "de",
+        "verified_name": "string"
+      },
       "type": "string"
     }
-  },
-  "required": [
-    "type"
-  ],
-  "title": "SetupAttemptPaymentMethodDetails",
-  "type": "object",
-  "x-expandableFields": [
-    "au_becs_debit",
-    "bacs_debit",
-    "bancontact",
-    "card",
-    "card_present",
-    "ideal",
-    "sepa_debit",
-    "sofort"
-  ]
+  }
 }

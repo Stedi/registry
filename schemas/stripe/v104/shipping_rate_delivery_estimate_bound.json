@@ -1,27 +1,34 @@
 {
-  "description": "",
-  "properties": {
-    "unit": {
-      "description": "A unit of time.",
-      "enum": [
-        "business_day",
-        "day",
-        "hour",
-        "month",
-        "week"
-      ],
-      "type": "string"
+  "name": "shipping_rate_delivery_estimate_bound",
+  "schema": {
+    "description": "",
+    "properties": {
+      "unit": {
+        "description": "A unit of time.",
+        "enum": [
+          "business_day",
+          "day",
+          "hour",
+          "month",
+          "week"
+        ],
+        "type": "string"
+      },
+      "value": {
+        "description": "Must be greater than 0.",
+        "type": "integer"
+      }
     },
-    "value": {
-      "description": "Must be greater than 0.",
-      "type": "integer"
+    "required": [
+      "unit",
+      "value"
+    ],
+    "title": "ShippingRateDeliveryEstimateBound",
+    "type": "object",
+    "x-expandableFields": [],
+    "default": {
+      "unit": "business_day",
+      "value": 0
     }
-  },
-  "required": [
-    "unit",
-    "value"
-  ],
-  "title": "ShippingRateDeliveryEstimateBound",
-  "type": "object",
-  "x-expandableFields": []
+  }
 }

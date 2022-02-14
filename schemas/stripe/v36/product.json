@@ -1,138 +1,117 @@
 {
-  "description": "Products describe the specific goods or services you offer to your customers.\nFor example, you might offer a Standard and Premium version of your goods or service; each version would be a separate Product.\nThey can be used in conjunction with [Prices](https://stripe.com/docs/api#prices) to configure pricing in Checkout and Subscriptions.\n\nRelated guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription) or accept [one-time payments with Checkout](https://stripe.com/docs/payments/checkout/client#create-products) and more about [Products and Prices](https://stripe.com/docs/billing/prices-guide)",
-  "properties": {
-    "active": {
-      "description": "Whether the product is currently available for purchase.",
-      "type": "boolean"
-    },
-    "created": {
-      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-      "format": "unix-time",
-      "type": "integer"
-    },
-    "description": {
-      "description": "The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "id": {
-      "description": "Unique identifier for the object.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "images": {
-      "description": "A list of up to 8 URLs of images for this product, meant to be displayable to the customer.",
-      "items": {
+  "name": "product",
+  "schema": {
+    "description": "Products describe the specific goods or services you offer to your customers.\nFor example, you might offer a Standard and Premium version of your goods or service; each version would be a separate Product.\nThey can be used in conjunction with [Prices](https://stripe.com/docs/api#prices) to configure pricing in Checkout and Subscriptions.\n\nRelated guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription) or accept [one-time payments with Checkout](https://stripe.com/docs/payments/checkout/client#create-products) and more about [Products and Prices](https://stripe.com/docs/billing/prices-guide)",
+    "properties": {
+      "active": {
+        "description": "Whether the product is currently available for purchase.",
+        "type": "boolean"
+      },
+      "created": {
+        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+        "format": "unix-time",
+        "type": "integer"
+      },
+      "description": {
+        "description": "The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "id": {
+        "description": "Unique identifier for the object.",
         "maxLength": 5000,
         "type": "string"
       },
-      "type": "array"
-    },
-    "livemode": {
-      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-      "type": "boolean"
-    },
-    "metadata": {
-      "additionalProperties": {
-        "maxLength": 500,
+      "images": {
+        "maxLength": 5000,
         "type": "string"
       },
-      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-      "type": "object"
+      "livemode": {
+        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+        "type": "boolean"
+      },
+      "metadata": {},
+      "name": {
+        "description": "The product's name, meant to be displayable to the customer. Whenever this product is sold via a subscription, name will show up on associated invoice line item descriptions.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "object": {
+        "description": "String representing the object's type. Objects of the same type share the same value.",
+        "enum": [
+          "product"
+        ],
+        "type": "string"
+      },
+      "package_dimensions": {
+        "height": 0,
+        "length": 0,
+        "weight": 0,
+        "width": 0
+      },
+      "shippable": {
+        "description": "Whether this product is shipped (i.e., physical goods).",
+        "nullable": true,
+        "type": "boolean"
+      },
+      "statement_descriptor": {
+        "description": "Extra information about a product which will appear on your customer's credit card statement. In the case that multiple products are billed at once, the first statement descriptor will be used.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "unit_label": {
+        "description": "A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "updated": {
+        "description": "Time at which the object was last updated. Measured in seconds since the Unix epoch.",
+        "format": "unix-time",
+        "type": "integer"
+      },
+      "url": {
+        "description": "A URL of a publicly-accessible webpage for this product.",
+        "maxLength": 2048,
+        "nullable": true,
+        "type": "string"
+      }
     },
-    "name": {
-      "description": "The product's name, meant to be displayable to the customer. Whenever this product is sold via a subscription, name will show up on associated invoice line item descriptions.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "object": {
-      "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "product"
-      ],
-      "type": "string"
-    },
-    "package_dimensions": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "height": {
-              "description": "Height, in inches.",
-              "type": "number"
-            },
-            "length": {
-              "description": "Length, in inches.",
-              "type": "number"
-            },
-            "weight": {
-              "description": "Weight, in ounces.",
-              "type": "number"
-            },
-            "width": {
-              "description": "Width, in inches.",
-              "type": "number"
-            }
-          },
-          "required": [
-            "height",
-            "length",
-            "weight",
-            "width"
-          ],
-          "title": "PackageDimensions",
-          "type": "object",
-          "x-expandableFields": []
-        }
-      ],
-      "description": "The dimensions of this product for shipping purposes.",
-      "nullable": true
-    },
-    "shippable": {
-      "description": "Whether this product is shipped (i.e., physical goods).",
-      "nullable": true,
-      "type": "boolean"
-    },
-    "statement_descriptor": {
-      "description": "Extra information about a product which will appear on your customer's credit card statement. In the case that multiple products are billed at once, the first statement descriptor will be used.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "unit_label": {
-      "description": "A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "updated": {
-      "description": "Time at which the object was last updated. Measured in seconds since the Unix epoch.",
-      "format": "unix-time",
-      "type": "integer"
-    },
-    "url": {
-      "description": "A URL of a publicly-accessible webpage for this product.",
-      "maxLength": 2048,
-      "nullable": true,
-      "type": "string"
+    "required": [
+      "active",
+      "created",
+      "id",
+      "images",
+      "livemode",
+      "metadata",
+      "name",
+      "object",
+      "updated"
+    ],
+    "title": "Product",
+    "type": "object",
+    "x-expandableFields": [
+      "package_dimensions"
+    ],
+    "x-resourceId": "product",
+    "default": {
+      "active": true,
+      "created": 0,
+      "description": "string",
+      "id": "string",
+      "images": "string",
+      "livemode": true,
+      "metadata": {},
+      "name": "string",
+      "object": "product",
+      "package_dimensions": {},
+      "shippable": true,
+      "statement_descriptor": "string",
+      "unit_label": "string",
+      "updated": 0,
+      "url": "string"
     }
-  },
-  "required": [
-    "active",
-    "created",
-    "id",
-    "images",
-    "livemode",
-    "metadata",
-    "name",
-    "object",
-    "updated"
-  ],
-  "title": "Product",
-  "type": "object",
-  "x-expandableFields": [
-    "package_dimensions"
-  ],
-  "x-resourceId": "product"
+  }
 }

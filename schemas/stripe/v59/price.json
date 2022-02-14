@@ -1,661 +1,119 @@
 {
-  "description": "Prices define the unit cost, currency, and (optional) billing cycle for both recurring and one-time purchases of products.\n[Products](https://stripe.com/docs/api#products) help you track inventory or provisioning, and prices help you track payment terms. Different physical goods or levels of service should be represented by products, and pricing options should be represented by prices. This approach lets you change prices without having to change your provisioning scheme.\n\nFor example, you might have a single \"gold\" product that has prices for $10/month, $100/year, and €9 once.\n\nRelated guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription), [create an invoice](https://stripe.com/docs/billing/invoices/create), and more about [products and prices](https://stripe.com/docs/billing/prices-guide).",
-  "properties": {
-    "active": {
-      "description": "Whether the price can be used for new purchases.",
-      "type": "boolean"
-    },
-    "billing_scheme": {
-      "description": "Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.",
-      "enum": [
-        "per_unit",
-        "tiered"
-      ],
-      "type": "string"
-    },
-    "created": {
-      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-      "format": "unix-time",
-      "type": "integer"
-    },
-    "currency": {
-      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-      "type": "string"
-    },
-    "id": {
-      "description": "Unique identifier for the object.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "livemode": {
-      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-      "type": "boolean"
-    },
-    "lookup_key": {
-      "description": "A lookup key used to retrieve prices dynamically from a static string.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "metadata": {
-      "additionalProperties": {
-        "maxLength": 500,
+  "name": "price",
+  "schema": {
+    "description": "Prices define the unit cost, currency, and (optional) billing cycle for both recurring and one-time purchases of products.\n[Products](https://stripe.com/docs/api#products) help you track inventory or provisioning, and prices help you track payment terms. Different physical goods or levels of service should be represented by products, and pricing options should be represented by prices. This approach lets you change prices without having to change your provisioning scheme.\n\nFor example, you might have a single \"gold\" product that has prices for $10/month, $100/year, and €9 once.\n\nRelated guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription), [create an invoice](https://stripe.com/docs/billing/invoices/create), and more about [products and prices](https://stripe.com/docs/billing/prices-guide).",
+    "properties": {
+      "active": {
+        "description": "Whether the price can be used for new purchases.",
+        "type": "boolean"
+      },
+      "billing_scheme": {
+        "description": "Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.",
+        "enum": [
+          "per_unit",
+          "tiered"
+        ],
         "type": "string"
       },
-      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-      "type": "object"
-    },
-    "nickname": {
-      "description": "A brief description of the price, hidden from customers.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "object": {
-      "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "price"
-      ],
-      "type": "string"
-    },
-    "product": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "description": "Products describe the specific goods or services you offer to your customers.\nFor example, you might offer a Standard and Premium version of your goods or service; each version would be a separate Product.\nThey can be used in conjunction with [Prices](https://stripe.com/docs/api#prices) to configure pricing in Checkout and Subscriptions.\n\nRelated guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription) or accept [one-time payments with Checkout](https://stripe.com/docs/payments/checkout/client#create-products) and more about [Products and Prices](https://stripe.com/docs/billing/prices-guide)",
-          "properties": {
-            "active": {
-              "description": "Whether the product is currently available for purchase.",
-              "type": "boolean"
-            },
-            "created": {
-              "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-              "format": "unix-time",
-              "type": "integer"
-            },
-            "description": {
-              "description": "The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.",
-              "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
-            },
-            "id": {
-              "description": "Unique identifier for the object.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "images": {
-              "description": "A list of up to 8 URLs of images for this product, meant to be displayable to the customer.",
-              "items": {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "livemode": {
-              "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-              "type": "boolean"
-            },
-            "metadata": {
-              "additionalProperties": {
-                "maxLength": 500,
-                "type": "string"
-              },
-              "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-              "type": "object"
-            },
-            "name": {
-              "description": "The product's name, meant to be displayable to the customer. Whenever this product is sold via a subscription, name will show up on associated invoice line item descriptions.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "object": {
-              "description": "String representing the object's type. Objects of the same type share the same value.",
-              "enum": [
-                "product"
-              ],
-              "type": "string"
-            },
-            "package_dimensions": {
-              "anyOf": [
-                {
-                  "description": "",
-                  "properties": {
-                    "height": {
-                      "description": "Height, in inches.",
-                      "type": "number"
-                    },
-                    "length": {
-                      "description": "Length, in inches.",
-                      "type": "number"
-                    },
-                    "weight": {
-                      "description": "Weight, in ounces.",
-                      "type": "number"
-                    },
-                    "width": {
-                      "description": "Width, in inches.",
-                      "type": "number"
-                    }
-                  },
-                  "required": [
-                    "height",
-                    "length",
-                    "weight",
-                    "width"
-                  ],
-                  "title": "PackageDimensions",
-                  "type": "object",
-                  "x-expandableFields": []
-                }
-              ],
-              "description": "The dimensions of this product for shipping purposes.",
-              "nullable": true
-            },
-            "shippable": {
-              "description": "Whether this product is shipped (i.e., physical goods).",
-              "nullable": true,
-              "type": "boolean"
-            },
-            "statement_descriptor": {
-              "description": "Extra information about a product which will appear on your customer's credit card statement. In the case that multiple products are billed at once, the first statement descriptor will be used.",
-              "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
-            },
-            "tax_code": {
-              "anyOf": [
-                {
-                  "maxLength": 5000,
-                  "type": "string"
-                },
-                {
-                  "description": "[Tax codes](https://stripe.com/docs/tax/tax-codes) classify goods and services for tax purposes.",
-                  "properties": {
-                    "description": {
-                      "description": "A detailed description of which types of products the tax code represents.",
-                      "maxLength": 5000,
-                      "type": "string"
-                    },
-                    "id": {
-                      "description": "Unique identifier for the object.",
-                      "maxLength": 5000,
-                      "type": "string"
-                    },
-                    "name": {
-                      "description": "A short name for the tax code.",
-                      "maxLength": 5000,
-                      "type": "string"
-                    },
-                    "object": {
-                      "description": "String representing the object's type. Objects of the same type share the same value.",
-                      "enum": [
-                        "tax_code"
-                      ],
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "description",
-                    "id",
-                    "name",
-                    "object"
-                  ],
-                  "title": "TaxProductResourceTaxCode",
-                  "type": "object",
-                  "x-expandableFields": [],
-                  "x-resourceId": "tax_code"
-                }
-              ],
-              "description": "A [tax code](https://stripe.com/docs/tax/tax-codes) ID.",
-              "nullable": true,
-              "x-expansionResources": {
-                "oneOf": [
-                  {
-                    "description": "[Tax codes](https://stripe.com/docs/tax/tax-codes) classify goods and services for tax purposes.",
-                    "properties": {
-                      "description": {
-                        "description": "A detailed description of which types of products the tax code represents.",
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "id": {
-                        "description": "Unique identifier for the object.",
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "name": {
-                        "description": "A short name for the tax code.",
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "object": {
-                        "description": "String representing the object's type. Objects of the same type share the same value.",
-                        "enum": [
-                          "tax_code"
-                        ],
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "description",
-                      "id",
-                      "name",
-                      "object"
-                    ],
-                    "title": "TaxProductResourceTaxCode",
-                    "type": "object",
-                    "x-expandableFields": [],
-                    "x-resourceId": "tax_code"
-                  }
-                ]
-              }
-            },
-            "unit_label": {
-              "description": "A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.",
-              "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
-            },
-            "updated": {
-              "description": "Time at which the object was last updated. Measured in seconds since the Unix epoch.",
-              "format": "unix-time",
-              "type": "integer"
-            },
-            "url": {
-              "description": "A URL of a publicly-accessible webpage for this product.",
-              "maxLength": 2048,
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "required": [
-            "active",
-            "created",
-            "id",
-            "images",
-            "livemode",
-            "metadata",
-            "name",
-            "object",
-            "updated"
-          ],
-          "title": "Product",
-          "type": "object",
-          "x-expandableFields": [
-            "package_dimensions",
-            "tax_code"
-          ],
-          "x-resourceId": "product"
-        },
-        {
-          "description": "",
-          "properties": {
-            "deleted": {
-              "description": "Always true for a deleted object",
-              "enum": [
-                true
-              ],
-              "type": "boolean"
-            },
-            "id": {
-              "description": "Unique identifier for the object.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "object": {
-              "description": "String representing the object's type. Objects of the same type share the same value.",
-              "enum": [
-                "product"
-              ],
-              "type": "string"
-            }
-          },
-          "required": [
-            "deleted",
-            "id",
-            "object"
-          ],
-          "title": "DeletedProduct",
-          "type": "object",
-          "x-expandableFields": [],
-          "x-resourceId": "deleted_product"
-        }
-      ],
-      "description": "The ID of the product this price is associated with.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "description": "Products describe the specific goods or services you offer to your customers.\nFor example, you might offer a Standard and Premium version of your goods or service; each version would be a separate Product.\nThey can be used in conjunction with [Prices](https://stripe.com/docs/api#prices) to configure pricing in Checkout and Subscriptions.\n\nRelated guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription) or accept [one-time payments with Checkout](https://stripe.com/docs/payments/checkout/client#create-products) and more about [Products and Prices](https://stripe.com/docs/billing/prices-guide)",
-            "properties": {
-              "active": {
-                "description": "Whether the product is currently available for purchase.",
-                "type": "boolean"
-              },
-              "created": {
-                "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                "format": "unix-time",
-                "type": "integer"
-              },
-              "description": {
-                "description": "The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "id": {
-                "description": "Unique identifier for the object.",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "images": {
-                "description": "A list of up to 8 URLs of images for this product, meant to be displayable to the customer.",
-                "items": {
-                  "maxLength": 5000,
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "livemode": {
-                "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                "type": "boolean"
-              },
-              "metadata": {
-                "additionalProperties": {
-                  "maxLength": 500,
-                  "type": "string"
-                },
-                "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-                "type": "object"
-              },
-              "name": {
-                "description": "The product's name, meant to be displayable to the customer. Whenever this product is sold via a subscription, name will show up on associated invoice line item descriptions.",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "object": {
-                "description": "String representing the object's type. Objects of the same type share the same value.",
-                "enum": [
-                  "product"
-                ],
-                "type": "string"
-              },
-              "package_dimensions": {
-                "anyOf": [
-                  {
-                    "description": "",
-                    "properties": {
-                      "height": {
-                        "description": "Height, in inches.",
-                        "type": "number"
-                      },
-                      "length": {
-                        "description": "Length, in inches.",
-                        "type": "number"
-                      },
-                      "weight": {
-                        "description": "Weight, in ounces.",
-                        "type": "number"
-                      },
-                      "width": {
-                        "description": "Width, in inches.",
-                        "type": "number"
-                      }
-                    },
-                    "required": [
-                      "height",
-                      "length",
-                      "weight",
-                      "width"
-                    ],
-                    "title": "PackageDimensions",
-                    "type": "object",
-                    "x-expandableFields": []
-                  }
-                ],
-                "description": "The dimensions of this product for shipping purposes.",
-                "nullable": true
-              },
-              "shippable": {
-                "description": "Whether this product is shipped (i.e., physical goods).",
-                "nullable": true,
-                "type": "boolean"
-              },
-              "statement_descriptor": {
-                "description": "Extra information about a product which will appear on your customer's credit card statement. In the case that multiple products are billed at once, the first statement descriptor will be used.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "tax_code": {
-                "anyOf": [
-                  {
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  {
-                    "description": "[Tax codes](https://stripe.com/docs/tax/tax-codes) classify goods and services for tax purposes.",
-                    "properties": {
-                      "description": {
-                        "description": "A detailed description of which types of products the tax code represents.",
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "id": {
-                        "description": "Unique identifier for the object.",
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "name": {
-                        "description": "A short name for the tax code.",
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "object": {
-                        "description": "String representing the object's type. Objects of the same type share the same value.",
-                        "enum": [
-                          "tax_code"
-                        ],
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "description",
-                      "id",
-                      "name",
-                      "object"
-                    ],
-                    "title": "TaxProductResourceTaxCode",
-                    "type": "object",
-                    "x-expandableFields": [],
-                    "x-resourceId": "tax_code"
-                  }
-                ],
-                "description": "A [tax code](https://stripe.com/docs/tax/tax-codes) ID.",
-                "nullable": true,
-                "x-expansionResources": {
-                  "oneOf": [
-                    {
-                      "description": "[Tax codes](https://stripe.com/docs/tax/tax-codes) classify goods and services for tax purposes.",
-                      "properties": {
-                        "description": {
-                          "description": "A detailed description of which types of products the tax code represents.",
-                          "maxLength": 5000,
-                          "type": "string"
-                        },
-                        "id": {
-                          "description": "Unique identifier for the object.",
-                          "maxLength": 5000,
-                          "type": "string"
-                        },
-                        "name": {
-                          "description": "A short name for the tax code.",
-                          "maxLength": 5000,
-                          "type": "string"
-                        },
-                        "object": {
-                          "description": "String representing the object's type. Objects of the same type share the same value.",
-                          "enum": [
-                            "tax_code"
-                          ],
-                          "type": "string"
-                        }
-                      },
-                      "required": [
-                        "description",
-                        "id",
-                        "name",
-                        "object"
-                      ],
-                      "title": "TaxProductResourceTaxCode",
-                      "type": "object",
-                      "x-expandableFields": [],
-                      "x-resourceId": "tax_code"
-                    }
-                  ]
-                }
-              },
-              "unit_label": {
-                "description": "A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "updated": {
-                "description": "Time at which the object was last updated. Measured in seconds since the Unix epoch.",
-                "format": "unix-time",
-                "type": "integer"
-              },
-              "url": {
-                "description": "A URL of a publicly-accessible webpage for this product.",
-                "maxLength": 2048,
-                "nullable": true,
-                "type": "string"
-              }
-            },
-            "required": [
-              "active",
-              "created",
-              "id",
-              "images",
-              "livemode",
-              "metadata",
-              "name",
-              "object",
-              "updated"
+      "created": {
+        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+        "format": "unix-time",
+        "type": "integer"
+      },
+      "currency": {
+        "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+        "type": "string"
+      },
+      "id": {
+        "description": "Unique identifier for the object.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "livemode": {
+        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+        "type": "boolean"
+      },
+      "lookup_key": {
+        "description": "A lookup key used to retrieve prices dynamically from a static string.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "metadata": {},
+      "nickname": {
+        "description": "A brief description of the price, hidden from customers.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "object": {
+        "description": "String representing the object's type. Objects of the same type share the same value.",
+        "enum": [
+          "price"
+        ],
+        "type": "string"
+      },
+      "product": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "recurring": {
+        "description": "",
+        "properties": {
+          "aggregate_usage": {
+            "description": "Specifies a usage aggregation strategy for prices of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.",
+            "enum": [
+              "last_during_period",
+              "last_ever",
+              "max",
+              "sum"
             ],
-            "title": "Product",
-            "type": "object",
-            "x-expandableFields": [
-              "package_dimensions",
-              "tax_code"
-            ],
-            "x-resourceId": "product"
+            "nullable": true,
+            "type": "string"
           },
-          {
-            "description": "",
-            "properties": {
-              "deleted": {
-                "description": "Always true for a deleted object",
-                "enum": [
-                  true
-                ],
-                "type": "boolean"
-              },
-              "id": {
-                "description": "Unique identifier for the object.",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "object": {
-                "description": "String representing the object's type. Objects of the same type share the same value.",
-                "enum": [
-                  "product"
-                ],
-                "type": "string"
-              }
-            },
-            "required": [
-              "deleted",
-              "id",
-              "object"
+          "interval": {
+            "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
+            "enum": [
+              "day",
+              "month",
+              "week",
+              "year"
             ],
-            "title": "DeletedProduct",
-            "type": "object",
-            "x-expandableFields": [],
-            "x-resourceId": "deleted_product"
+            "type": "string"
+          },
+          "interval_count": {
+            "description": "The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.",
+            "type": "integer"
+          },
+          "usage_type": {
+            "description": "Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.",
+            "enum": [
+              "licensed",
+              "metered"
+            ],
+            "type": "string"
           }
-        ]
-      }
-    },
-    "recurring": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "aggregate_usage": {
-              "description": "Specifies a usage aggregation strategy for prices of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.",
-              "enum": [
-                "last_during_period",
-                "last_ever",
-                "max",
-                "sum"
-              ],
-              "nullable": true,
-              "type": "string"
-            },
-            "interval": {
-              "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
-              "enum": [
-                "day",
-                "month",
-                "week",
-                "year"
-              ],
-              "type": "string"
-            },
-            "interval_count": {
-              "description": "The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.",
-              "type": "integer"
-            },
-            "usage_type": {
-              "description": "Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.",
-              "enum": [
-                "licensed",
-                "metered"
-              ],
-              "type": "string"
-            }
-          },
-          "required": [
-            "interval",
-            "interval_count",
-            "usage_type"
-          ],
-          "title": "Recurring",
-          "type": "object",
-          "x-expandableFields": []
-        }
-      ],
-      "description": "The recurring components of a price such as `interval` and `usage_type`.",
-      "nullable": true
-    },
-    "tax_behavior": {
-      "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.",
-      "enum": [
-        "exclusive",
-        "inclusive",
-        "unspecified"
-      ],
-      "nullable": true,
-      "type": "string"
-    },
-    "tiers": {
-      "description": "Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.",
-      "items": {
+        },
+        "required": [
+          "interval",
+          "interval_count",
+          "usage_type"
+        ],
+        "title": "Recurring",
+        "type": "object",
+        "x-expandableFields": []
+      },
+      "tax_behavior": {
+        "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.",
+        "enum": [
+          "exclusive",
+          "inclusive",
+          "unspecified"
+        ],
+        "nullable": true,
+        "type": "string"
+      },
+      "tiers": {
         "description": "",
         "properties": {
           "flat_amount": {
@@ -690,86 +148,114 @@
         "type": "object",
         "x-expandableFields": []
       },
-      "type": "array"
-    },
-    "tiers_mode": {
-      "description": "Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.",
-      "enum": [
-        "graduated",
-        "volume"
-      ],
-      "nullable": true,
-      "type": "string"
-    },
-    "transform_quantity": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "divide_by": {
-              "description": "Divide usage by this number.",
-              "type": "integer"
-            },
-            "round": {
-              "description": "After division, either round the result `up` or `down`.",
-              "enum": [
-                "down",
-                "up"
-              ],
-              "type": "string"
-            }
+      "tiers_mode": {
+        "description": "Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.",
+        "enum": [
+          "graduated",
+          "volume"
+        ],
+        "nullable": true,
+        "type": "string"
+      },
+      "transform_quantity": {
+        "description": "",
+        "properties": {
+          "divide_by": {
+            "description": "Divide usage by this number.",
+            "type": "integer"
           },
-          "required": [
-            "divide_by",
-            "round"
-          ],
-          "title": "TransformQuantity",
-          "type": "object",
-          "x-expandableFields": []
-        }
-      ],
-      "description": "Apply a transformation to the reported usage or set quantity before computing the amount billed. Cannot be combined with `tiers`.",
-      "nullable": true
+          "round": {
+            "description": "After division, either round the result `up` or `down`.",
+            "enum": [
+              "down",
+              "up"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "divide_by",
+          "round"
+        ],
+        "title": "TransformQuantity",
+        "type": "object",
+        "x-expandableFields": []
+      },
+      "type": {
+        "description": "One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.",
+        "enum": [
+          "one_time",
+          "recurring"
+        ],
+        "type": "string"
+      },
+      "unit_amount": {
+        "description": "The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.",
+        "nullable": true,
+        "type": "integer"
+      },
+      "unit_amount_decimal": {
+        "description": "The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.",
+        "format": "decimal",
+        "nullable": true,
+        "type": "string"
+      }
     },
-    "type": {
-      "description": "One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.",
-      "enum": [
-        "one_time",
-        "recurring"
-      ],
-      "type": "string"
-    },
-    "unit_amount": {
-      "description": "The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.",
-      "nullable": true,
-      "type": "integer"
-    },
-    "unit_amount_decimal": {
-      "description": "The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.",
-      "format": "decimal",
-      "nullable": true,
-      "type": "string"
+    "required": [
+      "active",
+      "billing_scheme",
+      "created",
+      "currency",
+      "id",
+      "livemode",
+      "metadata",
+      "object",
+      "product",
+      "type"
+    ],
+    "title": "Price",
+    "type": "object",
+    "x-expandableFields": [
+      "product",
+      "recurring",
+      "tiers",
+      "transform_quantity"
+    ],
+    "x-resourceId": "price",
+    "default": {
+      "active": true,
+      "billing_scheme": "per_unit",
+      "created": 0,
+      "currency": "string",
+      "id": "string",
+      "livemode": true,
+      "lookup_key": "string",
+      "metadata": {},
+      "nickname": "string",
+      "object": "price",
+      "product": "string",
+      "recurring": {
+        "aggregate_usage": "last_during_period",
+        "interval": "day",
+        "interval_count": 0,
+        "usage_type": "licensed"
+      },
+      "tax_behavior": "exclusive",
+      "tiers": {
+        "flat_amount": 0,
+        "flat_amount_decimal": "0.0",
+        "unit_amount": 0,
+        "unit_amount_decimal": "0.0",
+        "up_to": 0
+      },
+      "tiers_mode": "graduated",
+      "transform_quantity": {
+        "divide_by": 0,
+        "round": "down"
+      },
+      "type": "one_time",
+      "unit_amount": 0,
+      "unit_amount_decimal": "0.0"
     }
-  },
-  "required": [
-    "active",
-    "billing_scheme",
-    "created",
-    "currency",
-    "id",
-    "livemode",
-    "metadata",
-    "object",
-    "product",
-    "type"
-  ],
-  "title": "Price",
-  "type": "object",
-  "x-expandableFields": [
-    "product",
-    "recurring",
-    "tiers",
-    "transform_quantity"
-  ],
-  "x-resourceId": "price"
+  }
 }

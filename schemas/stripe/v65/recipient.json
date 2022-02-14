@@ -1,180 +1,186 @@
 {
-  "description": "With `Recipient` objects, you can transfer money from your Stripe account to a\nthird-party bank account or debit card. The API allows you to create, delete,\nand update your recipients. You can retrieve individual recipients as well as\na list of all your recipients.\n\n**`Recipient` objects have been deprecated in favor of\n[Connect](https://stripe.com/docs/connect), specifically Connect's much more powerful\n[Account objects](https://stripe.com/docs/api#account). Stripe accounts that don't already use\nrecipients can no longer begin doing so. Please use `Account` objects\ninstead.**",
-  "properties": {
-    "active_account": {
-      "anyOf": [
-        {
-          "$ref": "#/components/schemas/bank_account"
-        }
-      ],
-      "description": "Hash describing the current account on the recipient, if there is one.",
-      "nullable": true
-    },
-    "cards": {
-      "description": "",
-      "nullable": true,
-      "properties": {
-        "data": {
-          "items": {
-            "$ref": "#/components/schemas/card"
-          },
-          "type": "array"
-        },
-        "has_more": {
-          "description": "True if this list has another page of items after this one that can be fetched.",
-          "type": "boolean"
-        },
-        "object": {
-          "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
-          "enum": [
-            "list"
-          ],
-          "type": "string"
-        },
-        "url": {
-          "description": "The URL where this list can be accessed.",
-          "maxLength": 5000,
-          "type": "string"
-        }
+  "name": "recipient",
+  "schema": {
+    "description": "With `Recipient` objects, you can transfer money from your Stripe account to a\nthird-party bank account or debit card. The API allows you to create, delete,\nand update your recipients. You can retrieve individual recipients as well as\na list of all your recipients.\n\n**`Recipient` objects have been deprecated in favor of\n[Connect](https://stripe.com/docs/connect), specifically Connect's much more powerful\n[Account objects](https://stripe.com/docs/api#account). Stripe accounts that don't already use\nrecipients can no longer begin doing so. Please use `Account` objects\ninstead.**",
+    "properties": {
+      "active_account": {
+        "account": "string",
+        "account_holder_name": "string",
+        "account_holder_type": "string",
+        "account_type": "string",
+        "available_payout_methods": "instant",
+        "bank_name": "string",
+        "country": "string",
+        "currency": "string",
+        "customer": "string",
+        "default_for_currency": true,
+        "fingerprint": "string",
+        "id": "string",
+        "last4": "string",
+        "metadata": {},
+        "object": "bank_account",
+        "routing_number": "string",
+        "status": "string",
+        "default": {}
       },
-      "required": [
-        "data",
-        "has_more",
-        "object",
-        "url"
-      ],
-      "title": "CardList",
-      "type": "object",
-      "x-expandableFields": [
-        "data"
-      ]
-    },
-    "created": {
-      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-      "format": "unix-time",
-      "type": "integer"
-    },
-    "default_card": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/card"
-        }
-      ],
-      "description": "The default card to use for creating transfers to this recipient.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/card"
+      "cards": {
+        "description": "",
+        "nullable": true,
+        "properties": {
+          "data": {
+            "account": "string",
+            "address_city": "string",
+            "address_country": "string",
+            "address_line1": "string",
+            "address_line1_check": "string",
+            "address_line2": "string",
+            "address_state": "string",
+            "address_zip": "string",
+            "address_zip_check": "string",
+            "available_payout_methods": "instant",
+            "brand": "string",
+            "country": "string",
+            "currency": "string",
+            "customer": "string",
+            "cvc_check": "string",
+            "default_for_currency": true,
+            "dynamic_last4": "string",
+            "exp_month": 0,
+            "exp_year": 0,
+            "fingerprint": "string",
+            "funding": "string",
+            "id": "string",
+            "last4": "string",
+            "metadata": {},
+            "name": "string",
+            "object": "card",
+            "recipient": "string",
+            "tokenization_method": "string"
+          },
+          "has_more": {
+            "description": "True if this list has another page of items after this one that can be fetched.",
+            "type": "boolean"
+          },
+          "object": {
+            "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
+            "enum": [
+              "list"
+            ],
+            "type": "string"
+          },
+          "url": {
+            "description": "The URL where this list can be accessed.",
+            "maxLength": 5000,
+            "type": "string"
           }
+        },
+        "required": [
+          "data",
+          "has_more",
+          "object",
+          "url"
+        ],
+        "title": "CardList",
+        "type": "object",
+        "x-expandableFields": [
+          "data"
         ]
-      }
-    },
-    "description": {
-      "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "email": {
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "id": {
-      "description": "Unique identifier for the object.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "livemode": {
-      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-      "type": "boolean"
-    },
-    "metadata": {
-      "additionalProperties": {
-        "maxLength": 500,
+      },
+      "created": {
+        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+        "format": "unix-time",
+        "type": "integer"
+      },
+      "default_card": {
+        "maxLength": 5000,
         "type": "string"
       },
-      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-      "type": "object"
-    },
-    "migrated_to": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/account"
-        }
-      ],
-      "description": "The ID of the [Custom account](https://stripe.com/docs/connect/custom-accounts) this recipient was migrated to. If set, the recipient can no longer be updated, nor can transfers be made to it: use the Custom account instead.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/account"
-          }
-        ]
+      "description": {
+        "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "email": {
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "id": {
+        "description": "Unique identifier for the object.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "livemode": {
+        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+        "type": "boolean"
+      },
+      "metadata": {},
+      "migrated_to": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "name": {
+        "description": "Full, legal name of the recipient.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "object": {
+        "description": "String representing the object's type. Objects of the same type share the same value.",
+        "enum": [
+          "recipient"
+        ],
+        "type": "string"
+      },
+      "rolled_back_from": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": {
+        "description": "Type of the recipient, one of `individual` or `corporation`.",
+        "maxLength": 5000,
+        "type": "string"
       }
     },
-    "name": {
-      "description": "Full, legal name of the recipient.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "object": {
-      "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "recipient"
-      ],
-      "type": "string"
-    },
-    "rolled_back_from": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/account"
-        }
-      ],
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/account"
-          }
-        ]
-      }
-    },
-    "type": {
-      "description": "Type of the recipient, one of `individual` or `corporation`.",
-      "maxLength": 5000,
+    "required": [
+      "created",
+      "id",
+      "livemode",
+      "metadata",
+      "object",
+      "type"
+    ],
+    "title": "TransferRecipient",
+    "type": "object",
+    "x-expandableFields": [
+      "active_account",
+      "cards",
+      "default_card",
+      "migrated_to",
+      "rolled_back_from"
+    ],
+    "x-resourceId": "recipient",
+    "default": {
+      "active_account": {},
+      "cards": {
+        "data": {},
+        "has_more": true,
+        "object": "list",
+        "url": "string"
+      },
+      "created": 0,
+      "default_card": "string",
+      "description": "string",
+      "email": "string",
+      "id": "string",
+      "livemode": true,
+      "metadata": {},
+      "migrated_to": "string",
+      "name": "string",
+      "object": "recipient",
+      "rolled_back_from": "string",
       "type": "string"
     }
-  },
-  "required": [
-    "created",
-    "id",
-    "livemode",
-    "metadata",
-    "object",
-    "type"
-  ],
-  "title": "TransferRecipient",
-  "type": "object",
-  "x-expandableFields": [
-    "active_account",
-    "cards",
-    "default_card",
-    "migrated_to",
-    "rolled_back_from"
-  ],
-  "x-resourceId": "recipient"
+  }
 }

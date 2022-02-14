@@ -1,21 +1,38 @@
 {
-  "description": "",
-  "properties": {
-    "amount": {
-      "description": "The amount discounted.",
-      "type": "integer"
+  "name": "line_items_discount_amount",
+  "schema": {
+    "description": "",
+    "properties": {
+      "amount": {
+        "description": "The amount discounted.",
+        "type": "integer"
+      },
+      "discount": {
+        "checkout_session": "string",
+        "coupon": {},
+        "customer": "string",
+        "end": 0,
+        "id": "string",
+        "invoice": "string",
+        "invoice_item": "string",
+        "object": "discount",
+        "promotion_code": "string",
+        "start": 0,
+        "subscription": "string"
+      }
     },
-    "discount": {
-      "$ref": "#/components/schemas/discount"
+    "required": [
+      "amount",
+      "discount"
+    ],
+    "title": "LineItemsDiscountAmount",
+    "type": "object",
+    "x-expandableFields": [
+      "discount"
+    ],
+    "default": {
+      "amount": 0,
+      "discount": {}
     }
-  },
-  "required": [
-    "amount",
-    "discount"
-  ],
-  "title": "LineItemsDiscountAmount",
-  "type": "object",
-  "x-expandableFields": [
-    "discount"
-  ]
+  }
 }

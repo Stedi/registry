@@ -1,25 +1,26 @@
 {
-  "description": "",
-  "properties": {
-    "card": {
-      "description": "",
-      "properties": {},
-      "title": "PaymentIntentCardProcessing",
-      "type": "object",
-      "x-expandableFields": []
+  "name": "payment_intent_processing",
+  "schema": {
+    "description": "",
+    "properties": {
+      "card": {},
+      "type": {
+        "description": "Type of the next action to perform, one of `card`.",
+        "maxLength": 5000,
+        "type": "string"
+      }
     },
-    "type": {
-      "description": "Type of the next action to perform, one of `card`.",
-      "maxLength": 5000,
+    "required": [
+      "type"
+    ],
+    "title": "PaymentIntentProcessing",
+    "type": "object",
+    "x-expandableFields": [
+      "card"
+    ],
+    "default": {
+      "card": {},
       "type": "string"
     }
-  },
-  "required": [
-    "type"
-  ],
-  "title": "PaymentIntentProcessing",
-  "type": "object",
-  "x-expandableFields": [
-    "card"
-  ]
+  }
 }

@@ -1,34 +1,42 @@
 {
-  "description": "",
-  "properties": {
-    "enabled": {
-      "description": "Whether the feature is enabled.",
-      "type": "boolean"
+  "name": "portal_subscription_cancel",
+  "schema": {
+    "description": "",
+    "properties": {
+      "enabled": {
+        "description": "Whether the feature is enabled.",
+        "type": "boolean"
+      },
+      "mode": {
+        "description": "Whether to cancel subscriptions immediately or at the end of the billing period.",
+        "enum": [
+          "at_period_end",
+          "immediately"
+        ],
+        "type": "string"
+      },
+      "proration_behavior": {
+        "description": "Whether to create prorations when canceling subscriptions. Possible values are `none` and `create_prorations`.",
+        "enum": [
+          "always_invoice",
+          "create_prorations",
+          "none"
+        ],
+        "type": "string"
+      }
     },
-    "mode": {
-      "description": "Whether to cancel subscriptions immediately or at the end of the billing period.",
-      "enum": [
-        "at_period_end",
-        "immediately"
-      ],
-      "type": "string"
-    },
-    "proration_behavior": {
-      "description": "Whether to create prorations when canceling subscriptions. Possible values are `none` and `create_prorations`.",
-      "enum": [
-        "always_invoice",
-        "create_prorations",
-        "none"
-      ],
-      "type": "string"
+    "required": [
+      "enabled",
+      "mode",
+      "proration_behavior"
+    ],
+    "title": "PortalSubscriptionCancel",
+    "type": "object",
+    "x-expandableFields": [],
+    "default": {
+      "enabled": true,
+      "mode": "at_period_end",
+      "proration_behavior": "always_invoice"
     }
-  },
-  "required": [
-    "enabled",
-    "mode",
-    "proration_behavior"
-  ],
-  "title": "PortalSubscriptionCancel",
-  "type": "object",
-  "x-expandableFields": []
+  }
 }

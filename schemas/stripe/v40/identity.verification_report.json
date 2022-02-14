@@ -1,518 +1,114 @@
 {
-  "description": "A VerificationReport is the result of an attempt to collect and verify data from a user.\nThe collection of verification checks performed is determined from the `type` and `options`\nparameters used. You can find the result of each verification check performed in the\nappropriate sub-resource: `document`, `id_number`, `selfie`.\n\nEach VerificationReport contains a copy of any data collected by the user as well as\nreference IDs which can be used to access collected images through the [FileUpload](https://stripe.com/docs/api/files)\nAPI. To configure and create VerificationReports, use the\n[VerificationSession](https://stripe.com/docs/api/identity/verification_sessions) API.\n\nRelated guides: [Accessing verification results](https://stripe.com/docs/identity/verification-sessions#results).",
-  "properties": {
-    "created": {
-      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-      "type": "integer"
-    },
-    "document": {
-      "description": "Result from a document check",
-      "properties": {
-        "address": {
-          "anyOf": [
-            {
-              "description": "",
-              "properties": {
-                "city": {
-                  "description": "City, district, suburb, town, or village.",
-                  "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
-                },
-                "country": {
-                  "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-                  "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
-                },
-                "line1": {
-                  "description": "Address line 1 (e.g., street, PO Box, or company name).",
-                  "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
-                },
-                "line2": {
-                  "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
-                  "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
-                },
-                "postal_code": {
-                  "description": "ZIP or postal code.",
-                  "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
-                },
-                "state": {
-                  "description": "State, county, province, or region.",
-                  "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
-                }
-              },
-              "title": "Address",
-              "type": "object",
-              "x-expandableFields": []
-            }
-          ],
-          "description": "Address as it appears in the document.",
-          "nullable": true
-        },
-        "dob": {
-          "anyOf": [
-            {
-              "description": "Point in Time",
-              "properties": {
-                "day": {
-                  "description": "Numerical day between 1 and 31.",
-                  "nullable": true,
-                  "type": "integer"
-                },
-                "month": {
-                  "description": "Numerical month between 1 and 12.",
-                  "nullable": true,
-                  "type": "integer"
-                },
-                "year": {
-                  "description": "The four-digit year.",
-                  "nullable": true,
-                  "type": "integer"
-                }
-              },
-              "title": "GelatoDataDocumentReportDateOfBirth",
-              "type": "object",
-              "x-expandableFields": []
-            }
-          ],
-          "description": "Date of birth as it appears in the document.",
-          "nullable": true
-        },
+  "name": "identity.verification_report",
+  "schema": {
+    "description": "A VerificationReport is the result of an attempt to collect and verify data from a user.\nThe collection of verification checks performed is determined from the `type` and `options`\nparameters used. You can find the result of each verification check performed in the\nappropriate sub-resource: `document`, `id_number`, `selfie`.\n\nEach VerificationReport contains a copy of any data collected by the user as well as\nreference IDs which can be used to access collected images through the [FileUpload](https://stripe.com/docs/api/files)\nAPI. To configure and create VerificationReports, use the\n[VerificationSession](https://stripe.com/docs/api/identity/verification_sessions) API.\n\nRelated guides: [Accessing verification results](https://stripe.com/docs/identity/verification-sessions#results).",
+    "properties": {
+      "created": {
+        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+        "type": "integer"
+      },
+      "document": {
+        "address": {},
+        "dob": {},
         "error": {
-          "anyOf": [
-            {
-              "description": "",
-              "properties": {
-                "code": {
-                  "description": "A short machine-readable string giving the reason for the verification failure.",
-                  "enum": [
-                    "document_expired",
-                    "document_type_not_supported",
-                    "document_unverified_other"
-                  ],
-                  "nullable": true,
-                  "type": "string"
-                },
-                "reason": {
-                  "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
-                  "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
-                }
-              },
-              "title": "GelatoDocumentReportError",
-              "type": "object",
-              "x-expandableFields": []
-            }
-          ],
-          "description": "Details on the verification error. Present when status is `unverified`.",
-          "nullable": true
+          "code": "document_expired",
+          "reason": "string"
         },
-        "expiration_date": {
-          "anyOf": [
-            {
-              "description": "Point in Time",
-              "properties": {
-                "day": {
-                  "description": "Numerical day between 1 and 31.",
-                  "nullable": true,
-                  "type": "integer"
-                },
-                "month": {
-                  "description": "Numerical month between 1 and 12.",
-                  "nullable": true,
-                  "type": "integer"
-                },
-                "year": {
-                  "description": "The four-digit year.",
-                  "nullable": true,
-                  "type": "integer"
-                }
-              },
-              "title": "GelatoDataDocumentReportExpirationDate",
-              "type": "object",
-              "x-expandableFields": []
-            }
-          ],
-          "description": "Expiration date of the document.",
-          "nullable": true
-        },
-        "files": {
-          "description": "Array of [File](https://stripe.com/docs/api/files) ids containing images for this document.",
-          "items": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "nullable": true,
-          "type": "array"
-        },
-        "first_name": {
-          "description": "First name as it appears in the document.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
-        },
-        "issued_date": {
-          "anyOf": [
-            {
-              "description": "Point in Time",
-              "properties": {
-                "day": {
-                  "description": "Numerical day between 1 and 31.",
-                  "nullable": true,
-                  "type": "integer"
-                },
-                "month": {
-                  "description": "Numerical month between 1 and 12.",
-                  "nullable": true,
-                  "type": "integer"
-                },
-                "year": {
-                  "description": "The four-digit year.",
-                  "nullable": true,
-                  "type": "integer"
-                }
-              },
-              "title": "GelatoDataDocumentReportIssuedDate",
-              "type": "object",
-              "x-expandableFields": []
-            }
-          ],
-          "description": "Issued date of the document.",
-          "nullable": true
-        },
-        "issuing_country": {
-          "description": "Issuing country of the document.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
-        },
-        "last_name": {
-          "description": "Last name as it appears in the document.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
-        },
-        "number": {
-          "description": "Document ID number.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
-        },
-        "status": {
-          "description": "Status of this `document` check.",
-          "enum": [
-            "unverified",
-            "verified"
-          ],
-          "type": "string",
-          "x-stripeBypassValidation": true
-        },
-        "type": {
-          "description": "Type of the document.",
-          "enum": [
-            "driving_license",
-            "id_card",
-            "passport"
-          ],
-          "nullable": true,
-          "type": "string"
-        }
+        "expiration_date": {},
+        "files": "string",
+        "first_name": "string",
+        "issued_date": {},
+        "issuing_country": "string",
+        "last_name": "string",
+        "number": "string",
+        "status": "unverified",
+        "type": "driving_license"
       },
-      "required": [
-        "status"
-      ],
-      "title": "GelatoDocumentReport",
-      "type": "object",
-      "x-expandableFields": [
-        "address",
-        "dob",
-        "error",
-        "expiration_date",
-        "issued_date"
-      ]
-    },
-    "id": {
-      "description": "Unique identifier for the object.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "id_number": {
-      "description": "Result from an id_number check",
-      "properties": {
-        "dob": {
-          "anyOf": [
-            {
-              "description": "Point in Time",
-              "properties": {
-                "day": {
-                  "description": "Numerical day between 1 and 31.",
-                  "nullable": true,
-                  "type": "integer"
-                },
-                "month": {
-                  "description": "Numerical month between 1 and 12.",
-                  "nullable": true,
-                  "type": "integer"
-                },
-                "year": {
-                  "description": "The four-digit year.",
-                  "nullable": true,
-                  "type": "integer"
-                }
-              },
-              "title": "GelatoDataIdNumberReportDate",
-              "type": "object",
-              "x-expandableFields": []
-            }
-          ],
-          "description": "Date of birth.",
-          "nullable": true
-        },
+      "id": {
+        "description": "Unique identifier for the object.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "id_number": {
+        "dob": {},
         "error": {
-          "anyOf": [
-            {
-              "description": "",
-              "properties": {
-                "code": {
-                  "description": "A short machine-readable string giving the reason for the verification failure.",
-                  "enum": [
-                    "id_number_insufficient_document_data",
-                    "id_number_mismatch",
-                    "id_number_unverified_other"
-                  ],
-                  "nullable": true,
-                  "type": "string"
-                },
-                "reason": {
-                  "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
-                  "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
-                }
-              },
-              "title": "GelatoIdNumberReportError",
-              "type": "object",
-              "x-expandableFields": []
-            }
-          ],
-          "description": "Details on the verification error. Present when status is `unverified`.",
-          "nullable": true
+          "code": "id_number_insufficient_document_data",
+          "reason": "string"
         },
-        "first_name": {
-          "description": "First name.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
-        },
-        "id_number": {
-          "description": "ID number.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
-        },
-        "id_number_type": {
-          "description": "Type of ID number.",
-          "enum": [
-            "br_cpf",
-            "sg_nric",
-            "us_ssn"
-          ],
-          "nullable": true,
-          "type": "string"
-        },
-        "last_name": {
-          "description": "Last name.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
-        },
-        "status": {
-          "description": "Status of this `id_number` check.",
-          "enum": [
-            "unverified",
-            "verified"
-          ],
-          "type": "string",
-          "x-stripeBypassValidation": true
-        }
+        "first_name": "string",
+        "id_number": "string",
+        "id_number_type": "br_cpf",
+        "last_name": "string",
+        "status": "unverified"
       },
-      "required": [
-        "status"
-      ],
-      "title": "GelatoIdNumberReport",
-      "type": "object",
-      "x-expandableFields": [
-        "dob",
-        "error"
-      ]
-    },
-    "livemode": {
-      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-      "type": "boolean"
-    },
-    "object": {
-      "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "identity.verification_report"
-      ],
-      "type": "string"
-    },
-    "options": {
-      "description": "",
-      "properties": {
-        "document": {
-          "description": "",
-          "properties": {
-            "allowed_types": {
-              "description": "Restrict the list of allowed document type to these types.",
-              "items": {
-                "enum": [
-                  "driving_license",
-                  "id_card",
-                  "passport"
-                ],
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "require_id_number": {
-              "description": "Require that the user provide an id number which will be verified.",
-              "type": "boolean"
-            },
-            "require_live_capture": {
-              "description": "Require that the user capture documents live with their webcam or phone camera.",
-              "type": "boolean"
-            },
-            "require_matching_selfie": {
-              "description": "Require that the user provide a selfie to compare against the document photo.",
-              "type": "boolean"
-            }
-          },
-          "title": "GelatoReportDocumentOptions",
-          "type": "object",
-          "x-expandableFields": []
-        },
-        "id_number": {
-          "description": "",
-          "properties": {},
-          "title": "GelatoReportIdNumberOptions",
-          "type": "object",
-          "x-expandableFields": []
-        }
+      "livemode": {
+        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+        "type": "boolean"
       },
-      "title": "GelatoVerificationReportOptions",
-      "type": "object",
-      "x-expandableFields": [
-        "document",
-        "id_number"
-      ]
-    },
-    "selfie": {
-      "description": "Result from a selfie check",
-      "properties": {
-        "document": {
-          "description": "ID of the [File](https://stripe.com/docs/api/files) holding the image of the identity document used in this check.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
-        },
+      "object": {
+        "description": "String representing the object's type. Objects of the same type share the same value.",
+        "enum": [
+          "identity.verification_report"
+        ],
+        "type": "string"
+      },
+      "options": {
+        "document": {},
+        "id_number": {}
+      },
+      "selfie": {
+        "document": "string",
         "error": {
-          "anyOf": [
-            {
-              "description": "",
-              "properties": {
-                "code": {
-                  "description": "A short machine-readable string giving the reason for the verification failure.",
-                  "enum": [
-                    "selfie_document_missing_photo",
-                    "selfie_face_mismatch",
-                    "selfie_manipulated",
-                    "selfie_unverified_other"
-                  ],
-                  "nullable": true,
-                  "type": "string"
-                },
-                "reason": {
-                  "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
-                  "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
-                }
-              },
-              "title": "GelatoSelfieReportError",
-              "type": "object",
-              "x-expandableFields": []
-            }
-          ],
-          "description": "Details on the verification error. Present when status is `unverified`.",
-          "nullable": true
+          "code": "selfie_document_missing_photo",
+          "reason": "string"
         },
-        "selfie": {
-          "description": "ID of the [File](https://stripe.com/docs/api/files) holding the image of the selfie used in this check.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
-        },
-        "status": {
-          "description": "Status of this `selfie` check.",
-          "enum": [
-            "unverified",
-            "verified"
-          ],
-          "type": "string",
-          "x-stripeBypassValidation": true
-        }
+        "selfie": "string",
+        "status": "unverified"
       },
-      "required": [
-        "status"
-      ],
-      "title": "GelatoSelfieReport",
-      "type": "object",
-      "x-expandableFields": [
-        "error"
-      ]
+      "type": {
+        "description": "Type of report.",
+        "enum": [
+          "document",
+          "id_number"
+        ],
+        "type": "string",
+        "x-stripeBypassValidation": true
+      },
+      "verification_session": {
+        "description": "ID of the VerificationSession that created this report.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      }
     },
-    "type": {
-      "description": "Type of report.",
-      "enum": [
-        "document",
-        "id_number"
-      ],
-      "type": "string",
-      "x-stripeBypassValidation": true
-    },
-    "verification_session": {
-      "description": "ID of the VerificationSession that created this report.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+    "required": [
+      "created",
+      "id",
+      "livemode",
+      "object",
+      "options",
+      "type"
+    ],
+    "title": "GelatoVerificationReport",
+    "type": "object",
+    "x-expandableFields": [
+      "document",
+      "id_number",
+      "options",
+      "selfie"
+    ],
+    "x-resourceId": "identity.verification_report",
+    "default": {
+      "created": 0,
+      "document": {},
+      "id": "string",
+      "id_number": {},
+      "livemode": true,
+      "object": "identity.verification_report",
+      "options": {},
+      "selfie": {},
+      "type": "document",
+      "verification_session": "string"
     }
-  },
-  "required": [
-    "created",
-    "id",
-    "livemode",
-    "object",
-    "options",
-    "type"
-  ],
-  "title": "GelatoVerificationReport",
-  "type": "object",
-  "x-expandableFields": [
-    "document",
-    "id_number",
-    "options",
-    "selfie"
-  ],
-  "x-resourceId": "identity.verification_report"
+  }
 }

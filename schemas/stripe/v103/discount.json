@@ -1,295 +1,110 @@
 {
-  "description": "A discount represents the actual application of a coupon to a particular\ncustomer. It contains information about when the discount began and when it\nwill end.\n\nRelated guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).",
-  "properties": {
-    "checkout_session": {
-      "description": "The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "coupon": {
-      "description": "A coupon contains information about a percent-off or amount-off discount you\nmight want to apply to a customer. Coupons may be applied to [invoices](https://stripe.com/docs/api#invoices) or\n[orders](https://stripe.com/docs/api#create_order_legacy-coupon). Coupons do not work with conventional one-off [charges](https://stripe.com/docs/api#create_charge).",
-      "properties": {
-        "amount_off": {
-          "description": "Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for this customer.",
-          "nullable": true,
-          "type": "integer"
-        },
-        "applies_to": {
-          "description": "",
-          "properties": {
-            "products": {
-              "description": "A list of product IDs this coupon applies to",
-              "items": {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "type": "array"
-            }
-          },
-          "required": [
-            "products"
-          ],
-          "title": "CouponAppliesTo",
-          "type": "object",
-          "x-expandableFields": []
-        },
-        "created": {
-          "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-          "format": "unix-time",
-          "type": "integer"
-        },
-        "currency": {
-          "description": "If `amount_off` has been set, the three-letter [ISO code for the currency](https://stripe.com/docs/currencies) of the amount to take off.",
-          "nullable": true,
-          "type": "string"
-        },
-        "duration": {
-          "description": "One of `forever`, `once`, and `repeating`. Describes how long a customer who applies this coupon will get the discount.",
-          "enum": [
-            "forever",
-            "once",
-            "repeating"
-          ],
-          "type": "string"
-        },
-        "duration_in_months": {
-          "description": "If `duration` is `repeating`, the number of months the coupon applies. Null if coupon `duration` is `forever` or `once`.",
-          "nullable": true,
-          "type": "integer"
-        },
-        "id": {
-          "description": "Unique identifier for the object.",
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "livemode": {
-          "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-          "type": "boolean"
-        },
-        "max_redemptions": {
-          "description": "Maximum number of times this coupon can be redeemed, in total, across all customers, before it is no longer valid.",
-          "nullable": true,
-          "type": "integer"
-        },
-        "metadata": {
-          "additionalProperties": {
-            "maxLength": 500,
-            "type": "string"
-          },
-          "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-          "nullable": true,
-          "type": "object"
-        },
-        "name": {
-          "description": "Name of the coupon displayed to customers on for instance invoices or receipts.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
-        },
-        "object": {
-          "description": "String representing the object's type. Objects of the same type share the same value.",
-          "enum": [
-            "coupon"
-          ],
-          "type": "string"
-        },
-        "percent_off": {
-          "description": "Percent that will be taken off the subtotal of any invoices for this customer for the duration of the coupon. For example, a coupon with percent_off of 50 will make a %s100 invoice %s50 instead.",
-          "nullable": true,
-          "type": "number"
-        },
-        "redeem_by": {
-          "description": "Date after which the coupon can no longer be redeemed.",
-          "format": "unix-time",
-          "nullable": true,
-          "type": "integer"
-        },
-        "times_redeemed": {
-          "description": "Number of times this coupon has been applied to a customer.",
-          "type": "integer"
-        },
-        "valid": {
-          "description": "Taking account of the above properties, whether this coupon can still be applied to a customer.",
-          "type": "boolean"
-        }
+  "name": "discount",
+  "schema": {
+    "description": "A discount represents the actual application of a coupon to a particular\ncustomer. It contains information about when the discount began and when it\nwill end.\n\nRelated guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).",
+    "properties": {
+      "checkout_session": {
+        "description": "The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
       },
-      "required": [
-        "created",
-        "duration",
-        "id",
-        "livemode",
-        "object",
-        "times_redeemed",
-        "valid"
-      ],
-      "title": "Coupon",
-      "type": "object",
-      "x-expandableFields": [
-        "applies_to"
-      ],
-      "x-resourceId": "coupon"
-    },
-    "customer": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
+      "coupon": {
+        "amount_off": 0,
+        "applies_to": {
+          "products": "string"
         },
-        {
-          "$ref": "#/components/schemas/customer"
-        },
-        {
-          "description": "",
-          "properties": {
-            "deleted": {
-              "description": "Always true for a deleted object",
-              "enum": [
-                true
-              ],
-              "type": "boolean"
-            },
-            "id": {
-              "description": "Unique identifier for the object.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "object": {
-              "description": "String representing the object's type. Objects of the same type share the same value.",
-              "enum": [
-                "customer"
-              ],
-              "type": "string"
-            }
-          },
-          "required": [
-            "deleted",
-            "id",
-            "object"
-          ],
-          "title": "DeletedCustomer",
-          "type": "object",
-          "x-expandableFields": [],
-          "x-resourceId": "deleted_customer"
-        }
-      ],
-      "description": "The ID of the customer associated with this discount.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/customer"
-          },
-          {
-            "description": "",
-            "properties": {
-              "deleted": {
-                "description": "Always true for a deleted object",
-                "enum": [
-                  true
-                ],
-                "type": "boolean"
-              },
-              "id": {
-                "description": "Unique identifier for the object.",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "object": {
-                "description": "String representing the object's type. Objects of the same type share the same value.",
-                "enum": [
-                  "customer"
-                ],
-                "type": "string"
-              }
-            },
-            "required": [
-              "deleted",
-              "id",
-              "object"
-            ],
-            "title": "DeletedCustomer",
-            "type": "object",
-            "x-expandableFields": [],
-            "x-resourceId": "deleted_customer"
-          }
-        ]
+        "created": 0,
+        "currency": "string",
+        "duration": "forever",
+        "duration_in_months": 0,
+        "id": "string",
+        "livemode": true,
+        "max_redemptions": 0,
+        "metadata": {},
+        "name": "string",
+        "object": "coupon",
+        "percent_off": 0,
+        "redeem_by": 0,
+        "times_redeemed": 0,
+        "valid": true
+      },
+      "customer": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "end": {
+        "description": "If the coupon has a duration of `repeating`, the date that this discount will end. If the coupon has a duration of `once` or `forever`, this attribute will be null.",
+        "format": "unix-time",
+        "nullable": true,
+        "type": "integer"
+      },
+      "id": {
+        "description": "The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.",
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "invoice": {
+        "description": "The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "invoice_item": {
+        "description": "The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's coupon was applied to, if it was applied directly to a particular invoice item or invoice line item.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
+      },
+      "object": {
+        "description": "String representing the object's type. Objects of the same type share the same value.",
+        "enum": [
+          "discount"
+        ],
+        "type": "string"
+      },
+      "promotion_code": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "start": {
+        "description": "Date that the coupon was applied.",
+        "format": "unix-time",
+        "type": "integer"
+      },
+      "subscription": {
+        "description": "The subscription that this coupon is applied to, if it is applied to a particular subscription.",
+        "maxLength": 5000,
+        "nullable": true,
+        "type": "string"
       }
     },
-    "end": {
-      "description": "If the coupon has a duration of `repeating`, the date that this discount will end. If the coupon has a duration of `once` or `forever`, this attribute will be null.",
-      "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
-    },
-    "id": {
-      "description": "The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.",
-      "maxLength": 5000,
-      "type": "string"
-    },
-    "invoice": {
-      "description": "The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "invoice_item": {
-      "description": "The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's coupon was applied to, if it was applied directly to a particular invoice item or invoice line item.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
-    },
-    "object": {
-      "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "discount"
-      ],
-      "type": "string"
-    },
-    "promotion_code": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/promotion_code"
-        }
-      ],
-      "description": "The promotion code applied to create this discount.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/promotion_code"
-          }
-        ]
-      }
-    },
-    "start": {
-      "description": "Date that the coupon was applied.",
-      "format": "unix-time",
-      "type": "integer"
-    },
-    "subscription": {
-      "description": "The subscription that this coupon is applied to, if it is applied to a particular subscription.",
-      "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+    "required": [
+      "coupon",
+      "id",
+      "object",
+      "start"
+    ],
+    "title": "Discount",
+    "type": "object",
+    "x-expandableFields": [
+      "coupon",
+      "customer",
+      "promotion_code"
+    ],
+    "x-resourceId": "discount",
+    "default": {
+      "checkout_session": "string",
+      "coupon": {},
+      "customer": "string",
+      "end": 0,
+      "id": "string",
+      "invoice": "string",
+      "invoice_item": "string",
+      "object": "discount",
+      "promotion_code": "string",
+      "start": 0,
+      "subscription": "string"
     }
-  },
-  "required": [
-    "coupon",
-    "id",
-    "object",
-    "start"
-  ],
-  "title": "Discount",
-  "type": "object",
-  "x-expandableFields": [
-    "coupon",
-    "customer",
-    "promotion_code"
-  ],
-  "x-resourceId": "discount"
+  }
 }
