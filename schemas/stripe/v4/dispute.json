@@ -1,361 +1,171 @@
 {
-  "name": "dispute",
-  "schema": {
-    "description": "A dispute occurs when a customer questions your charge with their card issuer.\nWhen this happens, you're given the opportunity to respond to the dispute with\nevidence that shows that the charge is legitimate. You can find more\ninformation about the dispute process in our [Disputes and\nFraud](/docs/disputes) documentation.\n\nRelated guide: [Disputes and Fraud](https://stripe.com/docs/disputes).",
-    "properties": {
-      "amount": {
-        "description": "Disputed amount. Usually the amount of the charge, but can differ (usually because of currency fluctuation or because only part of the order is disputed).",
-        "type": "integer"
+  "description": "A dispute occurs when a customer questions your charge with their card issuer.\nWhen this happens, you're given the opportunity to respond to the dispute with\nevidence that shows that the charge is legitimate. You can find more\ninformation about the dispute process in our [Disputes and\nFraud](/docs/disputes) documentation.\n\nRelated guide: [Disputes and Fraud](https://stripe.com/docs/disputes).",
+  "properties": {
+    "amount": {
+      "description": "Disputed amount. Usually the amount of the charge, but can differ (usually because of currency fluctuation or because only part of the order is disputed).",
+      "type": "integer"
+    },
+    "balance_transactions": {
+      "description": "List of zero, one, or two balance transactions that show funds withdrawn and reinstated to your Stripe account as a result of this dispute.",
+      "items": {
+        "$ref": "#/components/schemas/balance_transaction"
       },
-      "balance_transactions": {
-        "amount": 0,
-        "available_on": 0,
-        "created": 0,
-        "currency": "string",
-        "description": "string",
-        "exchange_rate": 0,
-        "fee": 0,
-        "fee_details": {
-          "amount": 0,
-          "application": "string",
-          "currency": "string",
-          "description": "string",
+      "type": "array"
+    },
+    "charge": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
           "type": "string"
         },
-        "id": "string",
-        "net": 0,
-        "object": "balance_transaction",
-        "reporting_category": "string",
-        "source": "string",
-        "status": "string",
-        "type": "adjustment"
-      },
-      "charge": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "created": {
-        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-        "format": "unix-time",
-        "type": "integer"
-      },
-      "currency": {
-        "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-        "type": "string"
-      },
-      "evidence": {
-        "description": "",
-        "properties": {
-          "access_activity_log": {
-            "description": "Any server or activity logs showing proof that the customer accessed or downloaded the purchased digital product. This information should include IP addresses, corresponding timestamps, and any detailed recorded activity.",
-            "maxLength": 150000,
-            "nullable": true,
-            "type": "string"
-          },
-          "billing_address": {
-            "description": "The billing address provided by the customer.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "cancellation_policy": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "cancellation_policy_disclosure": {
-            "description": "An explanation of how and when the customer was shown your refund policy prior to purchase.",
-            "maxLength": 150000,
-            "nullable": true,
-            "type": "string"
-          },
-          "cancellation_rebuttal": {
-            "description": "A justification for why the customer's subscription was not canceled.",
-            "maxLength": 150000,
-            "nullable": true,
-            "type": "string"
-          },
-          "customer_communication": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "customer_email_address": {
-            "description": "The email address of the customer.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "customer_name": {
-            "description": "The name of the customer.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "customer_purchase_ip": {
-            "description": "The IP address that the customer used when making the purchase.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "customer_signature": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "duplicate_charge_documentation": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "duplicate_charge_explanation": {
-            "description": "An explanation of the difference between the disputed charge versus the prior charge that appears to be a duplicate.",
-            "maxLength": 150000,
-            "nullable": true,
-            "type": "string"
-          },
-          "duplicate_charge_id": {
-            "description": "The Stripe ID for the prior charge which appears to be a duplicate of the disputed charge.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "product_description": {
-            "description": "A description of the product or service that was sold.",
-            "maxLength": 150000,
-            "nullable": true,
-            "type": "string"
-          },
-          "receipt": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "refund_policy": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "refund_policy_disclosure": {
-            "description": "Documentation demonstrating that the customer was shown your refund policy prior to purchase.",
-            "maxLength": 150000,
-            "nullable": true,
-            "type": "string"
-          },
-          "refund_refusal_explanation": {
-            "description": "A justification for why the customer is not entitled to a refund.",
-            "maxLength": 150000,
-            "nullable": true,
-            "type": "string"
-          },
-          "service_date": {
-            "description": "The date on which the customer received or began receiving the purchased service, in a clear human-readable format.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "service_documentation": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "shipping_address": {
-            "description": "The address to which a physical product was shipped. You should try to include as complete address information as possible.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "shipping_carrier": {
-            "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. If multiple carriers were used for this purchase, please separate them with commas.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "shipping_date": {
-            "description": "The date on which a physical product began its route to the shipping address, in a clear human-readable format.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "shipping_documentation": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "shipping_tracking_number": {
-            "description": "The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "uncategorized_file": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "uncategorized_text": {
-            "description": "Any additional evidence or statements.",
-            "maxLength": 150000,
-            "nullable": true,
-            "type": "string"
+        {
+          "$ref": "#/components/schemas/charge"
+        }
+      ],
+      "description": "ID of the charge that was disputed.",
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/charge"
           }
-        },
-        "title": "DisputeEvidence",
-        "type": "object",
-        "x-expandableFields": [
-          "cancellation_policy",
-          "customer_communication",
-          "customer_signature",
-          "duplicate_charge_documentation",
-          "receipt",
-          "refund_policy",
-          "service_documentation",
-          "shipping_documentation",
-          "uncategorized_file"
         ]
-      },
-      "evidence_details": {
-        "description": "",
-        "properties": {
-          "due_by": {
-            "description": "Date by which evidence must be submitted in order to successfully challenge dispute. Will be null if the customer's bank or credit card company doesn't allow a response for this particular dispute.",
-            "format": "unix-time",
-            "nullable": true,
-            "type": "integer"
-          },
-          "has_evidence": {
-            "description": "Whether evidence has been staged for this dispute.",
-            "type": "boolean"
-          },
-          "past_due": {
-            "description": "Whether the last evidence submission was submitted past the due date. Defaults to `false` if no evidence submissions have occurred. If `true`, then delivery of the latest evidence is *not* guaranteed.",
-            "type": "boolean"
-          },
-          "submission_count": {
-            "description": "The number of times evidence has been submitted. Typically, you may only submit evidence once.",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "has_evidence",
-          "past_due",
-          "submission_count"
-        ],
-        "title": "DisputeEvidenceDetails",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "id": {
-        "description": "Unique identifier for the object.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "is_charge_refundable": {
-        "description": "If true, it is still possible to refund the disputed payment. Once the payment has been fully refunded, no further funds will be withdrawn from your Stripe account as a result of this dispute.",
-        "type": "boolean"
-      },
-      "livemode": {
-        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-        "type": "boolean"
-      },
-      "metadata": {},
-      "object": {
-        "description": "String representing the object's type. Objects of the same type share the same value.",
-        "enum": [
-          "dispute"
-        ],
-        "type": "string"
-      },
-      "payment_intent": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "reason": {
-        "description": "Reason given by cardholder for dispute. Possible values are `bank_cannot_process`, `check_returned`, `credit_not_processed`, `customer_initiated`, `debit_not_authorized`, `duplicate`, `fraudulent`, `general`, `incorrect_account_details`, `insufficient_funds`, `product_not_received`, `product_unacceptable`, `subscription_canceled`, or `unrecognized`. Read more about [dispute reasons](https://stripe.com/docs/disputes/categories).",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "status": {
-        "description": "Current status of dispute. Possible values are `warning_needs_response`, `warning_under_review`, `warning_closed`, `needs_response`, `under_review`, `charge_refunded`, `won`, or `lost`.",
-        "enum": [
-          "charge_refunded",
-          "lost",
-          "needs_response",
-          "under_review",
-          "warning_closed",
-          "warning_needs_response",
-          "warning_under_review",
-          "won"
-        ],
-        "type": "string"
       }
     },
-    "required": [
-      "amount",
-      "balance_transactions",
-      "charge",
-      "created",
-      "currency",
-      "evidence",
-      "evidence_details",
-      "id",
-      "is_charge_refundable",
-      "livemode",
-      "metadata",
-      "object",
-      "reason",
-      "status"
-    ],
-    "title": "Dispute",
-    "type": "object",
-    "x-expandableFields": [
-      "balance_transactions",
-      "charge",
-      "evidence",
-      "evidence_details",
-      "payment_intent"
-    ],
-    "x-resourceId": "dispute",
-    "default": {
-      "amount": 0,
-      "balance_transactions": {},
-      "charge": "string",
-      "created": 0,
-      "currency": "string",
-      "evidence": {
-        "access_activity_log": "string",
-        "billing_address": "string",
-        "cancellation_policy": "string",
-        "cancellation_policy_disclosure": "string",
-        "cancellation_rebuttal": "string",
-        "customer_communication": "string",
-        "customer_email_address": "string",
-        "customer_name": "string",
-        "customer_purchase_ip": "string",
-        "customer_signature": "string",
-        "duplicate_charge_documentation": "string",
-        "duplicate_charge_explanation": "string",
-        "duplicate_charge_id": "string",
-        "product_description": "string",
-        "receipt": "string",
-        "refund_policy": "string",
-        "refund_policy_disclosure": "string",
-        "refund_refusal_explanation": "string",
-        "service_date": "string",
-        "service_documentation": "string",
-        "shipping_address": "string",
-        "shipping_carrier": "string",
-        "shipping_date": "string",
-        "shipping_documentation": "string",
-        "shipping_tracking_number": "string",
-        "uncategorized_file": "string",
-        "uncategorized_text": "string"
+    "created": {
+      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "currency": {
+      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+      "type": "string"
+    },
+    "evidence": {
+      "$ref": "#/components/schemas/dispute_evidence"
+    },
+    "evidence_details": {
+      "description": "",
+      "properties": {
+        "due_by": {
+          "description": "Date by which evidence must be submitted in order to successfully challenge dispute. Will be null if the customer's bank or credit card company doesn't allow a response for this particular dispute.",
+          "format": "unix-time",
+          "nullable": true,
+          "type": "integer"
+        },
+        "has_evidence": {
+          "description": "Whether evidence has been staged for this dispute.",
+          "type": "boolean"
+        },
+        "past_due": {
+          "description": "Whether the last evidence submission was submitted past the due date. Defaults to `false` if no evidence submissions have occurred. If `true`, then delivery of the latest evidence is *not* guaranteed.",
+          "type": "boolean"
+        },
+        "submission_count": {
+          "description": "The number of times evidence has been submitted. Typically, you may only submit evidence once.",
+          "type": "integer"
+        }
       },
-      "evidence_details": {
-        "due_by": 0,
-        "has_evidence": true,
-        "past_due": true,
-        "submission_count": 0
+      "required": [
+        "has_evidence",
+        "past_due",
+        "submission_count"
+      ],
+      "title": "DisputeEvidenceDetails",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "is_charge_refundable": {
+      "description": "If true, it is still possible to refund the disputed payment. Once the payment has been fully refunded, no further funds will be withdrawn from your Stripe account as a result of this dispute.",
+      "type": "boolean"
+    },
+    "livemode": {
+      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+      "type": "boolean"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "maxLength": 500,
+        "type": "string"
       },
-      "id": "string",
-      "is_charge_refundable": true,
-      "livemode": true,
-      "metadata": {},
-      "object": "dispute",
-      "payment_intent": "string",
-      "reason": "string",
-      "status": "charge_refunded"
+      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+      "type": "object"
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "dispute"
+      ],
+      "type": "string"
+    },
+    "payment_intent": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/payment_intent"
+        }
+      ],
+      "description": "ID of the PaymentIntent that was disputed.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/payment_intent"
+          }
+        ]
+      }
+    },
+    "reason": {
+      "description": "Reason given by cardholder for dispute. Possible values are `bank_cannot_process`, `check_returned`, `credit_not_processed`, `customer_initiated`, `debit_not_authorized`, `duplicate`, `fraudulent`, `general`, `incorrect_account_details`, `insufficient_funds`, `product_not_received`, `product_unacceptable`, `subscription_canceled`, or `unrecognized`. Read more about [dispute reasons](https://stripe.com/docs/disputes/categories).",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "status": {
+      "description": "Current status of dispute. Possible values are `warning_needs_response`, `warning_under_review`, `warning_closed`, `needs_response`, `under_review`, `charge_refunded`, `won`, or `lost`.",
+      "enum": [
+        "charge_refunded",
+        "lost",
+        "needs_response",
+        "under_review",
+        "warning_closed",
+        "warning_needs_response",
+        "warning_under_review",
+        "won"
+      ],
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "amount",
+    "balance_transactions",
+    "charge",
+    "created",
+    "currency",
+    "evidence",
+    "evidence_details",
+    "id",
+    "is_charge_refundable",
+    "livemode",
+    "metadata",
+    "object",
+    "reason",
+    "status"
+  ],
+  "title": "Dispute",
+  "type": "object",
+  "x-expandableFields": [
+    "balance_transactions",
+    "charge",
+    "evidence",
+    "evidence_details",
+    "payment_intent"
+  ],
+  "x-resourceId": "dispute"
 }

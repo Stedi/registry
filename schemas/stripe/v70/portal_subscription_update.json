@@ -1,9 +1,9 @@
 {
-  "name": "portal_subscription_update",
-  "schema": {
-    "description": "",
-    "properties": {
-      "default_allowed_updates": {
+  "description": "",
+  "properties": {
+    "default_allowed_updates": {
+      "description": "The types of subscription updates that are supported for items listed in the `products` attribute. When empty, subscriptions are not updateable.",
+      "items": {
         "enum": [
           "price",
           "promotion_code",
@@ -11,16 +11,24 @@
         ],
         "type": "string"
       },
-      "enabled": {
-        "description": "Whether the feature is enabled.",
-        "type": "boolean"
-      },
-      "products": {
+      "type": "array"
+    },
+    "enabled": {
+      "description": "Whether the feature is enabled.",
+      "type": "boolean"
+    },
+    "products": {
+      "description": "The list of products that support subscription updates.",
+      "items": {
         "description": "",
         "properties": {
           "prices": {
-            "maxLength": 5000,
-            "type": "string"
+            "description": "The list of price IDs which, when subscribed to, a subscription can be updated.",
+            "items": {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "type": "array"
           },
           "product": {
             "description": "The product ID.",
@@ -36,34 +44,27 @@
         "type": "object",
         "x-expandableFields": []
       },
-      "proration_behavior": {
-        "description": "Determines how to handle prorations resulting from subscription updates. Valid values are `none`, `create_prorations`, and `always_invoice`.",
-        "enum": [
-          "always_invoice",
-          "create_prorations",
-          "none"
-        ],
-        "type": "string"
-      }
+      "nullable": true,
+      "type": "array"
     },
-    "required": [
-      "default_allowed_updates",
-      "enabled",
-      "proration_behavior"
-    ],
-    "title": "PortalSubscriptionUpdate",
-    "type": "object",
-    "x-expandableFields": [
-      "products"
-    ],
-    "default": {
-      "default_allowed_updates": "price",
-      "enabled": true,
-      "products": {
-        "prices": "string",
-        "product": "string"
-      },
-      "proration_behavior": "always_invoice"
+    "proration_behavior": {
+      "description": "Determines how to handle prorations resulting from subscription updates. Valid values are `none`, `create_prorations`, and `always_invoice`.",
+      "enum": [
+        "always_invoice",
+        "create_prorations",
+        "none"
+      ],
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "default_allowed_updates",
+    "enabled",
+    "proration_behavior"
+  ],
+  "title": "PortalSubscriptionUpdate",
+  "type": "object",
+  "x-expandableFields": [
+    "products"
+  ]
 }

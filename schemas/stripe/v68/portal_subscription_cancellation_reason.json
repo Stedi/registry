@@ -1,26 +1,23 @@
 {
-  "name": "portal_subscription_cancellation_reason",
-  "schema": {
-    "description": "",
-    "properties": {
-      "enabled": {
-        "description": "Whether the feature is enabled.",
-        "type": "boolean"
-      },
-      "options": {
-        "type": "string"
-      }
+  "description": "",
+  "properties": {
+    "enabled": {
+      "description": "Whether the feature is enabled.",
+      "type": "boolean"
     },
-    "required": [
-      "enabled",
-      "options"
-    ],
-    "title": "PortalSubscriptionCancellationReason",
-    "type": "object",
-    "x-expandableFields": [],
-    "default": {
-      "enabled": true,
-      "options": "string"
+    "options": {
+      "description": "Which cancellation reasons will be given as options to the customer.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
     }
-  }
+  },
+  "required": [
+    "enabled",
+    "options"
+  ],
+  "title": "PortalSubscriptionCancellationReason",
+  "type": "object",
+  "x-expandableFields": []
 }

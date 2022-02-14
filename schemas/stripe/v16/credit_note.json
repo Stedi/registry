@@ -1,160 +1,302 @@
 {
-  "name": "credit_note",
-  "schema": {
-    "description": "Issue a credit note to adjust an invoice's amount after the invoice is finalized.\n\nRelated guide: [Credit Notes](https://stripe.com/docs/billing/invoices/credit-notes).",
-    "properties": {
-      "amount": {
-        "description": "The integer amount in %s representing the total amount of the credit note, including tax.",
-        "type": "integer"
-      },
-      "created": {
-        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-        "format": "unix-time",
-        "type": "integer"
-      },
-      "currency": {
-        "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-        "type": "string"
-      },
-      "customer": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "customer_balance_transaction": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "discount_amount": {
-        "description": "The integer amount in %s representing the total amount of discount that was credited.",
-        "type": "integer"
-      },
-      "discount_amounts": {
-        "description": "",
-        "properties": {
-          "amount": {
-            "description": "The amount, in %s, of the discount.",
-            "type": "integer"
-          },
-          "discount": {
-            "maxLength": 5000,
-            "type": "string"
-          }
+  "description": "Issue a credit note to adjust an invoice's amount after the invoice is finalized.\n\nRelated guide: [Credit Notes](https://stripe.com/docs/billing/invoices/credit-notes).",
+  "properties": {
+    "amount": {
+      "description": "The integer amount in %s representing the total amount of the credit note, including tax.",
+      "type": "integer"
+    },
+    "created": {
+      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "currency": {
+      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+      "type": "string"
+    },
+    "customer": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
         },
-        "required": [
-          "amount",
-          "discount"
-        ],
-        "title": "DiscountsResourceDiscountAmount",
-        "type": "object",
-        "x-expandableFields": [
-          "discount"
-        ]
-      },
-      "id": {
-        "description": "Unique identifier for the object.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "invoice": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "lines": {
-        "description": "Line items that make up the credit note",
-        "properties": {
-          "data": {
+        {
+          "$ref": "#/components/schemas/customer"
+        },
+        {
+          "description": "",
+          "properties": {
+            "deleted": {
+              "description": "Always true for a deleted object",
+              "enum": [
+                true
+              ],
+              "type": "boolean"
+            },
+            "id": {
+              "description": "Unique identifier for the object.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "object": {
+              "description": "String representing the object's type. Objects of the same type share the same value.",
+              "enum": [
+                "customer"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "deleted",
+            "id",
+            "object"
+          ],
+          "title": "DeletedCustomer",
+          "type": "object",
+          "x-expandableFields": [],
+          "x-resourceId": "deleted_customer"
+        }
+      ],
+      "description": "ID of the customer.",
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/customer"
+          },
+          {
             "description": "",
             "properties": {
-              "amount": {
-                "description": "The integer amount in %s representing the gross amount being credited for this line item, excluding (exclusive) tax and discounts.",
-                "type": "integer"
-              },
-              "description": {
-                "description": "Description of the item being credited.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "discount_amount": {
-                "description": "The integer amount in %s representing the discount being credited for this line item.",
-                "type": "integer"
-              },
-              "discount_amounts": {
-                "description": "",
-                "properties": {
-                  "amount": {
-                    "description": "The amount, in %s, of the discount.",
-                    "type": "integer"
-                  },
-                  "discount": {
-                    "maxLength": 5000,
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "amount",
-                  "discount"
+              "deleted": {
+                "description": "Always true for a deleted object",
+                "enum": [
+                  true
                 ],
-                "title": "DiscountsResourceDiscountAmount",
-                "type": "object",
-                "x-expandableFields": [
-                  "discount"
-                ]
+                "type": "boolean"
               },
               "id": {
                 "description": "Unique identifier for the object.",
                 "maxLength": 5000,
                 "type": "string"
               },
-              "invoice_line_item": {
-                "description": "ID of the invoice line item being credited",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "livemode": {
-                "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                "type": "boolean"
-              },
               "object": {
                 "description": "String representing the object's type. Objects of the same type share the same value.",
                 "enum": [
-                  "credit_note_line_item"
+                  "customer"
                 ],
                 "type": "string"
+              }
+            },
+            "required": [
+              "deleted",
+              "id",
+              "object"
+            ],
+            "title": "DeletedCustomer",
+            "type": "object",
+            "x-expandableFields": [],
+            "x-resourceId": "deleted_customer"
+          }
+        ]
+      }
+    },
+    "customer_balance_transaction": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/customer_balance_transaction"
+        }
+      ],
+      "description": "Customer balance transaction related to this credit note.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/customer_balance_transaction"
+          }
+        ]
+      }
+    },
+    "discount_amount": {
+      "description": "The integer amount in %s representing the total amount of discount that was credited.",
+      "type": "integer"
+    },
+    "discount_amounts": {
+      "description": "The aggregate amounts calculated per discount for all line items.",
+      "items": {
+        "$ref": "#/components/schemas/discounts_resource_discount_amount"
+      },
+      "type": "array"
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "invoice": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/invoice"
+        }
+      ],
+      "description": "ID of the invoice.",
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/invoice"
+          }
+        ]
+      }
+    },
+    "lines": {
+      "description": "Line items that make up the credit note",
+      "properties": {
+        "data": {
+          "description": "Details about each object.",
+          "items": {
+            "$ref": "#/components/schemas/credit_note_line_item"
+          },
+          "type": "array"
+        },
+        "has_more": {
+          "description": "True if this list has another page of items after this one that can be fetched.",
+          "type": "boolean"
+        },
+        "object": {
+          "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
+          "enum": [
+            "list"
+          ],
+          "type": "string"
+        },
+        "url": {
+          "description": "The URL where this list can be accessed.",
+          "maxLength": 5000,
+          "type": "string"
+        }
+      },
+      "required": [
+        "data",
+        "has_more",
+        "object",
+        "url"
+      ],
+      "title": "CreditNoteLinesList",
+      "type": "object",
+      "x-expandableFields": [
+        "data"
+      ]
+    },
+    "livemode": {
+      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+      "type": "boolean"
+    },
+    "memo": {
+      "description": "Customer-facing text that appears on the credit note PDF.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "maxLength": 500,
+        "type": "string"
+      },
+      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+      "nullable": true,
+      "type": "object"
+    },
+    "number": {
+      "description": "A unique number that identifies this particular credit note and appears on the PDF of the credit note and its associated invoice.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "credit_note"
+      ],
+      "type": "string"
+    },
+    "out_of_band_amount": {
+      "description": "Amount that was credited outside of Stripe.",
+      "nullable": true,
+      "type": "integer"
+    },
+    "pdf": {
+      "description": "The link to download the PDF of the credit note.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "reason": {
+      "description": "Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`",
+      "enum": [
+        "duplicate",
+        "fraudulent",
+        "order_change",
+        "product_unsatisfactory"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "refund": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/refund"
+        }
+      ],
+      "description": "Refund related to this credit note.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/refund"
+          }
+        ]
+      }
+    },
+    "status": {
+      "description": "Status of this credit note, one of `issued` or `void`. Learn more about [voiding credit notes](https://stripe.com/docs/billing/invoices/credit-notes#voiding).",
+      "enum": [
+        "issued",
+        "void"
+      ],
+      "type": "string"
+    },
+    "subtotal": {
+      "description": "The integer amount in %s representing the amount of the credit note, excluding tax and invoice level discounts.",
+      "type": "integer"
+    },
+    "tax_amounts": {
+      "description": "The aggregate amounts calculated per tax rate for all line items.",
+      "items": {
+        "description": "",
+        "properties": {
+          "amount": {
+            "description": "The amount, in %s, of the tax.",
+            "type": "integer"
+          },
+          "inclusive": {
+            "description": "Whether this tax amount is inclusive or exclusive.",
+            "type": "boolean"
+          },
+          "tax_rate": {
+            "anyOf": [
+              {
+                "maxLength": 5000,
+                "type": "string"
               },
-              "quantity": {
-                "description": "The number of units of product being credited.",
-                "nullable": true,
-                "type": "integer"
-              },
-              "tax_amounts": {
-                "description": "",
-                "properties": {
-                  "amount": {
-                    "description": "The amount, in %s, of the tax.",
-                    "type": "integer"
-                  },
-                  "inclusive": {
-                    "description": "Whether this tax amount is inclusive or exclusive.",
-                    "type": "boolean"
-                  },
-                  "tax_rate": {
-                    "maxLength": 5000,
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "amount",
-                  "inclusive",
-                  "tax_rate"
-                ],
-                "title": "CreditNoteTaxAmount",
-                "type": "object",
-                "x-expandableFields": [
-                  "tax_rate"
-                ]
-              },
-              "tax_rates": {
+              {
                 "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
                 "properties": {
                   "active": {
@@ -202,7 +344,15 @@
                     "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
                     "type": "boolean"
                   },
-                  "metadata": {},
+                  "metadata": {
+                    "additionalProperties": {
+                      "maxLength": 500,
+                      "type": "string"
+                    },
+                    "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+                    "nullable": true,
+                    "type": "object"
+                  },
                   "object": {
                     "description": "String representing the object's type. Objects of the same type share the same value.",
                     "enum": [
@@ -235,150 +385,103 @@
                 "type": "object",
                 "x-expandableFields": [],
                 "x-resourceId": "tax_rate"
-              },
-              "type": {
-                "description": "The type of the credit note line item, one of `invoice_line_item` or `custom_line_item`. When the type is `invoice_line_item` there is an additional `invoice_line_item` property on the resource the value of which is the id of the credited line item on the invoice.",
-                "enum": [
-                  "custom_line_item",
-                  "invoice_line_item"
-                ],
-                "type": "string"
-              },
-              "unit_amount": {
-                "description": "The cost of each unit of product being credited.",
-                "nullable": true,
-                "type": "integer"
-              },
-              "unit_amount_decimal": {
-                "description": "Same as `unit_amount`, but contains a decimal value with at most 12 decimal places.",
-                "format": "decimal",
-                "nullable": true,
-                "type": "string"
               }
-            },
-            "required": [
-              "amount",
-              "discount_amount",
-              "discount_amounts",
-              "id",
-              "livemode",
-              "object",
-              "tax_amounts",
-              "tax_rates",
-              "type"
             ],
-            "title": "CreditNoteLineItem",
-            "type": "object",
-            "x-expandableFields": [
-              "discount_amounts",
-              "tax_amounts",
-              "tax_rates"
-            ],
-            "x-resourceId": "credit_note_line_item"
-          },
-          "has_more": {
-            "description": "True if this list has another page of items after this one that can be fetched.",
-            "type": "boolean"
-          },
-          "object": {
-            "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
-            "enum": [
-              "list"
-            ],
-            "type": "string"
-          },
-          "url": {
-            "description": "The URL where this list can be accessed.",
-            "maxLength": 5000,
-            "type": "string"
-          }
-        },
-        "required": [
-          "data",
-          "has_more",
-          "object",
-          "url"
-        ],
-        "title": "CreditNoteLinesList",
-        "type": "object",
-        "x-expandableFields": [
-          "data"
-        ]
-      },
-      "livemode": {
-        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-        "type": "boolean"
-      },
-      "memo": {
-        "description": "Customer-facing text that appears on the credit note PDF.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "metadata": {},
-      "number": {
-        "description": "A unique number that identifies this particular credit note and appears on the PDF of the credit note and its associated invoice.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "object": {
-        "description": "String representing the object's type. Objects of the same type share the same value.",
-        "enum": [
-          "credit_note"
-        ],
-        "type": "string"
-      },
-      "out_of_band_amount": {
-        "description": "Amount that was credited outside of Stripe.",
-        "nullable": true,
-        "type": "integer"
-      },
-      "pdf": {
-        "description": "The link to download the PDF of the credit note.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "reason": {
-        "description": "Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`",
-        "enum": [
-          "duplicate",
-          "fraudulent",
-          "order_change",
-          "product_unsatisfactory"
-        ],
-        "nullable": true,
-        "type": "string"
-      },
-      "refund": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "status": {
-        "description": "Status of this credit note, one of `issued` or `void`. Learn more about [voiding credit notes](https://stripe.com/docs/billing/invoices/credit-notes#voiding).",
-        "enum": [
-          "issued",
-          "void"
-        ],
-        "type": "string"
-      },
-      "subtotal": {
-        "description": "The integer amount in %s representing the amount of the credit note, excluding tax and invoice level discounts.",
-        "type": "integer"
-      },
-      "tax_amounts": {
-        "description": "",
-        "properties": {
-          "amount": {
-            "description": "The amount, in %s, of the tax.",
-            "type": "integer"
-          },
-          "inclusive": {
-            "description": "Whether this tax amount is inclusive or exclusive.",
-            "type": "boolean"
-          },
-          "tax_rate": {
-            "maxLength": 5000,
-            "type": "string"
+            "description": "The tax rate that was applied to get this tax amount.",
+            "x-expansionResources": {
+              "oneOf": [
+                {
+                  "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
+                  "properties": {
+                    "active": {
+                      "description": "Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.",
+                      "type": "boolean"
+                    },
+                    "country": {
+                      "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "created": {
+                      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                      "format": "unix-time",
+                      "type": "integer"
+                    },
+                    "description": {
+                      "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "display_name": {
+                      "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "Unique identifier for the object.",
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "inclusive": {
+                      "description": "This specifies if the tax rate is inclusive or exclusive.",
+                      "type": "boolean"
+                    },
+                    "jurisdiction": {
+                      "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "livemode": {
+                      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                      "type": "boolean"
+                    },
+                    "metadata": {
+                      "additionalProperties": {
+                        "maxLength": 500,
+                        "type": "string"
+                      },
+                      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+                      "nullable": true,
+                      "type": "object"
+                    },
+                    "object": {
+                      "description": "String representing the object's type. Objects of the same type share the same value.",
+                      "enum": [
+                        "tax_rate"
+                      ],
+                      "type": "string"
+                    },
+                    "percentage": {
+                      "description": "This represents the tax rate percent out of 100.",
+                      "type": "number"
+                    },
+                    "state": {
+                      "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "active",
+                    "created",
+                    "display_name",
+                    "id",
+                    "inclusive",
+                    "livemode",
+                    "object",
+                    "percentage"
+                  ],
+                  "title": "TaxRate",
+                  "type": "object",
+                  "x-expandableFields": [],
+                  "x-resourceId": "tax_rate"
+                }
+              ]
+            }
           }
         },
         "required": [
@@ -392,131 +495,57 @@
           "tax_rate"
         ]
       },
-      "total": {
-        "description": "The integer amount in %s representing the total amount of the credit note, including tax and all discount.",
-        "type": "integer"
-      },
-      "type": {
-        "description": "Type of this credit note, one of `pre_payment` or `post_payment`. A `pre_payment` credit note means it was issued when the invoice was open. A `post_payment` credit note means it was issued when the invoice was paid.",
-        "enum": [
-          "post_payment",
-          "pre_payment"
-        ],
-        "type": "string"
-      },
-      "voided_at": {
-        "description": "The time that the credit note was voided.",
-        "format": "unix-time",
-        "nullable": true,
-        "type": "integer"
-      }
+      "type": "array"
     },
-    "required": [
-      "amount",
-      "created",
-      "currency",
-      "customer",
-      "discount_amount",
-      "discount_amounts",
-      "id",
-      "invoice",
-      "lines",
-      "livemode",
-      "number",
-      "object",
-      "pdf",
-      "status",
-      "subtotal",
-      "tax_amounts",
-      "total",
-      "type"
-    ],
-    "title": "CreditNote",
-    "type": "object",
-    "x-expandableFields": [
-      "customer",
-      "customer_balance_transaction",
-      "discount_amounts",
-      "invoice",
-      "lines",
-      "refund",
-      "tax_amounts"
-    ],
-    "x-resourceId": "credit_note",
-    "default": {
-      "amount": 0,
-      "created": 0,
-      "currency": "string",
-      "customer": "string",
-      "customer_balance_transaction": "string",
-      "discount_amount": 0,
-      "discount_amounts": {
-        "amount": 0,
-        "discount": "string"
-      },
-      "id": "string",
-      "invoice": "string",
-      "lines": {
-        "data": {
-          "amount": 0,
-          "description": "string",
-          "discount_amount": 0,
-          "discount_amounts": {
-            "amount": 0,
-            "discount": "string"
-          },
-          "id": "string",
-          "invoice_line_item": "string",
-          "livemode": true,
-          "object": "credit_note_line_item",
-          "quantity": 0,
-          "tax_amounts": {
-            "amount": 0,
-            "inclusive": true,
-            "tax_rate": "string"
-          },
-          "tax_rates": {
-            "active": true,
-            "country": "string",
-            "created": 0,
-            "description": "string",
-            "display_name": "string",
-            "id": "string",
-            "inclusive": true,
-            "jurisdiction": "string",
-            "livemode": true,
-            "metadata": {},
-            "object": "tax_rate",
-            "percentage": 0,
-            "state": "string"
-          },
-          "type": "custom_line_item",
-          "unit_amount": 0,
-          "unit_amount_decimal": "0.0"
-        },
-        "has_more": true,
-        "object": "list",
-        "url": "string"
-      },
-      "livemode": true,
-      "memo": "string",
-      "metadata": {},
-      "number": "string",
-      "object": "credit_note",
-      "out_of_band_amount": 0,
-      "pdf": "string",
-      "reason": "duplicate",
-      "refund": "string",
-      "status": "issued",
-      "subtotal": 0,
-      "tax_amounts": {
-        "amount": 0,
-        "inclusive": true,
-        "tax_rate": "string"
-      },
-      "total": 0,
-      "type": "post_payment",
-      "voided_at": 0
+    "total": {
+      "description": "The integer amount in %s representing the total amount of the credit note, including tax and all discount.",
+      "type": "integer"
+    },
+    "type": {
+      "description": "Type of this credit note, one of `pre_payment` or `post_payment`. A `pre_payment` credit note means it was issued when the invoice was open. A `post_payment` credit note means it was issued when the invoice was paid.",
+      "enum": [
+        "post_payment",
+        "pre_payment"
+      ],
+      "type": "string"
+    },
+    "voided_at": {
+      "description": "The time that the credit note was voided.",
+      "format": "unix-time",
+      "nullable": true,
+      "type": "integer"
     }
-  }
+  },
+  "required": [
+    "amount",
+    "created",
+    "currency",
+    "customer",
+    "discount_amount",
+    "discount_amounts",
+    "id",
+    "invoice",
+    "lines",
+    "livemode",
+    "number",
+    "object",
+    "pdf",
+    "status",
+    "subtotal",
+    "tax_amounts",
+    "total",
+    "type"
+  ],
+  "title": "CreditNote",
+  "type": "object",
+  "x-expandableFields": [
+    "customer",
+    "customer_balance_transaction",
+    "discount_amounts",
+    "invoice",
+    "lines",
+    "refund",
+    "tax_amounts"
+  ],
+  "x-resourceId": "credit_note"
 }

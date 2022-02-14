@@ -1,94 +1,279 @@
 {
-  "name": "terminal.reader",
-  "schema": {
-    "description": "A Reader represents a physical device for accepting payment details.\n\nRelated guide: [Connecting to a Reader](https://stripe.com/docs/terminal/payments/connect-reader).",
-    "properties": {
-      "device_sw_version": {
-        "description": "The current software version of the reader.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "device_type": {
-        "description": "Type of reader, one of `bbpos_chipper2x`, `bbpos_wisepos_e`, or `verifone_P400`.",
-        "enum": [
-          "bbpos_chipper2x",
-          "bbpos_wisepos_e",
-          "verifone_P400"
-        ],
-        "type": "string"
-      },
-      "id": {
-        "description": "Unique identifier for the object.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "ip_address": {
-        "description": "The local IP address of the reader.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "label": {
-        "description": "Custom label given to the reader for easier identification.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "livemode": {
-        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-        "type": "boolean"
-      },
-      "location": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "metadata": {},
-      "object": {
-        "description": "String representing the object's type. Objects of the same type share the same value.",
-        "enum": [
-          "terminal.reader"
-        ],
-        "type": "string"
-      },
-      "serial_number": {
-        "description": "Serial number of the reader.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "status": {
-        "description": "The networking status of the reader.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
+  "description": "A Reader represents a physical device for accepting payment details.\n\nRelated guide: [Connecting to a Reader](https://stripe.com/docs/terminal/payments/connect-reader).",
+  "properties": {
+    "device_sw_version": {
+      "description": "The current software version of the reader.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "device_type": {
+      "description": "Type of reader, one of `bbpos_chipper2x`, `bbpos_wisepos_e`, or `verifone_P400`.",
+      "enum": [
+        "bbpos_chipper2x",
+        "bbpos_wisepos_e",
+        "verifone_P400"
+      ],
+      "type": "string"
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "ip_address": {
+      "description": "The local IP address of the reader.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "label": {
+      "description": "Custom label given to the reader for easier identification.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "livemode": {
+      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+      "type": "boolean"
+    },
+    "location": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "description": "A Location represents a grouping of readers.\n\nRelated guide: [Fleet Management](https://stripe.com/docs/terminal/fleet/locations).",
+          "properties": {
+            "address": {
+              "description": "",
+              "properties": {
+                "city": {
+                  "description": "City, district, suburb, town, or village.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "country": {
+                  "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "line1": {
+                  "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "line2": {
+                  "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "postal_code": {
+                  "description": "ZIP or postal code.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "state": {
+                  "description": "State, county, province, or region.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                }
+              },
+              "title": "Address",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "display_name": {
+              "description": "The display name of the location.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "id": {
+              "description": "Unique identifier for the object.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "livemode": {
+              "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+              "type": "boolean"
+            },
+            "metadata": {
+              "additionalProperties": {
+                "maxLength": 500,
+                "type": "string"
+              },
+              "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+              "type": "object"
+            },
+            "object": {
+              "description": "String representing the object's type. Objects of the same type share the same value.",
+              "enum": [
+                "terminal.location"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "address",
+            "display_name",
+            "id",
+            "livemode",
+            "metadata",
+            "object"
+          ],
+          "title": "TerminalLocationLocation",
+          "type": "object",
+          "x-expandableFields": [
+            "address"
+          ],
+          "x-resourceId": "terminal.location"
+        }
+      ],
+      "description": "The location identifier of the reader.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "description": "A Location represents a grouping of readers.\n\nRelated guide: [Fleet Management](https://stripe.com/docs/terminal/fleet/locations).",
+            "properties": {
+              "address": {
+                "description": "",
+                "properties": {
+                  "city": {
+                    "description": "City, district, suburb, town, or village.",
+                    "maxLength": 5000,
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "country": {
+                    "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                    "maxLength": 5000,
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "line1": {
+                    "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                    "maxLength": 5000,
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "line2": {
+                    "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                    "maxLength": 5000,
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "postal_code": {
+                    "description": "ZIP or postal code.",
+                    "maxLength": 5000,
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "state": {
+                    "description": "State, county, province, or region.",
+                    "maxLength": 5000,
+                    "nullable": true,
+                    "type": "string"
+                  }
+                },
+                "title": "Address",
+                "type": "object",
+                "x-expandableFields": []
+              },
+              "display_name": {
+                "description": "The display name of the location.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique identifier for the object.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "livemode": {
+                "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                "type": "boolean"
+              },
+              "metadata": {
+                "additionalProperties": {
+                  "maxLength": 500,
+                  "type": "string"
+                },
+                "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+                "type": "object"
+              },
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "terminal.location"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "address",
+              "display_name",
+              "id",
+              "livemode",
+              "metadata",
+              "object"
+            ],
+            "title": "TerminalLocationLocation",
+            "type": "object",
+            "x-expandableFields": [
+              "address"
+            ],
+            "x-resourceId": "terminal.location"
+          }
+        ]
       }
     },
-    "required": [
-      "device_type",
-      "id",
-      "label",
-      "livemode",
-      "metadata",
-      "object",
-      "serial_number"
-    ],
-    "title": "TerminalReaderReader",
-    "type": "object",
-    "x-expandableFields": [
-      "location"
-    ],
-    "x-resourceId": "terminal.reader",
-    "default": {
-      "device_sw_version": "string",
-      "device_type": "bbpos_chipper2x",
-      "id": "string",
-      "ip_address": "string",
-      "label": "string",
-      "livemode": true,
-      "location": "string",
-      "metadata": {},
-      "object": "terminal.reader",
-      "serial_number": "string",
-      "status": "string"
+    "metadata": {
+      "additionalProperties": {
+        "maxLength": 500,
+        "type": "string"
+      },
+      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+      "type": "object"
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "terminal.reader"
+      ],
+      "type": "string"
+    },
+    "serial_number": {
+      "description": "Serial number of the reader.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "status": {
+      "description": "The networking status of the reader.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "device_type",
+    "id",
+    "label",
+    "livemode",
+    "metadata",
+    "object",
+    "serial_number"
+  ],
+  "title": "TerminalReaderReader",
+  "type": "object",
+  "x-expandableFields": [
+    "location"
+  ],
+  "x-resourceId": "terminal.reader"
 }

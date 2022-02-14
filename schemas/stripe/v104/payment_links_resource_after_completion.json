@@ -1,64 +1,52 @@
 {
-  "name": "payment_links_resource_after_completion",
-  "schema": {
-    "description": "",
-    "properties": {
-      "hosted_confirmation": {
-        "description": "",
-        "properties": {
-          "custom_message": {
-            "description": "The custom message that is displayed to the customer after the purchase is complete.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "PaymentLinksResourceCompletionBehaviorConfirmationPage",
-        "type": "object",
-        "x-expandableFields": []
+  "description": "",
+  "properties": {
+    "hosted_confirmation": {
+      "description": "",
+      "properties": {
+        "custom_message": {
+          "description": "The custom message that is displayed to the customer after the purchase is complete.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
       },
-      "redirect": {
-        "description": "",
-        "properties": {
-          "url": {
-            "description": "The `url` the customer will be redirected to after the purchase is complete.",
-            "maxLength": 5000,
-            "type": "string"
-          }
-        },
-        "required": [
-          "url"
-        ],
-        "title": "PaymentLinksResourceCompletionBehaviorRedirect",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "type": {
-        "description": "The specified behavior after the purchase is complete.",
-        "enum": [
-          "hosted_confirmation",
-          "redirect"
-        ],
-        "type": "string"
-      }
+      "title": "PaymentLinksResourceCompletionBehaviorConfirmationPage",
+      "type": "object",
+      "x-expandableFields": []
     },
-    "required": [
-      "type"
-    ],
-    "title": "PaymentLinksResourceAfterCompletion",
-    "type": "object",
-    "x-expandableFields": [
-      "hosted_confirmation",
-      "redirect"
-    ],
-    "default": {
-      "hosted_confirmation": {
-        "custom_message": "string"
+    "redirect": {
+      "description": "",
+      "properties": {
+        "url": {
+          "description": "The `url` the customer will be redirected to after the purchase is complete.",
+          "maxLength": 5000,
+          "type": "string"
+        }
       },
-      "redirect": {
-        "url": "string"
-      },
-      "type": "hosted_confirmation"
+      "required": [
+        "url"
+      ],
+      "title": "PaymentLinksResourceCompletionBehaviorRedirect",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "type": {
+      "description": "The specified behavior after the purchase is complete.",
+      "enum": [
+        "hosted_confirmation",
+        "redirect"
+      ],
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "type"
+  ],
+  "title": "PaymentLinksResourceAfterCompletion",
+  "type": "object",
+  "x-expandableFields": [
+    "hosted_confirmation",
+    "redirect"
+  ]
 }

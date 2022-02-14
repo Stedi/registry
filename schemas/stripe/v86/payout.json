@@ -1,162 +1,381 @@
 {
-  "name": "payout",
-  "schema": {
-    "description": "A `Payout` object is created when you receive funds from Stripe, or when you\ninitiate a payout to either a bank account or debit card of a [connected\nStripe account](/docs/connect/bank-debit-card-payouts). You can retrieve individual payouts,\nas well as list all payouts. Payouts are made on [varying\nschedules](/docs/connect/manage-payout-schedule), depending on your country and\nindustry.\n\nRelated guide: [Receiving Payouts](https://stripe.com/docs/payouts).",
-    "properties": {
-      "amount": {
-        "description": "Amount (in %s) to be transferred to your bank account or debit card.",
-        "type": "integer"
-      },
-      "arrival_date": {
-        "description": "Date the payout is expected to arrive in the bank. This factors in delays like weekends or bank holidays.",
-        "format": "unix-time",
-        "type": "integer"
-      },
-      "automatic": {
-        "description": "Returns `true` if the payout was created by an [automated payout schedule](https://stripe.com/docs/payouts#payout-schedule), and `false` if it was [requested manually](https://stripe.com/docs/payouts#manual-payouts).",
-        "type": "boolean"
-      },
-      "balance_transaction": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "created": {
-        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-        "format": "unix-time",
-        "type": "integer"
-      },
-      "currency": {
-        "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-        "type": "string"
-      },
-      "description": {
-        "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "destination": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "failure_balance_transaction": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "failure_code": {
-        "description": "Error code explaining reason for payout failure if available. See [Types of payout failures](https://stripe.com/docs/api#payout_failures) for a list of failure codes.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "failure_message": {
-        "description": "Message to user further explaining reason for payout failure if available.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "id": {
-        "description": "Unique identifier for the object.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "livemode": {
-        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-        "type": "boolean"
-      },
-      "metadata": {},
-      "method": {
-        "description": "The method used to send this payout, which can be `standard` or `instant`. `instant` is only supported for payouts to debit cards. (See [Instant payouts for marketplaces](https://stripe.com/blog/instant-payouts-for-marketplaces) for more information.)",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "object": {
-        "description": "String representing the object's type. Objects of the same type share the same value.",
-        "enum": [
-          "payout"
-        ],
-        "type": "string"
-      },
-      "original_payout": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "reversed_by": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "source_type": {
-        "description": "The source balance this payout came from. One of `card`, `fpx`, or `bank_account`.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "statement_descriptor": {
-        "description": "Extra information about a payout to be displayed on the user's bank statement.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "status": {
-        "description": "Current status of the payout: `paid`, `pending`, `in_transit`, `canceled` or `failed`. A payout is `pending` until it is submitted to the bank, when it becomes `in_transit`. The status then changes to `paid` if the transaction goes through, or to `failed` or `canceled` (within 5 business days). Some failed payouts may initially show as `paid` but then change to `failed`.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "type": {
-        "description": "Can be `bank_account` or `card`.",
-        "enum": [
-          "bank_account",
-          "card"
-        ],
-        "type": "string"
+  "description": "A `Payout` object is created when you receive funds from Stripe, or when you\ninitiate a payout to either a bank account or debit card of a [connected\nStripe account](/docs/connect/bank-debit-card-payouts). You can retrieve individual payouts,\nas well as list all payouts. Payouts are made on [varying\nschedules](/docs/connect/manage-payout-schedule), depending on your country and\nindustry.\n\nRelated guide: [Receiving Payouts](https://stripe.com/docs/payouts).",
+  "properties": {
+    "amount": {
+      "description": "Amount (in %s) to be transferred to your bank account or debit card.",
+      "type": "integer"
+    },
+    "arrival_date": {
+      "description": "Date the payout is expected to arrive in the bank. This factors in delays like weekends or bank holidays.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "automatic": {
+      "description": "Returns `true` if the payout was created by an [automated payout schedule](https://stripe.com/docs/payouts#payout-schedule), and `false` if it was [requested manually](https://stripe.com/docs/payouts#manual-payouts).",
+      "type": "boolean"
+    },
+    "balance_transaction": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/balance_transaction"
+        }
+      ],
+      "description": "ID of the balance transaction that describes the impact of this payout on your account balance.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/balance_transaction"
+          }
+        ]
       }
     },
-    "required": [
-      "amount",
-      "arrival_date",
-      "automatic",
-      "created",
-      "currency",
-      "id",
-      "livemode",
-      "method",
-      "object",
-      "source_type",
-      "status",
-      "type"
-    ],
-    "title": "Payout",
-    "type": "object",
-    "x-expandableFields": [
-      "balance_transaction",
-      "destination",
-      "failure_balance_transaction",
-      "original_payout",
-      "reversed_by"
-    ],
-    "x-resourceId": "payout",
-    "default": {
-      "amount": 0,
-      "arrival_date": 0,
-      "automatic": true,
-      "balance_transaction": "string",
-      "created": 0,
-      "currency": "string",
-      "description": "string",
-      "destination": "string",
-      "failure_balance_transaction": "string",
-      "failure_code": "string",
-      "failure_message": "string",
-      "id": "string",
-      "livemode": true,
-      "metadata": {},
-      "method": "string",
-      "object": "payout",
-      "original_payout": "string",
-      "reversed_by": "string",
-      "source_type": "string",
-      "statement_descriptor": "string",
-      "status": "string",
-      "type": "bank_account"
+    "created": {
+      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "currency": {
+      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+      "type": "string"
+    },
+    "description": {
+      "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "destination": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/bank_account"
+        },
+        {
+          "$ref": "#/components/schemas/card"
+        },
+        {
+          "description": "",
+          "properties": {
+            "currency": {
+              "description": "Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank account.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "deleted": {
+              "description": "Always true for a deleted object",
+              "enum": [
+                true
+              ],
+              "type": "boolean"
+            },
+            "id": {
+              "description": "Unique identifier for the object.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "object": {
+              "description": "String representing the object's type. Objects of the same type share the same value.",
+              "enum": [
+                "bank_account"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "deleted",
+            "id",
+            "object"
+          ],
+          "title": "DeletedBankAccount",
+          "type": "object",
+          "x-expandableFields": []
+        },
+        {
+          "description": "",
+          "properties": {
+            "currency": {
+              "description": "Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank account.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "deleted": {
+              "description": "Always true for a deleted object",
+              "enum": [
+                true
+              ],
+              "type": "boolean"
+            },
+            "id": {
+              "description": "Unique identifier for the object.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "object": {
+              "description": "String representing the object's type. Objects of the same type share the same value.",
+              "enum": [
+                "card"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "deleted",
+            "id",
+            "object"
+          ],
+          "title": "DeletedCard",
+          "type": "object",
+          "x-expandableFields": []
+        }
+      ],
+      "description": "ID of the bank account or card the payout was sent to.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/bank_account"
+          },
+          {
+            "$ref": "#/components/schemas/card"
+          },
+          {
+            "description": "",
+            "properties": {
+              "currency": {
+                "description": "Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank account.",
+                "maxLength": 5000,
+                "nullable": true,
+                "type": "string"
+              },
+              "deleted": {
+                "description": "Always true for a deleted object",
+                "enum": [
+                  true
+                ],
+                "type": "boolean"
+              },
+              "id": {
+                "description": "Unique identifier for the object.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "bank_account"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "deleted",
+              "id",
+              "object"
+            ],
+            "title": "DeletedBankAccount",
+            "type": "object",
+            "x-expandableFields": []
+          },
+          {
+            "description": "",
+            "properties": {
+              "currency": {
+                "description": "Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank account.",
+                "maxLength": 5000,
+                "nullable": true,
+                "type": "string"
+              },
+              "deleted": {
+                "description": "Always true for a deleted object",
+                "enum": [
+                  true
+                ],
+                "type": "boolean"
+              },
+              "id": {
+                "description": "Unique identifier for the object.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "card"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "deleted",
+              "id",
+              "object"
+            ],
+            "title": "DeletedCard",
+            "type": "object",
+            "x-expandableFields": []
+          }
+        ]
+      }
+    },
+    "failure_balance_transaction": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/balance_transaction"
+        }
+      ],
+      "description": "If the payout failed or was canceled, this will be the ID of the balance transaction that reversed the initial balance transaction, and puts the funds from the failed payout back in your balance.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/balance_transaction"
+          }
+        ]
+      }
+    },
+    "failure_code": {
+      "description": "Error code explaining reason for payout failure if available. See [Types of payout failures](https://stripe.com/docs/api#payout_failures) for a list of failure codes.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "failure_message": {
+      "description": "Message to user further explaining reason for payout failure if available.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "livemode": {
+      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+      "type": "boolean"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "maxLength": 500,
+        "type": "string"
+      },
+      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+      "nullable": true,
+      "type": "object"
+    },
+    "method": {
+      "description": "The method used to send this payout, which can be `standard` or `instant`. `instant` is only supported for payouts to debit cards. (See [Instant payouts for marketplaces](https://stripe.com/blog/instant-payouts-for-marketplaces) for more information.)",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "payout"
+      ],
+      "type": "string"
+    },
+    "original_payout": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/payout"
+        }
+      ],
+      "description": "If the payout reverses another, this is the ID of the original payout.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/payout"
+          }
+        ]
+      }
+    },
+    "reversed_by": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/payout"
+        }
+      ],
+      "description": "If the payout was reversed, this is the ID of the payout that reverses this payout.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/payout"
+          }
+        ]
+      }
+    },
+    "source_type": {
+      "description": "The source balance this payout came from. One of `card`, `fpx`, or `bank_account`.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "statement_descriptor": {
+      "description": "Extra information about a payout to be displayed on the user's bank statement.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "status": {
+      "description": "Current status of the payout: `paid`, `pending`, `in_transit`, `canceled` or `failed`. A payout is `pending` until it is submitted to the bank, when it becomes `in_transit`. The status then changes to `paid` if the transaction goes through, or to `failed` or `canceled` (within 5 business days). Some failed payouts may initially show as `paid` but then change to `failed`.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "type": {
+      "description": "Can be `bank_account` or `card`.",
+      "enum": [
+        "bank_account",
+        "card"
+      ],
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "amount",
+    "arrival_date",
+    "automatic",
+    "created",
+    "currency",
+    "id",
+    "livemode",
+    "method",
+    "object",
+    "source_type",
+    "status",
+    "type"
+  ],
+  "title": "Payout",
+  "type": "object",
+  "x-expandableFields": [
+    "balance_transaction",
+    "destination",
+    "failure_balance_transaction",
+    "original_payout",
+    "reversed_by"
+  ],
+  "x-resourceId": "payout"
 }

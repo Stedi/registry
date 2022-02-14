@@ -1,52 +1,41 @@
 {
-  "name": "source_order_item",
-  "schema": {
-    "description": "",
-    "properties": {
-      "amount": {
-        "description": "The amount (price) for this order item.",
-        "nullable": true,
-        "type": "integer"
-      },
-      "currency": {
-        "description": "This currency of this order item. Required when `amount` is present.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "description": {
-        "description": "Human-readable description for this order item.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "parent": {
-        "description": "The ID of the associated object for this line item. Expandable if not null (e.g., expandable to a SKU).",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "quantity": {
-        "description": "The quantity of this order item. When type is `sku`, this is the number of instances of the SKU to be ordered.",
-        "type": "integer"
-      },
-      "type": {
-        "description": "The type of this order item. Must be `sku`, `tax`, or `shipping`.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      }
+  "description": "",
+  "properties": {
+    "amount": {
+      "description": "The amount (price) for this order item.",
+      "nullable": true,
+      "type": "integer"
     },
-    "title": "SourceOrderItem",
-    "type": "object",
-    "x-expandableFields": [],
-    "default": {
-      "amount": 0,
-      "currency": "string",
-      "description": "string",
-      "parent": "string",
-      "quantity": 0,
+    "currency": {
+      "description": "This currency of this order item. Required when `amount` is present.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "description": {
+      "description": "Human-readable description for this order item.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "parent": {
+      "description": "The ID of the associated object for this line item. Expandable if not null (e.g., expandable to a SKU).",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "quantity": {
+      "description": "The quantity of this order item. When type is `sku`, this is the number of instances of the SKU to be ordered.",
+      "type": "integer"
+    },
+    "type": {
+      "description": "The type of this order item. Must be `sku`, `tax`, or `shipping`.",
+      "maxLength": 5000,
+      "nullable": true,
       "type": "string"
     }
-  }
+  },
+  "title": "SourceOrderItem",
+  "type": "object",
+  "x-expandableFields": []
 }

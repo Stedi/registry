@@ -1,18 +1,26 @@
 {
-  "name": "account_capability_future_requirements",
-  "schema": {
-    "description": "",
-    "properties": {
-      "alternatives": {
+  "description": "",
+  "properties": {
+    "alternatives": {
+      "description": "Fields that are due and can be satisfied by providing the corresponding alternative fields instead.",
+      "items": {
         "description": "",
         "properties": {
           "alternative_fields_due": {
-            "maxLength": 5000,
-            "type": "string"
+            "description": "Fields that can be provided to satisfy all fields in `original_fields_due`.",
+            "items": {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "type": "array"
           },
           "original_fields_due": {
-            "maxLength": 5000,
-            "type": "string"
+            "description": "Fields that are due and can be satisfied by providing all fields in `alternative_fields_due`.",
+            "items": {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "type": "array"
           }
         },
         "required": [
@@ -23,23 +31,31 @@
         "type": "object",
         "x-expandableFields": []
       },
-      "current_deadline": {
-        "description": "Date on which `future_requirements` merges with the main `requirements` hash and `future_requirements` becomes empty. After the transition, `currently_due` requirements may immediately become `past_due`, but the account may also be given a grace period depending on the capability's enablement state prior to transitioning.",
-        "format": "unix-time",
-        "nullable": true,
-        "type": "integer"
-      },
-      "currently_due": {
+      "type": "array"
+    },
+    "current_deadline": {
+      "description": "Date on which `future_requirements` merges with the main `requirements` hash and `future_requirements` becomes empty. After the transition, `currently_due` requirements may immediately become `past_due`, but the account may also be given a grace period depending on the capability's enablement state prior to transitioning.",
+      "format": "unix-time",
+      "nullable": true,
+      "type": "integer"
+    },
+    "currently_due": {
+      "description": "Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.",
+      "items": {
         "maxLength": 5000,
         "type": "string"
       },
-      "disabled_reason": {
-        "description": "This is typed as a string for consistency with `requirements.disabled_reason`, but it safe to assume `future_requirements.disabled_reason` is empty because fields in `future_requirements` will never disable the account.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "errors": {
+      "type": "array"
+    },
+    "disabled_reason": {
+      "description": "This is typed as a string for consistency with `requirements.disabled_reason`, but it safe to assume `future_requirements.disabled_reason` is empty because fields in `future_requirements` will never disable the account.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "errors": {
+      "description": "Fields that are `currently_due` and need to be collected again because validation or verification failed.",
+      "items": {
         "description": "",
         "properties": {
           "code": {
@@ -114,48 +130,44 @@
         "type": "object",
         "x-expandableFields": []
       },
-      "eventually_due": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "past_due": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "pending_verification": {
-        "maxLength": 5000,
-        "type": "string"
-      }
+      "type": "array"
     },
-    "required": [
-      "currently_due",
-      "errors",
-      "eventually_due",
-      "past_due",
-      "pending_verification"
-    ],
-    "title": "AccountCapabilityFutureRequirements",
-    "type": "object",
-    "x-expandableFields": [
-      "alternatives",
-      "errors"
-    ],
-    "default": {
-      "alternatives": {
-        "alternative_fields_due": "string",
-        "original_fields_due": "string"
+    "eventually_due": {
+      "description": "Fields that need to be collected assuming all volume thresholds are reached. As they become required, they appear in `currently_due` as well.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
       },
-      "current_deadline": 0,
-      "currently_due": "string",
-      "disabled_reason": "string",
-      "errors": {
-        "code": "invalid_address_city_state_postal_code",
-        "reason": "string",
-        "requirement": "string"
+      "type": "array"
+    },
+    "past_due": {
+      "description": "Fields that weren't collected by `requirements.current_deadline`. These fields need to be collected to enable the capability on the account. New fields will never appear here; `future_requirements.past_due` will always be a subset of `requirements.past_due`.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
       },
-      "eventually_due": "string",
-      "past_due": "string",
-      "pending_verification": "string"
+      "type": "array"
+    },
+    "pending_verification": {
+      "description": "Fields that may become required depending on the results of verification or review. Will be an empty array unless an asynchronous verification is pending. If verification fails, these fields move to `eventually_due` or `currently_due`.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": "array"
     }
-  }
+  },
+  "required": [
+    "currently_due",
+    "errors",
+    "eventually_due",
+    "past_due",
+    "pending_verification"
+  ],
+  "title": "AccountCapabilityFutureRequirements",
+  "type": "object",
+  "x-expandableFields": [
+    "alternatives",
+    "errors"
+  ]
 }

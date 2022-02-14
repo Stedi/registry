@@ -1,27 +1,28 @@
 {
-  "name": "country_spec_verification_field_details",
-  "schema": {
-    "description": "",
-    "properties": {
-      "additional": {
+  "description": "",
+  "properties": {
+    "additional": {
+      "description": "Additional fields which are only required for some users.",
+      "items": {
         "maxLength": 5000,
         "type": "string"
       },
-      "minimum": {
+      "type": "array"
+    },
+    "minimum": {
+      "description": "Fields which every account must eventually provide.",
+      "items": {
         "maxLength": 5000,
         "type": "string"
-      }
-    },
-    "required": [
-      "additional",
-      "minimum"
-    ],
-    "title": "CountrySpecVerificationFieldDetails",
-    "type": "object",
-    "x-expandableFields": [],
-    "default": {
-      "additional": "string",
-      "minimum": "string"
+      },
+      "type": "array"
     }
-  }
+  },
+  "required": [
+    "additional",
+    "minimum"
+  ],
+  "title": "CountrySpecVerificationFieldDetails",
+  "type": "object",
+  "x-expandableFields": []
 }

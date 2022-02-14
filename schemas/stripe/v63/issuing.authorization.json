@@ -1,2503 +1,238 @@
 {
-  "name": "issuing.authorization",
-  "schema": {
-    "description": "When an [issued card](https://stripe.com/docs/issuing) is used to make a purchase, an Issuing `Authorization`\nobject is created. [Authorizations](https://stripe.com/docs/issuing/purchases/authorizations) must be approved for the\npurchase to be completed successfully.\n\nRelated guide: [Issued Card Authorizations](https://stripe.com/docs/issuing/purchases/authorizations).",
-    "properties": {
-      "amount": {
-        "description": "The total amount that was authorized or rejected. This amount is in the card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).",
-        "type": "integer"
+  "description": "When an [issued card](https://stripe.com/docs/issuing) is used to make a purchase, an Issuing `Authorization`\nobject is created. [Authorizations](https://stripe.com/docs/issuing/purchases/authorizations) must be approved for the\npurchase to be completed successfully.\n\nRelated guide: [Issued Card Authorizations](https://stripe.com/docs/issuing/purchases/authorizations).",
+  "properties": {
+    "amount": {
+      "description": "The total amount that was authorized or rejected. This amount is in the card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).",
+      "type": "integer"
+    },
+    "amount_details": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "atm_fee": {
+              "description": "The fee charged by the ATM for the cash withdrawal.",
+              "nullable": true,
+              "type": "integer"
+            }
+          },
+          "title": "IssuingAuthorizationAmountDetails",
+          "type": "object",
+          "x-expandableFields": []
+        }
+      ],
+      "description": "Detailed breakdown of amount components. These amounts are denominated in `currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).",
+      "nullable": true
+    },
+    "approved": {
+      "description": "Whether the authorization has been approved.",
+      "type": "boolean"
+    },
+    "authorization_method": {
+      "description": "How the card details were provided.",
+      "enum": [
+        "chip",
+        "contactless",
+        "keyed_in",
+        "online",
+        "swipe"
+      ],
+      "type": "string"
+    },
+    "balance_transactions": {
+      "description": "List of balance transactions associated with this authorization.",
+      "items": {
+        "$ref": "#/components/schemas/balance_transaction"
       },
-      "amount_details": {
-        "description": "",
-        "properties": {
-          "atm_fee": {
-            "description": "The fee charged by the ATM for the cash withdrawal.",
-            "nullable": true,
-            "type": "integer"
-          }
-        },
-        "title": "IssuingAuthorizationAmountDetails",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "approved": {
-        "description": "Whether the authorization has been approved.",
-        "type": "boolean"
-      },
-      "authorization_method": {
-        "description": "How the card details were provided.",
-        "enum": [
-          "chip",
-          "contactless",
-          "keyed_in",
-          "online",
-          "swipe"
-        ],
-        "type": "string"
-      },
-      "balance_transactions": {
-        "amount": 0,
-        "available_on": 0,
-        "created": 0,
-        "currency": "string",
-        "description": "string",
-        "exchange_rate": 0,
-        "fee": 0,
-        "fee_details": {
-          "amount": 0,
-          "application": "string",
-          "currency": "string",
-          "description": "string",
+      "type": "array"
+    },
+    "card": {
+      "$ref": "#/components/schemas/issuing.card"
+    },
+    "cardholder": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
           "type": "string"
         },
-        "id": "string",
-        "net": 0,
-        "object": "balance_transaction",
-        "reporting_category": "string",
-        "source": "string",
-        "status": "string",
-        "type": "adjustment"
-      },
-      "card": {
-        "description": "You can [create physical or virtual cards](https://stripe.com/docs/issuing/cards) that are issued to cardholders.",
-        "properties": {
-          "brand": {
-            "description": "The brand of the card.",
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "cancellation_reason": {
-            "description": "The reason why the card was canceled.",
-            "enum": [
-              "lost",
-              "stolen"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "cardholder": {
-            "description": "An Issuing `Cardholder` object represents an individual or business entity who is [issued](https://stripe.com/docs/issuing) cards.\n\nRelated guide: [How to create a Cardholder](https://stripe.com/docs/issuing/cards#create-cardholder)",
-            "properties": {
-              "billing": {
-                "description": "",
-                "properties": {
-                  "address": {
-                    "city": "string",
-                    "country": "string",
-                    "line1": "string",
-                    "line2": "string",
-                    "postal_code": "string",
-                    "state": "string"
-                  }
-                },
-                "required": [
-                  "address"
-                ],
-                "title": "IssuingCardholderAddress",
-                "type": "object",
-                "x-expandableFields": [
-                  "address"
-                ]
-              },
-              "company": {
-                "description": "",
-                "properties": {
-                  "tax_id_provided": {
-                    "description": "Whether the company's business ID number was provided.",
-                    "type": "boolean"
-                  }
-                },
-                "required": [
-                  "tax_id_provided"
-                ],
-                "title": "IssuingCardholderCompany",
-                "type": "object",
-                "x-expandableFields": []
-              },
-              "created": {
-                "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                "format": "unix-time",
-                "type": "integer"
-              },
-              "email": {
-                "description": "The cardholder's email address.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "id": {
-                "description": "Unique identifier for the object.",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "individual": {
-                "description": "",
-                "properties": {
-                  "dob": {
-                    "description": "",
-                    "properties": {
-                      "day": {
-                        "description": "The day of birth, between 1 and 31.",
-                        "nullable": true,
-                        "type": "integer"
-                      },
-                      "month": {
-                        "description": "The month of birth, between 1 and 12.",
-                        "nullable": true,
-                        "type": "integer"
-                      },
-                      "year": {
-                        "description": "The four-digit year of birth.",
-                        "nullable": true,
-                        "type": "integer"
-                      }
-                    },
-                    "title": "IssuingCardholderIndividualDOB",
-                    "type": "object",
-                    "x-expandableFields": []
-                  },
-                  "first_name": {
-                    "description": "The first name of this cardholder.",
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  "last_name": {
-                    "description": "The last name of this cardholder.",
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  "verification": {
-                    "description": "",
-                    "properties": {
-                      "document": {
-                        "description": "",
-                        "properties": {
-                          "back": {
-                            "maxLength": 5000,
-                            "type": "string"
-                          },
-                          "front": {
-                            "maxLength": 5000,
-                            "type": "string"
-                          }
-                        },
-                        "title": "IssuingCardholderIdDocument",
-                        "type": "object",
-                        "x-expandableFields": [
-                          "back",
-                          "front"
-                        ]
-                      }
-                    },
-                    "title": "IssuingCardholderVerification",
-                    "type": "object",
-                    "x-expandableFields": [
-                      "document"
-                    ]
-                  }
-                },
-                "required": [
-                  "first_name",
-                  "last_name"
-                ],
-                "title": "IssuingCardholderIndividual",
-                "type": "object",
-                "x-expandableFields": [
-                  "dob",
-                  "verification"
-                ]
-              },
-              "livemode": {
-                "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                "type": "boolean"
-              },
-              "metadata": {},
-              "name": {
-                "description": "The cardholder's name. This will be printed on cards issued to them.",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "object": {
-                "description": "String representing the object's type. Objects of the same type share the same value.",
-                "enum": [
-                  "issuing.cardholder"
-                ],
-                "type": "string"
-              },
-              "phone_number": {
-                "description": "The cardholder's phone number.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "requirements": {
-                "description": "",
-                "properties": {
-                  "disabled_reason": {
-                    "description": "If `disabled_reason` is present, all cards will decline authorizations with `cardholder_verification_required` reason.",
-                    "enum": [
-                      "listed",
-                      "rejected.listed",
-                      "under_review"
-                    ],
-                    "nullable": true,
-                    "type": "string"
-                  },
-                  "past_due": {
-                    "enum": [
-                      "company.tax_id",
-                      "individual.dob.day",
-                      "individual.dob.month",
-                      "individual.dob.year",
-                      "individual.first_name",
-                      "individual.last_name",
-                      "individual.verification.document"
-                    ],
-                    "type": "string",
-                    "x-stripeBypassValidation": true
-                  }
-                },
-                "title": "IssuingCardholderRequirements",
-                "type": "object",
-                "x-expandableFields": []
-              },
-              "spending_controls": {
-                "description": "",
-                "properties": {
-                  "allowed_categories": {
-                    "enum": [
-                      "ac_refrigeration_repair",
-                      "accounting_bookkeeping_services",
-                      "advertising_services",
-                      "agricultural_cooperative",
-                      "airlines_air_carriers",
-                      "airports_flying_fields",
-                      "ambulance_services",
-                      "amusement_parks_carnivals",
-                      "antique_reproductions",
-                      "antique_shops",
-                      "aquariums",
-                      "architectural_surveying_services",
-                      "art_dealers_and_galleries",
-                      "artists_supply_and_craft_shops",
-                      "auto_and_home_supply_stores",
-                      "auto_body_repair_shops",
-                      "auto_paint_shops",
-                      "auto_service_shops",
-                      "automated_cash_disburse",
-                      "automated_fuel_dispensers",
-                      "automobile_associations",
-                      "automotive_parts_and_accessories_stores",
-                      "automotive_tire_stores",
-                      "bail_and_bond_payments",
-                      "bakeries",
-                      "bands_orchestras",
-                      "barber_and_beauty_shops",
-                      "betting_casino_gambling",
-                      "bicycle_shops",
-                      "billiard_pool_establishments",
-                      "boat_dealers",
-                      "boat_rentals_and_leases",
-                      "book_stores",
-                      "books_periodicals_and_newspapers",
-                      "bowling_alleys",
-                      "bus_lines",
-                      "business_secretarial_schools",
-                      "buying_shopping_services",
-                      "cable_satellite_and_other_pay_television_and_radio",
-                      "camera_and_photographic_supply_stores",
-                      "candy_nut_and_confectionery_stores",
-                      "car_and_truck_dealers_new_used",
-                      "car_and_truck_dealers_used_only",
-                      "car_rental_agencies",
-                      "car_washes",
-                      "carpentry_services",
-                      "carpet_upholstery_cleaning",
-                      "caterers",
-                      "charitable_and_social_service_organizations_fundraising",
-                      "chemicals_and_allied_products",
-                      "child_care_services",
-                      "childrens_and_infants_wear_stores",
-                      "chiropodists_podiatrists",
-                      "chiropractors",
-                      "cigar_stores_and_stands",
-                      "civic_social_fraternal_associations",
-                      "cleaning_and_maintenance",
-                      "clothing_rental",
-                      "colleges_universities",
-                      "commercial_equipment",
-                      "commercial_footwear",
-                      "commercial_photography_art_and_graphics",
-                      "commuter_transport_and_ferries",
-                      "computer_network_services",
-                      "computer_programming",
-                      "computer_repair",
-                      "computer_software_stores",
-                      "computers_peripherals_and_software",
-                      "concrete_work_services",
-                      "construction_materials",
-                      "consulting_public_relations",
-                      "correspondence_schools",
-                      "cosmetic_stores",
-                      "counseling_services",
-                      "country_clubs",
-                      "courier_services",
-                      "court_costs",
-                      "credit_reporting_agencies",
-                      "cruise_lines",
-                      "dairy_products_stores",
-                      "dance_hall_studios_schools",
-                      "dating_escort_services",
-                      "dentists_orthodontists",
-                      "department_stores",
-                      "detective_agencies",
-                      "digital_goods_applications",
-                      "digital_goods_games",
-                      "digital_goods_large_volume",
-                      "digital_goods_media",
-                      "direct_marketing_catalog_merchant",
-                      "direct_marketing_combination_catalog_and_retail_merchant",
-                      "direct_marketing_inbound_telemarketing",
-                      "direct_marketing_insurance_services",
-                      "direct_marketing_other",
-                      "direct_marketing_outbound_telemarketing",
-                      "direct_marketing_subscription",
-                      "direct_marketing_travel",
-                      "discount_stores",
-                      "doctors",
-                      "door_to_door_sales",
-                      "drapery_window_covering_and_upholstery_stores",
-                      "drinking_places",
-                      "drug_stores_and_pharmacies",
-                      "drugs_drug_proprietaries_and_druggist_sundries",
-                      "dry_cleaners",
-                      "durable_goods",
-                      "duty_free_stores",
-                      "eating_places_restaurants",
-                      "educational_services",
-                      "electric_razor_stores",
-                      "electrical_parts_and_equipment",
-                      "electrical_services",
-                      "electronics_repair_shops",
-                      "electronics_stores",
-                      "elementary_secondary_schools",
-                      "employment_temp_agencies",
-                      "equipment_rental",
-                      "exterminating_services",
-                      "family_clothing_stores",
-                      "fast_food_restaurants",
-                      "financial_institutions",
-                      "fines_government_administrative_entities",
-                      "fireplace_fireplace_screens_and_accessories_stores",
-                      "floor_covering_stores",
-                      "florists",
-                      "florists_supplies_nursery_stock_and_flowers",
-                      "freezer_and_locker_meat_provisioners",
-                      "fuel_dealers_non_automotive",
-                      "funeral_services_crematories",
-                      "furniture_home_furnishings_and_equipment_stores_except_appliances",
-                      "furniture_repair_refinishing",
-                      "furriers_and_fur_shops",
-                      "general_services",
-                      "gift_card_novelty_and_souvenir_shops",
-                      "glass_paint_and_wallpaper_stores",
-                      "glassware_crystal_stores",
-                      "golf_courses_public",
-                      "government_services",
-                      "grocery_stores_supermarkets",
-                      "hardware_equipment_and_supplies",
-                      "hardware_stores",
-                      "health_and_beauty_spas",
-                      "hearing_aids_sales_and_supplies",
-                      "heating_plumbing_a_c",
-                      "hobby_toy_and_game_shops",
-                      "home_supply_warehouse_stores",
-                      "hospitals",
-                      "hotels_motels_and_resorts",
-                      "household_appliance_stores",
-                      "industrial_supplies",
-                      "information_retrieval_services",
-                      "insurance_default",
-                      "insurance_underwriting_premiums",
-                      "intra_company_purchases",
-                      "jewelry_stores_watches_clocks_and_silverware_stores",
-                      "landscaping_services",
-                      "laundries",
-                      "laundry_cleaning_services",
-                      "legal_services_attorneys",
-                      "luggage_and_leather_goods_stores",
-                      "lumber_building_materials_stores",
-                      "manual_cash_disburse",
-                      "marinas_service_and_supplies",
-                      "masonry_stonework_and_plaster",
-                      "massage_parlors",
-                      "medical_and_dental_labs",
-                      "medical_dental_ophthalmic_and_hospital_equipment_and_supplies",
-                      "medical_services",
-                      "membership_organizations",
-                      "mens_and_boys_clothing_and_accessories_stores",
-                      "mens_womens_clothing_stores",
-                      "metal_service_centers",
-                      "miscellaneous",
-                      "miscellaneous_apparel_and_accessory_shops",
-                      "miscellaneous_auto_dealers",
-                      "miscellaneous_business_services",
-                      "miscellaneous_food_stores",
-                      "miscellaneous_general_merchandise",
-                      "miscellaneous_general_services",
-                      "miscellaneous_home_furnishing_specialty_stores",
-                      "miscellaneous_publishing_and_printing",
-                      "miscellaneous_recreation_services",
-                      "miscellaneous_repair_shops",
-                      "miscellaneous_specialty_retail",
-                      "mobile_home_dealers",
-                      "motion_picture_theaters",
-                      "motor_freight_carriers_and_trucking",
-                      "motor_homes_dealers",
-                      "motor_vehicle_supplies_and_new_parts",
-                      "motorcycle_shops_and_dealers",
-                      "motorcycle_shops_dealers",
-                      "music_stores_musical_instruments_pianos_and_sheet_music",
-                      "news_dealers_and_newsstands",
-                      "non_fi_money_orders",
-                      "non_fi_stored_value_card_purchase_load",
-                      "nondurable_goods",
-                      "nurseries_lawn_and_garden_supply_stores",
-                      "nursing_personal_care",
-                      "office_and_commercial_furniture",
-                      "opticians_eyeglasses",
-                      "optometrists_ophthalmologist",
-                      "orthopedic_goods_prosthetic_devices",
-                      "osteopaths",
-                      "package_stores_beer_wine_and_liquor",
-                      "paints_varnishes_and_supplies",
-                      "parking_lots_garages",
-                      "passenger_railways",
-                      "pawn_shops",
-                      "pet_shops_pet_food_and_supplies",
-                      "petroleum_and_petroleum_products",
-                      "photo_developing",
-                      "photographic_photocopy_microfilm_equipment_and_supplies",
-                      "photographic_studios",
-                      "picture_video_production",
-                      "piece_goods_notions_and_other_dry_goods",
-                      "plumbing_heating_equipment_and_supplies",
-                      "political_organizations",
-                      "postal_services_government_only",
-                      "precious_stones_and_metals_watches_and_jewelry",
-                      "professional_services",
-                      "public_warehousing_and_storage",
-                      "quick_copy_repro_and_blueprint",
-                      "railroads",
-                      "real_estate_agents_and_managers_rentals",
-                      "record_stores",
-                      "recreational_vehicle_rentals",
-                      "religious_goods_stores",
-                      "religious_organizations",
-                      "roofing_siding_sheet_metal",
-                      "secretarial_support_services",
-                      "security_brokers_dealers",
-                      "service_stations",
-                      "sewing_needlework_fabric_and_piece_goods_stores",
-                      "shoe_repair_hat_cleaning",
-                      "shoe_stores",
-                      "small_appliance_repair",
-                      "snowmobile_dealers",
-                      "special_trade_services",
-                      "specialty_cleaning",
-                      "sporting_goods_stores",
-                      "sporting_recreation_camps",
-                      "sports_and_riding_apparel_stores",
-                      "sports_clubs_fields",
-                      "stamp_and_coin_stores",
-                      "stationary_office_supplies_printing_and_writing_paper",
-                      "stationery_stores_office_and_school_supply_stores",
-                      "swimming_pools_sales",
-                      "t_ui_travel_germany",
-                      "tailors_alterations",
-                      "tax_payments_government_agencies",
-                      "tax_preparation_services",
-                      "taxicabs_limousines",
-                      "telecommunication_equipment_and_telephone_sales",
-                      "telecommunication_services",
-                      "telegraph_services",
-                      "tent_and_awning_shops",
-                      "testing_laboratories",
-                      "theatrical_ticket_agencies",
-                      "timeshares",
-                      "tire_retreading_and_repair",
-                      "tolls_bridge_fees",
-                      "tourist_attractions_and_exhibits",
-                      "towing_services",
-                      "trailer_parks_campgrounds",
-                      "transportation_services",
-                      "travel_agencies_tour_operators",
-                      "truck_stop_iteration",
-                      "truck_utility_trailer_rentals",
-                      "typesetting_plate_making_and_related_services",
-                      "typewriter_stores",
-                      "u_s_federal_government_agencies_or_departments",
-                      "uniforms_commercial_clothing",
-                      "used_merchandise_and_secondhand_stores",
-                      "utilities",
-                      "variety_stores",
-                      "veterinary_services",
-                      "video_amusement_game_supplies",
-                      "video_game_arcades",
-                      "video_tape_rental_stores",
-                      "vocational_trade_schools",
-                      "watch_jewelry_repair",
-                      "welding_repair",
-                      "wholesale_clubs",
-                      "wig_and_toupee_stores",
-                      "wires_money_orders",
-                      "womens_accessory_and_specialty_shops",
-                      "womens_ready_to_wear_stores",
-                      "wrecking_and_salvage_yards"
-                    ],
-                    "type": "string"
-                  },
-                  "blocked_categories": {
-                    "enum": [
-                      "ac_refrigeration_repair",
-                      "accounting_bookkeeping_services",
-                      "advertising_services",
-                      "agricultural_cooperative",
-                      "airlines_air_carriers",
-                      "airports_flying_fields",
-                      "ambulance_services",
-                      "amusement_parks_carnivals",
-                      "antique_reproductions",
-                      "antique_shops",
-                      "aquariums",
-                      "architectural_surveying_services",
-                      "art_dealers_and_galleries",
-                      "artists_supply_and_craft_shops",
-                      "auto_and_home_supply_stores",
-                      "auto_body_repair_shops",
-                      "auto_paint_shops",
-                      "auto_service_shops",
-                      "automated_cash_disburse",
-                      "automated_fuel_dispensers",
-                      "automobile_associations",
-                      "automotive_parts_and_accessories_stores",
-                      "automotive_tire_stores",
-                      "bail_and_bond_payments",
-                      "bakeries",
-                      "bands_orchestras",
-                      "barber_and_beauty_shops",
-                      "betting_casino_gambling",
-                      "bicycle_shops",
-                      "billiard_pool_establishments",
-                      "boat_dealers",
-                      "boat_rentals_and_leases",
-                      "book_stores",
-                      "books_periodicals_and_newspapers",
-                      "bowling_alleys",
-                      "bus_lines",
-                      "business_secretarial_schools",
-                      "buying_shopping_services",
-                      "cable_satellite_and_other_pay_television_and_radio",
-                      "camera_and_photographic_supply_stores",
-                      "candy_nut_and_confectionery_stores",
-                      "car_and_truck_dealers_new_used",
-                      "car_and_truck_dealers_used_only",
-                      "car_rental_agencies",
-                      "car_washes",
-                      "carpentry_services",
-                      "carpet_upholstery_cleaning",
-                      "caterers",
-                      "charitable_and_social_service_organizations_fundraising",
-                      "chemicals_and_allied_products",
-                      "child_care_services",
-                      "childrens_and_infants_wear_stores",
-                      "chiropodists_podiatrists",
-                      "chiropractors",
-                      "cigar_stores_and_stands",
-                      "civic_social_fraternal_associations",
-                      "cleaning_and_maintenance",
-                      "clothing_rental",
-                      "colleges_universities",
-                      "commercial_equipment",
-                      "commercial_footwear",
-                      "commercial_photography_art_and_graphics",
-                      "commuter_transport_and_ferries",
-                      "computer_network_services",
-                      "computer_programming",
-                      "computer_repair",
-                      "computer_software_stores",
-                      "computers_peripherals_and_software",
-                      "concrete_work_services",
-                      "construction_materials",
-                      "consulting_public_relations",
-                      "correspondence_schools",
-                      "cosmetic_stores",
-                      "counseling_services",
-                      "country_clubs",
-                      "courier_services",
-                      "court_costs",
-                      "credit_reporting_agencies",
-                      "cruise_lines",
-                      "dairy_products_stores",
-                      "dance_hall_studios_schools",
-                      "dating_escort_services",
-                      "dentists_orthodontists",
-                      "department_stores",
-                      "detective_agencies",
-                      "digital_goods_applications",
-                      "digital_goods_games",
-                      "digital_goods_large_volume",
-                      "digital_goods_media",
-                      "direct_marketing_catalog_merchant",
-                      "direct_marketing_combination_catalog_and_retail_merchant",
-                      "direct_marketing_inbound_telemarketing",
-                      "direct_marketing_insurance_services",
-                      "direct_marketing_other",
-                      "direct_marketing_outbound_telemarketing",
-                      "direct_marketing_subscription",
-                      "direct_marketing_travel",
-                      "discount_stores",
-                      "doctors",
-                      "door_to_door_sales",
-                      "drapery_window_covering_and_upholstery_stores",
-                      "drinking_places",
-                      "drug_stores_and_pharmacies",
-                      "drugs_drug_proprietaries_and_druggist_sundries",
-                      "dry_cleaners",
-                      "durable_goods",
-                      "duty_free_stores",
-                      "eating_places_restaurants",
-                      "educational_services",
-                      "electric_razor_stores",
-                      "electrical_parts_and_equipment",
-                      "electrical_services",
-                      "electronics_repair_shops",
-                      "electronics_stores",
-                      "elementary_secondary_schools",
-                      "employment_temp_agencies",
-                      "equipment_rental",
-                      "exterminating_services",
-                      "family_clothing_stores",
-                      "fast_food_restaurants",
-                      "financial_institutions",
-                      "fines_government_administrative_entities",
-                      "fireplace_fireplace_screens_and_accessories_stores",
-                      "floor_covering_stores",
-                      "florists",
-                      "florists_supplies_nursery_stock_and_flowers",
-                      "freezer_and_locker_meat_provisioners",
-                      "fuel_dealers_non_automotive",
-                      "funeral_services_crematories",
-                      "furniture_home_furnishings_and_equipment_stores_except_appliances",
-                      "furniture_repair_refinishing",
-                      "furriers_and_fur_shops",
-                      "general_services",
-                      "gift_card_novelty_and_souvenir_shops",
-                      "glass_paint_and_wallpaper_stores",
-                      "glassware_crystal_stores",
-                      "golf_courses_public",
-                      "government_services",
-                      "grocery_stores_supermarkets",
-                      "hardware_equipment_and_supplies",
-                      "hardware_stores",
-                      "health_and_beauty_spas",
-                      "hearing_aids_sales_and_supplies",
-                      "heating_plumbing_a_c",
-                      "hobby_toy_and_game_shops",
-                      "home_supply_warehouse_stores",
-                      "hospitals",
-                      "hotels_motels_and_resorts",
-                      "household_appliance_stores",
-                      "industrial_supplies",
-                      "information_retrieval_services",
-                      "insurance_default",
-                      "insurance_underwriting_premiums",
-                      "intra_company_purchases",
-                      "jewelry_stores_watches_clocks_and_silverware_stores",
-                      "landscaping_services",
-                      "laundries",
-                      "laundry_cleaning_services",
-                      "legal_services_attorneys",
-                      "luggage_and_leather_goods_stores",
-                      "lumber_building_materials_stores",
-                      "manual_cash_disburse",
-                      "marinas_service_and_supplies",
-                      "masonry_stonework_and_plaster",
-                      "massage_parlors",
-                      "medical_and_dental_labs",
-                      "medical_dental_ophthalmic_and_hospital_equipment_and_supplies",
-                      "medical_services",
-                      "membership_organizations",
-                      "mens_and_boys_clothing_and_accessories_stores",
-                      "mens_womens_clothing_stores",
-                      "metal_service_centers",
-                      "miscellaneous",
-                      "miscellaneous_apparel_and_accessory_shops",
-                      "miscellaneous_auto_dealers",
-                      "miscellaneous_business_services",
-                      "miscellaneous_food_stores",
-                      "miscellaneous_general_merchandise",
-                      "miscellaneous_general_services",
-                      "miscellaneous_home_furnishing_specialty_stores",
-                      "miscellaneous_publishing_and_printing",
-                      "miscellaneous_recreation_services",
-                      "miscellaneous_repair_shops",
-                      "miscellaneous_specialty_retail",
-                      "mobile_home_dealers",
-                      "motion_picture_theaters",
-                      "motor_freight_carriers_and_trucking",
-                      "motor_homes_dealers",
-                      "motor_vehicle_supplies_and_new_parts",
-                      "motorcycle_shops_and_dealers",
-                      "motorcycle_shops_dealers",
-                      "music_stores_musical_instruments_pianos_and_sheet_music",
-                      "news_dealers_and_newsstands",
-                      "non_fi_money_orders",
-                      "non_fi_stored_value_card_purchase_load",
-                      "nondurable_goods",
-                      "nurseries_lawn_and_garden_supply_stores",
-                      "nursing_personal_care",
-                      "office_and_commercial_furniture",
-                      "opticians_eyeglasses",
-                      "optometrists_ophthalmologist",
-                      "orthopedic_goods_prosthetic_devices",
-                      "osteopaths",
-                      "package_stores_beer_wine_and_liquor",
-                      "paints_varnishes_and_supplies",
-                      "parking_lots_garages",
-                      "passenger_railways",
-                      "pawn_shops",
-                      "pet_shops_pet_food_and_supplies",
-                      "petroleum_and_petroleum_products",
-                      "photo_developing",
-                      "photographic_photocopy_microfilm_equipment_and_supplies",
-                      "photographic_studios",
-                      "picture_video_production",
-                      "piece_goods_notions_and_other_dry_goods",
-                      "plumbing_heating_equipment_and_supplies",
-                      "political_organizations",
-                      "postal_services_government_only",
-                      "precious_stones_and_metals_watches_and_jewelry",
-                      "professional_services",
-                      "public_warehousing_and_storage",
-                      "quick_copy_repro_and_blueprint",
-                      "railroads",
-                      "real_estate_agents_and_managers_rentals",
-                      "record_stores",
-                      "recreational_vehicle_rentals",
-                      "religious_goods_stores",
-                      "religious_organizations",
-                      "roofing_siding_sheet_metal",
-                      "secretarial_support_services",
-                      "security_brokers_dealers",
-                      "service_stations",
-                      "sewing_needlework_fabric_and_piece_goods_stores",
-                      "shoe_repair_hat_cleaning",
-                      "shoe_stores",
-                      "small_appliance_repair",
-                      "snowmobile_dealers",
-                      "special_trade_services",
-                      "specialty_cleaning",
-                      "sporting_goods_stores",
-                      "sporting_recreation_camps",
-                      "sports_and_riding_apparel_stores",
-                      "sports_clubs_fields",
-                      "stamp_and_coin_stores",
-                      "stationary_office_supplies_printing_and_writing_paper",
-                      "stationery_stores_office_and_school_supply_stores",
-                      "swimming_pools_sales",
-                      "t_ui_travel_germany",
-                      "tailors_alterations",
-                      "tax_payments_government_agencies",
-                      "tax_preparation_services",
-                      "taxicabs_limousines",
-                      "telecommunication_equipment_and_telephone_sales",
-                      "telecommunication_services",
-                      "telegraph_services",
-                      "tent_and_awning_shops",
-                      "testing_laboratories",
-                      "theatrical_ticket_agencies",
-                      "timeshares",
-                      "tire_retreading_and_repair",
-                      "tolls_bridge_fees",
-                      "tourist_attractions_and_exhibits",
-                      "towing_services",
-                      "trailer_parks_campgrounds",
-                      "transportation_services",
-                      "travel_agencies_tour_operators",
-                      "truck_stop_iteration",
-                      "truck_utility_trailer_rentals",
-                      "typesetting_plate_making_and_related_services",
-                      "typewriter_stores",
-                      "u_s_federal_government_agencies_or_departments",
-                      "uniforms_commercial_clothing",
-                      "used_merchandise_and_secondhand_stores",
-                      "utilities",
-                      "variety_stores",
-                      "veterinary_services",
-                      "video_amusement_game_supplies",
-                      "video_game_arcades",
-                      "video_tape_rental_stores",
-                      "vocational_trade_schools",
-                      "watch_jewelry_repair",
-                      "welding_repair",
-                      "wholesale_clubs",
-                      "wig_and_toupee_stores",
-                      "wires_money_orders",
-                      "womens_accessory_and_specialty_shops",
-                      "womens_ready_to_wear_stores",
-                      "wrecking_and_salvage_yards"
-                    ],
-                    "type": "string"
-                  },
-                  "spending_limits": {
-                    "description": "",
-                    "properties": {
-                      "amount": {
-                        "description": "Maximum amount allowed to spend per interval.",
-                        "type": "integer"
-                      },
-                      "categories": {
-                        "enum": [
-                          "ac_refrigeration_repair",
-                          "accounting_bookkeeping_services",
-                          "advertising_services",
-                          "agricultural_cooperative",
-                          "airlines_air_carriers",
-                          "airports_flying_fields",
-                          "ambulance_services",
-                          "amusement_parks_carnivals",
-                          "antique_reproductions",
-                          "antique_shops",
-                          "aquariums",
-                          "architectural_surveying_services",
-                          "art_dealers_and_galleries",
-                          "artists_supply_and_craft_shops",
-                          "auto_and_home_supply_stores",
-                          "auto_body_repair_shops",
-                          "auto_paint_shops",
-                          "auto_service_shops",
-                          "automated_cash_disburse",
-                          "automated_fuel_dispensers",
-                          "automobile_associations",
-                          "automotive_parts_and_accessories_stores",
-                          "automotive_tire_stores",
-                          "bail_and_bond_payments",
-                          "bakeries",
-                          "bands_orchestras",
-                          "barber_and_beauty_shops",
-                          "betting_casino_gambling",
-                          "bicycle_shops",
-                          "billiard_pool_establishments",
-                          "boat_dealers",
-                          "boat_rentals_and_leases",
-                          "book_stores",
-                          "books_periodicals_and_newspapers",
-                          "bowling_alleys",
-                          "bus_lines",
-                          "business_secretarial_schools",
-                          "buying_shopping_services",
-                          "cable_satellite_and_other_pay_television_and_radio",
-                          "camera_and_photographic_supply_stores",
-                          "candy_nut_and_confectionery_stores",
-                          "car_and_truck_dealers_new_used",
-                          "car_and_truck_dealers_used_only",
-                          "car_rental_agencies",
-                          "car_washes",
-                          "carpentry_services",
-                          "carpet_upholstery_cleaning",
-                          "caterers",
-                          "charitable_and_social_service_organizations_fundraising",
-                          "chemicals_and_allied_products",
-                          "child_care_services",
-                          "childrens_and_infants_wear_stores",
-                          "chiropodists_podiatrists",
-                          "chiropractors",
-                          "cigar_stores_and_stands",
-                          "civic_social_fraternal_associations",
-                          "cleaning_and_maintenance",
-                          "clothing_rental",
-                          "colleges_universities",
-                          "commercial_equipment",
-                          "commercial_footwear",
-                          "commercial_photography_art_and_graphics",
-                          "commuter_transport_and_ferries",
-                          "computer_network_services",
-                          "computer_programming",
-                          "computer_repair",
-                          "computer_software_stores",
-                          "computers_peripherals_and_software",
-                          "concrete_work_services",
-                          "construction_materials",
-                          "consulting_public_relations",
-                          "correspondence_schools",
-                          "cosmetic_stores",
-                          "counseling_services",
-                          "country_clubs",
-                          "courier_services",
-                          "court_costs",
-                          "credit_reporting_agencies",
-                          "cruise_lines",
-                          "dairy_products_stores",
-                          "dance_hall_studios_schools",
-                          "dating_escort_services",
-                          "dentists_orthodontists",
-                          "department_stores",
-                          "detective_agencies",
-                          "digital_goods_applications",
-                          "digital_goods_games",
-                          "digital_goods_large_volume",
-                          "digital_goods_media",
-                          "direct_marketing_catalog_merchant",
-                          "direct_marketing_combination_catalog_and_retail_merchant",
-                          "direct_marketing_inbound_telemarketing",
-                          "direct_marketing_insurance_services",
-                          "direct_marketing_other",
-                          "direct_marketing_outbound_telemarketing",
-                          "direct_marketing_subscription",
-                          "direct_marketing_travel",
-                          "discount_stores",
-                          "doctors",
-                          "door_to_door_sales",
-                          "drapery_window_covering_and_upholstery_stores",
-                          "drinking_places",
-                          "drug_stores_and_pharmacies",
-                          "drugs_drug_proprietaries_and_druggist_sundries",
-                          "dry_cleaners",
-                          "durable_goods",
-                          "duty_free_stores",
-                          "eating_places_restaurants",
-                          "educational_services",
-                          "electric_razor_stores",
-                          "electrical_parts_and_equipment",
-                          "electrical_services",
-                          "electronics_repair_shops",
-                          "electronics_stores",
-                          "elementary_secondary_schools",
-                          "employment_temp_agencies",
-                          "equipment_rental",
-                          "exterminating_services",
-                          "family_clothing_stores",
-                          "fast_food_restaurants",
-                          "financial_institutions",
-                          "fines_government_administrative_entities",
-                          "fireplace_fireplace_screens_and_accessories_stores",
-                          "floor_covering_stores",
-                          "florists",
-                          "florists_supplies_nursery_stock_and_flowers",
-                          "freezer_and_locker_meat_provisioners",
-                          "fuel_dealers_non_automotive",
-                          "funeral_services_crematories",
-                          "furniture_home_furnishings_and_equipment_stores_except_appliances",
-                          "furniture_repair_refinishing",
-                          "furriers_and_fur_shops",
-                          "general_services",
-                          "gift_card_novelty_and_souvenir_shops",
-                          "glass_paint_and_wallpaper_stores",
-                          "glassware_crystal_stores",
-                          "golf_courses_public",
-                          "government_services",
-                          "grocery_stores_supermarkets",
-                          "hardware_equipment_and_supplies",
-                          "hardware_stores",
-                          "health_and_beauty_spas",
-                          "hearing_aids_sales_and_supplies",
-                          "heating_plumbing_a_c",
-                          "hobby_toy_and_game_shops",
-                          "home_supply_warehouse_stores",
-                          "hospitals",
-                          "hotels_motels_and_resorts",
-                          "household_appliance_stores",
-                          "industrial_supplies",
-                          "information_retrieval_services",
-                          "insurance_default",
-                          "insurance_underwriting_premiums",
-                          "intra_company_purchases",
-                          "jewelry_stores_watches_clocks_and_silverware_stores",
-                          "landscaping_services",
-                          "laundries",
-                          "laundry_cleaning_services",
-                          "legal_services_attorneys",
-                          "luggage_and_leather_goods_stores",
-                          "lumber_building_materials_stores",
-                          "manual_cash_disburse",
-                          "marinas_service_and_supplies",
-                          "masonry_stonework_and_plaster",
-                          "massage_parlors",
-                          "medical_and_dental_labs",
-                          "medical_dental_ophthalmic_and_hospital_equipment_and_supplies",
-                          "medical_services",
-                          "membership_organizations",
-                          "mens_and_boys_clothing_and_accessories_stores",
-                          "mens_womens_clothing_stores",
-                          "metal_service_centers",
-                          "miscellaneous",
-                          "miscellaneous_apparel_and_accessory_shops",
-                          "miscellaneous_auto_dealers",
-                          "miscellaneous_business_services",
-                          "miscellaneous_food_stores",
-                          "miscellaneous_general_merchandise",
-                          "miscellaneous_general_services",
-                          "miscellaneous_home_furnishing_specialty_stores",
-                          "miscellaneous_publishing_and_printing",
-                          "miscellaneous_recreation_services",
-                          "miscellaneous_repair_shops",
-                          "miscellaneous_specialty_retail",
-                          "mobile_home_dealers",
-                          "motion_picture_theaters",
-                          "motor_freight_carriers_and_trucking",
-                          "motor_homes_dealers",
-                          "motor_vehicle_supplies_and_new_parts",
-                          "motorcycle_shops_and_dealers",
-                          "motorcycle_shops_dealers",
-                          "music_stores_musical_instruments_pianos_and_sheet_music",
-                          "news_dealers_and_newsstands",
-                          "non_fi_money_orders",
-                          "non_fi_stored_value_card_purchase_load",
-                          "nondurable_goods",
-                          "nurseries_lawn_and_garden_supply_stores",
-                          "nursing_personal_care",
-                          "office_and_commercial_furniture",
-                          "opticians_eyeglasses",
-                          "optometrists_ophthalmologist",
-                          "orthopedic_goods_prosthetic_devices",
-                          "osteopaths",
-                          "package_stores_beer_wine_and_liquor",
-                          "paints_varnishes_and_supplies",
-                          "parking_lots_garages",
-                          "passenger_railways",
-                          "pawn_shops",
-                          "pet_shops_pet_food_and_supplies",
-                          "petroleum_and_petroleum_products",
-                          "photo_developing",
-                          "photographic_photocopy_microfilm_equipment_and_supplies",
-                          "photographic_studios",
-                          "picture_video_production",
-                          "piece_goods_notions_and_other_dry_goods",
-                          "plumbing_heating_equipment_and_supplies",
-                          "political_organizations",
-                          "postal_services_government_only",
-                          "precious_stones_and_metals_watches_and_jewelry",
-                          "professional_services",
-                          "public_warehousing_and_storage",
-                          "quick_copy_repro_and_blueprint",
-                          "railroads",
-                          "real_estate_agents_and_managers_rentals",
-                          "record_stores",
-                          "recreational_vehicle_rentals",
-                          "religious_goods_stores",
-                          "religious_organizations",
-                          "roofing_siding_sheet_metal",
-                          "secretarial_support_services",
-                          "security_brokers_dealers",
-                          "service_stations",
-                          "sewing_needlework_fabric_and_piece_goods_stores",
-                          "shoe_repair_hat_cleaning",
-                          "shoe_stores",
-                          "small_appliance_repair",
-                          "snowmobile_dealers",
-                          "special_trade_services",
-                          "specialty_cleaning",
-                          "sporting_goods_stores",
-                          "sporting_recreation_camps",
-                          "sports_and_riding_apparel_stores",
-                          "sports_clubs_fields",
-                          "stamp_and_coin_stores",
-                          "stationary_office_supplies_printing_and_writing_paper",
-                          "stationery_stores_office_and_school_supply_stores",
-                          "swimming_pools_sales",
-                          "t_ui_travel_germany",
-                          "tailors_alterations",
-                          "tax_payments_government_agencies",
-                          "tax_preparation_services",
-                          "taxicabs_limousines",
-                          "telecommunication_equipment_and_telephone_sales",
-                          "telecommunication_services",
-                          "telegraph_services",
-                          "tent_and_awning_shops",
-                          "testing_laboratories",
-                          "theatrical_ticket_agencies",
-                          "timeshares",
-                          "tire_retreading_and_repair",
-                          "tolls_bridge_fees",
-                          "tourist_attractions_and_exhibits",
-                          "towing_services",
-                          "trailer_parks_campgrounds",
-                          "transportation_services",
-                          "travel_agencies_tour_operators",
-                          "truck_stop_iteration",
-                          "truck_utility_trailer_rentals",
-                          "typesetting_plate_making_and_related_services",
-                          "typewriter_stores",
-                          "u_s_federal_government_agencies_or_departments",
-                          "uniforms_commercial_clothing",
-                          "used_merchandise_and_secondhand_stores",
-                          "utilities",
-                          "variety_stores",
-                          "veterinary_services",
-                          "video_amusement_game_supplies",
-                          "video_game_arcades",
-                          "video_tape_rental_stores",
-                          "vocational_trade_schools",
-                          "watch_jewelry_repair",
-                          "welding_repair",
-                          "wholesale_clubs",
-                          "wig_and_toupee_stores",
-                          "wires_money_orders",
-                          "womens_accessory_and_specialty_shops",
-                          "womens_ready_to_wear_stores",
-                          "wrecking_and_salvage_yards"
-                        ],
-                        "type": "string"
-                      },
-                      "interval": {
-                        "description": "Interval (or event) to which the amount applies.",
-                        "enum": [
-                          "all_time",
-                          "daily",
-                          "monthly",
-                          "per_authorization",
-                          "weekly",
-                          "yearly"
-                        ],
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "amount",
-                      "interval"
-                    ],
-                    "title": "IssuingCardholderSpendingLimit",
-                    "type": "object",
-                    "x-expandableFields": []
-                  },
-                  "spending_limits_currency": {
-                    "description": "Currency of the amounts within `spending_limits`.",
-                    "nullable": true,
-                    "type": "string"
-                  }
-                },
-                "title": "IssuingCardholderAuthorizationControls",
-                "type": "object",
-                "x-expandableFields": [
-                  "spending_limits"
-                ]
-              },
-              "status": {
-                "description": "Specifies whether to permit authorizations on this cardholder's cards.",
-                "enum": [
-                  "active",
-                  "blocked",
-                  "inactive"
-                ],
-                "type": "string"
-              },
-              "type": {
-                "description": "One of `individual` or `company`.",
-                "enum": [
-                  "company",
-                  "individual"
-                ],
-                "type": "string",
-                "x-stripeBypassValidation": true
-              }
-            },
-            "required": [
-              "billing",
-              "created",
-              "id",
-              "livemode",
-              "metadata",
-              "name",
-              "object",
-              "requirements",
-              "status",
-              "type"
-            ],
-            "title": "IssuingCardholder",
-            "type": "object",
-            "x-expandableFields": [
-              "billing",
-              "company",
-              "individual",
-              "requirements",
-              "spending_controls"
-            ],
-            "x-resourceId": "issuing.cardholder"
-          },
-          "created": {
-            "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-            "format": "unix-time",
-            "type": "integer"
-          },
-          "currency": {
-            "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-            "type": "string"
-          },
-          "cvc": {
-            "description": "The card's CVC. For security reasons, this is only available for virtual cards, and will be omitted unless you explicitly request it with [the `expand` parameter](https://stripe.com/docs/api/expanding_objects). Additionally, it's only available via the [\"Retrieve a card\" endpoint](https://stripe.com/docs/api/issuing/cards/retrieve), not via \"List all cards\" or any other endpoint.",
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "exp_month": {
-            "description": "The expiration month of the card.",
-            "type": "integer"
-          },
-          "exp_year": {
-            "description": "The expiration year of the card.",
-            "type": "integer"
-          },
-          "id": {
-            "description": "Unique identifier for the object.",
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "last4": {
-            "description": "The last 4 digits of the card number.",
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "livemode": {
-            "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-            "type": "boolean"
-          },
-          "metadata": {},
-          "number": {
-            "description": "The full unredacted card number. For security reasons, this is only available for virtual cards, and will be omitted unless you explicitly request it with [the `expand` parameter](https://stripe.com/docs/api/expanding_objects). Additionally, it's only available via the [\"Retrieve a card\" endpoint](https://stripe.com/docs/api/issuing/cards/retrieve), not via \"List all cards\" or any other endpoint.",
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "object": {
-            "description": "String representing the object's type. Objects of the same type share the same value.",
-            "enum": [
-              "issuing.card"
-            ],
-            "type": "string"
-          },
-          "replaced_by": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "replacement_for": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "replacement_reason": {
-            "description": "The reason why the previous card needed to be replaced.",
-            "enum": [
-              "damaged",
-              "expired",
-              "lost",
-              "stolen"
-            ],
-            "nullable": true,
-            "type": "string",
-            "x-stripeBypassValidation": true
-          },
-          "shipping": {
-            "description": "",
-            "properties": {
-              "address": {
-                "city": "string",
-                "country": "string",
-                "line1": "string",
-                "line2": "string",
-                "postal_code": "string",
-                "state": "string"
-              },
-              "carrier": {
-                "description": "The delivery company that shipped a card.",
-                "enum": [
-                  "dhl",
-                  "fedex",
-                  "royal_mail",
-                  "usps"
-                ],
-                "nullable": true,
-                "type": "string"
-              },
-              "eta": {
-                "description": "A unix timestamp representing a best estimate of when the card will be delivered.",
-                "format": "unix-time",
-                "nullable": true,
-                "type": "integer"
-              },
-              "name": {
-                "description": "Recipient name.",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "service": {
-                "description": "Shipment service, such as `standard` or `express`.",
-                "enum": [
-                  "express",
-                  "priority",
-                  "standard"
-                ],
-                "type": "string",
-                "x-stripeBypassValidation": true
-              },
-              "status": {
-                "description": "The delivery status of the card.",
-                "enum": [
-                  "canceled",
-                  "delivered",
-                  "failure",
-                  "pending",
-                  "returned",
-                  "shipped"
-                ],
-                "nullable": true,
-                "type": "string"
-              },
-              "tracking_number": {
-                "description": "A tracking number for a card shipment.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "tracking_url": {
-                "description": "A link to the shipping carrier's site where you can view detailed information about a card shipment.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "type": {
-                "description": "Packaging options.",
-                "enum": [
-                  "bulk",
-                  "individual"
-                ],
-                "type": "string"
-              }
-            },
-            "required": [
-              "address",
-              "name",
-              "service",
-              "type"
-            ],
-            "title": "IssuingCardShipping",
-            "type": "object",
-            "x-expandableFields": [
-              "address"
-            ]
-          },
-          "spending_controls": {
-            "description": "",
-            "properties": {
-              "allowed_categories": {
-                "enum": [
-                  "ac_refrigeration_repair",
-                  "accounting_bookkeeping_services",
-                  "advertising_services",
-                  "agricultural_cooperative",
-                  "airlines_air_carriers",
-                  "airports_flying_fields",
-                  "ambulance_services",
-                  "amusement_parks_carnivals",
-                  "antique_reproductions",
-                  "antique_shops",
-                  "aquariums",
-                  "architectural_surveying_services",
-                  "art_dealers_and_galleries",
-                  "artists_supply_and_craft_shops",
-                  "auto_and_home_supply_stores",
-                  "auto_body_repair_shops",
-                  "auto_paint_shops",
-                  "auto_service_shops",
-                  "automated_cash_disburse",
-                  "automated_fuel_dispensers",
-                  "automobile_associations",
-                  "automotive_parts_and_accessories_stores",
-                  "automotive_tire_stores",
-                  "bail_and_bond_payments",
-                  "bakeries",
-                  "bands_orchestras",
-                  "barber_and_beauty_shops",
-                  "betting_casino_gambling",
-                  "bicycle_shops",
-                  "billiard_pool_establishments",
-                  "boat_dealers",
-                  "boat_rentals_and_leases",
-                  "book_stores",
-                  "books_periodicals_and_newspapers",
-                  "bowling_alleys",
-                  "bus_lines",
-                  "business_secretarial_schools",
-                  "buying_shopping_services",
-                  "cable_satellite_and_other_pay_television_and_radio",
-                  "camera_and_photographic_supply_stores",
-                  "candy_nut_and_confectionery_stores",
-                  "car_and_truck_dealers_new_used",
-                  "car_and_truck_dealers_used_only",
-                  "car_rental_agencies",
-                  "car_washes",
-                  "carpentry_services",
-                  "carpet_upholstery_cleaning",
-                  "caterers",
-                  "charitable_and_social_service_organizations_fundraising",
-                  "chemicals_and_allied_products",
-                  "child_care_services",
-                  "childrens_and_infants_wear_stores",
-                  "chiropodists_podiatrists",
-                  "chiropractors",
-                  "cigar_stores_and_stands",
-                  "civic_social_fraternal_associations",
-                  "cleaning_and_maintenance",
-                  "clothing_rental",
-                  "colleges_universities",
-                  "commercial_equipment",
-                  "commercial_footwear",
-                  "commercial_photography_art_and_graphics",
-                  "commuter_transport_and_ferries",
-                  "computer_network_services",
-                  "computer_programming",
-                  "computer_repair",
-                  "computer_software_stores",
-                  "computers_peripherals_and_software",
-                  "concrete_work_services",
-                  "construction_materials",
-                  "consulting_public_relations",
-                  "correspondence_schools",
-                  "cosmetic_stores",
-                  "counseling_services",
-                  "country_clubs",
-                  "courier_services",
-                  "court_costs",
-                  "credit_reporting_agencies",
-                  "cruise_lines",
-                  "dairy_products_stores",
-                  "dance_hall_studios_schools",
-                  "dating_escort_services",
-                  "dentists_orthodontists",
-                  "department_stores",
-                  "detective_agencies",
-                  "digital_goods_applications",
-                  "digital_goods_games",
-                  "digital_goods_large_volume",
-                  "digital_goods_media",
-                  "direct_marketing_catalog_merchant",
-                  "direct_marketing_combination_catalog_and_retail_merchant",
-                  "direct_marketing_inbound_telemarketing",
-                  "direct_marketing_insurance_services",
-                  "direct_marketing_other",
-                  "direct_marketing_outbound_telemarketing",
-                  "direct_marketing_subscription",
-                  "direct_marketing_travel",
-                  "discount_stores",
-                  "doctors",
-                  "door_to_door_sales",
-                  "drapery_window_covering_and_upholstery_stores",
-                  "drinking_places",
-                  "drug_stores_and_pharmacies",
-                  "drugs_drug_proprietaries_and_druggist_sundries",
-                  "dry_cleaners",
-                  "durable_goods",
-                  "duty_free_stores",
-                  "eating_places_restaurants",
-                  "educational_services",
-                  "electric_razor_stores",
-                  "electrical_parts_and_equipment",
-                  "electrical_services",
-                  "electronics_repair_shops",
-                  "electronics_stores",
-                  "elementary_secondary_schools",
-                  "employment_temp_agencies",
-                  "equipment_rental",
-                  "exterminating_services",
-                  "family_clothing_stores",
-                  "fast_food_restaurants",
-                  "financial_institutions",
-                  "fines_government_administrative_entities",
-                  "fireplace_fireplace_screens_and_accessories_stores",
-                  "floor_covering_stores",
-                  "florists",
-                  "florists_supplies_nursery_stock_and_flowers",
-                  "freezer_and_locker_meat_provisioners",
-                  "fuel_dealers_non_automotive",
-                  "funeral_services_crematories",
-                  "furniture_home_furnishings_and_equipment_stores_except_appliances",
-                  "furniture_repair_refinishing",
-                  "furriers_and_fur_shops",
-                  "general_services",
-                  "gift_card_novelty_and_souvenir_shops",
-                  "glass_paint_and_wallpaper_stores",
-                  "glassware_crystal_stores",
-                  "golf_courses_public",
-                  "government_services",
-                  "grocery_stores_supermarkets",
-                  "hardware_equipment_and_supplies",
-                  "hardware_stores",
-                  "health_and_beauty_spas",
-                  "hearing_aids_sales_and_supplies",
-                  "heating_plumbing_a_c",
-                  "hobby_toy_and_game_shops",
-                  "home_supply_warehouse_stores",
-                  "hospitals",
-                  "hotels_motels_and_resorts",
-                  "household_appliance_stores",
-                  "industrial_supplies",
-                  "information_retrieval_services",
-                  "insurance_default",
-                  "insurance_underwriting_premiums",
-                  "intra_company_purchases",
-                  "jewelry_stores_watches_clocks_and_silverware_stores",
-                  "landscaping_services",
-                  "laundries",
-                  "laundry_cleaning_services",
-                  "legal_services_attorneys",
-                  "luggage_and_leather_goods_stores",
-                  "lumber_building_materials_stores",
-                  "manual_cash_disburse",
-                  "marinas_service_and_supplies",
-                  "masonry_stonework_and_plaster",
-                  "massage_parlors",
-                  "medical_and_dental_labs",
-                  "medical_dental_ophthalmic_and_hospital_equipment_and_supplies",
-                  "medical_services",
-                  "membership_organizations",
-                  "mens_and_boys_clothing_and_accessories_stores",
-                  "mens_womens_clothing_stores",
-                  "metal_service_centers",
-                  "miscellaneous",
-                  "miscellaneous_apparel_and_accessory_shops",
-                  "miscellaneous_auto_dealers",
-                  "miscellaneous_business_services",
-                  "miscellaneous_food_stores",
-                  "miscellaneous_general_merchandise",
-                  "miscellaneous_general_services",
-                  "miscellaneous_home_furnishing_specialty_stores",
-                  "miscellaneous_publishing_and_printing",
-                  "miscellaneous_recreation_services",
-                  "miscellaneous_repair_shops",
-                  "miscellaneous_specialty_retail",
-                  "mobile_home_dealers",
-                  "motion_picture_theaters",
-                  "motor_freight_carriers_and_trucking",
-                  "motor_homes_dealers",
-                  "motor_vehicle_supplies_and_new_parts",
-                  "motorcycle_shops_and_dealers",
-                  "motorcycle_shops_dealers",
-                  "music_stores_musical_instruments_pianos_and_sheet_music",
-                  "news_dealers_and_newsstands",
-                  "non_fi_money_orders",
-                  "non_fi_stored_value_card_purchase_load",
-                  "nondurable_goods",
-                  "nurseries_lawn_and_garden_supply_stores",
-                  "nursing_personal_care",
-                  "office_and_commercial_furniture",
-                  "opticians_eyeglasses",
-                  "optometrists_ophthalmologist",
-                  "orthopedic_goods_prosthetic_devices",
-                  "osteopaths",
-                  "package_stores_beer_wine_and_liquor",
-                  "paints_varnishes_and_supplies",
-                  "parking_lots_garages",
-                  "passenger_railways",
-                  "pawn_shops",
-                  "pet_shops_pet_food_and_supplies",
-                  "petroleum_and_petroleum_products",
-                  "photo_developing",
-                  "photographic_photocopy_microfilm_equipment_and_supplies",
-                  "photographic_studios",
-                  "picture_video_production",
-                  "piece_goods_notions_and_other_dry_goods",
-                  "plumbing_heating_equipment_and_supplies",
-                  "political_organizations",
-                  "postal_services_government_only",
-                  "precious_stones_and_metals_watches_and_jewelry",
-                  "professional_services",
-                  "public_warehousing_and_storage",
-                  "quick_copy_repro_and_blueprint",
-                  "railroads",
-                  "real_estate_agents_and_managers_rentals",
-                  "record_stores",
-                  "recreational_vehicle_rentals",
-                  "religious_goods_stores",
-                  "religious_organizations",
-                  "roofing_siding_sheet_metal",
-                  "secretarial_support_services",
-                  "security_brokers_dealers",
-                  "service_stations",
-                  "sewing_needlework_fabric_and_piece_goods_stores",
-                  "shoe_repair_hat_cleaning",
-                  "shoe_stores",
-                  "small_appliance_repair",
-                  "snowmobile_dealers",
-                  "special_trade_services",
-                  "specialty_cleaning",
-                  "sporting_goods_stores",
-                  "sporting_recreation_camps",
-                  "sports_and_riding_apparel_stores",
-                  "sports_clubs_fields",
-                  "stamp_and_coin_stores",
-                  "stationary_office_supplies_printing_and_writing_paper",
-                  "stationery_stores_office_and_school_supply_stores",
-                  "swimming_pools_sales",
-                  "t_ui_travel_germany",
-                  "tailors_alterations",
-                  "tax_payments_government_agencies",
-                  "tax_preparation_services",
-                  "taxicabs_limousines",
-                  "telecommunication_equipment_and_telephone_sales",
-                  "telecommunication_services",
-                  "telegraph_services",
-                  "tent_and_awning_shops",
-                  "testing_laboratories",
-                  "theatrical_ticket_agencies",
-                  "timeshares",
-                  "tire_retreading_and_repair",
-                  "tolls_bridge_fees",
-                  "tourist_attractions_and_exhibits",
-                  "towing_services",
-                  "trailer_parks_campgrounds",
-                  "transportation_services",
-                  "travel_agencies_tour_operators",
-                  "truck_stop_iteration",
-                  "truck_utility_trailer_rentals",
-                  "typesetting_plate_making_and_related_services",
-                  "typewriter_stores",
-                  "u_s_federal_government_agencies_or_departments",
-                  "uniforms_commercial_clothing",
-                  "used_merchandise_and_secondhand_stores",
-                  "utilities",
-                  "variety_stores",
-                  "veterinary_services",
-                  "video_amusement_game_supplies",
-                  "video_game_arcades",
-                  "video_tape_rental_stores",
-                  "vocational_trade_schools",
-                  "watch_jewelry_repair",
-                  "welding_repair",
-                  "wholesale_clubs",
-                  "wig_and_toupee_stores",
-                  "wires_money_orders",
-                  "womens_accessory_and_specialty_shops",
-                  "womens_ready_to_wear_stores",
-                  "wrecking_and_salvage_yards"
-                ],
-                "type": "string"
-              },
-              "blocked_categories": {
-                "enum": [
-                  "ac_refrigeration_repair",
-                  "accounting_bookkeeping_services",
-                  "advertising_services",
-                  "agricultural_cooperative",
-                  "airlines_air_carriers",
-                  "airports_flying_fields",
-                  "ambulance_services",
-                  "amusement_parks_carnivals",
-                  "antique_reproductions",
-                  "antique_shops",
-                  "aquariums",
-                  "architectural_surveying_services",
-                  "art_dealers_and_galleries",
-                  "artists_supply_and_craft_shops",
-                  "auto_and_home_supply_stores",
-                  "auto_body_repair_shops",
-                  "auto_paint_shops",
-                  "auto_service_shops",
-                  "automated_cash_disburse",
-                  "automated_fuel_dispensers",
-                  "automobile_associations",
-                  "automotive_parts_and_accessories_stores",
-                  "automotive_tire_stores",
-                  "bail_and_bond_payments",
-                  "bakeries",
-                  "bands_orchestras",
-                  "barber_and_beauty_shops",
-                  "betting_casino_gambling",
-                  "bicycle_shops",
-                  "billiard_pool_establishments",
-                  "boat_dealers",
-                  "boat_rentals_and_leases",
-                  "book_stores",
-                  "books_periodicals_and_newspapers",
-                  "bowling_alleys",
-                  "bus_lines",
-                  "business_secretarial_schools",
-                  "buying_shopping_services",
-                  "cable_satellite_and_other_pay_television_and_radio",
-                  "camera_and_photographic_supply_stores",
-                  "candy_nut_and_confectionery_stores",
-                  "car_and_truck_dealers_new_used",
-                  "car_and_truck_dealers_used_only",
-                  "car_rental_agencies",
-                  "car_washes",
-                  "carpentry_services",
-                  "carpet_upholstery_cleaning",
-                  "caterers",
-                  "charitable_and_social_service_organizations_fundraising",
-                  "chemicals_and_allied_products",
-                  "child_care_services",
-                  "childrens_and_infants_wear_stores",
-                  "chiropodists_podiatrists",
-                  "chiropractors",
-                  "cigar_stores_and_stands",
-                  "civic_social_fraternal_associations",
-                  "cleaning_and_maintenance",
-                  "clothing_rental",
-                  "colleges_universities",
-                  "commercial_equipment",
-                  "commercial_footwear",
-                  "commercial_photography_art_and_graphics",
-                  "commuter_transport_and_ferries",
-                  "computer_network_services",
-                  "computer_programming",
-                  "computer_repair",
-                  "computer_software_stores",
-                  "computers_peripherals_and_software",
-                  "concrete_work_services",
-                  "construction_materials",
-                  "consulting_public_relations",
-                  "correspondence_schools",
-                  "cosmetic_stores",
-                  "counseling_services",
-                  "country_clubs",
-                  "courier_services",
-                  "court_costs",
-                  "credit_reporting_agencies",
-                  "cruise_lines",
-                  "dairy_products_stores",
-                  "dance_hall_studios_schools",
-                  "dating_escort_services",
-                  "dentists_orthodontists",
-                  "department_stores",
-                  "detective_agencies",
-                  "digital_goods_applications",
-                  "digital_goods_games",
-                  "digital_goods_large_volume",
-                  "digital_goods_media",
-                  "direct_marketing_catalog_merchant",
-                  "direct_marketing_combination_catalog_and_retail_merchant",
-                  "direct_marketing_inbound_telemarketing",
-                  "direct_marketing_insurance_services",
-                  "direct_marketing_other",
-                  "direct_marketing_outbound_telemarketing",
-                  "direct_marketing_subscription",
-                  "direct_marketing_travel",
-                  "discount_stores",
-                  "doctors",
-                  "door_to_door_sales",
-                  "drapery_window_covering_and_upholstery_stores",
-                  "drinking_places",
-                  "drug_stores_and_pharmacies",
-                  "drugs_drug_proprietaries_and_druggist_sundries",
-                  "dry_cleaners",
-                  "durable_goods",
-                  "duty_free_stores",
-                  "eating_places_restaurants",
-                  "educational_services",
-                  "electric_razor_stores",
-                  "electrical_parts_and_equipment",
-                  "electrical_services",
-                  "electronics_repair_shops",
-                  "electronics_stores",
-                  "elementary_secondary_schools",
-                  "employment_temp_agencies",
-                  "equipment_rental",
-                  "exterminating_services",
-                  "family_clothing_stores",
-                  "fast_food_restaurants",
-                  "financial_institutions",
-                  "fines_government_administrative_entities",
-                  "fireplace_fireplace_screens_and_accessories_stores",
-                  "floor_covering_stores",
-                  "florists",
-                  "florists_supplies_nursery_stock_and_flowers",
-                  "freezer_and_locker_meat_provisioners",
-                  "fuel_dealers_non_automotive",
-                  "funeral_services_crematories",
-                  "furniture_home_furnishings_and_equipment_stores_except_appliances",
-                  "furniture_repair_refinishing",
-                  "furriers_and_fur_shops",
-                  "general_services",
-                  "gift_card_novelty_and_souvenir_shops",
-                  "glass_paint_and_wallpaper_stores",
-                  "glassware_crystal_stores",
-                  "golf_courses_public",
-                  "government_services",
-                  "grocery_stores_supermarkets",
-                  "hardware_equipment_and_supplies",
-                  "hardware_stores",
-                  "health_and_beauty_spas",
-                  "hearing_aids_sales_and_supplies",
-                  "heating_plumbing_a_c",
-                  "hobby_toy_and_game_shops",
-                  "home_supply_warehouse_stores",
-                  "hospitals",
-                  "hotels_motels_and_resorts",
-                  "household_appliance_stores",
-                  "industrial_supplies",
-                  "information_retrieval_services",
-                  "insurance_default",
-                  "insurance_underwriting_premiums",
-                  "intra_company_purchases",
-                  "jewelry_stores_watches_clocks_and_silverware_stores",
-                  "landscaping_services",
-                  "laundries",
-                  "laundry_cleaning_services",
-                  "legal_services_attorneys",
-                  "luggage_and_leather_goods_stores",
-                  "lumber_building_materials_stores",
-                  "manual_cash_disburse",
-                  "marinas_service_and_supplies",
-                  "masonry_stonework_and_plaster",
-                  "massage_parlors",
-                  "medical_and_dental_labs",
-                  "medical_dental_ophthalmic_and_hospital_equipment_and_supplies",
-                  "medical_services",
-                  "membership_organizations",
-                  "mens_and_boys_clothing_and_accessories_stores",
-                  "mens_womens_clothing_stores",
-                  "metal_service_centers",
-                  "miscellaneous",
-                  "miscellaneous_apparel_and_accessory_shops",
-                  "miscellaneous_auto_dealers",
-                  "miscellaneous_business_services",
-                  "miscellaneous_food_stores",
-                  "miscellaneous_general_merchandise",
-                  "miscellaneous_general_services",
-                  "miscellaneous_home_furnishing_specialty_stores",
-                  "miscellaneous_publishing_and_printing",
-                  "miscellaneous_recreation_services",
-                  "miscellaneous_repair_shops",
-                  "miscellaneous_specialty_retail",
-                  "mobile_home_dealers",
-                  "motion_picture_theaters",
-                  "motor_freight_carriers_and_trucking",
-                  "motor_homes_dealers",
-                  "motor_vehicle_supplies_and_new_parts",
-                  "motorcycle_shops_and_dealers",
-                  "motorcycle_shops_dealers",
-                  "music_stores_musical_instruments_pianos_and_sheet_music",
-                  "news_dealers_and_newsstands",
-                  "non_fi_money_orders",
-                  "non_fi_stored_value_card_purchase_load",
-                  "nondurable_goods",
-                  "nurseries_lawn_and_garden_supply_stores",
-                  "nursing_personal_care",
-                  "office_and_commercial_furniture",
-                  "opticians_eyeglasses",
-                  "optometrists_ophthalmologist",
-                  "orthopedic_goods_prosthetic_devices",
-                  "osteopaths",
-                  "package_stores_beer_wine_and_liquor",
-                  "paints_varnishes_and_supplies",
-                  "parking_lots_garages",
-                  "passenger_railways",
-                  "pawn_shops",
-                  "pet_shops_pet_food_and_supplies",
-                  "petroleum_and_petroleum_products",
-                  "photo_developing",
-                  "photographic_photocopy_microfilm_equipment_and_supplies",
-                  "photographic_studios",
-                  "picture_video_production",
-                  "piece_goods_notions_and_other_dry_goods",
-                  "plumbing_heating_equipment_and_supplies",
-                  "political_organizations",
-                  "postal_services_government_only",
-                  "precious_stones_and_metals_watches_and_jewelry",
-                  "professional_services",
-                  "public_warehousing_and_storage",
-                  "quick_copy_repro_and_blueprint",
-                  "railroads",
-                  "real_estate_agents_and_managers_rentals",
-                  "record_stores",
-                  "recreational_vehicle_rentals",
-                  "religious_goods_stores",
-                  "religious_organizations",
-                  "roofing_siding_sheet_metal",
-                  "secretarial_support_services",
-                  "security_brokers_dealers",
-                  "service_stations",
-                  "sewing_needlework_fabric_and_piece_goods_stores",
-                  "shoe_repair_hat_cleaning",
-                  "shoe_stores",
-                  "small_appliance_repair",
-                  "snowmobile_dealers",
-                  "special_trade_services",
-                  "specialty_cleaning",
-                  "sporting_goods_stores",
-                  "sporting_recreation_camps",
-                  "sports_and_riding_apparel_stores",
-                  "sports_clubs_fields",
-                  "stamp_and_coin_stores",
-                  "stationary_office_supplies_printing_and_writing_paper",
-                  "stationery_stores_office_and_school_supply_stores",
-                  "swimming_pools_sales",
-                  "t_ui_travel_germany",
-                  "tailors_alterations",
-                  "tax_payments_government_agencies",
-                  "tax_preparation_services",
-                  "taxicabs_limousines",
-                  "telecommunication_equipment_and_telephone_sales",
-                  "telecommunication_services",
-                  "telegraph_services",
-                  "tent_and_awning_shops",
-                  "testing_laboratories",
-                  "theatrical_ticket_agencies",
-                  "timeshares",
-                  "tire_retreading_and_repair",
-                  "tolls_bridge_fees",
-                  "tourist_attractions_and_exhibits",
-                  "towing_services",
-                  "trailer_parks_campgrounds",
-                  "transportation_services",
-                  "travel_agencies_tour_operators",
-                  "truck_stop_iteration",
-                  "truck_utility_trailer_rentals",
-                  "typesetting_plate_making_and_related_services",
-                  "typewriter_stores",
-                  "u_s_federal_government_agencies_or_departments",
-                  "uniforms_commercial_clothing",
-                  "used_merchandise_and_secondhand_stores",
-                  "utilities",
-                  "variety_stores",
-                  "veterinary_services",
-                  "video_amusement_game_supplies",
-                  "video_game_arcades",
-                  "video_tape_rental_stores",
-                  "vocational_trade_schools",
-                  "watch_jewelry_repair",
-                  "welding_repair",
-                  "wholesale_clubs",
-                  "wig_and_toupee_stores",
-                  "wires_money_orders",
-                  "womens_accessory_and_specialty_shops",
-                  "womens_ready_to_wear_stores",
-                  "wrecking_and_salvage_yards"
-                ],
-                "type": "string"
-              },
-              "spending_limits": {
-                "description": "",
-                "properties": {
-                  "amount": {
-                    "description": "Maximum amount allowed to spend per interval.",
-                    "type": "integer"
-                  },
-                  "categories": {
-                    "enum": [
-                      "ac_refrigeration_repair",
-                      "accounting_bookkeeping_services",
-                      "advertising_services",
-                      "agricultural_cooperative",
-                      "airlines_air_carriers",
-                      "airports_flying_fields",
-                      "ambulance_services",
-                      "amusement_parks_carnivals",
-                      "antique_reproductions",
-                      "antique_shops",
-                      "aquariums",
-                      "architectural_surveying_services",
-                      "art_dealers_and_galleries",
-                      "artists_supply_and_craft_shops",
-                      "auto_and_home_supply_stores",
-                      "auto_body_repair_shops",
-                      "auto_paint_shops",
-                      "auto_service_shops",
-                      "automated_cash_disburse",
-                      "automated_fuel_dispensers",
-                      "automobile_associations",
-                      "automotive_parts_and_accessories_stores",
-                      "automotive_tire_stores",
-                      "bail_and_bond_payments",
-                      "bakeries",
-                      "bands_orchestras",
-                      "barber_and_beauty_shops",
-                      "betting_casino_gambling",
-                      "bicycle_shops",
-                      "billiard_pool_establishments",
-                      "boat_dealers",
-                      "boat_rentals_and_leases",
-                      "book_stores",
-                      "books_periodicals_and_newspapers",
-                      "bowling_alleys",
-                      "bus_lines",
-                      "business_secretarial_schools",
-                      "buying_shopping_services",
-                      "cable_satellite_and_other_pay_television_and_radio",
-                      "camera_and_photographic_supply_stores",
-                      "candy_nut_and_confectionery_stores",
-                      "car_and_truck_dealers_new_used",
-                      "car_and_truck_dealers_used_only",
-                      "car_rental_agencies",
-                      "car_washes",
-                      "carpentry_services",
-                      "carpet_upholstery_cleaning",
-                      "caterers",
-                      "charitable_and_social_service_organizations_fundraising",
-                      "chemicals_and_allied_products",
-                      "child_care_services",
-                      "childrens_and_infants_wear_stores",
-                      "chiropodists_podiatrists",
-                      "chiropractors",
-                      "cigar_stores_and_stands",
-                      "civic_social_fraternal_associations",
-                      "cleaning_and_maintenance",
-                      "clothing_rental",
-                      "colleges_universities",
-                      "commercial_equipment",
-                      "commercial_footwear",
-                      "commercial_photography_art_and_graphics",
-                      "commuter_transport_and_ferries",
-                      "computer_network_services",
-                      "computer_programming",
-                      "computer_repair",
-                      "computer_software_stores",
-                      "computers_peripherals_and_software",
-                      "concrete_work_services",
-                      "construction_materials",
-                      "consulting_public_relations",
-                      "correspondence_schools",
-                      "cosmetic_stores",
-                      "counseling_services",
-                      "country_clubs",
-                      "courier_services",
-                      "court_costs",
-                      "credit_reporting_agencies",
-                      "cruise_lines",
-                      "dairy_products_stores",
-                      "dance_hall_studios_schools",
-                      "dating_escort_services",
-                      "dentists_orthodontists",
-                      "department_stores",
-                      "detective_agencies",
-                      "digital_goods_applications",
-                      "digital_goods_games",
-                      "digital_goods_large_volume",
-                      "digital_goods_media",
-                      "direct_marketing_catalog_merchant",
-                      "direct_marketing_combination_catalog_and_retail_merchant",
-                      "direct_marketing_inbound_telemarketing",
-                      "direct_marketing_insurance_services",
-                      "direct_marketing_other",
-                      "direct_marketing_outbound_telemarketing",
-                      "direct_marketing_subscription",
-                      "direct_marketing_travel",
-                      "discount_stores",
-                      "doctors",
-                      "door_to_door_sales",
-                      "drapery_window_covering_and_upholstery_stores",
-                      "drinking_places",
-                      "drug_stores_and_pharmacies",
-                      "drugs_drug_proprietaries_and_druggist_sundries",
-                      "dry_cleaners",
-                      "durable_goods",
-                      "duty_free_stores",
-                      "eating_places_restaurants",
-                      "educational_services",
-                      "electric_razor_stores",
-                      "electrical_parts_and_equipment",
-                      "electrical_services",
-                      "electronics_repair_shops",
-                      "electronics_stores",
-                      "elementary_secondary_schools",
-                      "employment_temp_agencies",
-                      "equipment_rental",
-                      "exterminating_services",
-                      "family_clothing_stores",
-                      "fast_food_restaurants",
-                      "financial_institutions",
-                      "fines_government_administrative_entities",
-                      "fireplace_fireplace_screens_and_accessories_stores",
-                      "floor_covering_stores",
-                      "florists",
-                      "florists_supplies_nursery_stock_and_flowers",
-                      "freezer_and_locker_meat_provisioners",
-                      "fuel_dealers_non_automotive",
-                      "funeral_services_crematories",
-                      "furniture_home_furnishings_and_equipment_stores_except_appliances",
-                      "furniture_repair_refinishing",
-                      "furriers_and_fur_shops",
-                      "general_services",
-                      "gift_card_novelty_and_souvenir_shops",
-                      "glass_paint_and_wallpaper_stores",
-                      "glassware_crystal_stores",
-                      "golf_courses_public",
-                      "government_services",
-                      "grocery_stores_supermarkets",
-                      "hardware_equipment_and_supplies",
-                      "hardware_stores",
-                      "health_and_beauty_spas",
-                      "hearing_aids_sales_and_supplies",
-                      "heating_plumbing_a_c",
-                      "hobby_toy_and_game_shops",
-                      "home_supply_warehouse_stores",
-                      "hospitals",
-                      "hotels_motels_and_resorts",
-                      "household_appliance_stores",
-                      "industrial_supplies",
-                      "information_retrieval_services",
-                      "insurance_default",
-                      "insurance_underwriting_premiums",
-                      "intra_company_purchases",
-                      "jewelry_stores_watches_clocks_and_silverware_stores",
-                      "landscaping_services",
-                      "laundries",
-                      "laundry_cleaning_services",
-                      "legal_services_attorneys",
-                      "luggage_and_leather_goods_stores",
-                      "lumber_building_materials_stores",
-                      "manual_cash_disburse",
-                      "marinas_service_and_supplies",
-                      "masonry_stonework_and_plaster",
-                      "massage_parlors",
-                      "medical_and_dental_labs",
-                      "medical_dental_ophthalmic_and_hospital_equipment_and_supplies",
-                      "medical_services",
-                      "membership_organizations",
-                      "mens_and_boys_clothing_and_accessories_stores",
-                      "mens_womens_clothing_stores",
-                      "metal_service_centers",
-                      "miscellaneous",
-                      "miscellaneous_apparel_and_accessory_shops",
-                      "miscellaneous_auto_dealers",
-                      "miscellaneous_business_services",
-                      "miscellaneous_food_stores",
-                      "miscellaneous_general_merchandise",
-                      "miscellaneous_general_services",
-                      "miscellaneous_home_furnishing_specialty_stores",
-                      "miscellaneous_publishing_and_printing",
-                      "miscellaneous_recreation_services",
-                      "miscellaneous_repair_shops",
-                      "miscellaneous_specialty_retail",
-                      "mobile_home_dealers",
-                      "motion_picture_theaters",
-                      "motor_freight_carriers_and_trucking",
-                      "motor_homes_dealers",
-                      "motor_vehicle_supplies_and_new_parts",
-                      "motorcycle_shops_and_dealers",
-                      "motorcycle_shops_dealers",
-                      "music_stores_musical_instruments_pianos_and_sheet_music",
-                      "news_dealers_and_newsstands",
-                      "non_fi_money_orders",
-                      "non_fi_stored_value_card_purchase_load",
-                      "nondurable_goods",
-                      "nurseries_lawn_and_garden_supply_stores",
-                      "nursing_personal_care",
-                      "office_and_commercial_furniture",
-                      "opticians_eyeglasses",
-                      "optometrists_ophthalmologist",
-                      "orthopedic_goods_prosthetic_devices",
-                      "osteopaths",
-                      "package_stores_beer_wine_and_liquor",
-                      "paints_varnishes_and_supplies",
-                      "parking_lots_garages",
-                      "passenger_railways",
-                      "pawn_shops",
-                      "pet_shops_pet_food_and_supplies",
-                      "petroleum_and_petroleum_products",
-                      "photo_developing",
-                      "photographic_photocopy_microfilm_equipment_and_supplies",
-                      "photographic_studios",
-                      "picture_video_production",
-                      "piece_goods_notions_and_other_dry_goods",
-                      "plumbing_heating_equipment_and_supplies",
-                      "political_organizations",
-                      "postal_services_government_only",
-                      "precious_stones_and_metals_watches_and_jewelry",
-                      "professional_services",
-                      "public_warehousing_and_storage",
-                      "quick_copy_repro_and_blueprint",
-                      "railroads",
-                      "real_estate_agents_and_managers_rentals",
-                      "record_stores",
-                      "recreational_vehicle_rentals",
-                      "religious_goods_stores",
-                      "religious_organizations",
-                      "roofing_siding_sheet_metal",
-                      "secretarial_support_services",
-                      "security_brokers_dealers",
-                      "service_stations",
-                      "sewing_needlework_fabric_and_piece_goods_stores",
-                      "shoe_repair_hat_cleaning",
-                      "shoe_stores",
-                      "small_appliance_repair",
-                      "snowmobile_dealers",
-                      "special_trade_services",
-                      "specialty_cleaning",
-                      "sporting_goods_stores",
-                      "sporting_recreation_camps",
-                      "sports_and_riding_apparel_stores",
-                      "sports_clubs_fields",
-                      "stamp_and_coin_stores",
-                      "stationary_office_supplies_printing_and_writing_paper",
-                      "stationery_stores_office_and_school_supply_stores",
-                      "swimming_pools_sales",
-                      "t_ui_travel_germany",
-                      "tailors_alterations",
-                      "tax_payments_government_agencies",
-                      "tax_preparation_services",
-                      "taxicabs_limousines",
-                      "telecommunication_equipment_and_telephone_sales",
-                      "telecommunication_services",
-                      "telegraph_services",
-                      "tent_and_awning_shops",
-                      "testing_laboratories",
-                      "theatrical_ticket_agencies",
-                      "timeshares",
-                      "tire_retreading_and_repair",
-                      "tolls_bridge_fees",
-                      "tourist_attractions_and_exhibits",
-                      "towing_services",
-                      "trailer_parks_campgrounds",
-                      "transportation_services",
-                      "travel_agencies_tour_operators",
-                      "truck_stop_iteration",
-                      "truck_utility_trailer_rentals",
-                      "typesetting_plate_making_and_related_services",
-                      "typewriter_stores",
-                      "u_s_federal_government_agencies_or_departments",
-                      "uniforms_commercial_clothing",
-                      "used_merchandise_and_secondhand_stores",
-                      "utilities",
-                      "variety_stores",
-                      "veterinary_services",
-                      "video_amusement_game_supplies",
-                      "video_game_arcades",
-                      "video_tape_rental_stores",
-                      "vocational_trade_schools",
-                      "watch_jewelry_repair",
-                      "welding_repair",
-                      "wholesale_clubs",
-                      "wig_and_toupee_stores",
-                      "wires_money_orders",
-                      "womens_accessory_and_specialty_shops",
-                      "womens_ready_to_wear_stores",
-                      "wrecking_and_salvage_yards"
-                    ],
-                    "type": "string"
-                  },
-                  "interval": {
-                    "description": "Interval (or event) to which the amount applies.",
-                    "enum": [
-                      "all_time",
-                      "daily",
-                      "monthly",
-                      "per_authorization",
-                      "weekly",
-                      "yearly"
-                    ],
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "amount",
-                  "interval"
-                ],
-                "title": "IssuingCardSpendingLimit",
-                "type": "object",
-                "x-expandableFields": []
-              },
-              "spending_limits_currency": {
-                "description": "Currency of the amounts within `spending_limits`. Always the same as the currency of the card.",
-                "nullable": true,
-                "type": "string"
-              }
-            },
-            "title": "IssuingCardAuthorizationControls",
-            "type": "object",
-            "x-expandableFields": [
-              "spending_limits"
-            ]
-          },
-          "status": {
-            "description": "Whether authorizations can be approved on this card.",
-            "enum": [
-              "active",
-              "canceled",
-              "inactive"
-            ],
-            "type": "string",
-            "x-stripeBypassValidation": true
-          },
-          "type": {
-            "description": "The type of the card.",
-            "enum": [
-              "physical",
-              "virtual"
-            ],
-            "type": "string"
+        {
+          "$ref": "#/components/schemas/issuing.cardholder"
+        }
+      ],
+      "description": "The cardholder to whom this authorization belongs.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/issuing.cardholder"
           }
-        },
-        "required": [
-          "brand",
-          "cardholder",
-          "created",
-          "currency",
-          "exp_month",
-          "exp_year",
-          "id",
-          "last4",
-          "livemode",
-          "metadata",
-          "object",
-          "spending_controls",
-          "status",
-          "type"
-        ],
-        "title": "IssuingCard",
-        "type": "object",
-        "x-expandableFields": [
-          "cardholder",
-          "replaced_by",
-          "replacement_for",
-          "shipping",
-          "spending_controls"
-        ],
-        "x-resourceId": "issuing.card"
-      },
-      "cardholder": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "created": {
-        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-        "format": "unix-time",
-        "type": "integer"
-      },
-      "currency": {
-        "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-        "type": "string"
-      },
-      "id": {
-        "description": "Unique identifier for the object.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "livemode": {
-        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-        "type": "boolean"
-      },
-      "merchant_amount": {
-        "description": "The total amount that was authorized or rejected. This amount is in the `merchant_currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).",
-        "type": "integer"
-      },
-      "merchant_currency": {
-        "description": "The currency that was presented to the cardholder for the authorization. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-        "type": "string"
-      },
-      "merchant_data": {
-        "description": "",
-        "properties": {
-          "category": {
-            "description": "A categorization of the seller's type of business. See our [merchant categories guide](https://stripe.com/docs/issuing/merchant-categories) for a list of possible values.",
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "category_code": {
-            "description": "The merchant category code for the seller’s business",
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "city": {
-            "description": "City where the seller is located",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "country": {
-            "description": "Country where the seller is located",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "name": {
-            "description": "Name of the seller",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "network_id": {
-            "description": "Identifier assigned to the seller by the card brand",
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "postal_code": {
-            "description": "Postal code where the seller is located",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "state": {
-            "description": "State where the seller is located",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "required": [
-          "category",
-          "category_code",
-          "network_id"
-        ],
-        "title": "IssuingAuthorizationMerchantData",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "metadata": {},
-      "object": {
-        "description": "String representing the object's type. Objects of the same type share the same value.",
-        "enum": [
-          "issuing.authorization"
-        ],
-        "type": "string"
-      },
-      "pending_request": {
-        "description": "",
-        "properties": {
-          "amount": {
-            "description": "The additional amount Stripe will hold if the authorization is approved, in the card's [currency](https://stripe.com/docs/api#issuing_authorization_object-pending-request-currency) and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).",
-            "type": "integer"
-          },
-          "amount_details": {
-            "description": "",
-            "properties": {
-              "atm_fee": {
-                "description": "The fee charged by the ATM for the cash withdrawal.",
-                "nullable": true,
-                "type": "integer"
-              }
-            },
-            "title": "IssuingAuthorizationAmountDetails",
-            "type": "object",
-            "x-expandableFields": []
-          },
-          "currency": {
-            "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-            "type": "string"
-          },
-          "is_amount_controllable": {
-            "description": "If set `true`, you may provide [amount](https://stripe.com/docs/api/issuing/authorizations/approve#approve_issuing_authorization-amount) to control how much to hold for the authorization.",
-            "type": "boolean"
-          },
-          "merchant_amount": {
-            "description": "The amount the merchant is requesting to be authorized in the `merchant_currency`. The amount is in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).",
-            "type": "integer"
-          },
-          "merchant_currency": {
-            "description": "The local currency the merchant is requesting to authorize.",
-            "type": "string"
-          }
-        },
-        "required": [
-          "amount",
-          "currency",
-          "is_amount_controllable",
-          "merchant_amount",
-          "merchant_currency"
-        ],
-        "title": "IssuingAuthorizationPendingRequest",
-        "type": "object",
-        "x-expandableFields": [
-          "amount_details"
         ]
+      }
+    },
+    "created": {
+      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "currency": {
+      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+      "type": "string"
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "livemode": {
+      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+      "type": "boolean"
+    },
+    "merchant_amount": {
+      "description": "The total amount that was authorized or rejected. This amount is in the `merchant_currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).",
+      "type": "integer"
+    },
+    "merchant_currency": {
+      "description": "The currency that was presented to the cardholder for the authorization. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+      "type": "string"
+    },
+    "merchant_data": {
+      "description": "",
+      "properties": {
+        "category": {
+          "description": "A categorization of the seller's type of business. See our [merchant categories guide](https://stripe.com/docs/issuing/merchant-categories) for a list of possible values.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "category_code": {
+          "description": "The merchant category code for the seller’s business",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "city": {
+          "description": "City where the seller is located",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "country": {
+          "description": "Country where the seller is located",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the seller",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "network_id": {
+          "description": "Identifier assigned to the seller by the card brand",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "postal_code": {
+          "description": "Postal code where the seller is located",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "state": {
+          "description": "State where the seller is located",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
       },
-      "request_history": {
+      "required": [
+        "category",
+        "category_code",
+        "network_id"
+      ],
+      "title": "IssuingAuthorizationMerchantData",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "metadata": {
+      "additionalProperties": {
+        "maxLength": 500,
+        "type": "string"
+      },
+      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+      "type": "object"
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "issuing.authorization"
+      ],
+      "type": "string"
+    },
+    "pending_request": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "amount": {
+              "description": "The additional amount Stripe will hold if the authorization is approved, in the card's [currency](https://stripe.com/docs/api#issuing_authorization_object-pending-request-currency) and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).",
+              "type": "integer"
+            },
+            "amount_details": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "atm_fee": {
+                      "description": "The fee charged by the ATM for the cash withdrawal.",
+                      "nullable": true,
+                      "type": "integer"
+                    }
+                  },
+                  "title": "IssuingAuthorizationAmountDetails",
+                  "type": "object",
+                  "x-expandableFields": []
+                }
+              ],
+              "description": "Detailed breakdown of amount components. These amounts are denominated in `currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).",
+              "nullable": true
+            },
+            "currency": {
+              "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+              "type": "string"
+            },
+            "is_amount_controllable": {
+              "description": "If set `true`, you may provide [amount](https://stripe.com/docs/api/issuing/authorizations/approve#approve_issuing_authorization-amount) to control how much to hold for the authorization.",
+              "type": "boolean"
+            },
+            "merchant_amount": {
+              "description": "The amount the merchant is requesting to be authorized in the `merchant_currency`. The amount is in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).",
+              "type": "integer"
+            },
+            "merchant_currency": {
+              "description": "The local currency the merchant is requesting to authorize.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "amount",
+            "currency",
+            "is_amount_controllable",
+            "merchant_amount",
+            "merchant_currency"
+          ],
+          "title": "IssuingAuthorizationPendingRequest",
+          "type": "object",
+          "x-expandableFields": [
+            "amount_details"
+          ]
+        }
+      ],
+      "description": "The pending authorization request. This field will only be non-null during an `issuing_authorization.request` webhook.",
+      "nullable": true
+    },
+    "request_history": {
+      "description": "History of every time `pending_request` was approved/denied, either by you directly or by Stripe (e.g. based on your `spending_controls`). If the merchant changes the authorization by performing an [incremental authorization](https://stripe.com/docs/issuing/purchases/authorizations), you can look at this field to see the previous requests for the authorization.",
+      "items": {
         "description": "",
         "properties": {
           "amount": {
@@ -2505,17 +240,23 @@
             "type": "integer"
           },
           "amount_details": {
-            "description": "",
-            "properties": {
-              "atm_fee": {
-                "description": "The fee charged by the ATM for the cash withdrawal.",
-                "nullable": true,
-                "type": "integer"
+            "anyOf": [
+              {
+                "description": "",
+                "properties": {
+                  "atm_fee": {
+                    "description": "The fee charged by the ATM for the cash withdrawal.",
+                    "nullable": true,
+                    "type": "integer"
+                  }
+                },
+                "title": "IssuingAuthorizationAmountDetails",
+                "type": "object",
+                "x-expandableFields": []
               }
-            },
-            "title": "IssuingAuthorizationAmountDetails",
-            "type": "object",
-            "x-expandableFields": []
+            ],
+            "description": "Detailed breakdown of amount components. These amounts are denominated in `currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).",
+            "nullable": true
           },
           "approved": {
             "description": "Whether this request was approved.",
@@ -2576,670 +317,113 @@
           "amount_details"
         ]
       },
-      "status": {
-        "description": "The current status of the authorization in its lifecycle.",
-        "enum": [
-          "closed",
-          "pending",
-          "reversed"
-        ],
-        "type": "string"
-      },
-      "transactions": {
-        "description": "Any use of an [issued card](https://stripe.com/docs/issuing) that results in funds entering or leaving\nyour Stripe account, such as a completed purchase or refund, is represented by an Issuing\n`Transaction` object.\n\nRelated guide: [Issued Card Transactions](https://stripe.com/docs/issuing/purchases/transactions).",
-        "properties": {
-          "amount": {
-            "description": "The transaction amount, which will be reflected in your balance. This amount is in your currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).",
-            "type": "integer"
-          },
-          "amount_details": {
-            "description": "",
-            "properties": {
-              "atm_fee": {
-                "description": "The fee charged by the ATM for the cash withdrawal.",
-                "nullable": true,
-                "type": "integer"
-              }
-            },
-            "title": "IssuingTransactionAmountDetails",
-            "type": "object",
-            "x-expandableFields": []
-          },
-          "authorization": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "balance_transaction": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "card": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "cardholder": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "created": {
-            "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-            "format": "unix-time",
-            "type": "integer"
-          },
-          "currency": {
-            "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-            "type": "string"
-          },
-          "dispute": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "id": {
-            "description": "Unique identifier for the object.",
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "livemode": {
-            "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-            "type": "boolean"
-          },
-          "merchant_amount": {
-            "description": "The amount that the merchant will receive, denominated in `merchant_currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal). It will be different from `amount` if the merchant is taking payment in a different currency.",
-            "type": "integer"
-          },
-          "merchant_currency": {
-            "description": "The currency with which the merchant is taking payment.",
-            "type": "string"
-          },
-          "merchant_data": {
-            "description": "",
-            "properties": {
-              "category": {
-                "description": "A categorization of the seller's type of business. See our [merchant categories guide](https://stripe.com/docs/issuing/merchant-categories) for a list of possible values.",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "category_code": {
-                "description": "The merchant category code for the seller’s business",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "city": {
-                "description": "City where the seller is located",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "country": {
-                "description": "Country where the seller is located",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "name": {
-                "description": "Name of the seller",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "network_id": {
-                "description": "Identifier assigned to the seller by the card brand",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "postal_code": {
-                "description": "Postal code where the seller is located",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "state": {
-                "description": "State where the seller is located",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              }
-            },
-            "required": [
-              "category",
-              "category_code",
-              "network_id"
-            ],
-            "title": "IssuingAuthorizationMerchantData",
-            "type": "object",
-            "x-expandableFields": []
-          },
-          "metadata": {},
-          "object": {
-            "description": "String representing the object's type. Objects of the same type share the same value.",
-            "enum": [
-              "issuing.transaction"
-            ],
-            "type": "string"
-          },
-          "purchase_details": {
-            "description": "",
-            "properties": {
-              "flight": {
-                "description": "",
-                "properties": {
-                  "departure_at": {
-                    "description": "The time that the flight departed.",
-                    "nullable": true,
-                    "type": "integer"
-                  },
-                  "passenger_name": {
-                    "description": "The name of the passenger.",
-                    "maxLength": 5000,
-                    "nullable": true,
-                    "type": "string"
-                  },
-                  "refundable": {
-                    "description": "Whether the ticket is refundable.",
-                    "nullable": true,
-                    "type": "boolean"
-                  },
-                  "segments": {
-                    "description": "",
-                    "properties": {
-                      "arrival_airport_code": {
-                        "description": "The three-letter IATA airport code of the flight's destination.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "carrier": {
-                        "description": "The airline carrier code.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "departure_airport_code": {
-                        "description": "The three-letter IATA airport code that the flight departed from.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "flight_number": {
-                        "description": "The flight number.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "service_class": {
-                        "description": "The flight's service class.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "stopover_allowed": {
-                        "description": "Whether a stopover is allowed on this flight.",
-                        "nullable": true,
-                        "type": "boolean"
-                      }
-                    },
-                    "title": "IssuingTransactionFlightDataLeg",
-                    "type": "object",
-                    "x-expandableFields": []
-                  },
-                  "travel_agency": {
-                    "description": "The travel agency that issued the ticket.",
-                    "maxLength": 5000,
-                    "nullable": true,
-                    "type": "string"
-                  }
-                },
-                "title": "IssuingTransactionFlightData",
-                "type": "object",
-                "x-expandableFields": [
-                  "segments"
-                ]
-              },
-              "fuel": {
-                "description": "",
-                "properties": {
-                  "type": {
-                    "description": "The type of fuel that was purchased. One of `diesel`, `unleaded_plus`, `unleaded_regular`, `unleaded_super`, or `other`.",
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  "unit": {
-                    "description": "The units for `volume_decimal`. One of `us_gallon` or `liter`.",
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  "unit_cost_decimal": {
-                    "description": "The cost in cents per each unit of fuel, represented as a decimal string with at most 12 decimal places.",
-                    "format": "decimal",
-                    "type": "string"
-                  },
-                  "volume_decimal": {
-                    "description": "The volume of the fuel that was pumped, represented as a decimal string with at most 12 decimal places.",
-                    "format": "decimal",
-                    "nullable": true,
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "type",
-                  "unit",
-                  "unit_cost_decimal"
-                ],
-                "title": "IssuingTransactionFuelData",
-                "type": "object",
-                "x-expandableFields": []
-              },
-              "lodging": {
-                "description": "",
-                "properties": {
-                  "check_in_at": {
-                    "description": "The time of checking into the lodging.",
-                    "nullable": true,
-                    "type": "integer"
-                  },
-                  "nights": {
-                    "description": "The number of nights stayed at the lodging.",
-                    "nullable": true,
-                    "type": "integer"
-                  }
-                },
-                "title": "IssuingTransactionLodgingData",
-                "type": "object",
-                "x-expandableFields": []
-              },
-              "receipt": {
-                "description": "",
-                "properties": {
-                  "description": {
-                    "description": "The description of the item. The maximum length of this field is 26 characters.",
-                    "maxLength": 5000,
-                    "nullable": true,
-                    "type": "string"
-                  },
-                  "quantity": {
-                    "description": "The quantity of the item.",
-                    "nullable": true,
-                    "type": "number"
-                  },
-                  "total": {
-                    "description": "The total for this line item in cents.",
-                    "nullable": true,
-                    "type": "integer"
-                  },
-                  "unit_cost": {
-                    "description": "The unit cost of the item in cents.",
-                    "nullable": true,
-                    "type": "integer"
-                  }
-                },
-                "title": "IssuingTransactionReceiptData",
-                "type": "object",
-                "x-expandableFields": []
-              },
-              "reference": {
-                "description": "A merchant-specific order number.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              }
-            },
-            "title": "IssuingTransactionPurchaseDetails",
-            "type": "object",
-            "x-expandableFields": [
-              "flight",
-              "fuel",
-              "lodging",
-              "receipt"
-            ]
-          },
-          "type": {
-            "description": "The nature of the transaction.",
-            "enum": [
-              "capture",
-              "refund"
-            ],
-            "type": "string",
-            "x-stripeBypassValidation": true
-          },
-          "wallet": {
-            "description": "The digital wallet used for this transaction. One of `apple_pay`, `google_pay`, or `samsung_pay`.",
-            "enum": [
-              "apple_pay",
-              "google_pay",
-              "samsung_pay"
-            ],
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "required": [
-          "amount",
-          "card",
-          "created",
-          "currency",
-          "id",
-          "livemode",
-          "merchant_amount",
-          "merchant_currency",
-          "merchant_data",
-          "metadata",
-          "object",
-          "type"
-        ],
-        "title": "IssuingTransaction",
-        "type": "object",
-        "x-expandableFields": [
-          "amount_details",
-          "authorization",
-          "balance_transaction",
-          "card",
-          "cardholder",
-          "dispute",
-          "merchant_data",
-          "purchase_details"
-        ],
-        "x-resourceId": "issuing.transaction"
-      },
-      "verification_data": {
-        "description": "",
-        "properties": {
-          "address_line1_check": {
-            "description": "Whether the cardholder provided an address first line and if it matched the cardholder’s `billing.address.line1`.",
-            "enum": [
-              "match",
-              "mismatch",
-              "not_provided"
-            ],
-            "type": "string"
-          },
-          "address_postal_code_check": {
-            "description": "Whether the cardholder provided a postal code and if it matched the cardholder’s `billing.address.postal_code`.",
-            "enum": [
-              "match",
-              "mismatch",
-              "not_provided"
-            ],
-            "type": "string"
-          },
-          "cvc_check": {
-            "description": "Whether the cardholder provided a CVC and if it matched Stripe’s record.",
-            "enum": [
-              "match",
-              "mismatch",
-              "not_provided"
-            ],
-            "type": "string"
-          },
-          "expiry_check": {
-            "description": "Whether the cardholder provided an expiry date and if it matched Stripe’s record.",
-            "enum": [
-              "match",
-              "mismatch",
-              "not_provided"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "address_line1_check",
-          "address_postal_code_check",
-          "cvc_check",
-          "expiry_check"
-        ],
-        "title": "IssuingAuthorizationVerificationData",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "wallet": {
-        "description": "The digital wallet used for this authorization. One of `apple_pay`, `google_pay`, or `samsung_pay`.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      }
+      "type": "array"
     },
-    "required": [
-      "amount",
-      "approved",
-      "authorization_method",
-      "balance_transactions",
-      "card",
-      "created",
-      "currency",
-      "id",
-      "livemode",
-      "merchant_amount",
-      "merchant_currency",
-      "merchant_data",
-      "metadata",
-      "object",
-      "request_history",
-      "status",
-      "transactions",
-      "verification_data"
-    ],
-    "title": "IssuingAuthorization",
-    "type": "object",
-    "x-expandableFields": [
-      "amount_details",
-      "balance_transactions",
-      "card",
-      "cardholder",
-      "merchant_data",
-      "pending_request",
-      "request_history",
-      "transactions",
-      "verification_data"
-    ],
-    "x-resourceId": "issuing.authorization",
-    "default": {
-      "amount": 0,
-      "amount_details": {
-        "atm_fee": 0
+    "status": {
+      "description": "The current status of the authorization in its lifecycle.",
+      "enum": [
+        "closed",
+        "pending",
+        "reversed"
+      ],
+      "type": "string"
+    },
+    "transactions": {
+      "description": "List of [transactions](https://stripe.com/docs/api/issuing/transactions) associated with this authorization.",
+      "items": {
+        "$ref": "#/components/schemas/issuing.transaction"
       },
-      "approved": true,
-      "authorization_method": "chip",
-      "balance_transactions": {},
-      "card": {
-        "brand": "string",
-        "cancellation_reason": "lost",
-        "cardholder": {
-          "billing": {
-            "address": {}
-          },
-          "company": {
-            "tax_id_provided": true
-          },
-          "created": 0,
-          "email": "string",
-          "id": "string",
-          "individual": {
-            "dob": {
-              "day": 0,
-              "month": 0,
-              "year": 0
-            },
-            "first_name": "string",
-            "last_name": "string",
-            "verification": {
-              "document": {
-                "back": "string",
-                "front": "string"
-              }
-            }
-          },
-          "livemode": true,
-          "metadata": {},
-          "name": "string",
-          "object": "issuing.cardholder",
-          "phone_number": "string",
-          "requirements": {
-            "disabled_reason": "listed",
-            "past_due": "company.tax_id"
-          },
-          "spending_controls": {
-            "allowed_categories": "ac_refrigeration_repair",
-            "blocked_categories": "ac_refrigeration_repair",
-            "spending_limits": {
-              "amount": 0,
-              "categories": "ac_refrigeration_repair",
-              "interval": "all_time"
-            },
-            "spending_limits_currency": "string"
-          },
-          "status": "active",
-          "type": "company"
+      "type": "array"
+    },
+    "verification_data": {
+      "description": "",
+      "properties": {
+        "address_line1_check": {
+          "description": "Whether the cardholder provided an address first line and if it matched the cardholder’s `billing.address.line1`.",
+          "enum": [
+            "match",
+            "mismatch",
+            "not_provided"
+          ],
+          "type": "string"
         },
-        "created": 0,
-        "currency": "string",
-        "cvc": "string",
-        "exp_month": 0,
-        "exp_year": 0,
-        "id": "string",
-        "last4": "string",
-        "livemode": true,
-        "metadata": {},
-        "number": "string",
-        "object": "issuing.card",
-        "replaced_by": "string",
-        "replacement_for": "string",
-        "replacement_reason": "damaged",
-        "shipping": {
-          "address": {},
-          "carrier": "dhl",
-          "eta": 0,
-          "name": "string",
-          "service": "express",
-          "status": "canceled",
-          "tracking_number": "string",
-          "tracking_url": "string",
-          "type": "bulk"
+        "address_postal_code_check": {
+          "description": "Whether the cardholder provided a postal code and if it matched the cardholder’s `billing.address.postal_code`.",
+          "enum": [
+            "match",
+            "mismatch",
+            "not_provided"
+          ],
+          "type": "string"
         },
-        "spending_controls": {
-          "allowed_categories": "ac_refrigeration_repair",
-          "blocked_categories": "ac_refrigeration_repair",
-          "spending_limits": {
-            "amount": 0,
-            "categories": "ac_refrigeration_repair",
-            "interval": "all_time"
-          },
-          "spending_limits_currency": "string"
+        "cvc_check": {
+          "description": "Whether the cardholder provided a CVC and if it matched Stripe’s record.",
+          "enum": [
+            "match",
+            "mismatch",
+            "not_provided"
+          ],
+          "type": "string"
         },
-        "status": "active",
-        "type": "physical"
+        "expiry_check": {
+          "description": "Whether the cardholder provided an expiry date and if it matched Stripe’s record.",
+          "enum": [
+            "match",
+            "mismatch",
+            "not_provided"
+          ],
+          "type": "string"
+        }
       },
-      "cardholder": "string",
-      "created": 0,
-      "currency": "string",
-      "id": "string",
-      "livemode": true,
-      "merchant_amount": 0,
-      "merchant_currency": "string",
-      "merchant_data": {
-        "category": "string",
-        "category_code": "string",
-        "city": "string",
-        "country": "string",
-        "name": "string",
-        "network_id": "string",
-        "postal_code": "string",
-        "state": "string"
-      },
-      "metadata": {},
-      "object": "issuing.authorization",
-      "pending_request": {
-        "amount": 0,
-        "amount_details": {
-          "atm_fee": 0
-        },
-        "currency": "string",
-        "is_amount_controllable": true,
-        "merchant_amount": 0,
-        "merchant_currency": "string"
-      },
-      "request_history": {
-        "amount": 0,
-        "amount_details": {
-          "atm_fee": 0
-        },
-        "approved": true,
-        "created": 0,
-        "currency": "string",
-        "merchant_amount": 0,
-        "merchant_currency": "string",
-        "reason": "account_disabled"
-      },
-      "status": "closed",
-      "transactions": {
-        "amount": 0,
-        "amount_details": {
-          "atm_fee": 0
-        },
-        "authorization": "string",
-        "balance_transaction": "string",
-        "card": "string",
-        "cardholder": "string",
-        "created": 0,
-        "currency": "string",
-        "dispute": "string",
-        "id": "string",
-        "livemode": true,
-        "merchant_amount": 0,
-        "merchant_currency": "string",
-        "merchant_data": {
-          "category": "string",
-          "category_code": "string",
-          "city": "string",
-          "country": "string",
-          "name": "string",
-          "network_id": "string",
-          "postal_code": "string",
-          "state": "string"
-        },
-        "metadata": {},
-        "object": "issuing.transaction",
-        "purchase_details": {
-          "flight": {
-            "departure_at": 0,
-            "passenger_name": "string",
-            "refundable": true,
-            "segments": {
-              "arrival_airport_code": "string",
-              "carrier": "string",
-              "departure_airport_code": "string",
-              "flight_number": "string",
-              "service_class": "string",
-              "stopover_allowed": true
-            },
-            "travel_agency": "string"
-          },
-          "fuel": {
-            "type": "string",
-            "unit": "string",
-            "unit_cost_decimal": "0.0",
-            "volume_decimal": "0.0"
-          },
-          "lodging": {
-            "check_in_at": 0,
-            "nights": 0
-          },
-          "receipt": {
-            "description": "string",
-            "quantity": 0,
-            "total": 0,
-            "unit_cost": 0
-          },
-          "reference": "string"
-        },
-        "type": "capture",
-        "wallet": "apple_pay"
-      },
-      "verification_data": {
-        "address_line1_check": "match",
-        "address_postal_code_check": "match",
-        "cvc_check": "match",
-        "expiry_check": "match"
-      },
-      "wallet": "string"
+      "required": [
+        "address_line1_check",
+        "address_postal_code_check",
+        "cvc_check",
+        "expiry_check"
+      ],
+      "title": "IssuingAuthorizationVerificationData",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "wallet": {
+      "description": "The digital wallet used for this authorization. One of `apple_pay`, `google_pay`, or `samsung_pay`.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "amount",
+    "approved",
+    "authorization_method",
+    "balance_transactions",
+    "card",
+    "created",
+    "currency",
+    "id",
+    "livemode",
+    "merchant_amount",
+    "merchant_currency",
+    "merchant_data",
+    "metadata",
+    "object",
+    "request_history",
+    "status",
+    "transactions",
+    "verification_data"
+  ],
+  "title": "IssuingAuthorization",
+  "type": "object",
+  "x-expandableFields": [
+    "amount_details",
+    "balance_transactions",
+    "card",
+    "cardholder",
+    "merchant_data",
+    "pending_request",
+    "request_history",
+    "transactions",
+    "verification_data"
+  ],
+  "x-resourceId": "issuing.authorization"
 }

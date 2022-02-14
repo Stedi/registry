@@ -1,130 +1,219 @@
 {
-  "name": "bank_account",
-  "schema": {
-    "description": "These bank accounts are payment methods on `Customer` objects.\n\nOn the other hand [External Accounts](https://stripe.com/docs/api#external_accounts) are transfer\ndestinations on `Account` objects for [Custom accounts](https://stripe.com/docs/connect/custom-accounts).\nThey can be bank accounts or debit cards as well, and are documented in the links above.\n\nRelated guide: [Bank Debits and Transfers](https://stripe.com/docs/payments/bank-debits-transfers).",
-    "properties": {
-      "account": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "account_holder_name": {
-        "description": "The name of the person or business that owns the bank account.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "account_holder_type": {
-        "description": "The type of entity that holds the account. This can be either `individual` or `company`.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "account_type": {
-        "description": "The bank account type. This can only be `checking` or `savings` in most countries. In Japan, this can only be `futsu` or `toza`.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "available_payout_methods": {
+  "description": "These bank accounts are payment methods on `Customer` objects.\n\nOn the other hand [External Accounts](https://stripe.com/docs/api#external_accounts) are transfer\ndestinations on `Account` objects for [Custom accounts](https://stripe.com/docs/connect/custom-accounts).\nThey can be bank accounts or debit cards as well, and are documented in the links above.\n\nRelated guide: [Bank Debits and Transfers](https://stripe.com/docs/payments/bank-debits-transfers).",
+  "properties": {
+    "account": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/account"
+        }
+      ],
+      "description": "The ID of the account that the bank account is associated with.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/account"
+          }
+        ]
+      }
+    },
+    "account_holder_name": {
+      "description": "The name of the person or business that owns the bank account.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "account_holder_type": {
+      "description": "The type of entity that holds the account. This can be either `individual` or `company`.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "account_type": {
+      "description": "The bank account type. This can only be `checking` or `savings` in most countries. In Japan, this can only be `futsu` or `toza`.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "available_payout_methods": {
+      "description": "A set of available payout methods for this bank account. Only values from this set should be passed as the `method` when creating a payout.",
+      "items": {
         "enum": [
           "instant",
           "standard"
         ],
         "type": "string"
       },
-      "bank_name": {
-        "description": "Name of the bank associated with the routing number (e.g., `WELLS FARGO`).",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "country": {
-        "description": "Two-letter ISO code representing the country the bank account is located in.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "currency": {
-        "description": "Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank account.",
-        "type": "string"
-      },
-      "customer": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "default_for_currency": {
-        "description": "Whether this bank account is the default external account for its currency.",
-        "nullable": true,
-        "type": "boolean"
-      },
-      "fingerprint": {
-        "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "id": {
-        "description": "Unique identifier for the object.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "last4": {
-        "description": "The last four digits of the bank account number.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "metadata": {},
-      "object": {
-        "description": "String representing the object's type. Objects of the same type share the same value.",
-        "enum": [
-          "bank_account"
-        ],
-        "type": "string"
-      },
-      "routing_number": {
-        "description": "The routing transit number for the bank account.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "status": {
-        "description": "For bank accounts, possible values are `new`, `validated`, `verified`, `verification_failed`, or `errored`. A bank account that hasn't had any activity or validation performed is `new`. If Stripe can determine that the bank account exists, its status will be `validated`. Note that there often isn’t enough information to know (e.g., for smaller credit unions), and the validation is not always run. If customer bank account verification has succeeded, the bank account status will be `verified`. If the verification failed for any reason, such as microdeposit failure, the status will be `verification_failed`. If a transfer sent to this bank account fails, we'll set the status to `errored` and will not continue to send transfers until the bank details are updated.\n\nFor external accounts, possible values are `new` and `errored`. Validations aren't run against external accounts because they're only used for payouts. This means the other statuses don't apply. If a transfer fails, the status is set to `errored` and transfers are stopped until account details are updated.",
-        "maxLength": 5000,
-        "type": "string"
+      "nullable": true,
+      "type": "array"
+    },
+    "bank_name": {
+      "description": "Name of the bank associated with the routing number (e.g., `WELLS FARGO`).",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "country": {
+      "description": "Two-letter ISO code representing the country the bank account is located in.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "currency": {
+      "description": "Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank account.",
+      "type": "string"
+    },
+    "customer": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/customer"
+        },
+        {
+          "description": "",
+          "properties": {
+            "deleted": {
+              "description": "Always true for a deleted object",
+              "enum": [
+                true
+              ],
+              "type": "boolean"
+            },
+            "id": {
+              "description": "Unique identifier for the object.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "object": {
+              "description": "String representing the object's type. Objects of the same type share the same value.",
+              "enum": [
+                "customer"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "deleted",
+            "id",
+            "object"
+          ],
+          "title": "DeletedCustomer",
+          "type": "object",
+          "x-expandableFields": [],
+          "x-resourceId": "deleted_customer"
+        }
+      ],
+      "description": "The ID of the customer that the bank account is associated with.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/customer"
+          },
+          {
+            "description": "",
+            "properties": {
+              "deleted": {
+                "description": "Always true for a deleted object",
+                "enum": [
+                  true
+                ],
+                "type": "boolean"
+              },
+              "id": {
+                "description": "Unique identifier for the object.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "customer"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "deleted",
+              "id",
+              "object"
+            ],
+            "title": "DeletedCustomer",
+            "type": "object",
+            "x-expandableFields": [],
+            "x-resourceId": "deleted_customer"
+          }
+        ]
       }
     },
-    "required": [
-      "country",
-      "currency",
-      "id",
-      "last4",
-      "object",
-      "status"
-    ],
-    "title": "BankAccount",
-    "type": "object",
-    "x-expandableFields": [
-      "account",
-      "customer"
-    ],
-    "x-resourceId": "bank_account",
-    "default": {
-      "account": "string",
-      "account_holder_name": "string",
-      "account_holder_type": "string",
-      "account_type": "string",
-      "available_payout_methods": "instant",
-      "bank_name": "string",
-      "country": "string",
-      "currency": "string",
-      "customer": "string",
-      "default_for_currency": true,
-      "fingerprint": "string",
-      "id": "string",
-      "last4": "string",
-      "metadata": {},
-      "object": "bank_account",
-      "routing_number": "string",
-      "status": "string"
+    "default_for_currency": {
+      "description": "Whether this bank account is the default external account for its currency.",
+      "nullable": true,
+      "type": "boolean"
+    },
+    "fingerprint": {
+      "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "last4": {
+      "description": "The last four digits of the bank account number.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "maxLength": 500,
+        "type": "string"
+      },
+      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+      "nullable": true,
+      "type": "object"
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "bank_account"
+      ],
+      "type": "string"
+    },
+    "routing_number": {
+      "description": "The routing transit number for the bank account.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "status": {
+      "description": "For bank accounts, possible values are `new`, `validated`, `verified`, `verification_failed`, or `errored`. A bank account that hasn't had any activity or validation performed is `new`. If Stripe can determine that the bank account exists, its status will be `validated`. Note that there often isn’t enough information to know (e.g., for smaller credit unions), and the validation is not always run. If customer bank account verification has succeeded, the bank account status will be `verified`. If the verification failed for any reason, such as microdeposit failure, the status will be `verification_failed`. If a transfer sent to this bank account fails, we'll set the status to `errored` and will not continue to send transfers until the bank details are updated.\n\nFor external accounts, possible values are `new` and `errored`. Validations aren't run against external accounts because they're only used for payouts. This means the other statuses don't apply. If a transfer fails, the status is set to `errored` and transfers are stopped until account details are updated.",
+      "maxLength": 5000,
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "country",
+    "currency",
+    "id",
+    "last4",
+    "object",
+    "status"
+  ],
+  "title": "BankAccount",
+  "type": "object",
+  "x-expandableFields": [
+    "account",
+    "customer"
+  ],
+  "x-resourceId": "bank_account"
 }

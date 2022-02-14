@@ -1,67 +1,54 @@
 {
-  "name": "account_payout_settings",
-  "schema": {
-    "description": "",
-    "properties": {
-      "debit_negative_balances": {
-        "description": "A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank account. See our [Understanding Connect Account Balances](https://stripe.com/docs/connect/account-balances) documentation for details. Default value is `false` for Custom accounts, otherwise `true`.",
-        "type": "boolean"
-      },
-      "schedule": {
-        "description": "",
-        "properties": {
-          "delay_days": {
-            "description": "The number of days charges for the account will be held before being paid out.",
-            "type": "integer"
-          },
-          "interval": {
-            "description": "How frequently funds will be paid out. One of `manual` (payouts only created via API call), `daily`, `weekly`, or `monthly`.",
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "monthly_anchor": {
-            "description": "The day of the month funds will be paid out. Only shown if `interval` is monthly. Payouts scheduled between the 29th and 31st of the month are sent on the last day of shorter months.",
-            "type": "integer"
-          },
-          "weekly_anchor": {
-            "description": "The day of the week funds will be paid out, of the style 'monday', 'tuesday', etc. Only shown if `interval` is weekly.",
-            "maxLength": 5000,
-            "type": "string"
-          }
-        },
-        "required": [
-          "delay_days",
-          "interval"
-        ],
-        "title": "TransferSchedule",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "statement_descriptor": {
-        "description": "The text that appears on the bank account statement for payouts. If not set, this defaults to the platform's bank descriptor as set in the Dashboard.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      }
+  "description": "",
+  "properties": {
+    "debit_negative_balances": {
+      "description": "A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank account. See our [Understanding Connect Account Balances](https://stripe.com/docs/connect/account-balances) documentation for details. Default value is `false` for Custom accounts, otherwise `true`.",
+      "type": "boolean"
     },
-    "required": [
-      "debit_negative_balances",
-      "schedule"
-    ],
-    "title": "AccountPayoutSettings",
-    "type": "object",
-    "x-expandableFields": [
-      "schedule"
-    ],
-    "default": {
-      "debit_negative_balances": true,
-      "schedule": {
-        "delay_days": 0,
-        "interval": "string",
-        "monthly_anchor": 0,
-        "weekly_anchor": "string"
+    "schedule": {
+      "description": "",
+      "properties": {
+        "delay_days": {
+          "description": "The number of days charges for the account will be held before being paid out.",
+          "type": "integer"
+        },
+        "interval": {
+          "description": "How frequently funds will be paid out. One of `manual` (payouts only created via API call), `daily`, `weekly`, or `monthly`.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "monthly_anchor": {
+          "description": "The day of the month funds will be paid out. Only shown if `interval` is monthly. Payouts scheduled between the 29th and 31st of the month are sent on the last day of shorter months.",
+          "type": "integer"
+        },
+        "weekly_anchor": {
+          "description": "The day of the week funds will be paid out, of the style 'monday', 'tuesday', etc. Only shown if `interval` is weekly.",
+          "maxLength": 5000,
+          "type": "string"
+        }
       },
-      "statement_descriptor": "string"
+      "required": [
+        "delay_days",
+        "interval"
+      ],
+      "title": "TransferSchedule",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "statement_descriptor": {
+      "description": "The text that appears on the bank account statement for payouts. If not set, this defaults to the platform's bank descriptor as set in the Dashboard.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "debit_negative_balances",
+    "schedule"
+  ],
+  "title": "AccountPayoutSettings",
+  "type": "object",
+  "x-expandableFields": [
+    "schedule"
+  ]
 }

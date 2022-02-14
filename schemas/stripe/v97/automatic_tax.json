@@ -1,32 +1,25 @@
 {
-  "name": "automatic_tax",
-  "schema": {
-    "description": "",
-    "properties": {
-      "enabled": {
-        "description": "Whether Stripe automatically computes tax on this invoice.",
-        "type": "boolean"
-      },
-      "status": {
-        "description": "The status of the most recent automated tax calculation for this invoice.",
-        "enum": [
-          "complete",
-          "failed",
-          "requires_location_inputs"
-        ],
-        "nullable": true,
-        "type": "string"
-      }
+  "description": "",
+  "properties": {
+    "enabled": {
+      "description": "Whether Stripe automatically computes tax on this invoice.",
+      "type": "boolean"
     },
-    "required": [
-      "enabled"
-    ],
-    "title": "AutomaticTax",
-    "type": "object",
-    "x-expandableFields": [],
-    "default": {
-      "enabled": true,
-      "status": "complete"
+    "status": {
+      "description": "The status of the most recent automated tax calculation for this invoice.",
+      "enum": [
+        "complete",
+        "failed",
+        "requires_location_inputs"
+      ],
+      "nullable": true,
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "enabled"
+  ],
+  "title": "AutomaticTax",
+  "type": "object",
+  "x-expandableFields": []
 }

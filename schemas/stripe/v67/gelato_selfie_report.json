@@ -1,71 +1,65 @@
 {
-  "name": "gelato_selfie_report",
-  "schema": {
-    "description": "Result from a selfie check",
-    "properties": {
-      "document": {
-        "description": "ID of the [File](https://stripe.com/docs/api/files) holding the image of the identity document used in this check.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "error": {
-        "description": "",
-        "properties": {
-          "code": {
-            "description": "A short machine-readable string giving the reason for the verification failure.",
-            "enum": [
-              "selfie_document_missing_photo",
-              "selfie_face_mismatch",
-              "selfie_manipulated",
-              "selfie_unverified_other"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "reason": {
-            "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "GelatoSelfieReportError",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "selfie": {
-        "description": "ID of the [File](https://stripe.com/docs/api/files) holding the image of the selfie used in this check.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "status": {
-        "description": "Status of this `selfie` check.",
-        "enum": [
-          "unverified",
-          "verified"
-        ],
-        "type": "string",
-        "x-stripeBypassValidation": true
-      }
+  "description": "Result from a selfie check",
+  "properties": {
+    "document": {
+      "description": "ID of the [File](https://stripe.com/docs/api/files) holding the image of the identity document used in this check.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
     },
-    "required": [
-      "status"
-    ],
-    "title": "GelatoSelfieReport",
-    "type": "object",
-    "x-expandableFields": [
-      "error"
-    ],
-    "default": {
-      "document": "string",
-      "error": {
-        "code": "selfie_document_missing_photo",
-        "reason": "string"
-      },
-      "selfie": "string",
-      "status": "unverified"
+    "error": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "code": {
+              "description": "A short machine-readable string giving the reason for the verification failure.",
+              "enum": [
+                "selfie_document_missing_photo",
+                "selfie_face_mismatch",
+                "selfie_manipulated",
+                "selfie_unverified_other"
+              ],
+              "nullable": true,
+              "type": "string"
+            },
+            "reason": {
+              "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "title": "GelatoSelfieReportError",
+          "type": "object",
+          "x-expandableFields": []
+        }
+      ],
+      "description": "Details on the verification error. Present when status is `unverified`.",
+      "nullable": true
+    },
+    "selfie": {
+      "description": "ID of the [File](https://stripe.com/docs/api/files) holding the image of the selfie used in this check.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "status": {
+      "description": "Status of this `selfie` check.",
+      "enum": [
+        "unverified",
+        "verified"
+      ],
+      "type": "string",
+      "x-stripeBypassValidation": true
     }
-  }
+  },
+  "required": [
+    "status"
+  ],
+  "title": "GelatoSelfieReport",
+  "type": "object",
+  "x-expandableFields": [
+    "error"
+  ]
 }

@@ -1,29 +1,43 @@
 {
-  "name": "discounts_resource_discount_amount",
-  "schema": {
-    "description": "",
-    "properties": {
-      "amount": {
-        "description": "The amount, in %s, of the discount.",
-        "type": "integer"
-      },
-      "discount": {
-        "maxLength": 5000,
-        "type": "string"
-      }
+  "description": "",
+  "properties": {
+    "amount": {
+      "description": "The amount, in %s, of the discount.",
+      "type": "integer"
     },
-    "required": [
-      "amount",
-      "discount"
-    ],
-    "title": "DiscountsResourceDiscountAmount",
-    "type": "object",
-    "x-expandableFields": [
-      "discount"
-    ],
-    "default": {
-      "amount": 0,
-      "discount": "string"
+    "discount": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/discount"
+        },
+        {
+          "$ref": "#/components/schemas/deleted_discount"
+        }
+      ],
+      "description": "The discount that was applied to get this discount amount.",
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/discount"
+          },
+          {
+            "$ref": "#/components/schemas/deleted_discount"
+          }
+        ]
+      }
     }
-  }
+  },
+  "required": [
+    "amount",
+    "discount"
+  ],
+  "title": "DiscountsResourceDiscountAmount",
+  "type": "object",
+  "x-expandableFields": [
+    "discount"
+  ]
 }

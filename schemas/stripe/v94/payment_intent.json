@@ -1,0 +1,1253 @@
+{
+  "description": "A PaymentIntent guides you through the process of collecting a payment from your customer.\nWe recommend that you create exactly one PaymentIntent for each order or\ncustomer session in your system. You can reference the PaymentIntent later to\nsee the history of payment attempts for a particular session.\n\nA PaymentIntent transitions through\n[multiple statuses](https://stripe.com/docs/payments/intents#intent-statuses)\nthroughout its lifetime as it interfaces with Stripe.js to perform\nauthentication flows and ultimately creates at most one successful charge.\n\nRelated guide: [Payment Intents API](https://stripe.com/docs/payments/payment-intents).",
+  "properties": {
+    "amount": {
+      "description": "Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).",
+      "type": "integer"
+    },
+    "amount_capturable": {
+      "description": "Amount that can be captured from this PaymentIntent.",
+      "type": "integer"
+    },
+    "amount_received": {
+      "description": "Amount that was collected by this PaymentIntent.",
+      "type": "integer"
+    },
+    "application": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "description": "",
+          "properties": {
+            "id": {
+              "description": "Unique identifier for the object.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "name": {
+              "description": "The name of the application.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "object": {
+              "description": "String representing the object's type. Objects of the same type share the same value.",
+              "enum": [
+                "application"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "object"
+          ],
+          "title": "Application",
+          "type": "object",
+          "x-expandableFields": []
+        }
+      ],
+      "description": "ID of the Connect application that created the PaymentIntent.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "description": "",
+            "properties": {
+              "id": {
+                "description": "Unique identifier for the object.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "name": {
+                "description": "The name of the application.",
+                "maxLength": 5000,
+                "nullable": true,
+                "type": "string"
+              },
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "application"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "object"
+            ],
+            "title": "Application",
+            "type": "object",
+            "x-expandableFields": []
+          }
+        ]
+      }
+    },
+    "application_fee_amount": {
+      "description": "The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).",
+      "nullable": true,
+      "type": "integer"
+    },
+    "automatic_payment_methods": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "enabled": {
+              "description": "Automatically calculates compatible payment methods",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled"
+          ],
+          "title": "PaymentFlowsAutomaticPaymentMethodsPaymentIntent",
+          "type": "object",
+          "x-expandableFields": []
+        }
+      ],
+      "description": "Settings to configure compatible payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods)",
+      "nullable": true
+    },
+    "canceled_at": {
+      "description": "Populated when `status` is `canceled`, this is the time at which the PaymentIntent was canceled. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "nullable": true,
+      "type": "integer"
+    },
+    "cancellation_reason": {
+      "description": "Reason for cancellation of this PaymentIntent, either user-provided (`duplicate`, `fraudulent`, `requested_by_customer`, or `abandoned`) or generated by Stripe internally (`failed_invoice`, `void_invoice`, or `automatic`).",
+      "enum": [
+        "abandoned",
+        "automatic",
+        "duplicate",
+        "failed_invoice",
+        "fraudulent",
+        "requested_by_customer",
+        "void_invoice"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "capture_method": {
+      "description": "Controls when the funds will be captured from the customer's account.",
+      "enum": [
+        "automatic",
+        "manual"
+      ],
+      "type": "string"
+    },
+    "charges": {
+      "description": "Charges that were created by this PaymentIntent, if any.",
+      "properties": {
+        "data": {
+          "description": "This list only contains the latest charge, even if there were previously multiple unsuccessful charges. To view all previous charges for a PaymentIntent, you can filter the charges list using the `payment_intent` [parameter](https://stripe.com/docs/api/charges/list#list_charges-payment_intent).",
+          "items": {
+            "$ref": "#/components/schemas/charge"
+          },
+          "type": "array"
+        },
+        "has_more": {
+          "description": "True if this list has another page of items after this one that can be fetched.",
+          "type": "boolean"
+        },
+        "object": {
+          "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
+          "enum": [
+            "list"
+          ],
+          "type": "string"
+        },
+        "url": {
+          "description": "The URL where this list can be accessed.",
+          "maxLength": 5000,
+          "type": "string"
+        }
+      },
+      "required": [
+        "data",
+        "has_more",
+        "object",
+        "url"
+      ],
+      "title": "PaymentFlowsPaymentIntentResourceChargeList",
+      "type": "object",
+      "x-expandableFields": [
+        "data"
+      ]
+    },
+    "client_secret": {
+      "description": "The client secret of this PaymentIntent. Used for client-side retrieval using a publishable key. \n\nThe client secret can be used to complete a payment from your frontend. It should not be stored, logged, embedded in URLs, or exposed to anyone other than the customer. Make sure that you have TLS enabled on any page that includes the client secret.\n\nRefer to our docs to [accept a payment](https://stripe.com/docs/payments/accept-a-payment?integration=elements) and learn about how `client_secret` should be handled.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "confirmation_method": {
+      "enum": [
+        "automatic",
+        "manual"
+      ],
+      "type": "string"
+    },
+    "created": {
+      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "currency": {
+      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+      "type": "string"
+    },
+    "customer": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/customer"
+        },
+        {
+          "description": "",
+          "properties": {
+            "deleted": {
+              "description": "Always true for a deleted object",
+              "enum": [
+                true
+              ],
+              "type": "boolean"
+            },
+            "id": {
+              "description": "Unique identifier for the object.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "object": {
+              "description": "String representing the object's type. Objects of the same type share the same value.",
+              "enum": [
+                "customer"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "deleted",
+            "id",
+            "object"
+          ],
+          "title": "DeletedCustomer",
+          "type": "object",
+          "x-expandableFields": [],
+          "x-resourceId": "deleted_customer"
+        }
+      ],
+      "description": "ID of the Customer this PaymentIntent belongs to, if one exists.\n\nPayment methods attached to other Customers cannot be used with this PaymentIntent.\n\nIf present in combination with [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage), this PaymentIntent's payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/customer"
+          },
+          {
+            "description": "",
+            "properties": {
+              "deleted": {
+                "description": "Always true for a deleted object",
+                "enum": [
+                  true
+                ],
+                "type": "boolean"
+              },
+              "id": {
+                "description": "Unique identifier for the object.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "customer"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "deleted",
+              "id",
+              "object"
+            ],
+            "title": "DeletedCustomer",
+            "type": "object",
+            "x-expandableFields": [],
+            "x-resourceId": "deleted_customer"
+          }
+        ]
+      }
+    },
+    "description": {
+      "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "invoice": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/invoice"
+        }
+      ],
+      "description": "ID of the invoice that created this PaymentIntent, if it exists.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/invoice"
+          }
+        ]
+      }
+    },
+    "last_payment_error": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/api_errors"
+        }
+      ],
+      "description": "The payment error encountered in the previous PaymentIntent confirmation. It will be cleared if the PaymentIntent is later updated for any reason.",
+      "nullable": true
+    },
+    "livemode": {
+      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+      "type": "boolean"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "maxLength": 500,
+        "type": "string"
+      },
+      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. For more information, see the [documentation](https://stripe.com/docs/payments/payment-intents/creating-payment-intents#storing-information-in-metadata).",
+      "type": "object"
+    },
+    "next_action": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "alipay_handle_redirect": {
+              "description": "",
+              "properties": {
+                "native_data": {
+                  "description": "The native data to be used with Alipay SDK you must redirect your customer to in order to authenticate the payment in an Android App.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "native_url": {
+                  "description": "The native URL you must redirect your customer to in order to authenticate the payment in an iOS App.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "return_url": {
+                  "description": "If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "url": {
+                  "description": "The URL you must redirect your customer to in order to authenticate the payment.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                }
+              },
+              "title": "PaymentIntentNextActionAlipayHandleRedirect",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "boleto_display_details": {
+              "description": "",
+              "properties": {
+                "expires_at": {
+                  "description": "The timestamp after which the boleto expires.",
+                  "format": "unix-time",
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "hosted_voucher_url": {
+                  "description": "The URL to the hosted boleto voucher page, which allows customers to view the boleto voucher.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "number": {
+                  "description": "The boleto number.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "pdf": {
+                  "description": "The URL to the downloadable boleto voucher PDF.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                }
+              },
+              "title": "payment_intent_next_action_boleto",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "oxxo_display_details": {
+              "description": "",
+              "properties": {
+                "expires_after": {
+                  "description": "The timestamp after which the OXXO voucher expires.",
+                  "format": "unix-time",
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "hosted_voucher_url": {
+                  "description": "The URL for the hosted OXXO voucher page, which allows customers to view and print an OXXO voucher.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "number": {
+                  "description": "OXXO reference number.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                }
+              },
+              "title": "PaymentIntentNextActionDisplayOxxoDetails",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "redirect_to_url": {
+              "description": "",
+              "properties": {
+                "return_url": {
+                  "description": "If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "url": {
+                  "description": "The URL you must redirect your customer to in order to authenticate the payment.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                }
+              },
+              "title": "PaymentIntentNextActionRedirectToUrl",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "type": {
+              "description": "Type of the next action to perform, one of `redirect_to_url`, `use_stripe_sdk`, `alipay_handle_redirect`, `oxxo_display_details`, or `verify_with_microdeposits`.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "use_stripe_sdk": {
+              "description": "When confirming a PaymentIntent with Stripe.js, Stripe.js depends on the contents of this dictionary to invoke authentication flows. The shape of the contents is subject to change and is only intended to be used by Stripe.js.",
+              "type": "object"
+            },
+            "verify_with_microdeposits": {
+              "description": "",
+              "properties": {
+                "arrival_date": {
+                  "description": "The timestamp when the microdeposits are expected to land.",
+                  "format": "unix-time",
+                  "type": "integer"
+                },
+                "hosted_verification_url": {
+                  "description": "The URL for the hosted verification page, which allows customers to verify their bank account.",
+                  "maxLength": 5000,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "arrival_date",
+                "hosted_verification_url"
+              ],
+              "title": "PaymentIntentNextActionVerifyWithMicrodeposits",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "wechat_pay_display_qr_code": {
+              "description": "",
+              "properties": {
+                "data": {
+                  "description": "The data being used to generate QR code",
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                "image_data_url": {
+                  "description": "The base64 image data for a pre-generated QR code",
+                  "maxLength": 5000,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "data",
+                "image_data_url"
+              ],
+              "title": "PaymentIntentNextActionWechatPayDisplayQrCode",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "wechat_pay_redirect_to_android_app": {
+              "description": "",
+              "properties": {
+                "app_id": {
+                  "description": "app_id is the APP ID registered on WeChat open platform",
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                "nonce_str": {
+                  "description": "nonce_str is a random string",
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                "package": {
+                  "description": "package is static value",
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                "partner_id": {
+                  "description": "an unique merchant ID assigned by Wechat Pay",
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                "prepay_id": {
+                  "description": "an unique trading ID assigned by Wechat Pay",
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                "sign": {
+                  "description": "A signature",
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                "timestamp": {
+                  "description": "Specifies the current time in epoch format",
+                  "maxLength": 5000,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "app_id",
+                "nonce_str",
+                "package",
+                "partner_id",
+                "prepay_id",
+                "sign",
+                "timestamp"
+              ],
+              "title": "PaymentIntentNextActionWechatPayRedirectToAndroidApp",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "wechat_pay_redirect_to_ios_app": {
+              "description": "",
+              "properties": {
+                "native_url": {
+                  "description": "An universal link that redirect to Wechat Pay APP",
+                  "maxLength": 5000,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "native_url"
+              ],
+              "title": "PaymentIntentNextActionWechatPayRedirectToIOSApp",
+              "type": "object",
+              "x-expandableFields": []
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "title": "PaymentIntentNextAction",
+          "type": "object",
+          "x-expandableFields": [
+            "alipay_handle_redirect",
+            "boleto_display_details",
+            "oxxo_display_details",
+            "redirect_to_url",
+            "verify_with_microdeposits",
+            "wechat_pay_display_qr_code",
+            "wechat_pay_redirect_to_android_app",
+            "wechat_pay_redirect_to_ios_app"
+          ]
+        }
+      ],
+      "description": "If present, this property tells you what actions you need to take in order for your customer to fulfill a payment using the provided source.",
+      "nullable": true
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "payment_intent"
+      ],
+      "type": "string"
+    },
+    "on_behalf_of": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/account"
+        }
+      ],
+      "description": "The account (if any) for which the funds of the PaymentIntent are intended. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/account"
+          }
+        ]
+      }
+    },
+    "payment_method": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/payment_method"
+        }
+      ],
+      "description": "ID of the payment method used in this PaymentIntent.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/payment_method"
+          }
+        ]
+      }
+    },
+    "payment_method_options": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "acss_debit": {
+              "description": "",
+              "properties": {
+                "mandate_options": {
+                  "description": "",
+                  "properties": {
+                    "custom_mandate_url": {
+                      "description": "A URL for custom mandate text",
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "interval_description": {
+                      "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "payment_schedule": {
+                      "description": "Payment schedule for the mandate.",
+                      "enum": [
+                        "combined",
+                        "interval",
+                        "sporadic"
+                      ],
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "transaction_type": {
+                      "description": "Transaction type of the mandate.",
+                      "enum": [
+                        "business",
+                        "personal"
+                      ],
+                      "nullable": true,
+                      "type": "string"
+                    }
+                  },
+                  "title": "payment_intent_payment_method_options_mandate_options_acss_debit",
+                  "type": "object",
+                  "x-expandableFields": []
+                },
+                "verification_method": {
+                  "description": "Bank account verification method.",
+                  "enum": [
+                    "automatic",
+                    "instant",
+                    "microdeposits"
+                  ],
+                  "type": "string",
+                  "x-stripeBypassValidation": true
+                }
+              },
+              "title": "payment_intent_payment_method_options_acss_debit",
+              "type": "object",
+              "x-expandableFields": [
+                "mandate_options"
+              ]
+            },
+            "afterpay_clearpay": {
+              "description": "",
+              "properties": {
+                "reference": {
+                  "description": "Order identifier shown to the merchant in Afterpay’s online portal. We recommend using a value that helps you answer any questions a customer might have about\nthe payment. The identifier is limited to 128 characters and may contain only letters, digits, underscores, backslashes and dashes.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                }
+              },
+              "title": "payment_method_options_afterpay_clearpay",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "alipay": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_options_alipay",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "bancontact": {
+              "description": "",
+              "properties": {
+                "preferred_language": {
+                  "description": "Preferred language of the Bancontact authorization page that the customer is redirected to.",
+                  "enum": [
+                    "de",
+                    "en",
+                    "fr",
+                    "nl"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "preferred_language"
+              ],
+              "title": "payment_method_options_bancontact",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "boleto": {
+              "description": "",
+              "properties": {
+                "expires_after_days": {
+                  "description": "The number of calendar days before a Boleto voucher expires. For example, if you create a Boleto voucher on Monday and you set expires_after_days to 2, the Boleto voucher will expire on Wednesday at 23:59 America/Sao_Paulo time.",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "expires_after_days"
+              ],
+              "title": "payment_method_options_boleto",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "card": {
+              "description": "",
+              "properties": {
+                "installments": {
+                  "anyOf": [
+                    {
+                      "description": "",
+                      "properties": {
+                        "available_plans": {
+                          "description": "Installment plans that may be selected for this PaymentIntent.",
+                          "items": {
+                            "description": "",
+                            "properties": {
+                              "count": {
+                                "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
+                                "nullable": true,
+                                "type": "integer"
+                              },
+                              "interval": {
+                                "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
+                                "enum": [
+                                  "month"
+                                ],
+                                "nullable": true,
+                                "type": "string"
+                              },
+                              "type": {
+                                "description": "Type of installment plan, one of `fixed_count`.",
+                                "enum": [
+                                  "fixed_count"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
+                            "title": "payment_method_details_card_installments_plan",
+                            "type": "object",
+                            "x-expandableFields": []
+                          },
+                          "nullable": true,
+                          "type": "array"
+                        },
+                        "enabled": {
+                          "description": "Whether Installments are enabled for this PaymentIntent.",
+                          "type": "boolean"
+                        },
+                        "plan": {
+                          "anyOf": [
+                            {
+                              "description": "",
+                              "properties": {
+                                "count": {
+                                  "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
+                                  "nullable": true,
+                                  "type": "integer"
+                                },
+                                "interval": {
+                                  "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
+                                  "enum": [
+                                    "month"
+                                  ],
+                                  "nullable": true,
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "description": "Type of installment plan, one of `fixed_count`.",
+                                  "enum": [
+                                    "fixed_count"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type"
+                              ],
+                              "title": "payment_method_details_card_installments_plan",
+                              "type": "object",
+                              "x-expandableFields": []
+                            }
+                          ],
+                          "description": "Installment plan selected for this PaymentIntent.",
+                          "nullable": true
+                        }
+                      },
+                      "required": [
+                        "enabled"
+                      ],
+                      "title": "payment_method_options_card_installments",
+                      "type": "object",
+                      "x-expandableFields": [
+                        "available_plans",
+                        "plan"
+                      ]
+                    }
+                  ],
+                  "description": "Installment details for this payment (Mexico only).\n\nFor more information, see the [installments integration guide](https://stripe.com/docs/payments/installments).",
+                  "nullable": true
+                },
+                "network": {
+                  "description": "Selected network to process this payment intent on. Depends on the available networks of the card attached to the payment intent. Can be only set confirm-time.",
+                  "enum": [
+                    "amex",
+                    "cartes_bancaires",
+                    "diners",
+                    "discover",
+                    "interac",
+                    "jcb",
+                    "mastercard",
+                    "unionpay",
+                    "unknown",
+                    "visa"
+                  ],
+                  "nullable": true,
+                  "type": "string"
+                },
+                "request_three_d_secure": {
+                  "description": "We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.",
+                  "enum": [
+                    "any",
+                    "automatic",
+                    "challenge_only"
+                  ],
+                  "nullable": true,
+                  "type": "string"
+                }
+              },
+              "title": "payment_intent_payment_method_options_card",
+              "type": "object",
+              "x-expandableFields": [
+                "installments"
+              ]
+            },
+            "card_present": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_options_card_present",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "giropay": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_options_giropay",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "ideal": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_options_ideal",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "interac_present": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_options_interac_present",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "klarna": {
+              "description": "",
+              "properties": {
+                "preferred_locale": {
+                  "description": "Preferred locale of the Klarna checkout page that the customer is redirected to.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                }
+              },
+              "title": "payment_method_options_klarna",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "oxxo": {
+              "description": "",
+              "properties": {
+                "expires_after_days": {
+                  "description": "The number of calendar days before an OXXO invoice expires. For example, if you create an OXXO invoice on Monday and you set expires_after_days to 2, the OXXO invoice will expire on Wednesday at 23:59 America/Mexico_City time.",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "expires_after_days"
+              ],
+              "title": "payment_method_options_oxxo",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "p24": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_options_p24",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "sepa_debit": {
+              "description": "",
+              "properties": {
+                "mandate_options": {
+                  "description": "",
+                  "properties": {},
+                  "title": "payment_intent_payment_method_options_mandate_options_sepa_debit",
+                  "type": "object",
+                  "x-expandableFields": []
+                }
+              },
+              "title": "payment_intent_payment_method_options_sepa_debit",
+              "type": "object",
+              "x-expandableFields": [
+                "mandate_options"
+              ]
+            },
+            "sofort": {
+              "description": "",
+              "properties": {
+                "preferred_language": {
+                  "description": "Preferred language of the SOFORT authorization page that the customer is redirected to.",
+                  "enum": [
+                    "de",
+                    "en",
+                    "es",
+                    "fr",
+                    "it",
+                    "nl",
+                    "pl"
+                  ],
+                  "nullable": true,
+                  "type": "string"
+                }
+              },
+              "title": "payment_method_options_sofort",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "wechat_pay": {
+              "description": "",
+              "properties": {
+                "app_id": {
+                  "description": "The app ID registered with WeChat Pay. Only required when client is ios or android.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "client": {
+                  "description": "The client type that the end customer will pay from",
+                  "enum": [
+                    "android",
+                    "ios",
+                    "web"
+                  ],
+                  "nullable": true,
+                  "type": "string",
+                  "x-stripeBypassValidation": true
+                }
+              },
+              "title": "payment_method_options_wechat_pay",
+              "type": "object",
+              "x-expandableFields": []
+            }
+          },
+          "title": "PaymentIntentPaymentMethodOptions",
+          "type": "object",
+          "x-expandableFields": [
+            "acss_debit",
+            "afterpay_clearpay",
+            "alipay",
+            "bancontact",
+            "boleto",
+            "card",
+            "card_present",
+            "giropay",
+            "ideal",
+            "interac_present",
+            "klarna",
+            "oxxo",
+            "p24",
+            "sepa_debit",
+            "sofort",
+            "wechat_pay"
+          ]
+        }
+      ],
+      "description": "Payment-method-specific configuration for this PaymentIntent.",
+      "nullable": true
+    },
+    "payment_method_types": {
+      "description": "The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "receipt_email": {
+      "description": "Email address that the receipt for the resulting payment will be sent to. If `receipt_email` is specified for a payment in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "review": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/review"
+        }
+      ],
+      "description": "ID of the review associated with this PaymentIntent, if any.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/review"
+          }
+        ]
+      }
+    },
+    "setup_future_usage": {
+      "description": "Indicates that you intend to make future payments with this PaymentIntent's payment method.\n\nProviding this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.\n\nWhen processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).",
+      "enum": [
+        "off_session",
+        "on_session"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "shipping": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "properties": {
+                "city": {
+                  "description": "City, district, suburb, town, or village.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "country": {
+                  "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "line1": {
+                  "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "line2": {
+                  "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "postal_code": {
+                  "description": "ZIP or postal code.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "state": {
+                  "description": "State, county, province, or region.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                }
+              },
+              "title": "Address",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "carrier": {
+              "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "name": {
+              "description": "Recipient name.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "phone": {
+              "description": "Recipient phone (including extension).",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "tracking_number": {
+              "description": "The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "title": "Shipping",
+          "type": "object",
+          "x-expandableFields": [
+            "address"
+          ]
+        }
+      ],
+      "description": "Shipping information for this PaymentIntent.",
+      "nullable": true
+    },
+    "statement_descriptor": {
+      "description": "For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "statement_descriptor_suffix": {
+      "description": "Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "status": {
+      "description": "Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`. Read more about each PaymentIntent [status](https://stripe.com/docs/payments/intents#intent-statuses).",
+      "enum": [
+        "canceled",
+        "processing",
+        "requires_action",
+        "requires_capture",
+        "requires_confirmation",
+        "requires_payment_method",
+        "succeeded"
+      ],
+      "type": "string"
+    },
+    "transfer_data": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/transfer_data"
+        }
+      ],
+      "description": "The data with which to automatically create a Transfer when the payment is finalized. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.",
+      "nullable": true
+    },
+    "transfer_group": {
+      "description": "A string that identifies the resulting payment as part of a group. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    }
+  },
+  "required": [
+    "amount",
+    "capture_method",
+    "confirmation_method",
+    "created",
+    "currency",
+    "id",
+    "livemode",
+    "object",
+    "payment_method_types",
+    "status"
+  ],
+  "title": "PaymentIntent",
+  "type": "object",
+  "x-expandableFields": [
+    "application",
+    "automatic_payment_methods",
+    "charges",
+    "customer",
+    "invoice",
+    "last_payment_error",
+    "next_action",
+    "on_behalf_of",
+    "payment_method",
+    "payment_method_options",
+    "review",
+    "shipping",
+    "transfer_data"
+  ],
+  "x-resourceId": "payment_intent"
+}

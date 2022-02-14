@@ -1,29 +1,37 @@
 {
-  "name": "quotes_resource_from_quote",
-  "schema": {
-    "description": "",
-    "properties": {
-      "is_revision": {
-        "description": "Whether this quote is a revision of a different quote.",
-        "type": "boolean"
-      },
-      "quote": {
-        "maxLength": 5000,
-        "type": "string"
-      }
+  "description": "",
+  "properties": {
+    "is_revision": {
+      "description": "Whether this quote is a revision of a different quote.",
+      "type": "boolean"
     },
-    "required": [
-      "is_revision",
-      "quote"
-    ],
-    "title": "QuotesResourceFromQuote",
-    "type": "object",
-    "x-expandableFields": [
-      "quote"
-    ],
-    "default": {
-      "is_revision": true,
-      "quote": "string"
+    "quote": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/quote"
+        }
+      ],
+      "description": "The quote that was cloned.",
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/quote"
+          }
+        ]
+      }
     }
-  }
+  },
+  "required": [
+    "is_revision",
+    "quote"
+  ],
+  "title": "QuotesResourceFromQuote",
+  "type": "object",
+  "x-expandableFields": [
+    "quote"
+  ]
 }

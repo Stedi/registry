@@ -1,53 +1,79 @@
 {
-  "name": "portal_features",
-  "schema": {
-    "description": "",
-    "properties": {
-      "customer_update": {
-        "allowed_updates": "address",
-        "enabled": true
-      },
-      "invoice_history": {
-        "description": "",
-        "properties": {
-          "enabled": {
-            "description": "Whether the feature is enabled.",
-            "type": "boolean"
-          }
+  "description": "",
+  "properties": {
+    "customer_update": {
+      "description": "",
+      "properties": {
+        "allowed_updates": {
+          "description": "The types of customer updates that are supported. When empty, customers are not updateable.",
+          "items": {
+            "enum": [
+              "address",
+              "email",
+              "phone",
+              "shipping",
+              "tax_id"
+            ],
+            "type": "string"
+          },
+          "type": "array"
         },
-        "required": [
-          "enabled"
-        ],
-        "title": "PortalInvoiceList",
-        "type": "object",
-        "x-expandableFields": []
+        "enabled": {
+          "description": "Whether the feature is enabled.",
+          "type": "boolean"
+        }
       },
-      "payment_method_update": {
-        "description": "",
-        "properties": {
-          "enabled": {
-            "description": "Whether the feature is enabled.",
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "enabled"
-        ],
-        "title": "PortalPaymentMethodUpdate",
-        "type": "object",
-        "x-expandableFields": []
+      "required": [
+        "allowed_updates",
+        "enabled"
+      ],
+      "title": "PortalCustomerUpdate",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "invoice_history": {
+      "description": "",
+      "properties": {
+        "enabled": {
+          "description": "Whether the feature is enabled.",
+          "type": "boolean"
+        }
       },
-      "subscription_cancel": {
-        "description": "",
-        "properties": {
-          "cancellation_reason": {
-            "description": "",
-            "properties": {
-              "enabled": {
-                "description": "Whether the feature is enabled.",
-                "type": "boolean"
-              },
-              "options": {
+      "required": [
+        "enabled"
+      ],
+      "title": "PortalInvoiceList",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "payment_method_update": {
+      "description": "",
+      "properties": {
+        "enabled": {
+          "description": "Whether the feature is enabled.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "PortalPaymentMethodUpdate",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "subscription_cancel": {
+      "description": "",
+      "properties": {
+        "cancellation_reason": {
+          "description": "",
+          "properties": {
+            "enabled": {
+              "description": "Whether the feature is enabled.",
+              "type": "boolean"
+            },
+            "options": {
+              "description": "Which cancellation reasons will be given as options to the customer.",
+              "items": {
                 "enum": [
                   "customer_service",
                   "low_quality",
@@ -59,68 +85,72 @@
                   "unused"
                 ],
                 "type": "string"
-              }
-            },
-            "required": [
-              "enabled",
-              "options"
-            ],
-            "title": "PortalSubscriptionCancellationReason",
-            "type": "object",
-            "x-expandableFields": []
+              },
+              "type": "array"
+            }
           },
-          "enabled": {
-            "description": "Whether the feature is enabled.",
-            "type": "boolean"
-          },
-          "mode": {
-            "description": "Whether to cancel subscriptions immediately or at the end of the billing period.",
-            "enum": [
-              "at_period_end",
-              "immediately"
-            ],
-            "type": "string"
-          },
-          "proration_behavior": {
-            "description": "Whether to create prorations when canceling subscriptions. Possible values are `none` and `create_prorations`.",
-            "enum": [
-              "always_invoice",
-              "create_prorations",
-              "none"
-            ],
-            "type": "string"
-          }
+          "required": [
+            "enabled",
+            "options"
+          ],
+          "title": "PortalSubscriptionCancellationReason",
+          "type": "object",
+          "x-expandableFields": []
         },
-        "required": [
-          "enabled",
-          "mode",
-          "proration_behavior"
-        ],
-        "title": "PortalSubscriptionCancel",
-        "type": "object",
-        "x-expandableFields": [
-          "cancellation_reason"
-        ]
-      },
-      "subscription_pause": {
-        "description": "",
-        "properties": {
-          "enabled": {
-            "description": "Whether the feature is enabled.",
-            "type": "boolean"
-          }
+        "enabled": {
+          "description": "Whether the feature is enabled.",
+          "type": "boolean"
         },
-        "required": [
-          "enabled"
-        ],
-        "title": "PortalSubscriptionPause",
-        "type": "object",
-        "x-expandableFields": []
+        "mode": {
+          "description": "Whether to cancel subscriptions immediately or at the end of the billing period.",
+          "enum": [
+            "at_period_end",
+            "immediately"
+          ],
+          "type": "string"
+        },
+        "proration_behavior": {
+          "description": "Whether to create prorations when canceling subscriptions. Possible values are `none` and `create_prorations`.",
+          "enum": [
+            "always_invoice",
+            "create_prorations",
+            "none"
+          ],
+          "type": "string"
+        }
       },
-      "subscription_update": {
-        "description": "",
-        "properties": {
-          "default_allowed_updates": {
+      "required": [
+        "enabled",
+        "mode",
+        "proration_behavior"
+      ],
+      "title": "PortalSubscriptionCancel",
+      "type": "object",
+      "x-expandableFields": [
+        "cancellation_reason"
+      ]
+    },
+    "subscription_pause": {
+      "description": "",
+      "properties": {
+        "enabled": {
+          "description": "Whether the feature is enabled.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "PortalSubscriptionPause",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "subscription_update": {
+      "description": "",
+      "properties": {
+        "default_allowed_updates": {
+          "description": "The types of subscription updates that are supported for items listed in the `products` attribute. When empty, subscriptions are not updateable.",
+          "items": {
             "enum": [
               "price",
               "promotion_code",
@@ -128,16 +158,24 @@
             ],
             "type": "string"
           },
-          "enabled": {
-            "description": "Whether the feature is enabled.",
-            "type": "boolean"
-          },
-          "products": {
+          "type": "array"
+        },
+        "enabled": {
+          "description": "Whether the feature is enabled.",
+          "type": "boolean"
+        },
+        "products": {
+          "description": "The list of products that support subscription updates.",
+          "items": {
             "description": "",
             "properties": {
               "prices": {
-                "maxLength": 5000,
-                "type": "string"
+                "description": "The list of price IDs which, when subscribed to, a subscription can be updated.",
+                "items": {
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                "type": "array"
               },
               "product": {
                 "description": "The product ID.",
@@ -153,75 +191,47 @@
             "type": "object",
             "x-expandableFields": []
           },
-          "proration_behavior": {
-            "description": "Determines how to handle prorations resulting from subscription updates. Valid values are `none`, `create_prorations`, and `always_invoice`.",
-            "enum": [
-              "always_invoice",
-              "create_prorations",
-              "none"
-            ],
-            "type": "string"
-          }
+          "nullable": true,
+          "type": "array"
         },
-        "required": [
-          "default_allowed_updates",
-          "enabled",
-          "proration_behavior"
-        ],
-        "title": "PortalSubscriptionUpdate",
-        "type": "object",
-        "x-expandableFields": [
-          "products"
-        ]
-      }
-    },
-    "required": [
-      "customer_update",
-      "invoice_history",
-      "payment_method_update",
-      "subscription_cancel",
-      "subscription_pause",
-      "subscription_update"
-    ],
-    "title": "PortalFeatures",
-    "type": "object",
-    "x-expandableFields": [
-      "customer_update",
-      "invoice_history",
-      "payment_method_update",
-      "subscription_cancel",
-      "subscription_pause",
-      "subscription_update"
-    ],
-    "default": {
-      "customer_update": {},
-      "invoice_history": {
-        "enabled": true
+        "proration_behavior": {
+          "description": "Determines how to handle prorations resulting from subscription updates. Valid values are `none`, `create_prorations`, and `always_invoice`.",
+          "enum": [
+            "always_invoice",
+            "create_prorations",
+            "none"
+          ],
+          "type": "string"
+        }
       },
-      "payment_method_update": {
-        "enabled": true
-      },
-      "subscription_cancel": {
-        "cancellation_reason": {
-          "enabled": true,
-          "options": "customer_service"
-        },
-        "enabled": true,
-        "mode": "at_period_end",
-        "proration_behavior": "always_invoice"
-      },
-      "subscription_pause": {
-        "enabled": true
-      },
-      "subscription_update": {
-        "default_allowed_updates": "price",
-        "enabled": true,
-        "products": {
-          "prices": "string",
-          "product": "string"
-        },
-        "proration_behavior": "always_invoice"
-      }
+      "required": [
+        "default_allowed_updates",
+        "enabled",
+        "proration_behavior"
+      ],
+      "title": "PortalSubscriptionUpdate",
+      "type": "object",
+      "x-expandableFields": [
+        "products"
+      ]
     }
-  }
+  },
+  "required": [
+    "customer_update",
+    "invoice_history",
+    "payment_method_update",
+    "subscription_cancel",
+    "subscription_pause",
+    "subscription_update"
+  ],
+  "title": "PortalFeatures",
+  "type": "object",
+  "x-expandableFields": [
+    "customer_update",
+    "invoice_history",
+    "payment_method_update",
+    "subscription_cancel",
+    "subscription_pause",
+    "subscription_update"
+  ]
 }

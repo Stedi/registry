@@ -1,30 +1,23 @@
 {
-  "name": "account_unification_account_controller",
-  "schema": {
-    "description": "",
-    "properties": {
-      "is_controller": {
-        "description": "`true` if the Connect application retrieving the resource controls the account and can therefore exercise [platform controls](https://stripe.com/docs/connect/platform-controls-for-standard-accounts). Otherwise, this field is null.",
-        "type": "boolean"
-      },
-      "type": {
-        "description": "The controller type. Can be `application`, if a Connect application controls the account, or `account`, if the account controls itself.",
-        "enum": [
-          "account",
-          "application"
-        ],
-        "type": "string"
-      }
+  "description": "",
+  "properties": {
+    "is_controller": {
+      "description": "`true` if the Connect application retrieving the resource controls the account and can therefore exercise [platform controls](https://stripe.com/docs/connect/platform-controls-for-standard-accounts). Otherwise, this field is null.",
+      "type": "boolean"
     },
-    "required": [
-      "type"
-    ],
-    "title": "AccountUnificationAccountController",
-    "type": "object",
-    "x-expandableFields": [],
-    "default": {
-      "is_controller": true,
-      "type": "account"
+    "type": {
+      "description": "The controller type. Can be `application`, if a Connect application controls the account, or `account`, if the account controls itself.",
+      "enum": [
+        "account",
+        "application"
+      ],
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "type"
+  ],
+  "title": "AccountUnificationAccountController",
+  "type": "object",
+  "x-expandableFields": []
 }

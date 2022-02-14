@@ -1,273 +1,1384 @@
 {
-  "name": "payment_source",
-  "schema": {
-    "business_profile": {
-      "mcc": "string",
-      "name": "string",
-      "product_description": "string",
-      "support_address": {
-        "city": "string",
-        "country": "string",
-        "line1": "string",
-        "line2": "string",
-        "postal_code": "string",
-        "state": "string"
-      },
-      "support_email": "string",
-      "support_phone": "string",
-      "support_url": "string",
-      "url": "string"
+  "anyOf": [
+    {
+      "$ref": "#/components/schemas/account"
     },
-    "business_type": "company",
-    "capabilities": {
-      "au_becs_debit_payments": "active",
-      "bacs_debit_payments": "active",
-      "bancontact_payments": "active",
-      "card_issuing": "active",
-      "card_payments": "active",
-      "cartes_bancaires_payments": "active",
-      "eps_payments": "active",
-      "fpx_payments": "active",
-      "giropay_payments": "active",
-      "grabpay_payments": "active",
-      "ideal_payments": "active",
-      "jcb_payments": "active",
-      "legacy_payments": "active",
-      "oxxo_payments": "active",
-      "p24_payments": "active",
-      "sepa_debit_payments": "active",
-      "sofort_payments": "active",
-      "tax_reporting_us_1099_k": "active",
-      "tax_reporting_us_1099_misc": "active",
-      "transfers": "active"
+    {
+      "$ref": "#/components/schemas/alipay_account"
     },
-    "charges_enabled": true,
-    "company": {
-      "address": {
-        "city": "string",
-        "country": "string",
-        "line1": "string",
-        "line2": "string",
-        "postal_code": "string",
-        "state": "string"
-      },
-      "address_kana": {
-        "city": "string",
-        "country": "string",
-        "line1": "string",
-        "line2": "string",
-        "postal_code": "string",
-        "state": "string",
-        "town": "string"
-      },
-      "address_kanji": {
-        "city": "string",
-        "country": "string",
-        "line1": "string",
-        "line2": "string",
-        "postal_code": "string",
-        "state": "string",
-        "town": "string"
-      },
-      "directors_provided": true,
-      "executives_provided": true,
-      "name": "string",
-      "name_kana": "string",
-      "name_kanji": "string",
-      "owners_provided": true,
-      "phone": "string",
-      "structure": "government_instrumentality",
-      "tax_id_provided": true,
-      "tax_id_registrar": "string",
-      "vat_id_provided": true,
-      "verification": {
-        "document": {
-          "back": "string",
-          "details": "string",
-          "details_code": "string",
-          "front": "string"
+    {
+      "$ref": "#/components/schemas/bank_account"
+    },
+    {
+      "description": "",
+      "properties": {
+        "active": {
+          "description": "True when this bitcoin receiver has received a non-zero amount of bitcoin.",
+          "type": "boolean"
+        },
+        "amount": {
+          "description": "The amount of `currency` that you are collecting as payment.",
+          "type": "integer"
+        },
+        "amount_received": {
+          "description": "The amount of `currency` to which `bitcoin_amount_received` has been converted.",
+          "type": "integer"
+        },
+        "bitcoin_amount": {
+          "description": "The amount of bitcoin that the customer should send to fill the receiver. The `bitcoin_amount` is denominated in Satoshi: there are 10^8 Satoshi in one bitcoin.",
+          "type": "integer"
+        },
+        "bitcoin_amount_received": {
+          "description": "The amount of bitcoin that has been sent by the customer to this receiver.",
+          "type": "integer"
+        },
+        "bitcoin_uri": {
+          "description": "This URI can be displayed to the customer as a clickable link (to activate their bitcoin client) or as a QR code (for mobile wallets).",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "created": {
+          "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+          "format": "unix-time",
+          "type": "integer"
+        },
+        "currency": {
+          "description": "Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) to which the bitcoin will be converted.",
+          "type": "string"
+        },
+        "customer": {
+          "description": "The customer ID of the bitcoin receiver.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "email": {
+          "description": "The customer's email address, set by the API call that creates the receiver.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "filled": {
+          "description": "This flag is initially false and updates to true when the customer sends the `bitcoin_amount` to this receiver.",
+          "type": "boolean"
+        },
+        "id": {
+          "description": "Unique identifier for the object.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "inbound_address": {
+          "description": "A bitcoin address that is specific to this receiver. The customer can send bitcoin to this address to fill the receiver.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "livemode": {
+          "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+          "type": "boolean"
+        },
+        "metadata": {
+          "additionalProperties": {
+            "maxLength": 500,
+            "type": "string"
+          },
+          "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+          "nullable": true,
+          "type": "object"
+        },
+        "object": {
+          "description": "String representing the object's type. Objects of the same type share the same value.",
+          "enum": [
+            "bitcoin_receiver"
+          ],
+          "type": "string"
+        },
+        "payment": {
+          "description": "The ID of the payment created from the receiver, if any. Hidden when viewing the receiver with a publishable key.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "refund_address": {
+          "description": "The refund address of this bitcoin receiver.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "transactions": {
+          "description": "A list with one entry for each time that the customer sent bitcoin to the receiver. Hidden when viewing the receiver with a publishable key.",
+          "properties": {
+            "data": {
+              "description": "Details about each object.",
+              "items": {
+                "description": "",
+                "properties": {
+                  "amount": {
+                    "description": "The amount of `currency` that the transaction was converted to in real-time.",
+                    "type": "integer"
+                  },
+                  "bitcoin_amount": {
+                    "description": "The amount of bitcoin contained in the transaction.",
+                    "type": "integer"
+                  },
+                  "created": {
+                    "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                    "format": "unix-time",
+                    "type": "integer"
+                  },
+                  "currency": {
+                    "description": "Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) to which this transaction was converted.",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Unique identifier for the object.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "object": {
+                    "description": "String representing the object's type. Objects of the same type share the same value.",
+                    "enum": [
+                      "bitcoin_transaction"
+                    ],
+                    "type": "string"
+                  },
+                  "receiver": {
+                    "description": "The receiver to which this transaction was sent.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "amount",
+                  "bitcoin_amount",
+                  "created",
+                  "currency",
+                  "id",
+                  "object",
+                  "receiver"
+                ],
+                "title": "BitcoinTransaction",
+                "type": "object",
+                "x-expandableFields": [],
+                "x-resourceId": "bitcoin_transaction"
+              },
+              "type": "array"
+            },
+            "has_more": {
+              "description": "True if this list has another page of items after this one that can be fetched.",
+              "type": "boolean"
+            },
+            "object": {
+              "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
+              "enum": [
+                "list"
+              ],
+              "type": "string"
+            },
+            "url": {
+              "description": "The URL where this list can be accessed.",
+              "maxLength": 5000,
+              "type": "string"
+            }
+          },
+          "required": [
+            "data",
+            "has_more",
+            "object",
+            "url"
+          ],
+          "title": "BitcoinTransactionList",
+          "type": "object",
+          "x-expandableFields": [
+            "data"
+          ]
+        },
+        "uncaptured_funds": {
+          "description": "This receiver contains uncaptured funds that can be used for a payment or refunded.",
+          "type": "boolean"
+        },
+        "used_for_payment": {
+          "description": "Indicate if this source is used for payment.",
+          "nullable": true,
+          "type": "boolean"
         }
-      }
+      },
+      "required": [
+        "active",
+        "amount",
+        "amount_received",
+        "bitcoin_amount",
+        "bitcoin_amount_received",
+        "bitcoin_uri",
+        "created",
+        "currency",
+        "filled",
+        "id",
+        "inbound_address",
+        "livemode",
+        "object",
+        "uncaptured_funds"
+      ],
+      "title": "BitcoinReceiver",
+      "type": "object",
+      "x-expandableFields": [
+        "transactions"
+      ],
+      "x-resourceId": "bitcoin_receiver"
     },
-    "country": "string",
-    "created": 0,
-    "default_currency": "string",
-    "details_submitted": true,
-    "email": "string",
-    "external_accounts": {
-      "data": {
-        "account": "string",
-        "account_holder_name": "string",
-        "account_holder_type": "string",
-        "available_payout_methods": "instant",
-        "bank_name": "string",
-        "country": "string",
-        "currency": "string",
-        "customer": "string",
-        "default_for_currency": true,
-        "fingerprint": "string",
-        "id": "string",
-        "last4": "string",
-        "metadata": {},
-        "object": "bank_account",
-        "routing_number": "string",
-        "status": "string"
-      },
-      "has_more": true,
-      "object": "list",
-      "url": "string"
+    {
+      "$ref": "#/components/schemas/card"
     },
-    "id": "string",
-    "individual": {
-      "account": "string",
-      "address": {
-        "city": "string",
-        "country": "string",
-        "line1": "string",
-        "line2": "string",
-        "postal_code": "string",
-        "state": "string"
-      },
-      "address_kana": {
-        "city": "string",
-        "country": "string",
-        "line1": "string",
-        "line2": "string",
-        "postal_code": "string",
-        "state": "string",
-        "town": "string"
-      },
-      "address_kanji": {
-        "city": "string",
-        "country": "string",
-        "line1": "string",
-        "line2": "string",
-        "postal_code": "string",
-        "state": "string",
-        "town": "string"
-      },
-      "created": 0,
-      "dob": {
-        "day": 0,
-        "month": 0,
-        "year": 0
-      },
-      "email": "string",
-      "first_name": "string",
-      "first_name_kana": "string",
-      "first_name_kanji": "string",
-      "gender": "string",
-      "id": "string",
-      "id_number_provided": true,
-      "last_name": "string",
-      "last_name_kana": "string",
-      "last_name_kanji": "string",
-      "maiden_name": "string",
-      "metadata": {},
-      "object": "person",
-      "phone": "string",
-      "political_exposure": "existing",
-      "relationship": {
-        "director": true,
-        "executive": true,
-        "owner": true,
-        "percent_ownership": 0,
-        "representative": true,
-        "title": "string"
-      },
-      "requirements": {
-        "currently_due": "string",
-        "errors": {
-          "code": "invalid_address_city_state_postal_code",
-          "reason": "string",
-          "requirement": "string"
+    {
+      "description": "`Source` objects allow you to accept a variety of payment methods. They\nrepresent a customer's payment instrument, and can be used with the Stripe API\njust like a `Card` object: once chargeable, they can be charged, or can be\nattached to customers.\n\nRelated guides: [Sources API](https://stripe.com/docs/sources) and [Sources & Customers](https://stripe.com/docs/sources/customers).",
+      "properties": {
+        "ach_credit_transfer": {
+          "properties": {
+            "account_number": {
+              "nullable": true,
+              "type": "string"
+            },
+            "bank_name": {
+              "nullable": true,
+              "type": "string"
+            },
+            "fingerprint": {
+              "nullable": true,
+              "type": "string"
+            },
+            "refund_account_holder_name": {
+              "nullable": true,
+              "type": "string"
+            },
+            "refund_account_holder_type": {
+              "nullable": true,
+              "type": "string"
+            },
+            "refund_routing_number": {
+              "nullable": true,
+              "type": "string"
+            },
+            "routing_number": {
+              "nullable": true,
+              "type": "string"
+            },
+            "swift_code": {
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "type": "object"
         },
-        "eventually_due": "string",
-        "past_due": "string",
-        "pending_verification": "string"
-      },
-      "ssn_last_4_provided": true,
-      "verification": {
-        "additional_document": {
-          "back": "string",
-          "details": "string",
-          "details_code": "string",
-          "front": "string"
+        "ach_debit": {
+          "properties": {
+            "bank_name": {
+              "nullable": true,
+              "type": "string"
+            },
+            "country": {
+              "nullable": true,
+              "type": "string"
+            },
+            "fingerprint": {
+              "nullable": true,
+              "type": "string"
+            },
+            "last4": {
+              "nullable": true,
+              "type": "string"
+            },
+            "routing_number": {
+              "nullable": true,
+              "type": "string"
+            },
+            "type": {
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "type": "object"
         },
-        "details": "string",
-        "details_code": "string",
-        "document": {
-          "back": "string",
-          "details": "string",
-          "details_code": "string",
-          "front": "string"
+        "alipay": {
+          "properties": {
+            "data_string": {
+              "nullable": true,
+              "type": "string"
+            },
+            "native_url": {
+              "nullable": true,
+              "type": "string"
+            },
+            "statement_descriptor": {
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "type": "object"
         },
-        "status": "string"
-      }
-    },
-    "metadata": {},
-    "object": "account",
-    "payouts_enabled": true,
-    "requirements": {
-      "current_deadline": 0,
-      "currently_due": "string",
-      "disabled_reason": "string",
-      "errors": {
-        "code": "invalid_address_city_state_postal_code",
-        "reason": "string",
-        "requirement": "string"
-      },
-      "eventually_due": "string",
-      "past_due": "string",
-      "pending_verification": "string"
-    },
-    "settings": {
-      "bacs_debit_payments": {
-        "display_name": "string"
-      },
-      "branding": {
-        "icon": "string",
-        "logo": "string",
-        "primary_color": "string",
-        "secondary_color": "string"
-      },
-      "card_payments": {
-        "decline_on": {
-          "avs_failure": true,
-          "cvc_failure": true
+        "amount": {
+          "description": "A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount associated with the source. This is the amount for which the source will be chargeable once ready. Required for `single_use` sources.",
+          "nullable": true,
+          "type": "integer"
         },
-        "statement_descriptor_prefix": "string"
-      },
-      "dashboard": {
-        "display_name": "string",
-        "timezone": "string"
-      },
-      "payments": {
-        "statement_descriptor": "string",
-        "statement_descriptor_kana": "string",
-        "statement_descriptor_kanji": "string"
-      },
-      "payouts": {
-        "debit_negative_balances": true,
-        "schedule": {
-          "delay_days": 0,
-          "interval": "string",
-          "monthly_anchor": 0,
-          "weekly_anchor": "string"
+        "au_becs_debit": {
+          "properties": {
+            "bsb_number": {
+              "nullable": true,
+              "type": "string"
+            },
+            "fingerprint": {
+              "nullable": true,
+              "type": "string"
+            },
+            "last4": {
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "type": "object"
         },
-        "statement_descriptor": "string"
+        "bancontact": {
+          "properties": {
+            "bank_code": {
+              "nullable": true,
+              "type": "string"
+            },
+            "bank_name": {
+              "nullable": true,
+              "type": "string"
+            },
+            "bic": {
+              "nullable": true,
+              "type": "string"
+            },
+            "iban_last4": {
+              "nullable": true,
+              "type": "string"
+            },
+            "preferred_language": {
+              "nullable": true,
+              "type": "string"
+            },
+            "statement_descriptor": {
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "card": {
+          "properties": {
+            "address_line1_check": {
+              "nullable": true,
+              "type": "string"
+            },
+            "address_zip_check": {
+              "nullable": true,
+              "type": "string"
+            },
+            "brand": {
+              "nullable": true,
+              "type": "string"
+            },
+            "country": {
+              "nullable": true,
+              "type": "string"
+            },
+            "cvc_check": {
+              "nullable": true,
+              "type": "string"
+            },
+            "dynamic_last4": {
+              "nullable": true,
+              "type": "string"
+            },
+            "exp_month": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "exp_year": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "fingerprint": {
+              "type": "string"
+            },
+            "funding": {
+              "nullable": true,
+              "type": "string"
+            },
+            "last4": {
+              "nullable": true,
+              "type": "string"
+            },
+            "name": {
+              "nullable": true,
+              "type": "string"
+            },
+            "three_d_secure": {
+              "type": "string"
+            },
+            "tokenization_method": {
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "card_present": {
+          "properties": {
+            "application_cryptogram": {
+              "type": "string"
+            },
+            "application_preferred_name": {
+              "type": "string"
+            },
+            "authorization_code": {
+              "nullable": true,
+              "type": "string"
+            },
+            "authorization_response_code": {
+              "type": "string"
+            },
+            "brand": {
+              "nullable": true,
+              "type": "string"
+            },
+            "country": {
+              "nullable": true,
+              "type": "string"
+            },
+            "cvm_type": {
+              "type": "string"
+            },
+            "data_type": {
+              "nullable": true,
+              "type": "string"
+            },
+            "dedicated_file_name": {
+              "type": "string"
+            },
+            "emv_auth_data": {
+              "type": "string"
+            },
+            "evidence_customer_signature": {
+              "nullable": true,
+              "type": "string"
+            },
+            "evidence_transaction_certificate": {
+              "nullable": true,
+              "type": "string"
+            },
+            "exp_month": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "exp_year": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "fingerprint": {
+              "type": "string"
+            },
+            "funding": {
+              "nullable": true,
+              "type": "string"
+            },
+            "last4": {
+              "nullable": true,
+              "type": "string"
+            },
+            "pos_device_id": {
+              "nullable": true,
+              "type": "string"
+            },
+            "pos_entry_mode": {
+              "type": "string"
+            },
+            "read_method": {
+              "nullable": true,
+              "type": "string"
+            },
+            "reader": {
+              "nullable": true,
+              "type": "string"
+            },
+            "terminal_verification_results": {
+              "type": "string"
+            },
+            "transaction_status_information": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "client_secret": {
+          "description": "The client secret of the source. Used for client-side retrieval using a publishable key.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "code_verification": {
+          "description": "",
+          "properties": {
+            "attempts_remaining": {
+              "description": "The number of attempts remaining to authenticate the source object with a verification code.",
+              "type": "integer"
+            },
+            "status": {
+              "description": "The status of the code verification, either `pending` (awaiting verification, `attempts_remaining` should be greater than 0), `succeeded` (successful verification) or `failed` (failed verification, cannot be verified anymore as `attempts_remaining` should be 0).",
+              "maxLength": 5000,
+              "type": "string"
+            }
+          },
+          "required": [
+            "attempts_remaining",
+            "status"
+          ],
+          "title": "SourceCodeVerificationFlow",
+          "type": "object",
+          "x-expandableFields": []
+        },
+        "created": {
+          "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+          "format": "unix-time",
+          "type": "integer"
+        },
+        "currency": {
+          "description": "Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) associated with the source. This is the currency for which the source will be chargeable once ready. Required for `single_use` sources.",
+          "nullable": true,
+          "type": "string"
+        },
+        "customer": {
+          "description": "The ID of the customer to which this source is attached. This will not be present when the source has not been attached to a customer.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "eps": {
+          "properties": {
+            "reference": {
+              "nullable": true,
+              "type": "string"
+            },
+            "statement_descriptor": {
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "flow": {
+          "description": "The authentication `flow` of the source. `flow` is one of `redirect`, `receiver`, `code_verification`, `none`.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "giropay": {
+          "properties": {
+            "bank_code": {
+              "nullable": true,
+              "type": "string"
+            },
+            "bank_name": {
+              "nullable": true,
+              "type": "string"
+            },
+            "bic": {
+              "nullable": true,
+              "type": "string"
+            },
+            "statement_descriptor": {
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "id": {
+          "description": "Unique identifier for the object.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "ideal": {
+          "properties": {
+            "bank": {
+              "nullable": true,
+              "type": "string"
+            },
+            "bic": {
+              "nullable": true,
+              "type": "string"
+            },
+            "iban_last4": {
+              "nullable": true,
+              "type": "string"
+            },
+            "statement_descriptor": {
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "klarna": {
+          "properties": {
+            "background_image_url": {
+              "type": "string"
+            },
+            "client_token": {
+              "nullable": true,
+              "type": "string"
+            },
+            "first_name": {
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            },
+            "locale": {
+              "type": "string"
+            },
+            "logo_url": {
+              "type": "string"
+            },
+            "page_title": {
+              "type": "string"
+            },
+            "pay_later_asset_urls_descriptive": {
+              "type": "string"
+            },
+            "pay_later_asset_urls_standard": {
+              "type": "string"
+            },
+            "pay_later_name": {
+              "type": "string"
+            },
+            "pay_later_redirect_url": {
+              "type": "string"
+            },
+            "pay_now_asset_urls_descriptive": {
+              "type": "string"
+            },
+            "pay_now_asset_urls_standard": {
+              "type": "string"
+            },
+            "pay_now_name": {
+              "type": "string"
+            },
+            "pay_now_redirect_url": {
+              "type": "string"
+            },
+            "pay_over_time_asset_urls_descriptive": {
+              "type": "string"
+            },
+            "pay_over_time_asset_urls_standard": {
+              "type": "string"
+            },
+            "pay_over_time_name": {
+              "type": "string"
+            },
+            "pay_over_time_redirect_url": {
+              "type": "string"
+            },
+            "payment_method_categories": {
+              "type": "string"
+            },
+            "purchase_country": {
+              "type": "string"
+            },
+            "purchase_type": {
+              "type": "string"
+            },
+            "redirect_url": {
+              "type": "string"
+            },
+            "shipping_delay": {
+              "type": "integer"
+            },
+            "shipping_first_name": {
+              "type": "string"
+            },
+            "shipping_last_name": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "livemode": {
+          "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+          "type": "boolean"
+        },
+        "metadata": {
+          "additionalProperties": {
+            "maxLength": 500,
+            "type": "string"
+          },
+          "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+          "nullable": true,
+          "type": "object"
+        },
+        "multibanco": {
+          "properties": {
+            "entity": {
+              "nullable": true,
+              "type": "string"
+            },
+            "reference": {
+              "nullable": true,
+              "type": "string"
+            },
+            "refund_account_holder_address_city": {
+              "nullable": true,
+              "type": "string"
+            },
+            "refund_account_holder_address_country": {
+              "nullable": true,
+              "type": "string"
+            },
+            "refund_account_holder_address_line1": {
+              "nullable": true,
+              "type": "string"
+            },
+            "refund_account_holder_address_line2": {
+              "nullable": true,
+              "type": "string"
+            },
+            "refund_account_holder_address_postal_code": {
+              "nullable": true,
+              "type": "string"
+            },
+            "refund_account_holder_address_state": {
+              "nullable": true,
+              "type": "string"
+            },
+            "refund_account_holder_name": {
+              "nullable": true,
+              "type": "string"
+            },
+            "refund_iban": {
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "object": {
+          "description": "String representing the object's type. Objects of the same type share the same value.",
+          "enum": [
+            "source"
+          ],
+          "type": "string"
+        },
+        "owner": {
+          "anyOf": [
+            {
+              "description": "",
+              "properties": {
+                "address": {
+                  "anyOf": [
+                    {
+                      "description": "",
+                      "properties": {
+                        "city": {
+                          "description": "City, district, suburb, town, or village.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "country": {
+                          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "line1": {
+                          "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "line2": {
+                          "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "postal_code": {
+                          "description": "ZIP or postal code.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "state": {
+                          "description": "State, county, province, or region.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        }
+                      },
+                      "title": "Address",
+                      "type": "object",
+                      "x-expandableFields": []
+                    }
+                  ],
+                  "description": "Owner's address.",
+                  "nullable": true
+                },
+                "email": {
+                  "description": "Owner's email address.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "name": {
+                  "description": "Owner's full name.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "phone": {
+                  "description": "Owner's phone number (including extension).",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "verified_address": {
+                  "anyOf": [
+                    {
+                      "description": "",
+                      "properties": {
+                        "city": {
+                          "description": "City, district, suburb, town, or village.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "country": {
+                          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "line1": {
+                          "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "line2": {
+                          "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "postal_code": {
+                          "description": "ZIP or postal code.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "state": {
+                          "description": "State, county, province, or region.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        }
+                      },
+                      "title": "Address",
+                      "type": "object",
+                      "x-expandableFields": []
+                    }
+                  ],
+                  "description": "Verified owner's address. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                  "nullable": true
+                },
+                "verified_email": {
+                  "description": "Verified owner's email address. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "verified_name": {
+                  "description": "Verified owner's full name. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "verified_phone": {
+                  "description": "Verified owner's phone number (including extension). Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                }
+              },
+              "title": "SourceOwner",
+              "type": "object",
+              "x-expandableFields": [
+                "address",
+                "verified_address"
+              ]
+            }
+          ],
+          "description": "Information about the owner of the payment instrument that may be used or required by particular source types.",
+          "nullable": true
+        },
+        "p24": {
+          "properties": {
+            "reference": {
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "receiver": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "The address of the receiver source. This is the value that should be communicated to the customer to send their funds to.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "amount_charged": {
+              "description": "The total amount that was moved to your balance. This is almost always equal to the amount charged. In rare cases when customers deposit excess funds and we are unable to refund those, those funds get moved to your balance and show up in amount_charged as well. The amount charged is expressed in the source's currency.",
+              "type": "integer"
+            },
+            "amount_received": {
+              "description": "The total amount received by the receiver source. `amount_received = amount_returned + amount_charged` should be true for consumed sources unless customers deposit excess funds. The amount received is expressed in the source's currency.",
+              "type": "integer"
+            },
+            "amount_returned": {
+              "description": "The total amount that was returned to the customer. The amount returned is expressed in the source's currency.",
+              "type": "integer"
+            },
+            "refund_attributes_method": {
+              "description": "Type of refund attribute method, one of `email`, `manual`, or `none`.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "refund_attributes_status": {
+              "description": "Type of refund attribute status, one of `missing`, `requested`, or `available`.",
+              "maxLength": 5000,
+              "type": "string"
+            }
+          },
+          "required": [
+            "amount_charged",
+            "amount_received",
+            "amount_returned",
+            "refund_attributes_method",
+            "refund_attributes_status"
+          ],
+          "title": "SourceReceiverFlow",
+          "type": "object",
+          "x-expandableFields": []
+        },
+        "redirect": {
+          "description": "",
+          "properties": {
+            "failure_reason": {
+              "description": "The failure reason for the redirect, either `user_abort` (the customer aborted or dropped out of the redirect flow), `declined` (the authentication failed or the transaction was declined), or `processing_error` (the redirect failed due to a technical error). Present only if the redirect status is `failed`.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "return_url": {
+              "description": "The URL you provide to redirect the customer to after they authenticated their payment.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "status": {
+              "description": "The status of the redirect, either `pending` (ready to be used by your customer to authenticate the transaction), `succeeded` (succesful authentication, cannot be reused) or `not_required` (redirect should not be used) or `failed` (failed authentication, cannot be reused).",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "url": {
+              "description": "The URL provided to you to redirect a customer to as part of a `redirect` authentication flow.",
+              "maxLength": 2048,
+              "type": "string"
+            }
+          },
+          "required": [
+            "return_url",
+            "status",
+            "url"
+          ],
+          "title": "SourceRedirectFlow",
+          "type": "object",
+          "x-expandableFields": []
+        },
+        "sepa_debit": {
+          "properties": {
+            "bank_code": {
+              "nullable": true,
+              "type": "string"
+            },
+            "branch_code": {
+              "nullable": true,
+              "type": "string"
+            },
+            "country": {
+              "nullable": true,
+              "type": "string"
+            },
+            "fingerprint": {
+              "nullable": true,
+              "type": "string"
+            },
+            "last4": {
+              "nullable": true,
+              "type": "string"
+            },
+            "mandate_reference": {
+              "nullable": true,
+              "type": "string"
+            },
+            "mandate_url": {
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "sofort": {
+          "properties": {
+            "bank_code": {
+              "nullable": true,
+              "type": "string"
+            },
+            "bank_name": {
+              "nullable": true,
+              "type": "string"
+            },
+            "bic": {
+              "nullable": true,
+              "type": "string"
+            },
+            "country": {
+              "nullable": true,
+              "type": "string"
+            },
+            "iban_last4": {
+              "nullable": true,
+              "type": "string"
+            },
+            "preferred_language": {
+              "nullable": true,
+              "type": "string"
+            },
+            "statement_descriptor": {
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "source_order": {
+          "description": "",
+          "properties": {
+            "amount": {
+              "description": "A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the order.",
+              "type": "integer"
+            },
+            "currency": {
+              "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+              "type": "string"
+            },
+            "email": {
+              "description": "The email address of the customer placing the order.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "items": {
+              "description": "List of items constituting the order.",
+              "items": {
+                "description": "",
+                "properties": {
+                  "amount": {
+                    "description": "The amount (price) for this order item.",
+                    "nullable": true,
+                    "type": "integer"
+                  },
+                  "currency": {
+                    "description": "This currency of this order item. Required when `amount` is present.",
+                    "maxLength": 5000,
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "Human-readable description for this order item.",
+                    "maxLength": 5000,
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "parent": {
+                    "description": "The ID of the associated object for this line item. Expandable if not null (e.g., expandable to a SKU).",
+                    "maxLength": 5000,
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "quantity": {
+                    "description": "The quantity of this order item. When type is `sku`, this is the number of instances of the SKU to be ordered.",
+                    "type": "integer"
+                  },
+                  "type": {
+                    "description": "The type of this order item. Must be `sku`, `tax`, or `shipping`.",
+                    "maxLength": 5000,
+                    "nullable": true,
+                    "type": "string"
+                  }
+                },
+                "title": "SourceOrderItem",
+                "type": "object",
+                "x-expandableFields": []
+              },
+              "nullable": true,
+              "type": "array"
+            },
+            "shipping": {
+              "description": "",
+              "properties": {
+                "address": {
+                  "description": "",
+                  "properties": {
+                    "city": {
+                      "description": "City, district, suburb, town, or village.",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "country": {
+                      "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "line1": {
+                      "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "line2": {
+                      "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "postal_code": {
+                      "description": "ZIP or postal code.",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "state": {
+                      "description": "State, county, province, or region.",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    }
+                  },
+                  "title": "Address",
+                  "type": "object",
+                  "x-expandableFields": []
+                },
+                "carrier": {
+                  "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "name": {
+                  "description": "Recipient name.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "phone": {
+                  "description": "Recipient phone (including extension).",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "tracking_number": {
+                  "description": "The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                }
+              },
+              "title": "Shipping",
+              "type": "object",
+              "x-expandableFields": [
+                "address"
+              ]
+            }
+          },
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "title": "SourceOrder",
+          "type": "object",
+          "x-expandableFields": [
+            "items",
+            "shipping"
+          ]
+        },
+        "statement_descriptor": {
+          "description": "Extra information about a source. This will appear on your customer's statement every time you charge the source.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the source, one of `canceled`, `chargeable`, `consumed`, `failed`, or `pending`. Only `chargeable` sources can be used to create a charge.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "three_d_secure": {
+          "properties": {
+            "address_line1_check": {
+              "nullable": true,
+              "type": "string"
+            },
+            "address_zip_check": {
+              "nullable": true,
+              "type": "string"
+            },
+            "authenticated": {
+              "nullable": true,
+              "type": "boolean"
+            },
+            "brand": {
+              "nullable": true,
+              "type": "string"
+            },
+            "card": {
+              "nullable": true,
+              "type": "string"
+            },
+            "country": {
+              "nullable": true,
+              "type": "string"
+            },
+            "customer": {
+              "nullable": true,
+              "type": "string"
+            },
+            "cvc_check": {
+              "nullable": true,
+              "type": "string"
+            },
+            "dynamic_last4": {
+              "nullable": true,
+              "type": "string"
+            },
+            "exp_month": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "exp_year": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "fingerprint": {
+              "type": "string"
+            },
+            "funding": {
+              "nullable": true,
+              "type": "string"
+            },
+            "last4": {
+              "nullable": true,
+              "type": "string"
+            },
+            "name": {
+              "nullable": true,
+              "type": "string"
+            },
+            "three_d_secure": {
+              "type": "string"
+            },
+            "tokenization_method": {
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": {
+          "description": "The `type` of the source. The `type` is a payment method, one of `ach_credit_transfer`, `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`, `multibanco`, `klarna`, `p24`, `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An additional hash is included on the source with a name matching this value. It contains additional information specific to the [payment method](https://stripe.com/docs/sources) used.",
+          "enum": [
+            "ach_credit_transfer",
+            "ach_debit",
+            "alipay",
+            "au_becs_debit",
+            "bancontact",
+            "card",
+            "card_present",
+            "eps",
+            "giropay",
+            "ideal",
+            "klarna",
+            "multibanco",
+            "p24",
+            "sepa_debit",
+            "sofort",
+            "three_d_secure",
+            "wechat"
+          ],
+          "type": "string",
+          "x-stripeBypassValidation": true
+        },
+        "usage": {
+          "description": "Either `reusable` or `single_use`. Whether this source should be reusable or not. Some source types may or may not be reusable by construction, while others may leave the option at creation. If an incompatible value is passed, an error will be returned.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "wechat": {
+          "properties": {
+            "prepay_id": {
+              "type": "string"
+            },
+            "qr_code_url": {
+              "nullable": true,
+              "type": "string"
+            },
+            "statement_descriptor": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
       },
-      "sepa_debit_payments": {
-        "creditor_id": "string"
-      }
-    },
-    "tos_acceptance": {
-      "date": 0,
-      "ip": "string",
-      "service_agreement": "string",
-      "user_agent": "string"
-    },
-    "type": "custom",
-    "default": {}
-  }
+      "required": [
+        "client_secret",
+        "created",
+        "flow",
+        "id",
+        "livemode",
+        "object",
+        "status",
+        "type"
+      ],
+      "title": "Source",
+      "type": "object",
+      "x-expandableFields": [
+        "code_verification",
+        "owner",
+        "receiver",
+        "redirect",
+        "source_order"
+      ],
+      "x-resourceId": "source"
+    }
+  ],
+  "title": "Polymorphic",
+  "x-resourceId": "payment_source"
 }

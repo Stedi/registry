@@ -1,34 +1,26 @@
 {
-  "name": "promotion_codes_resource_restrictions",
-  "schema": {
-    "description": "",
-    "properties": {
-      "first_time_transaction": {
-        "description": "A Boolean indicating if the Promotion Code should only be redeemed for Customers without any successful payments or invoices",
-        "type": "boolean"
-      },
-      "minimum_amount": {
-        "description": "Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).",
-        "nullable": true,
-        "type": "integer"
-      },
-      "minimum_amount_currency": {
-        "description": "Three-letter [ISO code](https://stripe.com/docs/currencies) for minimum_amount",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      }
+  "description": "",
+  "properties": {
+    "first_time_transaction": {
+      "description": "A Boolean indicating if the Promotion Code should only be redeemed for Customers without any successful payments or invoices",
+      "type": "boolean"
     },
-    "required": [
-      "first_time_transaction"
-    ],
-    "title": "PromotionCodesResourceRestrictions",
-    "type": "object",
-    "x-expandableFields": [],
-    "default": {
-      "first_time_transaction": true,
-      "minimum_amount": 0,
-      "minimum_amount_currency": "string"
+    "minimum_amount": {
+      "description": "Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).",
+      "nullable": true,
+      "type": "integer"
+    },
+    "minimum_amount_currency": {
+      "description": "Three-letter [ISO code](https://stripe.com/docs/currencies) for minimum_amount",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "first_time_transaction"
+  ],
+  "title": "PromotionCodesResourceRestrictions",
+  "type": "object",
+  "x-expandableFields": []
 }

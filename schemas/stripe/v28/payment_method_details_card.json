@@ -1,376 +1,523 @@
 {
-  "name": "payment_method_details_card",
-  "schema": {
-    "description": "",
-    "properties": {
-      "brand": {
-        "description": "Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "checks": {
-        "description": "",
-        "properties": {
-          "address_line1_check": {
-            "description": "If a address line1 was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "address_postal_code_check": {
-            "description": "If a address postal code was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "cvc_check": {
-            "description": "If a CVC was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "payment_method_details_card_checks",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "country": {
-        "description": "Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "exp_month": {
-        "description": "Two-digit number representing the card's expiration month.",
-        "type": "integer"
-      },
-      "exp_year": {
-        "description": "Four-digit number representing the card's expiration year.",
-        "type": "integer"
-      },
-      "fingerprint": {
-        "description": "Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.\n\n*Starting May 1, 2021, card fingerprint in India for Connect will change to allow two fingerprints for the same card --- one for India and one for the rest of the world.*",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "funding": {
-        "description": "Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "installments": {
-        "description": "",
-        "properties": {
-          "plan": {
-            "description": "",
-            "properties": {
-              "count": {
-                "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
-                "nullable": true,
-                "type": "integer"
-              },
-              "interval": {
-                "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
-                "enum": [
-                  "month"
-                ],
-                "nullable": true,
-                "type": "string"
-              },
-              "type": {
-                "description": "Type of installment plan, one of `fixed_count`.",
-                "enum": [
-                  "fixed_count"
-                ],
-                "type": "string"
-              }
-            },
-            "required": [
-              "type"
-            ],
-            "title": "payment_method_details_card_installments_plan",
-            "type": "object",
-            "x-expandableFields": []
-          }
-        },
-        "title": "payment_method_details_card_installments",
-        "type": "object",
-        "x-expandableFields": [
-          "plan"
-        ]
-      },
-      "last4": {
-        "description": "The last four digits of the card.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "network": {
-        "description": "Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "three_d_secure": {
-        "description": "",
-        "properties": {
-          "authentication_flow": {
-            "description": "For authenticated transactions: how the customer was authenticated by\nthe issuing bank.",
-            "enum": [
-              "challenge",
-              "frictionless"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "result": {
-            "description": "Indicates the outcome of 3D Secure authentication.",
-            "enum": [
-              "attempt_acknowledged",
-              "authenticated",
-              "failed",
-              "not_supported",
-              "processing_error"
-            ],
-            "type": "string"
-          },
-          "result_reason": {
-            "description": "Additional information about why 3D Secure succeeded or failed based\non the `result`.",
-            "enum": [
-              "abandoned",
-              "bypassed",
-              "canceled",
-              "card_not_enrolled",
-              "network_not_supported",
-              "protocol_error",
-              "rejected"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "version": {
-            "description": "The version of 3D Secure that was used.",
-            "enum": [
-              "1.0.2",
-              "2.1.0",
-              "2.2.0"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "result",
-          "version"
-        ],
-        "title": "three_d_secure_details",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "wallet": {
-        "description": "",
-        "properties": {
-          "amex_express_checkout": {
-            "description": "",
-            "properties": {},
-            "title": "payment_method_details_card_wallet_amex_express_checkout",
-            "type": "object",
-            "x-expandableFields": []
-          },
-          "apple_pay": {
-            "description": "",
-            "properties": {},
-            "title": "payment_method_details_card_wallet_apple_pay",
-            "type": "object",
-            "x-expandableFields": []
-          },
-          "dynamic_last4": {
-            "description": "(For tokenized numbers only.) The last four digits of the device account number.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "google_pay": {
-            "description": "",
-            "properties": {},
-            "title": "payment_method_details_card_wallet_google_pay",
-            "type": "object",
-            "x-expandableFields": []
-          },
-          "masterpass": {
-            "description": "",
-            "properties": {
-              "billing_address": {
-                "city": "string",
-                "country": "string",
-                "line1": "string",
-                "line2": "string",
-                "postal_code": "string",
-                "state": "string"
-              },
-              "email": {
-                "description": "Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "name": {
-                "description": "Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "shipping_address": {
-                "city": "string",
-                "country": "string",
-                "line1": "string",
-                "line2": "string",
-                "postal_code": "string",
-                "state": "string"
-              }
-            },
-            "title": "payment_method_details_card_wallet_masterpass",
-            "type": "object",
-            "x-expandableFields": [
-              "billing_address",
-              "shipping_address"
-            ]
-          },
-          "samsung_pay": {
-            "description": "",
-            "properties": {},
-            "title": "payment_method_details_card_wallet_samsung_pay",
-            "type": "object",
-            "x-expandableFields": []
-          },
-          "type": {
-            "description": "The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.",
-            "enum": [
-              "amex_express_checkout",
-              "apple_pay",
-              "google_pay",
-              "masterpass",
-              "samsung_pay",
-              "visa_checkout"
-            ],
-            "type": "string"
-          },
-          "visa_checkout": {
-            "description": "",
-            "properties": {
-              "billing_address": {
-                "city": "string",
-                "country": "string",
-                "line1": "string",
-                "line2": "string",
-                "postal_code": "string",
-                "state": "string"
-              },
-              "email": {
-                "description": "Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "name": {
-                "description": "Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "shipping_address": {
-                "city": "string",
-                "country": "string",
-                "line1": "string",
-                "line2": "string",
-                "postal_code": "string",
-                "state": "string"
-              }
-            },
-            "title": "payment_method_details_card_wallet_visa_checkout",
-            "type": "object",
-            "x-expandableFields": [
-              "billing_address",
-              "shipping_address"
-            ]
-          }
-        },
-        "required": [
-          "type"
-        ],
-        "title": "payment_method_details_card_wallet",
-        "type": "object",
-        "x-expandableFields": [
-          "amex_express_checkout",
-          "apple_pay",
-          "google_pay",
-          "masterpass",
-          "samsung_pay",
-          "visa_checkout"
-        ]
-      }
+  "description": "",
+  "properties": {
+    "brand": {
+      "description": "Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
     },
-    "required": [
-      "exp_month",
-      "exp_year"
-    ],
-    "title": "payment_method_details_card",
-    "type": "object",
-    "x-expandableFields": [
-      "checks",
-      "installments",
-      "three_d_secure",
-      "wallet"
-    ],
-    "default": {
-      "brand": "string",
-      "checks": {
-        "address_line1_check": "string",
-        "address_postal_code_check": "string",
-        "cvc_check": "string"
-      },
-      "country": "string",
-      "exp_month": 0,
-      "exp_year": 0,
-      "fingerprint": "string",
-      "funding": "string",
-      "installments": {
-        "plan": {
-          "count": 0,
-          "interval": "month",
-          "type": "fixed_count"
+    "checks": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "address_line1_check": {
+              "description": "If a address line1 was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "address_postal_code_check": {
+              "description": "If a address postal code was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "cvc_check": {
+              "description": "If a CVC was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "title": "payment_method_details_card_checks",
+          "type": "object",
+          "x-expandableFields": []
         }
-      },
-      "last4": "string",
-      "network": "string",
-      "three_d_secure": {
-        "authentication_flow": "challenge",
-        "result": "attempt_acknowledged",
-        "result_reason": "abandoned",
-        "version": "1.0.2"
-      },
-      "wallet": {
-        "amex_express_checkout": {},
-        "apple_pay": {},
-        "dynamic_last4": "string",
-        "google_pay": {},
-        "masterpass": {
-          "billing_address": {},
-          "email": "string",
-          "name": "string",
-          "shipping_address": {}
-        },
-        "samsung_pay": {},
-        "type": "amex_express_checkout",
-        "visa_checkout": {
-          "billing_address": {},
-          "email": "string",
-          "name": "string",
-          "shipping_address": {}
+      ],
+      "description": "Check results by Card networks on Card address and CVC at time of payment.",
+      "nullable": true
+    },
+    "country": {
+      "description": "Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "exp_month": {
+      "description": "Two-digit number representing the card's expiration month.",
+      "type": "integer"
+    },
+    "exp_year": {
+      "description": "Four-digit number representing the card's expiration year.",
+      "type": "integer"
+    },
+    "fingerprint": {
+      "description": "Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.\n\n*Starting May 1, 2021, card fingerprint in India for Connect will change to allow two fingerprints for the same card --- one for India and one for the rest of the world.*",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "funding": {
+      "description": "Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "installments": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "plan": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "count": {
+                      "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
+                      "nullable": true,
+                      "type": "integer"
+                    },
+                    "interval": {
+                      "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
+                      "enum": [
+                        "month"
+                      ],
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Type of installment plan, one of `fixed_count`.",
+                      "enum": [
+                        "fixed_count"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ],
+                  "title": "payment_method_details_card_installments_plan",
+                  "type": "object",
+                  "x-expandableFields": []
+                }
+              ],
+              "description": "Installment plan selected for the payment.",
+              "nullable": true
+            }
+          },
+          "title": "payment_method_details_card_installments",
+          "type": "object",
+          "x-expandableFields": [
+            "plan"
+          ]
         }
-      }
+      ],
+      "description": "Installment details for this payment (Mexico only).\n\nFor more information, see the [installments integration guide](https://stripe.com/docs/payments/installments).",
+      "nullable": true
+    },
+    "last4": {
+      "description": "The last four digits of the card.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "network": {
+      "description": "Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "three_d_secure": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "authentication_flow": {
+              "description": "For authenticated transactions: how the customer was authenticated by\nthe issuing bank.",
+              "enum": [
+                "challenge",
+                "frictionless"
+              ],
+              "nullable": true,
+              "type": "string"
+            },
+            "result": {
+              "description": "Indicates the outcome of 3D Secure authentication.",
+              "enum": [
+                "attempt_acknowledged",
+                "authenticated",
+                "failed",
+                "not_supported",
+                "processing_error"
+              ],
+              "type": "string"
+            },
+            "result_reason": {
+              "description": "Additional information about why 3D Secure succeeded or failed based\non the `result`.",
+              "enum": [
+                "abandoned",
+                "bypassed",
+                "canceled",
+                "card_not_enrolled",
+                "network_not_supported",
+                "protocol_error",
+                "rejected"
+              ],
+              "nullable": true,
+              "type": "string"
+            },
+            "version": {
+              "description": "The version of 3D Secure that was used.",
+              "enum": [
+                "1.0.2",
+                "2.1.0",
+                "2.2.0"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "result",
+            "version"
+          ],
+          "title": "three_d_secure_details",
+          "type": "object",
+          "x-expandableFields": []
+        }
+      ],
+      "description": "Populated if this transaction used 3D Secure authentication.",
+      "nullable": true
+    },
+    "wallet": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "amex_express_checkout": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_details_card_wallet_amex_express_checkout",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "apple_pay": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_details_card_wallet_apple_pay",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "dynamic_last4": {
+              "description": "(For tokenized numbers only.) The last four digits of the device account number.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "google_pay": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_details_card_wallet_google_pay",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "masterpass": {
+              "description": "",
+              "properties": {
+                "billing_address": {
+                  "anyOf": [
+                    {
+                      "description": "",
+                      "properties": {
+                        "city": {
+                          "description": "City, district, suburb, town, or village.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "country": {
+                          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "line1": {
+                          "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "line2": {
+                          "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "postal_code": {
+                          "description": "ZIP or postal code.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "state": {
+                          "description": "State, county, province, or region.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        }
+                      },
+                      "title": "Address",
+                      "type": "object",
+                      "x-expandableFields": []
+                    }
+                  ],
+                  "description": "Owner's verified billing address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                  "nullable": true
+                },
+                "email": {
+                  "description": "Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "name": {
+                  "description": "Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "shipping_address": {
+                  "anyOf": [
+                    {
+                      "description": "",
+                      "properties": {
+                        "city": {
+                          "description": "City, district, suburb, town, or village.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "country": {
+                          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "line1": {
+                          "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "line2": {
+                          "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "postal_code": {
+                          "description": "ZIP or postal code.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "state": {
+                          "description": "State, county, province, or region.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        }
+                      },
+                      "title": "Address",
+                      "type": "object",
+                      "x-expandableFields": []
+                    }
+                  ],
+                  "description": "Owner's verified shipping address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                  "nullable": true
+                }
+              },
+              "title": "payment_method_details_card_wallet_masterpass",
+              "type": "object",
+              "x-expandableFields": [
+                "billing_address",
+                "shipping_address"
+              ]
+            },
+            "samsung_pay": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_details_card_wallet_samsung_pay",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "type": {
+              "description": "The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.",
+              "enum": [
+                "amex_express_checkout",
+                "apple_pay",
+                "google_pay",
+                "masterpass",
+                "samsung_pay",
+                "visa_checkout"
+              ],
+              "type": "string"
+            },
+            "visa_checkout": {
+              "description": "",
+              "properties": {
+                "billing_address": {
+                  "anyOf": [
+                    {
+                      "description": "",
+                      "properties": {
+                        "city": {
+                          "description": "City, district, suburb, town, or village.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "country": {
+                          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "line1": {
+                          "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "line2": {
+                          "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "postal_code": {
+                          "description": "ZIP or postal code.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "state": {
+                          "description": "State, county, province, or region.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        }
+                      },
+                      "title": "Address",
+                      "type": "object",
+                      "x-expandableFields": []
+                    }
+                  ],
+                  "description": "Owner's verified billing address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                  "nullable": true
+                },
+                "email": {
+                  "description": "Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "name": {
+                  "description": "Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "shipping_address": {
+                  "anyOf": [
+                    {
+                      "description": "",
+                      "properties": {
+                        "city": {
+                          "description": "City, district, suburb, town, or village.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "country": {
+                          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "line1": {
+                          "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "line2": {
+                          "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "postal_code": {
+                          "description": "ZIP or postal code.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "state": {
+                          "description": "State, county, province, or region.",
+                          "maxLength": 5000,
+                          "nullable": true,
+                          "type": "string"
+                        }
+                      },
+                      "title": "Address",
+                      "type": "object",
+                      "x-expandableFields": []
+                    }
+                  ],
+                  "description": "Owner's verified shipping address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                  "nullable": true
+                }
+              },
+              "title": "payment_method_details_card_wallet_visa_checkout",
+              "type": "object",
+              "x-expandableFields": [
+                "billing_address",
+                "shipping_address"
+              ]
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "title": "payment_method_details_card_wallet",
+          "type": "object",
+          "x-expandableFields": [
+            "amex_express_checkout",
+            "apple_pay",
+            "google_pay",
+            "masterpass",
+            "samsung_pay",
+            "visa_checkout"
+          ]
+        }
+      ],
+      "description": "If this Card is part of a card wallet, this contains the details of the card wallet.",
+      "nullable": true
     }
-  }
+  },
+  "required": [
+    "exp_month",
+    "exp_year"
+  ],
+  "title": "payment_method_details_card",
+  "type": "object",
+  "x-expandableFields": [
+    "checks",
+    "installments",
+    "three_d_secure",
+    "wallet"
+  ]
 }

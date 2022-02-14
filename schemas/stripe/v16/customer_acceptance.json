@@ -1,67 +1,55 @@
 {
-  "name": "customer_acceptance",
-  "schema": {
-    "description": "",
-    "properties": {
-      "accepted_at": {
-        "description": "The time at which the customer accepted the Mandate.",
-        "format": "unix-time",
-        "nullable": true,
-        "type": "integer"
-      },
-      "offline": {
-        "description": "",
-        "properties": {},
-        "title": "offline_acceptance",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "online": {
-        "description": "",
-        "properties": {
-          "ip_address": {
-            "description": "The IP address from which the Mandate was accepted by the customer.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "user_agent": {
-            "description": "The user agent of the browser from which the Mandate was accepted by the customer.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "online_acceptance",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "type": {
-        "description": "The type of customer acceptance information included with the Mandate. One of `online` or `offline`.",
-        "enum": [
-          "offline",
-          "online"
-        ],
-        "type": "string"
-      }
+  "description": "",
+  "properties": {
+    "accepted_at": {
+      "description": "The time at which the customer accepted the Mandate.",
+      "format": "unix-time",
+      "nullable": true,
+      "type": "integer"
     },
-    "required": [
-      "type"
-    ],
-    "title": "customer_acceptance",
-    "type": "object",
-    "x-expandableFields": [
-      "offline",
-      "online"
-    ],
-    "default": {
-      "accepted_at": 0,
-      "offline": {},
-      "online": {
-        "ip_address": "string",
-        "user_agent": "string"
+    "offline": {
+      "description": "",
+      "properties": {},
+      "title": "offline_acceptance",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "online": {
+      "description": "",
+      "properties": {
+        "ip_address": {
+          "description": "The IP address from which the Mandate was accepted by the customer.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "user_agent": {
+          "description": "The user agent of the browser from which the Mandate was accepted by the customer.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
       },
-      "type": "offline"
+      "title": "online_acceptance",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "type": {
+      "description": "The type of customer acceptance information included with the Mandate. One of `online` or `offline`.",
+      "enum": [
+        "offline",
+        "online"
+      ],
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "type"
+  ],
+  "title": "customer_acceptance",
+  "type": "object",
+  "x-expandableFields": [
+    "offline",
+    "online"
+  ]
 }

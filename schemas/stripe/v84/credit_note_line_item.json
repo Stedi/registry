@@ -1,71 +1,56 @@
 {
-  "name": "credit_note_line_item",
-  "schema": {
-    "description": "",
-    "properties": {
-      "amount": {
-        "description": "The integer amount in %s representing the gross amount being credited for this line item, excluding (exclusive) tax and discounts.",
-        "type": "integer"
+  "description": "",
+  "properties": {
+    "amount": {
+      "description": "The integer amount in %s representing the gross amount being credited for this line item, excluding (exclusive) tax and discounts.",
+      "type": "integer"
+    },
+    "description": {
+      "description": "Description of the item being credited.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "discount_amount": {
+      "description": "The integer amount in %s representing the discount being credited for this line item.",
+      "type": "integer"
+    },
+    "discount_amounts": {
+      "description": "The amount of discount calculated per discount for this line item",
+      "items": {
+        "$ref": "#/components/schemas/discounts_resource_discount_amount"
       },
-      "description": {
-        "description": "Description of the item being credited.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "discount_amount": {
-        "description": "The integer amount in %s representing the discount being credited for this line item.",
-        "type": "integer"
-      },
-      "discount_amounts": {
-        "description": "",
-        "properties": {
-          "amount": {
-            "description": "The amount, in %s, of the discount.",
-            "type": "integer"
-          },
-          "discount": {
-            "maxLength": 5000,
-            "type": "string"
-          }
-        },
-        "required": [
-          "amount",
-          "discount"
-        ],
-        "title": "DiscountsResourceDiscountAmount",
-        "type": "object",
-        "x-expandableFields": [
-          "discount"
-        ]
-      },
-      "id": {
-        "description": "Unique identifier for the object.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "invoice_line_item": {
-        "description": "ID of the invoice line item being credited",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "livemode": {
-        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-        "type": "boolean"
-      },
-      "object": {
-        "description": "String representing the object's type. Objects of the same type share the same value.",
-        "enum": [
-          "credit_note_line_item"
-        ],
-        "type": "string"
-      },
-      "quantity": {
-        "description": "The number of units of product being credited.",
-        "nullable": true,
-        "type": "integer"
-      },
-      "tax_amounts": {
+      "type": "array"
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "invoice_line_item": {
+      "description": "ID of the invoice line item being credited",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "livemode": {
+      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+      "type": "boolean"
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "credit_note_line_item"
+      ],
+      "type": "string"
+    },
+    "quantity": {
+      "description": "The number of units of product being credited.",
+      "nullable": true,
+      "type": "integer"
+    },
+    "tax_amounts": {
+      "description": "The amount of tax calculated per tax rate for this line item",
+      "items": {
         "description": "",
         "properties": {
           "amount": {
@@ -77,8 +62,225 @@
             "type": "boolean"
           },
           "tax_rate": {
-            "maxLength": 5000,
-            "type": "string"
+            "anyOf": [
+              {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              {
+                "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
+                "properties": {
+                  "active": {
+                    "description": "Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.",
+                    "type": "boolean"
+                  },
+                  "country": {
+                    "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                    "maxLength": 5000,
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "created": {
+                    "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                    "format": "unix-time",
+                    "type": "integer"
+                  },
+                  "description": {
+                    "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
+                    "maxLength": 5000,
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "display_name": {
+                    "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Unique identifier for the object.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "inclusive": {
+                    "description": "This specifies if the tax rate is inclusive or exclusive.",
+                    "type": "boolean"
+                  },
+                  "jurisdiction": {
+                    "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
+                    "maxLength": 5000,
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "livemode": {
+                    "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                    "type": "boolean"
+                  },
+                  "metadata": {
+                    "additionalProperties": {
+                      "maxLength": 500,
+                      "type": "string"
+                    },
+                    "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+                    "nullable": true,
+                    "type": "object"
+                  },
+                  "object": {
+                    "description": "String representing the object's type. Objects of the same type share the same value.",
+                    "enum": [
+                      "tax_rate"
+                    ],
+                    "type": "string"
+                  },
+                  "percentage": {
+                    "description": "This represents the tax rate percent out of 100.",
+                    "type": "number"
+                  },
+                  "state": {
+                    "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
+                    "maxLength": 5000,
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "tax_type": {
+                    "description": "The high-level tax type, such as `vat` or `sales_tax`.",
+                    "enum": [
+                      "gst",
+                      "hst",
+                      "pst",
+                      "qst",
+                      "rst",
+                      "sales_tax",
+                      "vat"
+                    ],
+                    "nullable": true,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "active",
+                  "created",
+                  "display_name",
+                  "id",
+                  "inclusive",
+                  "livemode",
+                  "object",
+                  "percentage"
+                ],
+                "title": "TaxRate",
+                "type": "object",
+                "x-expandableFields": [],
+                "x-resourceId": "tax_rate"
+              }
+            ],
+            "description": "The tax rate that was applied to get this tax amount.",
+            "x-expansionResources": {
+              "oneOf": [
+                {
+                  "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
+                  "properties": {
+                    "active": {
+                      "description": "Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.",
+                      "type": "boolean"
+                    },
+                    "country": {
+                      "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "created": {
+                      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                      "format": "unix-time",
+                      "type": "integer"
+                    },
+                    "description": {
+                      "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "display_name": {
+                      "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "Unique identifier for the object.",
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "inclusive": {
+                      "description": "This specifies if the tax rate is inclusive or exclusive.",
+                      "type": "boolean"
+                    },
+                    "jurisdiction": {
+                      "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "livemode": {
+                      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                      "type": "boolean"
+                    },
+                    "metadata": {
+                      "additionalProperties": {
+                        "maxLength": 500,
+                        "type": "string"
+                      },
+                      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+                      "nullable": true,
+                      "type": "object"
+                    },
+                    "object": {
+                      "description": "String representing the object's type. Objects of the same type share the same value.",
+                      "enum": [
+                        "tax_rate"
+                      ],
+                      "type": "string"
+                    },
+                    "percentage": {
+                      "description": "This represents the tax rate percent out of 100.",
+                      "type": "number"
+                    },
+                    "state": {
+                      "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "tax_type": {
+                      "description": "The high-level tax type, such as `vat` or `sales_tax`.",
+                      "enum": [
+                        "gst",
+                        "hst",
+                        "pst",
+                        "qst",
+                        "rst",
+                        "sales_tax",
+                        "vat"
+                      ],
+                      "nullable": true,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "active",
+                    "created",
+                    "display_name",
+                    "id",
+                    "inclusive",
+                    "livemode",
+                    "object",
+                    "percentage"
+                  ],
+                  "title": "TaxRate",
+                  "type": "object",
+                  "x-expandableFields": [],
+                  "x-resourceId": "tax_rate"
+                }
+              ]
+            }
           }
         },
         "required": [
@@ -92,7 +294,11 @@
           "tax_rate"
         ]
       },
-      "tax_rates": {
+      "type": "array"
+    },
+    "tax_rates": {
+      "description": "The tax rates which apply to the line item.",
+      "items": {
         "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
         "properties": {
           "active": {
@@ -140,7 +346,15 @@
             "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
             "type": "boolean"
           },
-          "metadata": {},
+          "metadata": {
+            "additionalProperties": {
+              "maxLength": 500,
+              "type": "string"
+            },
+            "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+            "nullable": true,
+            "type": "object"
+          },
           "object": {
             "description": "String representing the object's type. Objects of the same type share the same value.",
             "enum": [
@@ -188,82 +402,45 @@
         "x-expandableFields": [],
         "x-resourceId": "tax_rate"
       },
-      "type": {
-        "description": "The type of the credit note line item, one of `invoice_line_item` or `custom_line_item`. When the type is `invoice_line_item` there is an additional `invoice_line_item` property on the resource the value of which is the id of the credited line item on the invoice.",
-        "enum": [
-          "custom_line_item",
-          "invoice_line_item"
-        ],
-        "type": "string"
-      },
-      "unit_amount": {
-        "description": "The cost of each unit of product being credited.",
-        "nullable": true,
-        "type": "integer"
-      },
-      "unit_amount_decimal": {
-        "description": "Same as `unit_amount`, but contains a decimal value with at most 12 decimal places.",
-        "format": "decimal",
-        "nullable": true,
-        "type": "string"
-      }
+      "type": "array"
     },
-    "required": [
-      "amount",
-      "discount_amount",
-      "discount_amounts",
-      "id",
-      "livemode",
-      "object",
-      "tax_amounts",
-      "tax_rates",
-      "type"
-    ],
-    "title": "CreditNoteLineItem",
-    "type": "object",
-    "x-expandableFields": [
-      "discount_amounts",
-      "tax_amounts",
-      "tax_rates"
-    ],
-    "x-resourceId": "credit_note_line_item",
-    "default": {
-      "amount": 0,
-      "description": "string",
-      "discount_amount": 0,
-      "discount_amounts": {
-        "amount": 0,
-        "discount": "string"
-      },
-      "id": "string",
-      "invoice_line_item": "string",
-      "livemode": true,
-      "object": "credit_note_line_item",
-      "quantity": 0,
-      "tax_amounts": {
-        "amount": 0,
-        "inclusive": true,
-        "tax_rate": "string"
-      },
-      "tax_rates": {
-        "active": true,
-        "country": "string",
-        "created": 0,
-        "description": "string",
-        "display_name": "string",
-        "id": "string",
-        "inclusive": true,
-        "jurisdiction": "string",
-        "livemode": true,
-        "metadata": {},
-        "object": "tax_rate",
-        "percentage": 0,
-        "state": "string",
-        "tax_type": "gst"
-      },
-      "type": "custom_line_item",
-      "unit_amount": 0,
-      "unit_amount_decimal": "0.0"
+    "type": {
+      "description": "The type of the credit note line item, one of `invoice_line_item` or `custom_line_item`. When the type is `invoice_line_item` there is an additional `invoice_line_item` property on the resource the value of which is the id of the credited line item on the invoice.",
+      "enum": [
+        "custom_line_item",
+        "invoice_line_item"
+      ],
+      "type": "string"
+    },
+    "unit_amount": {
+      "description": "The cost of each unit of product being credited.",
+      "nullable": true,
+      "type": "integer"
+    },
+    "unit_amount_decimal": {
+      "description": "Same as `unit_amount`, but contains a decimal value with at most 12 decimal places.",
+      "format": "decimal",
+      "nullable": true,
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "amount",
+    "discount_amount",
+    "discount_amounts",
+    "id",
+    "livemode",
+    "object",
+    "tax_amounts",
+    "tax_rates",
+    "type"
+  ],
+  "title": "CreditNoteLineItem",
+  "type": "object",
+  "x-expandableFields": [
+    "discount_amounts",
+    "tax_amounts",
+    "tax_rates"
+  ],
+  "x-resourceId": "credit_note_line_item"
 }

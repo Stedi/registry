@@ -1,43 +1,36 @@
 {
-  "name": "gelato_session_last_error",
-  "schema": {
-    "description": "Shows last VerificationSession error",
-    "properties": {
-      "code": {
-        "description": "A short machine-readable string giving the reason for the verification or user-session failure.",
-        "enum": [
-          "abandoned",
-          "consent_declined",
-          "country_not_supported",
-          "device_not_supported",
-          "document_expired",
-          "document_type_not_supported",
-          "document_unverified_other",
-          "id_number_insufficient_document_data",
-          "id_number_mismatch",
-          "id_number_unverified_other",
-          "selfie_document_missing_photo",
-          "selfie_face_mismatch",
-          "selfie_manipulated",
-          "selfie_unverified_other",
-          "under_supported_age"
-        ],
-        "nullable": true,
-        "type": "string"
-      },
-      "reason": {
-        "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      }
+  "description": "Shows last VerificationSession error",
+  "properties": {
+    "code": {
+      "description": "A short machine-readable string giving the reason for the verification or user-session failure.",
+      "enum": [
+        "abandoned",
+        "consent_declined",
+        "country_not_supported",
+        "device_not_supported",
+        "document_expired",
+        "document_type_not_supported",
+        "document_unverified_other",
+        "id_number_insufficient_document_data",
+        "id_number_mismatch",
+        "id_number_unverified_other",
+        "selfie_document_missing_photo",
+        "selfie_face_mismatch",
+        "selfie_manipulated",
+        "selfie_unverified_other",
+        "under_supported_age"
+      ],
+      "nullable": true,
+      "type": "string"
     },
-    "title": "GelatoSessionLastError",
-    "type": "object",
-    "x-expandableFields": [],
-    "default": {
-      "code": "abandoned",
-      "reason": "string"
+    "reason": {
+      "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
     }
-  }
+  },
+  "title": "GelatoSessionLastError",
+  "type": "object",
+  "x-expandableFields": []
 }

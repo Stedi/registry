@@ -1,23 +1,13 @@
 {
-  "name": "external_account",
-  "schema": {
-    "account": "string",
-    "account_holder_name": "string",
-    "account_holder_type": "string",
-    "account_type": "string",
-    "available_payout_methods": "instant",
-    "bank_name": "string",
-    "country": "string",
-    "currency": "string",
-    "customer": "string",
-    "default_for_currency": true,
-    "fingerprint": "string",
-    "id": "string",
-    "last4": "string",
-    "metadata": {},
-    "object": "bank_account",
-    "routing_number": "string",
-    "status": "string",
-    "default": {}
-  }
+  "anyOf": [
+    {
+      "$ref": "#/components/schemas/bank_account"
+    },
+    {
+      "$ref": "#/components/schemas/card"
+    }
+  ],
+  "title": "Polymorphic",
+  "x-resourceId": "external_account",
+  "x-stripeBypassValidation": true
 }

@@ -1,1603 +1,1428 @@
 {
-  "name": "payment_method_details",
-  "schema": {
-    "description": "",
-    "properties": {
-      "ach_credit_transfer": {
-        "description": "",
-        "properties": {
-          "account_number": {
-            "description": "Account number to transfer funds to.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "bank_name": {
-            "description": "Name of the bank associated with the routing number.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "routing_number": {
-            "description": "Routing transit number for the bank account to transfer funds to.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "swift_code": {
-            "description": "SWIFT code of the bank associated with the routing number.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
+  "description": "",
+  "properties": {
+    "ach_credit_transfer": {
+      "description": "",
+      "properties": {
+        "account_number": {
+          "description": "Account number to transfer funds to.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
         },
-        "title": "payment_method_details_ach_credit_transfer",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "ach_debit": {
-        "description": "",
-        "properties": {
-          "account_holder_type": {
-            "description": "Type of entity that holds the account. This can be either `individual` or `company`.",
-            "enum": [
-              "company",
-              "individual"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "bank_name": {
-            "description": "Name of the bank associated with the bank account.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "country": {
-            "description": "Two-letter ISO code representing the country the bank account is located in.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "fingerprint": {
-            "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "last4": {
-            "description": "Last four digits of the bank account number.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "routing_number": {
-            "description": "Routing transit number of the bank account.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
+        "bank_name": {
+          "description": "Name of the bank associated with the routing number.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
         },
-        "title": "payment_method_details_ach_debit",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "acss_debit": {
-        "description": "",
-        "properties": {
-          "bank_name": {
-            "description": "Name of the bank associated with the bank account.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "fingerprint": {
-            "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "institution_number": {
-            "description": "Institution number of the bank account",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "last4": {
-            "description": "Last four digits of the bank account number.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "mandate": {
-            "description": "ID of the mandate used to make this payment.",
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "transit_number": {
-            "description": "Transit number of the bank account.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
+        "routing_number": {
+          "description": "Routing transit number for the bank account to transfer funds to.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
         },
-        "title": "payment_method_details_acss_debit",
-        "type": "object",
-        "x-expandableFields": []
+        "swift_code": {
+          "description": "SWIFT code of the bank associated with the routing number.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
       },
-      "afterpay_clearpay": {
-        "description": "",
-        "properties": {
-          "reference": {
-            "description": "Order identifier shown to the merchant in Afterpay’s online portal.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "payment_method_details_afterpay_clearpay",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "alipay": {
-        "fingerprint": "string",
-        "transaction_id": "string"
-      },
-      "au_becs_debit": {
-        "description": "",
-        "properties": {
-          "bsb_number": {
-            "description": "Bank-State-Branch number of the bank account.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "fingerprint": {
-            "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "last4": {
-            "description": "Last four digits of the bank account number.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "mandate": {
-            "description": "ID of the mandate used to make this payment.",
-            "maxLength": 5000,
-            "type": "string"
-          }
-        },
-        "title": "payment_method_details_au_becs_debit",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "bacs_debit": {
-        "description": "",
-        "properties": {
-          "fingerprint": {
-            "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "last4": {
-            "description": "Last four digits of the bank account number.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "mandate": {
-            "description": "ID of the mandate used to make this payment.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "sort_code": {
-            "description": "Sort code of the bank account. (e.g., `10-20-30`)",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "payment_method_details_bacs_debit",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "bancontact": {
-        "description": "",
-        "properties": {
-          "bank_code": {
-            "description": "Bank code of bank associated with the bank account.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "bank_name": {
-            "description": "Name of the bank associated with the bank account.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "bic": {
-            "description": "Bank Identifier Code of the bank associated with the bank account.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "generated_sepa_debit": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "generated_sepa_debit_mandate": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "iban_last4": {
-            "description": "Last four characters of the IBAN.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "preferred_language": {
-            "description": "Preferred language of the Bancontact authorization page that the customer is redirected to.\nCan be one of `en`, `de`, `fr`, or `nl`",
-            "enum": [
-              "de",
-              "en",
-              "fr",
-              "nl"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "verified_name": {
-            "description": "Owner's verified full name. Values are verified or provided by Bancontact directly\n(if supported) at the time of authorization or settlement. They cannot be set or mutated.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "payment_method_details_bancontact",
-        "type": "object",
-        "x-expandableFields": [
-          "generated_sepa_debit",
-          "generated_sepa_debit_mandate"
-        ]
-      },
-      "boleto": {
-        "description": "",
-        "properties": {
-          "tax_id": {
-            "description": "Uniquely identifies this customer tax_id (CNPJ or CPF)",
-            "maxLength": 5000,
-            "type": "string"
-          }
-        },
-        "required": [
-          "tax_id"
-        ],
-        "title": "payment_method_details_boleto",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "card": {
-        "description": "",
-        "properties": {
-          "brand": {
-            "description": "Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "checks": {
-            "description": "",
-            "properties": {
-              "address_line1_check": {
-                "description": "If a address line1 was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "address_postal_code_check": {
-                "description": "If a address postal code was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "cvc_check": {
-                "description": "If a CVC was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              }
-            },
-            "title": "payment_method_details_card_checks",
-            "type": "object",
-            "x-expandableFields": []
-          },
-          "country": {
-            "description": "Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "exp_month": {
-            "description": "Two-digit number representing the card's expiration month.",
-            "type": "integer"
-          },
-          "exp_year": {
-            "description": "Four-digit number representing the card's expiration year.",
-            "type": "integer"
-          },
-          "fingerprint": {
-            "description": "Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.\n\n*Starting May 1, 2021, card fingerprint in India for Connect will change to allow two fingerprints for the same card --- one for India and one for the rest of the world.*",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "funding": {
-            "description": "Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "installments": {
-            "description": "",
-            "properties": {
-              "plan": {
-                "description": "",
-                "properties": {
-                  "count": {
-                    "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
-                    "nullable": true,
-                    "type": "integer"
-                  },
-                  "interval": {
-                    "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
-                    "enum": [
-                      "month"
-                    ],
-                    "nullable": true,
-                    "type": "string"
-                  },
-                  "type": {
-                    "description": "Type of installment plan, one of `fixed_count`.",
-                    "enum": [
-                      "fixed_count"
-                    ],
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "type"
-                ],
-                "title": "payment_method_details_card_installments_plan",
-                "type": "object",
-                "x-expandableFields": []
-              }
-            },
-            "title": "payment_method_details_card_installments",
-            "type": "object",
-            "x-expandableFields": [
-              "plan"
-            ]
-          },
-          "last4": {
-            "description": "The last four digits of the card.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "network": {
-            "description": "Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "three_d_secure": {
-            "description": "",
-            "properties": {
-              "authentication_flow": {
-                "description": "For authenticated transactions: how the customer was authenticated by\nthe issuing bank.",
-                "enum": [
-                  "challenge",
-                  "frictionless"
-                ],
-                "nullable": true,
-                "type": "string"
-              },
-              "result": {
-                "description": "Indicates the outcome of 3D Secure authentication.",
-                "enum": [
-                  "attempt_acknowledged",
-                  "authenticated",
-                  "failed",
-                  "not_supported",
-                  "processing_error"
-                ],
-                "type": "string",
-                "x-stripeBypassValidation": true
-              },
-              "result_reason": {
-                "description": "Additional information about why 3D Secure succeeded or failed based\non the `result`.",
-                "enum": [
-                  "abandoned",
-                  "bypassed",
-                  "canceled",
-                  "card_not_enrolled",
-                  "network_not_supported",
-                  "protocol_error",
-                  "rejected"
-                ],
-                "nullable": true,
-                "type": "string"
-              },
-              "version": {
-                "description": "The version of 3D Secure that was used.",
-                "enum": [
-                  "1.0.2",
-                  "2.1.0",
-                  "2.2.0"
-                ],
-                "type": "string"
-              }
-            },
-            "required": [
-              "result",
-              "version"
-            ],
-            "title": "three_d_secure_details",
-            "type": "object",
-            "x-expandableFields": []
-          },
-          "wallet": {
-            "description": "",
-            "properties": {
-              "amex_express_checkout": {
-                "description": "",
-                "properties": {},
-                "title": "payment_method_details_card_wallet_amex_express_checkout",
-                "type": "object",
-                "x-expandableFields": []
-              },
-              "apple_pay": {
-                "description": "",
-                "properties": {},
-                "title": "payment_method_details_card_wallet_apple_pay",
-                "type": "object",
-                "x-expandableFields": []
-              },
-              "dynamic_last4": {
-                "description": "(For tokenized numbers only.) The last four digits of the device account number.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "google_pay": {
-                "description": "",
-                "properties": {},
-                "title": "payment_method_details_card_wallet_google_pay",
-                "type": "object",
-                "x-expandableFields": []
-              },
-              "masterpass": {
-                "description": "",
-                "properties": {
-                  "billing_address": {
-                    "city": "string",
-                    "country": "string",
-                    "line1": "string",
-                    "line2": "string",
-                    "postal_code": "string",
-                    "state": "string"
-                  },
-                  "email": {
-                    "description": "Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
-                    "maxLength": 5000,
-                    "nullable": true,
-                    "type": "string"
-                  },
-                  "name": {
-                    "description": "Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
-                    "maxLength": 5000,
-                    "nullable": true,
-                    "type": "string"
-                  },
-                  "shipping_address": {
-                    "city": "string",
-                    "country": "string",
-                    "line1": "string",
-                    "line2": "string",
-                    "postal_code": "string",
-                    "state": "string"
-                  }
-                },
-                "title": "payment_method_details_card_wallet_masterpass",
-                "type": "object",
-                "x-expandableFields": [
-                  "billing_address",
-                  "shipping_address"
-                ]
-              },
-              "samsung_pay": {
-                "description": "",
-                "properties": {},
-                "title": "payment_method_details_card_wallet_samsung_pay",
-                "type": "object",
-                "x-expandableFields": []
-              },
-              "type": {
-                "description": "The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.",
-                "enum": [
-                  "amex_express_checkout",
-                  "apple_pay",
-                  "google_pay",
-                  "masterpass",
-                  "samsung_pay",
-                  "visa_checkout"
-                ],
-                "type": "string"
-              },
-              "visa_checkout": {
-                "description": "",
-                "properties": {
-                  "billing_address": {
-                    "city": "string",
-                    "country": "string",
-                    "line1": "string",
-                    "line2": "string",
-                    "postal_code": "string",
-                    "state": "string"
-                  },
-                  "email": {
-                    "description": "Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
-                    "maxLength": 5000,
-                    "nullable": true,
-                    "type": "string"
-                  },
-                  "name": {
-                    "description": "Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
-                    "maxLength": 5000,
-                    "nullable": true,
-                    "type": "string"
-                  },
-                  "shipping_address": {
-                    "city": "string",
-                    "country": "string",
-                    "line1": "string",
-                    "line2": "string",
-                    "postal_code": "string",
-                    "state": "string"
-                  }
-                },
-                "title": "payment_method_details_card_wallet_visa_checkout",
-                "type": "object",
-                "x-expandableFields": [
-                  "billing_address",
-                  "shipping_address"
-                ]
-              }
-            },
-            "required": [
-              "type"
-            ],
-            "title": "payment_method_details_card_wallet",
-            "type": "object",
-            "x-expandableFields": [
-              "amex_express_checkout",
-              "apple_pay",
-              "google_pay",
-              "masterpass",
-              "samsung_pay",
-              "visa_checkout"
-            ]
-          }
-        },
-        "required": [
-          "exp_month",
-          "exp_year"
-        ],
-        "title": "payment_method_details_card",
-        "type": "object",
-        "x-expandableFields": [
-          "checks",
-          "installments",
-          "three_d_secure",
-          "wallet"
-        ]
-      },
-      "card_present": {
-        "description": "",
-        "properties": {
-          "brand": {
-            "description": "Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "cardholder_name": {
-            "description": "The cardholder name as read from the card, in [ISO 7813](https://en.wikipedia.org/wiki/ISO/IEC_7813) format. May include alphanumeric characters, special characters and first/last name separator (`/`).",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "country": {
-            "description": "Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "emv_auth_data": {
-            "description": "Authorization response cryptogram.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "exp_month": {
-            "description": "Two-digit number representing the card's expiration month.",
-            "type": "integer"
-          },
-          "exp_year": {
-            "description": "Four-digit number representing the card's expiration year.",
-            "type": "integer"
-          },
-          "fingerprint": {
-            "description": "Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.\n\n*Starting May 1, 2021, card fingerprint in India for Connect will change to allow two fingerprints for the same card --- one for India and one for the rest of the world.*",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "funding": {
-            "description": "Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "generated_card": {
-            "description": "ID of a card PaymentMethod generated from the card_present PaymentMethod that may be attached to a Customer for future transactions. Only present if it was possible to generate a card PaymentMethod.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "last4": {
-            "description": "The last four digits of the card.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "network": {
-            "description": "Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "read_method": {
-            "description": "How card details were read in this transaction.",
-            "enum": [
-              "contact_emv",
-              "contactless_emv",
-              "contactless_magstripe_mode",
-              "magnetic_stripe_fallback",
-              "magnetic_stripe_track2"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "receipt": {
-            "description": "",
-            "properties": {
-              "account_type": {
-                "description": "The type of account being debited or credited",
-                "enum": [
-                  "checking",
-                  "credit",
-                  "prepaid",
-                  "unknown"
-                ],
-                "type": "string",
-                "x-stripeBypassValidation": true
-              },
-              "application_cryptogram": {
-                "description": "EMV tag 9F26, cryptogram generated by the integrated circuit chip.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "application_preferred_name": {
-                "description": "Mnenomic of the Application Identifier.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "authorization_code": {
-                "description": "Identifier for this transaction.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "authorization_response_code": {
-                "description": "EMV tag 8A. A code returned by the card issuer.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "cardholder_verification_method": {
-                "description": "How the cardholder verified ownership of the card.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "dedicated_file_name": {
-                "description": "EMV tag 84. Similar to the application identifier stored on the integrated circuit chip.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "terminal_verification_results": {
-                "description": "The outcome of a series of EMV functions performed by the card reader.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "transaction_status_information": {
-                "description": "An indication of various EMV functions performed during the transaction.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              }
-            },
-            "title": "payment_method_details_card_present_receipt",
-            "type": "object",
-            "x-expandableFields": []
-          }
-        },
-        "required": [
-          "exp_month",
-          "exp_year"
-        ],
-        "title": "payment_method_details_card_present",
-        "type": "object",
-        "x-expandableFields": [
-          "receipt"
-        ]
-      },
-      "eps": {
-        "description": "",
-        "properties": {
-          "bank": {
-            "description": "The customer's bank. Should be one of `arzte_und_apotheker_bank`, `austrian_anadi_bank_ag`, `bank_austria`, `bankhaus_carl_spangler`, `bankhaus_schelhammer_und_schattera_ag`, `bawag_psk_ag`, `bks_bank_ag`, `brull_kallmus_bank_ag`, `btv_vier_lander_bank`, `capital_bank_grawe_gruppe_ag`, `dolomitenbank`, `easybank_ag`, `erste_bank_und_sparkassen`, `hypo_alpeadriabank_international_ag`, `hypo_noe_lb_fur_niederosterreich_u_wien`, `hypo_oberosterreich_salzburg_steiermark`, `hypo_tirol_bank_ag`, `hypo_vorarlberg_bank_ag`, `hypo_bank_burgenland_aktiengesellschaft`, `marchfelder_bank`, `oberbank_ag`, `raiffeisen_bankengruppe_osterreich`, `schoellerbank_ag`, `sparda_bank_wien`, `volksbank_gruppe`, `volkskreditbank_ag`, or `vr_bank_braunau`.",
-            "enum": [
-              "arzte_und_apotheker_bank",
-              "austrian_anadi_bank_ag",
-              "bank_austria",
-              "bankhaus_carl_spangler",
-              "bankhaus_schelhammer_und_schattera_ag",
-              "bawag_psk_ag",
-              "bks_bank_ag",
-              "brull_kallmus_bank_ag",
-              "btv_vier_lander_bank",
-              "capital_bank_grawe_gruppe_ag",
-              "dolomitenbank",
-              "easybank_ag",
-              "erste_bank_und_sparkassen",
-              "hypo_alpeadriabank_international_ag",
-              "hypo_bank_burgenland_aktiengesellschaft",
-              "hypo_noe_lb_fur_niederosterreich_u_wien",
-              "hypo_oberosterreich_salzburg_steiermark",
-              "hypo_tirol_bank_ag",
-              "hypo_vorarlberg_bank_ag",
-              "marchfelder_bank",
-              "oberbank_ag",
-              "raiffeisen_bankengruppe_osterreich",
-              "schoellerbank_ag",
-              "sparda_bank_wien",
-              "volksbank_gruppe",
-              "volkskreditbank_ag",
-              "vr_bank_braunau"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "verified_name": {
-            "description": "Owner's verified full name. Values are verified or provided by EPS directly\n(if supported) at the time of authorization or settlement. They cannot be set or mutated.\nEPS rarely provides this information so the attribute is usually empty.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "payment_method_details_eps",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "fpx": {
-        "description": "",
-        "properties": {
-          "bank": {
-            "description": "The customer's bank. Can be one of `affin_bank`, `alliance_bank`, `ambank`, `bank_islam`, `bank_muamalat`, `bank_rakyat`, `bsn`, `cimb`, `hong_leong_bank`, `hsbc`, `kfh`, `maybank2u`, `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`, `deutsche_bank`, `maybank2e`, or `pb_enterprise`.",
-            "enum": [
-              "affin_bank",
-              "alliance_bank",
-              "ambank",
-              "bank_islam",
-              "bank_muamalat",
-              "bank_rakyat",
-              "bsn",
-              "cimb",
-              "deutsche_bank",
-              "hong_leong_bank",
-              "hsbc",
-              "kfh",
-              "maybank2e",
-              "maybank2u",
-              "ocbc",
-              "pb_enterprise",
-              "public_bank",
-              "rhb",
-              "standard_chartered",
-              "uob"
-            ],
-            "type": "string"
-          },
-          "transaction_id": {
-            "description": "Unique transaction id generated by FPX for every request from the merchant",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "required": [
-          "bank"
-        ],
-        "title": "payment_method_details_fpx",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "giropay": {
-        "description": "",
-        "properties": {
-          "bank_code": {
-            "description": "Bank code of bank associated with the bank account.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "bank_name": {
-            "description": "Name of the bank associated with the bank account.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "bic": {
-            "description": "Bank Identifier Code of the bank associated with the bank account.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "verified_name": {
-            "description": "Owner's verified full name. Values are verified or provided by Giropay directly\n(if supported) at the time of authorization or settlement. They cannot be set or mutated.\nGiropay rarely provides this information so the attribute is usually empty.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "payment_method_details_giropay",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "grabpay": {
-        "description": "",
-        "properties": {
-          "transaction_id": {
-            "description": "Unique transaction id generated by GrabPay",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "payment_method_details_grabpay",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "ideal": {
-        "description": "",
-        "properties": {
-          "bank": {
-            "description": "The customer's bank. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, or `van_lanschot`.",
-            "enum": [
-              "abn_amro",
-              "asn_bank",
-              "bunq",
-              "handelsbanken",
-              "ing",
-              "knab",
-              "moneyou",
-              "rabobank",
-              "regiobank",
-              "revolut",
-              "sns_bank",
-              "triodos_bank",
-              "van_lanschot"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "bic": {
-            "description": "The Bank Identifier Code of the customer's bank.",
-            "enum": [
-              "ABNANL2A",
-              "ASNBNL21",
-              "BUNQNL2A",
-              "FVLBNL22",
-              "HANDNL2A",
-              "INGBNL2A",
-              "KNABNL2H",
-              "MOYONL21",
-              "RABONL2U",
-              "RBRBNL21",
-              "REVOLT21",
-              "SNSBNL2A",
-              "TRIONL2U"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "generated_sepa_debit": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "generated_sepa_debit_mandate": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "iban_last4": {
-            "description": "Last four characters of the IBAN.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "verified_name": {
-            "description": "Owner's verified full name. Values are verified or provided by iDEAL directly\n(if supported) at the time of authorization or settlement. They cannot be set or mutated.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "payment_method_details_ideal",
-        "type": "object",
-        "x-expandableFields": [
-          "generated_sepa_debit",
-          "generated_sepa_debit_mandate"
-        ]
-      },
-      "interac_present": {
-        "description": "",
-        "properties": {
-          "brand": {
-            "description": "Card brand. Can be `interac`, `mastercard` or `visa`.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "cardholder_name": {
-            "description": "The cardholder name as read from the card, in [ISO 7813](https://en.wikipedia.org/wiki/ISO/IEC_7813) format. May include alphanumeric characters, special characters and first/last name separator (`/`).",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "country": {
-            "description": "Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "emv_auth_data": {
-            "description": "Authorization response cryptogram.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "exp_month": {
-            "description": "Two-digit number representing the card's expiration month.",
-            "type": "integer"
-          },
-          "exp_year": {
-            "description": "Four-digit number representing the card's expiration year.",
-            "type": "integer"
-          },
-          "fingerprint": {
-            "description": "Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.\n\n*Starting May 1, 2021, card fingerprint in India for Connect will change to allow two fingerprints for the same card --- one for India and one for the rest of the world.*",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "funding": {
-            "description": "Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "generated_card": {
-            "description": "ID of a card PaymentMethod generated from the card_present PaymentMethod that may be attached to a Customer for future transactions. Only present if it was possible to generate a card PaymentMethod.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "last4": {
-            "description": "The last four digits of the card.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "network": {
-            "description": "Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "preferred_locales": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "read_method": {
-            "description": "How card details were read in this transaction.",
-            "enum": [
-              "contact_emv",
-              "contactless_emv",
-              "contactless_magstripe_mode",
-              "magnetic_stripe_fallback",
-              "magnetic_stripe_track2"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "receipt": {
-            "description": "",
-            "properties": {
-              "account_type": {
-                "description": "The type of account being debited or credited",
-                "enum": [
-                  "checking",
-                  "savings",
-                  "unknown"
-                ],
-                "type": "string",
-                "x-stripeBypassValidation": true
-              },
-              "application_cryptogram": {
-                "description": "EMV tag 9F26, cryptogram generated by the integrated circuit chip.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "application_preferred_name": {
-                "description": "Mnenomic of the Application Identifier.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "authorization_code": {
-                "description": "Identifier for this transaction.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "authorization_response_code": {
-                "description": "EMV tag 8A. A code returned by the card issuer.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "cardholder_verification_method": {
-                "description": "How the cardholder verified ownership of the card.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "dedicated_file_name": {
-                "description": "EMV tag 84. Similar to the application identifier stored on the integrated circuit chip.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "terminal_verification_results": {
-                "description": "The outcome of a series of EMV functions performed by the card reader.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "transaction_status_information": {
-                "description": "An indication of various EMV functions performed during the transaction.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              }
-            },
-            "title": "payment_method_details_interac_present_receipt",
-            "type": "object",
-            "x-expandableFields": []
-          }
-        },
-        "required": [
-          "exp_month",
-          "exp_year"
-        ],
-        "title": "payment_method_details_interac_present",
-        "type": "object",
-        "x-expandableFields": [
-          "receipt"
-        ]
-      },
-      "klarna": {
-        "description": "",
-        "properties": {},
-        "title": "payment_method_details_klarna",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "multibanco": {
-        "description": "",
-        "properties": {
-          "entity": {
-            "description": "Entity number associated with this Multibanco payment.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "reference": {
-            "description": "Reference number associated with this Multibanco payment.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "payment_method_details_multibanco",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "oxxo": {
-        "description": "",
-        "properties": {
-          "number": {
-            "description": "OXXO reference number",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "payment_method_details_oxxo",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "p24": {
-        "description": "",
-        "properties": {
-          "bank": {
-            "description": "The customer's bank. Can be one of `ing`, `citi_handlowy`, `tmobile_usbugi_bankowe`, `plus_bank`, `etransfer_pocztowy24`, `banki_spbdzielcze`, `bank_nowy_bfg_sa`, `getin_bank`, `blik`, `noble_pay`, `ideabank`, `envelobank`, `santander_przelew24`, `nest_przelew`, `mbank_mtransfer`, `inteligo`, `pbac_z_ipko`, `bnp_paribas`, `credit_agricole`, `toyota_bank`, `bank_pekao_sa`, `volkswagen_bank`, `bank_millennium`, `alior_bank`, or `boz`.",
-            "enum": [
-              "alior_bank",
-              "bank_millennium",
-              "bank_nowy_bfg_sa",
-              "bank_pekao_sa",
-              "banki_spbdzielcze",
-              "blik",
-              "bnp_paribas",
-              "boz",
-              "citi_handlowy",
-              "credit_agricole",
-              "envelobank",
-              "etransfer_pocztowy24",
-              "getin_bank",
-              "ideabank",
-              "ing",
-              "inteligo",
-              "mbank_mtransfer",
-              "nest_przelew",
-              "noble_pay",
-              "pbac_z_ipko",
-              "plus_bank",
-              "santander_przelew24",
-              "tmobile_usbugi_bankowe",
-              "toyota_bank",
-              "volkswagen_bank"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "reference": {
-            "description": "Unique reference for this Przelewy24 payment.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "verified_name": {
-            "description": "Owner's verified full name. Values are verified or provided by Przelewy24 directly\n(if supported) at the time of authorization or settlement. They cannot be set or mutated.\nPrzelewy24 rarely provides this information so the attribute is usually empty.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "payment_method_details_p24",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "sepa_debit": {
-        "description": "",
-        "properties": {
-          "bank_code": {
-            "description": "Bank code of bank associated with the bank account.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "branch_code": {
-            "description": "Branch code of bank associated with the bank account.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "country": {
-            "description": "Two-letter ISO code representing the country the bank account is located in.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "fingerprint": {
-            "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "last4": {
-            "description": "Last four characters of the IBAN.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "mandate": {
-            "description": "ID of the mandate used to make this payment.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "payment_method_details_sepa_debit",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "sofort": {
-        "description": "",
-        "properties": {
-          "bank_code": {
-            "description": "Bank code of bank associated with the bank account.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "bank_name": {
-            "description": "Name of the bank associated with the bank account.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "bic": {
-            "description": "Bank Identifier Code of the bank associated with the bank account.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "country": {
-            "description": "Two-letter ISO code representing the country the bank account is located in.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "generated_sepa_debit": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "generated_sepa_debit_mandate": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "iban_last4": {
-            "description": "Last four characters of the IBAN.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "preferred_language": {
-            "description": "Preferred language of the SOFORT authorization page that the customer is redirected to.\nCan be one of `de`, `en`, `es`, `fr`, `it`, `nl`, or `pl`",
-            "enum": [
-              "de",
-              "en",
-              "es",
-              "fr",
-              "it",
-              "nl",
-              "pl"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "verified_name": {
-            "description": "Owner's verified full name. Values are verified or provided by SOFORT directly\n(if supported) at the time of authorization or settlement. They cannot be set or mutated.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "payment_method_details_sofort",
-        "type": "object",
-        "x-expandableFields": [
-          "generated_sepa_debit",
-          "generated_sepa_debit_mandate"
-        ]
-      },
-      "stripe_account": {
-        "description": "",
-        "properties": {},
-        "title": "payment_method_details_stripe_account",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "type": {
-        "description": "The type of transaction-specific details of the payment method used in the payment, one of `ach_credit_transfer`, `ach_debit`, `acss_debit`, `alipay`, `au_becs_debit`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`, `klarna`, `multibanco`, `p24`, `sepa_debit`, `sofort`, `stripe_account`, or `wechat`.\nAn additional hash is included on `payment_method_details` with a name matching this value.\nIt contains information specific to the payment method.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "wechat": {
-        "description": "",
-        "properties": {},
-        "title": "payment_method_details_wechat",
-        "type": "object",
-        "x-expandableFields": []
-      }
+      "title": "payment_method_details_ach_credit_transfer",
+      "type": "object",
+      "x-expandableFields": []
     },
-    "required": [
-      "type"
-    ],
-    "title": "payment_method_details",
-    "type": "object",
-    "x-expandableFields": [
-      "ach_credit_transfer",
-      "ach_debit",
-      "acss_debit",
-      "afterpay_clearpay",
-      "alipay",
-      "au_becs_debit",
-      "bacs_debit",
-      "bancontact",
-      "boleto",
-      "card",
-      "card_present",
-      "eps",
-      "fpx",
-      "giropay",
-      "grabpay",
-      "ideal",
-      "interac_present",
-      "klarna",
-      "multibanco",
-      "oxxo",
-      "p24",
-      "sepa_debit",
-      "sofort",
-      "stripe_account",
-      "wechat"
-    ],
-    "default": {
-      "ach_credit_transfer": {
-        "account_number": "string",
-        "bank_name": "string",
-        "routing_number": "string",
-        "swift_code": "string"
+    "ach_debit": {
+      "description": "",
+      "properties": {
+        "account_holder_type": {
+          "description": "Type of entity that holds the account. This can be either `individual` or `company`.",
+          "enum": [
+            "company",
+            "individual"
+          ],
+          "nullable": true,
+          "type": "string"
+        },
+        "bank_name": {
+          "description": "Name of the bank associated with the bank account.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "country": {
+          "description": "Two-letter ISO code representing the country the bank account is located in.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "fingerprint": {
+          "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "last4": {
+          "description": "Last four digits of the bank account number.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "routing_number": {
+          "description": "Routing transit number of the bank account.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
       },
-      "ach_debit": {
-        "account_holder_type": "company",
-        "bank_name": "string",
-        "country": "string",
-        "fingerprint": "string",
-        "last4": "string",
-        "routing_number": "string"
+      "title": "payment_method_details_ach_debit",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "acss_debit": {
+      "description": "",
+      "properties": {
+        "bank_name": {
+          "description": "Name of the bank associated with the bank account.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "fingerprint": {
+          "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "institution_number": {
+          "description": "Institution number of the bank account",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "last4": {
+          "description": "Last four digits of the bank account number.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "mandate": {
+          "description": "ID of the mandate used to make this payment.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "transit_number": {
+          "description": "Transit number of the bank account.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
       },
-      "acss_debit": {
-        "bank_name": "string",
-        "fingerprint": "string",
-        "institution_number": "string",
-        "last4": "string",
-        "mandate": "string",
-        "transit_number": "string"
+      "title": "payment_method_details_acss_debit",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "afterpay_clearpay": {
+      "description": "",
+      "properties": {
+        "reference": {
+          "description": "Order identifier shown to the merchant in Afterpay’s online portal.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
       },
-      "afterpay_clearpay": {
-        "reference": "string"
+      "title": "payment_method_details_afterpay_clearpay",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "alipay": {
+      "description": "",
+      "properties": {
+        "fingerprint": {
+          "description": "Uniquely identifies this particular Alipay account. You can use this attribute to check whether two Alipay accounts are the same.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "transaction_id": {
+          "description": "Transaction ID of this particular Alipay transaction.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
       },
-      "alipay": {},
-      "au_becs_debit": {
-        "bsb_number": "string",
-        "fingerprint": "string",
-        "last4": "string",
-        "mandate": "string"
+      "title": "PaymentFlowsPrivatePaymentMethodsAlipayDetails",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "au_becs_debit": {
+      "description": "",
+      "properties": {
+        "bsb_number": {
+          "description": "Bank-State-Branch number of the bank account.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "fingerprint": {
+          "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "last4": {
+          "description": "Last four digits of the bank account number.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "mandate": {
+          "description": "ID of the mandate used to make this payment.",
+          "maxLength": 5000,
+          "type": "string"
+        }
       },
-      "bacs_debit": {
-        "fingerprint": "string",
-        "last4": "string",
-        "mandate": "string",
-        "sort_code": "string"
+      "title": "payment_method_details_au_becs_debit",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "bacs_debit": {
+      "description": "",
+      "properties": {
+        "fingerprint": {
+          "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "last4": {
+          "description": "Last four digits of the bank account number.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "mandate": {
+          "description": "ID of the mandate used to make this payment.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "sort_code": {
+          "description": "Sort code of the bank account. (e.g., `10-20-30`)",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
       },
-      "bancontact": {
-        "bank_code": "string",
-        "bank_name": "string",
-        "bic": "string",
-        "generated_sepa_debit": "string",
-        "generated_sepa_debit_mandate": "string",
-        "iban_last4": "string",
-        "preferred_language": "de",
-        "verified_name": "string"
+      "title": "payment_method_details_bacs_debit",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "bancontact": {
+      "$ref": "#/components/schemas/payment_method_details_bancontact"
+    },
+    "boleto": {
+      "description": "",
+      "properties": {
+        "tax_id": {
+          "description": "Uniquely identifies this customer tax_id (CNPJ or CPF)",
+          "maxLength": 5000,
+          "type": "string"
+        }
       },
-      "boleto": {
-        "tax_id": "string"
-      },
-      "card": {
-        "brand": "string",
+      "required": [
+        "tax_id"
+      ],
+      "title": "payment_method_details_boleto",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "card": {
+      "description": "",
+      "properties": {
+        "brand": {
+          "description": "Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
         "checks": {
-          "address_line1_check": "string",
-          "address_postal_code_check": "string",
-          "cvc_check": "string"
+          "anyOf": [
+            {
+              "description": "",
+              "properties": {
+                "address_line1_check": {
+                  "description": "If a address line1 was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "address_postal_code_check": {
+                  "description": "If a address postal code was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "cvc_check": {
+                  "description": "If a CVC was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                }
+              },
+              "title": "payment_method_details_card_checks",
+              "type": "object",
+              "x-expandableFields": []
+            }
+          ],
+          "description": "Check results by Card networks on Card address and CVC at time of payment.",
+          "nullable": true
         },
-        "country": "string",
-        "exp_month": 0,
-        "exp_year": 0,
-        "fingerprint": "string",
-        "funding": "string",
+        "country": {
+          "description": "Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "exp_month": {
+          "description": "Two-digit number representing the card's expiration month.",
+          "type": "integer"
+        },
+        "exp_year": {
+          "description": "Four-digit number representing the card's expiration year.",
+          "type": "integer"
+        },
+        "fingerprint": {
+          "description": "Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.\n\n*Starting May 1, 2021, card fingerprint in India for Connect will change to allow two fingerprints for the same card --- one for India and one for the rest of the world.*",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "funding": {
+          "description": "Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
         "installments": {
-          "plan": {
-            "count": 0,
-            "interval": "month",
-            "type": "fixed_count"
-          }
+          "anyOf": [
+            {
+              "description": "",
+              "properties": {
+                "plan": {
+                  "anyOf": [
+                    {
+                      "description": "",
+                      "properties": {
+                        "count": {
+                          "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
+                          "nullable": true,
+                          "type": "integer"
+                        },
+                        "interval": {
+                          "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
+                          "enum": [
+                            "month"
+                          ],
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "type": {
+                          "description": "Type of installment plan, one of `fixed_count`.",
+                          "enum": [
+                            "fixed_count"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "type"
+                      ],
+                      "title": "payment_method_details_card_installments_plan",
+                      "type": "object",
+                      "x-expandableFields": []
+                    }
+                  ],
+                  "description": "Installment plan selected for the payment.",
+                  "nullable": true
+                }
+              },
+              "title": "payment_method_details_card_installments",
+              "type": "object",
+              "x-expandableFields": [
+                "plan"
+              ]
+            }
+          ],
+          "description": "Installment details for this payment (Mexico only).\n\nFor more information, see the [installments integration guide](https://stripe.com/docs/payments/installments).",
+          "nullable": true
         },
-        "last4": "string",
-        "network": "string",
+        "last4": {
+          "description": "The last four digits of the card.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "network": {
+          "description": "Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
         "three_d_secure": {
-          "authentication_flow": "challenge",
-          "result": "attempt_acknowledged",
-          "result_reason": "abandoned",
-          "version": "1.0.2"
+          "anyOf": [
+            {
+              "description": "",
+              "properties": {
+                "authentication_flow": {
+                  "description": "For authenticated transactions: how the customer was authenticated by\nthe issuing bank.",
+                  "enum": [
+                    "challenge",
+                    "frictionless"
+                  ],
+                  "nullable": true,
+                  "type": "string"
+                },
+                "result": {
+                  "description": "Indicates the outcome of 3D Secure authentication.",
+                  "enum": [
+                    "attempt_acknowledged",
+                    "authenticated",
+                    "failed",
+                    "not_supported",
+                    "processing_error"
+                  ],
+                  "type": "string",
+                  "x-stripeBypassValidation": true
+                },
+                "result_reason": {
+                  "description": "Additional information about why 3D Secure succeeded or failed based\non the `result`.",
+                  "enum": [
+                    "abandoned",
+                    "bypassed",
+                    "canceled",
+                    "card_not_enrolled",
+                    "network_not_supported",
+                    "protocol_error",
+                    "rejected"
+                  ],
+                  "nullable": true,
+                  "type": "string"
+                },
+                "version": {
+                  "description": "The version of 3D Secure that was used.",
+                  "enum": [
+                    "1.0.2",
+                    "2.1.0",
+                    "2.2.0"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result",
+                "version"
+              ],
+              "title": "three_d_secure_details",
+              "type": "object",
+              "x-expandableFields": []
+            }
+          ],
+          "description": "Populated if this transaction used 3D Secure authentication.",
+          "nullable": true
         },
         "wallet": {
-          "amex_express_checkout": {},
-          "apple_pay": {},
-          "dynamic_last4": "string",
-          "google_pay": {},
-          "masterpass": {
-            "billing_address": {},
-            "email": "string",
-            "name": "string",
-            "shipping_address": {}
+          "anyOf": [
+            {
+              "description": "",
+              "properties": {
+                "amex_express_checkout": {
+                  "description": "",
+                  "properties": {},
+                  "title": "payment_method_details_card_wallet_amex_express_checkout",
+                  "type": "object",
+                  "x-expandableFields": []
+                },
+                "apple_pay": {
+                  "description": "",
+                  "properties": {},
+                  "title": "payment_method_details_card_wallet_apple_pay",
+                  "type": "object",
+                  "x-expandableFields": []
+                },
+                "dynamic_last4": {
+                  "description": "(For tokenized numbers only.) The last four digits of the device account number.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "google_pay": {
+                  "description": "",
+                  "properties": {},
+                  "title": "payment_method_details_card_wallet_google_pay",
+                  "type": "object",
+                  "x-expandableFields": []
+                },
+                "masterpass": {
+                  "description": "",
+                  "properties": {
+                    "billing_address": {
+                      "anyOf": [
+                        {
+                          "description": "",
+                          "properties": {
+                            "city": {
+                              "description": "City, district, suburb, town, or village.",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "country": {
+                              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "line1": {
+                              "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "line2": {
+                              "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "description": "ZIP or postal code.",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "state": {
+                              "description": "State, county, province, or region.",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            }
+                          },
+                          "title": "Address",
+                          "type": "object",
+                          "x-expandableFields": []
+                        }
+                      ],
+                      "description": "Owner's verified billing address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                      "nullable": true
+                    },
+                    "email": {
+                      "description": "Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "shipping_address": {
+                      "anyOf": [
+                        {
+                          "description": "",
+                          "properties": {
+                            "city": {
+                              "description": "City, district, suburb, town, or village.",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "country": {
+                              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "line1": {
+                              "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "line2": {
+                              "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "description": "ZIP or postal code.",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "state": {
+                              "description": "State, county, province, or region.",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            }
+                          },
+                          "title": "Address",
+                          "type": "object",
+                          "x-expandableFields": []
+                        }
+                      ],
+                      "description": "Owner's verified shipping address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                      "nullable": true
+                    }
+                  },
+                  "title": "payment_method_details_card_wallet_masterpass",
+                  "type": "object",
+                  "x-expandableFields": [
+                    "billing_address",
+                    "shipping_address"
+                  ]
+                },
+                "samsung_pay": {
+                  "description": "",
+                  "properties": {},
+                  "title": "payment_method_details_card_wallet_samsung_pay",
+                  "type": "object",
+                  "x-expandableFields": []
+                },
+                "type": {
+                  "description": "The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.",
+                  "enum": [
+                    "amex_express_checkout",
+                    "apple_pay",
+                    "google_pay",
+                    "masterpass",
+                    "samsung_pay",
+                    "visa_checkout"
+                  ],
+                  "type": "string"
+                },
+                "visa_checkout": {
+                  "description": "",
+                  "properties": {
+                    "billing_address": {
+                      "anyOf": [
+                        {
+                          "description": "",
+                          "properties": {
+                            "city": {
+                              "description": "City, district, suburb, town, or village.",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "country": {
+                              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "line1": {
+                              "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "line2": {
+                              "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "description": "ZIP or postal code.",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "state": {
+                              "description": "State, county, province, or region.",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            }
+                          },
+                          "title": "Address",
+                          "type": "object",
+                          "x-expandableFields": []
+                        }
+                      ],
+                      "description": "Owner's verified billing address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                      "nullable": true
+                    },
+                    "email": {
+                      "description": "Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "shipping_address": {
+                      "anyOf": [
+                        {
+                          "description": "",
+                          "properties": {
+                            "city": {
+                              "description": "City, district, suburb, town, or village.",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "country": {
+                              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "line1": {
+                              "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "line2": {
+                              "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "description": "ZIP or postal code.",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "state": {
+                              "description": "State, county, province, or region.",
+                              "maxLength": 5000,
+                              "nullable": true,
+                              "type": "string"
+                            }
+                          },
+                          "title": "Address",
+                          "type": "object",
+                          "x-expandableFields": []
+                        }
+                      ],
+                      "description": "Owner's verified shipping address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                      "nullable": true
+                    }
+                  },
+                  "title": "payment_method_details_card_wallet_visa_checkout",
+                  "type": "object",
+                  "x-expandableFields": [
+                    "billing_address",
+                    "shipping_address"
+                  ]
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "title": "payment_method_details_card_wallet",
+              "type": "object",
+              "x-expandableFields": [
+                "amex_express_checkout",
+                "apple_pay",
+                "google_pay",
+                "masterpass",
+                "samsung_pay",
+                "visa_checkout"
+              ]
+            }
+          ],
+          "description": "If this Card is part of a card wallet, this contains the details of the card wallet.",
+          "nullable": true
+        }
+      },
+      "required": [
+        "exp_month",
+        "exp_year"
+      ],
+      "title": "payment_method_details_card",
+      "type": "object",
+      "x-expandableFields": [
+        "checks",
+        "installments",
+        "three_d_secure",
+        "wallet"
+      ]
+    },
+    "card_present": {
+      "description": "",
+      "properties": {
+        "brand": {
+          "description": "Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "cardholder_name": {
+          "description": "The cardholder name as read from the card, in [ISO 7813](https://en.wikipedia.org/wiki/ISO/IEC_7813) format. May include alphanumeric characters, special characters and first/last name separator (`/`).",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "country": {
+          "description": "Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "emv_auth_data": {
+          "description": "Authorization response cryptogram.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "exp_month": {
+          "description": "Two-digit number representing the card's expiration month.",
+          "type": "integer"
+        },
+        "exp_year": {
+          "description": "Four-digit number representing the card's expiration year.",
+          "type": "integer"
+        },
+        "fingerprint": {
+          "description": "Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.\n\n*Starting May 1, 2021, card fingerprint in India for Connect will change to allow two fingerprints for the same card --- one for India and one for the rest of the world.*",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "funding": {
+          "description": "Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "generated_card": {
+          "description": "ID of a card PaymentMethod generated from the card_present PaymentMethod that may be attached to a Customer for future transactions. Only present if it was possible to generate a card PaymentMethod.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "last4": {
+          "description": "The last four digits of the card.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "network": {
+          "description": "Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "read_method": {
+          "description": "How card details were read in this transaction.",
+          "enum": [
+            "contact_emv",
+            "contactless_emv",
+            "contactless_magstripe_mode",
+            "magnetic_stripe_fallback",
+            "magnetic_stripe_track2"
+          ],
+          "nullable": true,
+          "type": "string"
+        },
+        "receipt": {
+          "anyOf": [
+            {
+              "description": "",
+              "properties": {
+                "account_type": {
+                  "description": "The type of account being debited or credited",
+                  "enum": [
+                    "checking",
+                    "credit",
+                    "prepaid",
+                    "unknown"
+                  ],
+                  "type": "string",
+                  "x-stripeBypassValidation": true
+                },
+                "application_cryptogram": {
+                  "description": "EMV tag 9F26, cryptogram generated by the integrated circuit chip.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "application_preferred_name": {
+                  "description": "Mnenomic of the Application Identifier.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "authorization_code": {
+                  "description": "Identifier for this transaction.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "authorization_response_code": {
+                  "description": "EMV tag 8A. A code returned by the card issuer.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "cardholder_verification_method": {
+                  "description": "How the cardholder verified ownership of the card.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "dedicated_file_name": {
+                  "description": "EMV tag 84. Similar to the application identifier stored on the integrated circuit chip.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "terminal_verification_results": {
+                  "description": "The outcome of a series of EMV functions performed by the card reader.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "transaction_status_information": {
+                  "description": "An indication of various EMV functions performed during the transaction.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                }
+              },
+              "title": "payment_method_details_card_present_receipt",
+              "type": "object",
+              "x-expandableFields": []
+            }
+          ],
+          "description": "A collection of fields required to be displayed on receipts. Only required for EMV transactions.",
+          "nullable": true
+        }
+      },
+      "required": [
+        "exp_month",
+        "exp_year"
+      ],
+      "title": "payment_method_details_card_present",
+      "type": "object",
+      "x-expandableFields": [
+        "receipt"
+      ]
+    },
+    "eps": {
+      "description": "",
+      "properties": {
+        "bank": {
+          "description": "The customer's bank. Should be one of `arzte_und_apotheker_bank`, `austrian_anadi_bank_ag`, `bank_austria`, `bankhaus_carl_spangler`, `bankhaus_schelhammer_und_schattera_ag`, `bawag_psk_ag`, `bks_bank_ag`, `brull_kallmus_bank_ag`, `btv_vier_lander_bank`, `capital_bank_grawe_gruppe_ag`, `dolomitenbank`, `easybank_ag`, `erste_bank_und_sparkassen`, `hypo_alpeadriabank_international_ag`, `hypo_noe_lb_fur_niederosterreich_u_wien`, `hypo_oberosterreich_salzburg_steiermark`, `hypo_tirol_bank_ag`, `hypo_vorarlberg_bank_ag`, `hypo_bank_burgenland_aktiengesellschaft`, `marchfelder_bank`, `oberbank_ag`, `raiffeisen_bankengruppe_osterreich`, `schoellerbank_ag`, `sparda_bank_wien`, `volksbank_gruppe`, `volkskreditbank_ag`, or `vr_bank_braunau`.",
+          "enum": [
+            "arzte_und_apotheker_bank",
+            "austrian_anadi_bank_ag",
+            "bank_austria",
+            "bankhaus_carl_spangler",
+            "bankhaus_schelhammer_und_schattera_ag",
+            "bawag_psk_ag",
+            "bks_bank_ag",
+            "brull_kallmus_bank_ag",
+            "btv_vier_lander_bank",
+            "capital_bank_grawe_gruppe_ag",
+            "dolomitenbank",
+            "easybank_ag",
+            "erste_bank_und_sparkassen",
+            "hypo_alpeadriabank_international_ag",
+            "hypo_bank_burgenland_aktiengesellschaft",
+            "hypo_noe_lb_fur_niederosterreich_u_wien",
+            "hypo_oberosterreich_salzburg_steiermark",
+            "hypo_tirol_bank_ag",
+            "hypo_vorarlberg_bank_ag",
+            "marchfelder_bank",
+            "oberbank_ag",
+            "raiffeisen_bankengruppe_osterreich",
+            "schoellerbank_ag",
+            "sparda_bank_wien",
+            "volksbank_gruppe",
+            "volkskreditbank_ag",
+            "vr_bank_braunau"
+          ],
+          "nullable": true,
+          "type": "string"
+        },
+        "verified_name": {
+          "description": "Owner's verified full name. Values are verified or provided by EPS directly\n(if supported) at the time of authorization or settlement. They cannot be set or mutated.\nEPS rarely provides this information so the attribute is usually empty.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
+      },
+      "title": "payment_method_details_eps",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "fpx": {
+      "description": "",
+      "properties": {
+        "bank": {
+          "description": "The customer's bank. Can be one of `affin_bank`, `alliance_bank`, `ambank`, `bank_islam`, `bank_muamalat`, `bank_rakyat`, `bsn`, `cimb`, `hong_leong_bank`, `hsbc`, `kfh`, `maybank2u`, `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`, `deutsche_bank`, `maybank2e`, or `pb_enterprise`.",
+          "enum": [
+            "affin_bank",
+            "alliance_bank",
+            "ambank",
+            "bank_islam",
+            "bank_muamalat",
+            "bank_rakyat",
+            "bsn",
+            "cimb",
+            "deutsche_bank",
+            "hong_leong_bank",
+            "hsbc",
+            "kfh",
+            "maybank2e",
+            "maybank2u",
+            "ocbc",
+            "pb_enterprise",
+            "public_bank",
+            "rhb",
+            "standard_chartered",
+            "uob"
+          ],
+          "type": "string"
+        },
+        "transaction_id": {
+          "description": "Unique transaction id generated by FPX for every request from the merchant",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
+      },
+      "required": [
+        "bank"
+      ],
+      "title": "payment_method_details_fpx",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "giropay": {
+      "description": "",
+      "properties": {
+        "bank_code": {
+          "description": "Bank code of bank associated with the bank account.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "bank_name": {
+          "description": "Name of the bank associated with the bank account.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "bic": {
+          "description": "Bank Identifier Code of the bank associated with the bank account.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "verified_name": {
+          "description": "Owner's verified full name. Values are verified or provided by Giropay directly\n(if supported) at the time of authorization or settlement. They cannot be set or mutated.\nGiropay rarely provides this information so the attribute is usually empty.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
+      },
+      "title": "payment_method_details_giropay",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "grabpay": {
+      "description": "",
+      "properties": {
+        "transaction_id": {
+          "description": "Unique transaction id generated by GrabPay",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
+      },
+      "title": "payment_method_details_grabpay",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "ideal": {
+      "$ref": "#/components/schemas/payment_method_details_ideal"
+    },
+    "interac_present": {
+      "description": "",
+      "properties": {
+        "brand": {
+          "description": "Card brand. Can be `interac`, `mastercard` or `visa`.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "cardholder_name": {
+          "description": "The cardholder name as read from the card, in [ISO 7813](https://en.wikipedia.org/wiki/ISO/IEC_7813) format. May include alphanumeric characters, special characters and first/last name separator (`/`).",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "country": {
+          "description": "Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "emv_auth_data": {
+          "description": "Authorization response cryptogram.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "exp_month": {
+          "description": "Two-digit number representing the card's expiration month.",
+          "type": "integer"
+        },
+        "exp_year": {
+          "description": "Four-digit number representing the card's expiration year.",
+          "type": "integer"
+        },
+        "fingerprint": {
+          "description": "Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.\n\n*Starting May 1, 2021, card fingerprint in India for Connect will change to allow two fingerprints for the same card --- one for India and one for the rest of the world.*",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "funding": {
+          "description": "Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "generated_card": {
+          "description": "ID of a card PaymentMethod generated from the card_present PaymentMethod that may be attached to a Customer for future transactions. Only present if it was possible to generate a card PaymentMethod.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "last4": {
+          "description": "The last four digits of the card.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "network": {
+          "description": "Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "preferred_locales": {
+          "description": "EMV tag 5F2D. Preferred languages specified by the integrated circuit chip.",
+          "items": {
+            "maxLength": 5000,
+            "type": "string"
           },
-          "samsung_pay": {},
-          "type": "amex_express_checkout",
-          "visa_checkout": {
-            "billing_address": {},
-            "email": "string",
-            "name": "string",
-            "shipping_address": {}
-          }
-        }
-      },
-      "card_present": {
-        "brand": "string",
-        "cardholder_name": "string",
-        "country": "string",
-        "emv_auth_data": "string",
-        "exp_month": 0,
-        "exp_year": 0,
-        "fingerprint": "string",
-        "funding": "string",
-        "generated_card": "string",
-        "last4": "string",
-        "network": "string",
-        "read_method": "contact_emv",
+          "nullable": true,
+          "type": "array"
+        },
+        "read_method": {
+          "description": "How card details were read in this transaction.",
+          "enum": [
+            "contact_emv",
+            "contactless_emv",
+            "contactless_magstripe_mode",
+            "magnetic_stripe_fallback",
+            "magnetic_stripe_track2"
+          ],
+          "nullable": true,
+          "type": "string"
+        },
         "receipt": {
-          "account_type": "checking",
-          "application_cryptogram": "string",
-          "application_preferred_name": "string",
-          "authorization_code": "string",
-          "authorization_response_code": "string",
-          "cardholder_verification_method": "string",
-          "dedicated_file_name": "string",
-          "terminal_verification_results": "string",
-          "transaction_status_information": "string"
+          "anyOf": [
+            {
+              "description": "",
+              "properties": {
+                "account_type": {
+                  "description": "The type of account being debited or credited",
+                  "enum": [
+                    "checking",
+                    "savings",
+                    "unknown"
+                  ],
+                  "type": "string",
+                  "x-stripeBypassValidation": true
+                },
+                "application_cryptogram": {
+                  "description": "EMV tag 9F26, cryptogram generated by the integrated circuit chip.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "application_preferred_name": {
+                  "description": "Mnenomic of the Application Identifier.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "authorization_code": {
+                  "description": "Identifier for this transaction.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "authorization_response_code": {
+                  "description": "EMV tag 8A. A code returned by the card issuer.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "cardholder_verification_method": {
+                  "description": "How the cardholder verified ownership of the card.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "dedicated_file_name": {
+                  "description": "EMV tag 84. Similar to the application identifier stored on the integrated circuit chip.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "terminal_verification_results": {
+                  "description": "The outcome of a series of EMV functions performed by the card reader.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "transaction_status_information": {
+                  "description": "An indication of various EMV functions performed during the transaction.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                }
+              },
+              "title": "payment_method_details_interac_present_receipt",
+              "type": "object",
+              "x-expandableFields": []
+            }
+          ],
+          "description": "A collection of fields required to be displayed on receipts. Only required for EMV transactions.",
+          "nullable": true
         }
       },
-      "eps": {
-        "bank": "arzte_und_apotheker_bank",
-        "verified_name": "string"
-      },
-      "fpx": {
-        "bank": "affin_bank",
-        "transaction_id": "string"
-      },
-      "giropay": {
-        "bank_code": "string",
-        "bank_name": "string",
-        "bic": "string",
-        "verified_name": "string"
-      },
-      "grabpay": {
-        "transaction_id": "string"
-      },
-      "ideal": {
-        "bank": "abn_amro",
-        "bic": "ABNANL2A",
-        "generated_sepa_debit": "string",
-        "generated_sepa_debit_mandate": "string",
-        "iban_last4": "string",
-        "verified_name": "string"
-      },
-      "interac_present": {
-        "brand": "string",
-        "cardholder_name": "string",
-        "country": "string",
-        "emv_auth_data": "string",
-        "exp_month": 0,
-        "exp_year": 0,
-        "fingerprint": "string",
-        "funding": "string",
-        "generated_card": "string",
-        "last4": "string",
-        "network": "string",
-        "preferred_locales": "string",
-        "read_method": "contact_emv",
-        "receipt": {
-          "account_type": "checking",
-          "application_cryptogram": "string",
-          "application_preferred_name": "string",
-          "authorization_code": "string",
-          "authorization_response_code": "string",
-          "cardholder_verification_method": "string",
-          "dedicated_file_name": "string",
-          "terminal_verification_results": "string",
-          "transaction_status_information": "string"
+      "required": [
+        "exp_month",
+        "exp_year"
+      ],
+      "title": "payment_method_details_interac_present",
+      "type": "object",
+      "x-expandableFields": [
+        "receipt"
+      ]
+    },
+    "klarna": {
+      "description": "",
+      "properties": {},
+      "title": "payment_method_details_klarna",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "multibanco": {
+      "description": "",
+      "properties": {
+        "entity": {
+          "description": "Entity number associated with this Multibanco payment.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "reference": {
+          "description": "Reference number associated with this Multibanco payment.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
         }
       },
-      "klarna": {},
-      "multibanco": {
-        "entity": "string",
-        "reference": "string"
+      "title": "payment_method_details_multibanco",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "oxxo": {
+      "description": "",
+      "properties": {
+        "number": {
+          "description": "OXXO reference number",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
       },
-      "oxxo": {
-        "number": "string"
+      "title": "payment_method_details_oxxo",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "p24": {
+      "description": "",
+      "properties": {
+        "bank": {
+          "description": "The customer's bank. Can be one of `ing`, `citi_handlowy`, `tmobile_usbugi_bankowe`, `plus_bank`, `etransfer_pocztowy24`, `banki_spbdzielcze`, `bank_nowy_bfg_sa`, `getin_bank`, `blik`, `noble_pay`, `ideabank`, `envelobank`, `santander_przelew24`, `nest_przelew`, `mbank_mtransfer`, `inteligo`, `pbac_z_ipko`, `bnp_paribas`, `credit_agricole`, `toyota_bank`, `bank_pekao_sa`, `volkswagen_bank`, `bank_millennium`, `alior_bank`, or `boz`.",
+          "enum": [
+            "alior_bank",
+            "bank_millennium",
+            "bank_nowy_bfg_sa",
+            "bank_pekao_sa",
+            "banki_spbdzielcze",
+            "blik",
+            "bnp_paribas",
+            "boz",
+            "citi_handlowy",
+            "credit_agricole",
+            "envelobank",
+            "etransfer_pocztowy24",
+            "getin_bank",
+            "ideabank",
+            "ing",
+            "inteligo",
+            "mbank_mtransfer",
+            "nest_przelew",
+            "noble_pay",
+            "pbac_z_ipko",
+            "plus_bank",
+            "santander_przelew24",
+            "tmobile_usbugi_bankowe",
+            "toyota_bank",
+            "volkswagen_bank"
+          ],
+          "nullable": true,
+          "type": "string"
+        },
+        "reference": {
+          "description": "Unique reference for this Przelewy24 payment.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "verified_name": {
+          "description": "Owner's verified full name. Values are verified or provided by Przelewy24 directly\n(if supported) at the time of authorization or settlement. They cannot be set or mutated.\nPrzelewy24 rarely provides this information so the attribute is usually empty.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
       },
-      "p24": {
-        "bank": "alior_bank",
-        "reference": "string",
-        "verified_name": "string"
+      "title": "payment_method_details_p24",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "sepa_debit": {
+      "description": "",
+      "properties": {
+        "bank_code": {
+          "description": "Bank code of bank associated with the bank account.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "branch_code": {
+          "description": "Branch code of bank associated with the bank account.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "country": {
+          "description": "Two-letter ISO code representing the country the bank account is located in.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "fingerprint": {
+          "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "last4": {
+          "description": "Last four characters of the IBAN.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "mandate": {
+          "description": "ID of the mandate used to make this payment.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
       },
-      "sepa_debit": {
-        "bank_code": "string",
-        "branch_code": "string",
-        "country": "string",
-        "fingerprint": "string",
-        "last4": "string",
-        "mandate": "string"
-      },
-      "sofort": {
-        "bank_code": "string",
-        "bank_name": "string",
-        "bic": "string",
-        "country": "string",
-        "generated_sepa_debit": "string",
-        "generated_sepa_debit_mandate": "string",
-        "iban_last4": "string",
-        "preferred_language": "de",
-        "verified_name": "string"
-      },
-      "stripe_account": {},
-      "type": "string",
-      "wechat": {}
+      "title": "payment_method_details_sepa_debit",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "sofort": {
+      "$ref": "#/components/schemas/payment_method_details_sofort"
+    },
+    "stripe_account": {
+      "description": "",
+      "properties": {},
+      "title": "payment_method_details_stripe_account",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "type": {
+      "description": "The type of transaction-specific details of the payment method used in the payment, one of `ach_credit_transfer`, `ach_debit`, `acss_debit`, `alipay`, `au_becs_debit`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`, `klarna`, `multibanco`, `p24`, `sepa_debit`, `sofort`, `stripe_account`, or `wechat`.\nAn additional hash is included on `payment_method_details` with a name matching this value.\nIt contains information specific to the payment method.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "wechat": {
+      "description": "",
+      "properties": {},
+      "title": "payment_method_details_wechat",
+      "type": "object",
+      "x-expandableFields": []
     }
-  }
+  },
+  "required": [
+    "type"
+  ],
+  "title": "payment_method_details",
+  "type": "object",
+  "x-expandableFields": [
+    "ach_credit_transfer",
+    "ach_debit",
+    "acss_debit",
+    "afterpay_clearpay",
+    "alipay",
+    "au_becs_debit",
+    "bacs_debit",
+    "bancontact",
+    "boleto",
+    "card",
+    "card_present",
+    "eps",
+    "fpx",
+    "giropay",
+    "grabpay",
+    "ideal",
+    "interac_present",
+    "klarna",
+    "multibanco",
+    "oxxo",
+    "p24",
+    "sepa_debit",
+    "sofort",
+    "stripe_account",
+    "wechat"
+  ]
 }

@@ -1,28 +1,25 @@
 {
-  "name": "networks",
-  "schema": {
-    "description": "",
-    "properties": {
-      "available": {
+  "description": "",
+  "properties": {
+    "available": {
+      "description": "All available networks for the card.",
+      "items": {
         "maxLength": 5000,
         "type": "string"
       },
-      "preferred": {
-        "description": "The preferred network for the card.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      }
+      "type": "array"
     },
-    "required": [
-      "available"
-    ],
-    "title": "networks",
-    "type": "object",
-    "x-expandableFields": [],
-    "default": {
-      "available": "string",
-      "preferred": "string"
+    "preferred": {
+      "description": "The preferred network for the card.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "available"
+  ],
+  "title": "networks",
+  "type": "object",
+  "x-expandableFields": []
 }

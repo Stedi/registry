@@ -1,44 +1,51 @@
 {
-  "name": "issuing_dispute_other_evidence",
-  "schema": {
-    "description": "",
-    "properties": {
-      "additional_documentation": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "explanation": {
-        "description": "Explanation of why the cardholder is disputing this transaction.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "product_description": {
-        "description": "Description of the merchandise or service that was purchased.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "product_type": {
-        "description": "Whether the product was a merchandise or service.",
-        "enum": [
-          "merchandise",
-          "service"
-        ],
-        "nullable": true,
-        "type": "string"
+  "description": "",
+  "properties": {
+    "additional_documentation": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/file"
+        }
+      ],
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/file"
+          }
+        ]
       }
     },
-    "title": "IssuingDisputeOtherEvidence",
-    "type": "object",
-    "x-expandableFields": [
-      "additional_documentation"
-    ],
-    "default": {
-      "additional_documentation": "string",
-      "explanation": "string",
-      "product_description": "string",
-      "product_type": "merchandise"
+    "explanation": {
+      "description": "Explanation of why the cardholder is disputing this transaction.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "product_description": {
+      "description": "Description of the merchandise or service that was purchased.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "product_type": {
+      "description": "Whether the product was a merchandise or service.",
+      "enum": [
+        "merchandise",
+        "service"
+      ],
+      "nullable": true,
+      "type": "string"
     }
-  }
+  },
+  "title": "IssuingDisputeOtherEvidence",
+  "type": "object",
+  "x-expandableFields": [
+    "additional_documentation"
+  ]
 }

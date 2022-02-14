@@ -1,31 +1,47 @@
 {
-  "name": "subscription_payment_method_options_card",
-  "schema": {
-    "description": "",
-    "properties": {
-      "mandate_options": {
-        "amount": 0,
-        "amount_type": "fixed",
-        "description": "string"
+  "description": "",
+  "properties": {
+    "mandate_options": {
+      "description": "",
+      "properties": {
+        "amount": {
+          "description": "Amount to be charged for future payments.",
+          "nullable": true,
+          "type": "integer"
+        },
+        "amount_type": {
+          "description": "One of `fixed` or `maximum`. If `fixed`, the `amount` param refers to the exact amount to be charged in future payments. If `maximum`, the amount charged can be up to the value passed for the `amount` param.",
+          "enum": [
+            "fixed",
+            "maximum"
+          ],
+          "nullable": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the mandate or subscription that is meant to be displayed to the customer.",
+          "maxLength": 200,
+          "nullable": true,
+          "type": "string"
+        }
       },
-      "request_three_d_secure": {
-        "description": "We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.",
-        "enum": [
-          "any",
-          "automatic"
-        ],
-        "nullable": true,
-        "type": "string"
-      }
+      "title": "invoice_mandate_options_card",
+      "type": "object",
+      "x-expandableFields": []
     },
-    "title": "subscription_payment_method_options_card",
-    "type": "object",
-    "x-expandableFields": [
-      "mandate_options"
-    ],
-    "default": {
-      "mandate_options": {},
-      "request_three_d_secure": "any"
+    "request_three_d_secure": {
+      "description": "We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.",
+      "enum": [
+        "any",
+        "automatic"
+      ],
+      "nullable": true,
+      "type": "string"
     }
-  }
+  },
+  "title": "subscription_payment_method_options_card",
+  "type": "object",
+  "x-expandableFields": [
+    "mandate_options"
+  ]
 }

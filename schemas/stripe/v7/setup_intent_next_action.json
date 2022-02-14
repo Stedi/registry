@@ -1,50 +1,42 @@
 {
-  "name": "setup_intent_next_action",
-  "schema": {
-    "description": "",
-    "properties": {
-      "redirect_to_url": {
-        "description": "",
-        "properties": {
-          "return_url": {
-            "description": "If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "url": {
-            "description": "The URL you must redirect your customer to in order to authenticate.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
+  "description": "",
+  "properties": {
+    "redirect_to_url": {
+      "description": "",
+      "properties": {
+        "return_url": {
+          "description": "If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
         },
-        "title": "SetupIntentNextActionRedirectToUrl",
-        "type": "object",
-        "x-expandableFields": []
+        "url": {
+          "description": "The URL you must redirect your customer to in order to authenticate.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
       },
-      "type": {
-        "description": "Type of the next action to perform, one of `redirect_to_url` or `use_stripe_sdk`.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "use_stripe_sdk": {}
+      "title": "SetupIntentNextActionRedirectToUrl",
+      "type": "object",
+      "x-expandableFields": []
     },
-    "required": [
-      "type"
-    ],
-    "title": "SetupIntentNextAction",
-    "type": "object",
-    "x-expandableFields": [
-      "redirect_to_url"
-    ],
-    "default": {
-      "redirect_to_url": {
-        "return_url": "string",
-        "url": "string"
-      },
-      "type": "string",
-      "use_stripe_sdk": {}
+    "type": {
+      "description": "Type of the next action to perform, one of `redirect_to_url` or `use_stripe_sdk`.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "use_stripe_sdk": {
+      "description": "When confirming a SetupIntent with Stripe.js, Stripe.js depends on the contents of this dictionary to invoke authentication flows. The shape of the contents is subject to change and is only intended to be used by Stripe.js.",
+      "type": "object"
     }
-  }
+  },
+  "required": [
+    "type"
+  ],
+  "title": "SetupIntentNextAction",
+  "type": "object",
+  "x-expandableFields": [
+    "redirect_to_url"
+  ]
 }

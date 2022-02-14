@@ -1,25 +1,29 @@
 {
-  "name": "account_capability_requirements",
-  "schema": {
-    "description": "",
-    "properties": {
-      "current_deadline": {
-        "description": "The date the fields in `currently_due` must be collected by to keep the capability enabled for the account.",
-        "format": "unix-time",
-        "nullable": true,
-        "type": "integer"
-      },
-      "currently_due": {
+  "description": "",
+  "properties": {
+    "current_deadline": {
+      "description": "The date the fields in `currently_due` must be collected by to keep the capability enabled for the account.",
+      "format": "unix-time",
+      "nullable": true,
+      "type": "integer"
+    },
+    "currently_due": {
+      "description": "The fields that need to be collected to keep the capability enabled. If not collected by the `current_deadline`, these fields appear in `past_due` as well, and the capability is disabled.",
+      "items": {
         "maxLength": 5000,
         "type": "string"
       },
-      "disabled_reason": {
-        "description": "If the capability is disabled, this string describes why. Possible values are `requirement.fields_needed`, `pending.onboarding`, `pending.review`, `rejected_fraud`, or `rejected.other`.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "errors": {
+      "type": "array"
+    },
+    "disabled_reason": {
+      "description": "If the capability is disabled, this string describes why. Possible values are `requirement.fields_needed`, `pending.onboarding`, `pending.review`, `rejected_fraud`, or `rejected.other`.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "errors": {
+      "description": "The fields that are `currently_due` and need to be collected again because validation or verification failed for some reason.",
+      "items": {
         "description": "",
         "properties": {
           "code": {
@@ -91,43 +95,43 @@
         "type": "object",
         "x-expandableFields": []
       },
-      "eventually_due": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "past_due": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "pending_verification": {
-        "maxLength": 5000,
-        "type": "string"
-      }
+      "type": "array"
     },
-    "required": [
-      "currently_due",
-      "errors",
-      "eventually_due",
-      "past_due",
-      "pending_verification"
-    ],
-    "title": "AccountCapabilityRequirements",
-    "type": "object",
-    "x-expandableFields": [
-      "errors"
-    ],
-    "default": {
-      "current_deadline": 0,
-      "currently_due": "string",
-      "disabled_reason": "string",
-      "errors": {
-        "code": "invalid_address_city_state_postal_code",
-        "reason": "string",
-        "requirement": "string"
+    "eventually_due": {
+      "description": "The fields that need to be collected assuming all volume thresholds are reached. As they become required, these fields appear in `currently_due` as well, and the `current_deadline` is set.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
       },
-      "eventually_due": "string",
-      "past_due": "string",
-      "pending_verification": "string"
+      "type": "array"
+    },
+    "past_due": {
+      "description": "The fields that weren't collected by the `current_deadline`. These fields need to be collected to enable the capability for the account.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "pending_verification": {
+      "description": "Fields that may become required depending on the results of verification or review. An empty array unless an asynchronous verification is pending. If verification fails, the fields in this array become required and move to `currently_due` or `past_due`.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": "array"
     }
-  }
+  },
+  "required": [
+    "currently_due",
+    "errors",
+    "eventually_due",
+    "past_due",
+    "pending_verification"
+  ],
+  "title": "AccountCapabilityRequirements",
+  "type": "object",
+  "x-expandableFields": [
+    "errors"
+  ]
 }

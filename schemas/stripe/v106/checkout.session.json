@@ -1,500 +1,229 @@
 {
-  "name": "checkout.session",
-  "schema": {
-    "description": "A Checkout Session represents your customer's session as they pay for\none-time purchases or subscriptions through [Checkout](https://stripe.com/docs/payments/checkout)\nor [Payment Links](https://stripe.com/docs/payments/payment-links). We recommend creating a\nnew Session each time your customer attempts to pay.\n\nOnce payment is successful, the Checkout Session will contain a reference\nto the [Customer](https://stripe.com/docs/api/customers), and either the successful\n[PaymentIntent](https://stripe.com/docs/api/payment_intents) or an active\n[Subscription](https://stripe.com/docs/api/subscriptions).\n\nYou can create a Checkout Session on your server and pass its ID to the\nclient to begin Checkout.\n\nRelated guide: [Checkout Server Quickstart](https://stripe.com/docs/payments/checkout/api).",
-    "properties": {
-      "after_expiration": {
-        "description": "",
-        "properties": {
-          "recovery": {
-            "description": "",
-            "properties": {
-              "allow_promotion_codes": {
-                "description": "Enables user redeemable promotion codes on the recovered Checkout Sessions. Defaults to `false`",
-                "type": "boolean"
-              },
-              "enabled": {
-                "description": "If `true`, a recovery url will be generated to recover this Checkout Session if it\nexpires before a transaction is completed. It will be attached to the\nCheckout Session object upon expiration.",
-                "type": "boolean"
-              },
-              "expires_at": {
-                "description": "The timestamp at which the recovery URL will expire.",
-                "format": "unix-time",
-                "nullable": true,
-                "type": "integer"
-              },
-              "url": {
-                "description": "URL that creates a new Checkout Session when clicked that is a copy of this expired Checkout Session",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              }
-            },
-            "required": [
-              "allow_promotion_codes",
-              "enabled"
-            ],
-            "title": "PaymentPagesCheckoutSessionAfterExpirationRecovery",
-            "type": "object",
-            "x-expandableFields": []
-          }
-        },
-        "title": "PaymentPagesCheckoutSessionAfterExpiration",
-        "type": "object",
-        "x-expandableFields": [
-          "recovery"
-        ]
-      },
-      "allow_promotion_codes": {
-        "description": "Enables user redeemable promotion codes.",
-        "nullable": true,
-        "type": "boolean"
-      },
-      "amount_subtotal": {
-        "description": "Total of all items before discounts or taxes are applied.",
-        "nullable": true,
-        "type": "integer"
-      },
-      "amount_total": {
-        "description": "Total of all items after discounts and taxes are applied.",
-        "nullable": true,
-        "type": "integer"
-      },
-      "automatic_tax": {
-        "description": "",
-        "properties": {
-          "enabled": {
-            "description": "Indicates whether automatic tax is enabled for the session",
-            "type": "boolean"
-          },
-          "status": {
-            "description": "The status of the most recent automated tax calculation for this session.",
-            "enum": [
-              "complete",
-              "failed",
-              "requires_location_inputs"
-            ],
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "required": [
-          "enabled"
-        ],
-        "title": "PaymentPagesCheckoutSessionAutomaticTax",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "billing_address_collection": {
-        "description": "Describes whether Checkout should collect the customer's billing address.",
-        "enum": [
-          "auto",
-          "required"
-        ],
-        "nullable": true,
-        "type": "string"
-      },
-      "cancel_url": {
-        "description": "The URL the customer will be directed to if they decide to cancel payment and return to your website.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "client_reference_id": {
-        "description": "A unique string to reference the Checkout Session. This can be a\ncustomer ID, a cart ID, or similar, and can be used to reconcile the\nSession with your internal systems.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "consent": {
-        "description": "",
-        "properties": {
-          "promotions": {
-            "description": "If `opt_in`, the customer consents to receiving promotional communications\nfrom the merchant about this Checkout Session.",
-            "enum": [
-              "opt_in",
-              "opt_out"
-            ],
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "PaymentPagesCheckoutSessionConsent",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "consent_collection": {
-        "description": "",
-        "properties": {
-          "promotions": {
-            "description": "If set to `auto`, enables the collection of customer consent for promotional communications. The Checkout\nSession will determine whether to display an option to opt into promotional communication\nfrom the merchant depending on the customer's locale. Only available to US merchants.",
-            "enum": [
-              "auto"
-            ],
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "PaymentPagesCheckoutSessionConsentCollection",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "currency": {
-        "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-        "nullable": true,
-        "type": "string"
-      },
-      "customer": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "customer_creation": {
-        "description": "Configure whether a Checkout Session creates a Customer when the Checkout Session completes.",
-        "enum": [
-          "always",
-          "if_required"
-        ],
-        "nullable": true,
-        "type": "string"
-      },
-      "customer_details": {
-        "description": "",
-        "properties": {
-          "email": {
-            "description": "The email associated with the Customer, if one exists, on the Checkout Session at the time of checkout or at time of session expiry.\nOtherwise, if the customer has consented to promotional content, this value is the most recent valid email provided by the customer on the Checkout form.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "phone": {
-            "description": "The customer's phone number at the time of checkout",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "tax_exempt": {
-            "description": "The customer’s tax exempt status at time of checkout.",
-            "enum": [
-              "exempt",
-              "none",
-              "reverse"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "tax_ids": {
-            "description": "",
-            "properties": {
-              "type": {
-                "description": "The type of the tax ID, one of `eu_vat`, `br_cnpj`, `br_cpf`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, or `unknown`",
-                "enum": [
-                  "ae_trn",
-                  "au_abn",
-                  "au_arn",
-                  "br_cnpj",
-                  "br_cpf",
-                  "ca_bn",
-                  "ca_gst_hst",
-                  "ca_pst_bc",
-                  "ca_pst_mb",
-                  "ca_pst_sk",
-                  "ca_qst",
-                  "ch_vat",
-                  "cl_tin",
-                  "es_cif",
-                  "eu_vat",
-                  "gb_vat",
-                  "ge_vat",
-                  "hk_br",
-                  "id_npwp",
-                  "il_vat",
-                  "in_gst",
-                  "is_vat",
-                  "jp_cn",
-                  "jp_rn",
-                  "kr_brn",
-                  "li_uid",
-                  "mx_rfc",
-                  "my_frp",
-                  "my_itn",
-                  "my_sst",
-                  "no_vat",
-                  "nz_gst",
-                  "ru_inn",
-                  "ru_kpp",
-                  "sa_vat",
-                  "sg_gst",
-                  "sg_uen",
-                  "th_vat",
-                  "tw_vat",
-                  "ua_vat",
-                  "unknown",
-                  "us_ein",
-                  "za_vat"
-                ],
-                "type": "string"
-              },
-              "value": {
-                "description": "The value of the tax ID.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              }
-            },
-            "required": [
-              "type"
-            ],
-            "title": "PaymentPagesCheckoutSessionTaxID",
-            "type": "object",
-            "x-expandableFields": []
-          }
-        },
-        "title": "PaymentPagesCheckoutSessionCustomerDetails",
-        "type": "object",
-        "x-expandableFields": [
-          "tax_ids"
-        ]
-      },
-      "customer_email": {
-        "description": "If provided, this value will be used when the Customer object is created.\nIf not provided, customers will be asked to enter their email address.\nUse this parameter to prefill customer data if you already have an email\non file. To access information about the customer once the payment flow is\ncomplete, use the `customer` attribute.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "expires_at": {
-        "description": "The timestamp at which the Checkout Session will expire.",
-        "format": "unix-time",
-        "type": "integer"
-      },
-      "id": {
-        "description": "Unique identifier for the object. Used to pass to `redirectToCheckout`\nin Stripe.js.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "line_items": {
-        "description": "The line items purchased by the customer.",
-        "properties": {
-          "data": {
-            "description": "A line item.",
-            "properties": {
-              "amount_subtotal": {
-                "description": "Total before any discounts or taxes are applied.",
-                "type": "integer"
-              },
-              "amount_total": {
-                "description": "Total after discounts and taxes.",
-                "type": "integer"
-              },
-              "currency": {
-                "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-                "type": "string"
-              },
-              "description": {
-                "description": "An arbitrary string attached to the object. Often useful for displaying to users. Defaults to product name.",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "discounts": {
-                "description": "",
-                "properties": {
-                  "amount": {
-                    "description": "The amount discounted.",
-                    "type": "integer"
-                  },
-                  "discount": {
-                    "description": "A discount represents the actual application of a coupon to a particular\ncustomer. It contains information about when the discount began and when it\nwill end.\n\nRelated guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).",
-                    "properties": {
-                      "checkout_session": {
-                        "description": "The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "coupon": {
-                        "description": "A coupon contains information about a percent-off or amount-off discount you\nmight want to apply to a customer. Coupons may be applied to [invoices](https://stripe.com/docs/api#invoices) or\n[orders](https://stripe.com/docs/api#create_order_legacy-coupon). Coupons do not work with conventional one-off [charges](https://stripe.com/docs/api#create_charge).",
-                        "properties": {
-                          "amount_off": {
-                            "description": "Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for this customer.",
-                            "nullable": true,
-                            "type": "integer"
-                          },
-                          "applies_to": {
-                            "description": "",
-                            "properties": {
-                              "products": {
-                                "maxLength": 5000,
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "products"
-                            ],
-                            "title": "CouponAppliesTo",
-                            "type": "object",
-                            "x-expandableFields": []
-                          },
-                          "created": {
-                            "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                            "format": "unix-time",
-                            "type": "integer"
-                          },
-                          "currency": {
-                            "description": "If `amount_off` has been set, the three-letter [ISO code for the currency](https://stripe.com/docs/currencies) of the amount to take off.",
-                            "nullable": true,
-                            "type": "string"
-                          },
-                          "duration": {
-                            "description": "One of `forever`, `once`, and `repeating`. Describes how long a customer who applies this coupon will get the discount.",
-                            "enum": [
-                              "forever",
-                              "once",
-                              "repeating"
-                            ],
-                            "type": "string"
-                          },
-                          "duration_in_months": {
-                            "description": "If `duration` is `repeating`, the number of months the coupon applies. Null if coupon `duration` is `forever` or `once`.",
-                            "nullable": true,
-                            "type": "integer"
-                          },
-                          "id": {
-                            "description": "Unique identifier for the object.",
-                            "maxLength": 5000,
-                            "type": "string"
-                          },
-                          "livemode": {
-                            "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                            "type": "boolean"
-                          },
-                          "max_redemptions": {
-                            "description": "Maximum number of times this coupon can be redeemed, in total, across all customers, before it is no longer valid.",
-                            "nullable": true,
-                            "type": "integer"
-                          },
-                          "metadata": {},
-                          "name": {
-                            "description": "Name of the coupon displayed to customers on for instance invoices or receipts.",
-                            "maxLength": 5000,
-                            "nullable": true,
-                            "type": "string"
-                          },
-                          "object": {
-                            "description": "String representing the object's type. Objects of the same type share the same value.",
-                            "enum": [
-                              "coupon"
-                            ],
-                            "type": "string"
-                          },
-                          "percent_off": {
-                            "description": "Percent that will be taken off the subtotal of any invoices for this customer for the duration of the coupon. For example, a coupon with percent_off of 50 will make a %s100 invoice %s50 instead.",
-                            "nullable": true,
-                            "type": "number"
-                          },
-                          "redeem_by": {
-                            "description": "Date after which the coupon can no longer be redeemed.",
-                            "format": "unix-time",
-                            "nullable": true,
-                            "type": "integer"
-                          },
-                          "times_redeemed": {
-                            "description": "Number of times this coupon has been applied to a customer.",
-                            "type": "integer"
-                          },
-                          "valid": {
-                            "description": "Taking account of the above properties, whether this coupon can still be applied to a customer.",
-                            "type": "boolean"
-                          }
-                        },
-                        "required": [
-                          "created",
-                          "duration",
-                          "id",
-                          "livemode",
-                          "object",
-                          "times_redeemed",
-                          "valid"
-                        ],
-                        "title": "Coupon",
-                        "type": "object",
-                        "x-expandableFields": [
-                          "applies_to"
-                        ],
-                        "x-resourceId": "coupon"
-                      },
-                      "customer": {
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "end": {
-                        "description": "If the coupon has a duration of `repeating`, the date that this discount will end. If the coupon has a duration of `once` or `forever`, this attribute will be null.",
-                        "format": "unix-time",
-                        "nullable": true,
-                        "type": "integer"
-                      },
-                      "id": {
-                        "description": "The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.",
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "invoice": {
-                        "description": "The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "invoice_item": {
-                        "description": "The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's coupon was applied to, if it was applied directly to a particular invoice item or invoice line item.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "object": {
-                        "description": "String representing the object's type. Objects of the same type share the same value.",
-                        "enum": [
-                          "discount"
-                        ],
-                        "type": "string"
-                      },
-                      "promotion_code": {
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "start": {
-                        "description": "Date that the coupon was applied.",
-                        "format": "unix-time",
-                        "type": "integer"
-                      },
-                      "subscription": {
-                        "description": "The subscription that this coupon is applied to, if it is applied to a particular subscription.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      }
+  "description": "A Checkout Session represents your customer's session as they pay for\none-time purchases or subscriptions through [Checkout](https://stripe.com/docs/payments/checkout)\nor [Payment Links](https://stripe.com/docs/payments/payment-links). We recommend creating a\nnew Session each time your customer attempts to pay.\n\nOnce payment is successful, the Checkout Session will contain a reference\nto the [Customer](https://stripe.com/docs/api/customers), and either the successful\n[PaymentIntent](https://stripe.com/docs/api/payment_intents) or an active\n[Subscription](https://stripe.com/docs/api/subscriptions).\n\nYou can create a Checkout Session on your server and pass its ID to the\nclient to begin Checkout.\n\nRelated guide: [Checkout Server Quickstart](https://stripe.com/docs/payments/checkout/api).",
+  "properties": {
+    "after_expiration": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "recovery": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "allow_promotion_codes": {
+                      "description": "Enables user redeemable promotion codes on the recovered Checkout Sessions. Defaults to `false`",
+                      "type": "boolean"
                     },
-                    "required": [
-                      "coupon",
-                      "id",
-                      "object",
-                      "start"
-                    ],
-                    "title": "Discount",
-                    "type": "object",
-                    "x-expandableFields": [
-                      "coupon",
-                      "customer",
-                      "promotion_code"
-                    ],
-                    "x-resourceId": "discount"
-                  }
-                },
-                "required": [
-                  "amount",
-                  "discount"
+                    "enabled": {
+                      "description": "If `true`, a recovery url will be generated to recover this Checkout Session if it\nexpires before a transaction is completed. It will be attached to the\nCheckout Session object upon expiration.",
+                      "type": "boolean"
+                    },
+                    "expires_at": {
+                      "description": "The timestamp at which the recovery URL will expire.",
+                      "format": "unix-time",
+                      "nullable": true,
+                      "type": "integer"
+                    },
+                    "url": {
+                      "description": "URL that creates a new Checkout Session when clicked that is a copy of this expired Checkout Session",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "allow_promotion_codes",
+                    "enabled"
+                  ],
+                  "title": "PaymentPagesCheckoutSessionAfterExpirationRecovery",
+                  "type": "object",
+                  "x-expandableFields": []
+                }
+              ],
+              "description": "When set, configuration used to recover the Checkout Session on expiry.",
+              "nullable": true
+            }
+          },
+          "title": "PaymentPagesCheckoutSessionAfterExpiration",
+          "type": "object",
+          "x-expandableFields": [
+            "recovery"
+          ]
+        }
+      ],
+      "description": "When set, provides configuration for actions to take if this Checkout Session expires.",
+      "nullable": true
+    },
+    "allow_promotion_codes": {
+      "description": "Enables user redeemable promotion codes.",
+      "nullable": true,
+      "type": "boolean"
+    },
+    "amount_subtotal": {
+      "description": "Total of all items before discounts or taxes are applied.",
+      "nullable": true,
+      "type": "integer"
+    },
+    "amount_total": {
+      "description": "Total of all items after discounts and taxes are applied.",
+      "nullable": true,
+      "type": "integer"
+    },
+    "automatic_tax": {
+      "description": "",
+      "properties": {
+        "enabled": {
+          "description": "Indicates whether automatic tax is enabled for the session",
+          "type": "boolean"
+        },
+        "status": {
+          "description": "The status of the most recent automated tax calculation for this session.",
+          "enum": [
+            "complete",
+            "failed",
+            "requires_location_inputs"
+          ],
+          "nullable": true,
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "PaymentPagesCheckoutSessionAutomaticTax",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "billing_address_collection": {
+      "description": "Describes whether Checkout should collect the customer's billing address.",
+      "enum": [
+        "auto",
+        "required"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "cancel_url": {
+      "description": "The URL the customer will be directed to if they decide to cancel payment and return to your website.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "client_reference_id": {
+      "description": "A unique string to reference the Checkout Session. This can be a\ncustomer ID, a cart ID, or similar, and can be used to reconcile the\nSession with your internal systems.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "consent": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "promotions": {
+              "description": "If `opt_in`, the customer consents to receiving promotional communications\nfrom the merchant about this Checkout Session.",
+              "enum": [
+                "opt_in",
+                "opt_out"
+              ],
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "title": "PaymentPagesCheckoutSessionConsent",
+          "type": "object",
+          "x-expandableFields": []
+        }
+      ],
+      "description": "Results of `consent_collection` for this session.",
+      "nullable": true
+    },
+    "consent_collection": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "promotions": {
+              "description": "If set to `auto`, enables the collection of customer consent for promotional communications. The Checkout\nSession will determine whether to display an option to opt into promotional communication\nfrom the merchant depending on the customer's locale. Only available to US merchants.",
+              "enum": [
+                "auto"
+              ],
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "title": "PaymentPagesCheckoutSessionConsentCollection",
+          "type": "object",
+          "x-expandableFields": []
+        }
+      ],
+      "description": "When set, provides configuration for the Checkout Session to gather active consent from customers.",
+      "nullable": true
+    },
+    "currency": {
+      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+      "nullable": true,
+      "type": "string"
+    },
+    "customer": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/customer"
+        },
+        {
+          "description": "",
+          "properties": {
+            "deleted": {
+              "description": "Always true for a deleted object",
+              "enum": [
+                true
+              ],
+              "type": "boolean"
+            },
+            "id": {
+              "description": "Unique identifier for the object.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "object": {
+              "description": "String representing the object's type. Objects of the same type share the same value.",
+              "enum": [
+                "customer"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "deleted",
+            "id",
+            "object"
+          ],
+          "title": "DeletedCustomer",
+          "type": "object",
+          "x-expandableFields": [],
+          "x-resourceId": "deleted_customer"
+        }
+      ],
+      "description": "The ID of the customer for this Session.\nFor Checkout Sessions in `payment` or `subscription` mode, Checkout\nwill create a new customer object based on information provided\nduring the payment flow unless an existing customer was provided when\nthe Session was created.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/customer"
+          },
+          {
+            "description": "",
+            "properties": {
+              "deleted": {
+                "description": "Always true for a deleted object",
+                "enum": [
+                  true
                 ],
-                "title": "LineItemsDiscountAmount",
-                "type": "object",
-                "x-expandableFields": [
-                  "discount"
-                ]
+                "type": "boolean"
               },
               "id": {
                 "description": "Unique identifier for the object.",
@@ -504,33 +233,980 @@
               "object": {
                 "description": "String representing the object's type. Objects of the same type share the same value.",
                 "enum": [
-                  "item"
+                  "customer"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "deleted",
+              "id",
+              "object"
+            ],
+            "title": "DeletedCustomer",
+            "type": "object",
+            "x-expandableFields": [],
+            "x-resourceId": "deleted_customer"
+          }
+        ]
+      }
+    },
+    "customer_creation": {
+      "description": "Configure whether a Checkout Session creates a Customer when the Checkout Session completes.",
+      "enum": [
+        "always",
+        "if_required"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "customer_details": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "email": {
+              "description": "The email associated with the Customer, if one exists, on the Checkout Session at the time of checkout or at time of session expiry.\nOtherwise, if the customer has consented to promotional content, this value is the most recent valid email provided by the customer on the Checkout form.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "phone": {
+              "description": "The customer's phone number at the time of checkout",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "tax_exempt": {
+              "description": "The customer’s tax exempt status at time of checkout.",
+              "enum": [
+                "exempt",
+                "none",
+                "reverse"
+              ],
+              "nullable": true,
+              "type": "string"
+            },
+            "tax_ids": {
+              "description": "The customer’s tax IDs at time of checkout.",
+              "items": {
+                "description": "",
+                "properties": {
+                  "type": {
+                    "description": "The type of the tax ID, one of `eu_vat`, `br_cnpj`, `br_cpf`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, or `unknown`",
+                    "enum": [
+                      "ae_trn",
+                      "au_abn",
+                      "au_arn",
+                      "br_cnpj",
+                      "br_cpf",
+                      "ca_bn",
+                      "ca_gst_hst",
+                      "ca_pst_bc",
+                      "ca_pst_mb",
+                      "ca_pst_sk",
+                      "ca_qst",
+                      "ch_vat",
+                      "cl_tin",
+                      "es_cif",
+                      "eu_vat",
+                      "gb_vat",
+                      "ge_vat",
+                      "hk_br",
+                      "id_npwp",
+                      "il_vat",
+                      "in_gst",
+                      "is_vat",
+                      "jp_cn",
+                      "jp_rn",
+                      "kr_brn",
+                      "li_uid",
+                      "mx_rfc",
+                      "my_frp",
+                      "my_itn",
+                      "my_sst",
+                      "no_vat",
+                      "nz_gst",
+                      "ru_inn",
+                      "ru_kpp",
+                      "sa_vat",
+                      "sg_gst",
+                      "sg_uen",
+                      "th_vat",
+                      "tw_vat",
+                      "ua_vat",
+                      "unknown",
+                      "us_ein",
+                      "za_vat"
+                    ],
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "The value of the tax ID.",
+                    "maxLength": 5000,
+                    "nullable": true,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type"
+                ],
+                "title": "PaymentPagesCheckoutSessionTaxID",
+                "type": "object",
+                "x-expandableFields": []
+              },
+              "nullable": true,
+              "type": "array"
+            }
+          },
+          "title": "PaymentPagesCheckoutSessionCustomerDetails",
+          "type": "object",
+          "x-expandableFields": [
+            "tax_ids"
+          ]
+        }
+      ],
+      "description": "The customer details including the customer's tax exempt status and the customer's tax IDs. Only present on Sessions in `payment` or `subscription` mode.",
+      "nullable": true
+    },
+    "customer_email": {
+      "description": "If provided, this value will be used when the Customer object is created.\nIf not provided, customers will be asked to enter their email address.\nUse this parameter to prefill customer data if you already have an email\non file. To access information about the customer once the payment flow is\ncomplete, use the `customer` attribute.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "expires_at": {
+      "description": "The timestamp at which the Checkout Session will expire.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "id": {
+      "description": "Unique identifier for the object. Used to pass to `redirectToCheckout`\nin Stripe.js.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "line_items": {
+      "description": "The line items purchased by the customer.",
+      "properties": {
+        "data": {
+          "description": "Details about each object.",
+          "items": {
+            "$ref": "#/components/schemas/item"
+          },
+          "type": "array"
+        },
+        "has_more": {
+          "description": "True if this list has another page of items after this one that can be fetched.",
+          "type": "boolean"
+        },
+        "object": {
+          "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
+          "enum": [
+            "list"
+          ],
+          "type": "string"
+        },
+        "url": {
+          "description": "The URL where this list can be accessed.",
+          "maxLength": 5000,
+          "type": "string"
+        }
+      },
+      "required": [
+        "data",
+        "has_more",
+        "object",
+        "url"
+      ],
+      "title": "PaymentPagesCheckoutSessionListLineItems",
+      "type": "object",
+      "x-expandableFields": [
+        "data"
+      ]
+    },
+    "livemode": {
+      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+      "type": "boolean"
+    },
+    "locale": {
+      "description": "The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the browser's locale is used.",
+      "enum": [
+        "auto",
+        "bg",
+        "cs",
+        "da",
+        "de",
+        "el",
+        "en",
+        "en-GB",
+        "es",
+        "es-419",
+        "et",
+        "fi",
+        "fil",
+        "fr",
+        "fr-CA",
+        "hr",
+        "hu",
+        "id",
+        "it",
+        "ja",
+        "ko",
+        "lt",
+        "lv",
+        "ms",
+        "mt",
+        "nb",
+        "nl",
+        "pl",
+        "pt",
+        "pt-BR",
+        "ro",
+        "ru",
+        "sk",
+        "sl",
+        "sv",
+        "th",
+        "tr",
+        "vi",
+        "zh",
+        "zh-HK",
+        "zh-TW"
+      ],
+      "nullable": true,
+      "type": "string",
+      "x-stripeBypassValidation": true
+    },
+    "metadata": {
+      "additionalProperties": {
+        "maxLength": 500,
+        "type": "string"
+      },
+      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+      "nullable": true,
+      "type": "object"
+    },
+    "mode": {
+      "description": "The mode of the Checkout Session.",
+      "enum": [
+        "payment",
+        "setup",
+        "subscription"
+      ],
+      "type": "string"
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "checkout.session"
+      ],
+      "type": "string"
+    },
+    "payment_intent": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/payment_intent"
+        }
+      ],
+      "description": "The ID of the PaymentIntent for Checkout Sessions in `payment` mode.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/payment_intent"
+          }
+        ]
+      }
+    },
+    "payment_link": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/payment_link"
+        }
+      ],
+      "description": "The ID of the Payment Link that created this Session.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/payment_link"
+          }
+        ]
+      }
+    },
+    "payment_method_options": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "acss_debit": {
+              "description": "",
+              "properties": {
+                "currency": {
+                  "description": "Currency supported by the bank account. Returned when the Session is in `setup` mode.",
+                  "enum": [
+                    "cad",
+                    "usd"
+                  ],
+                  "type": "string"
+                },
+                "mandate_options": {
+                  "description": "",
+                  "properties": {
+                    "custom_mandate_url": {
+                      "description": "A URL for custom mandate text",
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "default_for": {
+                      "description": "List of Stripe products where this mandate can be selected automatically. Returned when the Session is in `setup` mode.",
+                      "items": {
+                        "enum": [
+                          "invoice",
+                          "subscription"
+                        ],
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "interval_description": {
+                      "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "payment_schedule": {
+                      "description": "Payment schedule for the mandate.",
+                      "enum": [
+                        "combined",
+                        "interval",
+                        "sporadic"
+                      ],
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "transaction_type": {
+                      "description": "Transaction type of the mandate.",
+                      "enum": [
+                        "business",
+                        "personal"
+                      ],
+                      "nullable": true,
+                      "type": "string"
+                    }
+                  },
+                  "title": "CheckoutAcssDebitMandateOptions",
+                  "type": "object",
+                  "x-expandableFields": []
+                },
+                "verification_method": {
+                  "description": "Bank account verification method.",
+                  "enum": [
+                    "automatic",
+                    "instant",
+                    "microdeposits"
+                  ],
+                  "type": "string",
+                  "x-stripeBypassValidation": true
+                }
+              },
+              "title": "CheckoutAcssDebitPaymentMethodOptions",
+              "type": "object",
+              "x-expandableFields": [
+                "mandate_options"
+              ]
+            },
+            "boleto": {
+              "description": "",
+              "properties": {
+                "expires_after_days": {
+                  "description": "The number of calendar days before a Boleto voucher expires. For example, if you create a Boleto voucher on Monday and you set expires_after_days to 2, the Boleto voucher will expire on Wednesday at 23:59 America/Sao_Paulo time.",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "expires_after_days"
+              ],
+              "title": "payment_method_options_boleto",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "oxxo": {
+              "description": "",
+              "properties": {
+                "expires_after_days": {
+                  "description": "The number of calendar days before an OXXO invoice expires. For example, if you create an OXXO invoice on Monday and you set expires_after_days to 2, the OXXO invoice will expire on Wednesday at 23:59 America/Mexico_City time.",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "expires_after_days"
+              ],
+              "title": "payment_method_options_oxxo",
+              "type": "object",
+              "x-expandableFields": []
+            }
+          },
+          "title": "CheckoutSessionPaymentMethodOptions",
+          "type": "object",
+          "x-expandableFields": [
+            "acss_debit",
+            "boleto",
+            "oxxo"
+          ]
+        }
+      ],
+      "description": "Payment-method-specific configuration for the PaymentIntent or SetupIntent of this CheckoutSession.",
+      "nullable": true
+    },
+    "payment_method_types": {
+      "description": "A list of the types of payment methods (e.g. card) this Checkout\nSession is allowed to accept.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "payment_status": {
+      "description": "The payment status of the Checkout Session, one of `paid`, `unpaid`, or `no_payment_required`.\nYou can use this value to decide when to fulfill your customer's order.",
+      "enum": [
+        "no_payment_required",
+        "paid",
+        "unpaid"
+      ],
+      "type": "string"
+    },
+    "phone_number_collection": {
+      "description": "",
+      "properties": {
+        "enabled": {
+          "description": "Indicates whether phone number collection is enabled for the session",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "PaymentPagesCheckoutSessionPhoneNumberCollection",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "recovered_from": {
+      "description": "The ID of the original expired Checkout Session that triggered the recovery flow.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "setup_intent": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/setup_intent"
+        }
+      ],
+      "description": "The ID of the SetupIntent for Checkout Sessions in `setup` mode.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/setup_intent"
+          }
+        ]
+      }
+    },
+    "shipping": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "properties": {
+                "city": {
+                  "description": "City, district, suburb, town, or village.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "country": {
+                  "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "line1": {
+                  "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "line2": {
+                  "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "postal_code": {
+                  "description": "ZIP or postal code.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                },
+                "state": {
+                  "description": "State, county, province, or region.",
+                  "maxLength": 5000,
+                  "nullable": true,
+                  "type": "string"
+                }
+              },
+              "title": "Address",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "carrier": {
+              "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "name": {
+              "description": "Recipient name.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "phone": {
+              "description": "Recipient phone (including extension).",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "tracking_number": {
+              "description": "The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "title": "Shipping",
+          "type": "object",
+          "x-expandableFields": [
+            "address"
+          ]
+        }
+      ],
+      "description": "Shipping information for this Checkout Session.",
+      "nullable": true
+    },
+    "shipping_address_collection": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "allowed_countries": {
+              "description": "An array of two-letter ISO country codes representing which countries Checkout should provide as options for\nshipping locations. Unsupported country codes: `AS, CX, CC, CU, HM, IR, KP, MH, FM, NF, MP, PW, SD, SY, UM, VI`.",
+              "items": {
+                "enum": [
+                  "AC",
+                  "AD",
+                  "AE",
+                  "AF",
+                  "AG",
+                  "AI",
+                  "AL",
+                  "AM",
+                  "AO",
+                  "AQ",
+                  "AR",
+                  "AT",
+                  "AU",
+                  "AW",
+                  "AX",
+                  "AZ",
+                  "BA",
+                  "BB",
+                  "BD",
+                  "BE",
+                  "BF",
+                  "BG",
+                  "BH",
+                  "BI",
+                  "BJ",
+                  "BL",
+                  "BM",
+                  "BN",
+                  "BO",
+                  "BQ",
+                  "BR",
+                  "BS",
+                  "BT",
+                  "BV",
+                  "BW",
+                  "BY",
+                  "BZ",
+                  "CA",
+                  "CD",
+                  "CF",
+                  "CG",
+                  "CH",
+                  "CI",
+                  "CK",
+                  "CL",
+                  "CM",
+                  "CN",
+                  "CO",
+                  "CR",
+                  "CV",
+                  "CW",
+                  "CY",
+                  "CZ",
+                  "DE",
+                  "DJ",
+                  "DK",
+                  "DM",
+                  "DO",
+                  "DZ",
+                  "EC",
+                  "EE",
+                  "EG",
+                  "EH",
+                  "ER",
+                  "ES",
+                  "ET",
+                  "FI",
+                  "FJ",
+                  "FK",
+                  "FO",
+                  "FR",
+                  "GA",
+                  "GB",
+                  "GD",
+                  "GE",
+                  "GF",
+                  "GG",
+                  "GH",
+                  "GI",
+                  "GL",
+                  "GM",
+                  "GN",
+                  "GP",
+                  "GQ",
+                  "GR",
+                  "GS",
+                  "GT",
+                  "GU",
+                  "GW",
+                  "GY",
+                  "HK",
+                  "HN",
+                  "HR",
+                  "HT",
+                  "HU",
+                  "ID",
+                  "IE",
+                  "IL",
+                  "IM",
+                  "IN",
+                  "IO",
+                  "IQ",
+                  "IS",
+                  "IT",
+                  "JE",
+                  "JM",
+                  "JO",
+                  "JP",
+                  "KE",
+                  "KG",
+                  "KH",
+                  "KI",
+                  "KM",
+                  "KN",
+                  "KR",
+                  "KW",
+                  "KY",
+                  "KZ",
+                  "LA",
+                  "LB",
+                  "LC",
+                  "LI",
+                  "LK",
+                  "LR",
+                  "LS",
+                  "LT",
+                  "LU",
+                  "LV",
+                  "LY",
+                  "MA",
+                  "MC",
+                  "MD",
+                  "ME",
+                  "MF",
+                  "MG",
+                  "MK",
+                  "ML",
+                  "MM",
+                  "MN",
+                  "MO",
+                  "MQ",
+                  "MR",
+                  "MS",
+                  "MT",
+                  "MU",
+                  "MV",
+                  "MW",
+                  "MX",
+                  "MY",
+                  "MZ",
+                  "NA",
+                  "NC",
+                  "NE",
+                  "NG",
+                  "NI",
+                  "NL",
+                  "NO",
+                  "NP",
+                  "NR",
+                  "NU",
+                  "NZ",
+                  "OM",
+                  "PA",
+                  "PE",
+                  "PF",
+                  "PG",
+                  "PH",
+                  "PK",
+                  "PL",
+                  "PM",
+                  "PN",
+                  "PR",
+                  "PS",
+                  "PT",
+                  "PY",
+                  "QA",
+                  "RE",
+                  "RO",
+                  "RS",
+                  "RU",
+                  "RW",
+                  "SA",
+                  "SB",
+                  "SC",
+                  "SE",
+                  "SG",
+                  "SH",
+                  "SI",
+                  "SJ",
+                  "SK",
+                  "SL",
+                  "SM",
+                  "SN",
+                  "SO",
+                  "SR",
+                  "SS",
+                  "ST",
+                  "SV",
+                  "SX",
+                  "SZ",
+                  "TA",
+                  "TC",
+                  "TD",
+                  "TF",
+                  "TG",
+                  "TH",
+                  "TJ",
+                  "TK",
+                  "TL",
+                  "TM",
+                  "TN",
+                  "TO",
+                  "TR",
+                  "TT",
+                  "TV",
+                  "TW",
+                  "TZ",
+                  "UA",
+                  "UG",
+                  "US",
+                  "UY",
+                  "UZ",
+                  "VA",
+                  "VC",
+                  "VE",
+                  "VG",
+                  "VN",
+                  "VU",
+                  "WF",
+                  "WS",
+                  "XK",
+                  "YE",
+                  "YT",
+                  "ZA",
+                  "ZM",
+                  "ZW",
+                  "ZZ"
                 ],
                 "type": "string"
               },
-              "price": {
-                "description": "Prices define the unit cost, currency, and (optional) billing cycle for both recurring and one-time purchases of products.\n[Products](https://stripe.com/docs/api#products) help you track inventory or provisioning, and prices help you track payment terms. Different physical goods or levels of service should be represented by products, and pricing options should be represented by prices. This approach lets you change prices without having to change your provisioning scheme.\n\nFor example, you might have a single \"gold\" product that has prices for $10/month, $100/year, and €9 once.\n\nRelated guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription), [create an invoice](https://stripe.com/docs/billing/invoices/create), and more about [products and prices](https://stripe.com/docs/billing/prices-guide).",
+              "type": "array"
+            }
+          },
+          "required": [
+            "allowed_countries"
+          ],
+          "title": "PaymentPagesCheckoutSessionShippingAddressCollection",
+          "type": "object",
+          "x-expandableFields": []
+        }
+      ],
+      "description": "When set, provides configuration for Checkout to collect a shipping address from a customer.",
+      "nullable": true
+    },
+    "shipping_options": {
+      "description": "The shipping rate options applied to this Session.",
+      "items": {
+        "description": "",
+        "properties": {
+          "shipping_amount": {
+            "description": "A non-negative integer in cents representing how much to charge.",
+            "type": "integer"
+          },
+          "shipping_rate": {
+            "anyOf": [
+              {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              {
+                "description": "Shipping rates describe the price of shipping presented to your customers and can be\napplied to [Checkout Sessions](https://stripe.com/docs/payments/checkout/shipping) to collect shipping costs.",
                 "properties": {
                   "active": {
-                    "description": "Whether the price can be used for new purchases.",
+                    "description": "Whether the shipping rate can be used for new purchases. Defaults to `true`.",
                     "type": "boolean"
-                  },
-                  "billing_scheme": {
-                    "description": "Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.",
-                    "enum": [
-                      "per_unit",
-                      "tiered"
-                    ],
-                    "type": "string"
                   },
                   "created": {
                     "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
                     "format": "unix-time",
                     "type": "integer"
                   },
-                  "currency": {
-                    "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                  "delivery_estimate": {
+                    "anyOf": [
+                      {
+                        "description": "",
+                        "properties": {
+                          "maximum": {
+                            "anyOf": [
+                              {
+                                "description": "",
+                                "properties": {
+                                  "unit": {
+                                    "description": "A unit of time.",
+                                    "enum": [
+                                      "business_day",
+                                      "day",
+                                      "hour",
+                                      "month",
+                                      "week"
+                                    ],
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "description": "Must be greater than 0.",
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "unit",
+                                  "value"
+                                ],
+                                "title": "ShippingRateDeliveryEstimateBound",
+                                "type": "object",
+                                "x-expandableFields": []
+                              }
+                            ],
+                            "description": "The upper bound of the estimated range. If empty, represents no upper bound i.e., infinite.",
+                            "nullable": true
+                          },
+                          "minimum": {
+                            "anyOf": [
+                              {
+                                "description": "",
+                                "properties": {
+                                  "unit": {
+                                    "description": "A unit of time.",
+                                    "enum": [
+                                      "business_day",
+                                      "day",
+                                      "hour",
+                                      "month",
+                                      "week"
+                                    ],
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "description": "Must be greater than 0.",
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "unit",
+                                  "value"
+                                ],
+                                "title": "ShippingRateDeliveryEstimateBound",
+                                "type": "object",
+                                "x-expandableFields": []
+                              }
+                            ],
+                            "description": "The lower bound of the estimated range. If empty, represents no lower bound.",
+                            "nullable": true
+                          }
+                        },
+                        "title": "ShippingRateDeliveryEstimate",
+                        "type": "object",
+                        "x-expandableFields": [
+                          "maximum",
+                          "minimum"
+                        ]
+                      }
+                    ],
+                    "description": "The estimated range for how long shipping will take, meant to be displayable to the customer. This will appear on CheckoutSessions.",
+                    "nullable": true
+                  },
+                  "display_name": {
+                    "description": "The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.",
+                    "maxLength": 5000,
+                    "nullable": true,
                     "type": "string"
+                  },
+                  "fixed_amount": {
+                    "description": "",
+                    "properties": {
+                      "amount": {
+                        "description": "A non-negative integer in cents representing how much to charge.",
+                        "type": "integer"
+                      },
+                      "currency": {
+                        "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "amount",
+                      "currency"
+                    ],
+                    "title": "ShippingRateFixedAmount",
+                    "type": "object",
+                    "x-expandableFields": []
                   },
                   "id": {
                     "description": "Unique identifier for the object.",
@@ -541,78 +1217,23 @@
                     "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
                     "type": "boolean"
                   },
-                  "lookup_key": {
-                    "description": "A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.",
-                    "maxLength": 5000,
-                    "nullable": true,
-                    "type": "string"
-                  },
-                  "metadata": {},
-                  "nickname": {
-                    "description": "A brief description of the price, hidden from customers.",
-                    "maxLength": 5000,
-                    "nullable": true,
-                    "type": "string"
+                  "metadata": {
+                    "additionalProperties": {
+                      "maxLength": 500,
+                      "type": "string"
+                    },
+                    "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+                    "type": "object"
                   },
                   "object": {
                     "description": "String representing the object's type. Objects of the same type share the same value.",
                     "enum": [
-                      "price"
+                      "shipping_rate"
                     ],
                     "type": "string"
-                  },
-                  "product": {
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  "recurring": {
-                    "description": "",
-                    "properties": {
-                      "aggregate_usage": {
-                        "description": "Specifies a usage aggregation strategy for prices of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.",
-                        "enum": [
-                          "last_during_period",
-                          "last_ever",
-                          "max",
-                          "sum"
-                        ],
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "interval": {
-                        "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
-                        "enum": [
-                          "day",
-                          "month",
-                          "week",
-                          "year"
-                        ],
-                        "type": "string"
-                      },
-                      "interval_count": {
-                        "description": "The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.",
-                        "type": "integer"
-                      },
-                      "usage_type": {
-                        "description": "Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.",
-                        "enum": [
-                          "licensed",
-                          "metered"
-                        ],
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "interval",
-                      "interval_count",
-                      "usage_type"
-                    ],
-                    "title": "Recurring",
-                    "type": "object",
-                    "x-expandableFields": []
                   },
                   "tax_behavior": {
-                    "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.",
+                    "description": "Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`.",
                     "enum": [
                       "exclusive",
                       "inclusive",
@@ -621,819 +1242,395 @@
                     "nullable": true,
                     "type": "string"
                   },
-                  "tiers": {
-                    "description": "",
-                    "properties": {
-                      "flat_amount": {
-                        "description": "Price for the entire tier.",
-                        "nullable": true,
-                        "type": "integer"
-                      },
-                      "flat_amount_decimal": {
-                        "description": "Same as `flat_amount`, but contains a decimal value with at most 12 decimal places.",
-                        "format": "decimal",
-                        "nullable": true,
+                  "tax_code": {
+                    "anyOf": [
+                      {
+                        "maxLength": 5000,
                         "type": "string"
                       },
-                      "unit_amount": {
-                        "description": "Per unit price for units relevant to the tier.",
-                        "nullable": true,
-                        "type": "integer"
-                      },
-                      "unit_amount_decimal": {
-                        "description": "Same as `unit_amount`, but contains a decimal value with at most 12 decimal places.",
-                        "format": "decimal",
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "up_to": {
-                        "description": "Up to and including to this quantity will be contained in the tier.",
-                        "nullable": true,
-                        "type": "integer"
-                      }
-                    },
-                    "title": "PriceTier",
-                    "type": "object",
-                    "x-expandableFields": []
-                  },
-                  "tiers_mode": {
-                    "description": "Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.",
-                    "enum": [
-                      "graduated",
-                      "volume"
-                    ],
-                    "nullable": true,
-                    "type": "string"
-                  },
-                  "transform_quantity": {
-                    "description": "",
-                    "properties": {
-                      "divide_by": {
-                        "description": "Divide usage by this number.",
-                        "type": "integer"
-                      },
-                      "round": {
-                        "description": "After division, either round the result `up` or `down`.",
-                        "enum": [
-                          "down",
-                          "up"
+                      {
+                        "description": "[Tax codes](https://stripe.com/docs/tax/tax-codes) classify goods and services for tax purposes.",
+                        "properties": {
+                          "description": {
+                            "description": "A detailed description of which types of products the tax code represents.",
+                            "maxLength": 5000,
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "Unique identifier for the object.",
+                            "maxLength": 5000,
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "A short name for the tax code.",
+                            "maxLength": 5000,
+                            "type": "string"
+                          },
+                          "object": {
+                            "description": "String representing the object's type. Objects of the same type share the same value.",
+                            "enum": [
+                              "tax_code"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "description",
+                          "id",
+                          "name",
+                          "object"
                         ],
-                        "type": "string"
+                        "title": "TaxProductResourceTaxCode",
+                        "type": "object",
+                        "x-expandableFields": [],
+                        "x-resourceId": "tax_code"
                       }
-                    },
-                    "required": [
-                      "divide_by",
-                      "round"
                     ],
-                    "title": "TransformQuantity",
-                    "type": "object",
-                    "x-expandableFields": []
+                    "description": "A [tax code](https://stripe.com/docs/tax/tax-codes) ID. The Shipping tax code is `txcd_92010001`.",
+                    "nullable": true,
+                    "x-expansionResources": {
+                      "oneOf": [
+                        {
+                          "description": "[Tax codes](https://stripe.com/docs/tax/tax-codes) classify goods and services for tax purposes.",
+                          "properties": {
+                            "description": {
+                              "description": "A detailed description of which types of products the tax code represents.",
+                              "maxLength": 5000,
+                              "type": "string"
+                            },
+                            "id": {
+                              "description": "Unique identifier for the object.",
+                              "maxLength": 5000,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "A short name for the tax code.",
+                              "maxLength": 5000,
+                              "type": "string"
+                            },
+                            "object": {
+                              "description": "String representing the object's type. Objects of the same type share the same value.",
+                              "enum": [
+                                "tax_code"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "description",
+                            "id",
+                            "name",
+                            "object"
+                          ],
+                          "title": "TaxProductResourceTaxCode",
+                          "type": "object",
+                          "x-expandableFields": [],
+                          "x-resourceId": "tax_code"
+                        }
+                      ]
+                    }
                   },
                   "type": {
-                    "description": "One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.",
+                    "description": "The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.",
                     "enum": [
-                      "one_time",
-                      "recurring"
+                      "fixed_amount"
                     ],
-                    "type": "string"
-                  },
-                  "unit_amount": {
-                    "description": "The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.",
-                    "nullable": true,
-                    "type": "integer"
-                  },
-                  "unit_amount_decimal": {
-                    "description": "The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.",
-                    "format": "decimal",
-                    "nullable": true,
                     "type": "string"
                   }
                 },
                 "required": [
                   "active",
-                  "billing_scheme",
                   "created",
-                  "currency",
                   "id",
                   "livemode",
                   "metadata",
                   "object",
-                  "product",
                   "type"
                 ],
-                "title": "Price",
+                "title": "ShippingRate",
                 "type": "object",
                 "x-expandableFields": [
-                  "product",
-                  "recurring",
-                  "tiers",
-                  "transform_quantity"
+                  "delivery_estimate",
+                  "fixed_amount",
+                  "tax_code"
                 ],
-                "x-resourceId": "price"
-              },
-              "quantity": {
-                "description": "The quantity of products being purchased.",
-                "nullable": true,
-                "type": "integer"
-              },
-              "taxes": {
-                "description": "",
-                "properties": {
-                  "amount": {
-                    "description": "Amount of tax applied for this rate.",
-                    "type": "integer"
-                  },
-                  "rate": {
-                    "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
-                    "properties": {
-                      "active": {
-                        "description": "Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.",
-                        "type": "boolean"
+                "x-resourceId": "shipping_rate"
+              }
+            ],
+            "description": "The shipping rate.",
+            "x-expansionResources": {
+              "oneOf": [
+                {
+                  "description": "Shipping rates describe the price of shipping presented to your customers and can be\napplied to [Checkout Sessions](https://stripe.com/docs/payments/checkout/shipping) to collect shipping costs.",
+                  "properties": {
+                    "active": {
+                      "description": "Whether the shipping rate can be used for new purchases. Defaults to `true`.",
+                      "type": "boolean"
+                    },
+                    "created": {
+                      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                      "format": "unix-time",
+                      "type": "integer"
+                    },
+                    "delivery_estimate": {
+                      "anyOf": [
+                        {
+                          "description": "",
+                          "properties": {
+                            "maximum": {
+                              "anyOf": [
+                                {
+                                  "description": "",
+                                  "properties": {
+                                    "unit": {
+                                      "description": "A unit of time.",
+                                      "enum": [
+                                        "business_day",
+                                        "day",
+                                        "hour",
+                                        "month",
+                                        "week"
+                                      ],
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "description": "Must be greater than 0.",
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "unit",
+                                    "value"
+                                  ],
+                                  "title": "ShippingRateDeliveryEstimateBound",
+                                  "type": "object",
+                                  "x-expandableFields": []
+                                }
+                              ],
+                              "description": "The upper bound of the estimated range. If empty, represents no upper bound i.e., infinite.",
+                              "nullable": true
+                            },
+                            "minimum": {
+                              "anyOf": [
+                                {
+                                  "description": "",
+                                  "properties": {
+                                    "unit": {
+                                      "description": "A unit of time.",
+                                      "enum": [
+                                        "business_day",
+                                        "day",
+                                        "hour",
+                                        "month",
+                                        "week"
+                                      ],
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "description": "Must be greater than 0.",
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "unit",
+                                    "value"
+                                  ],
+                                  "title": "ShippingRateDeliveryEstimateBound",
+                                  "type": "object",
+                                  "x-expandableFields": []
+                                }
+                              ],
+                              "description": "The lower bound of the estimated range. If empty, represents no lower bound.",
+                              "nullable": true
+                            }
+                          },
+                          "title": "ShippingRateDeliveryEstimate",
+                          "type": "object",
+                          "x-expandableFields": [
+                            "maximum",
+                            "minimum"
+                          ]
+                        }
+                      ],
+                      "description": "The estimated range for how long shipping will take, meant to be displayable to the customer. This will appear on CheckoutSessions.",
+                      "nullable": true
+                    },
+                    "display_name": {
+                      "description": "The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.",
+                      "maxLength": 5000,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "fixed_amount": {
+                      "description": "",
+                      "properties": {
+                        "amount": {
+                          "description": "A non-negative integer in cents representing how much to charge.",
+                          "type": "integer"
+                        },
+                        "currency": {
+                          "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                          "type": "string"
+                        }
                       },
-                      "country": {
-                        "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-                        "maxLength": 5000,
-                        "nullable": true,
+                      "required": [
+                        "amount",
+                        "currency"
+                      ],
+                      "title": "ShippingRateFixedAmount",
+                      "type": "object",
+                      "x-expandableFields": []
+                    },
+                    "id": {
+                      "description": "Unique identifier for the object.",
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "livemode": {
+                      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                      "type": "boolean"
+                    },
+                    "metadata": {
+                      "additionalProperties": {
+                        "maxLength": 500,
                         "type": "string"
                       },
-                      "created": {
-                        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                        "format": "unix-time",
-                        "type": "integer"
-                      },
-                      "description": {
-                        "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "display_name": {
-                        "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "id": {
-                        "description": "Unique identifier for the object.",
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "inclusive": {
-                        "description": "This specifies if the tax rate is inclusive or exclusive.",
-                        "type": "boolean"
-                      },
-                      "jurisdiction": {
-                        "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "livemode": {
-                        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                        "type": "boolean"
-                      },
-                      "metadata": {},
-                      "object": {
-                        "description": "String representing the object's type. Objects of the same type share the same value.",
-                        "enum": [
-                          "tax_rate"
-                        ],
-                        "type": "string"
-                      },
-                      "percentage": {
-                        "description": "This represents the tax rate percent out of 100.",
-                        "type": "number"
-                      },
-                      "state": {
-                        "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "tax_type": {
-                        "description": "The high-level tax type, such as `vat` or `sales_tax`.",
-                        "enum": [
-                          "gst",
-                          "hst",
-                          "jct",
-                          "pst",
-                          "qst",
-                          "rst",
-                          "sales_tax",
-                          "vat"
-                        ],
-                        "nullable": true,
-                        "type": "string"
+                      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+                      "type": "object"
+                    },
+                    "object": {
+                      "description": "String representing the object's type. Objects of the same type share the same value.",
+                      "enum": [
+                        "shipping_rate"
+                      ],
+                      "type": "string"
+                    },
+                    "tax_behavior": {
+                      "description": "Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`.",
+                      "enum": [
+                        "exclusive",
+                        "inclusive",
+                        "unspecified"
+                      ],
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "tax_code": {
+                      "anyOf": [
+                        {
+                          "maxLength": 5000,
+                          "type": "string"
+                        },
+                        {
+                          "description": "[Tax codes](https://stripe.com/docs/tax/tax-codes) classify goods and services for tax purposes.",
+                          "properties": {
+                            "description": {
+                              "description": "A detailed description of which types of products the tax code represents.",
+                              "maxLength": 5000,
+                              "type": "string"
+                            },
+                            "id": {
+                              "description": "Unique identifier for the object.",
+                              "maxLength": 5000,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "A short name for the tax code.",
+                              "maxLength": 5000,
+                              "type": "string"
+                            },
+                            "object": {
+                              "description": "String representing the object's type. Objects of the same type share the same value.",
+                              "enum": [
+                                "tax_code"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "description",
+                            "id",
+                            "name",
+                            "object"
+                          ],
+                          "title": "TaxProductResourceTaxCode",
+                          "type": "object",
+                          "x-expandableFields": [],
+                          "x-resourceId": "tax_code"
+                        }
+                      ],
+                      "description": "A [tax code](https://stripe.com/docs/tax/tax-codes) ID. The Shipping tax code is `txcd_92010001`.",
+                      "nullable": true,
+                      "x-expansionResources": {
+                        "oneOf": [
+                          {
+                            "description": "[Tax codes](https://stripe.com/docs/tax/tax-codes) classify goods and services for tax purposes.",
+                            "properties": {
+                              "description": {
+                                "description": "A detailed description of which types of products the tax code represents.",
+                                "maxLength": 5000,
+                                "type": "string"
+                              },
+                              "id": {
+                                "description": "Unique identifier for the object.",
+                                "maxLength": 5000,
+                                "type": "string"
+                              },
+                              "name": {
+                                "description": "A short name for the tax code.",
+                                "maxLength": 5000,
+                                "type": "string"
+                              },
+                              "object": {
+                                "description": "String representing the object's type. Objects of the same type share the same value.",
+                                "enum": [
+                                  "tax_code"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "description",
+                              "id",
+                              "name",
+                              "object"
+                            ],
+                            "title": "TaxProductResourceTaxCode",
+                            "type": "object",
+                            "x-expandableFields": [],
+                            "x-resourceId": "tax_code"
+                          }
+                        ]
                       }
                     },
-                    "required": [
-                      "active",
-                      "created",
-                      "display_name",
-                      "id",
-                      "inclusive",
-                      "livemode",
-                      "object",
-                      "percentage"
-                    ],
-                    "title": "TaxRate",
-                    "type": "object",
-                    "x-expandableFields": [],
-                    "x-resourceId": "tax_rate"
-                  }
-                },
-                "required": [
-                  "amount",
-                  "rate"
-                ],
-                "title": "LineItemsTaxAmount",
-                "type": "object",
-                "x-expandableFields": [
-                  "rate"
-                ]
-              }
-            },
-            "required": [
-              "amount_subtotal",
-              "amount_total",
-              "currency",
-              "description",
-              "id",
-              "object"
-            ],
-            "title": "LineItem",
-            "type": "object",
-            "x-expandableFields": [
-              "discounts",
-              "price",
-              "taxes"
-            ],
-            "x-resourceId": "item"
-          },
-          "has_more": {
-            "description": "True if this list has another page of items after this one that can be fetched.",
-            "type": "boolean"
-          },
-          "object": {
-            "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
-            "enum": [
-              "list"
-            ],
-            "type": "string"
-          },
-          "url": {
-            "description": "The URL where this list can be accessed.",
-            "maxLength": 5000,
-            "type": "string"
-          }
-        },
-        "required": [
-          "data",
-          "has_more",
-          "object",
-          "url"
-        ],
-        "title": "PaymentPagesCheckoutSessionListLineItems",
-        "type": "object",
-        "x-expandableFields": [
-          "data"
-        ]
-      },
-      "livemode": {
-        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-        "type": "boolean"
-      },
-      "locale": {
-        "description": "The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the browser's locale is used.",
-        "enum": [
-          "auto",
-          "bg",
-          "cs",
-          "da",
-          "de",
-          "el",
-          "en",
-          "en-GB",
-          "es",
-          "es-419",
-          "et",
-          "fi",
-          "fil",
-          "fr",
-          "fr-CA",
-          "hr",
-          "hu",
-          "id",
-          "it",
-          "ja",
-          "ko",
-          "lt",
-          "lv",
-          "ms",
-          "mt",
-          "nb",
-          "nl",
-          "pl",
-          "pt",
-          "pt-BR",
-          "ro",
-          "ru",
-          "sk",
-          "sl",
-          "sv",
-          "th",
-          "tr",
-          "vi",
-          "zh",
-          "zh-HK",
-          "zh-TW"
-        ],
-        "nullable": true,
-        "type": "string",
-        "x-stripeBypassValidation": true
-      },
-      "metadata": {},
-      "mode": {
-        "description": "The mode of the Checkout Session.",
-        "enum": [
-          "payment",
-          "setup",
-          "subscription"
-        ],
-        "type": "string"
-      },
-      "object": {
-        "description": "String representing the object's type. Objects of the same type share the same value.",
-        "enum": [
-          "checkout.session"
-        ],
-        "type": "string"
-      },
-      "payment_intent": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "payment_link": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "payment_method_options": {
-        "description": "",
-        "properties": {
-          "acss_debit": {
-            "description": "",
-            "properties": {
-              "currency": {
-                "description": "Currency supported by the bank account. Returned when the Session is in `setup` mode.",
-                "enum": [
-                  "cad",
-                  "usd"
-                ],
-                "type": "string"
-              },
-              "mandate_options": {
-                "description": "",
-                "properties": {
-                  "custom_mandate_url": {
-                    "description": "A URL for custom mandate text",
-                    "maxLength": 5000,
-                    "type": "string"
+                    "type": {
+                      "description": "The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.",
+                      "enum": [
+                        "fixed_amount"
+                      ],
+                      "type": "string"
+                    }
                   },
-                  "default_for": {
-                    "enum": [
-                      "invoice",
-                      "subscription"
-                    ],
-                    "type": "string"
-                  },
-                  "interval_description": {
-                    "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
-                    "maxLength": 5000,
-                    "nullable": true,
-                    "type": "string"
-                  },
-                  "payment_schedule": {
-                    "description": "Payment schedule for the mandate.",
-                    "enum": [
-                      "combined",
-                      "interval",
-                      "sporadic"
-                    ],
-                    "nullable": true,
-                    "type": "string"
-                  },
-                  "transaction_type": {
-                    "description": "Transaction type of the mandate.",
-                    "enum": [
-                      "business",
-                      "personal"
-                    ],
-                    "nullable": true,
-                    "type": "string"
-                  }
-                },
-                "title": "CheckoutAcssDebitMandateOptions",
-                "type": "object",
-                "x-expandableFields": []
-              },
-              "verification_method": {
-                "description": "Bank account verification method.",
-                "enum": [
-                  "automatic",
-                  "instant",
-                  "microdeposits"
-                ],
-                "type": "string",
-                "x-stripeBypassValidation": true
-              }
-            },
-            "title": "CheckoutAcssDebitPaymentMethodOptions",
-            "type": "object",
-            "x-expandableFields": [
-              "mandate_options"
-            ]
-          },
-          "boleto": {
-            "description": "",
-            "properties": {
-              "expires_after_days": {
-                "description": "The number of calendar days before a Boleto voucher expires. For example, if you create a Boleto voucher on Monday and you set expires_after_days to 2, the Boleto voucher will expire on Wednesday at 23:59 America/Sao_Paulo time.",
-                "type": "integer"
-              }
-            },
-            "required": [
-              "expires_after_days"
-            ],
-            "title": "payment_method_options_boleto",
-            "type": "object",
-            "x-expandableFields": []
-          },
-          "oxxo": {
-            "description": "",
-            "properties": {
-              "expires_after_days": {
-                "description": "The number of calendar days before an OXXO invoice expires. For example, if you create an OXXO invoice on Monday and you set expires_after_days to 2, the OXXO invoice will expire on Wednesday at 23:59 America/Mexico_City time.",
-                "type": "integer"
-              }
-            },
-            "required": [
-              "expires_after_days"
-            ],
-            "title": "payment_method_options_oxxo",
-            "type": "object",
-            "x-expandableFields": []
-          }
-        },
-        "title": "CheckoutSessionPaymentMethodOptions",
-        "type": "object",
-        "x-expandableFields": [
-          "acss_debit",
-          "boleto",
-          "oxxo"
-        ]
-      },
-      "payment_method_types": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "payment_status": {
-        "description": "The payment status of the Checkout Session, one of `paid`, `unpaid`, or `no_payment_required`.\nYou can use this value to decide when to fulfill your customer's order.",
-        "enum": [
-          "no_payment_required",
-          "paid",
-          "unpaid"
-        ],
-        "type": "string"
-      },
-      "phone_number_collection": {
-        "description": "",
-        "properties": {
-          "enabled": {
-            "description": "Indicates whether phone number collection is enabled for the session",
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "enabled"
-        ],
-        "title": "PaymentPagesCheckoutSessionPhoneNumberCollection",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "recovered_from": {
-        "description": "The ID of the original expired Checkout Session that triggered the recovery flow.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "setup_intent": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "shipping": {
-        "description": "",
-        "properties": {
-          "address": {
-            "city": "string",
-            "country": "string",
-            "line1": "string",
-            "line2": "string",
-            "postal_code": "string",
-            "state": "string"
-          },
-          "carrier": {
-            "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "name": {
-            "description": "Recipient name.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "phone": {
-            "description": "Recipient phone (including extension).",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "tracking_number": {
-            "description": "The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "Shipping",
-        "type": "object",
-        "x-expandableFields": [
-          "address"
-        ]
-      },
-      "shipping_address_collection": {
-        "description": "",
-        "properties": {
-          "allowed_countries": {
-            "enum": [
-              "AC",
-              "AD",
-              "AE",
-              "AF",
-              "AG",
-              "AI",
-              "AL",
-              "AM",
-              "AO",
-              "AQ",
-              "AR",
-              "AT",
-              "AU",
-              "AW",
-              "AX",
-              "AZ",
-              "BA",
-              "BB",
-              "BD",
-              "BE",
-              "BF",
-              "BG",
-              "BH",
-              "BI",
-              "BJ",
-              "BL",
-              "BM",
-              "BN",
-              "BO",
-              "BQ",
-              "BR",
-              "BS",
-              "BT",
-              "BV",
-              "BW",
-              "BY",
-              "BZ",
-              "CA",
-              "CD",
-              "CF",
-              "CG",
-              "CH",
-              "CI",
-              "CK",
-              "CL",
-              "CM",
-              "CN",
-              "CO",
-              "CR",
-              "CV",
-              "CW",
-              "CY",
-              "CZ",
-              "DE",
-              "DJ",
-              "DK",
-              "DM",
-              "DO",
-              "DZ",
-              "EC",
-              "EE",
-              "EG",
-              "EH",
-              "ER",
-              "ES",
-              "ET",
-              "FI",
-              "FJ",
-              "FK",
-              "FO",
-              "FR",
-              "GA",
-              "GB",
-              "GD",
-              "GE",
-              "GF",
-              "GG",
-              "GH",
-              "GI",
-              "GL",
-              "GM",
-              "GN",
-              "GP",
-              "GQ",
-              "GR",
-              "GS",
-              "GT",
-              "GU",
-              "GW",
-              "GY",
-              "HK",
-              "HN",
-              "HR",
-              "HT",
-              "HU",
-              "ID",
-              "IE",
-              "IL",
-              "IM",
-              "IN",
-              "IO",
-              "IQ",
-              "IS",
-              "IT",
-              "JE",
-              "JM",
-              "JO",
-              "JP",
-              "KE",
-              "KG",
-              "KH",
-              "KI",
-              "KM",
-              "KN",
-              "KR",
-              "KW",
-              "KY",
-              "KZ",
-              "LA",
-              "LB",
-              "LC",
-              "LI",
-              "LK",
-              "LR",
-              "LS",
-              "LT",
-              "LU",
-              "LV",
-              "LY",
-              "MA",
-              "MC",
-              "MD",
-              "ME",
-              "MF",
-              "MG",
-              "MK",
-              "ML",
-              "MM",
-              "MN",
-              "MO",
-              "MQ",
-              "MR",
-              "MS",
-              "MT",
-              "MU",
-              "MV",
-              "MW",
-              "MX",
-              "MY",
-              "MZ",
-              "NA",
-              "NC",
-              "NE",
-              "NG",
-              "NI",
-              "NL",
-              "NO",
-              "NP",
-              "NR",
-              "NU",
-              "NZ",
-              "OM",
-              "PA",
-              "PE",
-              "PF",
-              "PG",
-              "PH",
-              "PK",
-              "PL",
-              "PM",
-              "PN",
-              "PR",
-              "PS",
-              "PT",
-              "PY",
-              "QA",
-              "RE",
-              "RO",
-              "RS",
-              "RU",
-              "RW",
-              "SA",
-              "SB",
-              "SC",
-              "SE",
-              "SG",
-              "SH",
-              "SI",
-              "SJ",
-              "SK",
-              "SL",
-              "SM",
-              "SN",
-              "SO",
-              "SR",
-              "SS",
-              "ST",
-              "SV",
-              "SX",
-              "SZ",
-              "TA",
-              "TC",
-              "TD",
-              "TF",
-              "TG",
-              "TH",
-              "TJ",
-              "TK",
-              "TL",
-              "TM",
-              "TN",
-              "TO",
-              "TR",
-              "TT",
-              "TV",
-              "TW",
-              "TZ",
-              "UA",
-              "UG",
-              "US",
-              "UY",
-              "UZ",
-              "VA",
-              "VC",
-              "VE",
-              "VG",
-              "VN",
-              "VU",
-              "WF",
-              "WS",
-              "XK",
-              "YE",
-              "YT",
-              "ZA",
-              "ZM",
-              "ZW",
-              "ZZ"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "allowed_countries"
-        ],
-        "title": "PaymentPagesCheckoutSessionShippingAddressCollection",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "shipping_options": {
-        "description": "",
-        "properties": {
-          "shipping_amount": {
-            "description": "A non-negative integer in cents representing how much to charge.",
-            "type": "integer"
-          },
-          "shipping_rate": {
-            "maxLength": 5000,
-            "type": "string"
+                  "required": [
+                    "active",
+                    "created",
+                    "id",
+                    "livemode",
+                    "metadata",
+                    "object",
+                    "type"
+                  ],
+                  "title": "ShippingRate",
+                  "type": "object",
+                  "x-expandableFields": [
+                    "delivery_estimate",
+                    "fixed_amount",
+                    "tax_code"
+                  ],
+                  "x-resourceId": "shipping_rate"
+                }
+              ]
+            }
           }
         },
         "required": [
@@ -1446,310 +1643,222 @@
           "shipping_rate"
         ]
       },
-      "shipping_rate": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "status": {
-        "description": "The status of the Checkout Session, one of `open`, `complete`, or `expired`.",
-        "enum": [
-          "complete",
-          "expired",
-          "open"
-        ],
-        "nullable": true,
-        "type": "string"
-      },
-      "submit_type": {
-        "description": "Describes the type of transaction being performed by Checkout in order to customize\nrelevant text on the page, such as the submit button. `submit_type` can only be\nspecified on Checkout Sessions in `payment` mode, but not Checkout Sessions\nin `subscription` or `setup` mode.",
-        "enum": [
-          "auto",
-          "book",
-          "donate",
-          "pay"
-        ],
-        "nullable": true,
-        "type": "string"
-      },
-      "subscription": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "success_url": {
-        "description": "The URL the customer will be directed to after the payment or\nsubscription creation is successful.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "tax_id_collection": {
-        "description": "",
-        "properties": {
-          "enabled": {
-            "description": "Indicates whether tax ID collection is enabled for the session",
-            "type": "boolean"
-          }
+      "type": "array"
+    },
+    "shipping_rate": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
         },
-        "required": [
-          "enabled"
-        ],
-        "title": "PaymentPagesCheckoutSessionTaxIDCollection",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "total_details": {
-        "description": "",
-        "properties": {
-          "amount_discount": {
-            "description": "This is the sum of all the line item discounts.",
-            "type": "integer"
-          },
-          "amount_shipping": {
-            "description": "This is the sum of all the line item shipping amounts.",
-            "nullable": true,
-            "type": "integer"
-          },
-          "amount_tax": {
-            "description": "This is the sum of all the line item tax amounts.",
-            "type": "integer"
-          },
-          "breakdown": {
-            "description": "",
-            "properties": {
-              "discounts": {
-                "description": "",
-                "properties": {
-                  "amount": {
-                    "description": "The amount discounted.",
-                    "type": "integer"
-                  },
-                  "discount": {
-                    "description": "A discount represents the actual application of a coupon to a particular\ncustomer. It contains information about when the discount began and when it\nwill end.\n\nRelated guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).",
-                    "properties": {
-                      "checkout_session": {
-                        "description": "The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "coupon": {
-                        "description": "A coupon contains information about a percent-off or amount-off discount you\nmight want to apply to a customer. Coupons may be applied to [invoices](https://stripe.com/docs/api#invoices) or\n[orders](https://stripe.com/docs/api#create_order_legacy-coupon). Coupons do not work with conventional one-off [charges](https://stripe.com/docs/api#create_charge).",
-                        "properties": {
-                          "amount_off": {
-                            "description": "Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for this customer.",
-                            "nullable": true,
-                            "type": "integer"
-                          },
-                          "applies_to": {
-                            "description": "",
-                            "properties": {
-                              "products": {
-                                "maxLength": 5000,
-                                "type": "string"
-                              }
+        {
+          "description": "Shipping rates describe the price of shipping presented to your customers and can be\napplied to [Checkout Sessions](https://stripe.com/docs/payments/checkout/shipping) to collect shipping costs.",
+          "properties": {
+            "active": {
+              "description": "Whether the shipping rate can be used for new purchases. Defaults to `true`.",
+              "type": "boolean"
+            },
+            "created": {
+              "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+              "format": "unix-time",
+              "type": "integer"
+            },
+            "delivery_estimate": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "maximum": {
+                      "anyOf": [
+                        {
+                          "description": "",
+                          "properties": {
+                            "unit": {
+                              "description": "A unit of time.",
+                              "enum": [
+                                "business_day",
+                                "day",
+                                "hour",
+                                "month",
+                                "week"
+                              ],
+                              "type": "string"
                             },
-                            "required": [
-                              "products"
-                            ],
-                            "title": "CouponAppliesTo",
-                            "type": "object",
-                            "x-expandableFields": []
+                            "value": {
+                              "description": "Must be greater than 0.",
+                              "type": "integer"
+                            }
                           },
-                          "created": {
-                            "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                            "format": "unix-time",
-                            "type": "integer"
-                          },
-                          "currency": {
-                            "description": "If `amount_off` has been set, the three-letter [ISO code for the currency](https://stripe.com/docs/currencies) of the amount to take off.",
-                            "nullable": true,
-                            "type": "string"
-                          },
-                          "duration": {
-                            "description": "One of `forever`, `once`, and `repeating`. Describes how long a customer who applies this coupon will get the discount.",
-                            "enum": [
-                              "forever",
-                              "once",
-                              "repeating"
-                            ],
-                            "type": "string"
-                          },
-                          "duration_in_months": {
-                            "description": "If `duration` is `repeating`, the number of months the coupon applies. Null if coupon `duration` is `forever` or `once`.",
-                            "nullable": true,
-                            "type": "integer"
-                          },
-                          "id": {
-                            "description": "Unique identifier for the object.",
-                            "maxLength": 5000,
-                            "type": "string"
-                          },
-                          "livemode": {
-                            "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                            "type": "boolean"
-                          },
-                          "max_redemptions": {
-                            "description": "Maximum number of times this coupon can be redeemed, in total, across all customers, before it is no longer valid.",
-                            "nullable": true,
-                            "type": "integer"
-                          },
-                          "metadata": {},
-                          "name": {
-                            "description": "Name of the coupon displayed to customers on for instance invoices or receipts.",
-                            "maxLength": 5000,
-                            "nullable": true,
-                            "type": "string"
-                          },
-                          "object": {
-                            "description": "String representing the object's type. Objects of the same type share the same value.",
-                            "enum": [
-                              "coupon"
-                            ],
-                            "type": "string"
-                          },
-                          "percent_off": {
-                            "description": "Percent that will be taken off the subtotal of any invoices for this customer for the duration of the coupon. For example, a coupon with percent_off of 50 will make a %s100 invoice %s50 instead.",
-                            "nullable": true,
-                            "type": "number"
-                          },
-                          "redeem_by": {
-                            "description": "Date after which the coupon can no longer be redeemed.",
-                            "format": "unix-time",
-                            "nullable": true,
-                            "type": "integer"
-                          },
-                          "times_redeemed": {
-                            "description": "Number of times this coupon has been applied to a customer.",
-                            "type": "integer"
-                          },
-                          "valid": {
-                            "description": "Taking account of the above properties, whether this coupon can still be applied to a customer.",
-                            "type": "boolean"
-                          }
-                        },
-                        "required": [
-                          "created",
-                          "duration",
-                          "id",
-                          "livemode",
-                          "object",
-                          "times_redeemed",
-                          "valid"
-                        ],
-                        "title": "Coupon",
-                        "type": "object",
-                        "x-expandableFields": [
-                          "applies_to"
-                        ],
-                        "x-resourceId": "coupon"
-                      },
-                      "customer": {
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "end": {
-                        "description": "If the coupon has a duration of `repeating`, the date that this discount will end. If the coupon has a duration of `once` or `forever`, this attribute will be null.",
-                        "format": "unix-time",
-                        "nullable": true,
-                        "type": "integer"
-                      },
-                      "id": {
-                        "description": "The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.",
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "invoice": {
-                        "description": "The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "invoice_item": {
-                        "description": "The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's coupon was applied to, if it was applied directly to a particular invoice item or invoice line item.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "object": {
-                        "description": "String representing the object's type. Objects of the same type share the same value.",
-                        "enum": [
-                          "discount"
-                        ],
-                        "type": "string"
-                      },
-                      "promotion_code": {
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "start": {
-                        "description": "Date that the coupon was applied.",
-                        "format": "unix-time",
-                        "type": "integer"
-                      },
-                      "subscription": {
-                        "description": "The subscription that this coupon is applied to, if it is applied to a particular subscription.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      }
+                          "required": [
+                            "unit",
+                            "value"
+                          ],
+                          "title": "ShippingRateDeliveryEstimateBound",
+                          "type": "object",
+                          "x-expandableFields": []
+                        }
+                      ],
+                      "description": "The upper bound of the estimated range. If empty, represents no upper bound i.e., infinite.",
+                      "nullable": true
                     },
-                    "required": [
-                      "coupon",
-                      "id",
-                      "object",
-                      "start"
-                    ],
-                    "title": "Discount",
-                    "type": "object",
-                    "x-expandableFields": [
-                      "coupon",
-                      "customer",
-                      "promotion_code"
-                    ],
-                    "x-resourceId": "discount"
-                  }
-                },
-                "required": [
-                  "amount",
-                  "discount"
-                ],
-                "title": "LineItemsDiscountAmount",
-                "type": "object",
-                "x-expandableFields": [
-                  "discount"
-                ]
-              },
-              "taxes": {
-                "description": "",
-                "properties": {
-                  "amount": {
-                    "description": "Amount of tax applied for this rate.",
-                    "type": "integer"
+                    "minimum": {
+                      "anyOf": [
+                        {
+                          "description": "",
+                          "properties": {
+                            "unit": {
+                              "description": "A unit of time.",
+                              "enum": [
+                                "business_day",
+                                "day",
+                                "hour",
+                                "month",
+                                "week"
+                              ],
+                              "type": "string"
+                            },
+                            "value": {
+                              "description": "Must be greater than 0.",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "unit",
+                            "value"
+                          ],
+                          "title": "ShippingRateDeliveryEstimateBound",
+                          "type": "object",
+                          "x-expandableFields": []
+                        }
+                      ],
+                      "description": "The lower bound of the estimated range. If empty, represents no lower bound.",
+                      "nullable": true
+                    }
                   },
-                  "rate": {
-                    "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
+                  "title": "ShippingRateDeliveryEstimate",
+                  "type": "object",
+                  "x-expandableFields": [
+                    "maximum",
+                    "minimum"
+                  ]
+                }
+              ],
+              "description": "The estimated range for how long shipping will take, meant to be displayable to the customer. This will appear on CheckoutSessions.",
+              "nullable": true
+            },
+            "display_name": {
+              "description": "The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "fixed_amount": {
+              "description": "",
+              "properties": {
+                "amount": {
+                  "description": "A non-negative integer in cents representing how much to charge.",
+                  "type": "integer"
+                },
+                "currency": {
+                  "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "amount",
+                "currency"
+              ],
+              "title": "ShippingRateFixedAmount",
+              "type": "object",
+              "x-expandableFields": []
+            },
+            "id": {
+              "description": "Unique identifier for the object.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "livemode": {
+              "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+              "type": "boolean"
+            },
+            "metadata": {
+              "additionalProperties": {
+                "maxLength": 500,
+                "type": "string"
+              },
+              "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+              "type": "object"
+            },
+            "object": {
+              "description": "String representing the object's type. Objects of the same type share the same value.",
+              "enum": [
+                "shipping_rate"
+              ],
+              "type": "string"
+            },
+            "tax_behavior": {
+              "description": "Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`.",
+              "enum": [
+                "exclusive",
+                "inclusive",
+                "unspecified"
+              ],
+              "nullable": true,
+              "type": "string"
+            },
+            "tax_code": {
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                {
+                  "description": "[Tax codes](https://stripe.com/docs/tax/tax-codes) classify goods and services for tax purposes.",
+                  "properties": {
+                    "description": {
+                      "description": "A detailed description of which types of products the tax code represents.",
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "Unique identifier for the object.",
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "A short name for the tax code.",
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "object": {
+                      "description": "String representing the object's type. Objects of the same type share the same value.",
+                      "enum": [
+                        "tax_code"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "description",
+                    "id",
+                    "name",
+                    "object"
+                  ],
+                  "title": "TaxProductResourceTaxCode",
+                  "type": "object",
+                  "x-expandableFields": [],
+                  "x-resourceId": "tax_code"
+                }
+              ],
+              "description": "A [tax code](https://stripe.com/docs/tax/tax-codes) ID. The Shipping tax code is `txcd_92010001`.",
+              "nullable": true,
+              "x-expansionResources": {
+                "oneOf": [
+                  {
+                    "description": "[Tax codes](https://stripe.com/docs/tax/tax-codes) classify goods and services for tax purposes.",
                     "properties": {
-                      "active": {
-                        "description": "Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.",
-                        "type": "boolean"
-                      },
-                      "country": {
-                        "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "created": {
-                        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                        "format": "unix-time",
-                        "type": "integer"
-                      },
                       "description": {
-                        "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "display_name": {
-                        "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
+                        "description": "A detailed description of which types of products the tax code represents.",
                         "maxLength": 5000,
                         "type": "string"
                       },
@@ -1758,407 +1867,448 @@
                         "maxLength": 5000,
                         "type": "string"
                       },
-                      "inclusive": {
-                        "description": "This specifies if the tax rate is inclusive or exclusive.",
-                        "type": "boolean"
-                      },
-                      "jurisdiction": {
-                        "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
+                      "name": {
+                        "description": "A short name for the tax code.",
                         "maxLength": 5000,
-                        "nullable": true,
                         "type": "string"
                       },
-                      "livemode": {
-                        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                        "type": "boolean"
-                      },
-                      "metadata": {},
                       "object": {
                         "description": "String representing the object's type. Objects of the same type share the same value.",
                         "enum": [
-                          "tax_rate"
+                          "tax_code"
                         ],
-                        "type": "string"
-                      },
-                      "percentage": {
-                        "description": "This represents the tax rate percent out of 100.",
-                        "type": "number"
-                      },
-                      "state": {
-                        "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
-                        "maxLength": 5000,
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "tax_type": {
-                        "description": "The high-level tax type, such as `vat` or `sales_tax`.",
-                        "enum": [
-                          "gst",
-                          "hst",
-                          "jct",
-                          "pst",
-                          "qst",
-                          "rst",
-                          "sales_tax",
-                          "vat"
-                        ],
-                        "nullable": true,
                         "type": "string"
                       }
                     },
                     "required": [
-                      "active",
-                      "created",
-                      "display_name",
+                      "description",
                       "id",
-                      "inclusive",
-                      "livemode",
-                      "object",
-                      "percentage"
+                      "name",
+                      "object"
                     ],
-                    "title": "TaxRate",
+                    "title": "TaxProductResourceTaxCode",
                     "type": "object",
                     "x-expandableFields": [],
-                    "x-resourceId": "tax_rate"
+                    "x-resourceId": "tax_code"
+                  }
+                ]
+              }
+            },
+            "type": {
+              "description": "The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.",
+              "enum": [
+                "fixed_amount"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "active",
+            "created",
+            "id",
+            "livemode",
+            "metadata",
+            "object",
+            "type"
+          ],
+          "title": "ShippingRate",
+          "type": "object",
+          "x-expandableFields": [
+            "delivery_estimate",
+            "fixed_amount",
+            "tax_code"
+          ],
+          "x-resourceId": "shipping_rate"
+        }
+      ],
+      "description": "The ID of the ShippingRate for Checkout Sessions in `payment` mode.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "description": "Shipping rates describe the price of shipping presented to your customers and can be\napplied to [Checkout Sessions](https://stripe.com/docs/payments/checkout/shipping) to collect shipping costs.",
+            "properties": {
+              "active": {
+                "description": "Whether the shipping rate can be used for new purchases. Defaults to `true`.",
+                "type": "boolean"
+              },
+              "created": {
+                "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                "format": "unix-time",
+                "type": "integer"
+              },
+              "delivery_estimate": {
+                "anyOf": [
+                  {
+                    "description": "",
+                    "properties": {
+                      "maximum": {
+                        "anyOf": [
+                          {
+                            "description": "",
+                            "properties": {
+                              "unit": {
+                                "description": "A unit of time.",
+                                "enum": [
+                                  "business_day",
+                                  "day",
+                                  "hour",
+                                  "month",
+                                  "week"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Must be greater than 0.",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "unit",
+                              "value"
+                            ],
+                            "title": "ShippingRateDeliveryEstimateBound",
+                            "type": "object",
+                            "x-expandableFields": []
+                          }
+                        ],
+                        "description": "The upper bound of the estimated range. If empty, represents no upper bound i.e., infinite.",
+                        "nullable": true
+                      },
+                      "minimum": {
+                        "anyOf": [
+                          {
+                            "description": "",
+                            "properties": {
+                              "unit": {
+                                "description": "A unit of time.",
+                                "enum": [
+                                  "business_day",
+                                  "day",
+                                  "hour",
+                                  "month",
+                                  "week"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Must be greater than 0.",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "unit",
+                              "value"
+                            ],
+                            "title": "ShippingRateDeliveryEstimateBound",
+                            "type": "object",
+                            "x-expandableFields": []
+                          }
+                        ],
+                        "description": "The lower bound of the estimated range. If empty, represents no lower bound.",
+                        "nullable": true
+                      }
+                    },
+                    "title": "ShippingRateDeliveryEstimate",
+                    "type": "object",
+                    "x-expandableFields": [
+                      "maximum",
+                      "minimum"
+                    ]
+                  }
+                ],
+                "description": "The estimated range for how long shipping will take, meant to be displayable to the customer. This will appear on CheckoutSessions.",
+                "nullable": true
+              },
+              "display_name": {
+                "description": "The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.",
+                "maxLength": 5000,
+                "nullable": true,
+                "type": "string"
+              },
+              "fixed_amount": {
+                "description": "",
+                "properties": {
+                  "amount": {
+                    "description": "A non-negative integer in cents representing how much to charge.",
+                    "type": "integer"
+                  },
+                  "currency": {
+                    "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                    "type": "string"
                   }
                 },
                 "required": [
                   "amount",
-                  "rate"
+                  "currency"
                 ],
-                "title": "LineItemsTaxAmount",
+                "title": "ShippingRateFixedAmount",
                 "type": "object",
-                "x-expandableFields": [
-                  "rate"
-                ]
+                "x-expandableFields": []
+              },
+              "id": {
+                "description": "Unique identifier for the object.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "livemode": {
+                "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                "type": "boolean"
+              },
+              "metadata": {
+                "additionalProperties": {
+                  "maxLength": 500,
+                  "type": "string"
+                },
+                "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+                "type": "object"
+              },
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "shipping_rate"
+                ],
+                "type": "string"
+              },
+              "tax_behavior": {
+                "description": "Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`.",
+                "enum": [
+                  "exclusive",
+                  "inclusive",
+                  "unspecified"
+                ],
+                "nullable": true,
+                "type": "string"
+              },
+              "tax_code": {
+                "anyOf": [
+                  {
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  {
+                    "description": "[Tax codes](https://stripe.com/docs/tax/tax-codes) classify goods and services for tax purposes.",
+                    "properties": {
+                      "description": {
+                        "description": "A detailed description of which types of products the tax code represents.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "Unique identifier for the object.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "A short name for the tax code.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "object": {
+                        "description": "String representing the object's type. Objects of the same type share the same value.",
+                        "enum": [
+                          "tax_code"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "id",
+                      "name",
+                      "object"
+                    ],
+                    "title": "TaxProductResourceTaxCode",
+                    "type": "object",
+                    "x-expandableFields": [],
+                    "x-resourceId": "tax_code"
+                  }
+                ],
+                "description": "A [tax code](https://stripe.com/docs/tax/tax-codes) ID. The Shipping tax code is `txcd_92010001`.",
+                "nullable": true,
+                "x-expansionResources": {
+                  "oneOf": [
+                    {
+                      "description": "[Tax codes](https://stripe.com/docs/tax/tax-codes) classify goods and services for tax purposes.",
+                      "properties": {
+                        "description": {
+                          "description": "A detailed description of which types of products the tax code represents.",
+                          "maxLength": 5000,
+                          "type": "string"
+                        },
+                        "id": {
+                          "description": "Unique identifier for the object.",
+                          "maxLength": 5000,
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "A short name for the tax code.",
+                          "maxLength": 5000,
+                          "type": "string"
+                        },
+                        "object": {
+                          "description": "String representing the object's type. Objects of the same type share the same value.",
+                          "enum": [
+                            "tax_code"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "description",
+                        "id",
+                        "name",
+                        "object"
+                      ],
+                      "title": "TaxProductResourceTaxCode",
+                      "type": "object",
+                      "x-expandableFields": [],
+                      "x-resourceId": "tax_code"
+                    }
+                  ]
+                }
+              },
+              "type": {
+                "description": "The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.",
+                "enum": [
+                  "fixed_amount"
+                ],
+                "type": "string"
               }
             },
             "required": [
-              "discounts",
-              "taxes"
+              "active",
+              "created",
+              "id",
+              "livemode",
+              "metadata",
+              "object",
+              "type"
             ],
-            "title": "PaymentPagesCheckoutSessionTotalDetailsResourceBreakdown",
+            "title": "ShippingRate",
             "type": "object",
             "x-expandableFields": [
-              "discounts",
-              "taxes"
-            ]
+              "delivery_estimate",
+              "fixed_amount",
+              "tax_code"
+            ],
+            "x-resourceId": "shipping_rate"
           }
-        },
-        "required": [
-          "amount_discount",
-          "amount_tax"
-        ],
-        "title": "PaymentPagesCheckoutSessionTotalDetails",
-        "type": "object",
-        "x-expandableFields": [
-          "breakdown"
         ]
-      },
-      "url": {
-        "description": "The URL to the Checkout Session.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
       }
     },
-    "required": [
-      "automatic_tax",
-      "cancel_url",
-      "expires_at",
-      "id",
-      "livemode",
-      "mode",
-      "object",
-      "payment_method_types",
-      "payment_status",
-      "shipping_options",
-      "success_url"
-    ],
-    "title": "Session",
-    "type": "object",
-    "x-expandableFields": [
-      "after_expiration",
-      "automatic_tax",
-      "consent",
-      "consent_collection",
-      "customer",
-      "customer_details",
-      "line_items",
-      "payment_intent",
-      "payment_link",
-      "payment_method_options",
-      "phone_number_collection",
-      "setup_intent",
-      "shipping",
-      "shipping_address_collection",
-      "shipping_options",
-      "shipping_rate",
-      "subscription",
-      "tax_id_collection",
-      "total_details"
-    ],
-    "x-resourceId": "checkout.session",
-    "default": {
-      "after_expiration": {
-        "recovery": {
-          "allow_promotion_codes": true,
-          "enabled": true,
-          "expires_at": 0,
-          "url": "string"
+    "status": {
+      "description": "The status of the Checkout Session, one of `open`, `complete`, or `expired`.",
+      "enum": [
+        "complete",
+        "expired",
+        "open"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "submit_type": {
+      "description": "Describes the type of transaction being performed by Checkout in order to customize\nrelevant text on the page, such as the submit button. `submit_type` can only be\nspecified on Checkout Sessions in `payment` mode, but not Checkout Sessions\nin `subscription` or `setup` mode.",
+      "enum": [
+        "auto",
+        "book",
+        "donate",
+        "pay"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "subscription": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/subscription"
         }
-      },
-      "allow_promotion_codes": true,
-      "amount_subtotal": 0,
-      "amount_total": 0,
-      "automatic_tax": {
-        "enabled": true,
-        "status": "complete"
-      },
-      "billing_address_collection": "auto",
-      "cancel_url": "string",
-      "client_reference_id": "string",
-      "consent": {
-        "promotions": "opt_in"
-      },
-      "consent_collection": {
-        "promotions": "auto"
-      },
-      "currency": "string",
-      "customer": "string",
-      "customer_creation": "always",
-      "customer_details": {
-        "email": "string",
-        "phone": "string",
-        "tax_exempt": "exempt",
-        "tax_ids": {
-          "type": "ae_trn",
-          "value": "string"
-        }
-      },
-      "customer_email": "string",
-      "expires_at": 0,
-      "id": "string",
-      "line_items": {
-        "data": {
-          "amount_subtotal": 0,
-          "amount_total": 0,
-          "currency": "string",
-          "description": "string",
-          "discounts": {
-            "amount": 0,
-            "discount": {
-              "checkout_session": "string",
-              "coupon": {
-                "amount_off": 0,
-                "applies_to": {
-                  "products": "string"
-                },
-                "created": 0,
-                "currency": "string",
-                "duration": "forever",
-                "duration_in_months": 0,
-                "id": "string",
-                "livemode": true,
-                "max_redemptions": 0,
-                "metadata": {},
-                "name": "string",
-                "object": "coupon",
-                "percent_off": 0,
-                "redeem_by": 0,
-                "times_redeemed": 0,
-                "valid": true
-              },
-              "customer": "string",
-              "end": 0,
-              "id": "string",
-              "invoice": "string",
-              "invoice_item": "string",
-              "object": "discount",
-              "promotion_code": "string",
-              "start": 0,
-              "subscription": "string"
-            }
-          },
-          "id": "string",
-          "object": "item",
-          "price": {
-            "active": true,
-            "billing_scheme": "per_unit",
-            "created": 0,
-            "currency": "string",
-            "id": "string",
-            "livemode": true,
-            "lookup_key": "string",
-            "metadata": {},
-            "nickname": "string",
-            "object": "price",
-            "product": "string",
-            "recurring": {
-              "aggregate_usage": "last_during_period",
-              "interval": "day",
-              "interval_count": 0,
-              "usage_type": "licensed"
-            },
-            "tax_behavior": "exclusive",
-            "tiers": {
-              "flat_amount": 0,
-              "flat_amount_decimal": "0.0",
-              "unit_amount": 0,
-              "unit_amount_decimal": "0.0",
-              "up_to": 0
-            },
-            "tiers_mode": "graduated",
-            "transform_quantity": {
-              "divide_by": 0,
-              "round": "down"
-            },
-            "type": "one_time",
-            "unit_amount": 0,
-            "unit_amount_decimal": "0.0"
-          },
-          "quantity": 0,
-          "taxes": {
-            "amount": 0,
-            "rate": {
-              "active": true,
-              "country": "string",
-              "created": 0,
-              "description": "string",
-              "display_name": "string",
-              "id": "string",
-              "inclusive": true,
-              "jurisdiction": "string",
-              "livemode": true,
-              "metadata": {},
-              "object": "tax_rate",
-              "percentage": 0,
-              "state": "string",
-              "tax_type": "gst"
-            }
+      ],
+      "description": "The ID of the subscription for Checkout Sessions in `subscription` mode.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/subscription"
           }
-        },
-        "has_more": true,
-        "object": "list",
-        "url": "string"
-      },
-      "livemode": true,
-      "locale": "auto",
-      "metadata": {},
-      "mode": "payment",
-      "object": "checkout.session",
-      "payment_intent": "string",
-      "payment_link": "string",
-      "payment_method_options": {
-        "acss_debit": {
-          "currency": "cad",
-          "mandate_options": {
-            "custom_mandate_url": "string",
-            "default_for": "invoice",
-            "interval_description": "string",
-            "payment_schedule": "combined",
-            "transaction_type": "business"
-          },
-          "verification_method": "automatic"
-        },
-        "boleto": {
-          "expires_after_days": 0
-        },
-        "oxxo": {
-          "expires_after_days": 0
+        ]
+      }
+    },
+    "success_url": {
+      "description": "The URL the customer will be directed to after the payment or\nsubscription creation is successful.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "tax_id_collection": {
+      "description": "",
+      "properties": {
+        "enabled": {
+          "description": "Indicates whether tax ID collection is enabled for the session",
+          "type": "boolean"
         }
       },
-      "payment_method_types": "string",
-      "payment_status": "no_payment_required",
-      "phone_number_collection": {
-        "enabled": true
-      },
-      "recovered_from": "string",
-      "setup_intent": "string",
-      "shipping": {
-        "address": {},
-        "carrier": "string",
-        "name": "string",
-        "phone": "string",
-        "tracking_number": "string"
-      },
-      "shipping_address_collection": {
-        "allowed_countries": "AC"
-      },
-      "shipping_options": {
-        "shipping_amount": 0,
-        "shipping_rate": "string"
-      },
-      "shipping_rate": "string",
-      "status": "complete",
-      "submit_type": "auto",
-      "subscription": "string",
-      "success_url": "string",
-      "tax_id_collection": {
-        "enabled": true
-      },
-      "total_details": {
-        "amount_discount": 0,
-        "amount_shipping": 0,
-        "amount_tax": 0,
-        "breakdown": {
-          "discounts": {
-            "amount": 0,
-            "discount": {
-              "checkout_session": "string",
-              "coupon": {
-                "amount_off": 0,
-                "applies_to": {
-                  "products": "string"
-                },
-                "created": 0,
-                "currency": "string",
-                "duration": "forever",
-                "duration_in_months": 0,
-                "id": "string",
-                "livemode": true,
-                "max_redemptions": 0,
-                "metadata": {},
-                "name": "string",
-                "object": "coupon",
-                "percent_off": 0,
-                "redeem_by": 0,
-                "times_redeemed": 0,
-                "valid": true
-              },
-              "customer": "string",
-              "end": 0,
-              "id": "string",
-              "invoice": "string",
-              "invoice_item": "string",
-              "object": "discount",
-              "promotion_code": "string",
-              "start": 0,
-              "subscription": "string"
-            }
-          },
-          "taxes": {
-            "amount": 0,
-            "rate": {
-              "active": true,
-              "country": "string",
-              "created": 0,
-              "description": "string",
-              "display_name": "string",
-              "id": "string",
-              "inclusive": true,
-              "jurisdiction": "string",
-              "livemode": true,
-              "metadata": {},
-              "object": "tax_rate",
-              "percentage": 0,
-              "state": "string",
-              "tax_type": "gst"
-            }
-          }
+      "required": [
+        "enabled"
+      ],
+      "title": "PaymentPagesCheckoutSessionTaxIDCollection",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "total_details": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/payment_pages_checkout_session_total_details"
         }
-      },
-      "url": "string"
+      ],
+      "description": "Tax and discount details for the computed total amount.",
+      "nullable": true
+    },
+    "url": {
+      "description": "The URL to the Checkout Session.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "automatic_tax",
+    "cancel_url",
+    "expires_at",
+    "id",
+    "livemode",
+    "mode",
+    "object",
+    "payment_method_types",
+    "payment_status",
+    "shipping_options",
+    "success_url"
+  ],
+  "title": "Session",
+  "type": "object",
+  "x-expandableFields": [
+    "after_expiration",
+    "automatic_tax",
+    "consent",
+    "consent_collection",
+    "customer",
+    "customer_details",
+    "line_items",
+    "payment_intent",
+    "payment_link",
+    "payment_method_options",
+    "phone_number_collection",
+    "setup_intent",
+    "shipping",
+    "shipping_address_collection",
+    "shipping_options",
+    "shipping_rate",
+    "subscription",
+    "tax_id_collection",
+    "total_details"
+  ],
+  "x-resourceId": "checkout.session"
 }

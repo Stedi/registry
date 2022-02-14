@@ -1,20 +1,19 @@
 {
-  "name": "issuing_cardholder_verification",
-  "schema": {
-    "description": "",
-    "properties": {
-      "document": {
-        "back": "string",
-        "front": "string"
-      }
-    },
-    "title": "IssuingCardholderVerification",
-    "type": "object",
-    "x-expandableFields": [
-      "document"
-    ],
-    "default": {
-      "document": {}
+  "description": "",
+  "properties": {
+    "document": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/issuing_cardholder_id_document"
+        }
+      ],
+      "description": "An identifying document, either a passport or local ID card.",
+      "nullable": true
     }
-  }
+  },
+  "title": "IssuingCardholderVerification",
+  "type": "object",
+  "x-expandableFields": [
+    "document"
+  ]
 }

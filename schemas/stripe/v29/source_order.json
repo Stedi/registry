@@ -1,21 +1,21 @@
 {
-  "name": "source_order",
-  "schema": {
-    "description": "",
-    "properties": {
-      "amount": {
-        "description": "A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the order.",
-        "type": "integer"
-      },
-      "currency": {
-        "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-        "type": "string"
-      },
-      "email": {
-        "description": "The email address of the customer placing the order.",
-        "maxLength": 5000,
-        "type": "string"
-      },
+  "description": "",
+  "properties": {
+    "amount": {
+      "description": "A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the order.",
+      "type": "integer"
+    },
+    "currency": {
+      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+      "type": "string"
+    },
+    "email": {
+      "description": "The email address of the customer placing the order.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "items": {
+      "description": "List of items constituting the order.",
       "items": {
         "description": "",
         "properties": {
@@ -57,37 +57,96 @@
         "type": "object",
         "x-expandableFields": []
       },
-      "shipping": {
-        "address": {},
-        "carrier": "string",
-        "name": "string",
-        "phone": "string",
-        "tracking_number": "string"
-      }
+      "nullable": true,
+      "type": "array"
     },
-    "required": [
-      "amount",
-      "currency"
-    ],
-    "title": "SourceOrder",
-    "type": "object",
-    "x-expandableFields": [
-      "items",
-      "shipping"
-    ],
-    "default": {
-      "amount": 0,
-      "currency": "string",
-      "email": "string",
-      "items": {
-        "amount": 0,
-        "currency": "string",
-        "description": "string",
-        "parent": "string",
-        "quantity": 0,
-        "type": "string"
+    "shipping": {
+      "description": "",
+      "properties": {
+        "address": {
+          "description": "",
+          "properties": {
+            "city": {
+              "description": "City, district, suburb, town, or village.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "country": {
+              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "line1": {
+              "description": "Address line 1 (e.g., street, PO Box, or company name).",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "line2": {
+              "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "postal_code": {
+              "description": "ZIP or postal code.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "state": {
+              "description": "State, county, province, or region.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "title": "Address",
+          "type": "object",
+          "x-expandableFields": []
+        },
+        "carrier": {
+          "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "Recipient name.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "phone": {
+          "description": "Recipient phone (including extension).",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "tracking_number": {
+          "description": "The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
       },
-      "shipping": {}
+      "title": "Shipping",
+      "type": "object",
+      "x-expandableFields": [
+        "address"
+      ]
     }
-  }
+  },
+  "required": [
+    "amount",
+    "currency"
+  ],
+  "title": "SourceOrder",
+  "type": "object",
+  "x-expandableFields": [
+    "items",
+    "shipping"
+  ]
 }

@@ -1,491 +1,103 @@
 {
-  "name": "issuing.dispute",
-  "schema": {
-    "description": "As a [card issuer](https://stripe.com/docs/issuing), you can dispute transactions that the cardholder does not recognize, suspects to be fraudulent, or has other issues with.\n\nRelated guide: [Disputing Transactions](https://stripe.com/docs/issuing/purchases/disputes)",
-    "properties": {
-      "amount": {
-        "description": "Disputed amount. Usually the amount of the `transaction`, but can differ (usually because of currency fluctuation).",
-        "type": "integer"
+  "description": "As a [card issuer](https://stripe.com/docs/issuing), you can dispute transactions that the cardholder does not recognize, suspects to be fraudulent, or has other issues with.\n\nRelated guide: [Disputing Transactions](https://stripe.com/docs/issuing/purchases/disputes)",
+  "properties": {
+    "amount": {
+      "description": "Disputed amount. Usually the amount of the `transaction`, but can differ (usually because of currency fluctuation).",
+      "type": "integer"
+    },
+    "balance_transactions": {
+      "description": "List of balance transactions associated with the dispute.",
+      "items": {
+        "$ref": "#/components/schemas/balance_transaction"
       },
-      "balance_transactions": {
-        "amount": 0,
-        "available_on": 0,
-        "created": 0,
-        "currency": "string",
-        "description": "string",
-        "exchange_rate": 0,
-        "fee": 0,
-        "fee_details": {
-          "amount": 0,
-          "application": "string",
-          "currency": "string",
-          "description": "string",
+      "nullable": true,
+      "type": "array"
+    },
+    "created": {
+      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "currency": {
+      "description": "The currency the `transaction` was made in.",
+      "type": "string"
+    },
+    "evidence": {
+      "$ref": "#/components/schemas/issuing_dispute_evidence"
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "livemode": {
+      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+      "type": "boolean"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "maxLength": 500,
+        "type": "string"
+      },
+      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+      "type": "object"
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "issuing.dispute"
+      ],
+      "type": "string"
+    },
+    "status": {
+      "description": "Current status of the dispute.",
+      "enum": [
+        "expired",
+        "lost",
+        "submitted",
+        "unsubmitted",
+        "won"
+      ],
+      "type": "string"
+    },
+    "transaction": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
           "type": "string"
         },
-        "id": "string",
-        "net": 0,
-        "object": "balance_transaction",
-        "reporting_category": "string",
-        "source": "string",
-        "status": "string",
-        "type": "adjustment"
-      },
-      "created": {
-        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-        "format": "unix-time",
-        "type": "integer"
-      },
-      "currency": {
-        "description": "The currency the `transaction` was made in.",
-        "type": "string"
-      },
-      "evidence": {
-        "description": "",
-        "properties": {
-          "canceled": {
-            "description": "",
-            "properties": {
-              "additional_documentation": {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "canceled_at": {
-                "description": "Date when order was canceled.",
-                "format": "unix-time",
-                "nullable": true,
-                "type": "integer"
-              },
-              "cancellation_policy_provided": {
-                "description": "Whether the cardholder was provided with a cancellation policy.",
-                "nullable": true,
-                "type": "boolean"
-              },
-              "cancellation_reason": {
-                "description": "Reason for canceling the order.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "expected_at": {
-                "description": "Date when the cardholder expected to receive the product.",
-                "format": "unix-time",
-                "nullable": true,
-                "type": "integer"
-              },
-              "explanation": {
-                "description": "Explanation of why the cardholder is disputing this transaction.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "product_description": {
-                "description": "Description of the merchandise or service that was purchased.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "product_type": {
-                "description": "Whether the product was a merchandise or service.",
-                "enum": [
-                  "merchandise",
-                  "service"
-                ],
-                "nullable": true,
-                "type": "string"
-              },
-              "return_status": {
-                "description": "Result of cardholder's attempt to return the product.",
-                "enum": [
-                  "merchant_rejected",
-                  "successful"
-                ],
-                "nullable": true,
-                "type": "string"
-              },
-              "returned_at": {
-                "description": "Date when the product was returned or attempted to be returned.",
-                "format": "unix-time",
-                "nullable": true,
-                "type": "integer"
-              }
-            },
-            "title": "IssuingDisputeCanceledEvidence",
-            "type": "object",
-            "x-expandableFields": [
-              "additional_documentation"
-            ]
-          },
-          "duplicate": {
-            "description": "",
-            "properties": {
-              "additional_documentation": {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "card_statement": {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "cash_receipt": {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "check_image": {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "explanation": {
-                "description": "Explanation of why the cardholder is disputing this transaction.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "original_transaction": {
-                "description": "Transaction (e.g., ipi_...) that the disputed transaction is a duplicate of. Of the two or more transactions that are copies of each other, this is original undisputed one.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              }
-            },
-            "title": "IssuingDisputeDuplicateEvidence",
-            "type": "object",
-            "x-expandableFields": [
-              "additional_documentation",
-              "card_statement",
-              "cash_receipt",
-              "check_image"
-            ]
-          },
-          "fraudulent": {
-            "description": "",
-            "properties": {
-              "additional_documentation": {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "explanation": {
-                "description": "Explanation of why the cardholder is disputing this transaction.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              }
-            },
-            "title": "IssuingDisputeFraudulentEvidence",
-            "type": "object",
-            "x-expandableFields": [
-              "additional_documentation"
-            ]
-          },
-          "merchandise_not_as_described": {
-            "description": "",
-            "properties": {
-              "additional_documentation": {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "explanation": {
-                "description": "Explanation of why the cardholder is disputing this transaction.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "received_at": {
-                "description": "Date when the product was received.",
-                "format": "unix-time",
-                "nullable": true,
-                "type": "integer"
-              },
-              "return_description": {
-                "description": "Description of the cardholder's attempt to return the product.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "return_status": {
-                "description": "Result of cardholder's attempt to return the product.",
-                "enum": [
-                  "merchant_rejected",
-                  "successful"
-                ],
-                "nullable": true,
-                "type": "string"
-              },
-              "returned_at": {
-                "description": "Date when the product was returned or attempted to be returned.",
-                "format": "unix-time",
-                "nullable": true,
-                "type": "integer"
-              }
-            },
-            "title": "IssuingDisputeMerchandiseNotAsDescribedEvidence",
-            "type": "object",
-            "x-expandableFields": [
-              "additional_documentation"
-            ]
-          },
-          "not_received": {
-            "description": "",
-            "properties": {
-              "additional_documentation": {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "expected_at": {
-                "description": "Date when the cardholder expected to receive the product.",
-                "format": "unix-time",
-                "nullable": true,
-                "type": "integer"
-              },
-              "explanation": {
-                "description": "Explanation of why the cardholder is disputing this transaction.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "product_description": {
-                "description": "Description of the merchandise or service that was purchased.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "product_type": {
-                "description": "Whether the product was a merchandise or service.",
-                "enum": [
-                  "merchandise",
-                  "service"
-                ],
-                "nullable": true,
-                "type": "string"
-              }
-            },
-            "title": "IssuingDisputeNotReceivedEvidence",
-            "type": "object",
-            "x-expandableFields": [
-              "additional_documentation"
-            ]
-          },
-          "other": {
-            "description": "",
-            "properties": {
-              "additional_documentation": {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "explanation": {
-                "description": "Explanation of why the cardholder is disputing this transaction.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "product_description": {
-                "description": "Description of the merchandise or service that was purchased.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "product_type": {
-                "description": "Whether the product was a merchandise or service.",
-                "enum": [
-                  "merchandise",
-                  "service"
-                ],
-                "nullable": true,
-                "type": "string"
-              }
-            },
-            "title": "IssuingDisputeOtherEvidence",
-            "type": "object",
-            "x-expandableFields": [
-              "additional_documentation"
-            ]
-          },
-          "reason": {
-            "description": "The reason for filing the dispute. Its value will match the field containing the evidence.",
-            "enum": [
-              "canceled",
-              "duplicate",
-              "fraudulent",
-              "merchandise_not_as_described",
-              "not_received",
-              "other",
-              "service_not_as_described"
-            ],
-            "type": "string",
-            "x-stripeBypassValidation": true
-          },
-          "service_not_as_described": {
-            "description": "",
-            "properties": {
-              "additional_documentation": {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "canceled_at": {
-                "description": "Date when order was canceled.",
-                "format": "unix-time",
-                "nullable": true,
-                "type": "integer"
-              },
-              "cancellation_reason": {
-                "description": "Reason for canceling the order.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "explanation": {
-                "description": "Explanation of why the cardholder is disputing this transaction.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "received_at": {
-                "description": "Date when the product was received.",
-                "format": "unix-time",
-                "nullable": true,
-                "type": "integer"
-              }
-            },
-            "title": "IssuingDisputeServiceNotAsDescribedEvidence",
-            "type": "object",
-            "x-expandableFields": [
-              "additional_documentation"
-            ]
-          }
-        },
-        "required": [
-          "reason"
-        ],
-        "title": "IssuingDisputeEvidence",
-        "type": "object",
-        "x-expandableFields": [
-          "canceled",
-          "duplicate",
-          "fraudulent",
-          "merchandise_not_as_described",
-          "not_received",
-          "other",
-          "service_not_as_described"
-        ]
-      },
-      "id": {
-        "description": "Unique identifier for the object.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "livemode": {
-        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-        "type": "boolean"
-      },
-      "metadata": {},
-      "object": {
-        "description": "String representing the object's type. Objects of the same type share the same value.",
-        "enum": [
-          "issuing.dispute"
-        ],
-        "type": "string"
-      },
-      "status": {
-        "description": "Current status of the dispute.",
-        "enum": [
-          "expired",
-          "lost",
-          "submitted",
-          "unsubmitted",
-          "won"
-        ],
-        "type": "string"
-      },
-      "transaction": {
-        "maxLength": 5000,
-        "type": "string"
-      }
-    },
-    "required": [
-      "amount",
-      "created",
-      "currency",
-      "evidence",
-      "id",
-      "livemode",
-      "metadata",
-      "object",
-      "status",
-      "transaction"
-    ],
-    "title": "IssuingDispute",
-    "type": "object",
-    "x-expandableFields": [
-      "balance_transactions",
-      "evidence",
-      "transaction"
-    ],
-    "x-resourceId": "issuing.dispute",
-    "default": {
-      "amount": 0,
-      "balance_transactions": {},
-      "created": 0,
-      "currency": "string",
-      "evidence": {
-        "canceled": {
-          "additional_documentation": "string",
-          "canceled_at": 0,
-          "cancellation_policy_provided": true,
-          "cancellation_reason": "string",
-          "expected_at": 0,
-          "explanation": "string",
-          "product_description": "string",
-          "product_type": "merchandise",
-          "return_status": "merchant_rejected",
-          "returned_at": 0
-        },
-        "duplicate": {
-          "additional_documentation": "string",
-          "card_statement": "string",
-          "cash_receipt": "string",
-          "check_image": "string",
-          "explanation": "string",
-          "original_transaction": "string"
-        },
-        "fraudulent": {
-          "additional_documentation": "string",
-          "explanation": "string"
-        },
-        "merchandise_not_as_described": {
-          "additional_documentation": "string",
-          "explanation": "string",
-          "received_at": 0,
-          "return_description": "string",
-          "return_status": "merchant_rejected",
-          "returned_at": 0
-        },
-        "not_received": {
-          "additional_documentation": "string",
-          "expected_at": 0,
-          "explanation": "string",
-          "product_description": "string",
-          "product_type": "merchandise"
-        },
-        "other": {
-          "additional_documentation": "string",
-          "explanation": "string",
-          "product_description": "string",
-          "product_type": "merchandise"
-        },
-        "reason": "canceled",
-        "service_not_as_described": {
-          "additional_documentation": "string",
-          "canceled_at": 0,
-          "cancellation_reason": "string",
-          "explanation": "string",
-          "received_at": 0
+        {
+          "$ref": "#/components/schemas/issuing.transaction"
         }
-      },
-      "id": "string",
-      "livemode": true,
-      "metadata": {},
-      "object": "issuing.dispute",
-      "status": "expired",
-      "transaction": "string"
+      ],
+      "description": "The transaction being disputed.",
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/issuing.transaction"
+          }
+        ]
+      }
     }
-  }
+  },
+  "required": [
+    "amount",
+    "created",
+    "currency",
+    "evidence",
+    "id",
+    "livemode",
+    "metadata",
+    "object",
+    "status",
+    "transaction"
+  ],
+  "title": "IssuingDispute",
+  "type": "object",
+  "x-expandableFields": [
+    "balance_transactions",
+    "evidence",
+    "transaction"
+  ],
+  "x-resourceId": "issuing.dispute"
 }

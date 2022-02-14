@@ -1,59 +1,108 @@
 {
-  "name": "checkout_session_payment_method_options",
-  "schema": {
-    "description": "",
-    "properties": {
-      "acss_debit": {
-        "currency": "cad",
-        "mandate_options": {},
-        "verification_method": "automatic"
-      },
-      "boleto": {
-        "description": "",
-        "properties": {
-          "expires_after_days": {
-            "description": "The number of calendar days before a Boleto voucher expires. For example, if you create a Boleto voucher on Monday and you set expires_after_days to 2, the Boleto voucher will expire on Wednesday at 23:59 America/Sao_Paulo time.",
-            "type": "integer"
-          }
+  "description": "",
+  "properties": {
+    "acss_debit": {
+      "description": "",
+      "properties": {
+        "currency": {
+          "description": "Currency supported by the bank account. Returned when the Session is in `setup` mode.",
+          "enum": [
+            "cad",
+            "usd"
+          ],
+          "type": "string"
         },
-        "required": [
-          "expires_after_days"
-        ],
-        "title": "payment_method_options_boleto",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "oxxo": {
-        "description": "",
-        "properties": {
-          "expires_after_days": {
-            "description": "The number of calendar days before an OXXO invoice expires. For example, if you create an OXXO invoice on Monday and you set expires_after_days to 2, the OXXO invoice will expire on Wednesday at 23:59 America/Mexico_City time.",
-            "type": "integer"
-          }
+        "mandate_options": {
+          "description": "",
+          "properties": {
+            "custom_mandate_url": {
+              "description": "A URL for custom mandate text",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "interval_description": {
+              "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "payment_schedule": {
+              "description": "Payment schedule for the mandate.",
+              "enum": [
+                "combined",
+                "interval",
+                "sporadic"
+              ],
+              "nullable": true,
+              "type": "string"
+            },
+            "transaction_type": {
+              "description": "Transaction type of the mandate.",
+              "enum": [
+                "business",
+                "personal"
+              ],
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "title": "CheckoutAcssDebitMandateOptions",
+          "type": "object",
+          "x-expandableFields": []
         },
-        "required": [
-          "expires_after_days"
-        ],
-        "title": "payment_method_options_oxxo",
-        "type": "object",
-        "x-expandableFields": []
-      }
+        "verification_method": {
+          "description": "Bank account verification method.",
+          "enum": [
+            "automatic",
+            "instant",
+            "microdeposits"
+          ],
+          "type": "string",
+          "x-stripeBypassValidation": true
+        }
+      },
+      "title": "CheckoutAcssDebitPaymentMethodOptions",
+      "type": "object",
+      "x-expandableFields": [
+        "mandate_options"
+      ]
     },
-    "title": "CheckoutSessionPaymentMethodOptions",
-    "type": "object",
-    "x-expandableFields": [
-      "acss_debit",
-      "boleto",
-      "oxxo"
-    ],
-    "default": {
-      "acss_debit": {},
-      "boleto": {
-        "expires_after_days": 0
+    "boleto": {
+      "description": "",
+      "properties": {
+        "expires_after_days": {
+          "description": "The number of calendar days before a Boleto voucher expires. For example, if you create a Boleto voucher on Monday and you set expires_after_days to 2, the Boleto voucher will expire on Wednesday at 23:59 America/Sao_Paulo time.",
+          "type": "integer"
+        }
       },
-      "oxxo": {
-        "expires_after_days": 0
-      }
+      "required": [
+        "expires_after_days"
+      ],
+      "title": "payment_method_options_boleto",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "oxxo": {
+      "description": "",
+      "properties": {
+        "expires_after_days": {
+          "description": "The number of calendar days before an OXXO invoice expires. For example, if you create an OXXO invoice on Monday and you set expires_after_days to 2, the OXXO invoice will expire on Wednesday at 23:59 America/Mexico_City time.",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "expires_after_days"
+      ],
+      "title": "payment_method_options_oxxo",
+      "type": "object",
+      "x-expandableFields": []
     }
-  }
+  },
+  "title": "CheckoutSessionPaymentMethodOptions",
+  "type": "object",
+  "x-expandableFields": [
+    "acss_debit",
+    "boleto",
+    "oxxo"
+  ]
 }

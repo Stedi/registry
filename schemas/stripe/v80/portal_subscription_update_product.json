@@ -1,28 +1,25 @@
 {
-  "name": "portal_subscription_update_product",
-  "schema": {
-    "description": "",
-    "properties": {
-      "prices": {
+  "description": "",
+  "properties": {
+    "prices": {
+      "description": "The list of price IDs which, when subscribed to, a subscription can be updated.",
+      "items": {
         "maxLength": 5000,
         "type": "string"
       },
-      "product": {
-        "description": "The product ID.",
-        "maxLength": 5000,
-        "type": "string"
-      }
+      "type": "array"
     },
-    "required": [
-      "prices",
-      "product"
-    ],
-    "title": "PortalSubscriptionUpdateProduct",
-    "type": "object",
-    "x-expandableFields": [],
-    "default": {
-      "prices": "string",
-      "product": "string"
+    "product": {
+      "description": "The product ID.",
+      "maxLength": 5000,
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "prices",
+    "product"
+  ],
+  "title": "PortalSubscriptionUpdateProduct",
+  "type": "object",
+  "x-expandableFields": []
 }

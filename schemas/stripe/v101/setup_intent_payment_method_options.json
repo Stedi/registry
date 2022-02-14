@@ -1,143 +1,125 @@
 {
-  "name": "setup_intent_payment_method_options",
-  "schema": {
-    "description": "",
-    "properties": {
-      "acss_debit": {
-        "description": "",
-        "properties": {
-          "currency": {
-            "description": "Currency supported by the bank account",
-            "enum": [
-              "cad",
-              "usd"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "mandate_options": {
-            "description": "",
-            "properties": {
-              "custom_mandate_url": {
-                "description": "A URL for custom mandate text",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "default_for": {
+  "description": "",
+  "properties": {
+    "acss_debit": {
+      "description": "",
+      "properties": {
+        "currency": {
+          "description": "Currency supported by the bank account",
+          "enum": [
+            "cad",
+            "usd"
+          ],
+          "nullable": true,
+          "type": "string"
+        },
+        "mandate_options": {
+          "description": "",
+          "properties": {
+            "custom_mandate_url": {
+              "description": "A URL for custom mandate text",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "default_for": {
+              "description": "List of Stripe products where this mandate can be selected automatically.",
+              "items": {
                 "enum": [
                   "invoice",
                   "subscription"
                 ],
                 "type": "string"
               },
-              "interval_description": {
-                "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "payment_schedule": {
-                "description": "Payment schedule for the mandate.",
-                "enum": [
-                  "combined",
-                  "interval",
-                  "sporadic"
-                ],
-                "nullable": true,
-                "type": "string"
-              },
-              "transaction_type": {
-                "description": "Transaction type of the mandate.",
-                "enum": [
-                  "business",
-                  "personal"
-                ],
-                "nullable": true,
-                "type": "string"
-              }
+              "type": "array"
             },
-            "title": "setup_intent_payment_method_options_mandate_options_acss_debit",
-            "type": "object",
-            "x-expandableFields": []
+            "interval_description": {
+              "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "payment_schedule": {
+              "description": "Payment schedule for the mandate.",
+              "enum": [
+                "combined",
+                "interval",
+                "sporadic"
+              ],
+              "nullable": true,
+              "type": "string"
+            },
+            "transaction_type": {
+              "description": "Transaction type of the mandate.",
+              "enum": [
+                "business",
+                "personal"
+              ],
+              "nullable": true,
+              "type": "string"
+            }
           },
-          "verification_method": {
-            "description": "Bank account verification method.",
-            "enum": [
-              "automatic",
-              "instant",
-              "microdeposits"
-            ],
-            "type": "string",
-            "x-stripeBypassValidation": true
-          }
+          "title": "setup_intent_payment_method_options_mandate_options_acss_debit",
+          "type": "object",
+          "x-expandableFields": []
         },
-        "title": "setup_intent_payment_method_options_acss_debit",
-        "type": "object",
-        "x-expandableFields": [
-          "mandate_options"
-        ]
+        "verification_method": {
+          "description": "Bank account verification method.",
+          "enum": [
+            "automatic",
+            "instant",
+            "microdeposits"
+          ],
+          "type": "string",
+          "x-stripeBypassValidation": true
+        }
       },
-      "card": {
-        "description": "",
-        "properties": {
-          "request_three_d_secure": {
-            "description": "We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.",
-            "enum": [
-              "any",
-              "automatic",
-              "challenge_only"
-            ],
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "setup_intent_payment_method_options_card",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "sepa_debit": {
-        "description": "",
-        "properties": {
-          "mandate_options": {
-            "description": "",
-            "properties": {},
-            "title": "setup_intent_payment_method_options_mandate_options_sepa_debit",
-            "type": "object",
-            "x-expandableFields": []
-          }
-        },
-        "title": "setup_intent_payment_method_options_sepa_debit",
-        "type": "object",
-        "x-expandableFields": [
-          "mandate_options"
-        ]
-      }
+      "title": "setup_intent_payment_method_options_acss_debit",
+      "type": "object",
+      "x-expandableFields": [
+        "mandate_options"
+      ]
     },
-    "title": "SetupIntentPaymentMethodOptions",
-    "type": "object",
-    "x-expandableFields": [
-      "acss_debit",
-      "card",
-      "sepa_debit"
-    ],
-    "default": {
-      "acss_debit": {
-        "currency": "cad",
+    "card": {
+      "description": "",
+      "properties": {
+        "request_three_d_secure": {
+          "description": "We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.",
+          "enum": [
+            "any",
+            "automatic",
+            "challenge_only"
+          ],
+          "nullable": true,
+          "type": "string"
+        }
+      },
+      "title": "setup_intent_payment_method_options_card",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "sepa_debit": {
+      "description": "",
+      "properties": {
         "mandate_options": {
-          "custom_mandate_url": "string",
-          "default_for": "invoice",
-          "interval_description": "string",
-          "payment_schedule": "combined",
-          "transaction_type": "business"
-        },
-        "verification_method": "automatic"
+          "description": "",
+          "properties": {},
+          "title": "setup_intent_payment_method_options_mandate_options_sepa_debit",
+          "type": "object",
+          "x-expandableFields": []
+        }
       },
-      "card": {
-        "request_three_d_secure": "any"
-      },
-      "sepa_debit": {
-        "mandate_options": {}
-      }
+      "title": "setup_intent_payment_method_options_sepa_debit",
+      "type": "object",
+      "x-expandableFields": [
+        "mandate_options"
+      ]
     }
-  }
+  },
+  "title": "SetupIntentPaymentMethodOptions",
+  "type": "object",
+  "x-expandableFields": [
+    "acss_debit",
+    "card",
+    "sepa_debit"
+  ]
 }

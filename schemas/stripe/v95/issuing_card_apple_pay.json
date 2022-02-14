@@ -1,32 +1,25 @@
 {
-  "name": "issuing_card_apple_pay",
-  "schema": {
-    "description": "",
-    "properties": {
-      "eligible": {
-        "description": "Apple Pay Eligibility",
-        "type": "boolean"
-      },
-      "ineligible_reason": {
-        "description": "Reason the card is ineligible for Apple Pay",
-        "enum": [
-          "missing_agreement",
-          "missing_cardholder_contact",
-          "unsupported_region"
-        ],
-        "nullable": true,
-        "type": "string"
-      }
+  "description": "",
+  "properties": {
+    "eligible": {
+      "description": "Apple Pay Eligibility",
+      "type": "boolean"
     },
-    "required": [
-      "eligible"
-    ],
-    "title": "IssuingCardApplePay",
-    "type": "object",
-    "x-expandableFields": [],
-    "default": {
-      "eligible": true,
-      "ineligible_reason": "missing_agreement"
+    "ineligible_reason": {
+      "description": "Reason the card is ineligible for Apple Pay",
+      "enum": [
+        "missing_agreement",
+        "missing_cardholder_contact",
+        "unsupported_region"
+      ],
+      "nullable": true,
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "eligible"
+  ],
+  "title": "IssuingCardApplePay",
+  "type": "object",
+  "x-expandableFields": []
 }

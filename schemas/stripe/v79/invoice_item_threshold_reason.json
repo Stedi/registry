@@ -1,27 +1,24 @@
 {
-  "name": "invoice_item_threshold_reason",
-  "schema": {
-    "description": "",
-    "properties": {
-      "line_item_ids": {
+  "description": "",
+  "properties": {
+    "line_item_ids": {
+      "description": "The IDs of the line items that triggered the threshold invoice.",
+      "items": {
         "maxLength": 5000,
         "type": "string"
       },
-      "usage_gte": {
-        "description": "The quantity threshold boundary that applied to the given line item.",
-        "type": "integer"
-      }
+      "type": "array"
     },
-    "required": [
-      "line_item_ids",
-      "usage_gte"
-    ],
-    "title": "InvoiceItemThresholdReason",
-    "type": "object",
-    "x-expandableFields": [],
-    "default": {
-      "line_item_ids": "string",
-      "usage_gte": 0
+    "usage_gte": {
+      "description": "The quantity threshold boundary that applied to the given line item.",
+      "type": "integer"
     }
-  }
+  },
+  "required": [
+    "line_item_ids",
+    "usage_gte"
+  ],
+  "title": "InvoiceItemThresholdReason",
+  "type": "object",
+  "x-expandableFields": []
 }

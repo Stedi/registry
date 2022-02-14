@@ -1,55 +1,49 @@
 {
-  "name": "setup_intent_payment_method_options_mandate_options_acss_debit",
-  "schema": {
-    "description": "",
-    "properties": {
-      "custom_mandate_url": {
-        "description": "A URL for custom mandate text",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "default_for": {
+  "description": "",
+  "properties": {
+    "custom_mandate_url": {
+      "description": "A URL for custom mandate text",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "default_for": {
+      "description": "List of Stripe products where this mandate can be selected automatically.",
+      "items": {
         "enum": [
           "invoice",
           "subscription"
         ],
         "type": "string"
       },
-      "interval_description": {
-        "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "payment_schedule": {
-        "description": "Payment schedule for the mandate.",
-        "enum": [
-          "combined",
-          "interval",
-          "sporadic"
-        ],
-        "nullable": true,
-        "type": "string"
-      },
-      "transaction_type": {
-        "description": "Transaction type of the mandate.",
-        "enum": [
-          "business",
-          "personal"
-        ],
-        "nullable": true,
-        "type": "string"
-      }
+      "type": "array"
     },
-    "title": "setup_intent_payment_method_options_mandate_options_acss_debit",
-    "type": "object",
-    "x-expandableFields": [],
-    "default": {
-      "custom_mandate_url": "string",
-      "default_for": "invoice",
-      "interval_description": "string",
-      "payment_schedule": "combined",
-      "transaction_type": "business"
+    "interval_description": {
+      "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "payment_schedule": {
+      "description": "Payment schedule for the mandate.",
+      "enum": [
+        "combined",
+        "interval",
+        "sporadic"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "transaction_type": {
+      "description": "Transaction type of the mandate.",
+      "enum": [
+        "business",
+        "personal"
+      ],
+      "nullable": true,
+      "type": "string"
     }
-  }
+  },
+  "title": "setup_intent_payment_method_options_mandate_options_acss_debit",
+  "type": "object",
+  "x-expandableFields": []
 }

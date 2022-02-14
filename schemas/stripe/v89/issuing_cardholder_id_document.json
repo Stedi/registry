@@ -1,26 +1,51 @@
 {
-  "name": "issuing_cardholder_id_document",
-  "schema": {
-    "description": "",
-    "properties": {
-      "back": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "front": {
-        "maxLength": 5000,
-        "type": "string"
+  "description": "",
+  "properties": {
+    "back": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/file"
+        }
+      ],
+      "description": "The back of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/file"
+          }
+        ]
       }
     },
-    "title": "IssuingCardholderIdDocument",
-    "type": "object",
-    "x-expandableFields": [
-      "back",
-      "front"
-    ],
-    "default": {
-      "back": "string",
-      "front": "string"
+    "front": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/file"
+        }
+      ],
+      "description": "The front of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`.",
+      "nullable": true,
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/file"
+          }
+        ]
+      }
     }
-  }
+  },
+  "title": "IssuingCardholderIdDocument",
+  "type": "object",
+  "x-expandableFields": [
+    "back",
+    "front"
+  ]
 }

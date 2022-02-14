@@ -1,13 +1,13 @@
 {
-  "name": "issuing_cardholder_spending_limit",
-  "schema": {
-    "description": "",
-    "properties": {
-      "amount": {
-        "description": "Maximum amount allowed to spend per interval.",
-        "type": "integer"
-      },
-      "categories": {
+  "description": "",
+  "properties": {
+    "amount": {
+      "description": "Maximum amount allowed to spend per interval.",
+      "type": "integer"
+    },
+    "categories": {
+      "description": "Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) this limit applies to. Omitting this field will apply the limit to all categories.",
+      "items": {
         "enum": [
           "ac_refrigeration_repair",
           "accounting_bookkeeping_services",
@@ -300,30 +300,27 @@
         ],
         "type": "string"
       },
-      "interval": {
-        "description": "Interval (or event) to which the amount applies.",
-        "enum": [
-          "all_time",
-          "daily",
-          "monthly",
-          "per_authorization",
-          "weekly",
-          "yearly"
-        ],
-        "type": "string"
-      }
+      "nullable": true,
+      "type": "array"
     },
-    "required": [
-      "amount",
-      "interval"
-    ],
-    "title": "IssuingCardholderSpendingLimit",
-    "type": "object",
-    "x-expandableFields": [],
-    "default": {
-      "amount": 0,
-      "categories": "ac_refrigeration_repair",
-      "interval": "all_time"
+    "interval": {
+      "description": "Interval (or event) to which the amount applies.",
+      "enum": [
+        "all_time",
+        "daily",
+        "monthly",
+        "per_authorization",
+        "weekly",
+        "yearly"
+      ],
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "amount",
+    "interval"
+  ],
+  "title": "IssuingCardholderSpendingLimit",
+  "type": "object",
+  "x-expandableFields": []
 }

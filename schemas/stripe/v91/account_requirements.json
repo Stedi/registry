@@ -1,18 +1,26 @@
 {
-  "name": "account_requirements",
-  "schema": {
-    "description": "",
-    "properties": {
-      "alternatives": {
+  "description": "",
+  "properties": {
+    "alternatives": {
+      "description": "Fields that are due and can be satisfied by providing the corresponding alternative fields instead.",
+      "items": {
         "description": "",
         "properties": {
           "alternative_fields_due": {
-            "maxLength": 5000,
-            "type": "string"
+            "description": "Fields that can be provided to satisfy all fields in `original_fields_due`.",
+            "items": {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "type": "array"
           },
           "original_fields_due": {
-            "maxLength": 5000,
-            "type": "string"
+            "description": "Fields that are due and can be satisfied by providing all fields in `alternative_fields_due`.",
+            "items": {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "type": "array"
           }
         },
         "required": [
@@ -23,23 +31,33 @@
         "type": "object",
         "x-expandableFields": []
       },
-      "current_deadline": {
-        "description": "Date by which the fields in `currently_due` must be collected to keep the account enabled. These fields may disable the account sooner if the next threshold is reached before they are collected.",
-        "format": "unix-time",
-        "nullable": true,
-        "type": "integer"
-      },
-      "currently_due": {
+      "nullable": true,
+      "type": "array"
+    },
+    "current_deadline": {
+      "description": "Date by which the fields in `currently_due` must be collected to keep the account enabled. These fields may disable the account sooner if the next threshold is reached before they are collected.",
+      "format": "unix-time",
+      "nullable": true,
+      "type": "integer"
+    },
+    "currently_due": {
+      "description": "Fields that need to be collected to keep the account enabled. If not collected by `current_deadline`, these fields appear in `past_due` as well, and the account is disabled.",
+      "items": {
         "maxLength": 5000,
         "type": "string"
       },
-      "disabled_reason": {
-        "description": "If the account is disabled, this string describes why. Can be `requirements.past_due`, `requirements.pending_verification`, `listed`, `platform_paused`, `rejected.listed`, `rejected.terms_of_service`, `rejected.card_casher`, `rejected.auto_fraud_shutdown`, `rejected.fraud`, `rejected.dishonest_merchant`, `rejected.identity_fraud`, `rejected.platform_fraud`, `rejected.platform_terms_of_service`, `rejected.other`, `under_review`, or `other`.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "errors": {
+      "nullable": true,
+      "type": "array"
+    },
+    "disabled_reason": {
+      "description": "If the account is disabled, this string describes why. Can be `requirements.past_due`, `requirements.pending_verification`, `listed`, `platform_paused`, `rejected.listed`, `rejected.terms_of_service`, `rejected.card_casher`, `rejected.auto_fraud_shutdown`, `rejected.fraud`, `rejected.dishonest_merchant`, `rejected.identity_fraud`, `rejected.platform_fraud`, `rejected.platform_terms_of_service`, `rejected.other`, `under_review`, or `other`.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "errors": {
+      "description": "Fields that are `currently_due` and need to be collected again because validation or verification failed.",
+      "items": {
         "description": "",
         "properties": {
           "code": {
@@ -114,41 +132,41 @@
         "type": "object",
         "x-expandableFields": []
       },
-      "eventually_due": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "past_due": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "pending_verification": {
-        "maxLength": 5000,
-        "type": "string"
-      }
+      "nullable": true,
+      "type": "array"
     },
-    "title": "AccountRequirements",
-    "type": "object",
-    "x-expandableFields": [
-      "alternatives",
-      "errors"
-    ],
-    "default": {
-      "alternatives": {
-        "alternative_fields_due": "string",
-        "original_fields_due": "string"
+    "eventually_due": {
+      "description": "Fields that need to be collected assuming all volume thresholds are reached. As they become required, they appear in `currently_due` as well, and `current_deadline` becomes set.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
       },
-      "current_deadline": 0,
-      "currently_due": "string",
-      "disabled_reason": "string",
-      "errors": {
-        "code": "invalid_address_city_state_postal_code",
-        "reason": "string",
-        "requirement": "string"
+      "nullable": true,
+      "type": "array"
+    },
+    "past_due": {
+      "description": "Fields that weren't collected by `current_deadline`. These fields need to be collected to enable the account.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
       },
-      "eventually_due": "string",
-      "past_due": "string",
-      "pending_verification": "string"
+      "nullable": true,
+      "type": "array"
+    },
+    "pending_verification": {
+      "description": "Fields that may become required depending on the results of verification or review. Will be an empty array unless an asynchronous verification is pending. If verification fails, these fields move to `eventually_due`, `currently_due`, or `past_due`.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "nullable": true,
+      "type": "array"
     }
-  }
+  },
+  "title": "AccountRequirements",
+  "type": "object",
+  "x-expandableFields": [
+    "alternatives",
+    "errors"
+  ]
 }

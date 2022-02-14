@@ -1,33 +1,26 @@
 {
-  "name": "subscriptions_resource_pause_collection",
-  "schema": {
-    "description": "The Pause Collection settings determine how we will pause collection for this subscription and for how long the subscription\nshould be paused.",
-    "properties": {
-      "behavior": {
-        "description": "The payment collection behavior for this subscription while paused. One of `keep_as_draft`, `mark_uncollectible`, or `void`.",
-        "enum": [
-          "keep_as_draft",
-          "mark_uncollectible",
-          "void"
-        ],
-        "type": "string"
-      },
-      "resumes_at": {
-        "description": "The time after which the subscription will resume collecting payments.",
-        "format": "unix-time",
-        "nullable": true,
-        "type": "integer"
-      }
+  "description": "The Pause Collection settings determine how we will pause collection for this subscription and for how long the subscription\nshould be paused.",
+  "properties": {
+    "behavior": {
+      "description": "The payment collection behavior for this subscription while paused. One of `keep_as_draft`, `mark_uncollectible`, or `void`.",
+      "enum": [
+        "keep_as_draft",
+        "mark_uncollectible",
+        "void"
+      ],
+      "type": "string"
     },
-    "required": [
-      "behavior"
-    ],
-    "title": "SubscriptionsResourcePauseCollection",
-    "type": "object",
-    "x-expandableFields": [],
-    "default": {
-      "behavior": "keep_as_draft",
-      "resumes_at": 0
+    "resumes_at": {
+      "description": "The time after which the subscription will resume collecting payments.",
+      "format": "unix-time",
+      "nullable": true,
+      "type": "integer"
     }
-  }
+  },
+  "required": [
+    "behavior"
+  ],
+  "title": "SubscriptionsResourcePauseCollection",
+  "type": "object",
+  "x-expandableFields": []
 }

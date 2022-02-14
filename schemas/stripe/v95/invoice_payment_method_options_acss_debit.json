@@ -1,46 +1,37 @@
 {
-  "name": "invoice_payment_method_options_acss_debit",
-  "schema": {
-    "description": "",
-    "properties": {
-      "mandate_options": {
-        "description": "",
-        "properties": {
-          "transaction_type": {
-            "description": "Transaction type of the mandate.",
-            "enum": [
-              "business",
-              "personal"
-            ],
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "invoice_payment_method_options_acss_debit_mandate_options",
-        "type": "object",
-        "x-expandableFields": []
+  "description": "",
+  "properties": {
+    "mandate_options": {
+      "description": "",
+      "properties": {
+        "transaction_type": {
+          "description": "Transaction type of the mandate.",
+          "enum": [
+            "business",
+            "personal"
+          ],
+          "nullable": true,
+          "type": "string"
+        }
       },
-      "verification_method": {
-        "description": "Bank account verification method.",
-        "enum": [
-          "automatic",
-          "instant",
-          "microdeposits"
-        ],
-        "type": "string",
-        "x-stripeBypassValidation": true
-      }
+      "title": "invoice_payment_method_options_acss_debit_mandate_options",
+      "type": "object",
+      "x-expandableFields": []
     },
-    "title": "invoice_payment_method_options_acss_debit",
-    "type": "object",
-    "x-expandableFields": [
-      "mandate_options"
-    ],
-    "default": {
-      "mandate_options": {
-        "transaction_type": "business"
-      },
-      "verification_method": "automatic"
+    "verification_method": {
+      "description": "Bank account verification method.",
+      "enum": [
+        "automatic",
+        "instant",
+        "microdeposits"
+      ],
+      "type": "string",
+      "x-stripeBypassValidation": true
     }
-  }
+  },
+  "title": "invoice_payment_method_options_acss_debit",
+  "type": "object",
+  "x-expandableFields": [
+    "mandate_options"
+  ]
 }

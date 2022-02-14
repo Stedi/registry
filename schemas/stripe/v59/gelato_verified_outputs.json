@@ -1,63 +1,118 @@
 {
-  "name": "gelato_verified_outputs",
-  "schema": {
-    "description": "",
-    "properties": {
-      "address": {
-        "city": "string",
-        "country": "string",
-        "line1": "string",
-        "line2": "string",
-        "postal_code": "string",
-        "state": "string"
-      },
-      "dob": {
-        "day": 0,
-        "month": 0,
-        "year": 0
-      },
-      "first_name": {
-        "description": "The user's verified first name.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "id_number": {
-        "description": "The user's verified id number.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "id_number_type": {
-        "description": "The user's verified id number type.",
-        "enum": [
-          "br_cpf",
-          "sg_nric",
-          "us_ssn"
-        ],
-        "nullable": true,
-        "type": "string"
-      },
-      "last_name": {
-        "description": "The user's verified last name.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      }
+  "description": "",
+  "properties": {
+    "address": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "city": {
+              "description": "City, district, suburb, town, or village.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "country": {
+              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "line1": {
+              "description": "Address line 1 (e.g., street, PO Box, or company name).",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "line2": {
+              "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "postal_code": {
+              "description": "ZIP or postal code.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "state": {
+              "description": "State, county, province, or region.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "title": "Address",
+          "type": "object",
+          "x-expandableFields": []
+        }
+      ],
+      "description": "The user's verified address.",
+      "nullable": true
     },
-    "title": "GelatoVerifiedOutputs",
-    "type": "object",
-    "x-expandableFields": [
-      "address",
-      "dob"
-    ],
-    "default": {
-      "address": {},
-      "dob": {},
-      "first_name": "string",
-      "id_number": "string",
-      "id_number_type": "br_cpf",
-      "last_name": "string"
+    "dob": {
+      "anyOf": [
+        {
+          "description": "Point in Time",
+          "properties": {
+            "day": {
+              "description": "Numerical day between 1 and 31.",
+              "nullable": true,
+              "type": "integer"
+            },
+            "month": {
+              "description": "Numerical month between 1 and 12.",
+              "nullable": true,
+              "type": "integer"
+            },
+            "year": {
+              "description": "The four-digit year.",
+              "nullable": true,
+              "type": "integer"
+            }
+          },
+          "title": "GelatoDataVerifiedOutputsDate",
+          "type": "object",
+          "x-expandableFields": []
+        }
+      ],
+      "description": "The user’s verified date of birth.",
+      "nullable": true
+    },
+    "first_name": {
+      "description": "The user's verified first name.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "id_number": {
+      "description": "The user's verified id number.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "id_number_type": {
+      "description": "The user's verified id number type.",
+      "enum": [
+        "br_cpf",
+        "sg_nric",
+        "us_ssn"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "last_name": {
+      "description": "The user's verified last name.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
     }
-  }
+  },
+  "title": "GelatoVerifiedOutputs",
+  "type": "object",
+  "x-expandableFields": [
+    "address",
+    "dob"
+  ]
 }

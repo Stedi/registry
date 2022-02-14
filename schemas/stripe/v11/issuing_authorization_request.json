@@ -1,82 +1,85 @@
 {
-  "name": "issuing_authorization_request",
-  "schema": {
-    "description": "",
-    "properties": {
-      "amount": {
-        "description": "The authorization amount in your card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal). Stripe held this amount from your account to fund the authorization if the request was approved.",
-        "type": "integer"
-      },
-      "amount_details": {
-        "atm_fee": 0
-      },
-      "approved": {
-        "description": "Whether this request was approved.",
-        "type": "boolean"
-      },
-      "created": {
-        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-        "format": "unix-time",
-        "type": "integer"
-      },
-      "currency": {
-        "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "merchant_amount": {
-        "description": "The amount that was authorized at the time of this request. This amount is in the `merchant_currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).",
-        "type": "integer"
-      },
-      "merchant_currency": {
-        "description": "The currency that was collected by the merchant and presented to the cardholder for the authorization. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "reason": {
-        "description": "The reason for the approval or decline.",
-        "enum": [
-          "account_disabled",
-          "card_active",
-          "card_inactive",
-          "cardholder_inactive",
-          "cardholder_verification_required",
-          "insufficient_funds",
-          "not_allowed",
-          "spending_controls",
-          "suspected_fraud",
-          "verification_failed",
-          "webhook_approved",
-          "webhook_declined",
-          "webhook_timeout"
-        ],
-        "type": "string",
-        "x-stripeBypassValidation": true
-      }
+  "description": "",
+  "properties": {
+    "amount": {
+      "description": "The authorization amount in your card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal). Stripe held this amount from your account to fund the authorization if the request was approved.",
+      "type": "integer"
     },
-    "required": [
-      "amount",
-      "approved",
-      "created",
-      "currency",
-      "merchant_amount",
-      "merchant_currency",
-      "reason"
-    ],
-    "title": "IssuingAuthorizationRequest",
-    "type": "object",
-    "x-expandableFields": [
-      "amount_details"
-    ],
-    "default": {
-      "amount": 0,
-      "amount_details": {},
-      "approved": true,
-      "created": 0,
-      "currency": "string",
-      "merchant_amount": 0,
-      "merchant_currency": "string",
-      "reason": "account_disabled"
+    "amount_details": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "atm_fee": {
+              "description": "The fee charged by the ATM for the cash withdrawal.",
+              "nullable": true,
+              "type": "integer"
+            }
+          },
+          "title": "IssuingAuthorizationAmountDetails",
+          "type": "object",
+          "x-expandableFields": []
+        }
+      ],
+      "description": "Detailed breakdown of amount components. These amounts are denominated in `currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).",
+      "nullable": true
+    },
+    "approved": {
+      "description": "Whether this request was approved.",
+      "type": "boolean"
+    },
+    "created": {
+      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "currency": {
+      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "merchant_amount": {
+      "description": "The amount that was authorized at the time of this request. This amount is in the `merchant_currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).",
+      "type": "integer"
+    },
+    "merchant_currency": {
+      "description": "The currency that was collected by the merchant and presented to the cardholder for the authorization. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "reason": {
+      "description": "The reason for the approval or decline.",
+      "enum": [
+        "account_disabled",
+        "card_active",
+        "card_inactive",
+        "cardholder_inactive",
+        "cardholder_verification_required",
+        "insufficient_funds",
+        "not_allowed",
+        "spending_controls",
+        "suspected_fraud",
+        "verification_failed",
+        "webhook_approved",
+        "webhook_declined",
+        "webhook_timeout"
+      ],
+      "type": "string",
+      "x-stripeBypassValidation": true
     }
-  }
+  },
+  "required": [
+    "amount",
+    "approved",
+    "created",
+    "currency",
+    "merchant_amount",
+    "merchant_currency",
+    "reason"
+  ],
+  "title": "IssuingAuthorizationRequest",
+  "type": "object",
+  "x-expandableFields": [
+    "amount_details"
+  ]
 }

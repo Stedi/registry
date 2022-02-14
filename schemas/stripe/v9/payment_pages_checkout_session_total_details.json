@@ -1,68 +1,25 @@
 {
-  "name": "payment_pages_checkout_session_total_details",
-  "schema": {
-    "description": "",
-    "properties": {
-      "amount_discount": {
-        "description": "This is the sum of all the line item discounts.",
-        "type": "integer"
-      },
-      "amount_tax": {
-        "description": "This is the sum of all the line item tax amounts.",
-        "type": "integer"
-      },
-      "breakdown": {
-        "description": "",
-        "properties": {
-          "discounts": {
-            "amount": 0,
-            "discount": {}
-          },
-          "taxes": {
-            "amount": 0,
-            "rate": {
-              "active": true,
-              "created": 0,
-              "description": "string",
-              "display_name": "string",
-              "id": "string",
-              "inclusive": true,
-              "jurisdiction": "string",
-              "livemode": true,
-              "metadata": {},
-              "object": "tax_rate",
-              "percentage": 0
-            }
-          }
-        },
-        "required": [
-          "discounts",
-          "taxes"
-        ],
-        "title": "PaymentPagesCheckoutSessionTotalDetailsResourceBreakdown",
-        "type": "object",
-        "x-expandableFields": [
-          "discounts",
-          "taxes"
-        ]
-      }
+  "description": "",
+  "properties": {
+    "amount_discount": {
+      "description": "This is the sum of all the line item discounts.",
+      "type": "integer"
     },
-    "required": [
-      "amount_discount",
-      "amount_tax"
-    ],
-    "title": "PaymentPagesCheckoutSessionTotalDetails",
-    "type": "object",
-    "x-expandableFields": [
-      "breakdown"
-    ],
-    "default": {
-      "amount_discount": 0,
-      "amount_tax": 0,
-      "breakdown": {
-        "discounts": {},
-        "taxes": {}
-      }
+    "amount_tax": {
+      "description": "This is the sum of all the line item tax amounts.",
+      "type": "integer"
+    },
+    "breakdown": {
+      "$ref": "#/components/schemas/payment_pages_checkout_session_total_details_resource_breakdown"
     }
-  }
+  },
+  "required": [
+    "amount_discount",
+    "amount_tax"
+  ],
+  "title": "PaymentPagesCheckoutSessionTotalDetails",
+  "type": "object",
+  "x-expandableFields": [
+    "breakdown"
+  ]
 }

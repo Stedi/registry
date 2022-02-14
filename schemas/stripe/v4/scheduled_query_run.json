@@ -1,131 +1,94 @@
 {
-  "name": "scheduled_query_run",
-  "schema": {
-    "description": "If you have [scheduled a Sigma query](https://stripe.com/docs/sigma/scheduled-queries), you'll\nreceive a `sigma.scheduled_query_run.created` webhook each time the query\nruns. The webhook contains a `ScheduledQueryRun` object, which you can use to\nretrieve the query results.",
-    "properties": {
-      "created": {
-        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-        "format": "unix-time",
-        "type": "integer"
-      },
-      "data_load_time": {
-        "description": "When the query was run, Sigma contained a snapshot of your Stripe data at this time.",
-        "format": "unix-time",
-        "type": "integer"
-      },
-      "error": {
-        "description": "",
-        "properties": {
-          "message": {
-            "description": "Information about the run failure.",
-            "maxLength": 5000,
-            "type": "string"
-          }
-        },
-        "required": [
-          "message"
-        ],
-        "title": "SigmaScheduledQueryRunError",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "file": {
-        "created": 0,
-        "expires_at": 0,
-        "filename": "string",
-        "id": "string",
-        "links": {
-          "data": {
-            "created": 0,
-            "expired": true,
-            "expires_at": 0,
-            "file": "string",
-            "id": "string",
-            "livemode": true,
-            "metadata": {},
-            "object": "file_link",
-            "url": "string"
-          },
-          "has_more": true,
-          "object": "list",
-          "url": "string"
-        },
-        "object": "file",
-        "purpose": "additional_verification",
-        "size": 0,
-        "title": "string",
-        "type": "string",
-        "url": "string"
-      },
-      "id": {
-        "description": "Unique identifier for the object.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "livemode": {
-        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-        "type": "boolean"
-      },
-      "object": {
-        "description": "String representing the object's type. Objects of the same type share the same value.",
-        "enum": [
-          "scheduled_query_run"
-        ],
-        "type": "string"
-      },
-      "result_available_until": {
-        "description": "Time at which the result expires and is no longer available for download.",
-        "format": "unix-time",
-        "type": "integer"
-      },
-      "sql": {
-        "description": "SQL for the query.",
-        "maxLength": 100000,
-        "type": "string"
-      },
-      "status": {
-        "description": "The query's execution status, which will be `completed` for successful runs, and `canceled`, `failed`, or `timed_out` otherwise.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "title": {
-        "description": "Title of the query.",
-        "maxLength": 5000,
-        "type": "string"
-      }
+  "description": "If you have [scheduled a Sigma query](https://stripe.com/docs/sigma/scheduled-queries), you'll\nreceive a `sigma.scheduled_query_run.created` webhook each time the query\nruns. The webhook contains a `ScheduledQueryRun` object, which you can use to\nretrieve the query results.",
+  "properties": {
+    "created": {
+      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
     },
-    "required": [
-      "created",
-      "data_load_time",
-      "id",
-      "livemode",
-      "object",
-      "result_available_until",
-      "sql",
-      "status",
-      "title"
-    ],
-    "title": "ScheduledQueryRun",
-    "type": "object",
-    "x-expandableFields": [
-      "error",
-      "file"
-    ],
-    "x-resourceId": "scheduled_query_run",
-    "default": {
-      "created": 0,
-      "data_load_time": 0,
-      "error": {
-        "message": "string"
+    "data_load_time": {
+      "description": "When the query was run, Sigma contained a snapshot of your Stripe data at this time.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "error": {
+      "description": "",
+      "properties": {
+        "message": {
+          "description": "Information about the run failure.",
+          "maxLength": 5000,
+          "type": "string"
+        }
       },
-      "file": "string",
-      "id": "string",
-      "livemode": true,
-      "object": "scheduled_query_run",
-      "result_available_until": 0,
-      "sql": "string",
-      "status": "string",
-      "title": "string"
+      "required": [
+        "message"
+      ],
+      "title": "SigmaScheduledQueryRunError",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "file": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/file"
+        }
+      ],
+      "description": "The file object representing the results of the query.",
+      "nullable": true
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "livemode": {
+      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+      "type": "boolean"
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "scheduled_query_run"
+      ],
+      "type": "string"
+    },
+    "result_available_until": {
+      "description": "Time at which the result expires and is no longer available for download.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "sql": {
+      "description": "SQL for the query.",
+      "maxLength": 100000,
+      "type": "string"
+    },
+    "status": {
+      "description": "The query's execution status, which will be `completed` for successful runs, and `canceled`, `failed`, or `timed_out` otherwise.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "title": {
+      "description": "Title of the query.",
+      "maxLength": 5000,
+      "type": "string"
     }
-  }
+  },
+  "required": [
+    "created",
+    "data_load_time",
+    "id",
+    "livemode",
+    "object",
+    "result_available_until",
+    "sql",
+    "status",
+    "title"
+  ],
+  "title": "ScheduledQueryRun",
+  "type": "object",
+  "x-expandableFields": [
+    "error",
+    "file"
+  ],
+  "x-resourceId": "scheduled_query_run"
 }

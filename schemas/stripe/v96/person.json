@@ -1,359 +1,696 @@
 {
-  "name": "person",
-  "schema": {
-    "description": "This is an object representing a person associated with a Stripe account.\n\nA platform cannot access a Standard or Express account's persons after the account starts onboarding, such as after generating an account link for the account.\nSee the [Standard onboarding](https://stripe.com/docs/connect/standard-accounts) or [Express onboarding documentation](https://stripe.com/docs/connect/express-accounts) for information about platform pre-filling and account onboarding steps.\n\nRelated guide: [Handling Identity Verification with the API](https://stripe.com/docs/connect/identity-verification-api#person-information).",
-    "properties": {
-      "account": {
-        "description": "The account the person is associated with.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "address": {
-        "city": "string",
-        "country": "string",
-        "line1": "string",
-        "line2": "string",
-        "postal_code": "string",
-        "state": "string"
-      },
-      "address_kana": {
-        "city": "string",
-        "country": "string",
-        "line1": "string",
-        "line2": "string",
-        "postal_code": "string",
-        "state": "string",
-        "town": "string"
-      },
-      "address_kanji": {
-        "city": "string",
-        "country": "string",
-        "line1": "string",
-        "line2": "string",
-        "postal_code": "string",
-        "state": "string",
-        "town": "string"
-      },
-      "created": {
-        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-        "format": "unix-time",
-        "type": "integer"
-      },
-      "dob": {
-        "day": 0,
-        "month": 0,
-        "year": 0
-      },
-      "email": {
-        "description": "The person's email address.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "first_name": {
-        "description": "The person's first name.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "first_name_kana": {
-        "description": "The Kana variation of the person's first name (Japan only).",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "first_name_kanji": {
-        "description": "The Kanji variation of the person's first name (Japan only).",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "full_name_aliases": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "future_requirements": {
-        "description": "",
-        "properties": {
-          "alternatives": {
-            "alternative_fields_due": "string",
-            "original_fields_due": "string"
-          },
-          "currently_due": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "errors": {
-            "code": "invalid_address_city_state_postal_code",
-            "reason": "string",
-            "requirement": "string"
-          },
-          "eventually_due": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "past_due": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "pending_verification": {
-            "maxLength": 5000,
-            "type": "string"
-          }
-        },
-        "required": [
-          "currently_due",
-          "errors",
-          "eventually_due",
-          "past_due",
-          "pending_verification"
-        ],
-        "title": "PersonFutureRequirements",
-        "type": "object",
-        "x-expandableFields": [
-          "alternatives",
-          "errors"
-        ]
-      },
-      "gender": {
-        "description": "The person's gender (International regulations require either \"male\" or \"female\").",
-        "nullable": true,
-        "type": "string"
-      },
-      "id": {
-        "description": "Unique identifier for the object.",
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "id_number_provided": {
-        "description": "Whether the person's `id_number` was provided.",
-        "type": "boolean"
-      },
-      "last_name": {
-        "description": "The person's last name.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "last_name_kana": {
-        "description": "The Kana variation of the person's last name (Japan only).",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "last_name_kanji": {
-        "description": "The Kanji variation of the person's last name (Japan only).",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "maiden_name": {
-        "description": "The person's maiden name.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "metadata": {},
-      "nationality": {
-        "description": "The country where the person is a national.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "object": {
-        "description": "String representing the object's type. Objects of the same type share the same value.",
-        "enum": [
-          "person"
-        ],
-        "type": "string"
-      },
-      "phone": {
-        "description": "The person's phone number.",
-        "maxLength": 5000,
-        "nullable": true,
-        "type": "string"
-      },
-      "political_exposure": {
-        "description": "Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.",
-        "enum": [
-          "existing",
-          "none"
-        ],
-        "type": "string"
-      },
-      "relationship": {
-        "description": "",
-        "properties": {
-          "director": {
-            "description": "Whether the person is a director of the account's legal entity. Directors are typically members of the governing board of the company, or responsible for ensuring the company meets its regulatory obligations.",
-            "nullable": true,
-            "type": "boolean"
-          },
-          "executive": {
-            "description": "Whether the person has significant responsibility to control, manage, or direct the organization.",
-            "nullable": true,
-            "type": "boolean"
-          },
-          "owner": {
-            "description": "Whether the person is an owner of the account’s legal entity.",
-            "nullable": true,
-            "type": "boolean"
-          },
-          "percent_ownership": {
-            "description": "The percent owned by the person of the account's legal entity.",
-            "nullable": true,
-            "type": "number"
-          },
-          "representative": {
-            "description": "Whether the person is authorized as the primary representative of the account. This is the person nominated by the business to provide information about themselves, and general information about the account. There can only be one representative at any given time. At the time the account is created, this person should be set to the person responsible for opening the account.",
-            "nullable": true,
-            "type": "boolean"
-          },
-          "title": {
-            "description": "The person's title (e.g., CEO, Support Engineer).",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "title": "PersonRelationship",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "requirements": {
-        "description": "",
-        "properties": {
-          "alternatives": {
-            "alternative_fields_due": "string",
-            "original_fields_due": "string"
-          },
-          "currently_due": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "errors": {
-            "code": "invalid_address_city_state_postal_code",
-            "reason": "string",
-            "requirement": "string"
-          },
-          "eventually_due": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "past_due": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "pending_verification": {
-            "maxLength": 5000,
-            "type": "string"
-          }
-        },
-        "required": [
-          "currently_due",
-          "errors",
-          "eventually_due",
-          "past_due",
-          "pending_verification"
-        ],
-        "title": "PersonRequirements",
-        "type": "object",
-        "x-expandableFields": [
-          "alternatives",
-          "errors"
-        ]
-      },
-      "ssn_last_4_provided": {
-        "description": "Whether the last four digits of the person's Social Security number have been provided (U.S. only).",
-        "type": "boolean"
-      },
-      "verification": {
-        "additional_document": {
-          "back": "string",
-          "details": "string",
-          "details_code": "string",
-          "front": "string"
-        },
-        "details": "string",
-        "details_code": "string",
-        "document": {
-          "back": "string",
-          "details": "string",
-          "details_code": "string",
-          "front": "string"
-        },
-        "status": "string"
-      }
+  "description": "This is an object representing a person associated with a Stripe account.\n\nA platform cannot access a Standard or Express account's persons after the account starts onboarding, such as after generating an account link for the account.\nSee the [Standard onboarding](https://stripe.com/docs/connect/standard-accounts) or [Express onboarding documentation](https://stripe.com/docs/connect/express-accounts) for information about platform pre-filling and account onboarding steps.\n\nRelated guide: [Handling Identity Verification with the API](https://stripe.com/docs/connect/identity-verification-api#person-information).",
+  "properties": {
+    "account": {
+      "description": "The account the person is associated with.",
+      "maxLength": 5000,
+      "type": "string"
     },
-    "required": [
-      "account",
-      "created",
-      "id",
-      "object"
-    ],
-    "title": "Person",
-    "type": "object",
-    "x-expandableFields": [
-      "address",
-      "address_kana",
-      "address_kanji",
-      "dob",
-      "future_requirements",
-      "relationship",
-      "requirements",
-      "verification"
-    ],
-    "x-resourceId": "person",
-    "default": {
-      "account": "string",
-      "address": {},
-      "address_kana": {},
-      "address_kanji": {},
-      "created": 0,
-      "dob": {},
-      "email": "string",
-      "first_name": "string",
-      "first_name_kana": "string",
-      "first_name_kanji": "string",
-      "full_name_aliases": "string",
-      "future_requirements": {
-        "alternatives": {},
-        "currently_due": "string",
-        "errors": {},
-        "eventually_due": "string",
-        "past_due": "string",
-        "pending_verification": "string"
+    "address": {
+      "description": "",
+      "properties": {
+        "city": {
+          "description": "City, district, suburb, town, or village.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "country": {
+          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "line1": {
+          "description": "Address line 1 (e.g., street, PO Box, or company name).",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "line2": {
+          "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "postal_code": {
+          "description": "ZIP or postal code.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        },
+        "state": {
+          "description": "State, county, province, or region.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
       },
-      "gender": "string",
-      "id": "string",
-      "id_number_provided": true,
-      "last_name": "string",
-      "last_name_kana": "string",
-      "last_name_kanji": "string",
-      "maiden_name": "string",
-      "metadata": {},
-      "nationality": "string",
-      "object": "person",
-      "phone": "string",
-      "political_exposure": "existing",
-      "relationship": {
-        "director": true,
-        "executive": true,
-        "owner": true,
-        "percent_ownership": 0,
-        "representative": true,
-        "title": "string"
+      "title": "Address",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "address_kana": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "city": {
+              "description": "City/Ward.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "country": {
+              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "line1": {
+              "description": "Block/Building number.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "line2": {
+              "description": "Building details.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "postal_code": {
+              "description": "ZIP or postal code.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "state": {
+              "description": "Prefecture.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "town": {
+              "description": "Town/cho-me.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "title": "LegalEntityJapanAddress",
+          "type": "object",
+          "x-expandableFields": []
+        }
+      ],
+      "nullable": true
+    },
+    "address_kanji": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "city": {
+              "description": "City/Ward.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "country": {
+              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "line1": {
+              "description": "Block/Building number.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "line2": {
+              "description": "Building details.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "postal_code": {
+              "description": "ZIP or postal code.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "state": {
+              "description": "Prefecture.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "town": {
+              "description": "Town/cho-me.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "title": "LegalEntityJapanAddress",
+          "type": "object",
+          "x-expandableFields": []
+        }
+      ],
+      "nullable": true
+    },
+    "created": {
+      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "dob": {
+      "description": "",
+      "properties": {
+        "day": {
+          "description": "The day of birth, between 1 and 31.",
+          "nullable": true,
+          "type": "integer"
+        },
+        "month": {
+          "description": "The month of birth, between 1 and 12.",
+          "nullable": true,
+          "type": "integer"
+        },
+        "year": {
+          "description": "The four-digit year of birth.",
+          "nullable": true,
+          "type": "integer"
+        }
       },
-      "requirements": {
-        "alternatives": {},
-        "currently_due": "string",
-        "errors": {},
-        "eventually_due": "string",
-        "past_due": "string",
-        "pending_verification": "string"
+      "title": "LegalEntityDOB",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "email": {
+      "description": "The person's email address.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "first_name": {
+      "description": "The person's first name.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "first_name_kana": {
+      "description": "The Kana variation of the person's first name (Japan only).",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "first_name_kanji": {
+      "description": "The Kanji variation of the person's first name (Japan only).",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "full_name_aliases": {
+      "description": "A list of alternate names or aliases that the person is known by.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
       },
-      "ssn_last_4_provided": true,
-      "verification": {}
+      "type": "array"
+    },
+    "future_requirements": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "alternatives": {
+              "description": "Fields that are due and can be satisfied by providing the corresponding alternative fields instead.",
+              "items": {
+                "description": "",
+                "properties": {
+                  "alternative_fields_due": {
+                    "description": "Fields that can be provided to satisfy all fields in `original_fields_due`.",
+                    "items": {
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "original_fields_due": {
+                    "description": "Fields that are due and can be satisfied by providing all fields in `alternative_fields_due`.",
+                    "items": {
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "alternative_fields_due",
+                  "original_fields_due"
+                ],
+                "title": "AccountRequirementsAlternative",
+                "type": "object",
+                "x-expandableFields": []
+              },
+              "nullable": true,
+              "type": "array"
+            },
+            "currently_due": {
+              "description": "Fields that need to be collected to keep the person's account enabled. If not collected by the account's `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash, and may immediately become `past_due`, but the account may also be given a grace period depending on the account's enablement state prior to transition.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "errors": {
+              "description": "Fields that are `currently_due` and need to be collected again because validation or verification failed.",
+              "items": {
+                "description": "",
+                "properties": {
+                  "code": {
+                    "description": "The code for the type of error.",
+                    "enum": [
+                      "invalid_address_city_state_postal_code",
+                      "invalid_street_address",
+                      "invalid_value_other",
+                      "verification_document_address_mismatch",
+                      "verification_document_address_missing",
+                      "verification_document_corrupt",
+                      "verification_document_country_not_supported",
+                      "verification_document_dob_mismatch",
+                      "verification_document_duplicate_type",
+                      "verification_document_expired",
+                      "verification_document_failed_copy",
+                      "verification_document_failed_greyscale",
+                      "verification_document_failed_other",
+                      "verification_document_failed_test_mode",
+                      "verification_document_fraudulent",
+                      "verification_document_id_number_mismatch",
+                      "verification_document_id_number_missing",
+                      "verification_document_incomplete",
+                      "verification_document_invalid",
+                      "verification_document_issue_or_expiry_date_missing",
+                      "verification_document_manipulated",
+                      "verification_document_missing_back",
+                      "verification_document_missing_front",
+                      "verification_document_name_mismatch",
+                      "verification_document_name_missing",
+                      "verification_document_nationality_mismatch",
+                      "verification_document_not_readable",
+                      "verification_document_not_signed",
+                      "verification_document_not_uploaded",
+                      "verification_document_photo_mismatch",
+                      "verification_document_too_large",
+                      "verification_document_type_not_supported",
+                      "verification_failed_address_match",
+                      "verification_failed_business_iec_number",
+                      "verification_failed_document_match",
+                      "verification_failed_id_number_match",
+                      "verification_failed_keyed_identity",
+                      "verification_failed_keyed_match",
+                      "verification_failed_name_match",
+                      "verification_failed_other",
+                      "verification_failed_tax_id_match",
+                      "verification_failed_tax_id_not_issued",
+                      "verification_missing_executives",
+                      "verification_missing_owners",
+                      "verification_requires_additional_memorandum_of_associations"
+                    ],
+                    "type": "string",
+                    "x-stripeBypassValidation": true
+                  },
+                  "reason": {
+                    "description": "An informative message that indicates the error type and provides additional details about the error.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "requirement": {
+                    "description": "The specific user onboarding requirement field (in the requirements hash) that needs to be resolved.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "reason",
+                  "requirement"
+                ],
+                "title": "AccountRequirementsError",
+                "type": "object",
+                "x-expandableFields": []
+              },
+              "type": "array"
+            },
+            "eventually_due": {
+              "description": "Fields that need to be collected assuming all volume thresholds are reached. As they become required, they appear in `currently_due` as well, and the account's `future_requirements[current_deadline]` becomes set.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "past_due": {
+              "description": "Fields that weren't collected by the account's `requirements.current_deadline`. These fields need to be collected to enable the person's account. New fields will never appear here; `future_requirements.past_due` will always be a subset of `requirements.past_due`.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "pending_verification": {
+              "description": "Fields that may become required depending on the results of verification or review. Will be an empty array unless an asynchronous verification is pending. If verification fails, these fields move to `eventually_due` or `currently_due`.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "currently_due",
+            "errors",
+            "eventually_due",
+            "past_due",
+            "pending_verification"
+          ],
+          "title": "PersonFutureRequirements",
+          "type": "object",
+          "x-expandableFields": [
+            "alternatives",
+            "errors"
+          ]
+        }
+      ],
+      "nullable": true
+    },
+    "gender": {
+      "description": "The person's gender (International regulations require either \"male\" or \"female\").",
+      "nullable": true,
+      "type": "string"
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "id_number_provided": {
+      "description": "Whether the person's `id_number` was provided.",
+      "type": "boolean"
+    },
+    "last_name": {
+      "description": "The person's last name.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "last_name_kana": {
+      "description": "The Kana variation of the person's last name (Japan only).",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "last_name_kanji": {
+      "description": "The Kanji variation of the person's last name (Japan only).",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "maiden_name": {
+      "description": "The person's maiden name.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "maxLength": 500,
+        "type": "string"
+      },
+      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+      "type": "object"
+    },
+    "nationality": {
+      "description": "The country where the person is a national.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "person"
+      ],
+      "type": "string"
+    },
+    "phone": {
+      "description": "The person's phone number.",
+      "maxLength": 5000,
+      "nullable": true,
+      "type": "string"
+    },
+    "political_exposure": {
+      "description": "Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.",
+      "enum": [
+        "existing",
+        "none"
+      ],
+      "type": "string"
+    },
+    "relationship": {
+      "description": "",
+      "properties": {
+        "director": {
+          "description": "Whether the person is a director of the account's legal entity. Directors are typically members of the governing board of the company, or responsible for ensuring the company meets its regulatory obligations.",
+          "nullable": true,
+          "type": "boolean"
+        },
+        "executive": {
+          "description": "Whether the person has significant responsibility to control, manage, or direct the organization.",
+          "nullable": true,
+          "type": "boolean"
+        },
+        "owner": {
+          "description": "Whether the person is an owner of the account’s legal entity.",
+          "nullable": true,
+          "type": "boolean"
+        },
+        "percent_ownership": {
+          "description": "The percent owned by the person of the account's legal entity.",
+          "nullable": true,
+          "type": "number"
+        },
+        "representative": {
+          "description": "Whether the person is authorized as the primary representative of the account. This is the person nominated by the business to provide information about themselves, and general information about the account. There can only be one representative at any given time. At the time the account is created, this person should be set to the person responsible for opening the account.",
+          "nullable": true,
+          "type": "boolean"
+        },
+        "title": {
+          "description": "The person's title (e.g., CEO, Support Engineer).",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
+      },
+      "title": "PersonRelationship",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "requirements": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "alternatives": {
+              "description": "Fields that are due and can be satisfied by providing the corresponding alternative fields instead.",
+              "items": {
+                "description": "",
+                "properties": {
+                  "alternative_fields_due": {
+                    "description": "Fields that can be provided to satisfy all fields in `original_fields_due`.",
+                    "items": {
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "original_fields_due": {
+                    "description": "Fields that are due and can be satisfied by providing all fields in `alternative_fields_due`.",
+                    "items": {
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "alternative_fields_due",
+                  "original_fields_due"
+                ],
+                "title": "AccountRequirementsAlternative",
+                "type": "object",
+                "x-expandableFields": []
+              },
+              "nullable": true,
+              "type": "array"
+            },
+            "currently_due": {
+              "description": "Fields that need to be collected to keep the person's account enabled. If not collected by the account's `current_deadline`, these fields appear in `past_due` as well, and the account is disabled.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "errors": {
+              "description": "Fields that are `currently_due` and need to be collected again because validation or verification failed.",
+              "items": {
+                "description": "",
+                "properties": {
+                  "code": {
+                    "description": "The code for the type of error.",
+                    "enum": [
+                      "invalid_address_city_state_postal_code",
+                      "invalid_street_address",
+                      "invalid_value_other",
+                      "verification_document_address_mismatch",
+                      "verification_document_address_missing",
+                      "verification_document_corrupt",
+                      "verification_document_country_not_supported",
+                      "verification_document_dob_mismatch",
+                      "verification_document_duplicate_type",
+                      "verification_document_expired",
+                      "verification_document_failed_copy",
+                      "verification_document_failed_greyscale",
+                      "verification_document_failed_other",
+                      "verification_document_failed_test_mode",
+                      "verification_document_fraudulent",
+                      "verification_document_id_number_mismatch",
+                      "verification_document_id_number_missing",
+                      "verification_document_incomplete",
+                      "verification_document_invalid",
+                      "verification_document_issue_or_expiry_date_missing",
+                      "verification_document_manipulated",
+                      "verification_document_missing_back",
+                      "verification_document_missing_front",
+                      "verification_document_name_mismatch",
+                      "verification_document_name_missing",
+                      "verification_document_nationality_mismatch",
+                      "verification_document_not_readable",
+                      "verification_document_not_signed",
+                      "verification_document_not_uploaded",
+                      "verification_document_photo_mismatch",
+                      "verification_document_too_large",
+                      "verification_document_type_not_supported",
+                      "verification_failed_address_match",
+                      "verification_failed_business_iec_number",
+                      "verification_failed_document_match",
+                      "verification_failed_id_number_match",
+                      "verification_failed_keyed_identity",
+                      "verification_failed_keyed_match",
+                      "verification_failed_name_match",
+                      "verification_failed_other",
+                      "verification_failed_tax_id_match",
+                      "verification_failed_tax_id_not_issued",
+                      "verification_missing_executives",
+                      "verification_missing_owners",
+                      "verification_requires_additional_memorandum_of_associations"
+                    ],
+                    "type": "string",
+                    "x-stripeBypassValidation": true
+                  },
+                  "reason": {
+                    "description": "An informative message that indicates the error type and provides additional details about the error.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "requirement": {
+                    "description": "The specific user onboarding requirement field (in the requirements hash) that needs to be resolved.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "reason",
+                  "requirement"
+                ],
+                "title": "AccountRequirementsError",
+                "type": "object",
+                "x-expandableFields": []
+              },
+              "type": "array"
+            },
+            "eventually_due": {
+              "description": "Fields that need to be collected assuming all volume thresholds are reached. As they become required, they appear in `currently_due` as well, and the account's `current_deadline` becomes set.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "past_due": {
+              "description": "Fields that weren't collected by the account's `current_deadline`. These fields need to be collected to enable the person's account.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "pending_verification": {
+              "description": "Fields that may become required depending on the results of verification or review. Will be an empty array unless an asynchronous verification is pending. If verification fails, these fields move to `eventually_due`, `currently_due`, or `past_due`.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "currently_due",
+            "errors",
+            "eventually_due",
+            "past_due",
+            "pending_verification"
+          ],
+          "title": "PersonRequirements",
+          "type": "object",
+          "x-expandableFields": [
+            "alternatives",
+            "errors"
+          ]
+        }
+      ],
+      "nullable": true
+    },
+    "ssn_last_4_provided": {
+      "description": "Whether the last four digits of the person's Social Security number have been provided (U.S. only).",
+      "type": "boolean"
+    },
+    "verification": {
+      "$ref": "#/components/schemas/legal_entity_person_verification"
     }
-  }
+  },
+  "required": [
+    "account",
+    "created",
+    "id",
+    "object"
+  ],
+  "title": "Person",
+  "type": "object",
+  "x-expandableFields": [
+    "address",
+    "address_kana",
+    "address_kanji",
+    "dob",
+    "future_requirements",
+    "relationship",
+    "requirements",
+    "verification"
+  ],
+  "x-resourceId": "person"
 }
