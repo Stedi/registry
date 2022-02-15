@@ -1,63 +1,128 @@
 {
-  "name": "CardProgram",
-  "schema": {
-    "title": "Card Program",
-    "description": "Card Program data that serves as a template for creating new cards.",
-    "type": "object",
-    "x-tags": [
-      "Card Program"
-    ],
-    "properties": {
-      "id": {
-        "type": "string",
-        "minLength": 1,
-        "format": "uuid"
+  "title": "Card Program",
+  "description": "Card Program data that serves as a template for creating new cards.",
+  "type": "object",
+  "x-tags": [
+    "Card Program"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "format": "uuid"
+    },
+    "display_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string",
+      "enum": [
+        "LunchOrderingIcon",
+        "SoftwareTrialIcon",
+        "AdvertisingIcon",
+        "SaasSubscriptionIcon",
+        "OnboardingIcon",
+        "WellnessIcon",
+        "EducationStipendIcon",
+        "PerDiemCardIcon",
+        "TravelExpensesIcon",
+        "CardIcon"
+      ]
+    },
+    "is_default": {
+      "type": "boolean"
+    },
+    "is_physical": {
+      "type": "boolean"
+    },
+    "spending_restrictions": {
+      "description": "Specifies the spend restrictions on a Ramp card.",
+      "type": "object",
+      "title": "Card Spending Restriction",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Amount limit total per interval."
+        },
+        "interval": {
+          "type": "string",
+          "minLength": 1,
+          "enum": [
+            "DAILY",
+            "MONTHLY",
+            "YEARLY",
+            "TOTAL"
+          ],
+          "description": "Time interval to apply limit to."
+        },
+        "lock_date": {
+          "type": "string",
+          "minLength": 1,
+          "format": "date-time",
+          "description": "Date to automatically lock the card. If lock date has passed, set to a future date or to null to unlock the card."
+        },
+        "categories": {
+          "type": "array",
+          "uniqueItems": true,
+          "description": "List of Ramp Category Codes to restrict this card to.",
+          "items": {
+            "type": "number"
+          }
+        },
+        "blocked_categories": {
+          "type": "array",
+          "uniqueItems": true,
+          "description": "List of Ramp Category Codes blocked for this card.",
+          "items": {
+            "type": "number"
+          }
+        },
+        "transaction_amount_limit": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Max amount limit per transaction."
+        }
       },
-      "display_name": {
-        "type": "string",
-        "minLength": 1
-      },
-      "description": {
-        "type": "string"
-      },
-      "icon": {
-        "type": "string",
-        "enum": [
-          "LunchOrderingIcon",
-          "SoftwareTrialIcon",
-          "AdvertisingIcon",
-          "SaasSubscriptionIcon",
-          "OnboardingIcon",
-          "WellnessIcon",
-          "EducationStipendIcon",
-          "PerDiemCardIcon",
-          "TravelExpensesIcon",
-          "CardIcon"
-        ]
-      },
-      "is_default": {
-        "type": "boolean"
-      },
-      "is_physical": {
-        "type": "boolean"
-      },
-      "spending_restrictions": {
+      "x-tags": [
+        "Card"
+      ],
+      "default": {
         "amount": 0,
         "interval": "DAILY",
         "lock_date": "1970-01-01T00:00:00.000Z",
-        "categories": 0,
-        "blocked_categories": 0,
+        "categories": [
+          0
+        ],
+        "blocked_categories": [
+          0
+        ],
         "transaction_amount_limit": 0
       }
-    },
-    "default": {
-      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "display_name": "string",
-      "description": "string",
-      "icon": "LunchOrderingIcon",
-      "is_default": true,
-      "is_physical": true,
-      "spending_restrictions": {}
+    }
+  },
+  "default": {
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "display_name": "string",
+    "description": "string",
+    "icon": "LunchOrderingIcon",
+    "is_default": true,
+    "is_physical": true,
+    "spending_restrictions": {
+      "amount": 0,
+      "interval": "DAILY",
+      "lock_date": "1970-01-01T00:00:00.000Z",
+      "categories": [
+        0
+      ],
+      "blocked_categories": [
+        0
+      ],
+      "transaction_amount_limit": 0
     }
   }
 }

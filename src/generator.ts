@@ -4,7 +4,7 @@ import openAPIParser from "@readme/openapi-parser";
 import path from "path";
 import fs from "fs";
 import { OpenAPIV3 } from "openapi-types";
-import { mock, traverse } from "./util";
+import { mock } from "./util";
 
 // CommonJS
 
@@ -38,8 +38,7 @@ async function unbundle(bundle: SchemaPackage): Promise<Schema[]> {
 export async function generateForVersion(
   rootPath: string,
   providerName: keyof typeof providers,
-  version: string,
-  shouldGenerateMock?: boolean,
+  version: string
 ) {
   const baseDir = path.join(rootPath, providerName, version);
   const folderExists = !fs.mkdirSync(baseDir, { recursive: true });
@@ -53,13 +52,9 @@ export async function generateForVersion(
   console.log(`Generating [${providerName}, ${version}]...`);
   for (const schema of schemas) {
     const target = path.join(baseDir, `${schema.name}.json`);
-    if (schema.name === "api_errors" || schema.name === "error" || schema.name === "invoice" || schema.name === "payment_intent" || schema.name === "setup_attempt" || schema.name === "setup_intent") {
-      continue;
-    }
-    schema.schema = traverse(schema.schema as OpenAPIV3.SchemaObject);
+    schema.schema = providers[providerName].getSchemaWithoutCircularReferences(schema.schema as OpenAPIV3.SchemaObject);
     (schema.schema as any)["default"] = mock(schema.schema as OpenAPIV3.SchemaObject);
-
-    fs.writeFileSync(target, JSON.stringify(schema, null, 2));
+    fs.writeFileSync(target, JSON.stringify(schema.schema, null, 2));
   }
 }
 
@@ -77,3 +72,4 @@ export async function generateAll(
   await generateAll("./schemas", "stripe");
   await generateAll("./schemas", "ramp");
 })();
+

@@ -1,49 +1,52 @@
 {
-  "name": "Reimbursement",
-  "schema": {
-    "title": "Reimbursement",
-    "type": "object",
-    "properties": {
-      "id": {
-        "type": "string",
-        "format": "uuid"
-      },
-      "user_id": {
-        "type": "string",
-        "format": "uuid"
-      },
-      "created_at": {
-        "type": "string",
-        "format": "date-time"
-      },
-      "amount": {
-        "type": "number"
-      },
-      "currency": {
-        "type": "string"
-      },
-      "transaction_date": {
-        "type": "string",
-        "format": "date"
-      },
-      "merchant": {
-        "type": "string"
-      },
-      "receipts": {
+  "title": "Reimbursement",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "user_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "transaction_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "merchant": {
+      "type": "string"
+    },
+    "receipts": {
+      "type": "array",
+      "description": "Receipts listed in ascending order by their creation time, related to the reimbursement.",
+      "items": {
         "type": "string",
         "format": "uuid",
         "minLength": 1
       }
-    },
-    "default": {
-      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "created_at": "1970-01-01T00:00:00.000Z",
-      "amount": 0,
-      "currency": "string",
-      "transaction_date": "1970-01-01T00:00:00.000Z",
-      "merchant": "string",
-      "receipts": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
     }
+  },
+  "default": {
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "created_at": "1970-01-01T00:00:00.000Z",
+    "amount": 0,
+    "currency": "string",
+    "transaction_date": "1970-01-01T00:00:00.000Z",
+    "merchant": "string",
+    "receipts": [
+      "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    ]
   }
 }

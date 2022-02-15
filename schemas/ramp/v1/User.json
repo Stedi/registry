@@ -1,112 +1,109 @@
 {
-  "name": "User",
-  "schema": {
-    "title": "User",
-    "description": "Ramp User",
-    "type": "object",
-    "properties": {
-      "id": {
-        "type": "string",
-        "minLength": 1,
-        "format": "uuid"
-      },
-      "email": {
-        "type": "string",
-        "minLength": 1,
-        "format": "email"
-      },
-      "first_name": {
-        "type": "string",
-        "minLength": 1
-      },
-      "last_name": {
-        "type": "string",
-        "minLength": 1
-      },
-      "role": {
-        "type": "string",
-        "minLength": 1,
-        "enum": [
-          "BUSINESS_ADMIN",
-          "BUSINESS_USER",
-          "BUSINESS_OWNER",
-          "BUSINESS_BOOKKEEPER"
-        ]
-      },
-      "phone": {
-        "type": "string",
-        "minLength": 1
-      },
-      "amount_limit": {
-        "type": "string"
-      },
-      "location_id": {
-        "type": [
-          "string",
-          "null"
-        ],
-        "format": "uuid"
-      },
-      "department_id": {
-        "type": [
-          "string",
-          "null"
-        ],
-        "format": "uuid"
-      },
-      "manager_id": {
-        "type": [
-          "string",
-          "null"
-        ],
-        "format": "uuid"
-      },
-      "business_id": {
-        "type": "string",
-        "format": "uuid"
-      },
-      "is_manager": {
-        "type": [
-          "boolean"
-        ]
-      },
-      "status": {
-        "description": "Summary of user status. If the user has not accepted their invite, the status will be one of INVITE_PENDING, INVITE_DELETED, or INVITE_EXPIRED. Once the user has accepted the invite, status will be USER_ONBOARDING; after onboarding, USER_ACTIVE; finally, if they are suspended, it will be USER_SUSPENDED.",
-        "type": "string",
-        "minLength": 1,
-        "enum": [
-          "INVITE_PENDING",
-          "INVITE_DELETED",
-          "INVITE_EXPIRED",
-          "USER_ONBOARDING",
-          "USER_ACTIVE",
-          "USER_SUSPENDED"
-        ]
-      }
+  "title": "User",
+  "description": "Ramp User",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "format": "uuid"
     },
-    "required": [
-      "id",
-      "email",
-      "first_name",
-      "last_name",
-      "role",
-      "phone",
-      "amount_limit"
-    ],
-    "default": {
-      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "email": "user@example.com",
-      "first_name": "string",
-      "last_name": "string",
-      "role": "BUSINESS_ADMIN",
-      "phone": "string",
-      "amount_limit": "string",
-      "location_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "department_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "manager_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "business_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "is_manager": true,
-      "status": "INVITE_PENDING"
+    "email": {
+      "type": "string",
+      "minLength": 1,
+      "format": "email"
+    },
+    "first_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "last_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "role": {
+      "type": "string",
+      "minLength": 1,
+      "enum": [
+        "BUSINESS_ADMIN",
+        "BUSINESS_USER",
+        "BUSINESS_OWNER",
+        "BUSINESS_BOOKKEEPER"
+      ]
+    },
+    "phone": {
+      "type": "string",
+      "minLength": 1
+    },
+    "amount_limit": {
+      "type": "string"
+    },
+    "location_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid"
+    },
+    "department_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid"
+    },
+    "manager_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid"
+    },
+    "business_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "is_manager": {
+      "type": [
+        "boolean"
+      ]
+    },
+    "status": {
+      "description": "Summary of user status. If the user has not accepted their invite, the status will be one of INVITE_PENDING, INVITE_DELETED, or INVITE_EXPIRED. Once the user has accepted the invite, status will be USER_ONBOARDING; after onboarding, USER_ACTIVE; finally, if they are suspended, it will be USER_SUSPENDED.",
+      "type": "string",
+      "minLength": 1,
+      "enum": [
+        "INVITE_PENDING",
+        "INVITE_DELETED",
+        "INVITE_EXPIRED",
+        "USER_ONBOARDING",
+        "USER_ACTIVE",
+        "USER_SUSPENDED"
+      ]
     }
+  },
+  "required": [
+    "id",
+    "email",
+    "first_name",
+    "last_name",
+    "role",
+    "phone",
+    "amount_limit"
+  ],
+  "default": {
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "email": "user@example.com",
+    "first_name": "string",
+    "last_name": "string",
+    "role": "BUSINESS_ADMIN",
+    "phone": "string",
+    "amount_limit": "string",
+    "location_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "department_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "manager_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "business_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "is_manager": true,
+    "status": "INVITE_PENDING"
   }
 }
