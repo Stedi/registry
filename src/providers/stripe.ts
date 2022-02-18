@@ -9,7 +9,7 @@ export class StripeProvider implements Provider {
     for await (const tag of github.getTags("stripe", "openapi")) {
       tags.push(tag.name);
     }
-    return [...tags];
+    return tags.slice(0, 1);
   }
 
   async getSchema(version: string): Promise<OpenAPI3Schema> {

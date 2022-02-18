@@ -1,0 +1,617 @@
+{
+  "description": "Stores representations of [stock keeping units](http://en.wikipedia.org/wiki/Stock_keeping_unit).\nSKUs describe specific product variations, taking into account any combination of: attributes,\ncurrency, and cost. For example, a product may be a T-shirt, whereas a specific SKU represents\nthe `size: large`, `color: red` version of that shirt.\n\nCan also be used to manage inventory.\n\nRelated guide: [Tax, Shipping, and Inventory](https://stripe.com/docs/orders).",
+  "properties": {
+    "active": {
+      "description": "Whether the SKU is available for purchase.",
+      "type": "boolean"
+    },
+    "attributes": {
+      "additionalProperties": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "description": "A dictionary of attributes and values for the attributes defined by the product. If, for example, a product's attributes are `[\"size\", \"gender\"]`, a valid SKU has the following dictionary of attributes: `{\"size\": \"Medium\", \"gender\": \"Unisex\"}`.",
+      "type": "object"
+    },
+    "created": {
+      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "currency": {
+      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+      "type": "string"
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "image": {
+      "description": "The URL of an image for this SKU, meant to be displayable to the customer.",
+      "maxLength": 2048,
+      "nullable": true,
+      "type": "string"
+    },
+    "inventory": {
+      "description": "",
+      "properties": {
+        "quantity": {
+          "description": "The count of inventory available. Will be present if and only if `type` is `finite`.",
+          "nullable": true,
+          "type": "integer"
+        },
+        "type": {
+          "description": "Inventory type. Possible values are `finite`, `bucket` (not quantified), and `infinite`.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "value": {
+          "description": "An indicator of the inventory available. Possible values are `in_stock`, `limited`, and `out_of_stock`. Will be present if and only if `type` is `bucket`.",
+          "maxLength": 5000,
+          "nullable": true,
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "SKUInventory",
+      "type": "object",
+      "x-expandableFields": []
+    },
+    "livemode": {
+      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+      "type": "boolean"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "maxLength": 500,
+        "type": "string"
+      },
+      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+      "type": "object"
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "sku"
+      ],
+      "type": "string"
+    },
+    "package_dimensions": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "height": {
+              "description": "Height, in inches.",
+              "type": "number"
+            },
+            "length": {
+              "description": "Length, in inches.",
+              "type": "number"
+            },
+            "weight": {
+              "description": "Weight, in ounces.",
+              "type": "number"
+            },
+            "width": {
+              "description": "Width, in inches.",
+              "type": "number"
+            }
+          },
+          "required": [
+            "height",
+            "length",
+            "weight",
+            "width"
+          ],
+          "title": "PackageDimensions",
+          "type": "object",
+          "x-expandableFields": []
+        }
+      ],
+      "description": "The dimensions of this SKU for shipping purposes.",
+      "nullable": true
+    },
+    "price": {
+      "description": "The cost of the item as a positive integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).",
+      "type": "integer"
+    },
+    "product": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "description": "Products describe the specific goods or services you offer to your customers.\nFor example, you might offer a Standard and Premium version of your goods or service; each version would be a separate Product.\nThey can be used in conjunction with [Prices](https://stripe.com/docs/api#prices) to configure pricing in Payment Links, Checkout, and Subscriptions.\n\nRelated guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription),\n[share a Payment Link](https://stripe.com/docs/payments/payment-links/overview),\n[accept payments with Checkout](https://stripe.com/docs/payments/accept-a-payment#create-product-prices-upfront),\nand more about [Products and Prices](https://stripe.com/docs/products-prices/overview)",
+          "properties": {
+            "active": {
+              "description": "Whether the product is currently available for purchase.",
+              "type": "boolean"
+            },
+            "created": {
+              "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+              "format": "unix-time",
+              "type": "integer"
+            },
+            "description": {
+              "description": "The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "id": {
+              "description": "Unique identifier for the object.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "images": {
+              "description": "A list of up to 8 URLs of images for this product, meant to be displayable to the customer.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "livemode": {
+              "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+              "type": "boolean"
+            },
+            "metadata": {
+              "additionalProperties": {
+                "maxLength": 500,
+                "type": "string"
+              },
+              "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+              "type": "object"
+            },
+            "name": {
+              "description": "The product's name, meant to be displayable to the customer. Whenever this product is sold via a subscription, name will show up on associated invoice line item descriptions.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "object": {
+              "description": "String representing the object's type. Objects of the same type share the same value.",
+              "enum": [
+                "product"
+              ],
+              "type": "string"
+            },
+            "package_dimensions": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "height": {
+                      "description": "Height, in inches.",
+                      "type": "number"
+                    },
+                    "length": {
+                      "description": "Length, in inches.",
+                      "type": "number"
+                    },
+                    "weight": {
+                      "description": "Weight, in ounces.",
+                      "type": "number"
+                    },
+                    "width": {
+                      "description": "Width, in inches.",
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "height",
+                    "length",
+                    "weight",
+                    "width"
+                  ],
+                  "title": "PackageDimensions",
+                  "type": "object",
+                  "x-expandableFields": []
+                }
+              ],
+              "description": "The dimensions of this product for shipping purposes.",
+              "nullable": true
+            },
+            "shippable": {
+              "description": "Whether this product is shipped (i.e., physical goods).",
+              "nullable": true,
+              "type": "boolean"
+            },
+            "statement_descriptor": {
+              "description": "Extra information about a product which will appear on your customer's credit card statement. In the case that multiple products are billed at once, the first statement descriptor will be used.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "tax_code": {
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                {
+                  "description": "[Tax codes](https://stripe.com/docs/tax/tax-codes) classify goods and services for tax purposes.",
+                  "properties": {
+                    "description": {
+                      "description": "A detailed description of which types of products the tax code represents.",
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "Unique identifier for the object.",
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "A short name for the tax code.",
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "object": {
+                      "description": "String representing the object's type. Objects of the same type share the same value.",
+                      "enum": [
+                        "tax_code"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "description",
+                    "id",
+                    "name",
+                    "object"
+                  ],
+                  "title": "TaxProductResourceTaxCode",
+                  "type": "object",
+                  "x-expandableFields": [],
+                  "x-resourceId": "tax_code"
+                }
+              ],
+              "description": "A [tax code](https://stripe.com/docs/tax/tax-codes) ID.",
+              "nullable": true,
+              "x-expansionResources": {
+                "oneOf": [
+                  {
+                    "description": "[Tax codes](https://stripe.com/docs/tax/tax-codes) classify goods and services for tax purposes.",
+                    "properties": {
+                      "description": {
+                        "description": "A detailed description of which types of products the tax code represents.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "Unique identifier for the object.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "A short name for the tax code.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "object": {
+                        "description": "String representing the object's type. Objects of the same type share the same value.",
+                        "enum": [
+                          "tax_code"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "id",
+                      "name",
+                      "object"
+                    ],
+                    "title": "TaxProductResourceTaxCode",
+                    "type": "object",
+                    "x-expandableFields": [],
+                    "x-resourceId": "tax_code"
+                  }
+                ]
+              }
+            },
+            "unit_label": {
+              "description": "A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.",
+              "maxLength": 5000,
+              "nullable": true,
+              "type": "string"
+            },
+            "updated": {
+              "description": "Time at which the object was last updated. Measured in seconds since the Unix epoch.",
+              "format": "unix-time",
+              "type": "integer"
+            },
+            "url": {
+              "description": "A URL of a publicly-accessible webpage for this product.",
+              "maxLength": 2048,
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          "required": [
+            "active",
+            "created",
+            "id",
+            "images",
+            "livemode",
+            "metadata",
+            "name",
+            "object",
+            "updated"
+          ],
+          "title": "Product",
+          "type": "object",
+          "x-expandableFields": [
+            "package_dimensions",
+            "tax_code"
+          ],
+          "x-resourceId": "product"
+        }
+      ],
+      "description": "The ID of the product this SKU is associated with. The product must be currently active.",
+      "x-expansionResources": {
+        "oneOf": [
+          {
+            "description": "Products describe the specific goods or services you offer to your customers.\nFor example, you might offer a Standard and Premium version of your goods or service; each version would be a separate Product.\nThey can be used in conjunction with [Prices](https://stripe.com/docs/api#prices) to configure pricing in Payment Links, Checkout, and Subscriptions.\n\nRelated guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription),\n[share a Payment Link](https://stripe.com/docs/payments/payment-links/overview),\n[accept payments with Checkout](https://stripe.com/docs/payments/accept-a-payment#create-product-prices-upfront),\nand more about [Products and Prices](https://stripe.com/docs/products-prices/overview)",
+            "properties": {
+              "active": {
+                "description": "Whether the product is currently available for purchase.",
+                "type": "boolean"
+              },
+              "created": {
+                "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                "format": "unix-time",
+                "type": "integer"
+              },
+              "description": {
+                "description": "The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.",
+                "maxLength": 5000,
+                "nullable": true,
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique identifier for the object.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "images": {
+                "description": "A list of up to 8 URLs of images for this product, meant to be displayable to the customer.",
+                "items": {
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "livemode": {
+                "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                "type": "boolean"
+              },
+              "metadata": {
+                "additionalProperties": {
+                  "maxLength": 500,
+                  "type": "string"
+                },
+                "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
+                "type": "object"
+              },
+              "name": {
+                "description": "The product's name, meant to be displayable to the customer. Whenever this product is sold via a subscription, name will show up on associated invoice line item descriptions.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "product"
+                ],
+                "type": "string"
+              },
+              "package_dimensions": {
+                "anyOf": [
+                  {
+                    "description": "",
+                    "properties": {
+                      "height": {
+                        "description": "Height, in inches.",
+                        "type": "number"
+                      },
+                      "length": {
+                        "description": "Length, in inches.",
+                        "type": "number"
+                      },
+                      "weight": {
+                        "description": "Weight, in ounces.",
+                        "type": "number"
+                      },
+                      "width": {
+                        "description": "Width, in inches.",
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "height",
+                      "length",
+                      "weight",
+                      "width"
+                    ],
+                    "title": "PackageDimensions",
+                    "type": "object",
+                    "x-expandableFields": []
+                  }
+                ],
+                "description": "The dimensions of this product for shipping purposes.",
+                "nullable": true
+              },
+              "shippable": {
+                "description": "Whether this product is shipped (i.e., physical goods).",
+                "nullable": true,
+                "type": "boolean"
+              },
+              "statement_descriptor": {
+                "description": "Extra information about a product which will appear on your customer's credit card statement. In the case that multiple products are billed at once, the first statement descriptor will be used.",
+                "maxLength": 5000,
+                "nullable": true,
+                "type": "string"
+              },
+              "tax_code": {
+                "anyOf": [
+                  {
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  {
+                    "description": "[Tax codes](https://stripe.com/docs/tax/tax-codes) classify goods and services for tax purposes.",
+                    "properties": {
+                      "description": {
+                        "description": "A detailed description of which types of products the tax code represents.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "Unique identifier for the object.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "A short name for the tax code.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "object": {
+                        "description": "String representing the object's type. Objects of the same type share the same value.",
+                        "enum": [
+                          "tax_code"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "id",
+                      "name",
+                      "object"
+                    ],
+                    "title": "TaxProductResourceTaxCode",
+                    "type": "object",
+                    "x-expandableFields": [],
+                    "x-resourceId": "tax_code"
+                  }
+                ],
+                "description": "A [tax code](https://stripe.com/docs/tax/tax-codes) ID.",
+                "nullable": true,
+                "x-expansionResources": {
+                  "oneOf": [
+                    {
+                      "description": "[Tax codes](https://stripe.com/docs/tax/tax-codes) classify goods and services for tax purposes.",
+                      "properties": {
+                        "description": {
+                          "description": "A detailed description of which types of products the tax code represents.",
+                          "maxLength": 5000,
+                          "type": "string"
+                        },
+                        "id": {
+                          "description": "Unique identifier for the object.",
+                          "maxLength": 5000,
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "A short name for the tax code.",
+                          "maxLength": 5000,
+                          "type": "string"
+                        },
+                        "object": {
+                          "description": "String representing the object's type. Objects of the same type share the same value.",
+                          "enum": [
+                            "tax_code"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "description",
+                        "id",
+                        "name",
+                        "object"
+                      ],
+                      "title": "TaxProductResourceTaxCode",
+                      "type": "object",
+                      "x-expandableFields": [],
+                      "x-resourceId": "tax_code"
+                    }
+                  ]
+                }
+              },
+              "unit_label": {
+                "description": "A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.",
+                "maxLength": 5000,
+                "nullable": true,
+                "type": "string"
+              },
+              "updated": {
+                "description": "Time at which the object was last updated. Measured in seconds since the Unix epoch.",
+                "format": "unix-time",
+                "type": "integer"
+              },
+              "url": {
+                "description": "A URL of a publicly-accessible webpage for this product.",
+                "maxLength": 2048,
+                "nullable": true,
+                "type": "string"
+              }
+            },
+            "required": [
+              "active",
+              "created",
+              "id",
+              "images",
+              "livemode",
+              "metadata",
+              "name",
+              "object",
+              "updated"
+            ],
+            "title": "Product",
+            "type": "object",
+            "x-expandableFields": [
+              "package_dimensions",
+              "tax_code"
+            ],
+            "x-resourceId": "product"
+          }
+        ]
+      }
+    },
+    "updated": {
+      "description": "Time at which the object was last updated. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "active",
+    "attributes",
+    "created",
+    "currency",
+    "id",
+    "inventory",
+    "livemode",
+    "metadata",
+    "object",
+    "price",
+    "product",
+    "updated"
+  ],
+  "title": "Sku",
+  "type": "object",
+  "x-expandableFields": [
+    "inventory",
+    "package_dimensions",
+    "product"
+  ],
+  "x-resourceId": "sku"
+}
