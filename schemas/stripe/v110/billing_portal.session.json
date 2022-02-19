@@ -2,8 +2,13 @@
   "description": "The Billing customer portal is a Stripe-hosted UI for subscription and\nbilling management.\n\nA portal configuration describes the functionality and features that you\nwant to provide to your customers through the portal.\n\nA portal session describes the instantiation of the customer portal for\na particular customer. By visiting the session's URL, the customer\ncan manage their subscriptions and billing details. For security reasons,\nsessions are short-lived and will expire if the customer does not visit the URL.\nCreate sessions on-demand when customers intend to manage their subscriptions\nand billing details.\n\nLearn more in the [integration guide](https://stripe.com/docs/billing/subscriptions/integrating-customer-portal).",
   "properties": {
     "configuration": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "The configuration used by this session, describing the features available."
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",

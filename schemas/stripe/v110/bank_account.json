@@ -2,11 +2,19 @@
   "description": "These bank accounts are payment methods on `Customer` objects.\n\nOn the other hand [External Accounts](https://stripe.com/docs/api#external_accounts) are transfer\ndestinations on `Account` objects for [Custom accounts](https://stripe.com/docs/connect/custom-accounts).\nThey can be bank accounts or debit cards as well, and are documented in the links above.\n\nRelated guide: [Bank Debits and Transfers](https://stripe.com/docs/payments/bank-debits-transfers).",
   "properties": {
     "account": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The ID of the account that the bank account is associated with."
     },
     "account_holder_name": {
       "description": "The name of the person or business that owns the bank account.",
@@ -57,11 +65,19 @@
       "type": "string"
     },
     "customer": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The ID of the customer that the bank account is associated with."
     },
     "default_for_currency": {
       "description": "Whether this bank account is the default external account for its currency.",

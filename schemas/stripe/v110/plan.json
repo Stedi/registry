@@ -90,11 +90,19 @@
       "type": "string"
     },
     "product": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The product whose pricing this plan determines."
     },
     "tiers": {
       "description": "",
@@ -152,30 +160,38 @@
       ]
     },
     "transform_usage": {
-      "description": "",
-      "properties": {
-        "divide_by": {
-          "description": "Divide usage by this number.",
-          "type": "integer"
-        },
-        "round": {
-          "description": "After division, either round the result `up` or `down`.",
-          "enum": [
-            "down",
-            "up"
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "divide_by": {
+              "description": "Divide usage by this number.",
+              "type": "integer"
+            },
+            "round": {
+              "description": "After division, either round the result `up` or `down`.",
+              "enum": [
+                "down",
+                "up"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "divide_by",
+            "round"
           ],
-          "type": "string"
+          "title": "TransformUsage",
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
         }
-      },
-      "required": [
-        "divide_by",
-        "round"
       ],
-      "title": "TransformUsage",
-      "type": [
-        "object",
-        "null"
-      ]
+      "description": "Apply a transformation to the reported usage or set quantity before computing the amount billed. Cannot be combined with `tiers`."
     },
     "trial_period_days": {
       "description": "Default number of trial days when subscribing a customer to this plan using [`trial_from_plan=true`](https://stripe.com/docs/api#create_subscription-trial_from_plan).",

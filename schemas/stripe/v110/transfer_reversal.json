@@ -6,11 +6,19 @@
       "type": "integer"
     },
     "balance_transaction": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Balance transaction that describes the impact on your account balance."
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -22,11 +30,19 @@
       "type": "string"
     },
     "destination_payment_refund": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Linked payment refund for the transfer reversal."
     },
     "id": {
       "description": "Unique identifier for the object.",
@@ -42,15 +58,28 @@
       "type": "string"
     },
     "source_refund": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "ID of the refund responsible for the transfer reversal."
     },
     "transfer": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "ID of the transfer that was reversed."
     }
   },
   "required": [

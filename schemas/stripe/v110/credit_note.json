@@ -15,15 +15,28 @@
       "type": "string"
     },
     "customer": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "ID of the customer."
     },
     "customer_balance_transaction": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Customer balance transaction related to this credit note."
     },
     "discount_amount": {
       "description": "The integer amount in %s representing the total amount of discount that was credited.",
@@ -37,8 +50,13 @@
           "type": "integer"
         },
         "discount": {
-          "maxLength": 5000,
-          "type": "string"
+          "anyOf": [
+            {
+              "maxLength": 5000,
+              "type": "string"
+            }
+          ],
+          "description": "The discount that was applied to get this discount amount."
         }
       },
       "required": [
@@ -54,8 +72,13 @@
       "type": "string"
     },
     "invoice": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "ID of the invoice."
     },
     "lines": {
       "description": "Line items that make up the credit note",
@@ -87,8 +110,13 @@
                   "type": "integer"
                 },
                 "discount": {
-                  "maxLength": 5000,
-                  "type": "string"
+                  "anyOf": [
+                    {
+                      "maxLength": 5000,
+                      "type": "string"
+                    }
+                  ],
+                  "description": "The discount that was applied to get this discount amount."
                 }
               },
               "required": [
@@ -138,8 +166,13 @@
                   "type": "boolean"
                 },
                 "tax_rate": {
-                  "maxLength": 5000,
-                  "type": "string"
+                  "anyOf": [
+                    {
+                      "maxLength": 5000,
+                      "type": "string"
+                    }
+                  ],
+                  "description": "The tax rate that was applied to get this tax amount."
                 }
               },
               "required": [
@@ -372,11 +405,19 @@
       ]
     },
     "refund": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Refund related to this credit note."
     },
     "status": {
       "description": "Status of this credit note, one of `issued` or `void`. Learn more about [voiding credit notes](https://stripe.com/docs/billing/invoices/credit-notes#voiding).",
@@ -402,8 +443,13 @@
           "type": "boolean"
         },
         "tax_rate": {
-          "maxLength": 5000,
-          "type": "string"
+          "anyOf": [
+            {
+              "maxLength": 5000,
+              "type": "string"
+            }
+          ],
+          "description": "The tax rate that was applied to get this tax amount."
         }
       },
       "required": [

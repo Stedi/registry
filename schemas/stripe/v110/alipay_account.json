@@ -7,11 +7,19 @@
       "type": "integer"
     },
     "customer": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The ID of the customer associated with this Alipay Account."
     },
     "fingerprint": {
       "description": "Uniquely identifies the account and will be the same across all Alipay account objects that are linked to the same Alipay account.",

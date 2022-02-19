@@ -23,32 +23,45 @@
       "type": "integer"
     },
     "current_phase": {
-      "description": "",
-      "properties": {
-        "end_date": {
-          "description": "The end of this phase of the subscription schedule.",
-          "format": "unix-time",
-          "type": "integer"
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "end_date": {
+              "description": "The end of this phase of the subscription schedule.",
+              "format": "unix-time",
+              "type": "integer"
+            },
+            "start_date": {
+              "description": "The start of this phase of the subscription schedule.",
+              "format": "unix-time",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "end_date",
+            "start_date"
+          ],
+          "title": "SubscriptionScheduleCurrentPhase",
+          "type": [
+            "object",
+            "null"
+          ]
         },
-        "start_date": {
-          "description": "The start of this phase of the subscription schedule.",
-          "format": "unix-time",
-          "type": "integer"
+        {
+          "type": "null"
         }
-      },
-      "required": [
-        "end_date",
-        "start_date"
       ],
-      "title": "SubscriptionScheduleCurrentPhase",
-      "type": [
-        "object",
-        "null"
-      ]
+      "description": "Object representing the start and end dates for the current phase of the subscription schedule, if it is `active`."
     },
     "customer": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "ID of the customer who owns the subscription schedule."
     },
     "default_settings": {
       "description": "",
@@ -83,29 +96,37 @@
           "type": "string"
         },
         "billing_thresholds": {
-          "description": "",
-          "properties": {
-            "amount_gte": {
-              "description": "Monetary threshold that triggers the subscription to create an invoice",
+          "anyOf": [
+            {
+              "description": "",
+              "properties": {
+                "amount_gte": {
+                  "description": "Monetary threshold that triggers the subscription to create an invoice",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "reset_billing_cycle_anchor": {
+                  "description": "Indicates if the `billing_cycle_anchor` should be reset when a threshold is reached. If true, `billing_cycle_anchor` will be updated to the date/time the threshold was last reached; otherwise, the value will remain unchanged. This value may not be `true` if the subscription contains items with plans that have `aggregate_usage=last_ever`.",
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                }
+              },
+              "title": "SubscriptionBillingThresholds",
               "type": [
-                "integer",
+                "object",
                 "null"
-              ]
+              ],
+              "nullable": true
             },
-            "reset_billing_cycle_anchor": {
-              "description": "Indicates if the `billing_cycle_anchor` should be reset when a threshold is reached. If true, `billing_cycle_anchor` will be updated to the date/time the threshold was last reached; otherwise, the value will remain unchanged. This value may not be `true` if the subscription contains items with plans that have `aggregate_usage=last_ever`.",
-              "type": [
-                "boolean",
-                "null"
-              ]
+            {
+              "type": "null"
             }
-          },
-          "title": "SubscriptionBillingThresholds",
-          "type": [
-            "object",
-            "null"
           ],
-          "nullable": true
+          "description": "Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period"
         },
         "collection_method": {
           "description": "Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay the underlying subscription at the end of each billing cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions.",
@@ -119,54 +140,83 @@
           ]
         },
         "default_payment_method": {
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "invoice_settings": {
-          "description": "",
-          "properties": {
-            "days_until_due": {
-              "description": "Number of days within which a customer must pay invoices generated by this subscription schedule. This value will be `null` for subscription schedules where `billing=charge_automatically`.",
+          "anyOf": [
+            {
+              "maxLength": 5000,
               "type": [
-                "integer",
-                "null"
-              ]
-            }
-          },
-          "title": "InvoiceSettingSubscriptionScheduleSetting",
-          "type": [
-            "object",
-            "null"
-          ],
-          "nullable": true
-        },
-        "transfer_data": {
-          "description": "",
-          "properties": {
-            "amount_percent": {
-              "description": "A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the destination account. By default, the entire amount is transferred to the destination.",
-              "type": [
-                "number",
+                "string",
                 "null"
               ]
             },
-            "destination": {
-              "maxLength": 5000,
-              "type": "string"
+            {
+              "type": "null"
             }
-          },
-          "required": [
-            "destination"
           ],
-          "title": "SubscriptionTransferData",
-          "type": [
-            "object",
-            "null"
+          "description": "ID of the default payment method for the subscription schedule. If not set, invoices will use the default payment method in the customer's invoice settings."
+        },
+        "invoice_settings": {
+          "anyOf": [
+            {
+              "description": "",
+              "properties": {
+                "days_until_due": {
+                  "description": "Number of days within which a customer must pay invoices generated by this subscription schedule. This value will be `null` for subscription schedules where `billing=charge_automatically`.",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                }
+              },
+              "title": "InvoiceSettingSubscriptionScheduleSetting",
+              "type": [
+                "object",
+                "null"
+              ],
+              "nullable": true
+            },
+            {
+              "type": "null"
+            }
           ],
-          "nullable": true
+          "description": "The subscription schedule's default invoice settings."
+        },
+        "transfer_data": {
+          "anyOf": [
+            {
+              "description": "",
+              "properties": {
+                "amount_percent": {
+                  "description": "A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the destination account. By default, the entire amount is transferred to the destination.",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "destination": {
+                  "anyOf": [
+                    {
+                      "maxLength": 5000,
+                      "type": "string"
+                    }
+                  ],
+                  "description": "The account where funds from the payment will be transferred to upon payment success."
+                }
+              },
+              "required": [
+                "destination"
+              ],
+              "title": "SubscriptionTransferData",
+              "type": [
+                "object",
+                "null"
+              ],
+              "nullable": true
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "The account (if any) the associated subscription's payments will be attributed to for tax reporting, and where funds from each payment will be transferred to for each of the subscription's invoices."
         }
       },
       "required": [
@@ -209,8 +259,13 @@
           "description": "An Add Invoice Item describes the prices and quantities that will be added as pending invoice items when entering a phase.",
           "properties": {
             "price": {
-              "maxLength": 5000,
-              "type": "string"
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": "string"
+                }
+              ],
+              "description": "ID of the price used to generate the invoice item."
             },
             "quantity": {
               "description": "The quantity of the invoice item.",
@@ -365,29 +420,37 @@
           ]
         },
         "billing_thresholds": {
-          "description": "",
-          "properties": {
-            "amount_gte": {
-              "description": "Monetary threshold that triggers the subscription to create an invoice",
+          "anyOf": [
+            {
+              "description": "",
+              "properties": {
+                "amount_gte": {
+                  "description": "Monetary threshold that triggers the subscription to create an invoice",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "reset_billing_cycle_anchor": {
+                  "description": "Indicates if the `billing_cycle_anchor` should be reset when a threshold is reached. If true, `billing_cycle_anchor` will be updated to the date/time the threshold was last reached; otherwise, the value will remain unchanged. This value may not be `true` if the subscription contains items with plans that have `aggregate_usage=last_ever`.",
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                }
+              },
+              "title": "SubscriptionBillingThresholds",
               "type": [
-                "integer",
+                "object",
                 "null"
-              ]
+              ],
+              "nullable": true
             },
-            "reset_billing_cycle_anchor": {
-              "description": "Indicates if the `billing_cycle_anchor` should be reset when a threshold is reached. If true, `billing_cycle_anchor` will be updated to the date/time the threshold was last reached; otherwise, the value will remain unchanged. This value may not be `true` if the subscription contains items with plans that have `aggregate_usage=last_ever`.",
-              "type": [
-                "boolean",
-                "null"
-              ]
+            {
+              "type": "null"
             }
-          },
-          "title": "SubscriptionBillingThresholds",
-          "type": [
-            "object",
-            "null"
           ],
-          "nullable": true
+          "description": "Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period"
         },
         "collection_method": {
           "description": "Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay the underlying subscription at the end of each billing cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions.",
@@ -401,18 +464,34 @@
           ]
         },
         "coupon": {
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "anyOf": [
+            {
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "ID of the coupon to use during this phase of the subscription schedule."
         },
         "default_payment_method": {
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "anyOf": [
+            {
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "ID of the default payment method for the subscription schedule. It must belong to the customer associated with the subscription schedule. If not set, invoices will use the default payment method in the customer's invoice settings."
         },
         "default_tax_rates": {
           "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
@@ -526,46 +605,67 @@
           "type": "integer"
         },
         "invoice_settings": {
-          "description": "",
-          "properties": {
-            "days_until_due": {
-              "description": "Number of days within which a customer must pay invoices generated by this subscription schedule. This value will be `null` for subscription schedules where `billing=charge_automatically`.",
-              "type": [
-                "integer",
-                "null"
-              ]
-            }
-          },
-          "title": "InvoiceSettingSubscriptionScheduleSetting",
-          "type": [
-            "object",
-            "null"
-          ],
-          "nullable": true
-        },
-        "items": {
-          "description": "A phase item describes the price and quantity of a phase.",
-          "properties": {
-            "billing_thresholds": {
+          "anyOf": [
+            {
               "description": "",
               "properties": {
-                "usage_gte": {
-                  "description": "Usage threshold that triggers the subscription to create an invoice",
+                "days_until_due": {
+                  "description": "Number of days within which a customer must pay invoices generated by this subscription schedule. This value will be `null` for subscription schedules where `billing=charge_automatically`.",
                   "type": [
                     "integer",
                     "null"
                   ]
                 }
               },
-              "title": "SubscriptionItemBillingThresholds",
+              "title": "InvoiceSettingSubscriptionScheduleSetting",
               "type": [
                 "object",
                 "null"
-              ]
+              ],
+              "nullable": true
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "The invoice settings applicable during this phase."
+        },
+        "items": {
+          "description": "A phase item describes the price and quantity of a phase.",
+          "properties": {
+            "billing_thresholds": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "usage_gte": {
+                      "description": "Usage threshold that triggers the subscription to create an invoice",
+                      "type": [
+                        "integer",
+                        "null"
+                      ]
+                    }
+                  },
+                  "title": "SubscriptionItemBillingThresholds",
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Define thresholds at which an invoice will be sent, and the related subscription advanced to a new billing period"
             },
             "price": {
-              "maxLength": 5000,
-              "type": "string"
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": "string"
+                }
+              ],
+              "description": "ID of the price to which the customer should be subscribed."
             },
             "quantity": {
               "description": "Quantity of the plan to which the customer should be subscribed.",
@@ -699,29 +799,42 @@
           "type": "integer"
         },
         "transfer_data": {
-          "description": "",
-          "properties": {
-            "amount_percent": {
-              "description": "A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the destination account. By default, the entire amount is transferred to the destination.",
+          "anyOf": [
+            {
+              "description": "",
+              "properties": {
+                "amount_percent": {
+                  "description": "A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the destination account. By default, the entire amount is transferred to the destination.",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "destination": {
+                  "anyOf": [
+                    {
+                      "maxLength": 5000,
+                      "type": "string"
+                    }
+                  ],
+                  "description": "The account where funds from the payment will be transferred to upon payment success."
+                }
+              },
+              "required": [
+                "destination"
+              ],
+              "title": "SubscriptionTransferData",
               "type": [
-                "number",
+                "object",
                 "null"
-              ]
+              ],
+              "nullable": true
             },
-            "destination": {
-              "maxLength": 5000,
-              "type": "string"
+            {
+              "type": "null"
             }
-          },
-          "required": [
-            "destination"
           ],
-          "title": "SubscriptionTransferData",
-          "type": [
-            "object",
-            "null"
-          ],
-          "nullable": true
+          "description": "The account (if any) the associated subscription's payments will be attributed to for tax reporting, and where funds from each payment will be transferred to for each of the subscription's invoices."
         },
         "trial_end": {
           "description": "When the trial ends within the phase.",
@@ -770,11 +883,19 @@
       "type": "string"
     },
     "subscription": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "ID of the subscription managed by the subscription schedule."
     }
   },
   "required": [

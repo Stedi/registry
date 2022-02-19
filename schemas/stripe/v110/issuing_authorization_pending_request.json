@@ -6,21 +6,29 @@
       "type": "integer"
     },
     "amount_details": {
-      "description": "",
-      "properties": {
-        "atm_fee": {
-          "description": "The fee charged by the ATM for the cash withdrawal.",
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "atm_fee": {
+              "description": "The fee charged by the ATM for the cash withdrawal.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          },
+          "title": "IssuingAuthorizationAmountDetails",
           "type": [
-            "integer",
+            "object",
             "null"
           ]
+        },
+        {
+          "type": "null"
         }
-      },
-      "title": "IssuingAuthorizationAmountDetails",
-      "type": [
-        "object",
-        "null"
-      ]
+      ],
+      "description": "Detailed breakdown of amount components. These amounts are denominated in `currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal)."
     },
     "currency": {
       "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",

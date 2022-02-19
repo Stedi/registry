@@ -2,8 +2,13 @@
   "description": "",
   "properties": {
     "account": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "ID of the Stripe account this fee was taken from."
     },
     "amount": {
       "description": "Amount earned, in %s.",
@@ -14,19 +19,37 @@
       "type": "integer"
     },
     "application": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "ID of the Connect application that earned the fee."
     },
     "balance_transaction": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Balance transaction that describes the impact of this collected application fee on your account balance (not including refunds)."
     },
     "charge": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "ID of the charge that the application fee was taken from."
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -54,11 +77,19 @@
       "type": "string"
     },
     "originating_transaction": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "ID of the corresponding charge on the platform account, if this fee was the result of a charge using the `destination` parameter."
     },
     "refunded": {
       "description": "Whether the fee has been fully refunded. If the fee is only partially refunded, this attribute will still be false.",
@@ -75,11 +106,19 @@
               "type": "integer"
             },
             "balance_transaction": {
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Balance transaction that describes the impact on your account balance."
             },
             "created": {
               "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -91,8 +130,13 @@
               "type": "string"
             },
             "fee": {
-              "maxLength": 5000,
-              "type": "string"
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": "string"
+                }
+              ],
+              "description": "ID of the application fee that was refunded."
             },
             "id": {
               "description": "Unique identifier for the object.",

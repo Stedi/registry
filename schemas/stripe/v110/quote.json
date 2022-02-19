@@ -61,82 +61,90 @@
       "description": "",
       "properties": {
         "recurring": {
-          "description": "",
-          "properties": {
-            "amount_subtotal": {
-              "description": "Total before any discounts or taxes are applied.",
-              "type": "integer"
-            },
-            "amount_total": {
-              "description": "Total after discounts and taxes are applied.",
-              "type": "integer"
-            },
-            "interval": {
-              "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
-              "enum": [
-                "day",
-                "month",
-                "week",
-                "year"
-              ],
-              "type": "string"
-            },
-            "interval_count": {
-              "description": "The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.",
-              "type": "integer"
-            },
-            "total_details": {
+          "anyOf": [
+            {
               "description": "",
               "properties": {
-                "amount_discount": {
-                  "description": "This is the sum of all the line item discounts.",
+                "amount_subtotal": {
+                  "description": "Total before any discounts or taxes are applied.",
                   "type": "integer"
                 },
-                "amount_shipping": {
-                  "description": "This is the sum of all the line item shipping amounts.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "amount_tax": {
-                  "description": "This is the sum of all the line item tax amounts.",
+                "amount_total": {
+                  "description": "Total after discounts and taxes are applied.",
                   "type": "integer"
                 },
-                "breakdown": {
+                "interval": {
+                  "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
+                  "enum": [
+                    "day",
+                    "month",
+                    "week",
+                    "year"
+                  ],
+                  "type": "string"
+                },
+                "interval_count": {
+                  "description": "The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.",
+                  "type": "integer"
+                },
+                "total_details": {
                   "description": "",
                   "properties": {
-                    "discounts": {},
-                    "taxes": {}
+                    "amount_discount": {
+                      "description": "This is the sum of all the line item discounts.",
+                      "type": "integer"
+                    },
+                    "amount_shipping": {
+                      "description": "This is the sum of all the line item shipping amounts.",
+                      "type": [
+                        "integer",
+                        "null"
+                      ]
+                    },
+                    "amount_tax": {
+                      "description": "This is the sum of all the line item tax amounts.",
+                      "type": "integer"
+                    },
+                    "breakdown": {
+                      "description": "",
+                      "properties": {
+                        "discounts": {},
+                        "taxes": {}
+                      },
+                      "required": [
+                        "discounts",
+                        "taxes"
+                      ],
+                      "title": "QuotesResourceTotalDetailsResourceBreakdown",
+                      "type": "object"
+                    }
                   },
                   "required": [
-                    "discounts",
-                    "taxes"
+                    "amount_discount",
+                    "amount_tax"
                   ],
-                  "title": "QuotesResourceTotalDetailsResourceBreakdown",
+                  "title": "QuotesResourceTotalDetails",
                   "type": "object"
                 }
               },
               "required": [
-                "amount_discount",
-                "amount_tax"
+                "amount_subtotal",
+                "amount_total",
+                "interval",
+                "interval_count",
+                "total_details"
               ],
-              "title": "QuotesResourceTotalDetails",
-              "type": "object"
+              "title": "QuotesResourceRecurring",
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            {
+              "type": "null"
             }
-          },
-          "required": [
-            "amount_subtotal",
-            "amount_total",
-            "interval",
-            "interval_count",
-            "total_details"
           ],
-          "title": "QuotesResourceRecurring",
-          "type": [
-            "object",
-            "null"
-          ]
+          "description": "The definitive totals and line items the customer will be charged on a recurring basis. Takes into account the line items with recurring prices and discounts with `duration=forever` coupons only. Defaults to `null` if no inputted line items with recurring prices."
         },
         "upfront": {
           "description": "",
@@ -185,7 +193,12 @@
                       ],
                       "type": "string"
                     },
-                    "price": {},
+                    "price": {
+                      "anyOf": [
+                        {}
+                      ],
+                      "description": "The price used to generate the line item."
+                    },
                     "quantity": {
                       "description": "The quantity of products being purchased.",
                       "type": [
@@ -302,15 +315,27 @@
       ]
     },
     "customer": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The customer which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed."
     },
     "default_tax_rates": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ]
     },
     "description": {
       "description": "A description that will be displayed on the quote PDF.",
@@ -321,8 +346,12 @@
       ]
     },
     "discounts": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ]
     },
     "expires_at": {
       "description": "The date on which the quote will be canceled if in `open` or `draft` status. Measured in seconds since the Unix epoch.",
@@ -338,26 +367,39 @@
       ]
     },
     "from_quote": {
-      "description": "",
-      "properties": {
-        "is_revision": {
-          "description": "Whether this quote is a revision of a different quote.",
-          "type": "boolean"
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "is_revision": {
+              "description": "Whether this quote is a revision of a different quote.",
+              "type": "boolean"
+            },
+            "quote": {
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": "string"
+                }
+              ],
+              "description": "The quote that was cloned."
+            }
+          },
+          "required": [
+            "is_revision",
+            "quote"
+          ],
+          "title": "QuotesResourceFromQuote",
+          "type": [
+            "object",
+            "null"
+          ]
         },
-        "quote": {
-          "maxLength": 5000,
-          "type": "string"
+        {
+          "type": "null"
         }
-      },
-      "required": [
-        "is_revision",
-        "quote"
       ],
-      "title": "QuotesResourceFromQuote",
-      "type": [
-        "object",
-        "null"
-      ]
+      "description": "Details of the quote that was cloned. See the [cloning documentation](https://stripe.com/docs/quotes/clone) for more details."
     },
     "header": {
       "description": "A header that will be displayed on the quote PDF.",
@@ -373,28 +415,44 @@
       "type": "string"
     },
     "invoice": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "invoice_settings": {
-      "description": "",
-      "properties": {
-        "days_until_due": {
-          "description": "Number of days within which a customer must pay invoices generated by this quote. This value will be `null` for quotes where `collection_method=charge_automatically`.",
+      "anyOf": [
+        {
+          "maxLength": 5000,
           "type": [
-            "integer",
+            "string",
             "null"
           ]
+        },
+        {
+          "type": "null"
         }
-      },
-      "title": "InvoiceSettingQuoteSetting",
-      "type": [
-        "object",
-        "null"
-      ]
+      ],
+      "description": "The invoice that was created from this quote."
+    },
+    "invoice_settings": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "days_until_due": {
+              "description": "Number of days within which a customer must pay invoices generated by this quote. This value will be `null` for quotes where `collection_method=charge_automatically`.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          },
+          "title": "InvoiceSettingQuoteSetting",
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "All invoices will be billed using the specified settings."
     },
     "line_items": {
       "description": "A list of items the customer is being quoted for.",
@@ -432,7 +490,12 @@
               ],
               "type": "string"
             },
-            "price": {},
+            "price": {
+              "anyOf": [
+                {}
+              ],
+              "description": "The price used to generate the line item."
+            },
             "quantity": {
               "description": "The quantity of products being purchased.",
               "type": [
@@ -501,11 +564,19 @@
       "type": "string"
     },
     "on_behalf_of": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The account on behalf of which to charge. See the [Connect documentation](https://support.stripe.com/questions/sending-invoices-on-behalf-of-connected-accounts) for details."
     },
     "status": {
       "description": "The status of the quote.",
@@ -549,11 +620,19 @@
       "type": "object"
     },
     "subscription": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The subscription that was created or updated from this quote."
     },
     "subscription_data": {
       "description": "",
@@ -578,11 +657,19 @@
       "type": "object"
     },
     "subscription_schedule": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The subscription schedule that was created or updated from this quote."
     },
     "total_details": {
       "description": "",
@@ -624,35 +711,48 @@
       "type": "object"
     },
     "transfer_data": {
-      "description": "",
-      "properties": {
-        "amount": {
-          "description": "The amount in %s that will be transferred to the destination account when the invoice is paid. By default, the entire amount is transferred to the destination.",
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "amount": {
+              "description": "The amount in %s that will be transferred to the destination account when the invoice is paid. By default, the entire amount is transferred to the destination.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "amount_percent": {
+              "description": "A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the destination account. By default, the entire amount will be transferred to the destination.",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "destination": {
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": "string"
+                }
+              ],
+              "description": "The account where funds from the payment will be transferred to upon payment success."
+            }
+          },
+          "required": [
+            "destination"
+          ],
+          "title": "QuotesResourceTransferData",
           "type": [
-            "integer",
+            "object",
             "null"
           ]
         },
-        "amount_percent": {
-          "description": "A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the destination account. By default, the entire amount will be transferred to the destination.",
-          "type": [
-            "number",
-            "null"
-          ]
-        },
-        "destination": {
-          "maxLength": 5000,
-          "type": "string"
+        {
+          "type": "null"
         }
-      },
-      "required": [
-        "destination"
       ],
-      "title": "QuotesResourceTransferData",
-      "type": [
-        "object",
-        "null"
-      ]
+      "description": "The account (if any) the payments will be attributed to for tax reporting, and where funds from each payment will be transferred to for each of the invoices."
     }
   },
   "required": [

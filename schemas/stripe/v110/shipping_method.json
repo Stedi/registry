@@ -10,37 +10,45 @@
       "type": "string"
     },
     "delivery_estimate": {
-      "description": "",
-      "properties": {
-        "date": {
-          "description": "If `type` is `\"exact\"`, `date` will be the expected delivery date in the format YYYY-MM-DD.",
-          "maxLength": 5000,
-          "type": "string"
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "date": {
+              "description": "If `type` is `\"exact\"`, `date` will be the expected delivery date in the format YYYY-MM-DD.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "earliest": {
+              "description": "If `type` is `\"range\"`, `earliest` will be be the earliest delivery date in the format YYYY-MM-DD.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "latest": {
+              "description": "If `type` is `\"range\"`, `latest` will be the latest delivery date in the format YYYY-MM-DD.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "type": {
+              "description": "The type of estimate. Must be either `\"range\"` or `\"exact\"`.",
+              "maxLength": 5000,
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "title": "DeliveryEstimate",
+          "type": [
+            "object",
+            "null"
+          ]
         },
-        "earliest": {
-          "description": "If `type` is `\"range\"`, `earliest` will be be the earliest delivery date in the format YYYY-MM-DD.",
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "latest": {
-          "description": "If `type` is `\"range\"`, `latest` will be the latest delivery date in the format YYYY-MM-DD.",
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "type": {
-          "description": "The type of estimate. Must be either `\"range\"` or `\"exact\"`.",
-          "maxLength": 5000,
-          "type": "string"
+        {
+          "type": "null"
         }
-      },
-      "required": [
-        "type"
       ],
-      "title": "DeliveryEstimate",
-      "type": [
-        "object",
-        "null"
-      ]
+      "description": "The estimated delivery date for the given shipping method. Can be either a specific date or a range."
     },
     "description": {
       "description": "An arbitrary string attached to the object. Often useful for displaying to users.",

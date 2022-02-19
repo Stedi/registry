@@ -137,11 +137,19 @@
       "type": "integer"
     },
     "customer": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The customer that this promotion code can be used by."
     },
     "expires_at": {
       "description": "Date at which the promotion code can no longer be redeemed.",

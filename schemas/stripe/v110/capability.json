@@ -2,8 +2,13 @@
   "description": "This is an object representing a capability for a Stripe account.\n\nRelated guide: [Account capabilities](https://stripe.com/docs/connect/account-capabilities).",
   "properties": {
     "account": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "The account for which the capability enables functionality."
     },
     "future_requirements": {
       "description": "",

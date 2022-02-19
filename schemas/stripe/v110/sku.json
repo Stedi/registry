@@ -71,44 +71,57 @@
       "type": "string"
     },
     "package_dimensions": {
-      "description": "",
-      "properties": {
-        "height": {
-          "description": "Height, in inches.",
-          "type": "number"
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "height": {
+              "description": "Height, in inches.",
+              "type": "number"
+            },
+            "length": {
+              "description": "Length, in inches.",
+              "type": "number"
+            },
+            "weight": {
+              "description": "Weight, in ounces.",
+              "type": "number"
+            },
+            "width": {
+              "description": "Width, in inches.",
+              "type": "number"
+            }
+          },
+          "required": [
+            "height",
+            "length",
+            "weight",
+            "width"
+          ],
+          "title": "PackageDimensions",
+          "type": [
+            "object",
+            "null"
+          ]
         },
-        "length": {
-          "description": "Length, in inches.",
-          "type": "number"
-        },
-        "weight": {
-          "description": "Weight, in ounces.",
-          "type": "number"
-        },
-        "width": {
-          "description": "Width, in inches.",
-          "type": "number"
+        {
+          "type": "null"
         }
-      },
-      "required": [
-        "height",
-        "length",
-        "weight",
-        "width"
       ],
-      "title": "PackageDimensions",
-      "type": [
-        "object",
-        "null"
-      ]
+      "description": "The dimensions of this SKU for shipping purposes."
     },
     "price": {
       "description": "The cost of the item as a positive integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).",
       "type": "integer"
     },
     "product": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "The ID of the product this SKU is associated with. The product must be currently active."
     },
     "updated": {
       "description": "Time at which the object was last updated. Measured in seconds since the Unix epoch.",

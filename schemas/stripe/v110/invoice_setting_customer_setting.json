@@ -23,11 +23,19 @@
       "type": "object"
     },
     "default_payment_method": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "ID of a payment method that's attached to the customer, to be used as the customer's default payment method for subscriptions and invoices."
     },
     "footer": {
       "description": "Default footer to be displayed on invoices for this customer.",

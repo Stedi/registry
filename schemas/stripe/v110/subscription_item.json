@@ -2,21 +2,29 @@
   "description": "Subscription items allow you to create customer subscriptions with more than\none plan, making it easy to represent complex billing relationships.",
   "properties": {
     "billing_thresholds": {
-      "description": "",
-      "properties": {
-        "usage_gte": {
-          "description": "Usage threshold that triggers the subscription to create an invoice",
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "usage_gte": {
+              "description": "Usage threshold that triggers the subscription to create an invoice",
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          },
+          "title": "SubscriptionItemBillingThresholds",
           "type": [
-            "integer",
+            "object",
             "null"
           ]
+        },
+        {
+          "type": "null"
         }
-      },
-      "title": "SubscriptionItemBillingThresholds",
-      "type": [
-        "object",
-        "null"
-      ]
+      ],
+      "description": "Define thresholds at which an invoice will be sent, and the related subscription advanced to a new billing period"
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -93,58 +101,71 @@
           "type": "string"
         },
         "product": {
-          "maxLength": 5000,
-          "type": "string"
+          "anyOf": [
+            {
+              "maxLength": 5000,
+              "type": "string"
+            }
+          ],
+          "description": "The ID of the product this price is associated with."
         },
         "recurring": {
-          "description": "",
-          "properties": {
-            "aggregate_usage": {
-              "description": "Specifies a usage aggregation strategy for prices of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.",
-              "enum": [
-                "last_during_period",
-                "last_ever",
-                "max",
-                "sum"
+          "anyOf": [
+            {
+              "description": "",
+              "properties": {
+                "aggregate_usage": {
+                  "description": "Specifies a usage aggregation strategy for prices of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.",
+                  "enum": [
+                    "last_during_period",
+                    "last_ever",
+                    "max",
+                    "sum"
+                  ],
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "interval": {
+                  "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
+                  "enum": [
+                    "day",
+                    "month",
+                    "week",
+                    "year"
+                  ],
+                  "type": "string"
+                },
+                "interval_count": {
+                  "description": "The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.",
+                  "type": "integer"
+                },
+                "usage_type": {
+                  "description": "Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.",
+                  "enum": [
+                    "licensed",
+                    "metered"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "interval",
+                "interval_count",
+                "usage_type"
               ],
+              "title": "Recurring",
               "type": [
-                "string",
+                "object",
                 "null"
               ]
             },
-            "interval": {
-              "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
-              "enum": [
-                "day",
-                "month",
-                "week",
-                "year"
-              ],
-              "type": "string"
-            },
-            "interval_count": {
-              "description": "The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.",
-              "type": "integer"
-            },
-            "usage_type": {
-              "description": "Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.",
-              "enum": [
-                "licensed",
-                "metered"
-              ],
-              "type": "string"
+            {
+              "type": "null"
             }
-          },
-          "required": [
-            "interval",
-            "interval_count",
-            "usage_type"
           ],
-          "title": "Recurring",
-          "type": [
-            "object",
-            "null"
-          ]
+          "description": "The recurring components of a price such as `interval` and `usage_type`."
         },
         "tax_behavior": {
           "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.",
@@ -214,30 +235,38 @@
           ]
         },
         "transform_quantity": {
-          "description": "",
-          "properties": {
-            "divide_by": {
-              "description": "Divide usage by this number.",
-              "type": "integer"
-            },
-            "round": {
-              "description": "After division, either round the result `up` or `down`.",
-              "enum": [
-                "down",
-                "up"
+          "anyOf": [
+            {
+              "description": "",
+              "properties": {
+                "divide_by": {
+                  "description": "Divide usage by this number.",
+                  "type": "integer"
+                },
+                "round": {
+                  "description": "After division, either round the result `up` or `down`.",
+                  "enum": [
+                    "down",
+                    "up"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "divide_by",
+                "round"
               ],
-              "type": "string"
+              "title": "TransformQuantity",
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            {
+              "type": "null"
             }
-          },
-          "required": [
-            "divide_by",
-            "round"
           ],
-          "title": "TransformQuantity",
-          "type": [
-            "object",
-            "null"
-          ]
+          "description": "Apply a transformation to the reported usage or set quantity before computing the amount billed. Cannot be combined with `tiers`."
         },
         "type": {
           "description": "One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.",

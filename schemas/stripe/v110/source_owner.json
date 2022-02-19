@@ -2,63 +2,71 @@
   "description": "",
   "properties": {
     "address": {
-      "description": "",
-      "properties": {
-        "city": {
-          "description": "City, district, suburb, town, or village.",
-          "maxLength": 5000,
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "city": {
+              "description": "City, district, suburb, town, or village.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "country": {
+              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "line1": {
+              "description": "Address line 1 (e.g., street, PO Box, or company name).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "line2": {
+              "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "postal_code": {
+              "description": "ZIP or postal code.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "state": {
+              "description": "State, county, province, or region.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "title": "Address",
           "type": [
-            "string",
+            "object",
             "null"
-          ]
+          ],
+          "nullable": true
         },
-        "country": {
-          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "line1": {
-          "description": "Address line 1 (e.g., street, PO Box, or company name).",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "line2": {
-          "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "postal_code": {
-          "description": "ZIP or postal code.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "state": {
-          "description": "State, county, province, or region.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+        {
+          "type": "null"
         }
-      },
-      "title": "Address",
-      "type": [
-        "object",
-        "null"
       ],
-      "nullable": true
+      "description": "Owner's address."
     },
     "email": {
       "description": "Owner's email address.",
@@ -85,63 +93,71 @@
       ]
     },
     "verified_address": {
-      "description": "",
-      "properties": {
-        "city": {
-          "description": "City, district, suburb, town, or village.",
-          "maxLength": 5000,
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "city": {
+              "description": "City, district, suburb, town, or village.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "country": {
+              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "line1": {
+              "description": "Address line 1 (e.g., street, PO Box, or company name).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "line2": {
+              "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "postal_code": {
+              "description": "ZIP or postal code.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "state": {
+              "description": "State, county, province, or region.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "title": "Address",
           "type": [
-            "string",
+            "object",
             "null"
-          ]
+          ],
+          "nullable": true
         },
-        "country": {
-          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "line1": {
-          "description": "Address line 1 (e.g., street, PO Box, or company name).",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "line2": {
-          "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "postal_code": {
-          "description": "ZIP or postal code.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "state": {
-          "description": "State, county, province, or region.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+        {
+          "type": "null"
         }
-      },
-      "title": "Address",
-      "type": [
-        "object",
-        "null"
       ],
-      "nullable": true
+      "description": "Verified owner's address. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated."
     },
     "verified_email": {
       "description": "Verified owner's email address. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.",

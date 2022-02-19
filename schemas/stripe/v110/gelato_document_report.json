@@ -2,154 +2,186 @@
   "description": "Result from a document check",
   "properties": {
     "address": {
-      "description": "",
-      "properties": {
-        "city": {
-          "description": "City, district, suburb, town, or village.",
-          "maxLength": 5000,
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "city": {
+              "description": "City, district, suburb, town, or village.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "country": {
+              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "line1": {
+              "description": "Address line 1 (e.g., street, PO Box, or company name).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "line2": {
+              "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "postal_code": {
+              "description": "ZIP or postal code.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "state": {
+              "description": "State, county, province, or region.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "title": "Address",
           "type": [
-            "string",
+            "object",
             "null"
           ]
         },
-        "country": {
-          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "line1": {
-          "description": "Address line 1 (e.g., street, PO Box, or company name).",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "line2": {
-          "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "postal_code": {
-          "description": "ZIP or postal code.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "state": {
-          "description": "State, county, province, or region.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+        {
+          "type": "null"
         }
-      },
-      "title": "Address",
-      "type": [
-        "object",
-        "null"
-      ]
+      ],
+      "description": "Address as it appears in the document."
     },
     "dob": {
-      "description": "Point in Time",
-      "properties": {
-        "day": {
-          "description": "Numerical day between 1 and 31.",
+      "anyOf": [
+        {
+          "description": "Point in Time",
+          "properties": {
+            "day": {
+              "description": "Numerical day between 1 and 31.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "month": {
+              "description": "Numerical month between 1 and 12.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "year": {
+              "description": "The four-digit year.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          },
+          "title": "GelatoDataDocumentReportDateOfBirth",
           "type": [
-            "integer",
+            "object",
             "null"
           ]
         },
-        "month": {
-          "description": "Numerical month between 1 and 12.",
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "year": {
-          "description": "The four-digit year.",
-          "type": [
-            "integer",
-            "null"
-          ]
+        {
+          "type": "null"
         }
-      },
-      "title": "GelatoDataDocumentReportDateOfBirth",
-      "type": [
-        "object",
-        "null"
-      ]
+      ],
+      "description": "Date of birth as it appears in the document."
     },
     "error": {
-      "description": "",
-      "properties": {
-        "code": {
-          "description": "A short machine-readable string giving the reason for the verification failure.",
-          "enum": [
-            "document_expired",
-            "document_type_not_supported",
-            "document_unverified_other"
-          ],
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "code": {
+              "description": "A short machine-readable string giving the reason for the verification failure.",
+              "enum": [
+                "document_expired",
+                "document_type_not_supported",
+                "document_unverified_other"
+              ],
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "reason": {
+              "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "title": "GelatoDocumentReportError",
           "type": [
-            "string",
+            "object",
             "null"
           ]
         },
-        "reason": {
-          "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+        {
+          "type": "null"
         }
-      },
-      "title": "GelatoDocumentReportError",
-      "type": [
-        "object",
-        "null"
-      ]
+      ],
+      "description": "Details on the verification error. Present when status is `unverified`."
     },
     "expiration_date": {
-      "description": "Point in Time",
-      "properties": {
-        "day": {
-          "description": "Numerical day between 1 and 31.",
+      "anyOf": [
+        {
+          "description": "Point in Time",
+          "properties": {
+            "day": {
+              "description": "Numerical day between 1 and 31.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "month": {
+              "description": "Numerical month between 1 and 12.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "year": {
+              "description": "The four-digit year.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          },
+          "title": "GelatoDataDocumentReportExpirationDate",
           "type": [
-            "integer",
+            "object",
             "null"
           ]
         },
-        "month": {
-          "description": "Numerical month between 1 and 12.",
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "year": {
-          "description": "The four-digit year.",
-          "type": [
-            "integer",
-            "null"
-          ]
+        {
+          "type": "null"
         }
-      },
-      "title": "GelatoDataDocumentReportExpirationDate",
-      "type": [
-        "object",
-        "null"
-      ]
+      ],
+      "description": "Expiration date of the document."
     },
     "files": {
       "maxLength": 5000,
@@ -164,35 +196,43 @@
       ]
     },
     "issued_date": {
-      "description": "Point in Time",
-      "properties": {
-        "day": {
-          "description": "Numerical day between 1 and 31.",
+      "anyOf": [
+        {
+          "description": "Point in Time",
+          "properties": {
+            "day": {
+              "description": "Numerical day between 1 and 31.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "month": {
+              "description": "Numerical month between 1 and 12.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "year": {
+              "description": "The four-digit year.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          },
+          "title": "GelatoDataDocumentReportIssuedDate",
           "type": [
-            "integer",
+            "object",
             "null"
           ]
         },
-        "month": {
-          "description": "Numerical month between 1 and 12.",
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "year": {
-          "description": "The four-digit year.",
-          "type": [
-            "integer",
-            "null"
-          ]
+        {
+          "type": "null"
         }
-      },
-      "title": "GelatoDataDocumentReportIssuedDate",
-      "type": [
-        "object",
-        "null"
-      ]
+      ],
+      "description": "Issued date of the document."
     },
     "issuing_country": {
       "description": "Issuing country of the document.",

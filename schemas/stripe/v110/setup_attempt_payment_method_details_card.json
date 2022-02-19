@@ -2,69 +2,77 @@
   "description": "",
   "properties": {
     "three_d_secure": {
-      "description": "",
-      "properties": {
-        "authentication_flow": {
-          "description": "For authenticated transactions: how the customer was authenticated by\nthe issuing bank.",
-          "enum": [
-            "challenge",
-            "frictionless"
-          ],
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "authentication_flow": {
+              "description": "For authenticated transactions: how the customer was authenticated by\nthe issuing bank.",
+              "enum": [
+                "challenge",
+                "frictionless"
+              ],
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "result": {
+              "description": "Indicates the outcome of 3D Secure authentication.",
+              "enum": [
+                "attempt_acknowledged",
+                "authenticated",
+                "failed",
+                "not_supported",
+                "processing_error"
+              ],
+              "type": [
+                "string",
+                "null"
+              ],
+              "x-stripeBypassValidation": true
+            },
+            "result_reason": {
+              "description": "Additional information about why 3D Secure succeeded or failed based\non the `result`.",
+              "enum": [
+                "abandoned",
+                "bypassed",
+                "canceled",
+                "card_not_enrolled",
+                "network_not_supported",
+                "protocol_error",
+                "rejected"
+              ],
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "version": {
+              "description": "The version of 3D Secure that was used.",
+              "enum": [
+                "1.0.2",
+                "2.1.0",
+                "2.2.0"
+              ],
+              "type": [
+                "string",
+                "null"
+              ],
+              "x-stripeBypassValidation": true
+            }
+          },
+          "title": "three_d_secure_details",
           "type": [
-            "string",
+            "object",
             "null"
           ]
         },
-        "result": {
-          "description": "Indicates the outcome of 3D Secure authentication.",
-          "enum": [
-            "attempt_acknowledged",
-            "authenticated",
-            "failed",
-            "not_supported",
-            "processing_error"
-          ],
-          "type": [
-            "string",
-            "null"
-          ],
-          "x-stripeBypassValidation": true
-        },
-        "result_reason": {
-          "description": "Additional information about why 3D Secure succeeded or failed based\non the `result`.",
-          "enum": [
-            "abandoned",
-            "bypassed",
-            "canceled",
-            "card_not_enrolled",
-            "network_not_supported",
-            "protocol_error",
-            "rejected"
-          ],
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "version": {
-          "description": "The version of 3D Secure that was used.",
-          "enum": [
-            "1.0.2",
-            "2.1.0",
-            "2.2.0"
-          ],
-          "type": [
-            "string",
-            "null"
-          ],
-          "x-stripeBypassValidation": true
+        {
+          "type": "null"
         }
-      },
-      "title": "three_d_secure_details",
-      "type": [
-        "object",
-        "null"
-      ]
+      ],
+      "description": "Populated if this authorization used 3D Secure authentication."
     }
   },
   "title": "setup_attempt_payment_method_details_card",

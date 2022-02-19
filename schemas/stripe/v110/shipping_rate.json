@@ -11,74 +11,98 @@
       "type": "integer"
     },
     "delivery_estimate": {
-      "description": "",
-      "properties": {
-        "maximum": {
+      "anyOf": [
+        {
           "description": "",
           "properties": {
-            "unit": {
-              "description": "A unit of time.",
-              "enum": [
-                "business_day",
-                "day",
-                "hour",
-                "month",
-                "week"
+            "maximum": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "unit": {
+                      "description": "A unit of time.",
+                      "enum": [
+                        "business_day",
+                        "day",
+                        "hour",
+                        "month",
+                        "week"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "description": "Must be greater than 0.",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "unit",
+                    "value"
+                  ],
+                  "title": "ShippingRateDeliveryEstimateBound",
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "nullable": true
+                },
+                {
+                  "type": "null"
+                }
               ],
-              "type": "string"
+              "description": "The upper bound of the estimated range. If empty, represents no upper bound i.e., infinite."
             },
-            "value": {
-              "description": "Must be greater than 0.",
-              "type": "integer"
+            "minimum": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "unit": {
+                      "description": "A unit of time.",
+                      "enum": [
+                        "business_day",
+                        "day",
+                        "hour",
+                        "month",
+                        "week"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "description": "Must be greater than 0.",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "unit",
+                    "value"
+                  ],
+                  "title": "ShippingRateDeliveryEstimateBound",
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "nullable": true
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The lower bound of the estimated range. If empty, represents no lower bound."
             }
           },
-          "required": [
-            "unit",
-            "value"
-          ],
-          "title": "ShippingRateDeliveryEstimateBound",
+          "title": "ShippingRateDeliveryEstimate",
           "type": [
             "object",
             "null"
-          ],
-          "nullable": true
+          ]
         },
-        "minimum": {
-          "description": "",
-          "properties": {
-            "unit": {
-              "description": "A unit of time.",
-              "enum": [
-                "business_day",
-                "day",
-                "hour",
-                "month",
-                "week"
-              ],
-              "type": "string"
-            },
-            "value": {
-              "description": "Must be greater than 0.",
-              "type": "integer"
-            }
-          },
-          "required": [
-            "unit",
-            "value"
-          ],
-          "title": "ShippingRateDeliveryEstimateBound",
-          "type": [
-            "object",
-            "null"
-          ],
-          "nullable": true
+        {
+          "type": "null"
         }
-      },
-      "title": "ShippingRateDeliveryEstimate",
-      "type": [
-        "object",
-        "null"
-      ]
+      ],
+      "description": "The estimated range for how long shipping will take, meant to be displayable to the customer. This will appear on CheckoutSessions."
     },
     "display_name": {
       "description": "The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.",
@@ -137,11 +161,19 @@
       ]
     },
     "tax_code": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "A [tax code](https://stripe.com/docs/tax/tax-codes) ID. The Shipping tax code is `txcd_92010001`."
     },
     "type": {
       "description": "The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.",

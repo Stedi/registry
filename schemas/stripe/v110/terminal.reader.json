@@ -41,11 +41,19 @@
       "type": "boolean"
     },
     "location": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The location identifier of the reader."
     },
     "metadata": {},
     "object": {

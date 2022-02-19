@@ -6,11 +6,19 @@
       "type": "integer"
     },
     "balance_transaction": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Balance transaction that describes the impact on your account balance."
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -22,8 +30,13 @@
       "type": "string"
     },
     "fee": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "ID of the application fee that was refunded."
     },
     "id": {
       "description": "Unique identifier for the object.",

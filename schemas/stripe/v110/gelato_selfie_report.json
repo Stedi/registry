@@ -10,35 +10,43 @@
       ]
     },
     "error": {
-      "description": "",
-      "properties": {
-        "code": {
-          "description": "A short machine-readable string giving the reason for the verification failure.",
-          "enum": [
-            "selfie_document_missing_photo",
-            "selfie_face_mismatch",
-            "selfie_manipulated",
-            "selfie_unverified_other"
-          ],
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "code": {
+              "description": "A short machine-readable string giving the reason for the verification failure.",
+              "enum": [
+                "selfie_document_missing_photo",
+                "selfie_face_mismatch",
+                "selfie_manipulated",
+                "selfie_unverified_other"
+              ],
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "reason": {
+              "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "title": "GelatoSelfieReportError",
           "type": [
-            "string",
+            "object",
             "null"
           ]
         },
-        "reason": {
-          "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+        {
+          "type": "null"
         }
-      },
-      "title": "GelatoSelfieReportError",
-      "type": [
-        "object",
-        "null"
-      ]
+      ],
+      "description": "Details on the verification error. Present when status is `unverified`."
     },
     "selfie": {
       "description": "ID of the [File](https://stripe.com/docs/api/files) holding the image of the selfie used in this check.",

@@ -2,11 +2,19 @@
   "description": "",
   "properties": {
     "additional_documentation": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute."
     },
     "expected_at": {
       "description": "Date when the cardholder expected to receive the product.",

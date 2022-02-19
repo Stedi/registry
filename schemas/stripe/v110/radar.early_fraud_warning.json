@@ -6,8 +6,13 @@
       "type": "boolean"
     },
     "charge": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "ID of the charge this early fraud warning is for, optionally expanded."
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -36,8 +41,13 @@
       "type": "string"
     },
     "payment_intent": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "ID of the Payment Intent this early fraud warning is for, optionally expanded."
     }
   },
   "required": [

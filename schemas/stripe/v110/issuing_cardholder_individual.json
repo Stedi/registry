@@ -2,35 +2,43 @@
   "description": "",
   "properties": {
     "dob": {
-      "description": "",
-      "properties": {
-        "day": {
-          "description": "The day of birth, between 1 and 31.",
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "day": {
+              "description": "The day of birth, between 1 and 31.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "month": {
+              "description": "The month of birth, between 1 and 12.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "year": {
+              "description": "The four-digit year of birth.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          },
+          "title": "IssuingCardholderIndividualDOB",
           "type": [
-            "integer",
+            "object",
             "null"
           ]
         },
-        "month": {
-          "description": "The month of birth, between 1 and 12.",
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "year": {
-          "description": "The four-digit year of birth.",
-          "type": [
-            "integer",
-            "null"
-          ]
+        {
+          "type": "null"
         }
-      },
-      "title": "IssuingCardholderIndividualDOB",
-      "type": [
-        "object",
-        "null"
-      ]
+      ],
+      "description": "The date of birth of this cardholder."
     },
     "first_name": {
       "description": "The first name of this cardholder.",
@@ -43,38 +51,70 @@
       "type": "string"
     },
     "verification": {
-      "description": "",
-      "properties": {
-        "document": {
+      "anyOf": [
+        {
           "description": "",
           "properties": {
-            "back": {
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "front": {
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+            "document": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "back": {
+                      "anyOf": [
+                        {
+                          "maxLength": 5000,
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The back of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`."
+                    },
+                    "front": {
+                      "anyOf": [
+                        {
+                          "maxLength": 5000,
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The front of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`."
+                    }
+                  },
+                  "title": "IssuingCardholderIdDocument",
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "An identifying document, either a passport or local ID card."
             }
           },
-          "title": "IssuingCardholderIdDocument",
+          "title": "IssuingCardholderVerification",
           "type": [
             "object",
             "null"
           ]
+        },
+        {
+          "type": "null"
         }
-      },
-      "title": "IssuingCardholderVerification",
-      "type": [
-        "object",
-        "null"
-      ]
+      ],
+      "description": "Government-issued ID document for this cardholder."
     }
   },
   "required": [

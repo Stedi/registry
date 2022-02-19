@@ -108,11 +108,20 @@
           "type": "string"
         },
         "source": {
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "anyOf": [
+            {
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "The Stripe object to which this transaction is related.",
+          "x-stripeBypassValidation": true
         },
         "status": {
           "description": "If the transaction's net funds are available in the Stripe balance yet. Either `available` or `pending`.",
@@ -192,11 +201,19 @@
           "description": "",
           "properties": {
             "additional_documentation": {
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute."
             },
             "canceled_at": {
               "description": "Date when order was canceled.",
@@ -283,32 +300,64 @@
           "description": "",
           "properties": {
             "additional_documentation": {
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute."
             },
             "card_statement": {
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Copy of the card statement showing that the product had already been paid for."
             },
             "cash_receipt": {
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Copy of the receipt showing that the product had been paid for in cash."
             },
             "check_image": {
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Image of the front and back of the check that was used to pay for the product."
             },
             "explanation": {
               "description": "Explanation of why the cardholder is disputing this transaction.",
@@ -334,11 +383,19 @@
           "description": "",
           "properties": {
             "additional_documentation": {
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute."
             },
             "explanation": {
               "description": "Explanation of why the cardholder is disputing this transaction.",
@@ -356,11 +413,19 @@
           "description": "",
           "properties": {
             "additional_documentation": {
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute."
             },
             "explanation": {
               "description": "Explanation of why the cardholder is disputing this transaction.",
@@ -413,11 +478,19 @@
           "description": "",
           "properties": {
             "additional_documentation": {
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute."
             },
             "expected_at": {
               "description": "Date when the cardholder expected to receive the product.",
@@ -462,11 +535,19 @@
           "description": "",
           "properties": {
             "additional_documentation": {
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute."
             },
             "explanation": {
               "description": "Explanation of why the cardholder is disputing this transaction.",
@@ -517,11 +598,19 @@
           "description": "",
           "properties": {
             "additional_documentation": {
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute."
             },
             "canceled_at": {
               "description": "Date when order was canceled.",
@@ -595,8 +684,13 @@
       "type": "string"
     },
     "transaction": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "The transaction being disputed."
     }
   },
   "required": [

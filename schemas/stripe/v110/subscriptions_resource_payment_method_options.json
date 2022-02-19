@@ -2,119 +2,143 @@
   "description": "",
   "properties": {
     "acss_debit": {
-      "description": "",
-      "properties": {
-        "mandate_options": {
+      "anyOf": [
+        {
           "description": "",
           "properties": {
-            "transaction_type": {
-              "description": "Transaction type of the mandate.",
+            "mandate_options": {
+              "description": "",
+              "properties": {
+                "transaction_type": {
+                  "description": "Transaction type of the mandate.",
+                  "enum": [
+                    "business",
+                    "personal"
+                  ],
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "title": "invoice_payment_method_options_acss_debit_mandate_options",
+              "type": "object"
+            },
+            "verification_method": {
+              "description": "Bank account verification method.",
               "enum": [
-                "business",
-                "personal"
+                "automatic",
+                "instant",
+                "microdeposits"
               ],
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": "string",
+              "x-stripeBypassValidation": true
             }
           },
-          "title": "invoice_payment_method_options_acss_debit_mandate_options",
-          "type": "object"
-        },
-        "verification_method": {
-          "description": "Bank account verification method.",
-          "enum": [
-            "automatic",
-            "instant",
-            "microdeposits"
-          ],
-          "type": "string",
-          "x-stripeBypassValidation": true
-        }
-      },
-      "title": "invoice_payment_method_options_acss_debit",
-      "type": [
-        "object",
-        "null"
-      ]
-    },
-    "bancontact": {
-      "description": "",
-      "properties": {
-        "preferred_language": {
-          "description": "Preferred language of the Bancontact authorization page that the customer is redirected to.",
-          "enum": [
-            "de",
-            "en",
-            "fr",
-            "nl"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "preferred_language"
-      ],
-      "title": "invoice_payment_method_options_bancontact",
-      "type": [
-        "object",
-        "null"
-      ]
-    },
-    "card": {
-      "description": "",
-      "properties": {
-        "mandate_options": {
-          "description": "",
-          "properties": {
-            "amount": {
-              "description": "Amount to be charged for future payments.",
-              "type": [
-                "integer",
-                "null"
-              ]
-            },
-            "amount_type": {
-              "description": "One of `fixed` or `maximum`. If `fixed`, the `amount` param refers to the exact amount to be charged in future payments. If `maximum`, the amount charged can be up to the value passed for the `amount` param.",
-              "enum": [
-                "fixed",
-                "maximum"
-              ],
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "description": {
-              "description": "A description of the mandate or subscription that is meant to be displayed to the customer.",
-              "maxLength": 200,
-              "type": [
-                "string",
-                "null"
-              ]
-            }
-          },
-          "title": "invoice_mandate_options_card",
-          "type": "object"
-        },
-        "request_three_d_secure": {
-          "description": "We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.",
-          "enum": [
-            "any",
-            "automatic"
-          ],
+          "title": "invoice_payment_method_options_acss_debit",
           "type": [
-            "string",
+            "object",
             "null"
           ]
+        },
+        {
+          "type": "null"
         }
-      },
-      "title": "subscription_payment_method_options_card",
-      "type": [
-        "object",
-        "null"
-      ]
+      ],
+      "description": "This sub-hash contains details about the Canadian pre-authorized debit payment method options to pass to invoices created by the subscription."
+    },
+    "bancontact": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "preferred_language": {
+              "description": "Preferred language of the Bancontact authorization page that the customer is redirected to.",
+              "enum": [
+                "de",
+                "en",
+                "fr",
+                "nl"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "preferred_language"
+          ],
+          "title": "invoice_payment_method_options_bancontact",
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "This sub-hash contains details about the Bancontact payment method options to pass to invoices created by the subscription."
+    },
+    "card": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "mandate_options": {
+              "description": "",
+              "properties": {
+                "amount": {
+                  "description": "Amount to be charged for future payments.",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "amount_type": {
+                  "description": "One of `fixed` or `maximum`. If `fixed`, the `amount` param refers to the exact amount to be charged in future payments. If `maximum`, the amount charged can be up to the value passed for the `amount` param.",
+                  "enum": [
+                    "fixed",
+                    "maximum"
+                  ],
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "description": {
+                  "description": "A description of the mandate or subscription that is meant to be displayed to the customer.",
+                  "maxLength": 200,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "title": "invoice_mandate_options_card",
+              "type": "object"
+            },
+            "request_three_d_secure": {
+              "description": "We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.",
+              "enum": [
+                "any",
+                "automatic"
+              ],
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "title": "subscription_payment_method_options_card",
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "This sub-hash contains details about the Card payment method options to pass to invoices created by the subscription."
     }
   },
   "title": "SubscriptionsResourcePaymentMethodOptions",

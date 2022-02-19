@@ -2,25 +2,38 @@
   "description": "A phase item describes the price and quantity of a phase.",
   "properties": {
     "billing_thresholds": {
-      "description": "",
-      "properties": {
-        "usage_gte": {
-          "description": "Usage threshold that triggers the subscription to create an invoice",
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "usage_gte": {
+              "description": "Usage threshold that triggers the subscription to create an invoice",
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          },
+          "title": "SubscriptionItemBillingThresholds",
           "type": [
-            "integer",
+            "object",
             "null"
           ]
+        },
+        {
+          "type": "null"
         }
-      },
-      "title": "SubscriptionItemBillingThresholds",
-      "type": [
-        "object",
-        "null"
-      ]
+      ],
+      "description": "Define thresholds at which an invoice will be sent, and the related subscription advanced to a new billing period"
     },
     "price": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "ID of the price to which the customer should be subscribed."
     },
     "quantity": {
       "description": "Quantity of the plan to which the customer should be subscribed.",

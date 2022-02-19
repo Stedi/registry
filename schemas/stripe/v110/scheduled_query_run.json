@@ -27,199 +27,212 @@
       "type": "object"
     },
     "file": {
-      "description": "This is an object representing a file hosted on Stripe's servers. The\nfile may have been uploaded by yourself using the [create file](https://stripe.com/docs/api#create_file)\nrequest (for example, when uploading dispute evidence) or it may have\nbeen created by Stripe (for example, the results of a [Sigma scheduled\nquery](#scheduled_queries)).\n\nRelated guide: [File Upload Guide](https://stripe.com/docs/file-upload).",
-      "properties": {
-        "created": {
-          "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-          "format": "unix-time",
-          "type": "integer"
-        },
-        "expires_at": {
-          "description": "The time at which the file expires and is no longer available in epoch seconds.",
-          "format": "unix-time",
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "filename": {
-          "description": "A filename for the file, suitable for saving to a filesystem.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "id": {
-          "description": "Unique identifier for the object.",
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "links": {
-          "description": "A list of [file links](https://stripe.com/docs/api#file_links) that point at this file.",
+      "anyOf": [
+        {
+          "description": "This is an object representing a file hosted on Stripe's servers. The\nfile may have been uploaded by yourself using the [create file](https://stripe.com/docs/api#create_file)\nrequest (for example, when uploading dispute evidence) or it may have\nbeen created by Stripe (for example, the results of a [Sigma scheduled\nquery](#scheduled_queries)).\n\nRelated guide: [File Upload Guide](https://stripe.com/docs/file-upload).",
           "properties": {
-            "data": {
-              "description": "To share the contents of a `File` object with non-Stripe users, you can\ncreate a `FileLink`. `FileLink`s contain a URL that can be used to\nretrieve the contents of the file without authentication.",
+            "created": {
+              "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+              "format": "unix-time",
+              "type": "integer"
+            },
+            "expires_at": {
+              "description": "The time at which the file expires and is no longer available in epoch seconds.",
+              "format": "unix-time",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "filename": {
+              "description": "A filename for the file, suitable for saving to a filesystem.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "id": {
+              "description": "Unique identifier for the object.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "links": {
+              "description": "A list of [file links](https://stripe.com/docs/api#file_links) that point at this file.",
               "properties": {
-                "created": {
-                  "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                  "format": "unix-time",
-                  "type": "integer"
+                "data": {
+                  "description": "To share the contents of a `File` object with non-Stripe users, you can\ncreate a `FileLink`. `FileLink`s contain a URL that can be used to\nretrieve the contents of the file without authentication.",
+                  "properties": {
+                    "created": {
+                      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                      "format": "unix-time",
+                      "type": "integer"
+                    },
+                    "expired": {
+                      "description": "Whether this link is already expired.",
+                      "type": "boolean"
+                    },
+                    "expires_at": {
+                      "description": "Time at which the link expires.",
+                      "format": "unix-time",
+                      "type": [
+                        "integer",
+                        "null"
+                      ]
+                    },
+                    "file": {
+                      "anyOf": [
+                        {
+                          "maxLength": 5000,
+                          "type": "string"
+                        }
+                      ],
+                      "description": "The file object this link points to."
+                    },
+                    "id": {
+                      "description": "Unique identifier for the object.",
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "livemode": {
+                      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                      "type": "boolean"
+                    },
+                    "metadata": {},
+                    "object": {
+                      "description": "String representing the object's type. Objects of the same type share the same value.",
+                      "enum": [
+                        "file_link"
+                      ],
+                      "type": "string"
+                    },
+                    "url": {
+                      "description": "The publicly accessible URL to download the file.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "created",
+                    "expired",
+                    "file",
+                    "id",
+                    "livemode",
+                    "metadata",
+                    "object"
+                  ],
+                  "title": "FileLink",
+                  "type": "object",
+                  "x-resourceId": "file_link"
                 },
-                "expired": {
-                  "description": "Whether this link is already expired.",
+                "has_more": {
+                  "description": "True if this list has another page of items after this one that can be fetched.",
                   "type": "boolean"
                 },
-                "expires_at": {
-                  "description": "Time at which the link expires.",
-                  "format": "unix-time",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "file": {
-                  "maxLength": 5000,
-                  "type": "string"
-                },
-                "id": {
-                  "description": "Unique identifier for the object.",
-                  "maxLength": 5000,
-                  "type": "string"
-                },
-                "livemode": {
-                  "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                  "type": "boolean"
-                },
-                "metadata": {},
                 "object": {
-                  "description": "String representing the object's type. Objects of the same type share the same value.",
+                  "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
                   "enum": [
-                    "file_link"
+                    "list"
                   ],
                   "type": "string"
                 },
                 "url": {
-                  "description": "The publicly accessible URL to download the file.",
+                  "description": "The URL where this list can be accessed.",
                   "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": "string"
                 }
               },
               "required": [
-                "created",
-                "expired",
-                "file",
-                "id",
-                "livemode",
-                "metadata",
-                "object"
+                "data",
+                "has_more",
+                "object",
+                "url"
               ],
-              "title": "FileLink",
-              "type": "object",
-              "x-resourceId": "file_link"
-            },
-            "has_more": {
-              "description": "True if this list has another page of items after this one that can be fetched.",
-              "type": "boolean"
+              "title": "FileFileLinkList",
+              "type": [
+                "object",
+                "null"
+              ]
             },
             "object": {
-              "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
+              "description": "String representing the object's type. Objects of the same type share the same value.",
               "enum": [
-                "list"
+                "file"
               ],
               "type": "string"
             },
-            "url": {
-              "description": "The URL where this list can be accessed.",
+            "purpose": {
+              "description": "The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.",
+              "enum": [
+                "account_requirement",
+                "additional_verification",
+                "business_icon",
+                "business_logo",
+                "customer_signature",
+                "dispute_evidence",
+                "document_provider_identity_document",
+                "finance_report_run",
+                "identity_document",
+                "identity_document_downloadable",
+                "pci_document",
+                "selfie",
+                "sigma_scheduled_query",
+                "tax_document_user_upload"
+              ],
+              "type": "string",
+              "x-stripeBypassValidation": true
+            },
+            "size": {
+              "description": "The size in bytes of the file object.",
+              "type": "integer"
+            },
+            "title": {
+              "description": "A user friendly title for the document.",
               "maxLength": 5000,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "type": {
+              "description": "The type of the file returned (e.g., `csv`, `pdf`, `jpg`, or `png`).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "url": {
+              "description": "The URL from which the file can be downloaded using your live secret API key.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "required": [
-            "data",
-            "has_more",
+            "created",
+            "id",
             "object",
-            "url"
+            "purpose",
+            "size"
           ],
-          "title": "FileFileLinkList",
+          "title": "File",
           "type": [
             "object",
             "null"
-          ]
-        },
-        "object": {
-          "description": "String representing the object's type. Objects of the same type share the same value.",
-          "enum": [
-            "file"
           ],
-          "type": "string"
+          "x-resourceId": "file"
         },
-        "purpose": {
-          "description": "The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.",
-          "enum": [
-            "account_requirement",
-            "additional_verification",
-            "business_icon",
-            "business_logo",
-            "customer_signature",
-            "dispute_evidence",
-            "document_provider_identity_document",
-            "finance_report_run",
-            "identity_document",
-            "identity_document_downloadable",
-            "pci_document",
-            "selfie",
-            "sigma_scheduled_query",
-            "tax_document_user_upload"
-          ],
-          "type": "string",
-          "x-stripeBypassValidation": true
-        },
-        "size": {
-          "description": "The size in bytes of the file object.",
-          "type": "integer"
-        },
-        "title": {
-          "description": "A user friendly title for the document.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "type": {
-          "description": "The type of the file returned (e.g., `csv`, `pdf`, `jpg`, or `png`).",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "url": {
-          "description": "The URL from which the file can be downloaded using your live secret API key.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+        {
+          "type": "null"
         }
-      },
-      "required": [
-        "created",
-        "id",
-        "object",
-        "purpose",
-        "size"
       ],
-      "title": "File",
-      "type": [
-        "object",
-        "null"
-      ],
-      "x-resourceId": "file"
+      "description": "The file object representing the results of the query."
     },
     "id": {
       "description": "Unique identifier for the object.",

@@ -45,36 +45,44 @@
       "type": "string"
     },
     "package_dimensions": {
-      "description": "",
-      "properties": {
-        "height": {
-          "description": "Height, in inches.",
-          "type": "number"
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "height": {
+              "description": "Height, in inches.",
+              "type": "number"
+            },
+            "length": {
+              "description": "Length, in inches.",
+              "type": "number"
+            },
+            "weight": {
+              "description": "Weight, in ounces.",
+              "type": "number"
+            },
+            "width": {
+              "description": "Width, in inches.",
+              "type": "number"
+            }
+          },
+          "required": [
+            "height",
+            "length",
+            "weight",
+            "width"
+          ],
+          "title": "PackageDimensions",
+          "type": [
+            "object",
+            "null"
+          ]
         },
-        "length": {
-          "description": "Length, in inches.",
-          "type": "number"
-        },
-        "weight": {
-          "description": "Weight, in ounces.",
-          "type": "number"
-        },
-        "width": {
-          "description": "Width, in inches.",
-          "type": "number"
+        {
+          "type": "null"
         }
-      },
-      "required": [
-        "height",
-        "length",
-        "weight",
-        "width"
       ],
-      "title": "PackageDimensions",
-      "type": [
-        "object",
-        "null"
-      ]
+      "description": "The dimensions of this product for shipping purposes."
     },
     "shippable": {
       "description": "Whether this product is shipped (i.e., physical goods).",
@@ -92,11 +100,19 @@
       ]
     },
     "tax_code": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "A [tax code](https://stripe.com/docs/tax/tax-codes) ID."
     },
     "unit_label": {
       "description": "A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.",

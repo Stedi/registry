@@ -34,28 +34,52 @@
       ]
     },
     "generated_from": {
-      "description": "",
-      "properties": {
-        "charge": {
-          "maxLength": 5000,
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "charge": {
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The ID of the Charge that generated this PaymentMethod, if any."
+            },
+            "setup_attempt": {
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The ID of the SetupAttempt that generated this PaymentMethod, if any."
+            }
+          },
+          "title": "sepa_debit_generated_from",
           "type": [
-            "string",
+            "object",
             "null"
           ]
         },
-        "setup_attempt": {
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+        {
+          "type": "null"
         }
-      },
-      "title": "sepa_debit_generated_from",
-      "type": [
-        "object",
-        "null"
-      ]
+      ],
+      "description": "Information about the object that generated this PaymentMethod."
     },
     "last4": {
       "description": "Last four characters of the IBAN.",

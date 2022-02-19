@@ -2,41 +2,49 @@
   "description": "",
   "properties": {
     "plan": {
-      "description": "",
-      "properties": {
-        "count": {
-          "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "interval": {
+              "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
+              "enum": [
+                "month"
+              ],
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "type": {
+              "description": "Type of installment plan, one of `fixed_count`.",
+              "enum": [
+                "fixed_count"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "title": "payment_method_details_card_installments_plan",
           "type": [
-            "integer",
+            "object",
             "null"
           ]
         },
-        "interval": {
-          "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
-          "enum": [
-            "month"
-          ],
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "type": {
-          "description": "Type of installment plan, one of `fixed_count`.",
-          "enum": [
-            "fixed_count"
-          ],
-          "type": "string"
+        {
+          "type": "null"
         }
-      },
-      "required": [
-        "type"
       ],
-      "title": "payment_method_details_card_installments_plan",
-      "type": [
-        "object",
-        "null"
-      ]
+      "description": "Installment plan selected for the payment."
     }
   },
   "title": "payment_method_details_card_installments",

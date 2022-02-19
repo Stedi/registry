@@ -11,19 +11,32 @@
       "type": "integer"
     },
     "credit_note": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The ID of the credit note (if any) related to the transaction."
     },
     "currency": {
       "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
       "type": "string"
     },
     "customer": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "The ID of the customer the transaction belongs to."
     },
     "description": {
       "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
@@ -43,11 +56,19 @@
       "type": "string"
     },
     "invoice": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The ID of the invoice (if any) related to the transaction."
     },
     "livemode": {
       "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",

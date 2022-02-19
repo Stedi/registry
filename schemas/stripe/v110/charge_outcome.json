@@ -27,8 +27,13 @@
       "type": "integer"
     },
     "rule": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "The ID of the Radar rule that matched the payment, if applicable."
     },
     "seller_message": {
       "description": "A human-readable description of the outcome type and reason, designed for you (the recipient of the payment), not your customer.",

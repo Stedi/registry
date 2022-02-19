@@ -2,28 +2,52 @@
   "description": "",
   "properties": {
     "document": {
-      "description": "",
-      "properties": {
-        "back": {
-          "maxLength": 5000,
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "back": {
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The back of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`."
+            },
+            "front": {
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The front of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`."
+            }
+          },
+          "title": "IssuingCardholderIdDocument",
           "type": [
-            "string",
+            "object",
             "null"
           ]
         },
-        "front": {
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+        {
+          "type": "null"
         }
-      },
-      "title": "IssuingCardholderIdDocument",
-      "type": [
-        "object",
-        "null"
-      ]
+      ],
+      "description": "An identifying document, either a passport or local ID card."
     }
   },
   "title": "IssuingCardholderVerification",

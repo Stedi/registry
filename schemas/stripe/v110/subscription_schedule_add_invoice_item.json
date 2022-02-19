@@ -2,8 +2,13 @@
   "description": "An Add Invoice Item describes the prices and quantities that will be added as pending invoice items when entering a phase.",
   "properties": {
     "price": {
-      "maxLength": 5000,
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "ID of the price used to generate the invoice item."
     },
     "quantity": {
       "description": "The quantity of the invoice item.",

@@ -138,11 +138,19 @@
           "x-resourceId": "coupon"
         },
         "customer": {
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "anyOf": [
+            {
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "The ID of the customer associated with this discount."
         },
         "end": {
           "description": "If the coupon has a duration of `repeating`, the date that this discount will end. If the coupon has a duration of `once` or `forever`, this attribute will be null.",
@@ -181,11 +189,19 @@
           "type": "string"
         },
         "promotion_code": {
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "anyOf": [
+            {
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "The promotion code applied to create this discount."
         },
         "start": {
           "description": "Date that the coupon was applied.",

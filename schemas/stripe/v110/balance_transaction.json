@@ -101,11 +101,20 @@
       "type": "string"
     },
     "source": {
-      "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The Stripe object to which this transaction is related.",
+      "x-stripeBypassValidation": true
     },
     "status": {
       "description": "If the transaction's net funds are available in the Stripe balance yet. Either `available` or `pending`.",
