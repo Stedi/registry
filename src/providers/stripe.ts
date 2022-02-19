@@ -74,6 +74,9 @@ function traverse(schema: OpenAPIV3.SchemaObject, parents: Set<String>): any {
   if (!_.isArray(schema.type) && schema.nullable) {
     (schema as any)["type"] = [schema.type, "null"];
     delete (schema as any)["nullable"];
+    if (_.isArray(schema.enum)) {
+      schema.enum.push(null);
+    }
   }
 
   // get type, use first if array
