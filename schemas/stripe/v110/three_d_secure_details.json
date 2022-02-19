@@ -7,8 +7,10 @@
         "challenge",
         "frictionless"
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "result": {
       "description": "Indicates the outcome of 3D Secure authentication.",
@@ -19,8 +21,10 @@
         "not_supported",
         "processing_error"
       ],
-      "nullable": true,
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "x-stripeBypassValidation": true
     },
     "result_reason": {
@@ -34,8 +38,10 @@
         "protocol_error",
         "rejected"
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "version": {
       "description": "The version of 3D Secure that was used.",
@@ -44,12 +50,19 @@
         "2.1.0",
         "2.2.0"
       ],
-      "nullable": true,
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "x-stripeBypassValidation": true
     }
   },
   "title": "three_d_secure_details",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "authentication_flow": "challenge",
+    "result": "attempt_acknowledged",
+    "result_reason": "abandoned",
+    "version": "1.0.2"
+  }
 }

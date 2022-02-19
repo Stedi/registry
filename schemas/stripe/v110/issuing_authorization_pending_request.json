@@ -6,23 +6,21 @@
       "type": "integer"
     },
     "amount_details": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "atm_fee": {
-              "description": "The fee charged by the ATM for the cash withdrawal.",
-              "nullable": true,
-              "type": "integer"
-            }
-          },
-          "title": "IssuingAuthorizationAmountDetails",
-          "type": "object",
-          "x-expandableFields": []
+      "description": "",
+      "properties": {
+        "atm_fee": {
+          "description": "The fee charged by the ATM for the cash withdrawal.",
+          "type": [
+            "integer",
+            "null"
+          ]
         }
-      ],
-      "description": "Detailed breakdown of amount components. These amounts are denominated in `currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).",
-      "nullable": true
+      },
+      "title": "IssuingAuthorizationAmountDetails",
+      "type": [
+        "object",
+        "null"
+      ]
     },
     "currency": {
       "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
@@ -50,7 +48,14 @@
   ],
   "title": "IssuingAuthorizationPendingRequest",
   "type": "object",
-  "x-expandableFields": [
-    "amount_details"
-  ]
+  "default": {
+    "amount": 0,
+    "amount_details": {
+      "atm_fee": 0
+    },
+    "currency": "string",
+    "is_amount_controllable": true,
+    "merchant_amount": 0,
+    "merchant_currency": "string"
+  }
 }

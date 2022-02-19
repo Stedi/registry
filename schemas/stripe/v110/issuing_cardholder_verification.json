@@ -2,18 +2,36 @@
   "description": "",
   "properties": {
     "document": {
-      "anyOf": [
-        {
-          "$ref": "#/components/schemas/issuing_cardholder_id_document"
+      "description": "",
+      "properties": {
+        "back": {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "front": {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
         }
-      ],
-      "description": "An identifying document, either a passport or local ID card.",
-      "nullable": true
+      },
+      "title": "IssuingCardholderIdDocument",
+      "type": [
+        "object",
+        "null"
+      ]
     }
   },
   "title": "IssuingCardholderVerification",
   "type": "object",
-  "x-expandableFields": [
-    "document"
-  ]
+  "default": {
+    "document": {
+      "back": "string",
+      "front": "string"
+    }
+  }
 }

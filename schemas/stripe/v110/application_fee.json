@@ -2,23 +2,8 @@
   "description": "",
   "properties": {
     "account": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/account"
-        }
-      ],
-      "description": "ID of the Stripe account this fee was taken from.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/account"
-          }
-        ]
-      }
+      "maxLength": 5000,
+      "type": "string"
     },
     "amount": {
       "description": "Amount earned, in %s.",
@@ -29,116 +14,19 @@
       "type": "integer"
     },
     "application": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "description": "",
-          "properties": {
-            "id": {
-              "description": "Unique identifier for the object.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "name": {
-              "description": "The name of the application.",
-              "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
-            },
-            "object": {
-              "description": "String representing the object's type. Objects of the same type share the same value.",
-              "enum": [
-                "application"
-              ],
-              "type": "string"
-            }
-          },
-          "required": [
-            "id",
-            "object"
-          ],
-          "title": "Application",
-          "type": "object",
-          "x-expandableFields": []
-        }
-      ],
-      "description": "ID of the Connect application that earned the fee.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "description": "",
-            "properties": {
-              "id": {
-                "description": "Unique identifier for the object.",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "name": {
-                "description": "The name of the application.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "object": {
-                "description": "String representing the object's type. Objects of the same type share the same value.",
-                "enum": [
-                  "application"
-                ],
-                "type": "string"
-              }
-            },
-            "required": [
-              "id",
-              "object"
-            ],
-            "title": "Application",
-            "type": "object",
-            "x-expandableFields": []
-          }
-        ]
-      }
+      "maxLength": 5000,
+      "type": "string"
     },
     "balance_transaction": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/balance_transaction"
-        }
-      ],
-      "description": "Balance transaction that describes the impact of this collected application fee on your account balance (not including refunds).",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/balance_transaction"
-          }
-        ]
-      }
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "charge": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/charge"
-        }
-      ],
-      "description": "ID of the charge that the application fee was taken from.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/charge"
-          }
-        ]
-      }
+      "maxLength": 5000,
+      "type": "string"
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -166,24 +54,11 @@
       "type": "string"
     },
     "originating_transaction": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/charge"
-        }
-      ],
-      "description": "ID of the corresponding charge on the platform account, if this fee was the result of a charge using the `destination` parameter.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/charge"
-          }
-        ]
-      }
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "refunded": {
       "description": "Whether the fee has been fully refunded. If the fee is only partially refunded, this attribute will still be false.",
@@ -193,11 +68,57 @@
       "description": "A list of refunds that have been applied to the fee.",
       "properties": {
         "data": {
-          "description": "Details about each object.",
-          "items": {
-            "$ref": "#/components/schemas/fee_refund"
+          "description": "`Application Fee Refund` objects allow you to refund an application fee that\nhas previously been created but not yet refunded. Funds will be refunded to\nthe Stripe account from which the fee was originally collected.\n\nRelated guide: [Refunding Application Fees](https://stripe.com/docs/connect/destination-charges#refunding-app-fee).",
+          "properties": {
+            "amount": {
+              "description": "Amount, in %s.",
+              "type": "integer"
+            },
+            "balance_transaction": {
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "created": {
+              "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+              "format": "unix-time",
+              "type": "integer"
+            },
+            "currency": {
+              "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+              "type": "string"
+            },
+            "fee": {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "id": {
+              "description": "Unique identifier for the object.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "metadata": {},
+            "object": {
+              "description": "String representing the object's type. Objects of the same type share the same value.",
+              "enum": [
+                "fee_refund"
+              ],
+              "type": "string"
+            }
           },
-          "type": "array"
+          "required": [
+            "amount",
+            "created",
+            "currency",
+            "fee",
+            "id",
+            "object"
+          ],
+          "title": "FeeRefund",
+          "type": "object",
+          "x-resourceId": "fee_refund"
         },
         "has_more": {
           "description": "True if this list has another page of items after this one that can be fetched.",
@@ -223,10 +144,7 @@
         "url"
       ],
       "title": "FeeRefundList",
-      "type": "object",
-      "x-expandableFields": [
-        "data"
-      ]
+      "type": "object"
     }
   },
   "required": [
@@ -245,13 +163,35 @@
   ],
   "title": "PlatformFee",
   "type": "object",
-  "x-expandableFields": [
-    "account",
-    "application",
-    "balance_transaction",
-    "charge",
-    "originating_transaction",
-    "refunds"
-  ],
-  "x-resourceId": "application_fee"
+  "x-resourceId": "application_fee",
+  "default": {
+    "account": "string",
+    "amount": 0,
+    "amount_refunded": 0,
+    "application": "string",
+    "balance_transaction": "string",
+    "charge": "string",
+    "created": 0,
+    "currency": "string",
+    "id": "string",
+    "livemode": true,
+    "object": "application_fee",
+    "originating_transaction": "string",
+    "refunded": true,
+    "refunds": {
+      "data": {
+        "amount": 0,
+        "balance_transaction": "string",
+        "created": 0,
+        "currency": "string",
+        "fee": "string",
+        "id": "string",
+        "metadata": {},
+        "object": "fee_refund"
+      },
+      "has_more": true,
+      "object": "list",
+      "url": "string"
+    }
+  }
 }

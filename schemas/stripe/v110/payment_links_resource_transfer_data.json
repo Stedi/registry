@@ -3,27 +3,14 @@
   "properties": {
     "amount": {
       "description": "The amount in %s that will be transferred to the destination account. By default, the entire amount is transferred to the destination.",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "destination": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/account"
-        }
-      ],
-      "description": "The connected account receiving the transfer.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/account"
-          }
-        ]
-      }
+      "maxLength": 5000,
+      "type": "string"
     }
   },
   "required": [
@@ -31,7 +18,8 @@
   ],
   "title": "PaymentLinksResourceTransferData",
   "type": "object",
-  "x-expandableFields": [
-    "destination"
-  ]
+  "default": {
+    "amount": 0,
+    "destination": "string"
+  }
 }

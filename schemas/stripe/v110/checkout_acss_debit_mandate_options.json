@@ -7,21 +7,19 @@
       "type": "string"
     },
     "default_for": {
-      "description": "List of Stripe products where this mandate can be selected automatically. Returned when the Session is in `setup` mode.",
-      "items": {
-        "enum": [
-          "invoice",
-          "subscription"
-        ],
-        "type": "string"
-      },
-      "type": "array"
+      "enum": [
+        "invoice",
+        "subscription"
+      ],
+      "type": "string"
     },
     "interval_description": {
       "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "payment_schedule": {
       "description": "Payment schedule for the mandate.",
@@ -30,8 +28,10 @@
         "interval",
         "sporadic"
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "transaction_type": {
       "description": "Transaction type of the mandate.",
@@ -39,11 +39,19 @@
         "business",
         "personal"
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "CheckoutAcssDebitMandateOptions",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "custom_mandate_url": "string",
+    "default_for": "invoice",
+    "interval_description": "string",
+    "payment_schedule": "combined",
+    "transaction_type": "business"
+  }
 }

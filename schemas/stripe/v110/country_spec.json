@@ -18,40 +18,18 @@
       ],
       "type": "string"
     },
-    "supported_bank_account_currencies": {
-      "additionalProperties": {
-        "items": {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "type": "array"
-      },
-      "description": "Currencies that can be accepted in the specific country (for transfers).",
-      "type": "object"
-    },
+    "supported_bank_account_currencies": {},
     "supported_payment_currencies": {
-      "description": "Currencies that can be accepted in the specified country (for payments).",
-      "items": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "type": "array"
+      "maxLength": 5000,
+      "type": "string"
     },
     "supported_payment_methods": {
-      "description": "Payment methods available in the specified country. You may need to enable some payment methods (e.g., [ACH](https://stripe.com/docs/ach)) on your account before they appear in this list. The `stripe` payment method refers to [charging through your platform](https://stripe.com/docs/connect/destination-charges).",
-      "items": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "type": "array"
+      "maxLength": 5000,
+      "type": "string"
     },
     "supported_transfer_countries": {
-      "description": "Countries that can accept transfers from the specified country.",
-      "items": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "type": "array"
+      "maxLength": 5000,
+      "type": "string"
     },
     "verification_fields": {
       "description": "",
@@ -60,20 +38,12 @@
           "description": "",
           "properties": {
             "additional": {
-              "description": "Additional fields which are only required for some users.",
-              "items": {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "type": "array"
+              "maxLength": 5000,
+              "type": "string"
             },
             "minimum": {
-              "description": "Fields which every account must eventually provide.",
-              "items": {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "type": "array"
+              "maxLength": 5000,
+              "type": "string"
             }
           },
           "required": [
@@ -81,27 +51,18 @@
             "minimum"
           ],
           "title": "CountrySpecVerificationFieldDetails",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "individual": {
           "description": "",
           "properties": {
             "additional": {
-              "description": "Additional fields which are only required for some users.",
-              "items": {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "type": "array"
+              "maxLength": 5000,
+              "type": "string"
             },
             "minimum": {
-              "description": "Fields which every account must eventually provide.",
-              "items": {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "type": "array"
+              "maxLength": 5000,
+              "type": "string"
             }
           },
           "required": [
@@ -109,8 +70,7 @@
             "minimum"
           ],
           "title": "CountrySpecVerificationFieldDetails",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         }
       },
       "required": [
@@ -118,11 +78,7 @@
         "individual"
       ],
       "title": "CountrySpecVerificationFields",
-      "type": "object",
-      "x-expandableFields": [
-        "company",
-        "individual"
-      ]
+      "type": "object"
     }
   },
   "required": [
@@ -137,8 +93,24 @@
   ],
   "title": "CountrySpec",
   "type": "object",
-  "x-expandableFields": [
-    "verification_fields"
-  ],
-  "x-resourceId": "country_spec"
+  "x-resourceId": "country_spec",
+  "default": {
+    "default_currency": "string",
+    "id": "string",
+    "object": "country_spec",
+    "supported_bank_account_currencies": {},
+    "supported_payment_currencies": "string",
+    "supported_payment_methods": "string",
+    "supported_transfer_countries": "string",
+    "verification_fields": {
+      "company": {
+        "additional": "string",
+        "minimum": "string"
+      },
+      "individual": {
+        "additional": "string",
+        "minimum": "string"
+      }
+    }
+  }
 }

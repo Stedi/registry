@@ -14,47 +14,47 @@
     "ip_address": {
       "description": "A recent IP address of the customer used for tax reporting and tax location inference.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "location": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "country": {
-              "description": "The customer's country as identified by Stripe Tax.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "source": {
-              "description": "The data source used to infer the customer's location.",
-              "enum": [
-                "billing_address",
-                "ip_address",
-                "payment_method",
-                "shipping_destination"
-              ],
-              "type": "string"
-            },
-            "state": {
-              "description": "The customer's state, county, province, or region as identified by Stripe Tax.",
-              "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "required": [
-            "country",
-            "source"
+      "description": "",
+      "properties": {
+        "country": {
+          "description": "The customer's country as identified by Stripe Tax.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "source": {
+          "description": "The data source used to infer the customer's location.",
+          "enum": [
+            "billing_address",
+            "ip_address",
+            "payment_method",
+            "shipping_destination"
           ],
-          "title": "CustomerTaxLocation",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "string"
+        },
+        "state": {
+          "description": "The customer's state, county, province, or region as identified by Stripe Tax.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
         }
+      },
+      "required": [
+        "country",
+        "source"
       ],
-      "description": "The customer's location as identified by Stripe Tax.",
-      "nullable": true
+      "title": "CustomerTaxLocation",
+      "type": [
+        "object",
+        "null"
+      ]
     }
   },
   "required": [
@@ -62,7 +62,13 @@
   ],
   "title": "CustomerTax",
   "type": "object",
-  "x-expandableFields": [
-    "location"
-  ]
+  "default": {
+    "automatic_tax": "failed",
+    "ip_address": "string",
+    "location": {
+      "country": "string",
+      "source": "billing_address",
+      "state": "string"
+    }
+  }
 }

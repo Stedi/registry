@@ -6,23 +6,8 @@
       "type": "boolean"
     },
     "charge": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/charge"
-        }
-      ],
-      "description": "ID of the charge this early fraud warning is for, optionally expanded.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/charge"
-          }
-        ]
-      }
+      "maxLength": 5000,
+      "type": "string"
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -51,23 +36,8 @@
       "type": "string"
     },
     "payment_intent": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/payment_intent"
-        }
-      ],
-      "description": "ID of the Payment Intent this early fraud warning is for, optionally expanded.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/payment_intent"
-          }
-        ]
-      }
+      "maxLength": 5000,
+      "type": "string"
     }
   },
   "required": [
@@ -81,9 +51,15 @@
   ],
   "title": "RadarEarlyFraudWarning",
   "type": "object",
-  "x-expandableFields": [
-    "charge",
-    "payment_intent"
-  ],
-  "x-resourceId": "radar.early_fraud_warning"
+  "x-resourceId": "radar.early_fraud_warning",
+  "default": {
+    "actionable": true,
+    "charge": "string",
+    "created": 0,
+    "fraud_type": "string",
+    "id": "string",
+    "livemode": true,
+    "object": "radar.early_fraud_warning",
+    "payment_intent": "string"
+  }
 }

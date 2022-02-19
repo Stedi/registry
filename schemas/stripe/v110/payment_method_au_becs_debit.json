@@ -4,23 +4,33 @@
     "bsb_number": {
       "description": "Six-digit number identifying bank and branch associated with this bank account.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "fingerprint": {
       "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "last4": {
       "description": "Last four digits of the bank account number.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "payment_method_au_becs_debit",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "bsb_number": "string",
+    "fingerprint": "string",
+    "last4": "string"
+  }
 }

@@ -26,8 +26,7 @@
         }
       },
       "title": "SourceTransactionAchCreditTransferData",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "amount": {
       "description": "A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the amount your customer has pushed to the receiver.",
@@ -63,8 +62,7 @@
         }
       },
       "title": "SourceTransactionChfCreditTransferData",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -115,8 +113,7 @@
         }
       },
       "title": "SourceTransactionGbpCreditTransferData",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "id": {
       "description": "Unique identifier for the object.",
@@ -149,8 +146,7 @@
         }
       },
       "title": "SourceTransactionPaperCheckData",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "sepa_credit_transfer": {
       "description": "",
@@ -172,8 +168,7 @@
         }
       },
       "title": "SourceTransactionSepaCreditTransferData",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "source": {
       "description": "The ID of the source this transaction is attached to.",
@@ -221,12 +216,47 @@
   ],
   "title": "SourceTransaction",
   "type": "object",
-  "x-expandableFields": [
-    "ach_credit_transfer",
-    "chf_credit_transfer",
-    "gbp_credit_transfer",
-    "paper_check",
-    "sepa_credit_transfer"
-  ],
-  "x-resourceId": "source_transaction"
+  "x-resourceId": "source_transaction",
+  "default": {
+    "ach_credit_transfer": {
+      "customer_data": "string",
+      "fingerprint": "string",
+      "last4": "string",
+      "routing_number": "string"
+    },
+    "amount": 0,
+    "chf_credit_transfer": {
+      "reference": "string",
+      "sender_address_country": "string",
+      "sender_address_line1": "string",
+      "sender_iban": "string",
+      "sender_name": "string"
+    },
+    "created": 0,
+    "currency": "string",
+    "gbp_credit_transfer": {
+      "fingerprint": "string",
+      "funding_method": "string",
+      "last4": "string",
+      "reference": "string",
+      "sender_account_number": "string",
+      "sender_name": "string",
+      "sender_sort_code": "string"
+    },
+    "id": "string",
+    "livemode": true,
+    "object": "source_transaction",
+    "paper_check": {
+      "available_at": "string",
+      "invoices": "string"
+    },
+    "sepa_credit_transfer": {
+      "reference": "string",
+      "sender_iban": "string",
+      "sender_name": "string"
+    },
+    "source": "string",
+    "status": "string",
+    "type": "ach_credit_transfer"
+  }
 }

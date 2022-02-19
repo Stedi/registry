@@ -2,18 +2,14 @@
   "description": "",
   "properties": {
     "allowed_updates": {
-      "description": "The types of customer updates that are supported. When empty, customers are not updateable.",
-      "items": {
-        "enum": [
-          "address",
-          "email",
-          "phone",
-          "shipping",
-          "tax_id"
-        ],
-        "type": "string"
-      },
-      "type": "array"
+      "enum": [
+        "address",
+        "email",
+        "phone",
+        "shipping",
+        "tax_id"
+      ],
+      "type": "string"
     },
     "enabled": {
       "description": "Whether the feature is enabled.",
@@ -26,5 +22,8 @@
   ],
   "title": "PortalCustomerUpdate",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "allowed_updates": "address",
+    "enabled": true
+  }
 }

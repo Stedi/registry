@@ -2,201 +2,166 @@
   "description": "This is an object representing your Stripe balance. You can retrieve it to see\nthe balance currently on your Stripe account.\n\nYou can also retrieve the balance history, which contains a list of\n[transactions](https://stripe.com/docs/reporting/balance-transaction-types) that contributed to the balance\n(charges, payouts, and so forth).\n\nThe available and pending amounts for each currency are broken down further by\npayment source types.\n\nRelated guide: [Understanding Connect Account Balances](https://stripe.com/docs/connect/account-balances).",
   "properties": {
     "available": {
-      "description": "Funds that are available to be transferred or paid out, whether automatically by Stripe or explicitly via the [Transfers API](https://stripe.com/docs/api#transfers) or [Payouts API](https://stripe.com/docs/api#payouts). The available balance for each currency and payment type can be found in the `source_types` property.",
-      "items": {
-        "description": "",
-        "properties": {
-          "amount": {
-            "description": "Balance amount.",
-            "type": "integer"
-          },
-          "currency": {
-            "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-            "type": "string"
-          },
-          "source_types": {
-            "description": "",
-            "properties": {
-              "bank_account": {
-                "description": "Amount for bank account.",
-                "type": "integer"
-              },
-              "card": {
-                "description": "Amount for card.",
-                "type": "integer"
-              },
-              "fpx": {
-                "description": "Amount for FPX.",
-                "type": "integer"
-              }
-            },
-            "title": "BalanceAmountBySourceType",
-            "type": "object",
-            "x-expandableFields": []
-          }
+      "description": "",
+      "properties": {
+        "amount": {
+          "description": "Balance amount.",
+          "type": "integer"
         },
-        "required": [
-          "amount",
-          "currency"
-        ],
-        "title": "BalanceAmount",
-        "type": "object",
-        "x-expandableFields": [
-          "source_types"
-        ]
+        "currency": {
+          "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+          "type": "string"
+        },
+        "source_types": {
+          "description": "",
+          "properties": {
+            "bank_account": {
+              "description": "Amount for bank account.",
+              "type": "integer"
+            },
+            "card": {
+              "description": "Amount for card.",
+              "type": "integer"
+            },
+            "fpx": {
+              "description": "Amount for FPX.",
+              "type": "integer"
+            }
+          },
+          "title": "BalanceAmountBySourceType",
+          "type": "object"
+        }
       },
-      "type": "array"
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "BalanceAmount",
+      "type": "object"
     },
     "connect_reserved": {
-      "description": "Funds held due to negative balances on connected Custom accounts. The connect reserve balance for each currency and payment type can be found in the `source_types` property.",
-      "items": {
-        "description": "",
-        "properties": {
-          "amount": {
-            "description": "Balance amount.",
-            "type": "integer"
-          },
-          "currency": {
-            "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-            "type": "string"
-          },
-          "source_types": {
-            "description": "",
-            "properties": {
-              "bank_account": {
-                "description": "Amount for bank account.",
-                "type": "integer"
-              },
-              "card": {
-                "description": "Amount for card.",
-                "type": "integer"
-              },
-              "fpx": {
-                "description": "Amount for FPX.",
-                "type": "integer"
-              }
-            },
-            "title": "BalanceAmountBySourceType",
-            "type": "object",
-            "x-expandableFields": []
-          }
+      "description": "",
+      "properties": {
+        "amount": {
+          "description": "Balance amount.",
+          "type": "integer"
         },
-        "required": [
-          "amount",
-          "currency"
-        ],
-        "title": "BalanceAmount",
-        "type": "object",
-        "x-expandableFields": [
-          "source_types"
-        ]
+        "currency": {
+          "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+          "type": "string"
+        },
+        "source_types": {
+          "description": "",
+          "properties": {
+            "bank_account": {
+              "description": "Amount for bank account.",
+              "type": "integer"
+            },
+            "card": {
+              "description": "Amount for card.",
+              "type": "integer"
+            },
+            "fpx": {
+              "description": "Amount for FPX.",
+              "type": "integer"
+            }
+          },
+          "title": "BalanceAmountBySourceType",
+          "type": "object"
+        }
       },
-      "type": "array"
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "BalanceAmount",
+      "type": "object"
     },
     "instant_available": {
-      "description": "Funds that can be paid out using Instant Payouts.",
-      "items": {
-        "description": "",
-        "properties": {
-          "amount": {
-            "description": "Balance amount.",
-            "type": "integer"
-          },
-          "currency": {
-            "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-            "type": "string"
-          },
-          "source_types": {
-            "description": "",
-            "properties": {
-              "bank_account": {
-                "description": "Amount for bank account.",
-                "type": "integer"
-              },
-              "card": {
-                "description": "Amount for card.",
-                "type": "integer"
-              },
-              "fpx": {
-                "description": "Amount for FPX.",
-                "type": "integer"
-              }
-            },
-            "title": "BalanceAmountBySourceType",
-            "type": "object",
-            "x-expandableFields": []
-          }
+      "description": "",
+      "properties": {
+        "amount": {
+          "description": "Balance amount.",
+          "type": "integer"
         },
-        "required": [
-          "amount",
-          "currency"
-        ],
-        "title": "BalanceAmount",
-        "type": "object",
-        "x-expandableFields": [
-          "source_types"
-        ]
+        "currency": {
+          "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+          "type": "string"
+        },
+        "source_types": {
+          "description": "",
+          "properties": {
+            "bank_account": {
+              "description": "Amount for bank account.",
+              "type": "integer"
+            },
+            "card": {
+              "description": "Amount for card.",
+              "type": "integer"
+            },
+            "fpx": {
+              "description": "Amount for FPX.",
+              "type": "integer"
+            }
+          },
+          "title": "BalanceAmountBySourceType",
+          "type": "object"
+        }
       },
-      "type": "array"
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "BalanceAmount",
+      "type": "object"
     },
     "issuing": {
       "description": "",
       "properties": {
         "available": {
-          "description": "Funds that are available for use.",
-          "items": {
-            "description": "",
-            "properties": {
-              "amount": {
-                "description": "Balance amount.",
-                "type": "integer"
-              },
-              "currency": {
-                "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-                "type": "string"
-              },
-              "source_types": {
-                "description": "",
-                "properties": {
-                  "bank_account": {
-                    "description": "Amount for bank account.",
-                    "type": "integer"
-                  },
-                  "card": {
-                    "description": "Amount for card.",
-                    "type": "integer"
-                  },
-                  "fpx": {
-                    "description": "Amount for FPX.",
-                    "type": "integer"
-                  }
-                },
-                "title": "BalanceAmountBySourceType",
-                "type": "object",
-                "x-expandableFields": []
-              }
+          "description": "",
+          "properties": {
+            "amount": {
+              "description": "Balance amount.",
+              "type": "integer"
             },
-            "required": [
-              "amount",
-              "currency"
-            ],
-            "title": "BalanceAmount",
-            "type": "object",
-            "x-expandableFields": [
-              "source_types"
-            ]
+            "currency": {
+              "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+              "type": "string"
+            },
+            "source_types": {
+              "description": "",
+              "properties": {
+                "bank_account": {
+                  "description": "Amount for bank account.",
+                  "type": "integer"
+                },
+                "card": {
+                  "description": "Amount for card.",
+                  "type": "integer"
+                },
+                "fpx": {
+                  "description": "Amount for FPX.",
+                  "type": "integer"
+                }
+              },
+              "title": "BalanceAmountBySourceType",
+              "type": "object"
+            }
           },
-          "type": "array"
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "title": "BalanceAmount",
+          "type": "object"
         }
       },
       "required": [
         "available"
       ],
       "title": "BalanceDetail",
-      "type": "object",
-      "x-expandableFields": [
-        "available"
-      ]
+      "type": "object"
     },
     "livemode": {
       "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
@@ -210,50 +175,42 @@
       "type": "string"
     },
     "pending": {
-      "description": "Funds that are not yet available in the balance, due to the 7-day rolling pay cycle. The pending balance for each currency, and for each payment type, can be found in the `source_types` property.",
-      "items": {
-        "description": "",
-        "properties": {
-          "amount": {
-            "description": "Balance amount.",
-            "type": "integer"
-          },
-          "currency": {
-            "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-            "type": "string"
-          },
-          "source_types": {
-            "description": "",
-            "properties": {
-              "bank_account": {
-                "description": "Amount for bank account.",
-                "type": "integer"
-              },
-              "card": {
-                "description": "Amount for card.",
-                "type": "integer"
-              },
-              "fpx": {
-                "description": "Amount for FPX.",
-                "type": "integer"
-              }
-            },
-            "title": "BalanceAmountBySourceType",
-            "type": "object",
-            "x-expandableFields": []
-          }
+      "description": "",
+      "properties": {
+        "amount": {
+          "description": "Balance amount.",
+          "type": "integer"
         },
-        "required": [
-          "amount",
-          "currency"
-        ],
-        "title": "BalanceAmount",
-        "type": "object",
-        "x-expandableFields": [
-          "source_types"
-        ]
+        "currency": {
+          "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+          "type": "string"
+        },
+        "source_types": {
+          "description": "",
+          "properties": {
+            "bank_account": {
+              "description": "Amount for bank account.",
+              "type": "integer"
+            },
+            "card": {
+              "description": "Amount for card.",
+              "type": "integer"
+            },
+            "fpx": {
+              "description": "Amount for FPX.",
+              "type": "integer"
+            }
+          },
+          "title": "BalanceAmountBySourceType",
+          "type": "object"
+        }
       },
-      "type": "array"
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "BalanceAmount",
+      "type": "object"
     }
   },
   "required": [
@@ -264,12 +221,56 @@
   ],
   "title": "Balance",
   "type": "object",
-  "x-expandableFields": [
-    "available",
-    "connect_reserved",
-    "instant_available",
-    "issuing",
-    "pending"
-  ],
-  "x-resourceId": "balance"
+  "x-resourceId": "balance",
+  "default": {
+    "available": {
+      "amount": 0,
+      "currency": "string",
+      "source_types": {
+        "bank_account": 0,
+        "card": 0,
+        "fpx": 0
+      }
+    },
+    "connect_reserved": {
+      "amount": 0,
+      "currency": "string",
+      "source_types": {
+        "bank_account": 0,
+        "card": 0,
+        "fpx": 0
+      }
+    },
+    "instant_available": {
+      "amount": 0,
+      "currency": "string",
+      "source_types": {
+        "bank_account": 0,
+        "card": 0,
+        "fpx": 0
+      }
+    },
+    "issuing": {
+      "available": {
+        "amount": 0,
+        "currency": "string",
+        "source_types": {
+          "bank_account": 0,
+          "card": 0,
+          "fpx": 0
+        }
+      }
+    },
+    "livemode": true,
+    "object": "balance",
+    "pending": {
+      "amount": 0,
+      "currency": "string",
+      "source_types": {
+        "bank_account": 0,
+        "card": 0,
+        "fpx": 0
+      }
+    }
+  }
 }

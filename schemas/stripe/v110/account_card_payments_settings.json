@@ -18,19 +18,24 @@
         "cvc_failure"
       ],
       "title": "AccountDeclineChargeOn",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "statement_descriptor_prefix": {
       "description": "The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge. `statement_descriptor_prefix` is useful for maximizing descriptor space for the dynamic portion.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "AccountCardPaymentsSettings",
   "type": "object",
-  "x-expandableFields": [
-    "decline_on"
-  ]
+  "default": {
+    "decline_on": {
+      "avs_failure": true,
+      "cvc_failure": true
+    },
+    "statement_descriptor_prefix": "string"
+  }
 }

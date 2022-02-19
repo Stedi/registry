@@ -9,8 +9,10 @@
     "invoice": {
       "description": "The invoice in which this usage period has been billed for.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "livemode": {
       "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
@@ -29,19 +31,22 @@
         "end": {
           "description": "The end date of this usage period. All usage up to and including this point in time is included.",
           "format": "unix-time",
-          "nullable": true,
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ]
         },
         "start": {
           "description": "The start date of this usage period. All usage after this point in time is included.",
           "format": "unix-time",
-          "nullable": true,
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ]
         }
       },
       "title": "Period",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "subscription_item": {
       "description": "The ID of the subscription item this summary is describing.",
@@ -63,8 +68,17 @@
   ],
   "title": "UsageRecordSummary",
   "type": "object",
-  "x-expandableFields": [
-    "period"
-  ],
-  "x-resourceId": "usage_record_summary"
+  "x-resourceId": "usage_record_summary",
+  "default": {
+    "id": "string",
+    "invoice": "string",
+    "livemode": true,
+    "object": "usage_record_summary",
+    "period": {
+      "end": 0,
+      "start": 0
+    },
+    "subscription_item": "string",
+    "total_usage": 0
+  }
 }

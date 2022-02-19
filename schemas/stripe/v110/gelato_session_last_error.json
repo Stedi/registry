@@ -20,18 +20,25 @@
         "selfie_unverified_other",
         "under_supported_age"
       ],
-      "nullable": true,
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "x-stripeBypassValidation": true
     },
     "reason": {
       "description": "A message that explains the reason for verification or user-session failure.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "GelatoSessionLastError",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "code": "abandoned",
+    "reason": "string"
+  }
 }

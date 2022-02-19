@@ -19,8 +19,10 @@
     "state": {
       "description": "The customer's state, county, province, or region as identified by Stripe Tax.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "required": [
@@ -29,5 +31,9 @@
   ],
   "title": "CustomerTaxLocation",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "country": "string",
+    "source": "billing_address",
+    "state": "string"
+  }
 }

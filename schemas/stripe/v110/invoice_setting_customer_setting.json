@@ -2,63 +2,50 @@
   "description": "",
   "properties": {
     "custom_fields": {
-      "description": "Default custom fields to be displayed on invoices for this customer.",
-      "items": {
-        "description": "",
-        "properties": {
-          "name": {
-            "description": "The name of the custom field.",
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "value": {
-            "description": "The value of the custom field.",
-            "maxLength": 5000,
-            "type": "string"
-          }
-        },
-        "required": [
-          "name",
-          "value"
-        ],
-        "title": "InvoiceSettingCustomField",
-        "type": "object",
-        "x-expandableFields": []
-      },
-      "nullable": true,
-      "type": "array"
-    },
-    "default_payment_method": {
-      "anyOf": [
-        {
+      "description": "",
+      "properties": {
+        "name": {
+          "description": "The name of the custom field.",
           "maxLength": 5000,
           "type": "string"
         },
-        {
-          "$ref": "#/components/schemas/payment_method"
+        "value": {
+          "description": "The value of the custom field.",
+          "maxLength": 5000,
+          "type": "string"
         }
+      },
+      "required": [
+        "name",
+        "value"
       ],
-      "description": "ID of a payment method that's attached to the customer, to be used as the customer's default payment method for subscriptions and invoices.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/payment_method"
-          }
-        ]
-      }
+      "title": "InvoiceSettingCustomField",
+      "type": "object"
+    },
+    "default_payment_method": {
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "footer": {
       "description": "Default footer to be displayed on invoices for this customer.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "InvoiceSettingCustomerSetting",
   "type": "object",
-  "x-expandableFields": [
-    "custom_fields",
-    "default_payment_method"
-  ]
+  "default": {
+    "custom_fields": {
+      "name": "string",
+      "value": "string"
+    },
+    "default_payment_method": "string",
+    "footer": "string"
+  }
 }

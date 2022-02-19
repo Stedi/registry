@@ -9,21 +9,17 @@
           "type": "boolean"
         },
         "options": {
-          "description": "Which cancellation reasons will be given as options to the customer.",
-          "items": {
-            "enum": [
-              "customer_service",
-              "low_quality",
-              "missing_features",
-              "other",
-              "switched_service",
-              "too_complex",
-              "too_expensive",
-              "unused"
-            ],
-            "type": "string"
-          },
-          "type": "array"
+          "enum": [
+            "customer_service",
+            "low_quality",
+            "missing_features",
+            "other",
+            "switched_service",
+            "too_complex",
+            "too_expensive",
+            "unused"
+          ],
+          "type": "string"
         }
       },
       "required": [
@@ -31,8 +27,7 @@
         "options"
       ],
       "title": "PortalSubscriptionCancellationReason",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "enabled": {
       "description": "Whether the feature is enabled.",
@@ -64,7 +59,13 @@
   ],
   "title": "PortalSubscriptionCancel",
   "type": "object",
-  "x-expandableFields": [
-    "cancellation_reason"
-  ]
+  "default": {
+    "cancellation_reason": {
+      "enabled": true,
+      "options": "customer_service"
+    },
+    "enabled": true,
+    "mode": "at_period_end",
+    "proration_behavior": "always_invoice"
+  }
 }

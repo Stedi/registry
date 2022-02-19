@@ -4,15 +4,16 @@
     "accepted_at": {
       "description": "The time at which the customer accepted the Mandate.",
       "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "offline": {
       "description": "",
       "properties": {},
       "title": "offline_acceptance",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "online": {
       "description": "",
@@ -20,19 +21,22 @@
         "ip_address": {
           "description": "The IP address from which the Mandate was accepted by the customer.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "user_agent": {
           "description": "The user agent of the browser from which the Mandate was accepted by the customer.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "title": "online_acceptance",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "type": {
       "description": "The type of customer acceptance information included with the Mandate. One of `online` or `offline`.",
@@ -48,8 +52,13 @@
   ],
   "title": "customer_acceptance",
   "type": "object",
-  "x-expandableFields": [
-    "offline",
-    "online"
-  ]
+  "default": {
+    "accepted_at": 0,
+    "offline": {},
+    "online": {
+      "ip_address": "string",
+      "user_agent": "string"
+    },
+    "type": "offline"
+  }
 }

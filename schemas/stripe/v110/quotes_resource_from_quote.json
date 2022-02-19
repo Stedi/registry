@@ -6,23 +6,8 @@
       "type": "boolean"
     },
     "quote": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/quote"
-        }
-      ],
-      "description": "The quote that was cloned.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/quote"
-          }
-        ]
-      }
+      "maxLength": 5000,
+      "type": "string"
     }
   },
   "required": [
@@ -31,7 +16,8 @@
   ],
   "title": "QuotesResourceFromQuote",
   "type": "object",
-  "x-expandableFields": [
-    "quote"
-  ]
+  "default": {
+    "is_revision": true,
+    "quote": "string"
+  }
 }

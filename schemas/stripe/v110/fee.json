@@ -8,8 +8,10 @@
     "application": {
       "description": "ID of the Connect application that earned the fee.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "currency": {
       "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
@@ -18,8 +20,10 @@
     "description": {
       "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "type": {
       "description": "Type of the fee, one of: `application_fee`, `stripe_fee` or `tax`.",
@@ -34,5 +38,11 @@
   ],
   "title": "Fee",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "amount": 0,
+    "application": "string",
+    "currency": "string",
+    "description": "string",
+    "type": "string"
+  }
 }

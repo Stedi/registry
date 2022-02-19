@@ -7,15 +7,16 @@
         "accepted_at": {
           "description": "The time at which the customer accepted the Mandate.",
           "format": "unix-time",
-          "nullable": true,
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ]
         },
         "offline": {
           "description": "",
           "properties": {},
           "title": "offline_acceptance",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "online": {
           "description": "",
@@ -23,19 +24,22 @@
             "ip_address": {
               "description": "The IP address from which the Mandate was accepted by the customer.",
               "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "user_agent": {
               "description": "The user agent of the browser from which the Mandate was accepted by the customer.",
               "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "title": "online_acceptance",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "type": {
           "description": "The type of customer acceptance information included with the Mandate. One of `online` or `offline`.",
@@ -50,11 +54,7 @@
         "type"
       ],
       "title": "customer_acceptance",
-      "type": "object",
-      "x-expandableFields": [
-        "offline",
-        "online"
-      ]
+      "type": "object"
     },
     "id": {
       "description": "Unique identifier for the object.",
@@ -69,8 +69,7 @@
       "description": "",
       "properties": {},
       "title": "mandate_multi_use",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "object": {
       "description": "String representing the object's type. Objects of the same type share the same value.",
@@ -80,23 +79,8 @@
       "type": "string"
     },
     "payment_method": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/payment_method"
-        }
-      ],
-      "description": "ID of the payment method associated with this mandate.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/payment_method"
-          }
-        ]
-      }
+      "maxLength": 5000,
+      "type": "string"
     },
     "payment_method_details": {
       "description": "",
@@ -105,21 +89,19 @@
           "description": "",
           "properties": {
             "default_for": {
-              "description": "List of Stripe products where this mandate can be selected automatically.",
-              "items": {
-                "enum": [
-                  "invoice",
-                  "subscription"
-                ],
-                "type": "string"
-              },
-              "type": "array"
+              "enum": [
+                "invoice",
+                "subscription"
+              ],
+              "type": "string"
             },
             "interval_description": {
               "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
               "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "payment_schedule": {
               "description": "Payment schedule for the mandate.",
@@ -144,8 +126,7 @@
             "transaction_type"
           ],
           "title": "mandate_acss_debit",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "au_becs_debit": {
           "description": "",
@@ -160,8 +141,7 @@
             "url"
           ],
           "title": "mandate_au_becs_debit",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "bacs_debit": {
           "description": "",
@@ -193,15 +173,13 @@
             "url"
           ],
           "title": "mandate_bacs_debit",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "card": {
           "description": "",
           "properties": {},
           "title": "card_mandate_payment_method_details",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "sepa_debit": {
           "description": "",
@@ -222,8 +200,7 @@
             "url"
           ],
           "title": "mandate_sepa_debit",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "type": {
           "description": "The type of the payment method associated with this mandate. An additional hash is included on `payment_method_details` with a name matching this value. It contains mandate information specific to the payment method.",
@@ -235,14 +212,7 @@
         "type"
       ],
       "title": "mandate_payment_method_details",
-      "type": "object",
-      "x-expandableFields": [
-        "acss_debit",
-        "au_becs_debit",
-        "bacs_debit",
-        "card",
-        "sepa_debit"
-      ]
+      "type": "object"
     },
     "single_use": {
       "description": "",
@@ -261,8 +231,7 @@
         "currency"
       ],
       "title": "mandate_single_use",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "status": {
       "description": "The status of the mandate, which indicates whether it can be used to initiate a payment.",
@@ -294,12 +263,49 @@
   ],
   "title": "Mandate",
   "type": "object",
-  "x-expandableFields": [
-    "customer_acceptance",
-    "multi_use",
-    "payment_method",
-    "payment_method_details",
-    "single_use"
-  ],
-  "x-resourceId": "mandate"
+  "x-resourceId": "mandate",
+  "default": {
+    "customer_acceptance": {
+      "accepted_at": 0,
+      "offline": {},
+      "online": {
+        "ip_address": "string",
+        "user_agent": "string"
+      },
+      "type": "offline"
+    },
+    "id": "string",
+    "livemode": true,
+    "multi_use": {},
+    "object": "mandate",
+    "payment_method": "string",
+    "payment_method_details": {
+      "acss_debit": {
+        "default_for": "invoice",
+        "interval_description": "string",
+        "payment_schedule": "combined",
+        "transaction_type": "business"
+      },
+      "au_becs_debit": {
+        "url": "string"
+      },
+      "bacs_debit": {
+        "network_status": "accepted",
+        "reference": "string",
+        "url": "string"
+      },
+      "card": {},
+      "sepa_debit": {
+        "reference": "string",
+        "url": "string"
+      },
+      "type": "string"
+    },
+    "single_use": {
+      "amount": 0,
+      "currency": "string"
+    },
+    "status": "active",
+    "type": "multi_use"
+  }
 }

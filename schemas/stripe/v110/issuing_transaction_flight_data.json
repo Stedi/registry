@@ -3,78 +3,103 @@
   "properties": {
     "departure_at": {
       "description": "The time that the flight departed.",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "passenger_name": {
       "description": "The name of the passenger.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "refundable": {
       "description": "Whether the ticket is refundable.",
-      "nullable": true,
-      "type": "boolean"
+      "type": [
+        "boolean",
+        "null"
+      ]
     },
     "segments": {
-      "description": "The legs of the trip.",
-      "items": {
-        "description": "",
-        "properties": {
-          "arrival_airport_code": {
-            "description": "The three-letter IATA airport code of the flight's destination.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "carrier": {
-            "description": "The airline carrier code.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "departure_airport_code": {
-            "description": "The three-letter IATA airport code that the flight departed from.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "flight_number": {
-            "description": "The flight number.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "service_class": {
-            "description": "The flight's service class.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          },
-          "stopover_allowed": {
-            "description": "Whether a stopover is allowed on this flight.",
-            "nullable": true,
-            "type": "boolean"
-          }
+      "description": "",
+      "properties": {
+        "arrival_airport_code": {
+          "description": "The three-letter IATA airport code of the flight's destination.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
         },
-        "title": "IssuingTransactionFlightDataLeg",
-        "type": "object",
-        "x-expandableFields": []
+        "carrier": {
+          "description": "The airline carrier code.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "departure_airport_code": {
+          "description": "The three-letter IATA airport code that the flight departed from.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "flight_number": {
+          "description": "The flight number.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "service_class": {
+          "description": "The flight's service class.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "stopover_allowed": {
+          "description": "Whether a stopover is allowed on this flight.",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
       },
-      "nullable": true,
-      "type": "array"
+      "title": "IssuingTransactionFlightDataLeg",
+      "type": "object"
     },
     "travel_agency": {
       "description": "The travel agency that issued the ticket.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "IssuingTransactionFlightData",
   "type": "object",
-  "x-expandableFields": [
-    "segments"
-  ]
+  "default": {
+    "departure_at": 0,
+    "passenger_name": "string",
+    "refundable": true,
+    "segments": {
+      "arrival_airport_code": "string",
+      "carrier": "string",
+      "departure_airport_code": "string",
+      "flight_number": "string",
+      "service_class": "string",
+      "stopover_allowed": true
+    },
+    "travel_agency": "string"
+  }
 }

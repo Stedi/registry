@@ -2,18 +2,16 @@
   "description": "",
   "properties": {
     "available": {
-      "description": "All available networks for the card.",
-      "items": {
-        "maxLength": 5000,
-        "type": "string"
-      },
-      "type": "array"
+      "maxLength": 5000,
+      "type": "string"
     },
     "preferred": {
       "description": "The preferred network for the card.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "required": [
@@ -21,5 +19,8 @@
   ],
   "title": "networks",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "available": "string",
+    "preferred": "string"
+  }
 }

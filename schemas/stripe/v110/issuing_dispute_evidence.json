@@ -2,22 +2,315 @@
   "description": "",
   "properties": {
     "canceled": {
-      "$ref": "#/components/schemas/issuing_dispute_canceled_evidence"
+      "description": "",
+      "properties": {
+        "additional_documentation": {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "canceled_at": {
+          "description": "Date when order was canceled.",
+          "format": "unix-time",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "cancellation_policy_provided": {
+          "description": "Whether the cardholder was provided with a cancellation policy.",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "cancellation_reason": {
+          "description": "Reason for canceling the order.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "expected_at": {
+          "description": "Date when the cardholder expected to receive the product.",
+          "format": "unix-time",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "explanation": {
+          "description": "Explanation of why the cardholder is disputing this transaction.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "product_description": {
+          "description": "Description of the merchandise or service that was purchased.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "product_type": {
+          "description": "Whether the product was a merchandise or service.",
+          "enum": [
+            "merchandise",
+            "service"
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "return_status": {
+          "description": "Result of cardholder's attempt to return the product.",
+          "enum": [
+            "merchant_rejected",
+            "successful"
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "returned_at": {
+          "description": "Date when the product was returned or attempted to be returned.",
+          "format": "unix-time",
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "title": "IssuingDisputeCanceledEvidence",
+      "type": "object"
     },
     "duplicate": {
-      "$ref": "#/components/schemas/issuing_dispute_duplicate_evidence"
+      "description": "",
+      "properties": {
+        "additional_documentation": {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "card_statement": {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cash_receipt": {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "check_image": {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "explanation": {
+          "description": "Explanation of why the cardholder is disputing this transaction.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "original_transaction": {
+          "description": "Transaction (e.g., ipi_...) that the disputed transaction is a duplicate of. Of the two or more transactions that are copies of each other, this is original undisputed one.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "title": "IssuingDisputeDuplicateEvidence",
+      "type": "object"
     },
     "fraudulent": {
-      "$ref": "#/components/schemas/issuing_dispute_fraudulent_evidence"
+      "description": "",
+      "properties": {
+        "additional_documentation": {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "explanation": {
+          "description": "Explanation of why the cardholder is disputing this transaction.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "title": "IssuingDisputeFraudulentEvidence",
+      "type": "object"
     },
     "merchandise_not_as_described": {
-      "$ref": "#/components/schemas/issuing_dispute_merchandise_not_as_described_evidence"
+      "description": "",
+      "properties": {
+        "additional_documentation": {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "explanation": {
+          "description": "Explanation of why the cardholder is disputing this transaction.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "received_at": {
+          "description": "Date when the product was received.",
+          "format": "unix-time",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "return_description": {
+          "description": "Description of the cardholder's attempt to return the product.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "return_status": {
+          "description": "Result of cardholder's attempt to return the product.",
+          "enum": [
+            "merchant_rejected",
+            "successful"
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "returned_at": {
+          "description": "Date when the product was returned or attempted to be returned.",
+          "format": "unix-time",
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "title": "IssuingDisputeMerchandiseNotAsDescribedEvidence",
+      "type": "object"
     },
     "not_received": {
-      "$ref": "#/components/schemas/issuing_dispute_not_received_evidence"
+      "description": "",
+      "properties": {
+        "additional_documentation": {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "expected_at": {
+          "description": "Date when the cardholder expected to receive the product.",
+          "format": "unix-time",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "explanation": {
+          "description": "Explanation of why the cardholder is disputing this transaction.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "product_description": {
+          "description": "Description of the merchandise or service that was purchased.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "product_type": {
+          "description": "Whether the product was a merchandise or service.",
+          "enum": [
+            "merchandise",
+            "service"
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "title": "IssuingDisputeNotReceivedEvidence",
+      "type": "object"
     },
     "other": {
-      "$ref": "#/components/schemas/issuing_dispute_other_evidence"
+      "description": "",
+      "properties": {
+        "additional_documentation": {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "explanation": {
+          "description": "Explanation of why the cardholder is disputing this transaction.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "product_description": {
+          "description": "Description of the merchandise or service that was purchased.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "product_type": {
+          "description": "Whether the product was a merchandise or service.",
+          "enum": [
+            "merchandise",
+            "service"
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "title": "IssuingDisputeOtherEvidence",
+      "type": "object"
     },
     "reason": {
       "description": "The reason for filing the dispute. Its value will match the field containing the evidence.",
@@ -34,7 +327,50 @@
       "x-stripeBypassValidation": true
     },
     "service_not_as_described": {
-      "$ref": "#/components/schemas/issuing_dispute_service_not_as_described_evidence"
+      "description": "",
+      "properties": {
+        "additional_documentation": {
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "canceled_at": {
+          "description": "Date when order was canceled.",
+          "format": "unix-time",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "cancellation_reason": {
+          "description": "Reason for canceling the order.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "explanation": {
+          "description": "Explanation of why the cardholder is disputing this transaction.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "received_at": {
+          "description": "Date when the product was received.",
+          "format": "unix-time",
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "title": "IssuingDisputeServiceNotAsDescribedEvidence",
+      "type": "object"
     }
   },
   "required": [
@@ -42,13 +378,59 @@
   ],
   "title": "IssuingDisputeEvidence",
   "type": "object",
-  "x-expandableFields": [
-    "canceled",
-    "duplicate",
-    "fraudulent",
-    "merchandise_not_as_described",
-    "not_received",
-    "other",
-    "service_not_as_described"
-  ]
+  "default": {
+    "canceled": {
+      "additional_documentation": "string",
+      "canceled_at": 0,
+      "cancellation_policy_provided": true,
+      "cancellation_reason": "string",
+      "expected_at": 0,
+      "explanation": "string",
+      "product_description": "string",
+      "product_type": "merchandise",
+      "return_status": "merchant_rejected",
+      "returned_at": 0
+    },
+    "duplicate": {
+      "additional_documentation": "string",
+      "card_statement": "string",
+      "cash_receipt": "string",
+      "check_image": "string",
+      "explanation": "string",
+      "original_transaction": "string"
+    },
+    "fraudulent": {
+      "additional_documentation": "string",
+      "explanation": "string"
+    },
+    "merchandise_not_as_described": {
+      "additional_documentation": "string",
+      "explanation": "string",
+      "received_at": 0,
+      "return_description": "string",
+      "return_status": "merchant_rejected",
+      "returned_at": 0
+    },
+    "not_received": {
+      "additional_documentation": "string",
+      "expected_at": 0,
+      "explanation": "string",
+      "product_description": "string",
+      "product_type": "merchandise"
+    },
+    "other": {
+      "additional_documentation": "string",
+      "explanation": "string",
+      "product_description": "string",
+      "product_type": "merchandise"
+    },
+    "reason": "canceled",
+    "service_not_as_described": {
+      "additional_documentation": "string",
+      "canceled_at": 0,
+      "cancellation_reason": "string",
+      "explanation": "string",
+      "received_at": 0
+    }
+  }
 }

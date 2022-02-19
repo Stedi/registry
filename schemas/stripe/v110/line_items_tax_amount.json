@@ -15,8 +15,10 @@
         "country": {
           "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "created": {
           "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -26,8 +28,10 @@
         "description": {
           "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "display_name": {
           "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
@@ -46,22 +50,16 @@
         "jurisdiction": {
           "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "livemode": {
           "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
           "type": "boolean"
         },
-        "metadata": {
-          "additionalProperties": {
-            "maxLength": 500,
-            "type": "string"
-          },
-          "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-          "nullable": true,
-          "type": "object"
-        },
+        "metadata": {},
         "object": {
           "description": "String representing the object's type. Objects of the same type share the same value.",
           "enum": [
@@ -76,8 +74,10 @@
         "state": {
           "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "tax_type": {
           "description": "The high-level tax type, such as `vat` or `sales_tax`.",
@@ -91,8 +91,10 @@
             "sales_tax",
             "vat"
           ],
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": [
@@ -107,7 +109,6 @@
       ],
       "title": "TaxRate",
       "type": "object",
-      "x-expandableFields": [],
       "x-resourceId": "tax_rate"
     }
   },
@@ -117,7 +118,23 @@
   ],
   "title": "LineItemsTaxAmount",
   "type": "object",
-  "x-expandableFields": [
-    "rate"
-  ]
+  "default": {
+    "amount": 0,
+    "rate": {
+      "active": true,
+      "country": "string",
+      "created": 0,
+      "description": "string",
+      "display_name": "string",
+      "id": "string",
+      "inclusive": true,
+      "jurisdiction": "string",
+      "livemode": true,
+      "metadata": {},
+      "object": "tax_rate",
+      "percentage": 0,
+      "state": "string",
+      "tax_type": "gst"
+    }
+  }
 }

@@ -8,8 +8,10 @@
     "application": {
       "description": "ID of the Connect Application that created the configuration.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "business_profile": {
       "description": "",
@@ -17,8 +19,10 @@
         "headline": {
           "description": "The messaging shown to customers in the portal.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "privacy_policy_url": {
           "description": "A link to the business’s publicly available privacy policy.",
@@ -36,8 +40,7 @@
         "terms_of_service_url"
       ],
       "title": "PortalBusinessProfile",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -47,8 +50,10 @@
     "default_return_url": {
       "description": "The default URL to redirect customers to when they click on the portal's link to return to your website. This can be [overriden](https://stripe.com/docs/api/customer_portal/sessions/create#create_portal_session-return_url) when creating the session.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "features": {
       "description": "",
@@ -57,18 +62,14 @@
           "description": "",
           "properties": {
             "allowed_updates": {
-              "description": "The types of customer updates that are supported. When empty, customers are not updateable.",
-              "items": {
-                "enum": [
-                  "address",
-                  "email",
-                  "phone",
-                  "shipping",
-                  "tax_id"
-                ],
-                "type": "string"
-              },
-              "type": "array"
+              "enum": [
+                "address",
+                "email",
+                "phone",
+                "shipping",
+                "tax_id"
+              ],
+              "type": "string"
             },
             "enabled": {
               "description": "Whether the feature is enabled.",
@@ -80,8 +81,7 @@
             "enabled"
           ],
           "title": "PortalCustomerUpdate",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "invoice_history": {
           "description": "",
@@ -95,8 +95,7 @@
             "enabled"
           ],
           "title": "PortalInvoiceList",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "payment_method_update": {
           "description": "",
@@ -110,8 +109,7 @@
             "enabled"
           ],
           "title": "PortalPaymentMethodUpdate",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "subscription_cancel": {
           "description": "",
@@ -124,21 +122,17 @@
                   "type": "boolean"
                 },
                 "options": {
-                  "description": "Which cancellation reasons will be given as options to the customer.",
-                  "items": {
-                    "enum": [
-                      "customer_service",
-                      "low_quality",
-                      "missing_features",
-                      "other",
-                      "switched_service",
-                      "too_complex",
-                      "too_expensive",
-                      "unused"
-                    ],
-                    "type": "string"
-                  },
-                  "type": "array"
+                  "enum": [
+                    "customer_service",
+                    "low_quality",
+                    "missing_features",
+                    "other",
+                    "switched_service",
+                    "too_complex",
+                    "too_expensive",
+                    "unused"
+                  ],
+                  "type": "string"
                 }
               },
               "required": [
@@ -146,8 +140,7 @@
                 "options"
               ],
               "title": "PortalSubscriptionCancellationReason",
-              "type": "object",
-              "x-expandableFields": []
+              "type": "object"
             },
             "enabled": {
               "description": "Whether the feature is enabled.",
@@ -178,10 +171,7 @@
             "proration_behavior"
           ],
           "title": "PortalSubscriptionCancel",
-          "type": "object",
-          "x-expandableFields": [
-            "cancellation_reason"
-          ]
+          "type": "object"
         },
         "subscription_pause": {
           "description": "",
@@ -195,57 +185,42 @@
             "enabled"
           ],
           "title": "PortalSubscriptionPause",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "subscription_update": {
           "description": "",
           "properties": {
             "default_allowed_updates": {
-              "description": "The types of subscription updates that are supported for items listed in the `products` attribute. When empty, subscriptions are not updateable.",
-              "items": {
-                "enum": [
-                  "price",
-                  "promotion_code",
-                  "quantity"
-                ],
-                "type": "string"
-              },
-              "type": "array"
+              "enum": [
+                "price",
+                "promotion_code",
+                "quantity"
+              ],
+              "type": "string"
             },
             "enabled": {
               "description": "Whether the feature is enabled.",
               "type": "boolean"
             },
             "products": {
-              "description": "The list of products that support subscription updates.",
-              "items": {
-                "description": "",
-                "properties": {
-                  "prices": {
-                    "description": "The list of price IDs which, when subscribed to, a subscription can be updated.",
-                    "items": {
-                      "maxLength": 5000,
-                      "type": "string"
-                    },
-                    "type": "array"
-                  },
-                  "product": {
-                    "description": "The product ID.",
-                    "maxLength": 5000,
-                    "type": "string"
-                  }
+              "description": "",
+              "properties": {
+                "prices": {
+                  "maxLength": 5000,
+                  "type": "string"
                 },
-                "required": [
-                  "prices",
-                  "product"
-                ],
-                "title": "PortalSubscriptionUpdateProduct",
-                "type": "object",
-                "x-expandableFields": []
+                "product": {
+                  "description": "The product ID.",
+                  "maxLength": 5000,
+                  "type": "string"
+                }
               },
-              "nullable": true,
-              "type": "array"
+              "required": [
+                "prices",
+                "product"
+              ],
+              "title": "PortalSubscriptionUpdateProduct",
+              "type": "object"
             },
             "proration_behavior": {
               "description": "Determines how to handle prorations resulting from subscription updates. Valid values are `none`, `create_prorations`, and `always_invoice`.",
@@ -263,10 +238,7 @@
             "proration_behavior"
           ],
           "title": "PortalSubscriptionUpdate",
-          "type": "object",
-          "x-expandableFields": [
-            "products"
-          ]
+          "type": "object"
         }
       },
       "required": [
@@ -278,15 +250,7 @@
         "subscription_update"
       ],
       "title": "PortalFeatures",
-      "type": "object",
-      "x-expandableFields": [
-        "customer_update",
-        "invoice_history",
-        "payment_method_update",
-        "subscription_cancel",
-        "subscription_pause",
-        "subscription_update"
-      ]
+      "type": "object"
     },
     "id": {
       "description": "Unique identifier for the object.",
@@ -301,15 +265,7 @@
       "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
       "type": "boolean"
     },
-    "metadata": {
-      "additionalProperties": {
-        "maxLength": 500,
-        "type": "string"
-      },
-      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-      "nullable": true,
-      "type": "object"
-    },
+    "metadata": {},
     "object": {
       "description": "String representing the object's type. Objects of the same type share the same value.",
       "enum": [
@@ -336,9 +292,55 @@
   ],
   "title": "PortalConfiguration",
   "type": "object",
-  "x-expandableFields": [
-    "business_profile",
-    "features"
-  ],
-  "x-resourceId": "billing_portal.configuration"
+  "x-resourceId": "billing_portal.configuration",
+  "default": {
+    "active": true,
+    "application": "string",
+    "business_profile": {
+      "headline": "string",
+      "privacy_policy_url": "string",
+      "terms_of_service_url": "string"
+    },
+    "created": 0,
+    "default_return_url": "string",
+    "features": {
+      "customer_update": {
+        "allowed_updates": "address",
+        "enabled": true
+      },
+      "invoice_history": {
+        "enabled": true
+      },
+      "payment_method_update": {
+        "enabled": true
+      },
+      "subscription_cancel": {
+        "cancellation_reason": {
+          "enabled": true,
+          "options": "customer_service"
+        },
+        "enabled": true,
+        "mode": "at_period_end",
+        "proration_behavior": "always_invoice"
+      },
+      "subscription_pause": {
+        "enabled": true
+      },
+      "subscription_update": {
+        "default_allowed_updates": "price",
+        "enabled": true,
+        "products": {
+          "prices": "string",
+          "product": "string"
+        },
+        "proration_behavior": "always_invoice"
+      }
+    },
+    "id": "string",
+    "is_default": true,
+    "livemode": true,
+    "metadata": {},
+    "object": "billing_portal.configuration",
+    "updated": 0
+  }
 }

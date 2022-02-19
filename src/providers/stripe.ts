@@ -3,7 +3,6 @@ import * as github from "../github";
 import { OpenAPIV3 } from "openapi-types";
 import _ from "lodash";
 import deepcopy from "deepcopy";
-import definition from "../v110.json";
 
 const maxDepth = 4;
 

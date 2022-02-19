@@ -9,8 +9,10 @@
     "api_version": {
       "description": "The Stripe API version used to render `data`. *Note: This property is populated only for events on or after October 31, 2014*.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -20,21 +22,14 @@
     "data": {
       "description": "",
       "properties": {
-        "object": {
-          "description": "Object containing the API resource relevant to the event. For example, an `invoice.created` event will have a full [invoice object](https://stripe.com/docs/api#invoice_object) as the value of the object key.",
-          "type": "object"
-        },
-        "previous_attributes": {
-          "description": "Object containing the names of the attributes that have changed, and their previous values (sent along only with *.updated events).",
-          "type": "object"
-        }
+        "object": {},
+        "previous_attributes": {}
       },
       "required": [
         "object"
       ],
       "title": "NotificationEventData",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "id": {
       "description": "Unique identifier for the object.",
@@ -57,30 +52,30 @@
       "type": "integer"
     },
     "request": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "id": {
-              "description": "ID of the API request that caused the event. If null, the event was automatic (e.g., Stripe's automatic subscription handling). Request logs are available in the [dashboard](https://dashboard.stripe.com/logs), but currently not in the API.",
-              "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
-            },
-            "idempotency_key": {
-              "description": "The idempotency key transmitted during the request, if any. *Note: This property is populated only for events on or after May 23, 2017*.",
-              "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "title": "NotificationEventRequest",
-          "type": "object",
-          "x-expandableFields": []
+      "description": "",
+      "properties": {
+        "id": {
+          "description": "ID of the API request that caused the event. If null, the event was automatic (e.g., Stripe's automatic subscription handling). Request logs are available in the [dashboard](https://dashboard.stripe.com/logs), but currently not in the API.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "idempotency_key": {
+          "description": "The idempotency key transmitted during the request, if any. *Note: This property is populated only for events on or after May 23, 2017*.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
         }
-      ],
-      "description": "Information on the API request that instigated the event.",
-      "nullable": true
+      },
+      "title": "NotificationEventRequest",
+      "type": [
+        "object",
+        "null"
+      ]
     },
     "type": {
       "description": "Description of the event (e.g., `invoice.created` or `charge.refunded`).",
@@ -99,9 +94,23 @@
   ],
   "title": "NotificationEvent",
   "type": "object",
-  "x-expandableFields": [
-    "data",
-    "request"
-  ],
-  "x-resourceId": "event"
+  "x-resourceId": "event",
+  "default": {
+    "account": "string",
+    "api_version": "string",
+    "created": 0,
+    "data": {
+      "object": {},
+      "previous_attributes": {}
+    },
+    "id": "string",
+    "livemode": true,
+    "object": "event",
+    "pending_webhooks": 0,
+    "request": {
+      "id": "string",
+      "idempotency_key": "string"
+    },
+    "type": "string"
+  }
 }

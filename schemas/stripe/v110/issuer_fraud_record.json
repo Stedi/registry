@@ -6,23 +6,8 @@
       "type": "boolean"
     },
     "charge": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/charge"
-        }
-      ],
-      "description": "ID of the charge this issuer fraud record is for, optionally expanded.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/charge"
-          }
-        ]
-      }
+      "maxLength": 5000,
+      "type": "string"
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -72,8 +57,16 @@
   ],
   "title": "IssuerFraudRecord",
   "type": "object",
-  "x-expandableFields": [
-    "charge"
-  ],
-  "x-resourceId": "issuer_fraud_record"
+  "x-resourceId": "issuer_fraud_record",
+  "default": {
+    "actionable": true,
+    "charge": "string",
+    "created": 0,
+    "fraud_type": "string",
+    "has_liability_shift": true,
+    "id": "string",
+    "livemode": true,
+    "object": "issuer_fraud_record",
+    "post_date": 0
+  }
 }

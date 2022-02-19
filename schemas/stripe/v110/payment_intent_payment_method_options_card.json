@@ -2,101 +2,95 @@
   "description": "",
   "properties": {
     "installments": {
-      "anyOf": [
-        {
+      "description": "",
+      "properties": {
+        "available_plans": {
           "description": "",
           "properties": {
-            "available_plans": {
-              "description": "Installment plans that may be selected for this PaymentIntent.",
-              "items": {
-                "description": "",
-                "properties": {
-                  "count": {
-                    "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
-                    "nullable": true,
-                    "type": "integer"
-                  },
-                  "interval": {
-                    "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
-                    "enum": [
-                      "month"
-                    ],
-                    "nullable": true,
-                    "type": "string"
-                  },
-                  "type": {
-                    "description": "Type of installment plan, one of `fixed_count`.",
-                    "enum": [
-                      "fixed_count"
-                    ],
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "type"
-                ],
-                "title": "payment_method_details_card_installments_plan",
-                "type": "object",
-                "x-expandableFields": []
-              },
-              "nullable": true,
-              "type": "array"
+            "count": {
+              "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
+              "type": [
+                "integer",
+                "null"
+              ]
             },
-            "enabled": {
-              "description": "Whether Installments are enabled for this PaymentIntent.",
-              "type": "boolean"
-            },
-            "plan": {
-              "anyOf": [
-                {
-                  "description": "",
-                  "properties": {
-                    "count": {
-                      "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
-                      "nullable": true,
-                      "type": "integer"
-                    },
-                    "interval": {
-                      "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
-                      "enum": [
-                        "month"
-                      ],
-                      "nullable": true,
-                      "type": "string"
-                    },
-                    "type": {
-                      "description": "Type of installment plan, one of `fixed_count`.",
-                      "enum": [
-                        "fixed_count"
-                      ],
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "type"
-                  ],
-                  "title": "payment_method_details_card_installments_plan",
-                  "type": "object",
-                  "x-expandableFields": []
-                }
+            "interval": {
+              "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
+              "enum": [
+                "month"
               ],
-              "description": "Installment plan selected for this PaymentIntent.",
-              "nullable": true
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "type": {
+              "description": "Type of installment plan, one of `fixed_count`.",
+              "enum": [
+                "fixed_count"
+              ],
+              "type": "string"
             }
           },
           "required": [
-            "enabled"
+            "type"
           ],
-          "title": "payment_method_options_card_installments",
-          "type": "object",
-          "x-expandableFields": [
-            "available_plans",
-            "plan"
+          "title": "payment_method_details_card_installments_plan",
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "enabled": {
+          "description": "Whether Installments are enabled for this PaymentIntent.",
+          "type": "boolean"
+        },
+        "plan": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "interval": {
+              "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
+              "enum": [
+                "month"
+              ],
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "type": {
+              "description": "Type of installment plan, one of `fixed_count`.",
+              "enum": [
+                "fixed_count"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "title": "payment_method_details_card_installments_plan",
+          "type": [
+            "object",
+            "null"
           ]
         }
+      },
+      "required": [
+        "enabled"
       ],
-      "description": "Installment details for this payment (Mexico only).\n\nFor more information, see the [installments integration guide](https://stripe.com/docs/payments/installments).",
-      "nullable": true
+      "title": "payment_method_options_card_installments",
+      "type": [
+        "object",
+        "null"
+      ]
     },
     "network": {
       "description": "Selected network to process this payment intent on. Depends on the available networks of the card attached to the payment intent. Can be only set confirm-time.",
@@ -112,8 +106,10 @@
         "unknown",
         "visa"
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "request_three_d_secure": {
       "description": "We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.",
@@ -122,8 +118,10 @@
         "automatic",
         "challenge_only"
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "setup_future_usage": {
       "description": "Indicates that you intend to make future payments with this PaymentIntent's payment method.\n\nProviding this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.\n\nWhen processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).",
@@ -137,7 +135,22 @@
   },
   "title": "payment_intent_payment_method_options_card",
   "type": "object",
-  "x-expandableFields": [
-    "installments"
-  ]
+  "default": {
+    "installments": {
+      "available_plans": {
+        "count": 0,
+        "interval": "month",
+        "type": "fixed_count"
+      },
+      "enabled": true,
+      "plan": {
+        "count": 0,
+        "interval": "month",
+        "type": "fixed_count"
+      }
+    },
+    "network": "amex",
+    "request_three_d_secure": "any",
+    "setup_future_usage": "none"
+  }
 }

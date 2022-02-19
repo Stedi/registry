@@ -5,20 +5,12 @@
       "description": "",
       "properties": {
         "additional": {
-          "description": "Additional fields which are only required for some users.",
-          "items": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "type": "array"
+          "maxLength": 5000,
+          "type": "string"
         },
         "minimum": {
-          "description": "Fields which every account must eventually provide.",
-          "items": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "type": "array"
+          "maxLength": 5000,
+          "type": "string"
         }
       },
       "required": [
@@ -26,27 +18,18 @@
         "minimum"
       ],
       "title": "CountrySpecVerificationFieldDetails",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "individual": {
       "description": "",
       "properties": {
         "additional": {
-          "description": "Additional fields which are only required for some users.",
-          "items": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "type": "array"
+          "maxLength": 5000,
+          "type": "string"
         },
         "minimum": {
-          "description": "Fields which every account must eventually provide.",
-          "items": {
-            "maxLength": 5000,
-            "type": "string"
-          },
-          "type": "array"
+          "maxLength": 5000,
+          "type": "string"
         }
       },
       "required": [
@@ -54,8 +37,7 @@
         "minimum"
       ],
       "title": "CountrySpecVerificationFieldDetails",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     }
   },
   "required": [
@@ -64,8 +46,14 @@
   ],
   "title": "CountrySpecVerificationFields",
   "type": "object",
-  "x-expandableFields": [
-    "company",
-    "individual"
-  ]
+  "default": {
+    "company": {
+      "additional": "string",
+      "minimum": "string"
+    },
+    "individual": {
+      "additional": "string",
+      "minimum": "string"
+    }
+  }
 }

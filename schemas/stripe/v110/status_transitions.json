@@ -4,29 +4,42 @@
     "canceled": {
       "description": "The time that the order was canceled.",
       "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "fulfiled": {
       "description": "The time that the order was fulfilled.",
       "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "paid": {
       "description": "The time that the order was paid.",
       "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "returned": {
       "description": "The time that the order was returned.",
       "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     }
   },
   "title": "StatusTransitions",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "canceled": 0,
+    "fulfiled": 0,
+    "paid": 0,
+    "returned": 0
+  }
 }

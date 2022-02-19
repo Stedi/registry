@@ -3,16 +3,20 @@
   "properties": {
     "count": {
       "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "interval": {
       "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
       "enum": [
         "month"
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "type": {
       "description": "Type of installment plan, one of `fixed_count`.",
@@ -27,5 +31,9 @@
   ],
   "title": "payment_method_details_card_installments_plan",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "count": 0,
+    "interval": "month",
+    "type": "fixed_count"
+  }
 }

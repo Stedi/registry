@@ -15,27 +15,24 @@
       "properties": {
         "amount_off": {
           "description": "Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for this customer.",
-          "nullable": true,
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ]
         },
         "applies_to": {
           "description": "",
           "properties": {
             "products": {
-              "description": "A list of product IDs this coupon applies to",
-              "items": {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "type": "array"
+              "maxLength": 5000,
+              "type": "string"
             }
           },
           "required": [
             "products"
           ],
           "title": "CouponAppliesTo",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "created": {
           "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -44,8 +41,10 @@
         },
         "currency": {
           "description": "If `amount_off` has been set, the three-letter [ISO code for the currency](https://stripe.com/docs/currencies) of the amount to take off.",
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "duration": {
           "description": "One of `forever`, `once`, and `repeating`. Describes how long a customer who applies this coupon will get the discount.",
@@ -58,8 +57,10 @@
         },
         "duration_in_months": {
           "description": "If `duration` is `repeating`, the number of months the coupon applies. Null if coupon `duration` is `forever` or `once`.",
-          "nullable": true,
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ]
         },
         "id": {
           "description": "Unique identifier for the object.",
@@ -72,23 +73,19 @@
         },
         "max_redemptions": {
           "description": "Maximum number of times this coupon can be redeemed, in total, across all customers, before it is no longer valid.",
-          "nullable": true,
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ]
         },
-        "metadata": {
-          "additionalProperties": {
-            "maxLength": 500,
-            "type": "string"
-          },
-          "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-          "nullable": true,
-          "type": "object"
-        },
+        "metadata": {},
         "name": {
           "description": "Name of the coupon displayed to customers on for instance invoices or receipts.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "object": {
           "description": "String representing the object's type. Objects of the same type share the same value.",
@@ -99,14 +96,18 @@
         },
         "percent_off": {
           "description": "Percent that will be taken off the subtotal of any invoices for this customer for the duration of the coupon. For example, a coupon with percent_off of 50 will make a %s100 invoice %s50 instead.",
-          "nullable": true,
-          "type": "number"
+          "type": [
+            "number",
+            "null"
+          ]
         },
         "redeem_by": {
           "description": "Date after which the coupon can no longer be redeemed.",
           "format": "unix-time",
-          "nullable": true,
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ]
         },
         "times_redeemed": {
           "description": "Number of times this coupon has been applied to a customer.",
@@ -128,9 +129,6 @@
       ],
       "title": "Coupon",
       "type": "object",
-      "x-expandableFields": [
-        "applies_to"
-      ],
       "x-resourceId": "coupon"
     },
     "created": {
@@ -139,96 +137,19 @@
       "type": "integer"
     },
     "customer": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/customer"
-        },
-        {
-          "description": "",
-          "properties": {
-            "deleted": {
-              "description": "Always true for a deleted object",
-              "enum": [
-                true
-              ],
-              "type": "boolean"
-            },
-            "id": {
-              "description": "Unique identifier for the object.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "object": {
-              "description": "String representing the object's type. Objects of the same type share the same value.",
-              "enum": [
-                "customer"
-              ],
-              "type": "string"
-            }
-          },
-          "required": [
-            "deleted",
-            "id",
-            "object"
-          ],
-          "title": "DeletedCustomer",
-          "type": "object",
-          "x-expandableFields": [],
-          "x-resourceId": "deleted_customer"
-        }
-      ],
-      "description": "The customer that this promotion code can be used by.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/customer"
-          },
-          {
-            "description": "",
-            "properties": {
-              "deleted": {
-                "description": "Always true for a deleted object",
-                "enum": [
-                  true
-                ],
-                "type": "boolean"
-              },
-              "id": {
-                "description": "Unique identifier for the object.",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "object": {
-                "description": "String representing the object's type. Objects of the same type share the same value.",
-                "enum": [
-                  "customer"
-                ],
-                "type": "string"
-              }
-            },
-            "required": [
-              "deleted",
-              "id",
-              "object"
-            ],
-            "title": "DeletedCustomer",
-            "type": "object",
-            "x-expandableFields": [],
-            "x-resourceId": "deleted_customer"
-          }
-        ]
-      }
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "expires_at": {
       "description": "Date at which the promotion code can no longer be redeemed.",
       "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "id": {
       "description": "Unique identifier for the object.",
@@ -241,18 +162,12 @@
     },
     "max_redemptions": {
       "description": "Maximum number of times this promotion code can be redeemed.",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
-    "metadata": {
-      "additionalProperties": {
-        "maxLength": 500,
-        "type": "string"
-      },
-      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-      "nullable": true,
-      "type": "object"
-    },
+    "metadata": {},
     "object": {
       "description": "String representing the object's type. Objects of the same type share the same value.",
       "enum": [
@@ -269,22 +184,25 @@
         },
         "minimum_amount": {
           "description": "Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).",
-          "nullable": true,
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ]
         },
         "minimum_amount_currency": {
           "description": "Three-letter [ISO code](https://stripe.com/docs/currencies) for minimum_amount",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": [
         "first_time_transaction"
       ],
       "title": "PromotionCodesResourceRestrictions",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "times_redeemed": {
       "description": "Number of times this promotion code has been used.",
@@ -304,10 +222,43 @@
   ],
   "title": "PromotionCode",
   "type": "object",
-  "x-expandableFields": [
-    "coupon",
-    "customer",
-    "restrictions"
-  ],
-  "x-resourceId": "promotion_code"
+  "x-resourceId": "promotion_code",
+  "default": {
+    "active": true,
+    "code": "string",
+    "coupon": {
+      "amount_off": 0,
+      "applies_to": {
+        "products": "string"
+      },
+      "created": 0,
+      "currency": "string",
+      "duration": "forever",
+      "duration_in_months": 0,
+      "id": "string",
+      "livemode": true,
+      "max_redemptions": 0,
+      "metadata": {},
+      "name": "string",
+      "object": "coupon",
+      "percent_off": 0,
+      "redeem_by": 0,
+      "times_redeemed": 0,
+      "valid": true
+    },
+    "created": 0,
+    "customer": "string",
+    "expires_at": 0,
+    "id": "string",
+    "livemode": true,
+    "max_redemptions": 0,
+    "metadata": {},
+    "object": "promotion_code",
+    "restrictions": {
+      "first_time_transaction": true,
+      "minimum_amount": 0,
+      "minimum_amount_currency": "string"
+    },
+    "times_redeemed": 0
+  }
 }

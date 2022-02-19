@@ -9,8 +9,10 @@
         "max",
         "sum"
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "interval": {
       "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
@@ -42,5 +44,10 @@
   ],
   "title": "Recurring",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "aggregate_usage": "last_during_period",
+    "interval": "day",
+    "interval_count": 0,
+    "usage_type": "licensed"
+  }
 }

@@ -5,21 +5,19 @@
       "description": "",
       "properties": {
         "default_for": {
-          "description": "List of Stripe products where this mandate can be selected automatically.",
-          "items": {
-            "enum": [
-              "invoice",
-              "subscription"
-            ],
-            "type": "string"
-          },
-          "type": "array"
+          "enum": [
+            "invoice",
+            "subscription"
+          ],
+          "type": "string"
         },
         "interval_description": {
           "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "payment_schedule": {
           "description": "Payment schedule for the mandate.",
@@ -44,8 +42,7 @@
         "transaction_type"
       ],
       "title": "mandate_acss_debit",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "au_becs_debit": {
       "description": "",
@@ -60,8 +57,7 @@
         "url"
       ],
       "title": "mandate_au_becs_debit",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "bacs_debit": {
       "description": "",
@@ -93,15 +89,13 @@
         "url"
       ],
       "title": "mandate_bacs_debit",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "card": {
       "description": "",
       "properties": {},
       "title": "card_mandate_payment_method_details",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "sepa_debit": {
       "description": "",
@@ -122,8 +116,7 @@
         "url"
       ],
       "title": "mandate_sepa_debit",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "type": {
       "description": "The type of the payment method associated with this mandate. An additional hash is included on `payment_method_details` with a name matching this value. It contains mandate information specific to the payment method.",
@@ -136,11 +129,26 @@
   ],
   "title": "mandate_payment_method_details",
   "type": "object",
-  "x-expandableFields": [
-    "acss_debit",
-    "au_becs_debit",
-    "bacs_debit",
-    "card",
-    "sepa_debit"
-  ]
+  "default": {
+    "acss_debit": {
+      "default_for": "invoice",
+      "interval_description": "string",
+      "payment_schedule": "combined",
+      "transaction_type": "business"
+    },
+    "au_becs_debit": {
+      "url": "string"
+    },
+    "bacs_debit": {
+      "network_status": "accepted",
+      "reference": "string",
+      "url": "string"
+    },
+    "card": {},
+    "sepa_debit": {
+      "reference": "string",
+      "url": "string"
+    },
+    "type": "string"
+  }
 }

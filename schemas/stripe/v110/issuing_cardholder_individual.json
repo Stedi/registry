@@ -2,33 +2,35 @@
   "description": "",
   "properties": {
     "dob": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "day": {
-              "description": "The day of birth, between 1 and 31.",
-              "nullable": true,
-              "type": "integer"
-            },
-            "month": {
-              "description": "The month of birth, between 1 and 12.",
-              "nullable": true,
-              "type": "integer"
-            },
-            "year": {
-              "description": "The four-digit year of birth.",
-              "nullable": true,
-              "type": "integer"
-            }
-          },
-          "title": "IssuingCardholderIndividualDOB",
-          "type": "object",
-          "x-expandableFields": []
+      "description": "",
+      "properties": {
+        "day": {
+          "description": "The day of birth, between 1 and 31.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "month": {
+          "description": "The month of birth, between 1 and 12.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "year": {
+          "description": "The four-digit year of birth.",
+          "type": [
+            "integer",
+            "null"
+          ]
         }
-      ],
-      "description": "The date of birth of this cardholder.",
-      "nullable": true
+      },
+      "title": "IssuingCardholderIndividualDOB",
+      "type": [
+        "object",
+        "null"
+      ]
     },
     "first_name": {
       "description": "The first name of this cardholder.",
@@ -41,13 +43,38 @@
       "type": "string"
     },
     "verification": {
-      "anyOf": [
-        {
-          "$ref": "#/components/schemas/issuing_cardholder_verification"
+      "description": "",
+      "properties": {
+        "document": {
+          "description": "",
+          "properties": {
+            "back": {
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "front": {
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "title": "IssuingCardholderIdDocument",
+          "type": [
+            "object",
+            "null"
+          ]
         }
-      ],
-      "description": "Government-issued ID document for this cardholder.",
-      "nullable": true
+      },
+      "title": "IssuingCardholderVerification",
+      "type": [
+        "object",
+        "null"
+      ]
     }
   },
   "required": [
@@ -56,8 +83,19 @@
   ],
   "title": "IssuingCardholderIndividual",
   "type": "object",
-  "x-expandableFields": [
-    "dob",
-    "verification"
-  ]
+  "default": {
+    "dob": {
+      "day": 0,
+      "month": 0,
+      "year": 0
+    },
+    "first_name": "string",
+    "last_name": "string",
+    "verification": {
+      "document": {
+        "back": "string",
+        "front": "string"
+      }
+    }
+  }
 }

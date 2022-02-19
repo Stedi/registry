@@ -4,23 +4,33 @@
     "address_line1_check": {
       "description": "If a address line1 was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "address_postal_code_check": {
       "description": "If a address postal code was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "cvc_check": {
       "description": "If a CVC was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "payment_method_card_checks",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "address_line1_check": "string",
+    "address_postal_code_check": "string",
+    "cvc_check": "string"
+  }
 }

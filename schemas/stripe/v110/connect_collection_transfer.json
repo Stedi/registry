@@ -10,23 +10,8 @@
       "type": "string"
     },
     "destination": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/account"
-        }
-      ],
-      "description": "ID of the account that funds are being collected for.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/account"
-          }
-        ]
-      }
+      "maxLength": 5000,
+      "type": "string"
     },
     "id": {
       "description": "Unique identifier for the object.",
@@ -55,7 +40,12 @@
   ],
   "title": "ConnectCollectionTransfer",
   "type": "object",
-  "x-expandableFields": [
-    "destination"
-  ]
+  "default": {
+    "amount": 0,
+    "currency": "string",
+    "destination": "string",
+    "id": "string",
+    "livemode": true,
+    "object": "connect_collection_transfer"
+  }
 }

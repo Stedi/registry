@@ -10,13 +10,14 @@
             "business",
             "personal"
           ],
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "title": "invoice_payment_method_options_acss_debit_mandate_options",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "verification_method": {
       "description": "Bank account verification method.",
@@ -31,7 +32,10 @@
   },
   "title": "invoice_payment_method_options_acss_debit",
   "type": "object",
-  "x-expandableFields": [
-    "mandate_options"
-  ]
+  "default": {
+    "mandate_options": {
+      "transaction_type": "business"
+    },
+    "verification_method": "automatic"
+  }
 }

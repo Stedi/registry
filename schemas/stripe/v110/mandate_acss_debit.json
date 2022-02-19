@@ -2,21 +2,19 @@
   "description": "",
   "properties": {
     "default_for": {
-      "description": "List of Stripe products where this mandate can be selected automatically.",
-      "items": {
-        "enum": [
-          "invoice",
-          "subscription"
-        ],
-        "type": "string"
-      },
-      "type": "array"
+      "enum": [
+        "invoice",
+        "subscription"
+      ],
+      "type": "string"
     },
     "interval_description": {
       "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "payment_schedule": {
       "description": "Payment schedule for the mandate.",
@@ -42,5 +40,10 @@
   ],
   "title": "mandate_acss_debit",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "default_for": "invoice",
+    "interval_description": "string",
+    "payment_schedule": "combined",
+    "transaction_type": "business"
+  }
 }

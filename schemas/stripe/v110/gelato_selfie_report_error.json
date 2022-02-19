@@ -9,17 +9,24 @@
         "selfie_manipulated",
         "selfie_unverified_other"
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "reason": {
       "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "GelatoSelfieReportError",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "code": "selfie_document_missing_photo",
+    "reason": "string"
+  }
 }

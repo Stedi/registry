@@ -32,14 +32,15 @@
         "interval"
       ],
       "title": "TransferSchedule",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "statement_descriptor": {
       "description": "The text that appears on the bank account statement for payouts. If not set, this defaults to the platform's bank descriptor as set in the Dashboard.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "required": [
@@ -48,7 +49,14 @@
   ],
   "title": "AccountPayoutSettings",
   "type": "object",
-  "x-expandableFields": [
-    "schedule"
-  ]
+  "default": {
+    "debit_negative_balances": true,
+    "schedule": {
+      "delay_days": 0,
+      "interval": "string",
+      "monthly_anchor": 0,
+      "weekly_anchor": "string"
+    },
+    "statement_descriptor": "string"
+  }
 }

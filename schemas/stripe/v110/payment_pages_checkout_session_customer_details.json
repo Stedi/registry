@@ -4,14 +4,18 @@
     "email": {
       "description": "The email associated with the Customer, if one exists, on the Checkout Session at the time of checkout or at time of session expiry.\nOtherwise, if the customer has consented to promotional content, this value is the most recent valid email provided by the customer on the Checkout form.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "phone": {
       "description": "The customer's phone number at the time of checkout",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "tax_exempt": {
       "description": "The customer’s tax exempt status at time of checkout.",
@@ -20,84 +24,88 @@
         "none",
         "reverse"
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "tax_ids": {
-      "description": "The customer’s tax IDs at time of checkout.",
-      "items": {
-        "description": "",
-        "properties": {
-          "type": {
-            "description": "The type of the tax ID, one of `eu_vat`, `br_cnpj`, `br_cpf`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, or `unknown`",
-            "enum": [
-              "ae_trn",
-              "au_abn",
-              "au_arn",
-              "br_cnpj",
-              "br_cpf",
-              "ca_bn",
-              "ca_gst_hst",
-              "ca_pst_bc",
-              "ca_pst_mb",
-              "ca_pst_sk",
-              "ca_qst",
-              "ch_vat",
-              "cl_tin",
-              "es_cif",
-              "eu_vat",
-              "gb_vat",
-              "ge_vat",
-              "hk_br",
-              "id_npwp",
-              "il_vat",
-              "in_gst",
-              "is_vat",
-              "jp_cn",
-              "jp_rn",
-              "kr_brn",
-              "li_uid",
-              "mx_rfc",
-              "my_frp",
-              "my_itn",
-              "my_sst",
-              "no_vat",
-              "nz_gst",
-              "ru_inn",
-              "ru_kpp",
-              "sa_vat",
-              "sg_gst",
-              "sg_uen",
-              "th_vat",
-              "tw_vat",
-              "ua_vat",
-              "unknown",
-              "us_ein",
-              "za_vat"
-            ],
-            "type": "string"
-          },
-          "value": {
-            "description": "The value of the tax ID.",
-            "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
-          }
+      "description": "",
+      "properties": {
+        "type": {
+          "description": "The type of the tax ID, one of `eu_vat`, `br_cnpj`, `br_cpf`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, or `unknown`",
+          "enum": [
+            "ae_trn",
+            "au_abn",
+            "au_arn",
+            "br_cnpj",
+            "br_cpf",
+            "ca_bn",
+            "ca_gst_hst",
+            "ca_pst_bc",
+            "ca_pst_mb",
+            "ca_pst_sk",
+            "ca_qst",
+            "ch_vat",
+            "cl_tin",
+            "es_cif",
+            "eu_vat",
+            "gb_vat",
+            "ge_vat",
+            "hk_br",
+            "id_npwp",
+            "il_vat",
+            "in_gst",
+            "is_vat",
+            "jp_cn",
+            "jp_rn",
+            "kr_brn",
+            "li_uid",
+            "mx_rfc",
+            "my_frp",
+            "my_itn",
+            "my_sst",
+            "no_vat",
+            "nz_gst",
+            "ru_inn",
+            "ru_kpp",
+            "sa_vat",
+            "sg_gst",
+            "sg_uen",
+            "th_vat",
+            "tw_vat",
+            "ua_vat",
+            "unknown",
+            "us_ein",
+            "za_vat"
+          ],
+          "type": "string"
         },
-        "required": [
-          "type"
-        ],
-        "title": "PaymentPagesCheckoutSessionTaxID",
-        "type": "object",
-        "x-expandableFields": []
+        "value": {
+          "description": "The value of the tax ID.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       },
-      "nullable": true,
-      "type": "array"
+      "required": [
+        "type"
+      ],
+      "title": "PaymentPagesCheckoutSessionTaxID",
+      "type": "object"
     }
   },
   "title": "PaymentPagesCheckoutSessionCustomerDetails",
   "type": "object",
-  "x-expandableFields": [
-    "tax_ids"
-  ]
+  "default": {
+    "email": "string",
+    "phone": "string",
+    "tax_exempt": "exempt",
+    "tax_ids": {
+      "type": "ae_trn",
+      "value": "string"
+    }
+  }
 }
