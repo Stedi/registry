@@ -54,7 +54,6 @@ function traverse(schema: OpenAPIV3.SchemaObject, parents: Set<String>): any {
 
   if (schema.anyOf && schema.anyOf[0]) {
     schema.anyOf = schema.anyOf.slice(0, 1);
-    (schema.anyOf[0] as OpenAPIV3.SchemaObject).nullable = schema.nullable;
     schema.anyOf[0] = traverse(schema.anyOf[0] as OpenAPIV3.SchemaObject, parents);
     if (schema.nullable) {
       schema.anyOf[1] = { "type": "null" } as any;
