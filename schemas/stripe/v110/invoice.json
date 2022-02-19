@@ -18,11 +18,18 @@
       ]
     },
     "account_tax_ids": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        }
+      "description": "The account tax IDs associated with the invoice. Only editable when the invoice is a draft.",
+      "items": {
+        "anyOf": [
+          {
+            "maxLength": 5000,
+            "type": "string"
+          }
+        ]
+      },
+      "type": [
+        "array",
+        "null"
       ]
     },
     "amount_due": {
@@ -133,25 +140,32 @@
       "type": "string"
     },
     "custom_fields": {
-      "description": "",
-      "properties": {
-        "name": {
-          "description": "The name of the custom field.",
-          "maxLength": 5000,
-          "type": "string"
+      "description": "Custom fields displayed on the invoice.",
+      "items": {
+        "description": "",
+        "properties": {
+          "name": {
+            "description": "The name of the custom field.",
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "value": {
+            "description": "The value of the custom field.",
+            "maxLength": 5000,
+            "type": "string"
+          }
         },
-        "value": {
-          "description": "The value of the custom field.",
-          "maxLength": 5000,
-          "type": "string"
-        }
+        "required": [
+          "name",
+          "value"
+        ],
+        "title": "InvoiceSettingCustomField",
+        "type": "object"
       },
-      "required": [
-        "name",
-        "value"
-      ],
-      "title": "InvoiceSettingCustomField",
-      "type": "object"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "customer": {
       "anyOf": [
@@ -382,71 +396,78 @@
       ]
     },
     "customer_tax_ids": {
-      "description": "",
-      "properties": {
-        "type": {
-          "description": "The type of the tax ID, one of `eu_vat`, `br_cnpj`, `br_cpf`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, or `unknown`",
-          "enum": [
-            "ae_trn",
-            "au_abn",
-            "au_arn",
-            "br_cnpj",
-            "br_cpf",
-            "ca_bn",
-            "ca_gst_hst",
-            "ca_pst_bc",
-            "ca_pst_mb",
-            "ca_pst_sk",
-            "ca_qst",
-            "ch_vat",
-            "cl_tin",
-            "es_cif",
-            "eu_vat",
-            "gb_vat",
-            "ge_vat",
-            "hk_br",
-            "id_npwp",
-            "il_vat",
-            "in_gst",
-            "is_vat",
-            "jp_cn",
-            "jp_rn",
-            "kr_brn",
-            "li_uid",
-            "mx_rfc",
-            "my_frp",
-            "my_itn",
-            "my_sst",
-            "no_vat",
-            "nz_gst",
-            "ru_inn",
-            "ru_kpp",
-            "sa_vat",
-            "sg_gst",
-            "sg_uen",
-            "th_vat",
-            "tw_vat",
-            "ua_vat",
-            "unknown",
-            "us_ein",
-            "za_vat"
-          ],
-          "type": "string"
+      "description": "The customer's tax IDs. Until the invoice is finalized, this field will contain the same tax IDs as `customer.tax_ids`. Once the invoice is finalized, this field will no longer be updated.",
+      "items": {
+        "description": "",
+        "properties": {
+          "type": {
+            "description": "The type of the tax ID, one of `eu_vat`, `br_cnpj`, `br_cpf`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, or `unknown`",
+            "enum": [
+              "ae_trn",
+              "au_abn",
+              "au_arn",
+              "br_cnpj",
+              "br_cpf",
+              "ca_bn",
+              "ca_gst_hst",
+              "ca_pst_bc",
+              "ca_pst_mb",
+              "ca_pst_sk",
+              "ca_qst",
+              "ch_vat",
+              "cl_tin",
+              "es_cif",
+              "eu_vat",
+              "gb_vat",
+              "ge_vat",
+              "hk_br",
+              "id_npwp",
+              "il_vat",
+              "in_gst",
+              "is_vat",
+              "jp_cn",
+              "jp_rn",
+              "kr_brn",
+              "li_uid",
+              "mx_rfc",
+              "my_frp",
+              "my_itn",
+              "my_sst",
+              "no_vat",
+              "nz_gst",
+              "ru_inn",
+              "ru_kpp",
+              "sa_vat",
+              "sg_gst",
+              "sg_uen",
+              "th_vat",
+              "tw_vat",
+              "ua_vat",
+              "unknown",
+              "us_ein",
+              "za_vat"
+            ],
+            "type": "string"
+          },
+          "value": {
+            "description": "The value of the tax ID.",
+            "maxLength": 5000,
+            "type": [
+              "string",
+              "null"
+            ]
+          }
         },
-        "value": {
-          "description": "The value of the tax ID.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        }
+        "required": [
+          "type"
+        ],
+        "title": "InvoicesResourceInvoiceTaxID",
+        "type": "object"
       },
-      "required": [
-        "type"
-      ],
-      "title": "InvoicesResourceInvoiceTaxID",
-      "type": "object"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "default_payment_method": {
       "anyOf": [
@@ -479,110 +500,114 @@
       "description": "ID of the default payment source for the invoice. It must belong to the customer associated with the invoice and be in a chargeable state. If not set, defaults to the subscription's default source, if any, or to the customer's default source."
     },
     "default_tax_rates": {
-      "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
-      "properties": {
-        "active": {
-          "description": "Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.",
-          "type": "boolean"
+      "description": "The tax rates applied to this invoice, if any.",
+      "items": {
+        "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
+        "properties": {
+          "active": {
+            "description": "Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.",
+            "type": "boolean"
+          },
+          "country": {
+            "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+            "maxLength": 5000,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "created": {
+            "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+            "format": "unix-time",
+            "type": "integer"
+          },
+          "description": {
+            "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
+            "maxLength": 5000,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "display_name": {
+            "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier for the object.",
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "inclusive": {
+            "description": "This specifies if the tax rate is inclusive or exclusive.",
+            "type": "boolean"
+          },
+          "jurisdiction": {
+            "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
+            "maxLength": 5000,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "livemode": {
+            "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+            "type": "boolean"
+          },
+          "metadata": {},
+          "object": {
+            "description": "String representing the object's type. Objects of the same type share the same value.",
+            "enum": [
+              "tax_rate"
+            ],
+            "type": "string"
+          },
+          "percentage": {
+            "description": "This represents the tax rate percent out of 100.",
+            "type": "number"
+          },
+          "state": {
+            "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
+            "maxLength": 5000,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "tax_type": {
+            "description": "The high-level tax type, such as `vat` or `sales_tax`.",
+            "enum": [
+              "gst",
+              "hst",
+              "jct",
+              "pst",
+              "qst",
+              "rst",
+              "sales_tax",
+              "vat"
+            ],
+            "type": [
+              "string",
+              "null"
+            ]
+          }
         },
-        "country": {
-          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "created": {
-          "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-          "format": "unix-time",
-          "type": "integer"
-        },
-        "description": {
-          "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "display_name": {
-          "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique identifier for the object.",
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "inclusive": {
-          "description": "This specifies if the tax rate is inclusive or exclusive.",
-          "type": "boolean"
-        },
-        "jurisdiction": {
-          "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "livemode": {
-          "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-          "type": "boolean"
-        },
-        "metadata": {},
-        "object": {
-          "description": "String representing the object's type. Objects of the same type share the same value.",
-          "enum": [
-            "tax_rate"
-          ],
-          "type": "string"
-        },
-        "percentage": {
-          "description": "This represents the tax rate percent out of 100.",
-          "type": "number"
-        },
-        "state": {
-          "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "tax_type": {
-          "description": "The high-level tax type, such as `vat` or `sales_tax`.",
-          "enum": [
-            "gst",
-            "hst",
-            "jct",
-            "pst",
-            "qst",
-            "rst",
-            "sales_tax",
-            "vat"
-          ],
-          "type": [
-            "string",
-            "null"
-          ]
-        }
+        "required": [
+          "active",
+          "created",
+          "display_name",
+          "id",
+          "inclusive",
+          "livemode",
+          "object",
+          "percentage"
+        ],
+        "title": "TaxRate",
+        "type": "object",
+        "x-resourceId": "tax_rate"
       },
-      "required": [
-        "active",
-        "created",
-        "display_name",
-        "id",
-        "inclusive",
-        "livemode",
-        "object",
-        "percentage"
-      ],
-      "title": "TaxRate",
-      "type": "object",
-      "x-resourceId": "tax_rate"
+      "type": "array"
     },
     "description": {
       "description": "An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.",
@@ -619,8 +644,12 @@
                   "description": "",
                   "properties": {
                     "products": {
-                      "maxLength": 5000,
-                      "type": "string"
+                      "description": "A list of product IDs this coupon applies to",
+                      "items": {
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "type": "array"
                     }
                   },
                   "required": [
@@ -826,11 +855,18 @@
       "description": "Describes the current discount applied to this invoice, if there is one. Not populated if there are multiple discounts."
     },
     "discounts": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        }
+      "description": "The discounts applied to the invoice. Line item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.",
+      "items": {
+        "anyOf": [
+          {
+            "maxLength": 5000,
+            "type": "string"
+          }
+        ]
+      },
+      "type": [
+        "array",
+        "null"
       ]
     },
     "due_date": {
@@ -1010,394 +1046,398 @@
                   "description": "Charges that were created by this PaymentIntent, if any.",
                   "properties": {
                     "data": {
-                      "description": "To charge a credit or a debit card, you create a `Charge` object. You can\nretrieve and refund individual charges as well as list all charges. Charges\nare identified by a unique, random ID.\n\nRelated guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).",
-                      "properties": {
-                        "amount": {
-                          "description": "Amount intended to be collected by this payment. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).",
-                          "type": "integer"
+                      "description": "This list only contains the latest charge, even if there were previously multiple unsuccessful charges. To view all previous charges for a PaymentIntent, you can filter the charges list using the `payment_intent` [parameter](https://stripe.com/docs/api/charges/list#list_charges-payment_intent).",
+                      "items": {
+                        "description": "To charge a credit or a debit card, you create a `Charge` object. You can\nretrieve and refund individual charges as well as list all charges. Charges\nare identified by a unique, random ID.\n\nRelated guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).",
+                        "properties": {
+                          "amount": {
+                            "description": "Amount intended to be collected by this payment. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).",
+                            "type": "integer"
+                          },
+                          "amount_captured": {
+                            "description": "Amount in %s captured (can be less than the amount attribute on the charge if a partial capture was made).",
+                            "type": "integer"
+                          },
+                          "amount_refunded": {
+                            "description": "Amount in %s refunded (can be less than the amount attribute on the charge if a partial refund was issued).",
+                            "type": "integer"
+                          },
+                          "application": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "ID of the Connect application that created the charge."
+                          },
+                          "application_fee": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "The application fee (if any) for the charge. [See the Connect documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees) for details."
+                          },
+                          "application_fee_amount": {
+                            "description": "The amount of the application fee (if any) requested for the charge. [See the Connect documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees) for details.",
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
+                          },
+                          "balance_transaction": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "ID of the balance transaction that describes the impact of this charge on your account balance (not including refunds or disputes)."
+                          },
+                          "billing_details": {},
+                          "calculated_statement_descriptor": {
+                            "description": "The full statement descriptor that is passed to card networks, and that is displayed on your customers' credit card and bank statements. Allows you to see what the statement descriptor looks like after the static and dynamic portions are combined.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "captured": {
+                            "description": "If the charge was created without capturing, this Boolean represents whether it is still uncaptured or has since been captured.",
+                            "type": "boolean"
+                          },
+                          "created": {
+                            "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                            "format": "unix-time",
+                            "type": "integer"
+                          },
+                          "currency": {
+                            "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                            "type": "string"
+                          },
+                          "customer": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "ID of the customer this charge is for if one exists."
+                          },
+                          "description": {
+                            "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
+                            "maxLength": 40000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "disputed": {
+                            "description": "Whether the charge has been disputed.",
+                            "type": "boolean"
+                          },
+                          "failure_code": {
+                            "description": "Error code explaining reason for charge failure if available (see [the errors section](https://stripe.com/docs/api#errors) for a list of codes).",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "failure_message": {
+                            "description": "Message to user further explaining reason for charge failure if available.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "fraud_details": {
+                            "anyOf": [
+                              {},
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "Information on fraud assessments for the charge."
+                          },
+                          "id": {
+                            "description": "Unique identifier for the object.",
+                            "maxLength": 5000,
+                            "type": "string"
+                          },
+                          "invoice": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "ID of the invoice this charge is for if one exists."
+                          },
+                          "livemode": {
+                            "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                            "type": "boolean"
+                          },
+                          "metadata": {},
+                          "object": {
+                            "description": "String representing the object's type. Objects of the same type share the same value.",
+                            "enum": [
+                              "charge"
+                            ],
+                            "type": "string"
+                          },
+                          "on_behalf_of": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "The account (if any) the charge was made on behalf of without triggering an automatic transfer. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers) for details."
+                          },
+                          "order": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "ID of the order this charge is for if one exists."
+                          },
+                          "outcome": {
+                            "anyOf": [
+                              {},
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "Details about whether the payment was accepted, and why. See [understanding declines](https://stripe.com/docs/declines) for details."
+                          },
+                          "paid": {
+                            "description": "`true` if the charge succeeded, or was successfully authorized for later capture.",
+                            "type": "boolean"
+                          },
+                          "payment_intent": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "ID of the PaymentIntent associated with this charge, if one exists."
+                          },
+                          "payment_method": {
+                            "description": "ID of the payment method used in this charge.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "payment_method_details": {
+                            "anyOf": [
+                              {},
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "Details about the payment method at the time of the transaction."
+                          },
+                          "receipt_email": {
+                            "description": "This is the email address that the receipt for this charge was sent to.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "receipt_number": {
+                            "description": "This is the transaction number that appears on email receipts sent for this charge. This attribute will be `null` until a receipt has been sent.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "receipt_url": {
+                            "description": "This is the URL to view the receipt for this charge. The receipt is kept up-to-date to the latest state of the charge, including any refunds. If the charge is for an Invoice, the receipt will be stylized as an Invoice receipt.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "refunded": {
+                            "description": "Whether the charge has been fully refunded. If the charge is only partially refunded, this attribute will still be false.",
+                            "type": "boolean"
+                          },
+                          "refunds": {},
+                          "review": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "ID of the review associated with this charge if one exists."
+                          },
+                          "shipping": {
+                            "anyOf": [
+                              {},
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "Shipping information for the charge."
+                          },
+                          "source_transfer": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "The transfer ID which created this charge. Only present if the charge came from another Stripe account. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details."
+                          },
+                          "statement_descriptor": {
+                            "description": "For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value as the complete description of a charge on your customers’ statements. Must contain at least one letter, maximum 22 characters.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "statement_descriptor_suffix": {
+                            "description": "Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "status": {
+                            "description": "The status of the payment is either `succeeded`, `pending`, or `failed`.",
+                            "enum": [
+                              "failed",
+                              "pending",
+                              "succeeded"
+                            ],
+                            "type": "string"
+                          },
+                          "transfer": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": "string"
+                              }
+                            ],
+                            "description": "ID of the transfer to the `destination` account (only applicable if the charge was created using the `destination` parameter)."
+                          },
+                          "transfer_data": {
+                            "anyOf": [
+                              {},
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "An optional dictionary including the account to automatically transfer to as part of a destination charge. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details."
+                          },
+                          "transfer_group": {
+                            "description": "A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          }
                         },
-                        "amount_captured": {
-                          "description": "Amount in %s captured (can be less than the amount attribute on the charge if a partial capture was made).",
-                          "type": "integer"
-                        },
-                        "amount_refunded": {
-                          "description": "Amount in %s refunded (can be less than the amount attribute on the charge if a partial refund was issued).",
-                          "type": "integer"
-                        },
-                        "application": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "ID of the Connect application that created the charge."
-                        },
-                        "application_fee": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "The application fee (if any) for the charge. [See the Connect documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees) for details."
-                        },
-                        "application_fee_amount": {
-                          "description": "The amount of the application fee (if any) requested for the charge. [See the Connect documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees) for details.",
-                          "type": [
-                            "integer",
-                            "null"
-                          ]
-                        },
-                        "balance_transaction": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "ID of the balance transaction that describes the impact of this charge on your account balance (not including refunds or disputes)."
-                        },
-                        "billing_details": {},
-                        "calculated_statement_descriptor": {
-                          "description": "The full statement descriptor that is passed to card networks, and that is displayed on your customers' credit card and bank statements. Allows you to see what the statement descriptor looks like after the static and dynamic portions are combined.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "captured": {
-                          "description": "If the charge was created without capturing, this Boolean represents whether it is still uncaptured or has since been captured.",
-                          "type": "boolean"
-                        },
-                        "created": {
-                          "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                          "format": "unix-time",
-                          "type": "integer"
-                        },
-                        "currency": {
-                          "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-                          "type": "string"
-                        },
-                        "customer": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "ID of the customer this charge is for if one exists."
-                        },
-                        "description": {
-                          "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
-                          "maxLength": 40000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "disputed": {
-                          "description": "Whether the charge has been disputed.",
-                          "type": "boolean"
-                        },
-                        "failure_code": {
-                          "description": "Error code explaining reason for charge failure if available (see [the errors section](https://stripe.com/docs/api#errors) for a list of codes).",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "failure_message": {
-                          "description": "Message to user further explaining reason for charge failure if available.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "fraud_details": {
-                          "anyOf": [
-                            {},
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "Information on fraud assessments for the charge."
-                        },
-                        "id": {
-                          "description": "Unique identifier for the object.",
-                          "maxLength": 5000,
-                          "type": "string"
-                        },
-                        "invoice": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "ID of the invoice this charge is for if one exists."
-                        },
-                        "livemode": {
-                          "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                          "type": "boolean"
-                        },
-                        "metadata": {},
-                        "object": {
-                          "description": "String representing the object's type. Objects of the same type share the same value.",
-                          "enum": [
-                            "charge"
-                          ],
-                          "type": "string"
-                        },
-                        "on_behalf_of": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "The account (if any) the charge was made on behalf of without triggering an automatic transfer. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers) for details."
-                        },
-                        "order": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "ID of the order this charge is for if one exists."
-                        },
-                        "outcome": {
-                          "anyOf": [
-                            {},
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "Details about whether the payment was accepted, and why. See [understanding declines](https://stripe.com/docs/declines) for details."
-                        },
-                        "paid": {
-                          "description": "`true` if the charge succeeded, or was successfully authorized for later capture.",
-                          "type": "boolean"
-                        },
-                        "payment_intent": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "ID of the PaymentIntent associated with this charge, if one exists."
-                        },
-                        "payment_method": {
-                          "description": "ID of the payment method used in this charge.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "payment_method_details": {
-                          "anyOf": [
-                            {},
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "Details about the payment method at the time of the transaction."
-                        },
-                        "receipt_email": {
-                          "description": "This is the email address that the receipt for this charge was sent to.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "receipt_number": {
-                          "description": "This is the transaction number that appears on email receipts sent for this charge. This attribute will be `null` until a receipt has been sent.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "receipt_url": {
-                          "description": "This is the URL to view the receipt for this charge. The receipt is kept up-to-date to the latest state of the charge, including any refunds. If the charge is for an Invoice, the receipt will be stylized as an Invoice receipt.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "refunded": {
-                          "description": "Whether the charge has been fully refunded. If the charge is only partially refunded, this attribute will still be false.",
-                          "type": "boolean"
-                        },
-                        "refunds": {},
-                        "review": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "ID of the review associated with this charge if one exists."
-                        },
-                        "shipping": {
-                          "anyOf": [
-                            {},
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "Shipping information for the charge."
-                        },
-                        "source_transfer": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "The transfer ID which created this charge. Only present if the charge came from another Stripe account. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details."
-                        },
-                        "statement_descriptor": {
-                          "description": "For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value as the complete description of a charge on your customers’ statements. Must contain at least one letter, maximum 22 characters.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "statement_descriptor_suffix": {
-                          "description": "Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "status": {
-                          "description": "The status of the payment is either `succeeded`, `pending`, or `failed`.",
-                          "enum": [
-                            "failed",
-                            "pending",
-                            "succeeded"
-                          ],
-                          "type": "string"
-                        },
-                        "transfer": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": "string"
-                            }
-                          ],
-                          "description": "ID of the transfer to the `destination` account (only applicable if the charge was created using the `destination` parameter)."
-                        },
-                        "transfer_data": {
-                          "anyOf": [
-                            {},
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "An optional dictionary including the account to automatically transfer to as part of a destination charge. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details."
-                        },
-                        "transfer_group": {
-                          "description": "A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        }
+                        "required": [
+                          "amount",
+                          "amount_captured",
+                          "amount_refunded",
+                          "billing_details",
+                          "captured",
+                          "created",
+                          "currency",
+                          "disputed",
+                          "id",
+                          "livemode",
+                          "metadata",
+                          "object",
+                          "paid",
+                          "refunded",
+                          "refunds",
+                          "status"
+                        ],
+                        "title": "Charge",
+                        "type": "object",
+                        "x-resourceId": "charge"
                       },
-                      "required": [
-                        "amount",
-                        "amount_captured",
-                        "amount_refunded",
-                        "billing_details",
-                        "captured",
-                        "created",
-                        "currency",
-                        "disputed",
-                        "id",
-                        "livemode",
-                        "metadata",
-                        "object",
-                        "paid",
-                        "refunded",
-                        "refunds",
-                        "status"
-                      ],
-                      "title": "Charge",
-                      "type": "object",
-                      "x-resourceId": "charge"
+                      "type": "array"
                     },
                     "has_more": {
                       "description": "True if this list has another page of items after this one that can be fetched.",
@@ -2202,8 +2242,12 @@
                   "description": "Payment-method-specific configuration for this PaymentIntent."
                 },
                 "payment_method_types": {
-                  "maxLength": 5000,
-                  "type": "string"
+                  "description": "The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.",
+                  "items": {
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "type": "array"
                 },
                 "processing": {
                   "anyOf": [
@@ -2854,8 +2898,12 @@
                           "description": "",
                           "properties": {
                             "available": {
-                              "maxLength": 5000,
-                              "type": "string"
+                              "description": "All available networks for the card.",
+                              "items": {
+                                "maxLength": 5000,
+                                "type": "string"
+                              },
+                              "type": "array"
                             },
                             "preferred": {
                               "description": "The preferred network for the card.",
@@ -3710,8 +3758,12 @@
                   "description": "Payment-method-specific configuration for this SetupIntent."
                 },
                 "payment_method_types": {
-                  "maxLength": 5000,
-                  "type": "string"
+                  "description": "The list of payment method types (e.g. card) that this SetupIntent is allowed to set up.",
+                  "items": {
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "type": "array"
                 },
                 "single_use_mandate": {
                   "anyOf": [
@@ -3804,11 +3856,18 @@
                       ]
                     },
                     "available_payout_methods": {
-                      "enum": [
-                        "instant",
-                        "standard"
-                      ],
-                      "type": "string"
+                      "description": "A set of available payout methods for this bank account. Only values from this set should be passed as the `method` when creating a payout.",
+                      "items": {
+                        "enum": [
+                          "instant",
+                          "standard"
+                        ],
+                        "type": "string"
+                      },
+                      "type": [
+                        "array",
+                        "null"
+                      ]
                     },
                     "bank_name": {
                       "description": "Name of the bank associated with the routing number (e.g., `WELLS FARGO`).",
@@ -3935,127 +3994,489 @@
       "description": "The individual line items that make up the invoice. `lines` is sorted as follows: invoice items in reverse chronological order, followed by the subscription, if any.",
       "properties": {
         "data": {
-          "description": "",
-          "properties": {
-            "amount": {
-              "description": "The amount, in %s.",
-              "type": "integer"
-            },
-            "currency": {
-              "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-              "type": "string"
-            },
-            "description": {
-              "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "discount_amounts": {
-              "description": "",
-              "properties": {
-                "amount": {
-                  "description": "The amount, in %s, of the discount.",
-                  "type": "integer"
+          "description": "Details about each object.",
+          "items": {
+            "description": "",
+            "properties": {
+              "amount": {
+                "description": "The amount, in %s.",
+                "type": "integer"
+              },
+              "currency": {
+                "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                "type": "string"
+              },
+              "description": {
+                "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
+                "maxLength": 5000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "discount_amounts": {
+                "description": "The amount of discount calculated per discount for this line item.",
+                "items": {
+                  "description": "",
+                  "properties": {
+                    "amount": {
+                      "description": "The amount, in %s, of the discount.",
+                      "type": "integer"
+                    },
+                    "discount": {
+                      "anyOf": [
+                        {
+                          "maxLength": 5000,
+                          "type": "string"
+                        }
+                      ],
+                      "description": "The discount that was applied to get this discount amount."
+                    }
+                  },
+                  "required": [
+                    "amount",
+                    "discount"
+                  ],
+                  "title": "DiscountsResourceDiscountAmount",
+                  "type": "object"
                 },
-                "discount": {
+                "type": [
+                  "array",
+                  "null"
+                ]
+              },
+              "discountable": {
+                "description": "If true, discounts will apply to this line item. Always false for prorations.",
+                "type": "boolean"
+              },
+              "discounts": {
+                "description": "The discounts applied to the invoice line item. Line item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.",
+                "items": {
                   "anyOf": [
                     {
                       "maxLength": 5000,
                       "type": "string"
                     }
-                  ],
-                  "description": "The discount that was applied to get this discount amount."
-                }
-              },
-              "required": [
-                "amount",
-                "discount"
-              ],
-              "title": "DiscountsResourceDiscountAmount",
-              "type": "object"
-            },
-            "discountable": {
-              "description": "If true, discounts will apply to this line item. Always false for prorations.",
-              "type": "boolean"
-            },
-            "discounts": {
-              "anyOf": [
-                {
-                  "maxLength": 5000,
-                  "type": "string"
-                }
-              ]
-            },
-            "id": {
-              "description": "Unique identifier for the object.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "invoice_item": {
-              "description": "The ID of the [invoice item](https://stripe.com/docs/api/invoiceitems) associated with this line item if any.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "livemode": {
-              "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-              "type": "boolean"
-            },
-            "metadata": {},
-            "object": {
-              "description": "String representing the object's type. Objects of the same type share the same value.",
-              "enum": [
-                "line_item"
-              ],
-              "type": "string"
-            },
-            "period": {
-              "description": "",
-              "properties": {
-                "end": {
-                  "description": "End of the line item's billing period",
-                  "format": "unix-time",
-                  "type": "integer"
+                  ]
                 },
-                "start": {
-                  "description": "Start of the line item's billing period",
-                  "format": "unix-time",
-                  "type": "integer"
-                }
+                "type": [
+                  "array",
+                  "null"
+                ]
               },
-              "required": [
-                "end",
-                "start"
-              ],
-              "title": "InvoiceLineItemPeriod",
-              "type": "object"
-            },
-            "price": {
-              "anyOf": [
-                {
-                  "description": "Prices define the unit cost, currency, and (optional) billing cycle for both recurring and one-time purchases of products.\n[Products](https://stripe.com/docs/api#products) help you track inventory or provisioning, and prices help you track payment terms. Different physical goods or levels of service should be represented by products, and pricing options should be represented by prices. This approach lets you change prices without having to change your provisioning scheme.\n\nFor example, you might have a single \"gold\" product that has prices for $10/month, $100/year, and €9 once.\n\nRelated guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription), [create an invoice](https://stripe.com/docs/billing/invoices/create), and more about [products and prices](https://stripe.com/docs/products-prices/overview).",
+              "id": {
+                "description": "Unique identifier for the object.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "invoice_item": {
+                "description": "The ID of the [invoice item](https://stripe.com/docs/api/invoiceitems) associated with this line item if any.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "livemode": {
+                "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                "type": "boolean"
+              },
+              "metadata": {},
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "line_item"
+                ],
+                "type": "string"
+              },
+              "period": {
+                "description": "",
+                "properties": {
+                  "end": {
+                    "description": "End of the line item's billing period",
+                    "format": "unix-time",
+                    "type": "integer"
+                  },
+                  "start": {
+                    "description": "Start of the line item's billing period",
+                    "format": "unix-time",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "end",
+                  "start"
+                ],
+                "title": "InvoiceLineItemPeriod",
+                "type": "object"
+              },
+              "price": {
+                "anyOf": [
+                  {
+                    "description": "Prices define the unit cost, currency, and (optional) billing cycle for both recurring and one-time purchases of products.\n[Products](https://stripe.com/docs/api#products) help you track inventory or provisioning, and prices help you track payment terms. Different physical goods or levels of service should be represented by products, and pricing options should be represented by prices. This approach lets you change prices without having to change your provisioning scheme.\n\nFor example, you might have a single \"gold\" product that has prices for $10/month, $100/year, and €9 once.\n\nRelated guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription), [create an invoice](https://stripe.com/docs/billing/invoices/create), and more about [products and prices](https://stripe.com/docs/products-prices/overview).",
+                    "properties": {
+                      "active": {
+                        "description": "Whether the price can be used for new purchases.",
+                        "type": "boolean"
+                      },
+                      "billing_scheme": {
+                        "description": "Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.",
+                        "enum": [
+                          "per_unit",
+                          "tiered"
+                        ],
+                        "type": "string"
+                      },
+                      "created": {
+                        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                        "format": "unix-time",
+                        "type": "integer"
+                      },
+                      "currency": {
+                        "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "Unique identifier for the object.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "livemode": {
+                        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                        "type": "boolean"
+                      },
+                      "lookup_key": {
+                        "description": "A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.",
+                        "maxLength": 5000,
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "metadata": {},
+                      "nickname": {
+                        "description": "A brief description of the price, hidden from customers.",
+                        "maxLength": 5000,
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "object": {
+                        "description": "String representing the object's type. Objects of the same type share the same value.",
+                        "enum": [
+                          "price"
+                        ],
+                        "type": "string"
+                      },
+                      "product": {
+                        "anyOf": [
+                          {
+                            "maxLength": 5000,
+                            "type": "string"
+                          }
+                        ],
+                        "description": "The ID of the product this price is associated with."
+                      },
+                      "recurring": {
+                        "anyOf": [
+                          {
+                            "description": "",
+                            "properties": {
+                              "aggregate_usage": {
+                                "description": "Specifies a usage aggregation strategy for prices of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.",
+                                "enum": [
+                                  "last_during_period",
+                                  "last_ever",
+                                  "max",
+                                  "sum"
+                                ],
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "interval": {
+                                "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
+                                "enum": [
+                                  "day",
+                                  "month",
+                                  "week",
+                                  "year"
+                                ],
+                                "type": "string"
+                              },
+                              "interval_count": {
+                                "description": "The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.",
+                                "type": "integer"
+                              },
+                              "usage_type": {
+                                "description": "Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.",
+                                "enum": [
+                                  "licensed",
+                                  "metered"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "interval",
+                              "interval_count",
+                              "usage_type"
+                            ],
+                            "title": "Recurring",
+                            "type": [
+                              "object",
+                              "null"
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "description": "The recurring components of a price such as `interval` and `usage_type`."
+                      },
+                      "tax_behavior": {
+                        "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.",
+                        "enum": [
+                          "exclusive",
+                          "inclusive",
+                          "unspecified"
+                        ],
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "tiers": {
+                        "description": "Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.",
+                        "items": {
+                          "description": "",
+                          "properties": {
+                            "flat_amount": {
+                              "description": "Price for the entire tier.",
+                              "type": [
+                                "integer",
+                                "null"
+                              ]
+                            },
+                            "flat_amount_decimal": {
+                              "description": "Same as `flat_amount`, but contains a decimal value with at most 12 decimal places.",
+                              "format": "decimal",
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            },
+                            "unit_amount": {
+                              "description": "Per unit price for units relevant to the tier.",
+                              "type": [
+                                "integer",
+                                "null"
+                              ]
+                            },
+                            "unit_amount_decimal": {
+                              "description": "Same as `unit_amount`, but contains a decimal value with at most 12 decimal places.",
+                              "format": "decimal",
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            },
+                            "up_to": {
+                              "description": "Up to and including to this quantity will be contained in the tier.",
+                              "type": [
+                                "integer",
+                                "null"
+                              ]
+                            }
+                          },
+                          "title": "PriceTier",
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "tiers_mode": {
+                        "description": "Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.",
+                        "enum": [
+                          "graduated",
+                          "volume"
+                        ],
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "transform_quantity": {
+                        "anyOf": [
+                          {
+                            "description": "",
+                            "properties": {
+                              "divide_by": {
+                                "description": "Divide usage by this number.",
+                                "type": "integer"
+                              },
+                              "round": {
+                                "description": "After division, either round the result `up` or `down`.",
+                                "enum": [
+                                  "down",
+                                  "up"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "divide_by",
+                              "round"
+                            ],
+                            "title": "TransformQuantity",
+                            "type": [
+                              "object",
+                              "null"
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "description": "Apply a transformation to the reported usage or set quantity before computing the amount billed. Cannot be combined with `tiers`."
+                      },
+                      "type": {
+                        "description": "One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.",
+                        "enum": [
+                          "one_time",
+                          "recurring"
+                        ],
+                        "type": "string"
+                      },
+                      "unit_amount": {
+                        "description": "The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.",
+                        "type": [
+                          "integer",
+                          "null"
+                        ]
+                      },
+                      "unit_amount_decimal": {
+                        "description": "The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.",
+                        "format": "decimal",
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "active",
+                      "billing_scheme",
+                      "created",
+                      "currency",
+                      "id",
+                      "livemode",
+                      "metadata",
+                      "object",
+                      "product",
+                      "type"
+                    ],
+                    "title": "Price",
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "x-resourceId": "price"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The price of the line item."
+              },
+              "proration": {
+                "description": "Whether this is a proration.",
+                "type": "boolean"
+              },
+              "quantity": {
+                "description": "The quantity of the subscription, if the line item is a subscription or a proration.",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "subscription": {
+                "description": "The subscription that the invoice item pertains to, if any.",
+                "maxLength": 5000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "subscription_item": {
+                "description": "The subscription item that generated this invoice item. Left empty if the line item is not an explicit result of a subscription.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "tax_amounts": {
+                "description": "The amount of tax calculated per tax rate for this line item",
+                "items": {
+                  "description": "",
                   "properties": {
-                    "active": {
-                      "description": "Whether the price can be used for new purchases.",
+                    "amount": {
+                      "description": "The amount, in %s, of the tax.",
+                      "type": "integer"
+                    },
+                    "inclusive": {
+                      "description": "Whether this tax amount is inclusive or exclusive.",
                       "type": "boolean"
                     },
-                    "billing_scheme": {
-                      "description": "Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.",
-                      "enum": [
-                        "per_unit",
-                        "tiered"
+                    "tax_rate": {
+                      "anyOf": [
+                        {
+                          "maxLength": 5000,
+                          "type": "string"
+                        }
                       ],
-                      "type": "string"
+                      "description": "The tax rate that was applied to get this tax amount."
+                    }
+                  },
+                  "required": [
+                    "amount",
+                    "inclusive",
+                    "tax_rate"
+                  ],
+                  "title": "InvoiceTaxAmount",
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "tax_rates": {
+                "description": "The tax rates which apply to the line item.",
+                "items": {
+                  "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
+                  "properties": {
+                    "active": {
+                      "description": "Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.",
+                      "type": "boolean"
+                    },
+                    "country": {
+                      "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     },
                     "created": {
                       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
                       "format": "unix-time",
                       "type": "integer"
                     },
-                    "currency": {
-                      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                    "description": {
+                      "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "display_name": {
+                      "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
+                      "maxLength": 5000,
                       "type": "string"
                     },
                     "id": {
@@ -4063,220 +4484,54 @@
                       "maxLength": 5000,
                       "type": "string"
                     },
+                    "inclusive": {
+                      "description": "This specifies if the tax rate is inclusive or exclusive.",
+                      "type": "boolean"
+                    },
+                    "jurisdiction": {
+                      "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
                     "livemode": {
                       "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
                       "type": "boolean"
                     },
-                    "lookup_key": {
-                      "description": "A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
                     "metadata": {},
-                    "nickname": {
-                      "description": "A brief description of the price, hidden from customers.",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
                     "object": {
                       "description": "String representing the object's type. Objects of the same type share the same value.",
                       "enum": [
-                        "price"
+                        "tax_rate"
                       ],
                       "type": "string"
                     },
-                    "product": {
-                      "anyOf": [
-                        {
-                          "maxLength": 5000,
-                          "type": "string"
-                        }
-                      ],
-                      "description": "The ID of the product this price is associated with."
+                    "percentage": {
+                      "description": "This represents the tax rate percent out of 100.",
+                      "type": "number"
                     },
-                    "recurring": {
-                      "anyOf": [
-                        {
-                          "description": "",
-                          "properties": {
-                            "aggregate_usage": {
-                              "description": "Specifies a usage aggregation strategy for prices of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.",
-                              "enum": [
-                                "last_during_period",
-                                "last_ever",
-                                "max",
-                                "sum"
-                              ],
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            "interval": {
-                              "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
-                              "enum": [
-                                "day",
-                                "month",
-                                "week",
-                                "year"
-                              ],
-                              "type": "string"
-                            },
-                            "interval_count": {
-                              "description": "The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.",
-                              "type": "integer"
-                            },
-                            "usage_type": {
-                              "description": "Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.",
-                              "enum": [
-                                "licensed",
-                                "metered"
-                              ],
-                              "type": "string"
-                            }
-                          },
-                          "required": [
-                            "interval",
-                            "interval_count",
-                            "usage_type"
-                          ],
-                          "title": "Recurring",
-                          "type": [
-                            "object",
-                            "null"
-                          ]
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ],
-                      "description": "The recurring components of a price such as `interval` and `usage_type`."
-                    },
-                    "tax_behavior": {
-                      "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.",
-                      "enum": [
-                        "exclusive",
-                        "inclusive",
-                        "unspecified"
-                      ],
+                    "state": {
+                      "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
+                      "maxLength": 5000,
                       "type": [
                         "string",
                         "null"
                       ]
                     },
-                    "tiers": {
-                      "description": "",
-                      "properties": {
-                        "flat_amount": {
-                          "description": "Price for the entire tier.",
-                          "type": [
-                            "integer",
-                            "null"
-                          ]
-                        },
-                        "flat_amount_decimal": {
-                          "description": "Same as `flat_amount`, but contains a decimal value with at most 12 decimal places.",
-                          "format": "decimal",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "unit_amount": {
-                          "description": "Per unit price for units relevant to the tier.",
-                          "type": [
-                            "integer",
-                            "null"
-                          ]
-                        },
-                        "unit_amount_decimal": {
-                          "description": "Same as `unit_amount`, but contains a decimal value with at most 12 decimal places.",
-                          "format": "decimal",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "up_to": {
-                          "description": "Up to and including to this quantity will be contained in the tier.",
-                          "type": [
-                            "integer",
-                            "null"
-                          ]
-                        }
-                      },
-                      "title": "PriceTier",
-                      "type": "object"
-                    },
-                    "tiers_mode": {
-                      "description": "Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.",
+                    "tax_type": {
+                      "description": "The high-level tax type, such as `vat` or `sales_tax`.",
                       "enum": [
-                        "graduated",
-                        "volume"
+                        "gst",
+                        "hst",
+                        "jct",
+                        "pst",
+                        "qst",
+                        "rst",
+                        "sales_tax",
+                        "vat"
                       ],
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "transform_quantity": {
-                      "anyOf": [
-                        {
-                          "description": "",
-                          "properties": {
-                            "divide_by": {
-                              "description": "Divide usage by this number.",
-                              "type": "integer"
-                            },
-                            "round": {
-                              "description": "After division, either round the result `up` or `down`.",
-                              "enum": [
-                                "down",
-                                "up"
-                              ],
-                              "type": "string"
-                            }
-                          },
-                          "required": [
-                            "divide_by",
-                            "round"
-                          ],
-                          "title": "TransformQuantity",
-                          "type": [
-                            "object",
-                            "null"
-                          ]
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ],
-                      "description": "Apply a transformation to the reported usage or set quantity before computing the amount billed. Cannot be combined with `tiers`."
-                    },
-                    "type": {
-                      "description": "One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.",
-                      "enum": [
-                        "one_time",
-                        "recurring"
-                      ],
-                      "type": "string"
-                    },
-                    "unit_amount": {
-                      "description": "The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.",
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "unit_amount_decimal": {
-                      "description": "The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.",
-                      "format": "decimal",
                       "type": [
                         "string",
                         "null"
@@ -4285,212 +4540,46 @@
                   },
                   "required": [
                     "active",
-                    "billing_scheme",
                     "created",
-                    "currency",
+                    "display_name",
                     "id",
+                    "inclusive",
                     "livemode",
-                    "metadata",
                     "object",
-                    "product",
-                    "type"
+                    "percentage"
                   ],
-                  "title": "Price",
-                  "type": [
-                    "object",
-                    "null"
-                  ],
-                  "x-resourceId": "price"
+                  "title": "TaxRate",
+                  "type": "object",
+                  "x-resourceId": "tax_rate"
                 },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "The price of the line item."
-            },
-            "proration": {
-              "description": "Whether this is a proration.",
-              "type": "boolean"
-            },
-            "quantity": {
-              "description": "The quantity of the subscription, if the line item is a subscription or a proration.",
-              "type": [
-                "integer",
-                "null"
-              ]
-            },
-            "subscription": {
-              "description": "The subscription that the invoice item pertains to, if any.",
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "subscription_item": {
-              "description": "The subscription item that generated this invoice item. Left empty if the line item is not an explicit result of a subscription.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "tax_amounts": {
-              "description": "",
-              "properties": {
-                "amount": {
-                  "description": "The amount, in %s, of the tax.",
-                  "type": "integer"
-                },
-                "inclusive": {
-                  "description": "Whether this tax amount is inclusive or exclusive.",
-                  "type": "boolean"
-                },
-                "tax_rate": {
-                  "anyOf": [
-                    {
-                      "maxLength": 5000,
-                      "type": "string"
-                    }
-                  ],
-                  "description": "The tax rate that was applied to get this tax amount."
-                }
+                "type": "array"
               },
-              "required": [
-                "amount",
-                "inclusive",
-                "tax_rate"
-              ],
-              "title": "InvoiceTaxAmount",
-              "type": "object"
+              "type": {
+                "description": "A string identifying the type of the source of this line item, either an `invoiceitem` or a `subscription`.",
+                "enum": [
+                  "invoiceitem",
+                  "subscription"
+                ],
+                "type": "string"
+              }
             },
-            "tax_rates": {
-              "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
-              "properties": {
-                "active": {
-                  "description": "Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.",
-                  "type": "boolean"
-                },
-                "country": {
-                  "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "created": {
-                  "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                  "format": "unix-time",
-                  "type": "integer"
-                },
-                "description": {
-                  "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "display_name": {
-                  "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
-                  "maxLength": 5000,
-                  "type": "string"
-                },
-                "id": {
-                  "description": "Unique identifier for the object.",
-                  "maxLength": 5000,
-                  "type": "string"
-                },
-                "inclusive": {
-                  "description": "This specifies if the tax rate is inclusive or exclusive.",
-                  "type": "boolean"
-                },
-                "jurisdiction": {
-                  "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "livemode": {
-                  "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                  "type": "boolean"
-                },
-                "metadata": {},
-                "object": {
-                  "description": "String representing the object's type. Objects of the same type share the same value.",
-                  "enum": [
-                    "tax_rate"
-                  ],
-                  "type": "string"
-                },
-                "percentage": {
-                  "description": "This represents the tax rate percent out of 100.",
-                  "type": "number"
-                },
-                "state": {
-                  "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "tax_type": {
-                  "description": "The high-level tax type, such as `vat` or `sales_tax`.",
-                  "enum": [
-                    "gst",
-                    "hst",
-                    "jct",
-                    "pst",
-                    "qst",
-                    "rst",
-                    "sales_tax",
-                    "vat"
-                  ],
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              },
-              "required": [
-                "active",
-                "created",
-                "display_name",
-                "id",
-                "inclusive",
-                "livemode",
-                "object",
-                "percentage"
-              ],
-              "title": "TaxRate",
-              "type": "object",
-              "x-resourceId": "tax_rate"
-            },
-            "type": {
-              "description": "A string identifying the type of the source of this line item, either an `invoiceitem` or a `subscription`.",
-              "enum": [
-                "invoiceitem",
-                "subscription"
-              ],
-              "type": "string"
-            }
+            "required": [
+              "amount",
+              "currency",
+              "discountable",
+              "id",
+              "livemode",
+              "metadata",
+              "object",
+              "period",
+              "proration",
+              "type"
+            ],
+            "title": "InvoiceLineItem",
+            "type": "object",
+            "x-resourceId": "line_item"
           },
-          "required": [
-            "amount",
-            "currency",
-            "discountable",
-            "id",
-            "livemode",
-            "metadata",
-            "object",
-            "period",
-            "proration",
-            "type"
-          ],
-          "title": "InvoiceLineItem",
-          "type": "object",
-          "x-resourceId": "line_item"
+          "type": "array"
         },
         "has_more": {
           "description": "True if this list has another page of items after this one that can be fetched.",
@@ -4712,25 +4801,32 @@
           "description": "Payment-method-specific configuration to provide to the invoice’s PaymentIntent."
         },
         "payment_method_types": {
-          "enum": [
-            "ach_credit_transfer",
-            "ach_debit",
-            "acss_debit",
-            "au_becs_debit",
-            "bacs_debit",
-            "bancontact",
-            "boleto",
-            "card",
-            "fpx",
-            "giropay",
-            "grabpay",
-            "ideal",
-            "sepa_debit",
-            "sofort",
-            "wechat_pay"
-          ],
-          "type": "string",
-          "x-stripeBypassValidation": true
+          "description": "The list of payment method types (e.g. card) to provide to the invoice’s PaymentIntent. If not set, Stripe attempts to automatically determine the types to use by looking at the invoice’s default payment method, the subscription’s default payment method, the customer’s default payment method, and your [invoice template settings](https://dashboard.stripe.com/settings/billing/invoice).",
+          "items": {
+            "enum": [
+              "ach_credit_transfer",
+              "ach_debit",
+              "acss_debit",
+              "au_becs_debit",
+              "bacs_debit",
+              "bancontact",
+              "boleto",
+              "card",
+              "fpx",
+              "giropay",
+              "grabpay",
+              "ideal",
+              "sepa_debit",
+              "sofort",
+              "wechat_pay"
+            ],
+            "type": "string",
+            "x-stripeBypassValidation": true
+          },
+          "type": [
+            "array",
+            "null"
+          ]
         }
       },
       "title": "InvoicesPaymentSettings",
@@ -4884,23 +4980,31 @@
           ]
         },
         "item_reasons": {
-          "description": "",
-          "properties": {
-            "line_item_ids": {
-              "maxLength": 5000,
-              "type": "string"
+          "description": "Indicates which line items triggered a threshold invoice.",
+          "items": {
+            "description": "",
+            "properties": {
+              "line_item_ids": {
+                "description": "The IDs of the line items that triggered the threshold invoice.",
+                "items": {
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "usage_gte": {
+                "description": "The quantity threshold boundary that applied to the given line item.",
+                "type": "integer"
+              }
             },
-            "usage_gte": {
-              "description": "The quantity threshold boundary that applied to the given line item.",
-              "type": "integer"
-            }
+            "required": [
+              "line_item_ids",
+              "usage_gte"
+            ],
+            "title": "InvoiceItemThresholdReason",
+            "type": "object"
           },
-          "required": [
-            "line_item_ids",
-            "usage_gte"
-          ],
-          "title": "InvoiceItemThresholdReason",
-          "type": "object"
+          "type": "array"
         }
       },
       "required": [
@@ -4914,57 +5018,68 @@
       "type": "integer"
     },
     "total_discount_amounts": {
-      "description": "",
-      "properties": {
-        "amount": {
-          "description": "The amount, in %s, of the discount.",
-          "type": "integer"
+      "description": "The aggregate amounts calculated per discount across all line items.",
+      "items": {
+        "description": "",
+        "properties": {
+          "amount": {
+            "description": "The amount, in %s, of the discount.",
+            "type": "integer"
+          },
+          "discount": {
+            "anyOf": [
+              {
+                "maxLength": 5000,
+                "type": "string"
+              }
+            ],
+            "description": "The discount that was applied to get this discount amount."
+          }
         },
-        "discount": {
-          "anyOf": [
-            {
-              "maxLength": 5000,
-              "type": "string"
-            }
-          ],
-          "description": "The discount that was applied to get this discount amount."
-        }
+        "required": [
+          "amount",
+          "discount"
+        ],
+        "title": "DiscountsResourceDiscountAmount",
+        "type": "object"
       },
-      "required": [
-        "amount",
-        "discount"
-      ],
-      "title": "DiscountsResourceDiscountAmount",
-      "type": "object"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "total_tax_amounts": {
-      "description": "",
-      "properties": {
-        "amount": {
-          "description": "The amount, in %s, of the tax.",
-          "type": "integer"
+      "description": "The aggregate amounts calculated per tax rate for all line items.",
+      "items": {
+        "description": "",
+        "properties": {
+          "amount": {
+            "description": "The amount, in %s, of the tax.",
+            "type": "integer"
+          },
+          "inclusive": {
+            "description": "Whether this tax amount is inclusive or exclusive.",
+            "type": "boolean"
+          },
+          "tax_rate": {
+            "anyOf": [
+              {
+                "maxLength": 5000,
+                "type": "string"
+              }
+            ],
+            "description": "The tax rate that was applied to get this tax amount."
+          }
         },
-        "inclusive": {
-          "description": "Whether this tax amount is inclusive or exclusive.",
-          "type": "boolean"
-        },
-        "tax_rate": {
-          "anyOf": [
-            {
-              "maxLength": 5000,
-              "type": "string"
-            }
-          ],
-          "description": "The tax rate that was applied to get this tax amount."
-        }
+        "required": [
+          "amount",
+          "inclusive",
+          "tax_rate"
+        ],
+        "title": "InvoiceTaxAmount",
+        "type": "object"
       },
-      "required": [
-        "amount",
-        "inclusive",
-        "tax_rate"
-      ],
-      "title": "InvoiceTaxAmount",
-      "type": "object"
+      "type": "array"
     },
     "transfer_data": {
       "anyOf": [
@@ -5045,7 +5160,9 @@
   "default": {
     "account_country": "string",
     "account_name": "string",
-    "account_tax_ids": "string",
+    "account_tax_ids": [
+      "string"
+    ],
     "amount_due": 0,
     "amount_paid": 0,
     "amount_remaining": 0,
@@ -5062,10 +5179,12 @@
     "collection_method": "charge_automatically",
     "created": 0,
     "currency": "string",
-    "custom_fields": {
-      "name": "string",
-      "value": "string"
-    },
+    "custom_fields": [
+      {
+        "name": "string",
+        "value": "string"
+      }
+    ],
     "customer": "string",
     "customer_address": {
       "city": "string",
@@ -5093,35 +5212,41 @@
       "tracking_number": "string"
     },
     "customer_tax_exempt": "exempt",
-    "customer_tax_ids": {
-      "type": "ae_trn",
-      "value": "string"
-    },
+    "customer_tax_ids": [
+      {
+        "type": "ae_trn",
+        "value": "string"
+      }
+    ],
     "default_payment_method": "string",
     "default_source": "string",
-    "default_tax_rates": {
-      "active": true,
-      "country": "string",
-      "created": 0,
-      "description": "string",
-      "display_name": "string",
-      "id": "string",
-      "inclusive": true,
-      "jurisdiction": "string",
-      "livemode": true,
-      "metadata": {},
-      "object": "tax_rate",
-      "percentage": 0,
-      "state": "string",
-      "tax_type": "gst"
-    },
+    "default_tax_rates": [
+      {
+        "active": true,
+        "country": "string",
+        "created": 0,
+        "description": "string",
+        "display_name": "string",
+        "id": "string",
+        "inclusive": true,
+        "jurisdiction": "string",
+        "livemode": true,
+        "metadata": {},
+        "object": "tax_rate",
+        "percentage": 0,
+        "state": "string",
+        "tax_type": "gst"
+      }
+    ],
     "description": "string",
     "discount": {
       "checkout_session": "string",
       "coupon": {
         "amount_off": 0,
         "applies_to": {
-          "products": "string"
+          "products": [
+            "string"
+          ]
         },
         "created": 0,
         "currency": "string",
@@ -5148,7 +5273,9 @@
       "start": 0,
       "subscription": "string"
     },
-    "discounts": "string",
+    "discounts": [
+      "string"
+    ],
     "due_date": 0,
     "ending_balance": 0,
     "footer": "string",
@@ -5175,52 +5302,54 @@
         "cancellation_reason": "abandoned",
         "capture_method": "automatic",
         "charges": {
-          "data": {
-            "amount": 0,
-            "amount_captured": 0,
-            "amount_refunded": 0,
-            "application": "string",
-            "application_fee": "string",
-            "application_fee_amount": 0,
-            "balance_transaction": "string",
-            "billing_details": {},
-            "calculated_statement_descriptor": "string",
-            "captured": true,
-            "created": 0,
-            "currency": "string",
-            "customer": "string",
-            "description": "string",
-            "disputed": true,
-            "failure_code": "string",
-            "failure_message": "string",
-            "fraud_details": {},
-            "id": "string",
-            "invoice": "string",
-            "livemode": true,
-            "metadata": {},
-            "object": "charge",
-            "on_behalf_of": "string",
-            "order": "string",
-            "outcome": {},
-            "paid": true,
-            "payment_intent": "string",
-            "payment_method": "string",
-            "payment_method_details": {},
-            "receipt_email": "string",
-            "receipt_number": "string",
-            "receipt_url": "string",
-            "refunded": true,
-            "refunds": {},
-            "review": "string",
-            "shipping": {},
-            "source_transfer": "string",
-            "statement_descriptor": "string",
-            "statement_descriptor_suffix": "string",
-            "status": "failed",
-            "transfer": "string",
-            "transfer_data": {},
-            "transfer_group": "string"
-          },
+          "data": [
+            {
+              "amount": 0,
+              "amount_captured": 0,
+              "amount_refunded": 0,
+              "application": "string",
+              "application_fee": "string",
+              "application_fee_amount": 0,
+              "balance_transaction": "string",
+              "billing_details": {},
+              "calculated_statement_descriptor": "string",
+              "captured": true,
+              "created": 0,
+              "currency": "string",
+              "customer": "string",
+              "description": "string",
+              "disputed": true,
+              "failure_code": "string",
+              "failure_message": "string",
+              "fraud_details": {},
+              "id": "string",
+              "invoice": "string",
+              "livemode": true,
+              "metadata": {},
+              "object": "charge",
+              "on_behalf_of": "string",
+              "order": "string",
+              "outcome": {},
+              "paid": true,
+              "payment_intent": "string",
+              "payment_method": "string",
+              "payment_method_details": {},
+              "receipt_email": "string",
+              "receipt_number": "string",
+              "receipt_url": "string",
+              "refunded": true,
+              "refunds": {},
+              "review": "string",
+              "shipping": {},
+              "source_transfer": "string",
+              "statement_descriptor": "string",
+              "statement_descriptor_suffix": "string",
+              "status": "failed",
+              "transfer": "string",
+              "transfer_data": {},
+              "transfer_group": "string"
+            }
+          ],
           "has_more": true,
           "object": "list",
           "url": "string"
@@ -5334,7 +5463,9 @@
             "client": "android"
           }
         },
-        "payment_method_types": "string",
+        "payment_method_types": [
+          "string"
+        ],
         "processing": {
           "card": {},
           "type": "card"
@@ -5421,7 +5552,9 @@
           },
           "last4": "string",
           "networks": {
-            "available": "string",
+            "available": [
+              "string"
+            ],
             "preferred": "string"
           },
           "three_d_secure_usage": {
@@ -5528,7 +5661,9 @@
             "mandate_options": {}
           }
         },
-        "payment_method_types": "string",
+        "payment_method_types": [
+          "string"
+        ],
         "single_use_mandate": "string",
         "status": "canceled",
         "usage": "string"
@@ -5538,7 +5673,9 @@
         "account_holder_name": "string",
         "account_holder_type": "string",
         "account_type": "string",
-        "available_payout_methods": "instant",
+        "available_payout_methods": [
+          "instant"
+        ],
         "bank_name": "string",
         "country": "string",
         "currency": "string",
@@ -5555,87 +5692,99 @@
       "type": "api_error"
     },
     "lines": {
-      "data": {
-        "amount": 0,
-        "currency": "string",
-        "description": "string",
-        "discount_amounts": {
+      "data": [
+        {
           "amount": 0,
-          "discount": "string"
-        },
-        "discountable": true,
-        "discounts": "string",
-        "id": "string",
-        "invoice_item": "string",
-        "livemode": true,
-        "metadata": {},
-        "object": "line_item",
-        "period": {
-          "end": 0,
-          "start": 0
-        },
-        "price": {
-          "active": true,
-          "billing_scheme": "per_unit",
-          "created": 0,
           "currency": "string",
-          "id": "string",
-          "livemode": true,
-          "lookup_key": "string",
-          "metadata": {},
-          "nickname": "string",
-          "object": "price",
-          "product": "string",
-          "recurring": {
-            "aggregate_usage": "last_during_period",
-            "interval": "day",
-            "interval_count": 0,
-            "usage_type": "licensed"
-          },
-          "tax_behavior": "exclusive",
-          "tiers": {
-            "flat_amount": 0,
-            "flat_amount_decimal": "0.0",
-            "unit_amount": 0,
-            "unit_amount_decimal": "0.0",
-            "up_to": 0
-          },
-          "tiers_mode": "graduated",
-          "transform_quantity": {
-            "divide_by": 0,
-            "round": "down"
-          },
-          "type": "one_time",
-          "unit_amount": 0,
-          "unit_amount_decimal": "0.0"
-        },
-        "proration": true,
-        "quantity": 0,
-        "subscription": "string",
-        "subscription_item": "string",
-        "tax_amounts": {
-          "amount": 0,
-          "inclusive": true,
-          "tax_rate": "string"
-        },
-        "tax_rates": {
-          "active": true,
-          "country": "string",
-          "created": 0,
           "description": "string",
-          "display_name": "string",
+          "discount_amounts": [
+            {
+              "amount": 0,
+              "discount": "string"
+            }
+          ],
+          "discountable": true,
+          "discounts": [
+            "string"
+          ],
           "id": "string",
-          "inclusive": true,
-          "jurisdiction": "string",
+          "invoice_item": "string",
           "livemode": true,
           "metadata": {},
-          "object": "tax_rate",
-          "percentage": 0,
-          "state": "string",
-          "tax_type": "gst"
-        },
-        "type": "invoiceitem"
-      },
+          "object": "line_item",
+          "period": {
+            "end": 0,
+            "start": 0
+          },
+          "price": {
+            "active": true,
+            "billing_scheme": "per_unit",
+            "created": 0,
+            "currency": "string",
+            "id": "string",
+            "livemode": true,
+            "lookup_key": "string",
+            "metadata": {},
+            "nickname": "string",
+            "object": "price",
+            "product": "string",
+            "recurring": {
+              "aggregate_usage": "last_during_period",
+              "interval": "day",
+              "interval_count": 0,
+              "usage_type": "licensed"
+            },
+            "tax_behavior": "exclusive",
+            "tiers": [
+              {
+                "flat_amount": 0,
+                "flat_amount_decimal": "0.0",
+                "unit_amount": 0,
+                "unit_amount_decimal": "0.0",
+                "up_to": 0
+              }
+            ],
+            "tiers_mode": "graduated",
+            "transform_quantity": {
+              "divide_by": 0,
+              "round": "down"
+            },
+            "type": "one_time",
+            "unit_amount": 0,
+            "unit_amount_decimal": "0.0"
+          },
+          "proration": true,
+          "quantity": 0,
+          "subscription": "string",
+          "subscription_item": "string",
+          "tax_amounts": [
+            {
+              "amount": 0,
+              "inclusive": true,
+              "tax_rate": "string"
+            }
+          ],
+          "tax_rates": [
+            {
+              "active": true,
+              "country": "string",
+              "created": 0,
+              "description": "string",
+              "display_name": "string",
+              "id": "string",
+              "inclusive": true,
+              "jurisdiction": "string",
+              "livemode": true,
+              "metadata": {},
+              "object": "tax_rate",
+              "percentage": 0,
+              "state": "string",
+              "tax_type": "gst"
+            }
+          ],
+          "type": "invoiceitem"
+        }
+      ],
       "has_more": true,
       "object": "list",
       "url": "string"
@@ -5664,7 +5813,9 @@
           "request_three_d_secure": "any"
         }
       },
-      "payment_method_types": "ach_credit_transfer"
+      "payment_method_types": [
+        "ach_credit_transfer"
+      ]
     },
     "period_end": 0,
     "period_start": 0,
@@ -5687,21 +5838,29 @@
     "tax": 0,
     "threshold_reason": {
       "amount_gte": 0,
-      "item_reasons": {
-        "line_item_ids": "string",
-        "usage_gte": 0
-      }
+      "item_reasons": [
+        {
+          "line_item_ids": [
+            "string"
+          ],
+          "usage_gte": 0
+        }
+      ]
     },
     "total": 0,
-    "total_discount_amounts": {
-      "amount": 0,
-      "discount": "string"
-    },
-    "total_tax_amounts": {
-      "amount": 0,
-      "inclusive": true,
-      "tax_rate": "string"
-    },
+    "total_discount_amounts": [
+      {
+        "amount": 0,
+        "discount": "string"
+      }
+    ],
+    "total_tax_amounts": [
+      {
+        "amount": 0,
+        "inclusive": true,
+        "tax_rate": "string"
+      }
+    ],
     "transfer_data": {
       "amount": 0,
       "destination": "string"

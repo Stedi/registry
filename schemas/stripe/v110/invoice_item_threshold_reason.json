@@ -2,8 +2,12 @@
   "description": "",
   "properties": {
     "line_item_ids": {
-      "maxLength": 5000,
-      "type": "string"
+      "description": "The IDs of the line items that triggered the threshold invoice.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": "array"
     },
     "usage_gte": {
       "description": "The quantity threshold boundary that applied to the given line item.",
@@ -17,7 +21,9 @@
   "title": "InvoiceItemThresholdReason",
   "type": "object",
   "default": {
-    "line_item_ids": "string",
+    "line_item_ids": [
+      "string"
+    ],
     "usage_gte": 0
   }
 }

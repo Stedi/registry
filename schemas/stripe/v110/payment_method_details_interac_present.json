@@ -82,8 +82,15 @@
       ]
     },
     "preferred_locales": {
-      "maxLength": 5000,
-      "type": "string"
+      "description": "EMV tag 5F2D. Preferred languages specified by the integrated circuit chip.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "read_method": {
       "description": "How card details were read in this transaction.",
@@ -210,7 +217,9 @@
     "generated_card": "string",
     "last4": "string",
     "network": "string",
-    "preferred_locales": "string",
+    "preferred_locales": [
+      "string"
+    ],
     "read_method": "contact_emv",
     "receipt": {
       "account_type": "checking",

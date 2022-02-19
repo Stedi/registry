@@ -108,8 +108,16 @@
                     "breakdown": {
                       "description": "",
                       "properties": {
-                        "discounts": {},
-                        "taxes": {}
+                        "discounts": {
+                          "description": "The aggregated line item discounts.",
+                          "items": {},
+                          "type": "array"
+                        },
+                        "taxes": {
+                          "description": "The aggregated line item tax amounts by rate.",
+                          "items": {},
+                          "type": "array"
+                        }
                       },
                       "required": [
                         "discounts",
@@ -161,64 +169,76 @@
               "description": "The line items that will appear on the next invoice after this quote is accepted. This does not include pending invoice items that exist on the customer but may still be included in the next invoice.",
               "properties": {
                 "data": {
-                  "description": "A line item.",
-                  "properties": {
-                    "amount_subtotal": {
-                      "description": "Total before any discounts or taxes are applied.",
-                      "type": "integer"
+                  "description": "Details about each object.",
+                  "items": {
+                    "description": "A line item.",
+                    "properties": {
+                      "amount_subtotal": {
+                        "description": "Total before any discounts or taxes are applied.",
+                        "type": "integer"
+                      },
+                      "amount_total": {
+                        "description": "Total after discounts and taxes.",
+                        "type": "integer"
+                      },
+                      "currency": {
+                        "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                        "type": "string"
+                      },
+                      "description": {
+                        "description": "An arbitrary string attached to the object. Often useful for displaying to users. Defaults to product name.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "discounts": {
+                        "description": "The discounts applied to the line item.",
+                        "items": {},
+                        "type": "array"
+                      },
+                      "id": {
+                        "description": "Unique identifier for the object.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "object": {
+                        "description": "String representing the object's type. Objects of the same type share the same value.",
+                        "enum": [
+                          "item"
+                        ],
+                        "type": "string"
+                      },
+                      "price": {
+                        "anyOf": [
+                          {}
+                        ],
+                        "description": "The price used to generate the line item."
+                      },
+                      "quantity": {
+                        "description": "The quantity of products being purchased.",
+                        "type": [
+                          "integer",
+                          "null"
+                        ]
+                      },
+                      "taxes": {
+                        "description": "The taxes applied to the line item.",
+                        "items": {},
+                        "type": "array"
+                      }
                     },
-                    "amount_total": {
-                      "description": "Total after discounts and taxes.",
-                      "type": "integer"
-                    },
-                    "currency": {
-                      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-                      "type": "string"
-                    },
-                    "description": {
-                      "description": "An arbitrary string attached to the object. Often useful for displaying to users. Defaults to product name.",
-                      "maxLength": 5000,
-                      "type": "string"
-                    },
-                    "discounts": {},
-                    "id": {
-                      "description": "Unique identifier for the object.",
-                      "maxLength": 5000,
-                      "type": "string"
-                    },
-                    "object": {
-                      "description": "String representing the object's type. Objects of the same type share the same value.",
-                      "enum": [
-                        "item"
-                      ],
-                      "type": "string"
-                    },
-                    "price": {
-                      "anyOf": [
-                        {}
-                      ],
-                      "description": "The price used to generate the line item."
-                    },
-                    "quantity": {
-                      "description": "The quantity of products being purchased.",
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "taxes": {}
+                    "required": [
+                      "amount_subtotal",
+                      "amount_total",
+                      "currency",
+                      "description",
+                      "id",
+                      "object"
+                    ],
+                    "title": "LineItem",
+                    "type": "object",
+                    "x-resourceId": "item"
                   },
-                  "required": [
-                    "amount_subtotal",
-                    "amount_total",
-                    "currency",
-                    "description",
-                    "id",
-                    "object"
-                  ],
-                  "title": "LineItem",
-                  "type": "object",
-                  "x-resourceId": "item"
+                  "type": "array"
                 },
                 "has_more": {
                   "description": "True if this list has another page of items after this one that can be fetched.",
@@ -267,8 +287,16 @@
                 "breakdown": {
                   "description": "",
                   "properties": {
-                    "discounts": {},
-                    "taxes": {}
+                    "discounts": {
+                      "description": "The aggregated line item discounts.",
+                      "items": {},
+                      "type": "array"
+                    },
+                    "taxes": {
+                      "description": "The aggregated line item tax amounts by rate.",
+                      "items": {},
+                      "type": "array"
+                    }
                   },
                   "required": [
                     "discounts",
@@ -330,12 +358,16 @@
       "description": "The customer which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed."
     },
     "default_tax_rates": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        }
-      ]
+      "description": "The tax rates applied to this quote.",
+      "items": {
+        "anyOf": [
+          {
+            "maxLength": 5000,
+            "type": "string"
+          }
+        ]
+      },
+      "type": "array"
     },
     "description": {
       "description": "A description that will be displayed on the quote PDF.",
@@ -346,12 +378,16 @@
       ]
     },
     "discounts": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        }
-      ]
+      "description": "The discounts applied to this quote.",
+      "items": {
+        "anyOf": [
+          {
+            "maxLength": 5000,
+            "type": "string"
+          }
+        ]
+      },
+      "type": "array"
     },
     "expires_at": {
       "description": "The date on which the quote will be canceled if in `open` or `draft` status. Measured in seconds since the Unix epoch.",
@@ -458,64 +494,76 @@
       "description": "A list of items the customer is being quoted for.",
       "properties": {
         "data": {
-          "description": "A line item.",
-          "properties": {
-            "amount_subtotal": {
-              "description": "Total before any discounts or taxes are applied.",
-              "type": "integer"
+          "description": "Details about each object.",
+          "items": {
+            "description": "A line item.",
+            "properties": {
+              "amount_subtotal": {
+                "description": "Total before any discounts or taxes are applied.",
+                "type": "integer"
+              },
+              "amount_total": {
+                "description": "Total after discounts and taxes.",
+                "type": "integer"
+              },
+              "currency": {
+                "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                "type": "string"
+              },
+              "description": {
+                "description": "An arbitrary string attached to the object. Often useful for displaying to users. Defaults to product name.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "discounts": {
+                "description": "The discounts applied to the line item.",
+                "items": {},
+                "type": "array"
+              },
+              "id": {
+                "description": "Unique identifier for the object.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "item"
+                ],
+                "type": "string"
+              },
+              "price": {
+                "anyOf": [
+                  {}
+                ],
+                "description": "The price used to generate the line item."
+              },
+              "quantity": {
+                "description": "The quantity of products being purchased.",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "taxes": {
+                "description": "The taxes applied to the line item.",
+                "items": {},
+                "type": "array"
+              }
             },
-            "amount_total": {
-              "description": "Total after discounts and taxes.",
-              "type": "integer"
-            },
-            "currency": {
-              "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-              "type": "string"
-            },
-            "description": {
-              "description": "An arbitrary string attached to the object. Often useful for displaying to users. Defaults to product name.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "discounts": {},
-            "id": {
-              "description": "Unique identifier for the object.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "object": {
-              "description": "String representing the object's type. Objects of the same type share the same value.",
-              "enum": [
-                "item"
-              ],
-              "type": "string"
-            },
-            "price": {
-              "anyOf": [
-                {}
-              ],
-              "description": "The price used to generate the line item."
-            },
-            "quantity": {
-              "description": "The quantity of products being purchased.",
-              "type": [
-                "integer",
-                "null"
-              ]
-            },
-            "taxes": {}
+            "required": [
+              "amount_subtotal",
+              "amount_total",
+              "currency",
+              "description",
+              "id",
+              "object"
+            ],
+            "title": "LineItem",
+            "type": "object",
+            "x-resourceId": "item"
           },
-          "required": [
-            "amount_subtotal",
-            "amount_total",
-            "currency",
-            "description",
-            "id",
-            "object"
-          ],
-          "title": "LineItem",
-          "type": "object",
-          "x-resourceId": "item"
+          "type": "array"
         },
         "has_more": {
           "description": "True if this list has another page of items after this one that can be fetched.",
@@ -692,8 +740,16 @@
         "breakdown": {
           "description": "",
           "properties": {
-            "discounts": {},
-            "taxes": {}
+            "discounts": {
+              "description": "The aggregated line item discounts.",
+              "items": {},
+              "type": "array"
+            },
+            "taxes": {
+              "description": "The aggregated line item tax amounts by rate.",
+              "items": {},
+              "type": "array"
+            }
           },
           "required": [
             "discounts",
@@ -797,8 +853,12 @@
           "amount_shipping": 0,
           "amount_tax": 0,
           "breakdown": {
-            "discounts": {},
-            "taxes": {}
+            "discounts": [
+              {}
+            ],
+            "taxes": [
+              {}
+            ]
           }
         }
       },
@@ -806,18 +866,24 @@
         "amount_subtotal": 0,
         "amount_total": 0,
         "line_items": {
-          "data": {
-            "amount_subtotal": 0,
-            "amount_total": 0,
-            "currency": "string",
-            "description": "string",
-            "discounts": {},
-            "id": "string",
-            "object": "item",
-            "price": {},
-            "quantity": 0,
-            "taxes": {}
-          },
+          "data": [
+            {
+              "amount_subtotal": 0,
+              "amount_total": 0,
+              "currency": "string",
+              "description": "string",
+              "discounts": [
+                {}
+              ],
+              "id": "string",
+              "object": "item",
+              "price": {},
+              "quantity": 0,
+              "taxes": [
+                {}
+              ]
+            }
+          ],
           "has_more": true,
           "object": "list",
           "url": "string"
@@ -827,8 +893,12 @@
           "amount_shipping": 0,
           "amount_tax": 0,
           "breakdown": {
-            "discounts": {},
-            "taxes": {}
+            "discounts": [
+              {}
+            ],
+            "taxes": [
+              {}
+            ]
           }
         }
       }
@@ -836,9 +906,13 @@
     "created": 0,
     "currency": "string",
     "customer": "string",
-    "default_tax_rates": "string",
+    "default_tax_rates": [
+      "string"
+    ],
     "description": "string",
-    "discounts": "string",
+    "discounts": [
+      "string"
+    ],
     "expires_at": 0,
     "footer": "string",
     "from_quote": {
@@ -852,18 +926,24 @@
       "days_until_due": 0
     },
     "line_items": {
-      "data": {
-        "amount_subtotal": 0,
-        "amount_total": 0,
-        "currency": "string",
-        "description": "string",
-        "discounts": {},
-        "id": "string",
-        "object": "item",
-        "price": {},
-        "quantity": 0,
-        "taxes": {}
-      },
+      "data": [
+        {
+          "amount_subtotal": 0,
+          "amount_total": 0,
+          "currency": "string",
+          "description": "string",
+          "discounts": [
+            {}
+          ],
+          "id": "string",
+          "object": "item",
+          "price": {},
+          "quantity": 0,
+          "taxes": [
+            {}
+          ]
+        }
+      ],
       "has_more": true,
       "object": "list",
       "url": "string"
@@ -890,8 +970,12 @@
       "amount_shipping": 0,
       "amount_tax": 0,
       "breakdown": {
-        "discounts": {},
-        "taxes": {}
+        "discounts": [
+          {}
+        ],
+        "taxes": [
+          {}
+        ]
       }
     },
     "transfer_data": {

@@ -2,39 +2,46 @@
   "description": "",
   "properties": {
     "available_plans": {
-      "description": "",
-      "properties": {
-        "count": {
-          "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
-          "type": [
-            "integer",
-            "null"
-          ]
+      "description": "Installment plans that may be selected for this PaymentIntent.",
+      "items": {
+        "description": "",
+        "properties": {
+          "count": {
+            "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "interval": {
+            "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
+            "enum": [
+              "month"
+            ],
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "description": "Type of installment plan, one of `fixed_count`.",
+            "enum": [
+              "fixed_count"
+            ],
+            "type": "string"
+          }
         },
-        "interval": {
-          "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
-          "enum": [
-            "month"
-          ],
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "type": {
-          "description": "Type of installment plan, one of `fixed_count`.",
-          "enum": [
-            "fixed_count"
-          ],
-          "type": "string"
-        }
+        "required": [
+          "type"
+        ],
+        "title": "payment_method_details_card_installments_plan",
+        "type": [
+          "object",
+          "null"
+        ]
       },
-      "required": [
-        "type"
-      ],
-      "title": "payment_method_details_card_installments_plan",
       "type": [
-        "object",
+        "array",
         "null"
       ]
     },
@@ -94,11 +101,13 @@
   "title": "payment_method_options_card_installments",
   "type": "object",
   "default": {
-    "available_plans": {
-      "count": 0,
-      "interval": "month",
-      "type": "fixed_count"
-    },
+    "available_plans": [
+      {
+        "count": 0,
+        "interval": "month",
+        "type": "fixed_count"
+      }
+    ],
     "enabled": true,
     "plan": {
       "count": 0,

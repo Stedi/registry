@@ -2,8 +2,12 @@
   "description": "",
   "properties": {
     "products": {
-      "maxLength": 5000,
-      "type": "string"
+      "description": "A list of product IDs this coupon applies to",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": "array"
     }
   },
   "required": [
@@ -12,6 +16,8 @@
   "title": "CouponAppliesTo",
   "type": "object",
   "default": {
-    "products": "string"
+    "products": [
+      "string"
+    ]
   }
 }

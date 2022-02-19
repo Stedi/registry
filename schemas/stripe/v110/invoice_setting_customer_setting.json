@@ -2,25 +2,32 @@
   "description": "",
   "properties": {
     "custom_fields": {
-      "description": "",
-      "properties": {
-        "name": {
-          "description": "The name of the custom field.",
-          "maxLength": 5000,
-          "type": "string"
+      "description": "Default custom fields to be displayed on invoices for this customer.",
+      "items": {
+        "description": "",
+        "properties": {
+          "name": {
+            "description": "The name of the custom field.",
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "value": {
+            "description": "The value of the custom field.",
+            "maxLength": 5000,
+            "type": "string"
+          }
         },
-        "value": {
-          "description": "The value of the custom field.",
-          "maxLength": 5000,
-          "type": "string"
-        }
+        "required": [
+          "name",
+          "value"
+        ],
+        "title": "InvoiceSettingCustomField",
+        "type": "object"
       },
-      "required": [
-        "name",
-        "value"
-      ],
-      "title": "InvoiceSettingCustomField",
-      "type": "object"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "default_payment_method": {
       "anyOf": [
@@ -49,10 +56,12 @@
   "title": "InvoiceSettingCustomerSetting",
   "type": "object",
   "default": {
-    "custom_fields": {
-      "name": "string",
-      "value": "string"
-    },
+    "custom_fields": [
+      {
+        "name": "string",
+        "value": "string"
+      }
+    ],
     "default_payment_method": "string",
     "footer": "string"
   }

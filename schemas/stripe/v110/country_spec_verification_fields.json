@@ -5,12 +5,20 @@
       "description": "",
       "properties": {
         "additional": {
-          "maxLength": 5000,
-          "type": "string"
+          "description": "Additional fields which are only required for some users.",
+          "items": {
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "type": "array"
         },
         "minimum": {
-          "maxLength": 5000,
-          "type": "string"
+          "description": "Fields which every account must eventually provide.",
+          "items": {
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "required": [
@@ -24,12 +32,20 @@
       "description": "",
       "properties": {
         "additional": {
-          "maxLength": 5000,
-          "type": "string"
+          "description": "Additional fields which are only required for some users.",
+          "items": {
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "type": "array"
         },
         "minimum": {
-          "maxLength": 5000,
-          "type": "string"
+          "description": "Fields which every account must eventually provide.",
+          "items": {
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "required": [
@@ -48,12 +64,20 @@
   "type": "object",
   "default": {
     "company": {
-      "additional": "string",
-      "minimum": "string"
+      "additional": [
+        "string"
+      ],
+      "minimum": [
+        "string"
+      ]
     },
     "individual": {
-      "additional": "string",
-      "minimum": "string"
+      "additional": [
+        "string"
+      ],
+      "minimum": [
+        "string"
+      ]
     }
   }
 }

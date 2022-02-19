@@ -2,12 +2,20 @@
   "description": "",
   "properties": {
     "alternative_fields_due": {
-      "maxLength": 5000,
-      "type": "string"
+      "description": "Fields that can be provided to satisfy all fields in `original_fields_due`.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": "array"
     },
     "original_fields_due": {
-      "maxLength": 5000,
-      "type": "string"
+      "description": "Fields that are due and can be satisfied by providing all fields in `alternative_fields_due`.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": "array"
     }
   },
   "required": [
@@ -17,7 +25,11 @@
   "title": "AccountRequirementsAlternative",
   "type": "object",
   "default": {
-    "alternative_fields_due": "string",
-    "original_fields_due": "string"
+    "alternative_fields_due": [
+      "string"
+    ],
+    "original_fields_due": [
+      "string"
+    ]
   }
 }

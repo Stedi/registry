@@ -202,394 +202,398 @@
                   "description": "Charges that were created by this PaymentIntent, if any.",
                   "properties": {
                     "data": {
-                      "description": "To charge a credit or a debit card, you create a `Charge` object. You can\nretrieve and refund individual charges as well as list all charges. Charges\nare identified by a unique, random ID.\n\nRelated guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).",
-                      "properties": {
-                        "amount": {
-                          "description": "Amount intended to be collected by this payment. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).",
-                          "type": "integer"
+                      "description": "This list only contains the latest charge, even if there were previously multiple unsuccessful charges. To view all previous charges for a PaymentIntent, you can filter the charges list using the `payment_intent` [parameter](https://stripe.com/docs/api/charges/list#list_charges-payment_intent).",
+                      "items": {
+                        "description": "To charge a credit or a debit card, you create a `Charge` object. You can\nretrieve and refund individual charges as well as list all charges. Charges\nare identified by a unique, random ID.\n\nRelated guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).",
+                        "properties": {
+                          "amount": {
+                            "description": "Amount intended to be collected by this payment. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).",
+                            "type": "integer"
+                          },
+                          "amount_captured": {
+                            "description": "Amount in %s captured (can be less than the amount attribute on the charge if a partial capture was made).",
+                            "type": "integer"
+                          },
+                          "amount_refunded": {
+                            "description": "Amount in %s refunded (can be less than the amount attribute on the charge if a partial refund was issued).",
+                            "type": "integer"
+                          },
+                          "application": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "ID of the Connect application that created the charge."
+                          },
+                          "application_fee": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "The application fee (if any) for the charge. [See the Connect documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees) for details."
+                          },
+                          "application_fee_amount": {
+                            "description": "The amount of the application fee (if any) requested for the charge. [See the Connect documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees) for details.",
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
+                          },
+                          "balance_transaction": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "ID of the balance transaction that describes the impact of this charge on your account balance (not including refunds or disputes)."
+                          },
+                          "billing_details": {},
+                          "calculated_statement_descriptor": {
+                            "description": "The full statement descriptor that is passed to card networks, and that is displayed on your customers' credit card and bank statements. Allows you to see what the statement descriptor looks like after the static and dynamic portions are combined.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "captured": {
+                            "description": "If the charge was created without capturing, this Boolean represents whether it is still uncaptured or has since been captured.",
+                            "type": "boolean"
+                          },
+                          "created": {
+                            "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                            "format": "unix-time",
+                            "type": "integer"
+                          },
+                          "currency": {
+                            "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                            "type": "string"
+                          },
+                          "customer": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "ID of the customer this charge is for if one exists."
+                          },
+                          "description": {
+                            "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
+                            "maxLength": 40000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "disputed": {
+                            "description": "Whether the charge has been disputed.",
+                            "type": "boolean"
+                          },
+                          "failure_code": {
+                            "description": "Error code explaining reason for charge failure if available (see [the errors section](https://stripe.com/docs/api#errors) for a list of codes).",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "failure_message": {
+                            "description": "Message to user further explaining reason for charge failure if available.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "fraud_details": {
+                            "anyOf": [
+                              {},
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "Information on fraud assessments for the charge."
+                          },
+                          "id": {
+                            "description": "Unique identifier for the object.",
+                            "maxLength": 5000,
+                            "type": "string"
+                          },
+                          "invoice": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "ID of the invoice this charge is for if one exists."
+                          },
+                          "livemode": {
+                            "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                            "type": "boolean"
+                          },
+                          "metadata": {},
+                          "object": {
+                            "description": "String representing the object's type. Objects of the same type share the same value.",
+                            "enum": [
+                              "charge"
+                            ],
+                            "type": "string"
+                          },
+                          "on_behalf_of": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "The account (if any) the charge was made on behalf of without triggering an automatic transfer. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers) for details."
+                          },
+                          "order": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "ID of the order this charge is for if one exists."
+                          },
+                          "outcome": {
+                            "anyOf": [
+                              {},
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "Details about whether the payment was accepted, and why. See [understanding declines](https://stripe.com/docs/declines) for details."
+                          },
+                          "paid": {
+                            "description": "`true` if the charge succeeded, or was successfully authorized for later capture.",
+                            "type": "boolean"
+                          },
+                          "payment_intent": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "ID of the PaymentIntent associated with this charge, if one exists."
+                          },
+                          "payment_method": {
+                            "description": "ID of the payment method used in this charge.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "payment_method_details": {
+                            "anyOf": [
+                              {},
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "Details about the payment method at the time of the transaction."
+                          },
+                          "receipt_email": {
+                            "description": "This is the email address that the receipt for this charge was sent to.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "receipt_number": {
+                            "description": "This is the transaction number that appears on email receipts sent for this charge. This attribute will be `null` until a receipt has been sent.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "receipt_url": {
+                            "description": "This is the URL to view the receipt for this charge. The receipt is kept up-to-date to the latest state of the charge, including any refunds. If the charge is for an Invoice, the receipt will be stylized as an Invoice receipt.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "refunded": {
+                            "description": "Whether the charge has been fully refunded. If the charge is only partially refunded, this attribute will still be false.",
+                            "type": "boolean"
+                          },
+                          "refunds": {},
+                          "review": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "ID of the review associated with this charge if one exists."
+                          },
+                          "shipping": {
+                            "anyOf": [
+                              {},
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "Shipping information for the charge."
+                          },
+                          "source_transfer": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "The transfer ID which created this charge. Only present if the charge came from another Stripe account. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details."
+                          },
+                          "statement_descriptor": {
+                            "description": "For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value as the complete description of a charge on your customers’ statements. Must contain at least one letter, maximum 22 characters.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "statement_descriptor_suffix": {
+                            "description": "Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "status": {
+                            "description": "The status of the payment is either `succeeded`, `pending`, or `failed`.",
+                            "enum": [
+                              "failed",
+                              "pending",
+                              "succeeded"
+                            ],
+                            "type": "string"
+                          },
+                          "transfer": {
+                            "anyOf": [
+                              {
+                                "maxLength": 5000,
+                                "type": "string"
+                              }
+                            ],
+                            "description": "ID of the transfer to the `destination` account (only applicable if the charge was created using the `destination` parameter)."
+                          },
+                          "transfer_data": {
+                            "anyOf": [
+                              {},
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "An optional dictionary including the account to automatically transfer to as part of a destination charge. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details."
+                          },
+                          "transfer_group": {
+                            "description": "A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.",
+                            "maxLength": 5000,
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          }
                         },
-                        "amount_captured": {
-                          "description": "Amount in %s captured (can be less than the amount attribute on the charge if a partial capture was made).",
-                          "type": "integer"
-                        },
-                        "amount_refunded": {
-                          "description": "Amount in %s refunded (can be less than the amount attribute on the charge if a partial refund was issued).",
-                          "type": "integer"
-                        },
-                        "application": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "ID of the Connect application that created the charge."
-                        },
-                        "application_fee": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "The application fee (if any) for the charge. [See the Connect documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees) for details."
-                        },
-                        "application_fee_amount": {
-                          "description": "The amount of the application fee (if any) requested for the charge. [See the Connect documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees) for details.",
-                          "type": [
-                            "integer",
-                            "null"
-                          ]
-                        },
-                        "balance_transaction": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "ID of the balance transaction that describes the impact of this charge on your account balance (not including refunds or disputes)."
-                        },
-                        "billing_details": {},
-                        "calculated_statement_descriptor": {
-                          "description": "The full statement descriptor that is passed to card networks, and that is displayed on your customers' credit card and bank statements. Allows you to see what the statement descriptor looks like after the static and dynamic portions are combined.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "captured": {
-                          "description": "If the charge was created without capturing, this Boolean represents whether it is still uncaptured or has since been captured.",
-                          "type": "boolean"
-                        },
-                        "created": {
-                          "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                          "format": "unix-time",
-                          "type": "integer"
-                        },
-                        "currency": {
-                          "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-                          "type": "string"
-                        },
-                        "customer": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "ID of the customer this charge is for if one exists."
-                        },
-                        "description": {
-                          "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
-                          "maxLength": 40000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "disputed": {
-                          "description": "Whether the charge has been disputed.",
-                          "type": "boolean"
-                        },
-                        "failure_code": {
-                          "description": "Error code explaining reason for charge failure if available (see [the errors section](https://stripe.com/docs/api#errors) for a list of codes).",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "failure_message": {
-                          "description": "Message to user further explaining reason for charge failure if available.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "fraud_details": {
-                          "anyOf": [
-                            {},
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "Information on fraud assessments for the charge."
-                        },
-                        "id": {
-                          "description": "Unique identifier for the object.",
-                          "maxLength": 5000,
-                          "type": "string"
-                        },
-                        "invoice": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "ID of the invoice this charge is for if one exists."
-                        },
-                        "livemode": {
-                          "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                          "type": "boolean"
-                        },
-                        "metadata": {},
-                        "object": {
-                          "description": "String representing the object's type. Objects of the same type share the same value.",
-                          "enum": [
-                            "charge"
-                          ],
-                          "type": "string"
-                        },
-                        "on_behalf_of": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "The account (if any) the charge was made on behalf of without triggering an automatic transfer. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers) for details."
-                        },
-                        "order": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "ID of the order this charge is for if one exists."
-                        },
-                        "outcome": {
-                          "anyOf": [
-                            {},
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "Details about whether the payment was accepted, and why. See [understanding declines](https://stripe.com/docs/declines) for details."
-                        },
-                        "paid": {
-                          "description": "`true` if the charge succeeded, or was successfully authorized for later capture.",
-                          "type": "boolean"
-                        },
-                        "payment_intent": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "ID of the PaymentIntent associated with this charge, if one exists."
-                        },
-                        "payment_method": {
-                          "description": "ID of the payment method used in this charge.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "payment_method_details": {
-                          "anyOf": [
-                            {},
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "Details about the payment method at the time of the transaction."
-                        },
-                        "receipt_email": {
-                          "description": "This is the email address that the receipt for this charge was sent to.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "receipt_number": {
-                          "description": "This is the transaction number that appears on email receipts sent for this charge. This attribute will be `null` until a receipt has been sent.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "receipt_url": {
-                          "description": "This is the URL to view the receipt for this charge. The receipt is kept up-to-date to the latest state of the charge, including any refunds. If the charge is for an Invoice, the receipt will be stylized as an Invoice receipt.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "refunded": {
-                          "description": "Whether the charge has been fully refunded. If the charge is only partially refunded, this attribute will still be false.",
-                          "type": "boolean"
-                        },
-                        "refunds": {},
-                        "review": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "ID of the review associated with this charge if one exists."
-                        },
-                        "shipping": {
-                          "anyOf": [
-                            {},
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "Shipping information for the charge."
-                        },
-                        "source_transfer": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "The transfer ID which created this charge. Only present if the charge came from another Stripe account. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details."
-                        },
-                        "statement_descriptor": {
-                          "description": "For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value as the complete description of a charge on your customers’ statements. Must contain at least one letter, maximum 22 characters.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "statement_descriptor_suffix": {
-                          "description": "Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "status": {
-                          "description": "The status of the payment is either `succeeded`, `pending`, or `failed`.",
-                          "enum": [
-                            "failed",
-                            "pending",
-                            "succeeded"
-                          ],
-                          "type": "string"
-                        },
-                        "transfer": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": "string"
-                            }
-                          ],
-                          "description": "ID of the transfer to the `destination` account (only applicable if the charge was created using the `destination` parameter)."
-                        },
-                        "transfer_data": {
-                          "anyOf": [
-                            {},
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "An optional dictionary including the account to automatically transfer to as part of a destination charge. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details."
-                        },
-                        "transfer_group": {
-                          "description": "A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        }
+                        "required": [
+                          "amount",
+                          "amount_captured",
+                          "amount_refunded",
+                          "billing_details",
+                          "captured",
+                          "created",
+                          "currency",
+                          "disputed",
+                          "id",
+                          "livemode",
+                          "metadata",
+                          "object",
+                          "paid",
+                          "refunded",
+                          "refunds",
+                          "status"
+                        ],
+                        "title": "Charge",
+                        "type": "object",
+                        "x-resourceId": "charge"
                       },
-                      "required": [
-                        "amount",
-                        "amount_captured",
-                        "amount_refunded",
-                        "billing_details",
-                        "captured",
-                        "created",
-                        "currency",
-                        "disputed",
-                        "id",
-                        "livemode",
-                        "metadata",
-                        "object",
-                        "paid",
-                        "refunded",
-                        "refunds",
-                        "status"
-                      ],
-                      "title": "Charge",
-                      "type": "object",
-                      "x-resourceId": "charge"
+                      "type": "array"
                     },
                     "has_more": {
                       "description": "True if this list has another page of items after this one that can be fetched.",
@@ -1394,8 +1398,12 @@
                   "description": "Payment-method-specific configuration for this PaymentIntent."
                 },
                 "payment_method_types": {
-                  "maxLength": 5000,
-                  "type": "string"
+                  "description": "The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.",
+                  "items": {
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "type": "array"
                 },
                 "processing": {
                   "anyOf": [
@@ -2044,8 +2052,12 @@
                           "description": "",
                           "properties": {
                             "available": {
-                              "maxLength": 5000,
-                              "type": "string"
+                              "description": "All available networks for the card.",
+                              "items": {
+                                "maxLength": 5000,
+                                "type": "string"
+                              },
+                              "type": "array"
                             },
                             "preferred": {
                               "description": "The preferred network for the card.",
@@ -2648,11 +2660,18 @@
                       ]
                     },
                     "available_payout_methods": {
-                      "enum": [
-                        "instant",
-                        "standard"
-                      ],
-                      "type": "string"
+                      "description": "A set of available payout methods for this bank account. Only values from this set should be passed as the `method` when creating a payout.",
+                      "items": {
+                        "enum": [
+                          "instant",
+                          "standard"
+                        ],
+                        "type": "string"
+                      },
+                      "type": [
+                        "array",
+                        "null"
+                      ]
                     },
                     "bank_name": {
                       "description": "Name of the bank associated with the routing number (e.g., `WELLS FARGO`).",
@@ -2946,11 +2965,15 @@
                       "type": "string"
                     },
                     "default_for": {
-                      "enum": [
-                        "invoice",
-                        "subscription"
-                      ],
-                      "type": "string"
+                      "description": "List of Stripe products where this mandate can be selected automatically.",
+                      "items": {
+                        "enum": [
+                          "invoice",
+                          "subscription"
+                        ],
+                        "type": "string"
+                      },
+                      "type": "array"
                     },
                     "interval_description": {
                       "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
@@ -3047,8 +3070,12 @@
       "description": "Payment-method-specific configuration for this SetupIntent."
     },
     "payment_method_types": {
-      "maxLength": 5000,
-      "type": "string"
+      "description": "The list of payment method types (e.g. card) that this SetupIntent is allowed to set up.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": "array"
     },
     "single_use_mandate": {
       "anyOf": [
@@ -3123,52 +3150,54 @@
         "cancellation_reason": "abandoned",
         "capture_method": "automatic",
         "charges": {
-          "data": {
-            "amount": 0,
-            "amount_captured": 0,
-            "amount_refunded": 0,
-            "application": "string",
-            "application_fee": "string",
-            "application_fee_amount": 0,
-            "balance_transaction": "string",
-            "billing_details": {},
-            "calculated_statement_descriptor": "string",
-            "captured": true,
-            "created": 0,
-            "currency": "string",
-            "customer": "string",
-            "description": "string",
-            "disputed": true,
-            "failure_code": "string",
-            "failure_message": "string",
-            "fraud_details": {},
-            "id": "string",
-            "invoice": "string",
-            "livemode": true,
-            "metadata": {},
-            "object": "charge",
-            "on_behalf_of": "string",
-            "order": "string",
-            "outcome": {},
-            "paid": true,
-            "payment_intent": "string",
-            "payment_method": "string",
-            "payment_method_details": {},
-            "receipt_email": "string",
-            "receipt_number": "string",
-            "receipt_url": "string",
-            "refunded": true,
-            "refunds": {},
-            "review": "string",
-            "shipping": {},
-            "source_transfer": "string",
-            "statement_descriptor": "string",
-            "statement_descriptor_suffix": "string",
-            "status": "failed",
-            "transfer": "string",
-            "transfer_data": {},
-            "transfer_group": "string"
-          },
+          "data": [
+            {
+              "amount": 0,
+              "amount_captured": 0,
+              "amount_refunded": 0,
+              "application": "string",
+              "application_fee": "string",
+              "application_fee_amount": 0,
+              "balance_transaction": "string",
+              "billing_details": {},
+              "calculated_statement_descriptor": "string",
+              "captured": true,
+              "created": 0,
+              "currency": "string",
+              "customer": "string",
+              "description": "string",
+              "disputed": true,
+              "failure_code": "string",
+              "failure_message": "string",
+              "fraud_details": {},
+              "id": "string",
+              "invoice": "string",
+              "livemode": true,
+              "metadata": {},
+              "object": "charge",
+              "on_behalf_of": "string",
+              "order": "string",
+              "outcome": {},
+              "paid": true,
+              "payment_intent": "string",
+              "payment_method": "string",
+              "payment_method_details": {},
+              "receipt_email": "string",
+              "receipt_number": "string",
+              "receipt_url": "string",
+              "refunded": true,
+              "refunds": {},
+              "review": "string",
+              "shipping": {},
+              "source_transfer": "string",
+              "statement_descriptor": "string",
+              "statement_descriptor_suffix": "string",
+              "status": "failed",
+              "transfer": "string",
+              "transfer_data": {},
+              "transfer_group": "string"
+            }
+          ],
           "has_more": true,
           "object": "list",
           "url": "string"
@@ -3282,7 +3311,9 @@
             "client": "android"
           }
         },
-        "payment_method_types": "string",
+        "payment_method_types": [
+          "string"
+        ],
         "processing": {
           "card": {},
           "type": "card"
@@ -3369,7 +3400,9 @@
           },
           "last4": "string",
           "networks": {
-            "available": "string",
+            "available": [
+              "string"
+            ],
             "preferred": "string"
           },
           "three_d_secure_usage": {
@@ -3441,7 +3474,9 @@
         "account_holder_name": "string",
         "account_holder_type": "string",
         "account_type": "string",
-        "available_payout_methods": "instant",
+        "available_payout_methods": [
+          "instant"
+        ],
         "bank_name": "string",
         "country": "string",
         "currency": "string",
@@ -3481,7 +3516,9 @@
         "currency": "cad",
         "mandate_options": {
           "custom_mandate_url": "string",
-          "default_for": "invoice",
+          "default_for": [
+            "invoice"
+          ],
           "interval_description": "string",
           "payment_schedule": "combined",
           "transaction_type": "business"
@@ -3495,7 +3532,9 @@
         "mandate_options": {}
       }
     },
-    "payment_method_types": "string",
+    "payment_method_types": [
+      "string"
+    ],
     "single_use_mandate": "string",
     "status": "canceled",
     "usage": "string"

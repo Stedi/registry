@@ -36,11 +36,18 @@
       "type": "boolean"
     },
     "discounts": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        }
+      "description": "The discounts which apply to the invoice item. Item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.",
+      "items": {
+        "anyOf": [
+          {
+            "maxLength": 5000,
+            "type": "string"
+          }
+        ]
+      },
+      "type": [
+        "array",
+        "null"
       ]
     },
     "id": {
@@ -235,48 +242,52 @@
               ]
             },
             "tiers": {
-              "description": "",
-              "properties": {
-                "flat_amount": {
-                  "description": "Price for the entire tier.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
+              "description": "Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.",
+              "items": {
+                "description": "",
+                "properties": {
+                  "flat_amount": {
+                    "description": "Price for the entire tier.",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "flat_amount_decimal": {
+                    "description": "Same as `flat_amount`, but contains a decimal value with at most 12 decimal places.",
+                    "format": "decimal",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "unit_amount": {
+                    "description": "Per unit price for units relevant to the tier.",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "unit_amount_decimal": {
+                    "description": "Same as `unit_amount`, but contains a decimal value with at most 12 decimal places.",
+                    "format": "decimal",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "up_to": {
+                    "description": "Up to and including to this quantity will be contained in the tier.",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  }
                 },
-                "flat_amount_decimal": {
-                  "description": "Same as `flat_amount`, but contains a decimal value with at most 12 decimal places.",
-                  "format": "decimal",
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "unit_amount": {
-                  "description": "Per unit price for units relevant to the tier.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "unit_amount_decimal": {
-                  "description": "Same as `unit_amount`, but contains a decimal value with at most 12 decimal places.",
-                  "format": "decimal",
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "up_to": {
-                  "description": "Up to and including to this quantity will be contained in the tier.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                }
+                "title": "PriceTier",
+                "type": "object"
               },
-              "title": "PriceTier",
-              "type": "object"
+              "type": "array"
             },
             "tiers_mode": {
               "description": "Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.",
@@ -401,110 +412,117 @@
       "type": "string"
     },
     "tax_rates": {
-      "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
-      "properties": {
-        "active": {
-          "description": "Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.",
-          "type": "boolean"
+      "description": "The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the invoice do not apply to this invoice item.",
+      "items": {
+        "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
+        "properties": {
+          "active": {
+            "description": "Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.",
+            "type": "boolean"
+          },
+          "country": {
+            "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+            "maxLength": 5000,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "created": {
+            "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+            "format": "unix-time",
+            "type": "integer"
+          },
+          "description": {
+            "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
+            "maxLength": 5000,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "display_name": {
+            "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier for the object.",
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "inclusive": {
+            "description": "This specifies if the tax rate is inclusive or exclusive.",
+            "type": "boolean"
+          },
+          "jurisdiction": {
+            "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
+            "maxLength": 5000,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "livemode": {
+            "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+            "type": "boolean"
+          },
+          "metadata": {},
+          "object": {
+            "description": "String representing the object's type. Objects of the same type share the same value.",
+            "enum": [
+              "tax_rate"
+            ],
+            "type": "string"
+          },
+          "percentage": {
+            "description": "This represents the tax rate percent out of 100.",
+            "type": "number"
+          },
+          "state": {
+            "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
+            "maxLength": 5000,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "tax_type": {
+            "description": "The high-level tax type, such as `vat` or `sales_tax`.",
+            "enum": [
+              "gst",
+              "hst",
+              "jct",
+              "pst",
+              "qst",
+              "rst",
+              "sales_tax",
+              "vat"
+            ],
+            "type": [
+              "string",
+              "null"
+            ]
+          }
         },
-        "country": {
-          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "created": {
-          "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-          "format": "unix-time",
-          "type": "integer"
-        },
-        "description": {
-          "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "display_name": {
-          "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique identifier for the object.",
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "inclusive": {
-          "description": "This specifies if the tax rate is inclusive or exclusive.",
-          "type": "boolean"
-        },
-        "jurisdiction": {
-          "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "livemode": {
-          "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-          "type": "boolean"
-        },
-        "metadata": {},
-        "object": {
-          "description": "String representing the object's type. Objects of the same type share the same value.",
-          "enum": [
-            "tax_rate"
-          ],
-          "type": "string"
-        },
-        "percentage": {
-          "description": "This represents the tax rate percent out of 100.",
-          "type": "number"
-        },
-        "state": {
-          "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "tax_type": {
-          "description": "The high-level tax type, such as `vat` or `sales_tax`.",
-          "enum": [
-            "gst",
-            "hst",
-            "jct",
-            "pst",
-            "qst",
-            "rst",
-            "sales_tax",
-            "vat"
-          ],
-          "type": [
-            "string",
-            "null"
-          ]
-        }
+        "required": [
+          "active",
+          "created",
+          "display_name",
+          "id",
+          "inclusive",
+          "livemode",
+          "object",
+          "percentage"
+        ],
+        "title": "TaxRate",
+        "type": "object",
+        "x-resourceId": "tax_rate"
       },
-      "required": [
-        "active",
-        "created",
-        "display_name",
-        "id",
-        "inclusive",
-        "livemode",
-        "object",
-        "percentage"
-      ],
-      "title": "TaxRate",
-      "type": "object",
-      "x-resourceId": "tax_rate"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "unit_amount": {
       "description": "Unit amount (in the `currency` specified) of the invoice item.",
@@ -545,7 +563,9 @@
     "date": 0,
     "description": "string",
     "discountable": true,
-    "discounts": "string",
+    "discounts": [
+      "string"
+    ],
     "id": "string",
     "invoice": "string",
     "livemode": true,
@@ -574,13 +594,15 @@
         "usage_type": "licensed"
       },
       "tax_behavior": "exclusive",
-      "tiers": {
-        "flat_amount": 0,
-        "flat_amount_decimal": "0.0",
-        "unit_amount": 0,
-        "unit_amount_decimal": "0.0",
-        "up_to": 0
-      },
+      "tiers": [
+        {
+          "flat_amount": 0,
+          "flat_amount_decimal": "0.0",
+          "unit_amount": 0,
+          "unit_amount_decimal": "0.0",
+          "up_to": 0
+        }
+      ],
       "tiers_mode": "graduated",
       "transform_quantity": {
         "divide_by": 0,
@@ -594,22 +616,24 @@
     "quantity": 0,
     "subscription": "string",
     "subscription_item": "string",
-    "tax_rates": {
-      "active": true,
-      "country": "string",
-      "created": 0,
-      "description": "string",
-      "display_name": "string",
-      "id": "string",
-      "inclusive": true,
-      "jurisdiction": "string",
-      "livemode": true,
-      "metadata": {},
-      "object": "tax_rate",
-      "percentage": 0,
-      "state": "string",
-      "tax_type": "gst"
-    },
+    "tax_rates": [
+      {
+        "active": true,
+        "country": "string",
+        "created": 0,
+        "description": "string",
+        "display_name": "string",
+        "id": "string",
+        "inclusive": true,
+        "jurisdiction": "string",
+        "livemode": true,
+        "metadata": {},
+        "object": "tax_rate",
+        "percentage": 0,
+        "state": "string",
+        "tax_type": "gst"
+      }
+    ],
     "unit_amount": 0,
     "unit_amount_decimal": "0.0"
   }

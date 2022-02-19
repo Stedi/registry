@@ -105,48 +105,52 @@
       "description": "The product whose pricing this plan determines."
     },
     "tiers": {
-      "description": "",
-      "properties": {
-        "flat_amount": {
-          "description": "Price for the entire tier.",
-          "type": [
-            "integer",
-            "null"
-          ]
+      "description": "Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.",
+      "items": {
+        "description": "",
+        "properties": {
+          "flat_amount": {
+            "description": "Price for the entire tier.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "flat_amount_decimal": {
+            "description": "Same as `flat_amount`, but contains a decimal value with at most 12 decimal places.",
+            "format": "decimal",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "unit_amount": {
+            "description": "Per unit price for units relevant to the tier.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "unit_amount_decimal": {
+            "description": "Same as `unit_amount`, but contains a decimal value with at most 12 decimal places.",
+            "format": "decimal",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "up_to": {
+            "description": "Up to and including to this quantity will be contained in the tier.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
         },
-        "flat_amount_decimal": {
-          "description": "Same as `flat_amount`, but contains a decimal value with at most 12 decimal places.",
-          "format": "decimal",
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "unit_amount": {
-          "description": "Per unit price for units relevant to the tier.",
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "unit_amount_decimal": {
-          "description": "Same as `unit_amount`, but contains a decimal value with at most 12 decimal places.",
-          "format": "decimal",
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "up_to": {
-          "description": "Up to and including to this quantity will be contained in the tier.",
-          "type": [
-            "integer",
-            "null"
-          ]
-        }
+        "title": "PlanTier",
+        "type": "object"
       },
-      "title": "PlanTier",
-      "type": "object"
+      "type": "array"
     },
     "tiers_mode": {
       "description": "Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.",
@@ -240,13 +244,15 @@
     "nickname": "string",
     "object": "plan",
     "product": "string",
-    "tiers": {
-      "flat_amount": 0,
-      "flat_amount_decimal": "0.0",
-      "unit_amount": 0,
-      "unit_amount_decimal": "0.0",
-      "up_to": 0
-    },
+    "tiers": [
+      {
+        "flat_amount": 0,
+        "flat_amount_decimal": "0.0",
+        "unit_amount": 0,
+        "unit_amount_decimal": "0.0",
+        "up_to": 0
+      }
+    ],
     "tiers_mode": "graduated",
     "transform_usage": {
       "divide_by": 0,

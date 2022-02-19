@@ -2,8 +2,12 @@
   "description": "",
   "properties": {
     "columns": {
-      "maxLength": 5000,
-      "type": "string"
+      "description": "The set of output columns requested for inclusion in the report run.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": "array"
     },
     "connected_account": {
       "description": "Connected account ID by which to filter the report run.",
@@ -43,7 +47,9 @@
   "title": "FinancialReportingFinanceReportRunRunParameters",
   "type": "object",
   "default": {
-    "columns": "string",
+    "columns": [
+      "string"
+    ],
     "connected_account": "string",
     "currency": "string",
     "interval_end": 0,

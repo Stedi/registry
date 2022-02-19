@@ -2,42 +2,46 @@
   "description": "",
   "properties": {
     "available": {
-      "description": "",
-      "properties": {
-        "amount": {
-          "description": "Balance amount.",
-          "type": "integer"
-        },
-        "currency": {
-          "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-          "type": "string"
-        },
-        "source_types": {
-          "description": "",
-          "properties": {
-            "bank_account": {
-              "description": "Amount for bank account.",
-              "type": "integer"
-            },
-            "card": {
-              "description": "Amount for card.",
-              "type": "integer"
-            },
-            "fpx": {
-              "description": "Amount for FPX.",
-              "type": "integer"
-            }
+      "description": "Funds that are available for use.",
+      "items": {
+        "description": "",
+        "properties": {
+          "amount": {
+            "description": "Balance amount.",
+            "type": "integer"
           },
-          "title": "BalanceAmountBySourceType",
-          "type": "object"
-        }
+          "currency": {
+            "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+            "type": "string"
+          },
+          "source_types": {
+            "description": "",
+            "properties": {
+              "bank_account": {
+                "description": "Amount for bank account.",
+                "type": "integer"
+              },
+              "card": {
+                "description": "Amount for card.",
+                "type": "integer"
+              },
+              "fpx": {
+                "description": "Amount for FPX.",
+                "type": "integer"
+              }
+            },
+            "title": "BalanceAmountBySourceType",
+            "type": "object"
+          }
+        },
+        "required": [
+          "amount",
+          "currency"
+        ],
+        "title": "BalanceAmount",
+        "type": "object"
       },
-      "required": [
-        "amount",
-        "currency"
-      ],
-      "title": "BalanceAmount",
-      "type": "object"
+      "type": "array"
     }
   },
   "required": [
@@ -46,14 +50,16 @@
   "title": "BalanceDetail",
   "type": "object",
   "default": {
-    "available": {
-      "amount": 0,
-      "currency": "string",
-      "source_types": {
-        "bank_account": 0,
-        "card": 0,
-        "fpx": 0
+    "available": [
+      {
+        "amount": 0,
+        "currency": "string",
+        "source_types": {
+          "bank_account": 0,
+          "card": 0,
+          "fpx": 0
+        }
       }
-    }
+    ]
   }
 }

@@ -104,8 +104,8 @@ function traverse(schema: OpenAPIV3.SchemaObject, parents: Set<String>): any {
     if (!items) {
       return [];
     }
-    return traverse(items, parents);
+    (schema as OpenAPIV3.ArraySchemaObject).items = traverse(items, parents);
+    return schema;
   }
-
   return schema;
 }

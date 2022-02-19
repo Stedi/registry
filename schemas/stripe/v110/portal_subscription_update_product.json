@@ -2,8 +2,12 @@
   "description": "",
   "properties": {
     "prices": {
-      "maxLength": 5000,
-      "type": "string"
+      "description": "The list of price IDs which, when subscribed to, a subscription can be updated.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": "array"
     },
     "product": {
       "description": "The product ID.",
@@ -18,7 +22,9 @@
   "title": "PortalSubscriptionUpdateProduct",
   "type": "object",
   "default": {
-    "prices": "string",
+    "prices": [
+      "string"
+    ],
     "product": "string"
   }
 }

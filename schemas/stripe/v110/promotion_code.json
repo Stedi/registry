@@ -24,8 +24,12 @@
           "description": "",
           "properties": {
             "products": {
-              "maxLength": 5000,
-              "type": "string"
+              "description": "A list of product IDs this coupon applies to",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": "array"
             }
           },
           "required": [
@@ -237,7 +241,9 @@
     "coupon": {
       "amount_off": 0,
       "applies_to": {
-        "products": "string"
+        "products": [
+          "string"
+        ]
       },
       "created": 0,
       "currency": "string",

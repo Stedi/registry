@@ -2,8 +2,12 @@
   "description": "",
   "properties": {
     "available": {
-      "maxLength": 5000,
-      "type": "string"
+      "description": "All available networks for the card.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": "array"
     },
     "preferred": {
       "description": "The preferred network for the card.",
@@ -20,7 +24,9 @@
   "title": "networks",
   "type": "object",
   "default": {
-    "available": "string",
+    "available": [
+      "string"
+    ],
     "preferred": "string"
   }
 }

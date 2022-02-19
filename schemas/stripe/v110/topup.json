@@ -1221,54 +1221,61 @@
               "type": "string"
             },
             "items": {
-              "description": "",
-              "properties": {
-                "amount": {
-                  "description": "The amount (price) for this order item.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
+              "description": "List of items constituting the order.",
+              "items": {
+                "description": "",
+                "properties": {
+                  "amount": {
+                    "description": "The amount (price) for this order item.",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "currency": {
+                    "description": "This currency of this order item. Required when `amount` is present.",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "description": {
+                    "description": "Human-readable description for this order item.",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "parent": {
+                    "description": "The ID of the associated object for this line item. Expandable if not null (e.g., expandable to a SKU).",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "quantity": {
+                    "description": "The quantity of this order item. When type is `sku`, this is the number of instances of the SKU to be ordered.",
+                    "type": "integer"
+                  },
+                  "type": {
+                    "description": "The type of this order item. Must be `sku`, `tax`, or `shipping`.",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
                 },
-                "currency": {
-                  "description": "This currency of this order item. Required when `amount` is present.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "description": {
-                  "description": "Human-readable description for this order item.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "parent": {
-                  "description": "The ID of the associated object for this line item. Expandable if not null (e.g., expandable to a SKU).",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "quantity": {
-                  "description": "The quantity of this order item. When type is `sku`, this is the number of instances of the SKU to be ordered.",
-                  "type": "integer"
-                },
-                "type": {
-                  "description": "The type of this order item. Must be `sku`, `tax`, or `shipping`.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
+                "title": "SourceOrderItem",
+                "type": "object"
               },
-              "title": "SourceOrderItem",
-              "type": "object"
+              "type": [
+                "array",
+                "null"
+              ]
             },
             "shipping": {
               "description": "",
@@ -1833,14 +1840,16 @@
         "amount": 0,
         "currency": "string",
         "email": "string",
-        "items": {
-          "amount": 0,
-          "currency": "string",
-          "description": "string",
-          "parent": "string",
-          "quantity": 0,
-          "type": "string"
-        },
+        "items": [
+          {
+            "amount": 0,
+            "currency": "string",
+            "description": "string",
+            "parent": "string",
+            "quantity": 0,
+            "type": "string"
+          }
+        ],
         "shipping": {
           "address": {
             "city": "string",

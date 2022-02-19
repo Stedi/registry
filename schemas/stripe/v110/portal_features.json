@@ -5,14 +5,18 @@
       "description": "",
       "properties": {
         "allowed_updates": {
-          "enum": [
-            "address",
-            "email",
-            "phone",
-            "shipping",
-            "tax_id"
-          ],
-          "type": "string"
+          "description": "The types of customer updates that are supported. When empty, customers are not updateable.",
+          "items": {
+            "enum": [
+              "address",
+              "email",
+              "phone",
+              "shipping",
+              "tax_id"
+            ],
+            "type": "string"
+          },
+          "type": "array"
         },
         "enabled": {
           "description": "Whether the feature is enabled.",
@@ -65,17 +69,21 @@
               "type": "boolean"
             },
             "options": {
-              "enum": [
-                "customer_service",
-                "low_quality",
-                "missing_features",
-                "other",
-                "switched_service",
-                "too_complex",
-                "too_expensive",
-                "unused"
-              ],
-              "type": "string"
+              "description": "Which cancellation reasons will be given as options to the customer.",
+              "items": {
+                "enum": [
+                  "customer_service",
+                  "low_quality",
+                  "missing_features",
+                  "other",
+                  "switched_service",
+                  "too_complex",
+                  "too_expensive",
+                  "unused"
+                ],
+                "type": "string"
+              },
+              "type": "array"
             }
           },
           "required": [
@@ -134,36 +142,51 @@
       "description": "",
       "properties": {
         "default_allowed_updates": {
-          "enum": [
-            "price",
-            "promotion_code",
-            "quantity"
-          ],
-          "type": "string"
+          "description": "The types of subscription updates that are supported for items listed in the `products` attribute. When empty, subscriptions are not updateable.",
+          "items": {
+            "enum": [
+              "price",
+              "promotion_code",
+              "quantity"
+            ],
+            "type": "string"
+          },
+          "type": "array"
         },
         "enabled": {
           "description": "Whether the feature is enabled.",
           "type": "boolean"
         },
         "products": {
-          "description": "",
-          "properties": {
-            "prices": {
-              "maxLength": 5000,
-              "type": "string"
+          "description": "The list of products that support subscription updates.",
+          "items": {
+            "description": "",
+            "properties": {
+              "prices": {
+                "description": "The list of price IDs which, when subscribed to, a subscription can be updated.",
+                "items": {
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "product": {
+                "description": "The product ID.",
+                "maxLength": 5000,
+                "type": "string"
+              }
             },
-            "product": {
-              "description": "The product ID.",
-              "maxLength": 5000,
-              "type": "string"
-            }
+            "required": [
+              "prices",
+              "product"
+            ],
+            "title": "PortalSubscriptionUpdateProduct",
+            "type": "object"
           },
-          "required": [
-            "prices",
-            "product"
-          ],
-          "title": "PortalSubscriptionUpdateProduct",
-          "type": "object"
+          "type": [
+            "array",
+            "null"
+          ]
         },
         "proration_behavior": {
           "description": "Determines how to handle prorations resulting from subscription updates. Valid values are `none`, `create_prorations`, and `always_invoice`.",
@@ -196,7 +219,9 @@
   "type": "object",
   "default": {
     "customer_update": {
-      "allowed_updates": "address",
+      "allowed_updates": [
+        "address"
+      ],
       "enabled": true
     },
     "invoice_history": {
@@ -208,7 +233,9 @@
     "subscription_cancel": {
       "cancellation_reason": {
         "enabled": true,
-        "options": "customer_service"
+        "options": [
+          "customer_service"
+        ]
       },
       "enabled": true,
       "mode": "at_period_end",
@@ -218,12 +245,18 @@
       "enabled": true
     },
     "subscription_update": {
-      "default_allowed_updates": "price",
+      "default_allowed_updates": [
+        "price"
+      ],
       "enabled": true,
-      "products": {
-        "prices": "string",
-        "product": "string"
-      },
+      "products": [
+        {
+          "prices": [
+            "string"
+          ],
+          "product": "string"
+        }
+      ],
       "proration_behavior": "always_invoice"
     }
   }

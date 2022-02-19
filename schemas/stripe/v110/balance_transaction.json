@@ -39,45 +39,49 @@
       "type": "integer"
     },
     "fee_details": {
-      "description": "",
-      "properties": {
-        "amount": {
-          "description": "Amount of the fee, in cents.",
-          "type": "integer"
+      "description": "Detailed breakdown of fees (in %s) paid for this transaction.",
+      "items": {
+        "description": "",
+        "properties": {
+          "amount": {
+            "description": "Amount of the fee, in cents.",
+            "type": "integer"
+          },
+          "application": {
+            "description": "ID of the Connect application that earned the fee.",
+            "maxLength": 5000,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "currency": {
+            "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+            "type": "string"
+          },
+          "description": {
+            "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
+            "maxLength": 5000,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "description": "Type of the fee, one of: `application_fee`, `stripe_fee` or `tax`.",
+            "maxLength": 5000,
+            "type": "string"
+          }
         },
-        "application": {
-          "description": "ID of the Connect application that earned the fee.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "currency": {
-          "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-          "type": "string"
-        },
-        "description": {
-          "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
-          "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "type": {
-          "description": "Type of the fee, one of: `application_fee`, `stripe_fee` or `tax`.",
-          "maxLength": 5000,
-          "type": "string"
-        }
+        "required": [
+          "amount",
+          "currency",
+          "type"
+        ],
+        "title": "Fee",
+        "type": "object"
       },
-      "required": [
-        "amount",
-        "currency",
-        "type"
-      ],
-      "title": "Fee",
-      "type": "object"
+      "type": "array"
     },
     "id": {
       "description": "Unique identifier for the object.",
@@ -185,13 +189,15 @@
     "description": "string",
     "exchange_rate": 0,
     "fee": 0,
-    "fee_details": {
-      "amount": 0,
-      "application": "string",
-      "currency": "string",
-      "description": "string",
-      "type": "string"
-    },
+    "fee_details": [
+      {
+        "amount": 0,
+        "application": "string",
+        "currency": "string",
+        "description": "string",
+        "type": "string"
+      }
+    ],
     "id": "string",
     "net": 0,
     "object": "balance_transaction",

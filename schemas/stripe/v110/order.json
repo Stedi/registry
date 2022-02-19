@@ -85,62 +85,66 @@
       "type": "string"
     },
     "items": {
-      "description": "A representation of the constituent items of any given order. Can be used to\nrepresent [SKUs](https://stripe.com/docs/api#skus), shipping costs, or taxes owed on the order.\n\nRelated guide: [Orders](https://stripe.com/docs/orders/guide).",
-      "properties": {
-        "amount": {
-          "description": "A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the line item.",
-          "type": "integer"
+      "description": "List of items constituting the order. An order can have up to 25 items.",
+      "items": {
+        "description": "A representation of the constituent items of any given order. Can be used to\nrepresent [SKUs](https://stripe.com/docs/api#skus), shipping costs, or taxes owed on the order.\n\nRelated guide: [Orders](https://stripe.com/docs/orders/guide).",
+        "properties": {
+          "amount": {
+            "description": "A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the line item.",
+            "type": "integer"
+          },
+          "currency": {
+            "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the line item, meant to be displayable to the user (e.g., `\"Express shipping\"`).",
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "object": {
+            "description": "String representing the object's type. Objects of the same type share the same value.",
+            "enum": [
+              "order_item"
+            ],
+            "type": "string"
+          },
+          "parent": {
+            "anyOf": [
+              {
+                "maxLength": 5000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            ],
+            "description": "The ID of the associated object for this line item. Expandable if not null (e.g., expandable to a SKU)."
+          },
+          "quantity": {
+            "description": "A positive integer representing the number of instances of `parent` that are included in this order item. Applicable/present only if `type` is `sku`.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "description": "The type of line item. One of `sku`, `tax`, `shipping`, or `discount`.",
+            "maxLength": 5000,
+            "type": "string"
+          }
         },
-        "currency": {
-          "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of the line item, meant to be displayable to the user (e.g., `\"Express shipping\"`).",
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "object": {
-          "description": "String representing the object's type. Objects of the same type share the same value.",
-          "enum": [
-            "order_item"
-          ],
-          "type": "string"
-        },
-        "parent": {
-          "anyOf": [
-            {
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
-            }
-          ],
-          "description": "The ID of the associated object for this line item. Expandable if not null (e.g., expandable to a SKU)."
-        },
-        "quantity": {
-          "description": "A positive integer representing the number of instances of `parent` that are included in this order item. Applicable/present only if `type` is `sku`.",
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "type": {
-          "description": "The type of line item. One of `sku`, `tax`, `shipping`, or `discount`.",
-          "maxLength": 5000,
-          "type": "string"
-        }
+        "required": [
+          "amount",
+          "currency",
+          "description",
+          "object",
+          "type"
+        ],
+        "title": "OrderItem",
+        "type": "object"
       },
-      "required": [
-        "amount",
-        "currency",
-        "description",
-        "object",
-        "type"
-      ],
-      "title": "OrderItem",
-      "type": "object"
+      "type": "array"
     },
     "livemode": {
       "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
@@ -158,138 +162,146 @@
       "description": "A list of returns that have taken place for this order.",
       "properties": {
         "data": {
-          "description": "A return represents the full or partial return of a number of [order items](https://stripe.com/docs/api#order_items).\nReturns always belong to an order, and may optionally contain a refund.\n\nRelated guide: [Handling Returns](https://stripe.com/docs/orders/guide#handling-returns).",
-          "properties": {
-            "amount": {
-              "description": "A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the returned line item.",
-              "type": "integer"
-            },
-            "created": {
-              "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-              "format": "unix-time",
-              "type": "integer"
-            },
-            "currency": {
-              "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-              "type": "string"
-            },
-            "id": {
-              "description": "Unique identifier for the object.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "items": {
-              "description": "A representation of the constituent items of any given order. Can be used to\nrepresent [SKUs](https://stripe.com/docs/api#skus), shipping costs, or taxes owed on the order.\n\nRelated guide: [Orders](https://stripe.com/docs/orders/guide).",
-              "properties": {
-                "amount": {
-                  "description": "A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the line item.",
-                  "type": "integer"
-                },
-                "currency": {
-                  "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-                  "type": "string"
-                },
-                "description": {
-                  "description": "Description of the line item, meant to be displayable to the user (e.g., `\"Express shipping\"`).",
-                  "maxLength": 5000,
-                  "type": "string"
-                },
-                "object": {
-                  "description": "String representing the object's type. Objects of the same type share the same value.",
-                  "enum": [
-                    "order_item"
-                  ],
-                  "type": "string"
-                },
-                "parent": {
-                  "anyOf": [
-                    {
+          "description": "Details about each object.",
+          "items": {
+            "description": "A return represents the full or partial return of a number of [order items](https://stripe.com/docs/api#order_items).\nReturns always belong to an order, and may optionally contain a refund.\n\nRelated guide: [Handling Returns](https://stripe.com/docs/orders/guide#handling-returns).",
+            "properties": {
+              "amount": {
+                "description": "A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the returned line item.",
+                "type": "integer"
+              },
+              "created": {
+                "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                "format": "unix-time",
+                "type": "integer"
+              },
+              "currency": {
+                "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique identifier for the object.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "items": {
+                "description": "The items included in this order return.",
+                "items": {
+                  "description": "A representation of the constituent items of any given order. Can be used to\nrepresent [SKUs](https://stripe.com/docs/api#skus), shipping costs, or taxes owed on the order.\n\nRelated guide: [Orders](https://stripe.com/docs/orders/guide).",
+                  "properties": {
+                    "amount": {
+                      "description": "A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the line item.",
+                      "type": "integer"
+                    },
+                    "currency": {
+                      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "Description of the line item, meant to be displayable to the user (e.g., `\"Express shipping\"`).",
                       "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "object": {
+                      "description": "String representing the object's type. Objects of the same type share the same value.",
+                      "enum": [
+                        "order_item"
+                      ],
+                      "type": "string"
+                    },
+                    "parent": {
+                      "anyOf": [
+                        {
+                          "maxLength": 5000,
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      ],
+                      "description": "The ID of the associated object for this line item. Expandable if not null (e.g., expandable to a SKU)."
+                    },
+                    "quantity": {
+                      "description": "A positive integer representing the number of instances of `parent` that are included in this order item. Applicable/present only if `type` is `sku`.",
                       "type": [
-                        "string",
+                        "integer",
                         "null"
                       ]
+                    },
+                    "type": {
+                      "description": "The type of line item. One of `sku`, `tax`, `shipping`, or `discount`.",
+                      "maxLength": 5000,
+                      "type": "string"
                     }
+                  },
+                  "required": [
+                    "amount",
+                    "currency",
+                    "description",
+                    "object",
+                    "type"
                   ],
-                  "description": "The ID of the associated object for this line item. Expandable if not null (e.g., expandable to a SKU)."
+                  "title": "OrderItem",
+                  "type": "object"
                 },
-                "quantity": {
-                  "description": "A positive integer representing the number of instances of `parent` that are included in this order item. Applicable/present only if `type` is `sku`.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "type": {
-                  "description": "The type of line item. One of `sku`, `tax`, `shipping`, or `discount`.",
-                  "maxLength": 5000,
-                  "type": "string"
-                }
+                "type": "array"
               },
-              "required": [
-                "amount",
-                "currency",
-                "description",
-                "object",
-                "type"
-              ],
-              "title": "OrderItem",
-              "type": "object"
+              "livemode": {
+                "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                "type": "boolean"
+              },
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "order_return"
+                ],
+                "type": "string"
+              },
+              "order": {
+                "anyOf": [
+                  {
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The order that this return includes items from."
+              },
+              "refund": {
+                "anyOf": [
+                  {
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The ID of the refund issued for this return."
+              }
             },
-            "livemode": {
-              "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-              "type": "boolean"
-            },
-            "object": {
-              "description": "String representing the object's type. Objects of the same type share the same value.",
-              "enum": [
-                "order_return"
-              ],
-              "type": "string"
-            },
-            "order": {
-              "anyOf": [
-                {
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "The order that this return includes items from."
-            },
-            "refund": {
-              "anyOf": [
-                {
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "The ID of the refund issued for this return."
-            }
+            "required": [
+              "amount",
+              "created",
+              "currency",
+              "id",
+              "items",
+              "livemode",
+              "object"
+            ],
+            "title": "OrderReturn",
+            "type": "object",
+            "x-resourceId": "order_return"
           },
-          "required": [
-            "amount",
-            "created",
-            "currency",
-            "id",
-            "items",
-            "livemode",
-            "object"
-          ],
-          "title": "OrderReturn",
-          "type": "object",
-          "x-resourceId": "order_return"
+          "type": "array"
         },
         "has_more": {
           "description": "True if this list has another page of items after this one that can be fetched.",
@@ -434,76 +446,83 @@
       "description": "The shipping address for the order. Present if the order is for goods to be shipped."
     },
     "shipping_methods": {
-      "description": "",
-      "properties": {
-        "amount": {
-          "description": "A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the line item.",
-          "type": "integer"
-        },
-        "currency": {
-          "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-          "type": "string"
-        },
-        "delivery_estimate": {
-          "anyOf": [
-            {
-              "description": "",
-              "properties": {
-                "date": {
-                  "description": "If `type` is `\"exact\"`, `date` will be the expected delivery date in the format YYYY-MM-DD.",
-                  "maxLength": 5000,
-                  "type": "string"
+      "description": "A list of supported shipping methods for this order. The desired shipping method can be specified either by updating the order, or when paying it.",
+      "items": {
+        "description": "",
+        "properties": {
+          "amount": {
+            "description": "A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the line item.",
+            "type": "integer"
+          },
+          "currency": {
+            "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+            "type": "string"
+          },
+          "delivery_estimate": {
+            "anyOf": [
+              {
+                "description": "",
+                "properties": {
+                  "date": {
+                    "description": "If `type` is `\"exact\"`, `date` will be the expected delivery date in the format YYYY-MM-DD.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "earliest": {
+                    "description": "If `type` is `\"range\"`, `earliest` will be be the earliest delivery date in the format YYYY-MM-DD.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "latest": {
+                    "description": "If `type` is `\"range\"`, `latest` will be the latest delivery date in the format YYYY-MM-DD.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "The type of estimate. Must be either `\"range\"` or `\"exact\"`.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  }
                 },
-                "earliest": {
-                  "description": "If `type` is `\"range\"`, `earliest` will be be the earliest delivery date in the format YYYY-MM-DD.",
-                  "maxLength": 5000,
-                  "type": "string"
-                },
-                "latest": {
-                  "description": "If `type` is `\"range\"`, `latest` will be the latest delivery date in the format YYYY-MM-DD.",
-                  "maxLength": 5000,
-                  "type": "string"
-                },
-                "type": {
-                  "description": "The type of estimate. Must be either `\"range\"` or `\"exact\"`.",
-                  "maxLength": 5000,
-                  "type": "string"
-                }
+                "required": [
+                  "type"
+                ],
+                "title": "DeliveryEstimate",
+                "type": [
+                  "object",
+                  "null"
+                ]
               },
-              "required": [
-                "type"
-              ],
-              "title": "DeliveryEstimate",
-              "type": [
-                "object",
-                "null"
-              ]
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "description": "The estimated delivery date for the given shipping method. Can be either a specific date or a range."
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The estimated delivery date for the given shipping method. Can be either a specific date or a range."
+          },
+          "description": {
+            "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier for the object.",
+            "maxLength": 5000,
+            "type": "string"
+          }
         },
-        "description": {
-          "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique identifier for the object.",
-          "maxLength": 5000,
-          "type": "string"
-        }
+        "required": [
+          "amount",
+          "currency",
+          "description",
+          "id"
+        ],
+        "title": "ShippingMethod",
+        "type": "object"
       },
-      "required": [
-        "amount",
-        "currency",
-        "description",
-        "id"
-      ],
-      "title": "ShippingMethod",
-      "type": "object"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "status": {
       "description": "Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More details in the [Orders Guide](https://stripe.com/docs/orders/guide#understanding-order-statuses).",
@@ -599,38 +618,44 @@
     "email": "string",
     "external_coupon_code": "string",
     "id": "string",
-    "items": {
-      "amount": 0,
-      "currency": "string",
-      "description": "string",
-      "object": "order_item",
-      "parent": "string",
-      "quantity": 0,
-      "type": "string"
-    },
+    "items": [
+      {
+        "amount": 0,
+        "currency": "string",
+        "description": "string",
+        "object": "order_item",
+        "parent": "string",
+        "quantity": 0,
+        "type": "string"
+      }
+    ],
     "livemode": true,
     "metadata": {},
     "object": "order",
     "returns": {
-      "data": {
-        "amount": 0,
-        "created": 0,
-        "currency": "string",
-        "id": "string",
-        "items": {
+      "data": [
+        {
           "amount": 0,
+          "created": 0,
           "currency": "string",
-          "description": "string",
-          "object": "order_item",
-          "parent": "string",
-          "quantity": 0,
-          "type": "string"
-        },
-        "livemode": true,
-        "object": "order_return",
-        "order": "string",
-        "refund": "string"
-      },
+          "id": "string",
+          "items": [
+            {
+              "amount": 0,
+              "currency": "string",
+              "description": "string",
+              "object": "order_item",
+              "parent": "string",
+              "quantity": 0,
+              "type": "string"
+            }
+          ],
+          "livemode": true,
+          "object": "order_return",
+          "order": "string",
+          "refund": "string"
+        }
+      ],
       "has_more": true,
       "object": "list",
       "url": "string"
@@ -650,18 +675,20 @@
       "phone": "string",
       "tracking_number": "string"
     },
-    "shipping_methods": {
-      "amount": 0,
-      "currency": "string",
-      "delivery_estimate": {
-        "date": "string",
-        "earliest": "string",
-        "latest": "string",
-        "type": "string"
-      },
-      "description": "string",
-      "id": "string"
-    },
+    "shipping_methods": [
+      {
+        "amount": 0,
+        "currency": "string",
+        "delivery_estimate": {
+          "date": "string",
+          "earliest": "string",
+          "latest": "string",
+          "type": "string"
+        },
+        "description": "string",
+        "id": "string"
+      }
+    ],
     "status": "string",
     "status_transitions": {
       "canceled": 0,

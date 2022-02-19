@@ -1724,8 +1724,15 @@
                   ]
                 },
                 "preferred_locales": {
-                  "maxLength": 5000,
-                  "type": "string"
+                  "description": "EMV tag 5F2D. Preferred languages specified by the integrated circuit chip.",
+                  "items": {
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "type": [
+                    "array",
+                    "null"
+                  ]
                 },
                 "read_method": {
                   "description": "How card details were read in this transaction.",
@@ -2203,169 +2210,173 @@
       "description": "A list of refunds that have been applied to the charge.",
       "properties": {
         "data": {
-          "description": "`Refund` objects allow you to refund a charge that has previously been created\nbut not yet refunded. Funds will be refunded to the credit or debit card that\nwas originally charged.\n\nRelated guide: [Refunds](https://stripe.com/docs/refunds).",
-          "properties": {
-            "amount": {
-              "description": "Amount, in %s.",
-              "type": "integer"
+          "description": "Details about each object.",
+          "items": {
+            "description": "`Refund` objects allow you to refund a charge that has previously been created\nbut not yet refunded. Funds will be refunded to the credit or debit card that\nwas originally charged.\n\nRelated guide: [Refunds](https://stripe.com/docs/refunds).",
+            "properties": {
+              "amount": {
+                "description": "Amount, in %s.",
+                "type": "integer"
+              },
+              "balance_transaction": {
+                "anyOf": [
+                  {
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Balance transaction that describes the impact on your account balance."
+              },
+              "charge": {
+                "anyOf": [
+                  {
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "ID of the charge that was refunded."
+              },
+              "created": {
+                "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                "format": "unix-time",
+                "type": "integer"
+              },
+              "currency": {
+                "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                "type": "string"
+              },
+              "description": {
+                "description": "An arbitrary string attached to the object. Often useful for displaying to users. (Available on non-card refunds only)",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "failure_balance_transaction": {
+                "anyOf": [
+                  {
+                    "maxLength": 5000,
+                    "type": "string"
+                  }
+                ],
+                "description": "If the refund failed, this balance transaction describes the adjustment made on your account balance that reverses the initial balance transaction."
+              },
+              "failure_reason": {
+                "description": "If the refund failed, the reason for refund failure if known. Possible values are `lost_or_stolen_card`, `expired_or_canceled_card`, or `unknown`.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique identifier for the object.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "metadata": {},
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "refund"
+                ],
+                "type": "string"
+              },
+              "payment_intent": {
+                "anyOf": [
+                  {
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "ID of the PaymentIntent that was refunded."
+              },
+              "reason": {
+                "description": "Reason for the refund, either user-provided (`duplicate`, `fraudulent`, or `requested_by_customer`) or generated by Stripe internally (`expired_uncaptured_charge`).",
+                "enum": [
+                  "duplicate",
+                  "expired_uncaptured_charge",
+                  "fraudulent",
+                  "requested_by_customer"
+                ],
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "x-stripeBypassValidation": true
+              },
+              "receipt_number": {
+                "description": "This is the transaction number that appears on email receipts sent for this refund.",
+                "maxLength": 5000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source_transfer_reversal": {
+                "anyOf": [
+                  {
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The transfer reversal that is associated with the refund. Only present if the charge came from another Stripe account. See the Connect documentation for details."
+              },
+              "status": {
+                "description": "Status of the refund. For credit card refunds, this can be `pending`, `succeeded`, or `failed`. For other types of refunds, it can be `pending`, `succeeded`, `failed`, or `canceled`. Refer to our [refunds](https://stripe.com/docs/refunds#failed-refunds) documentation for more details.",
+                "maxLength": 5000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "transfer_reversal": {
+                "anyOf": [
+                  {
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "If the accompanying transfer was reversed, the transfer reversal object. Only applicable if the charge was created using the destination parameter."
+              }
             },
-            "balance_transaction": {
-              "anyOf": [
-                {
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Balance transaction that describes the impact on your account balance."
-            },
-            "charge": {
-              "anyOf": [
-                {
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "ID of the charge that was refunded."
-            },
-            "created": {
-              "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-              "format": "unix-time",
-              "type": "integer"
-            },
-            "currency": {
-              "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-              "type": "string"
-            },
-            "description": {
-              "description": "An arbitrary string attached to the object. Often useful for displaying to users. (Available on non-card refunds only)",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "failure_balance_transaction": {
-              "anyOf": [
-                {
-                  "maxLength": 5000,
-                  "type": "string"
-                }
-              ],
-              "description": "If the refund failed, this balance transaction describes the adjustment made on your account balance that reverses the initial balance transaction."
-            },
-            "failure_reason": {
-              "description": "If the refund failed, the reason for refund failure if known. Possible values are `lost_or_stolen_card`, `expired_or_canceled_card`, or `unknown`.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "id": {
-              "description": "Unique identifier for the object.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "metadata": {},
-            "object": {
-              "description": "String representing the object's type. Objects of the same type share the same value.",
-              "enum": [
-                "refund"
-              ],
-              "type": "string"
-            },
-            "payment_intent": {
-              "anyOf": [
-                {
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "ID of the PaymentIntent that was refunded."
-            },
-            "reason": {
-              "description": "Reason for the refund, either user-provided (`duplicate`, `fraudulent`, or `requested_by_customer`) or generated by Stripe internally (`expired_uncaptured_charge`).",
-              "enum": [
-                "duplicate",
-                "expired_uncaptured_charge",
-                "fraudulent",
-                "requested_by_customer"
-              ],
-              "type": [
-                "string",
-                "null"
-              ],
-              "x-stripeBypassValidation": true
-            },
-            "receipt_number": {
-              "description": "This is the transaction number that appears on email receipts sent for this refund.",
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "source_transfer_reversal": {
-              "anyOf": [
-                {
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "The transfer reversal that is associated with the refund. Only present if the charge came from another Stripe account. See the Connect documentation for details."
-            },
-            "status": {
-              "description": "Status of the refund. For credit card refunds, this can be `pending`, `succeeded`, or `failed`. For other types of refunds, it can be `pending`, `succeeded`, `failed`, or `canceled`. Refer to our [refunds](https://stripe.com/docs/refunds#failed-refunds) documentation for more details.",
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "transfer_reversal": {
-              "anyOf": [
-                {
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "If the accompanying transfer was reversed, the transfer reversal object. Only applicable if the charge was created using the destination parameter."
-            }
+            "required": [
+              "amount",
+              "created",
+              "currency",
+              "id",
+              "object"
+            ],
+            "title": "Refund",
+            "type": "object",
+            "x-resourceId": "refund"
           },
-          "required": [
-            "amount",
-            "created",
-            "currency",
-            "id",
-            "object"
-          ],
-          "title": "Refund",
-          "type": "object",
-          "x-resourceId": "refund"
+          "type": "array"
         },
         "has_more": {
           "description": "True if this list has another page of items after this one that can be fetched.",
@@ -2854,7 +2865,9 @@
         "generated_card": "string",
         "last4": "string",
         "network": "string",
-        "preferred_locales": "string",
+        "preferred_locales": [
+          "string"
+        ],
         "read_method": "contact_emv",
         "receipt": {
           "account_type": "checking",
@@ -2916,25 +2929,27 @@
     "receipt_url": "string",
     "refunded": true,
     "refunds": {
-      "data": {
-        "amount": 0,
-        "balance_transaction": "string",
-        "charge": "string",
-        "created": 0,
-        "currency": "string",
-        "description": "string",
-        "failure_balance_transaction": "string",
-        "failure_reason": "string",
-        "id": "string",
-        "metadata": {},
-        "object": "refund",
-        "payment_intent": "string",
-        "reason": "duplicate",
-        "receipt_number": "string",
-        "source_transfer_reversal": "string",
-        "status": "string",
-        "transfer_reversal": "string"
-      },
+      "data": [
+        {
+          "amount": 0,
+          "balance_transaction": "string",
+          "charge": "string",
+          "created": 0,
+          "currency": "string",
+          "description": "string",
+          "failure_balance_transaction": "string",
+          "failure_reason": "string",
+          "id": "string",
+          "metadata": {},
+          "object": "refund",
+          "payment_intent": "string",
+          "reason": "duplicate",
+          "receipt_number": "string",
+          "source_transfer_reversal": "string",
+          "status": "string",
+          "transfer_reversal": "string"
+        }
+      ],
       "has_more": true,
       "object": "list",
       "url": "string"

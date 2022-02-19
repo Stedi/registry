@@ -31,8 +31,12 @@
       ]
     },
     "enabled_events": {
-      "maxLength": 5000,
-      "type": "string"
+      "description": "The list of events to enable for this endpoint. `['*']` indicates that all events are enabled, except those that require explicit selection.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": "array"
     },
     "id": {
       "description": "Unique identifier for the object.",
@@ -85,7 +89,9 @@
     "application": "string",
     "created": 0,
     "description": "string",
-    "enabled_events": "string",
+    "enabled_events": [
+      "string"
+    ],
     "id": "string",
     "livemode": true,
     "metadata": {},

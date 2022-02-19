@@ -12,8 +12,15 @@
       "type": "integer"
     },
     "default_columns": {
-      "maxLength": 5000,
-      "type": "string"
+      "description": "List of column names that are included by default when this Report Type gets run. (If the Report Type doesn't support the `columns` parameter, this will be null.)",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "id": {
       "description": "The [ID of the Report Type](https://stripe.com/docs/reporting/statements/api#available-report-types), such as `balance.summary.1`.",
@@ -62,7 +69,9 @@
   "default": {
     "data_available_end": 0,
     "data_available_start": 0,
-    "default_columns": "string",
+    "default_columns": [
+      "string"
+    ],
     "id": "string",
     "livemode": true,
     "name": "string",

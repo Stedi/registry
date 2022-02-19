@@ -192,8 +192,15 @@
           "description": "Expiration date of the document."
         },
         "files": {
-          "maxLength": 5000,
-          "type": "string"
+          "description": "Array of [File](https://stripe.com/docs/api/files) ids containing images for this document.",
+          "items": {
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
         },
         "first_name": {
           "description": "First name as it appears in the document.",
@@ -449,12 +456,16 @@
           "description": "",
           "properties": {
             "allowed_types": {
-              "enum": [
-                "driving_license",
-                "id_card",
-                "passport"
-              ],
-              "type": "string"
+              "description": "Array of strings of allowed identity document types. If the provided identity document isn’t one of the allowed types, the verification check will fail with a document_type_not_allowed error code.",
+              "items": {
+                "enum": [
+                  "driving_license",
+                  "id_card",
+                  "passport"
+                ],
+                "type": "string"
+              },
+              "type": "array"
             },
             "require_id_number": {
               "description": "Collect an ID number and perform an [ID number check](https://stripe.com/docs/identity/verification-checks?type=id-number) with the document’s extracted name and date of birth.",
@@ -610,7 +621,9 @@
         "month": 0,
         "year": 0
       },
-      "files": "string",
+      "files": [
+        "string"
+      ],
       "first_name": "string",
       "issued_date": {
         "day": 0,
@@ -644,7 +657,9 @@
     "object": "identity.verification_report",
     "options": {
       "document": {
-        "allowed_types": "driving_license",
+        "allowed_types": [
+          "driving_license"
+        ],
         "require_id_number": true,
         "require_live_capture": true,
         "require_matching_selfie": true

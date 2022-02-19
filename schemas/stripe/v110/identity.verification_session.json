@@ -104,12 +104,16 @@
           "description": "",
           "properties": {
             "allowed_types": {
-              "enum": [
-                "driving_license",
-                "id_card",
-                "passport"
-              ],
-              "type": "string"
+              "description": "Array of strings of allowed identity document types. If the provided identity document isn’t one of the allowed types, the verification check will fail with a document_type_not_allowed error code.",
+              "items": {
+                "enum": [
+                  "driving_license",
+                  "id_card",
+                  "passport"
+                ],
+                "type": "string"
+              },
+              "type": "array"
             },
             "require_id_number": {
               "description": "Collect an ID number and perform an [ID number check](https://stripe.com/docs/identity/verification-checks?type=id-number) with the document’s extracted name and date of birth.",
@@ -380,7 +384,9 @@
     "object": "identity.verification_session",
     "options": {
       "document": {
-        "allowed_types": "driving_license",
+        "allowed_types": [
+          "driving_license"
+        ],
         "require_id_number": true,
         "require_live_capture": true,
         "require_matching_selfie": true

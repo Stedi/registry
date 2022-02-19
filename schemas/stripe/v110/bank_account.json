@@ -41,11 +41,18 @@
       ]
     },
     "available_payout_methods": {
-      "enum": [
-        "instant",
-        "standard"
-      ],
-      "type": "string"
+      "description": "A set of available payout methods for this bank account. Only values from this set should be passed as the `method` when creating a payout.",
+      "items": {
+        "enum": [
+          "instant",
+          "standard"
+        ],
+        "type": "string"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "bank_name": {
       "description": "Name of the bank associated with the routing number (e.g., `WELLS FARGO`).",
@@ -142,7 +149,9 @@
     "account_holder_name": "string",
     "account_holder_type": "string",
     "account_type": "string",
-    "available_payout_methods": "instant",
+    "available_payout_methods": [
+      "instant"
+    ],
     "bank_name": "string",
     "country": "string",
     "currency": "string",

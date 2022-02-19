@@ -9,17 +9,21 @@
           "type": "boolean"
         },
         "options": {
-          "enum": [
-            "customer_service",
-            "low_quality",
-            "missing_features",
-            "other",
-            "switched_service",
-            "too_complex",
-            "too_expensive",
-            "unused"
-          ],
-          "type": "string"
+          "description": "Which cancellation reasons will be given as options to the customer.",
+          "items": {
+            "enum": [
+              "customer_service",
+              "low_quality",
+              "missing_features",
+              "other",
+              "switched_service",
+              "too_complex",
+              "too_expensive",
+              "unused"
+            ],
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "required": [
@@ -62,7 +66,9 @@
   "default": {
     "cancellation_reason": {
       "enabled": true,
-      "options": "customer_service"
+      "options": [
+        "customer_service"
+      ]
     },
     "enabled": true,
     "mode": "at_period_end",

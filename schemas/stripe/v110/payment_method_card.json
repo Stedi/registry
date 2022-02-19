@@ -367,8 +367,12 @@
           "description": "",
           "properties": {
             "available": {
-              "maxLength": 5000,
-              "type": "string"
+              "description": "All available networks for the card.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": "array"
             },
             "preferred": {
               "description": "The preferred network for the card.",
@@ -856,7 +860,9 @@
     },
     "last4": "string",
     "networks": {
-      "available": "string",
+      "available": [
+        "string"
+      ],
       "preferred": "string"
     },
     "three_d_secure_usage": {

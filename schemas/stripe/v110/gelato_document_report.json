@@ -184,8 +184,15 @@
       "description": "Expiration date of the document."
     },
     "files": {
-      "maxLength": 5000,
-      "type": "string"
+      "description": "Array of [File](https://stripe.com/docs/api/files) ids containing images for this document.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "first_name": {
       "description": "First name as it appears in the document.",
@@ -308,7 +315,9 @@
       "month": 0,
       "year": 0
     },
-    "files": "string",
+    "files": [
+      "string"
+    ],
     "first_name": "string",
     "issued_date": {
       "day": 0,

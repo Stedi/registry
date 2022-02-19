@@ -159,25 +159,32 @@
       "description": "Payment-method-specific configuration to provide to invoices created by the subscription."
     },
     "payment_method_types": {
-      "enum": [
-        "ach_credit_transfer",
-        "ach_debit",
-        "acss_debit",
-        "au_becs_debit",
-        "bacs_debit",
-        "bancontact",
-        "boleto",
-        "card",
-        "fpx",
-        "giropay",
-        "grabpay",
-        "ideal",
-        "sepa_debit",
-        "sofort",
-        "wechat_pay"
-      ],
-      "type": "string",
-      "x-stripeBypassValidation": true
+      "description": "The list of payment method types to provide to every invoice created by the subscription. If not set, Stripe attempts to automatically determine the types to use by looking at the invoice’s default payment method, the subscription’s default payment method, the customer’s default payment method, and your [invoice template settings](https://dashboard.stripe.com/settings/billing/invoice).",
+      "items": {
+        "enum": [
+          "ach_credit_transfer",
+          "ach_debit",
+          "acss_debit",
+          "au_becs_debit",
+          "bacs_debit",
+          "bancontact",
+          "boleto",
+          "card",
+          "fpx",
+          "giropay",
+          "grabpay",
+          "ideal",
+          "sepa_debit",
+          "sofort",
+          "wechat_pay"
+        ],
+        "type": "string",
+        "x-stripeBypassValidation": true
+      },
+      "type": [
+        "array",
+        "null"
+      ]
     }
   },
   "title": "SubscriptionsResourcePaymentSettings",
@@ -202,6 +209,8 @@
         "request_three_d_secure": "any"
       }
     },
-    "payment_method_types": "ach_credit_transfer"
+    "payment_method_types": [
+      "ach_credit_transfer"
+    ]
   }
 }

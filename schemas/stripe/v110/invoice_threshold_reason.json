@@ -9,23 +9,31 @@
       ]
     },
     "item_reasons": {
-      "description": "",
-      "properties": {
-        "line_item_ids": {
-          "maxLength": 5000,
-          "type": "string"
+      "description": "Indicates which line items triggered a threshold invoice.",
+      "items": {
+        "description": "",
+        "properties": {
+          "line_item_ids": {
+            "description": "The IDs of the line items that triggered the threshold invoice.",
+            "items": {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "usage_gte": {
+            "description": "The quantity threshold boundary that applied to the given line item.",
+            "type": "integer"
+          }
         },
-        "usage_gte": {
-          "description": "The quantity threshold boundary that applied to the given line item.",
-          "type": "integer"
-        }
+        "required": [
+          "line_item_ids",
+          "usage_gte"
+        ],
+        "title": "InvoiceItemThresholdReason",
+        "type": "object"
       },
-      "required": [
-        "line_item_ids",
-        "usage_gte"
-      ],
-      "title": "InvoiceItemThresholdReason",
-      "type": "object"
+      "type": "array"
     }
   },
   "required": [
@@ -35,9 +43,13 @@
   "type": "object",
   "default": {
     "amount_gte": 0,
-    "item_reasons": {
-      "line_item_ids": "string",
-      "usage_gte": 0
-    }
+    "item_reasons": [
+      {
+        "line_item_ids": [
+          "string"
+        ],
+        "usage_gte": 0
+      }
+    ]
   }
 }
