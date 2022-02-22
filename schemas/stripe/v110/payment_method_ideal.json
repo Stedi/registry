@@ -16,10 +16,13 @@
         "revolut",
         "sns_bank",
         "triodos_bank",
-        "van_lanschot"
+        "van_lanschot",
+        null
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "bic": {
       "description": "The Bank Identifier Code of the customer's bank, if the bank was provided.",
@@ -36,13 +39,19 @@
         "RBRBNL21",
         "REVOLT21",
         "SNSBNL2A",
-        "TRIONL2U"
+        "TRIONL2U",
+        null
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "payment_method_ideal",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "bank": "abn_amro",
+    "bic": "ABNANL2A"
+  }
 }

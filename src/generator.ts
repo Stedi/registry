@@ -1,4 +1,4 @@
-import { OpenAPI3Schema, SchemaPackage } from "./provider";
+import { Provider, OpenAPI3Schema, SchemaPackage } from "./provider";
 import providers from "./providers";
 import openAPIParser from "@readme/openapi-parser";
 import jsonSchemaRefParser from "@apidevtools/json-schema-ref-parser";
@@ -6,6 +6,8 @@ import path from "path";
 import fs from "fs";
 import { fromIntrospectionQuery } from "graphql-2-json-schema";
 import { IntrospectionQuery } from "graphql";
+import { OpenAPIV3 } from "openapi-types";
+import { mock } from "./util";
 
 interface Schema {
   name: string;
@@ -52,7 +54,6 @@ async function unbundle(bundle: SchemaPackage): Promise<Schema[]> {
     case "openapi-v3":
       const dereferenced = await openAPIParser.dereference(
         bundle.value as any,
-        { dereference: { circular: "ignore" } }
       );
       if (!("components" in dereferenced))
         throw new Error("Expected components");
@@ -81,12 +82,10 @@ export async function generateForVersion(
 
   console.log(`Generating [${providerName}, ${version}]...`);
   for (const schema of schemas) {
-    try {
-      const target = path.join(baseDir, `${schema.name}.json`);
-      fs.writeFileSync(target, JSON.stringify(schema.schema, null, 2));
-    } catch (error) {
-      console.error(`Failed to write ${schema.name}`);
-    }
+    const target = path.join(baseDir, `${schema.name}.json`);
+    schema.schema = providers[providerName].getSchemaWithoutCircularReferences(schema.schema as OpenAPIV3.SchemaObject);
+    (schema.schema as any)["default"] = mock(schema.schema as OpenAPIV3.SchemaObject);
+    fs.writeFileSync(target, JSON.stringify(schema.schema, null, 2));
   }
 }
 
@@ -105,3 +104,4 @@ export async function generateAll(
   await generateAll("./schemas", "ramp");
   await generateAll("./schemas", "shopify");
 })();
+

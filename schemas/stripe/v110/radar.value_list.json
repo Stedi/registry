@@ -91,7 +91,6 @@
             ],
             "title": "RadarListListItem",
             "type": "object",
-            "x-expandableFields": [],
             "x-resourceId": "radar.value_list_item"
           },
           "type": "array"
@@ -120,23 +119,13 @@
         "url"
       ],
       "title": "RadarListListItemList",
-      "type": "object",
-      "x-expandableFields": [
-        "data"
-      ]
+      "type": "object"
     },
     "livemode": {
       "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
       "type": "boolean"
     },
-    "metadata": {
-      "additionalProperties": {
-        "maxLength": 500,
-        "type": "string"
-      },
-      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-      "type": "object"
-    },
+    "metadata": {},
     "name": {
       "description": "The name of the value list.",
       "maxLength": 5000,
@@ -164,8 +153,32 @@
   ],
   "title": "RadarListList",
   "type": "object",
-  "x-expandableFields": [
-    "list_items"
-  ],
-  "x-resourceId": "radar.value_list"
+  "x-resourceId": "radar.value_list",
+  "default": {
+    "alias": "string",
+    "created": 0,
+    "created_by": "string",
+    "id": "string",
+    "item_type": "card_bin",
+    "list_items": {
+      "data": [
+        {
+          "created": 0,
+          "created_by": "string",
+          "id": "string",
+          "livemode": true,
+          "object": "radar.value_list_item",
+          "value": "string",
+          "value_list": "string"
+        }
+      ],
+      "has_more": true,
+      "object": "list",
+      "url": "string"
+    },
+    "livemode": true,
+    "metadata": {},
+    "name": "string",
+    "object": "radar.value_list"
+  }
 }

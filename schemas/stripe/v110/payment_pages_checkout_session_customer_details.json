@@ -4,24 +4,31 @@
     "email": {
       "description": "The email associated with the Customer, if one exists, on the Checkout Session at the time of checkout or at time of session expiry.\nOtherwise, if the customer has consented to promotional content, this value is the most recent valid email provided by the customer on the Checkout form.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "phone": {
       "description": "The customer's phone number at the time of checkout",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "tax_exempt": {
       "description": "The customer’s tax exempt status at time of checkout.",
       "enum": [
         "exempt",
         "none",
-        "reverse"
+        "reverse",
+        null
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "tax_ids": {
       "description": "The customer’s tax IDs at time of checkout.",
@@ -80,24 +87,35 @@
           "value": {
             "description": "The value of the tax ID.",
             "maxLength": 5000,
-            "nullable": true,
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "required": [
           "type"
         ],
         "title": "PaymentPagesCheckoutSessionTaxID",
-        "type": "object",
-        "x-expandableFields": []
+        "type": "object"
       },
-      "nullable": true,
-      "type": "array"
+      "type": [
+        "array",
+        "null"
+      ]
     }
   },
   "title": "PaymentPagesCheckoutSessionCustomerDetails",
   "type": "object",
-  "x-expandableFields": [
-    "tax_ids"
-  ]
+  "default": {
+    "email": "string",
+    "phone": "string",
+    "tax_exempt": "exempt",
+    "tax_ids": [
+      {
+        "type": "ae_trn",
+        "value": "string"
+      }
+    ]
+  }
 }

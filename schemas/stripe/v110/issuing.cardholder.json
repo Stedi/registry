@@ -10,53 +10,61 @@
             "city": {
               "description": "City, district, suburb, town, or village.",
               "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "country": {
               "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
               "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "line1": {
               "description": "Address line 1 (e.g., street, PO Box, or company name).",
               "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "line2": {
               "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
               "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "postal_code": {
               "description": "ZIP or postal code.",
               "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "state": {
               "description": "State, county, province, or region.",
               "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "title": "Address",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         }
       },
       "required": [
         "address"
       ],
       "title": "IssuingCardholderAddress",
-      "type": "object",
-      "x-expandableFields": [
-        "address"
-      ]
+      "type": "object"
     },
     "company": {
       "anyOf": [
@@ -72,12 +80,13 @@
             "tax_id_provided"
           ],
           "title": "IssuingCardholderCompany",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "Additional information about a `company` cardholder.",
-      "nullable": true
+      "description": "Additional information about a `company` cardholder."
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -87,8 +96,10 @@
     "email": {
       "description": "The cardholder's email address.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "id": {
       "description": "Unique identifier for the object.",
@@ -98,24 +109,127 @@
     "individual": {
       "anyOf": [
         {
-          "$ref": "#/components/schemas/issuing_cardholder_individual"
+          "description": "",
+          "properties": {
+            "dob": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "day": {
+                      "description": "The day of birth, between 1 and 31.",
+                      "type": [
+                        "integer",
+                        "null"
+                      ]
+                    },
+                    "month": {
+                      "description": "The month of birth, between 1 and 12.",
+                      "type": [
+                        "integer",
+                        "null"
+                      ]
+                    },
+                    "year": {
+                      "description": "The four-digit year of birth.",
+                      "type": [
+                        "integer",
+                        "null"
+                      ]
+                    }
+                  },
+                  "title": "IssuingCardholderIndividualDOB",
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The date of birth of this cardholder."
+            },
+            "first_name": {
+              "description": "The first name of this cardholder.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "last_name": {
+              "description": "The last name of this cardholder.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "verification": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "document": {
+                      "anyOf": [
+                        {
+                          "description": "",
+                          "properties": {
+                            "back": {
+                              "anyOf": [
+                                {
+                                  "maxLength": 5000,
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ],
+                              "description": "The back of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`."
+                            },
+                            "front": {
+                              "anyOf": [
+                                {
+                                  "maxLength": 5000,
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ],
+                              "description": "The front of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`."
+                            }
+                          },
+                          "title": "IssuingCardholderIdDocument",
+                          "type": "object"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "An identifying document, either a passport or local ID card."
+                    }
+                  },
+                  "title": "IssuingCardholderVerification",
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Government-issued ID document for this cardholder."
+            }
+          },
+          "required": [
+            "first_name",
+            "last_name"
+          ],
+          "title": "IssuingCardholderIndividual",
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "Additional information about an `individual` cardholder.",
-      "nullable": true
+      "description": "Additional information about an `individual` cardholder."
     },
     "livemode": {
       "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
       "type": "boolean"
     },
-    "metadata": {
-      "additionalProperties": {
-        "maxLength": 500,
-        "type": "string"
-      },
-      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-      "type": "object"
-    },
+    "metadata": {},
     "name": {
       "description": "The cardholder's name. This will be printed on cards issued to them.",
       "maxLength": 5000,
@@ -131,8 +245,10 @@
     "phone_number": {
       "description": "The cardholder's phone number. This is required for all cardholders who will be creating EU cards. See the [3D Secure documentation](https://stripe.com/docs/issuing/3d-secure#when-is-3d-secure-applied) for more details.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "requirements": {
       "description": "",
@@ -142,10 +258,13 @@
           "enum": [
             "listed",
             "rejected.listed",
-            "under_review"
+            "under_review",
+            null
           ],
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "past_due": {
           "description": "Array of fields that need to be collected in order to verify and re-enable the cardholder.",
@@ -162,13 +281,14 @@
             "type": "string",
             "x-stripeBypassValidation": true
           },
-          "nullable": true,
-          "type": "array"
+          "type": [
+            "array",
+            "null"
+          ]
         }
       },
       "title": "IssuingCardholderRequirements",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "spending_controls": {
       "anyOf": [
@@ -470,8 +590,10 @@
                 ],
                 "type": "string"
               },
-              "nullable": true,
-              "type": "array"
+              "type": [
+                "array",
+                "null"
+              ]
             },
             "blocked_categories": {
               "description": "Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) of authorizations to decline. All other categories will be allowed. Cannot be set with `allowed_categories`.",
@@ -768,8 +890,10 @@
                 ],
                 "type": "string"
               },
-              "nullable": true,
-              "type": "array"
+              "type": [
+                "array",
+                "null"
+              ]
             },
             "spending_limits": {
               "description": "Limit spending with amount-based rules that apply across this cardholder's cards.",
@@ -1075,8 +1199,10 @@
                       ],
                       "type": "string"
                     },
-                    "nullable": true,
-                    "type": "array"
+                    "type": [
+                      "array",
+                      "null"
+                    ]
                   },
                   "interval": {
                     "description": "Interval (or event) to which the amount applies.",
@@ -1096,27 +1222,29 @@
                   "interval"
                 ],
                 "title": "IssuingCardholderSpendingLimit",
-                "type": "object",
-                "x-expandableFields": []
+                "type": "object"
               },
-              "nullable": true,
-              "type": "array"
+              "type": [
+                "array",
+                "null"
+              ]
             },
             "spending_limits_currency": {
               "description": "Currency of the amounts within `spending_limits`.",
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "title": "IssuingCardholderAuthorizationControls",
-          "type": "object",
-          "x-expandableFields": [
-            "spending_limits"
-          ]
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "Rules that control spending across this cardholder's cards. Refer to our [documentation](https://stripe.com/docs/issuing/controls/spending-controls) for more details.",
-      "nullable": true
+      "description": "Rules that control spending across this cardholder's cards. Refer to our [documentation](https://stripe.com/docs/issuing/controls/spending-controls) for more details."
     },
     "status": {
       "description": "Specifies whether to permit authorizations on this cardholder's cards.",
@@ -1151,12 +1279,69 @@
   ],
   "title": "IssuingCardholder",
   "type": "object",
-  "x-expandableFields": [
-    "billing",
-    "company",
-    "individual",
-    "requirements",
-    "spending_controls"
-  ],
-  "x-resourceId": "issuing.cardholder"
+  "x-resourceId": "issuing.cardholder",
+  "default": {
+    "billing": {
+      "address": {
+        "city": "string",
+        "country": "string",
+        "line1": "string",
+        "line2": "string",
+        "postal_code": "string",
+        "state": "string"
+      }
+    },
+    "company": {
+      "tax_id_provided": true
+    },
+    "created": 0,
+    "email": "string",
+    "id": "string",
+    "individual": {
+      "dob": {
+        "day": 0,
+        "month": 0,
+        "year": 0
+      },
+      "first_name": "string",
+      "last_name": "string",
+      "verification": {
+        "document": {
+          "back": "string",
+          "front": "string"
+        }
+      }
+    },
+    "livemode": true,
+    "metadata": {},
+    "name": "string",
+    "object": "issuing.cardholder",
+    "phone_number": "string",
+    "requirements": {
+      "disabled_reason": "listed",
+      "past_due": [
+        "company.tax_id"
+      ]
+    },
+    "spending_controls": {
+      "allowed_categories": [
+        "ac_refrigeration_repair"
+      ],
+      "blocked_categories": [
+        "ac_refrigeration_repair"
+      ],
+      "spending_limits": [
+        {
+          "amount": 0,
+          "categories": [
+            "ac_refrigeration_repair"
+          ],
+          "interval": "all_time"
+        }
+      ],
+      "spending_limits_currency": "string"
+    },
+    "status": "active",
+    "type": "company"
+  }
 }

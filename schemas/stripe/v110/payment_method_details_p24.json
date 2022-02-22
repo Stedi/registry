@@ -28,25 +28,36 @@
         "santander_przelew24",
         "tmobile_usbugi_bankowe",
         "toyota_bank",
-        "volkswagen_bank"
+        "volkswagen_bank",
+        null
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "reference": {
       "description": "Unique reference for this Przelewy24 payment.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "verified_name": {
       "description": "Owner's verified full name. Values are verified or provided by Przelewy24 directly\n(if supported) at the time of authorization or settlement. They cannot be set or mutated.\nPrzelewy24 rarely provides this information so the attribute is usually empty.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "payment_method_details_p24",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "bank": "alior_bank",
+    "reference": "string",
+    "verified_name": "string"
+  }
 }

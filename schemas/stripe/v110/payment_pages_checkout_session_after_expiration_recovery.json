@@ -12,14 +12,18 @@
     "expires_at": {
       "description": "The timestamp at which the recovery URL will expire.",
       "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "url": {
       "description": "URL that creates a new Checkout Session when clicked that is a copy of this expired Checkout Session",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "required": [
@@ -28,5 +32,10 @@
   ],
   "title": "PaymentPagesCheckoutSessionAfterExpirationRecovery",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "allow_promotion_codes": true,
+    "enabled": true,
+    "expires_at": 0,
+    "url": "string"
+  }
 }

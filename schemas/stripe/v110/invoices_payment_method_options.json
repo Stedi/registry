@@ -13,15 +13,17 @@
                   "description": "Transaction type of the mandate.",
                   "enum": [
                     "business",
-                    "personal"
+                    "personal",
+                    null
                   ],
-                  "nullable": true,
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               },
               "title": "invoice_payment_method_options_acss_debit_mandate_options",
-              "type": "object",
-              "x-expandableFields": []
+              "type": "object"
             },
             "verification_method": {
               "description": "Bank account verification method.",
@@ -35,14 +37,13 @@
             }
           },
           "title": "invoice_payment_method_options_acss_debit",
-          "type": "object",
-          "x-expandableFields": [
-            "mandate_options"
-          ]
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "If paying by `acss_debit`, this sub-hash contains details about the Canadian pre-authorized debit payment method options to pass to the invoice’s PaymentIntent.",
-      "nullable": true
+      "description": "If paying by `acss_debit`, this sub-hash contains details about the Canadian pre-authorized debit payment method options to pass to the invoice’s PaymentIntent."
     },
     "bancontact": {
       "anyOf": [
@@ -64,12 +65,13 @@
             "preferred_language"
           ],
           "title": "invoice_payment_method_options_bancontact",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "If paying by `bancontact`, this sub-hash contains details about the Bancontact payment method options to pass to the invoice’s PaymentIntent.",
-      "nullable": true
+      "description": "If paying by `bancontact`, this sub-hash contains details about the Bancontact payment method options to pass to the invoice’s PaymentIntent."
     },
     "card": {
       "anyOf": [
@@ -80,26 +82,39 @@
               "description": "We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.",
               "enum": [
                 "any",
-                "automatic"
+                "automatic",
+                null
               ],
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "title": "invoice_payment_method_options_card",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "If paying by `card`, this sub-hash contains details about the Card payment method options to pass to the invoice’s PaymentIntent.",
-      "nullable": true
+      "description": "If paying by `card`, this sub-hash contains details about the Card payment method options to pass to the invoice’s PaymentIntent."
     }
   },
   "title": "InvoicesPaymentMethodOptions",
   "type": "object",
-  "x-expandableFields": [
-    "acss_debit",
-    "bancontact",
-    "card"
-  ]
+  "default": {
+    "acss_debit": {
+      "mandate_options": {
+        "transaction_type": "business"
+      },
+      "verification_method": "automatic"
+    },
+    "bancontact": {
+      "preferred_language": "de"
+    },
+    "card": {
+      "request_three_d_secure": "any"
+    }
+  }
 }

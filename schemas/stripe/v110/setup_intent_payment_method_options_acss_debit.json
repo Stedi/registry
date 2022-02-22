@@ -5,10 +5,13 @@
       "description": "Currency supported by the bank account",
       "enum": [
         "cad",
-        "usd"
+        "usd",
+        null
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "mandate_options": {
       "description": "",
@@ -32,32 +35,39 @@
         "interval_description": {
           "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "payment_schedule": {
           "description": "Payment schedule for the mandate.",
           "enum": [
             "combined",
             "interval",
-            "sporadic"
+            "sporadic",
+            null
           ],
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "transaction_type": {
           "description": "Transaction type of the mandate.",
           "enum": [
             "business",
-            "personal"
+            "personal",
+            null
           ],
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "title": "setup_intent_payment_method_options_mandate_options_acss_debit",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "verification_method": {
       "description": "Bank account verification method.",
@@ -72,7 +82,17 @@
   },
   "title": "setup_intent_payment_method_options_acss_debit",
   "type": "object",
-  "x-expandableFields": [
-    "mandate_options"
-  ]
+  "default": {
+    "currency": "cad",
+    "mandate_options": {
+      "custom_mandate_url": "string",
+      "default_for": [
+        "invoice"
+      ],
+      "interval_description": "string",
+      "payment_schedule": "combined",
+      "transaction_type": "business"
+    },
+    "verification_method": "automatic"
+  }
 }

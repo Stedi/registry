@@ -12,18 +12,10 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/balance_transaction"
+          "type": "null"
         }
       ],
-      "description": "Balance transaction that describes the impact on your account balance.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/balance_transaction"
-          }
-        ]
-      }
+      "description": "Balance transaction that describes the impact on your account balance."
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -39,34 +31,16 @@
         {
           "maxLength": 5000,
           "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/application_fee"
         }
       ],
-      "description": "ID of the application fee that was refunded.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/application_fee"
-          }
-        ]
-      }
+      "description": "ID of the application fee that was refunded."
     },
     "id": {
       "description": "Unique identifier for the object.",
       "maxLength": 5000,
       "type": "string"
     },
-    "metadata": {
-      "additionalProperties": {
-        "maxLength": 500,
-        "type": "string"
-      },
-      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-      "nullable": true,
-      "type": "object"
-    },
+    "metadata": {},
     "object": {
       "description": "String representing the object's type. Objects of the same type share the same value.",
       "enum": [
@@ -85,9 +59,15 @@
   ],
   "title": "FeeRefund",
   "type": "object",
-  "x-expandableFields": [
-    "balance_transaction",
-    "fee"
-  ],
-  "x-resourceId": "fee_refund"
+  "x-resourceId": "fee_refund",
+  "default": {
+    "amount": 0,
+    "balance_transaction": "string",
+    "created": 0,
+    "currency": "string",
+    "fee": "string",
+    "id": "string",
+    "metadata": {},
+    "object": "fee_refund"
+  }
 }

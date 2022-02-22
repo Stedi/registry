@@ -3,37 +3,56 @@
   "properties": {
     "director": {
       "description": "Whether the person is a director of the account's legal entity. Directors are typically members of the governing board of the company, or responsible for ensuring the company meets its regulatory obligations.",
-      "nullable": true,
-      "type": "boolean"
+      "type": [
+        "boolean",
+        "null"
+      ]
     },
     "executive": {
       "description": "Whether the person has significant responsibility to control, manage, or direct the organization.",
-      "nullable": true,
-      "type": "boolean"
+      "type": [
+        "boolean",
+        "null"
+      ]
     },
     "owner": {
       "description": "Whether the person is an owner of the account’s legal entity.",
-      "nullable": true,
-      "type": "boolean"
+      "type": [
+        "boolean",
+        "null"
+      ]
     },
     "percent_ownership": {
       "description": "The percent owned by the person of the account's legal entity.",
-      "nullable": true,
-      "type": "number"
+      "type": [
+        "number",
+        "null"
+      ]
     },
     "representative": {
       "description": "Whether the person is authorized as the primary representative of the account. This is the person nominated by the business to provide information about themselves, and general information about the account. There can only be one representative at any given time. At the time the account is created, this person should be set to the person responsible for opening the account.",
-      "nullable": true,
-      "type": "boolean"
+      "type": [
+        "boolean",
+        "null"
+      ]
     },
     "title": {
       "description": "The person's title (e.g., CEO, Support Engineer).",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "PersonRelationship",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "director": true,
+    "executive": true,
+    "owner": true,
+    "percent_ownership": 0,
+    "representative": true,
+    "title": "string"
+  }
 }

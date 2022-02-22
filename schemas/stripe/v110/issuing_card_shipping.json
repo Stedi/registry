@@ -7,43 +7,54 @@
         "city": {
           "description": "City, district, suburb, town, or village.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "country": {
           "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "line1": {
           "description": "Address line 1 (e.g., street, PO Box, or company name).",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "line2": {
           "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "postal_code": {
           "description": "ZIP or postal code.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "state": {
           "description": "State, county, province, or region.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "title": "Address",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "carrier": {
       "description": "The delivery company that shipped a card.",
@@ -51,16 +62,21 @@
         "dhl",
         "fedex",
         "royal_mail",
-        "usps"
+        "usps",
+        null
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "eta": {
       "description": "A unix timestamp representing a best estimate of when the card will be delivered.",
       "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "name": {
       "description": "Recipient name.",
@@ -85,22 +101,29 @@
         "failure",
         "pending",
         "returned",
-        "shipped"
+        "shipped",
+        null
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "tracking_number": {
       "description": "A tracking number for a card shipment.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "tracking_url": {
       "description": "A link to the shipping carrier's site where you can view detailed information about a card shipment.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "type": {
       "description": "Packaging options.",
@@ -119,7 +142,22 @@
   ],
   "title": "IssuingCardShipping",
   "type": "object",
-  "x-expandableFields": [
-    "address"
-  ]
+  "default": {
+    "address": {
+      "city": "string",
+      "country": "string",
+      "line1": "string",
+      "line2": "string",
+      "postal_code": "string",
+      "state": "string"
+    },
+    "carrier": "dhl",
+    "eta": 0,
+    "name": "string",
+    "service": "express",
+    "status": "canceled",
+    "tracking_number": "string",
+    "tracking_url": "string",
+    "type": "bulk"
+  }
 }

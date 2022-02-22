@@ -4,8 +4,10 @@
     "country": {
       "description": "Two-letter ISO code representing the country of the tax ID.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -19,18 +21,10 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/customer"
+          "type": "null"
         }
       ],
-      "description": "ID of the customer.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/customer"
-          }
-        ]
-      }
+      "description": "ID of the customer."
     },
     "id": {
       "description": "Unique identifier for the object.",
@@ -120,26 +114,31 @@
             "verified_address": {
               "description": "Verified address.",
               "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "verified_name": {
               "description": "Verified name.",
               "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "required": [
             "status"
           ],
           "title": "tax_id_verification",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "Tax ID verification information.",
-      "nullable": true
+      "description": "Tax ID verification information."
     }
   },
   "required": [
@@ -152,9 +151,20 @@
   ],
   "title": "tax_id",
   "type": "object",
-  "x-expandableFields": [
-    "customer",
-    "verification"
-  ],
-  "x-resourceId": "tax_id"
+  "x-resourceId": "tax_id",
+  "default": {
+    "country": "string",
+    "created": 0,
+    "customer": "string",
+    "id": "string",
+    "livemode": true,
+    "object": "tax_id",
+    "type": "ae_trn",
+    "value": "string",
+    "verification": {
+      "status": "pending",
+      "verified_address": "string",
+      "verified_name": "string"
+    }
+  }
 }

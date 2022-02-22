@@ -4,8 +4,10 @@
     "due_by": {
       "description": "Date by which evidence must be submitted in order to successfully challenge dispute. Will be null if the customer's bank or credit card company doesn't allow a response for this particular dispute.",
       "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "has_evidence": {
       "description": "Whether evidence has been staged for this dispute.",
@@ -27,5 +29,10 @@
   ],
   "title": "DisputeEvidenceDetails",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "due_by": 0,
+    "has_evidence": true,
+    "past_due": true,
+    "submission_count": 0
+  }
 }

@@ -31,8 +31,7 @@
               }
             },
             "title": "BalanceAmountBySourceType",
-            "type": "object",
-            "x-expandableFields": []
+            "type": "object"
           }
         },
         "required": [
@@ -40,10 +39,7 @@
           "currency"
         ],
         "title": "BalanceAmount",
-        "type": "object",
-        "x-expandableFields": [
-          "source_types"
-        ]
+        "type": "object"
       },
       "type": "array"
     }
@@ -53,7 +49,17 @@
   ],
   "title": "BalanceDetail",
   "type": "object",
-  "x-expandableFields": [
-    "available"
-  ]
+  "default": {
+    "available": [
+      {
+        "amount": 0,
+        "currency": "string",
+        "source_types": {
+          "bank_account": 0,
+          "card": 0,
+          "fpx": 0
+        }
+      }
+    ]
+  }
 }

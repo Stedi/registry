@@ -11,13 +11,17 @@
     },
     "application_fee_amount": {
       "description": "The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. Only applicable if there are no line items with recurring prices on the quote.",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "application_fee_percent": {
       "description": "A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account. Only applicable if there are line items with recurring prices on the quote.",
-      "nullable": true,
-      "type": "number"
+      "type": [
+        "number",
+        "null"
+      ]
     },
     "automatic_tax": {
       "description": "",
@@ -31,18 +35,20 @@
           "enum": [
             "complete",
             "failed",
-            "requires_location_inputs"
+            "requires_location_inputs",
+            null
           ],
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": [
         "enabled"
       ],
       "title": "QuotesResourceAutomaticTax",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "collection_method": {
       "description": "Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or on finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions. Defaults to `charge_automatically`.",
@@ -53,7 +59,273 @@
       "type": "string"
     },
     "computed": {
-      "$ref": "#/components/schemas/quotes_resource_computed"
+      "description": "",
+      "properties": {
+        "recurring": {
+          "anyOf": [
+            {
+              "description": "",
+              "properties": {
+                "amount_subtotal": {
+                  "description": "Total before any discounts or taxes are applied.",
+                  "type": "integer"
+                },
+                "amount_total": {
+                  "description": "Total after discounts and taxes are applied.",
+                  "type": "integer"
+                },
+                "interval": {
+                  "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
+                  "enum": [
+                    "day",
+                    "month",
+                    "week",
+                    "year"
+                  ],
+                  "type": "string"
+                },
+                "interval_count": {
+                  "description": "The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.",
+                  "type": "integer"
+                },
+                "total_details": {
+                  "description": "",
+                  "properties": {
+                    "amount_discount": {
+                      "description": "This is the sum of all the line item discounts.",
+                      "type": "integer"
+                    },
+                    "amount_shipping": {
+                      "description": "This is the sum of all the line item shipping amounts.",
+                      "type": [
+                        "integer",
+                        "null"
+                      ]
+                    },
+                    "amount_tax": {
+                      "description": "This is the sum of all the line item tax amounts.",
+                      "type": "integer"
+                    },
+                    "breakdown": {
+                      "description": "",
+                      "properties": {
+                        "discounts": {
+                          "description": "The aggregated line item discounts.",
+                          "items": {},
+                          "type": "array"
+                        },
+                        "taxes": {
+                          "description": "The aggregated line item tax amounts by rate.",
+                          "items": {},
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "discounts",
+                        "taxes"
+                      ],
+                      "title": "QuotesResourceTotalDetailsResourceBreakdown",
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "amount_discount",
+                    "amount_tax"
+                  ],
+                  "title": "QuotesResourceTotalDetails",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "amount_subtotal",
+                "amount_total",
+                "interval",
+                "interval_count",
+                "total_details"
+              ],
+              "title": "QuotesResourceRecurring",
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "The definitive totals and line items the customer will be charged on a recurring basis. Takes into account the line items with recurring prices and discounts with `duration=forever` coupons only. Defaults to `null` if no inputted line items with recurring prices."
+        },
+        "upfront": {
+          "description": "",
+          "properties": {
+            "amount_subtotal": {
+              "description": "Total before any discounts or taxes are applied.",
+              "type": "integer"
+            },
+            "amount_total": {
+              "description": "Total after discounts and taxes are applied.",
+              "type": "integer"
+            },
+            "line_items": {
+              "description": "The line items that will appear on the next invoice after this quote is accepted. This does not include pending invoice items that exist on the customer but may still be included in the next invoice.",
+              "properties": {
+                "data": {
+                  "description": "Details about each object.",
+                  "items": {
+                    "description": "A line item.",
+                    "properties": {
+                      "amount_subtotal": {
+                        "description": "Total before any discounts or taxes are applied.",
+                        "type": "integer"
+                      },
+                      "amount_total": {
+                        "description": "Total after discounts and taxes.",
+                        "type": "integer"
+                      },
+                      "currency": {
+                        "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                        "type": "string"
+                      },
+                      "description": {
+                        "description": "An arbitrary string attached to the object. Often useful for displaying to users. Defaults to product name.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "discounts": {
+                        "description": "The discounts applied to the line item.",
+                        "items": {},
+                        "type": "array"
+                      },
+                      "id": {
+                        "description": "Unique identifier for the object.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "object": {
+                        "description": "String representing the object's type. Objects of the same type share the same value.",
+                        "enum": [
+                          "item"
+                        ],
+                        "type": "string"
+                      },
+                      "price": {
+                        "anyOf": [
+                          {}
+                        ],
+                        "description": "The price used to generate the line item."
+                      },
+                      "quantity": {
+                        "description": "The quantity of products being purchased.",
+                        "type": [
+                          "integer",
+                          "null"
+                        ]
+                      },
+                      "taxes": {
+                        "description": "The taxes applied to the line item.",
+                        "items": {},
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "amount_subtotal",
+                      "amount_total",
+                      "currency",
+                      "description",
+                      "id",
+                      "object"
+                    ],
+                    "title": "LineItem",
+                    "type": "object",
+                    "x-resourceId": "item"
+                  },
+                  "type": "array"
+                },
+                "has_more": {
+                  "description": "True if this list has another page of items after this one that can be fetched.",
+                  "type": "boolean"
+                },
+                "object": {
+                  "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
+                  "enum": [
+                    "list"
+                  ],
+                  "type": "string"
+                },
+                "url": {
+                  "description": "The URL where this list can be accessed.",
+                  "maxLength": 5000,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "data",
+                "has_more",
+                "object",
+                "url"
+              ],
+              "title": "QuotesResourceListLineItems",
+              "type": "object"
+            },
+            "total_details": {
+              "description": "",
+              "properties": {
+                "amount_discount": {
+                  "description": "This is the sum of all the line item discounts.",
+                  "type": "integer"
+                },
+                "amount_shipping": {
+                  "description": "This is the sum of all the line item shipping amounts.",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "amount_tax": {
+                  "description": "This is the sum of all the line item tax amounts.",
+                  "type": "integer"
+                },
+                "breakdown": {
+                  "description": "",
+                  "properties": {
+                    "discounts": {
+                      "description": "The aggregated line item discounts.",
+                      "items": {},
+                      "type": "array"
+                    },
+                    "taxes": {
+                      "description": "The aggregated line item tax amounts by rate.",
+                      "items": {},
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "discounts",
+                    "taxes"
+                  ],
+                  "title": "QuotesResourceTotalDetailsResourceBreakdown",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "amount_discount",
+                "amount_tax"
+              ],
+              "title": "QuotesResourceTotalDetails",
+              "type": "object"
+            }
+          },
+          "required": [
+            "amount_subtotal",
+            "amount_total",
+            "total_details"
+          ],
+          "title": "QuotesResourceUpfront",
+          "type": "object"
+        }
+      },
+      "required": [
+        "upfront"
+      ],
+      "title": "QuotesResourceComputed",
+      "type": "object"
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -63,8 +335,10 @@
     "currency": {
       "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "customer": {
       "anyOf": [
@@ -73,84 +347,10 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/customer"
-        },
-        {
-          "description": "",
-          "properties": {
-            "deleted": {
-              "description": "Always true for a deleted object",
-              "enum": [
-                true
-              ],
-              "type": "boolean"
-            },
-            "id": {
-              "description": "Unique identifier for the object.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "object": {
-              "description": "String representing the object's type. Objects of the same type share the same value.",
-              "enum": [
-                "customer"
-              ],
-              "type": "string"
-            }
-          },
-          "required": [
-            "deleted",
-            "id",
-            "object"
-          ],
-          "title": "DeletedCustomer",
-          "type": "object",
-          "x-expandableFields": [],
-          "x-resourceId": "deleted_customer"
+          "type": "null"
         }
       ],
-      "description": "The customer which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/customer"
-          },
-          {
-            "description": "",
-            "properties": {
-              "deleted": {
-                "description": "Always true for a deleted object",
-                "enum": [
-                  true
-                ],
-                "type": "boolean"
-              },
-              "id": {
-                "description": "Unique identifier for the object.",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "object": {
-                "description": "String representing the object's type. Objects of the same type share the same value.",
-                "enum": [
-                  "customer"
-                ],
-                "type": "string"
-              }
-            },
-            "required": [
-              "deleted",
-              "id",
-              "object"
-            ],
-            "title": "DeletedCustomer",
-            "type": "object",
-            "x-expandableFields": [],
-            "x-resourceId": "deleted_customer"
-          }
-        ]
-      }
+      "description": "The customer which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed."
     },
     "default_tax_rates": {
       "description": "The tax rates applied to this quote.",
@@ -159,230 +359,18 @@
           {
             "maxLength": 5000,
             "type": "string"
-          },
-          {
-            "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
-            "properties": {
-              "active": {
-                "description": "Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.",
-                "type": "boolean"
-              },
-              "country": {
-                "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "created": {
-                "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                "format": "unix-time",
-                "type": "integer"
-              },
-              "description": {
-                "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "display_name": {
-                "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "id": {
-                "description": "Unique identifier for the object.",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "inclusive": {
-                "description": "This specifies if the tax rate is inclusive or exclusive.",
-                "type": "boolean"
-              },
-              "jurisdiction": {
-                "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "livemode": {
-                "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                "type": "boolean"
-              },
-              "metadata": {
-                "additionalProperties": {
-                  "maxLength": 500,
-                  "type": "string"
-                },
-                "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-                "nullable": true,
-                "type": "object"
-              },
-              "object": {
-                "description": "String representing the object's type. Objects of the same type share the same value.",
-                "enum": [
-                  "tax_rate"
-                ],
-                "type": "string"
-              },
-              "percentage": {
-                "description": "This represents the tax rate percent out of 100.",
-                "type": "number"
-              },
-              "state": {
-                "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
-                "maxLength": 5000,
-                "nullable": true,
-                "type": "string"
-              },
-              "tax_type": {
-                "description": "The high-level tax type, such as `vat` or `sales_tax`.",
-                "enum": [
-                  "gst",
-                  "hst",
-                  "jct",
-                  "pst",
-                  "qst",
-                  "rst",
-                  "sales_tax",
-                  "vat"
-                ],
-                "nullable": true,
-                "type": "string"
-              }
-            },
-            "required": [
-              "active",
-              "created",
-              "display_name",
-              "id",
-              "inclusive",
-              "livemode",
-              "object",
-              "percentage"
-            ],
-            "title": "TaxRate",
-            "type": "object",
-            "x-expandableFields": [],
-            "x-resourceId": "tax_rate"
           }
-        ],
-        "x-expansionResources": {
-          "oneOf": [
-            {
-              "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
-              "properties": {
-                "active": {
-                  "description": "Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.",
-                  "type": "boolean"
-                },
-                "country": {
-                  "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-                  "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
-                },
-                "created": {
-                  "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                  "format": "unix-time",
-                  "type": "integer"
-                },
-                "description": {
-                  "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
-                  "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
-                },
-                "display_name": {
-                  "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
-                  "maxLength": 5000,
-                  "type": "string"
-                },
-                "id": {
-                  "description": "Unique identifier for the object.",
-                  "maxLength": 5000,
-                  "type": "string"
-                },
-                "inclusive": {
-                  "description": "This specifies if the tax rate is inclusive or exclusive.",
-                  "type": "boolean"
-                },
-                "jurisdiction": {
-                  "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
-                  "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
-                },
-                "livemode": {
-                  "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                  "type": "boolean"
-                },
-                "metadata": {
-                  "additionalProperties": {
-                    "maxLength": 500,
-                    "type": "string"
-                  },
-                  "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-                  "nullable": true,
-                  "type": "object"
-                },
-                "object": {
-                  "description": "String representing the object's type. Objects of the same type share the same value.",
-                  "enum": [
-                    "tax_rate"
-                  ],
-                  "type": "string"
-                },
-                "percentage": {
-                  "description": "This represents the tax rate percent out of 100.",
-                  "type": "number"
-                },
-                "state": {
-                  "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
-                  "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
-                },
-                "tax_type": {
-                  "description": "The high-level tax type, such as `vat` or `sales_tax`.",
-                  "enum": [
-                    "gst",
-                    "hst",
-                    "jct",
-                    "pst",
-                    "qst",
-                    "rst",
-                    "sales_tax",
-                    "vat"
-                  ],
-                  "nullable": true,
-                  "type": "string"
-                }
-              },
-              "required": [
-                "active",
-                "created",
-                "display_name",
-                "id",
-                "inclusive",
-                "livemode",
-                "object",
-                "percentage"
-              ],
-              "title": "TaxRate",
-              "type": "object",
-              "x-expandableFields": [],
-              "x-resourceId": "tax_rate"
-            }
-          ]
-        }
+        ]
       },
       "type": "array"
     },
     "description": {
       "description": "A description that will be displayed on the quote PDF.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "discounts": {
       "description": "The discounts applied to this quote.",
@@ -391,18 +379,8 @@
           {
             "maxLength": 5000,
             "type": "string"
-          },
-          {
-            "$ref": "#/components/schemas/discount"
           }
-        ],
-        "x-expansionResources": {
-          "oneOf": [
-            {
-              "$ref": "#/components/schemas/discount"
-            }
-          ]
-        }
+        ]
       },
       "type": "array"
     },
@@ -414,23 +392,50 @@
     "footer": {
       "description": "A footer that will be displayed on the quote PDF.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "from_quote": {
       "anyOf": [
         {
-          "$ref": "#/components/schemas/quotes_resource_from_quote"
+          "description": "",
+          "properties": {
+            "is_revision": {
+              "description": "Whether this quote is a revision of a different quote.",
+              "type": "boolean"
+            },
+            "quote": {
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": "string"
+                }
+              ],
+              "description": "The quote that was cloned."
+            }
+          },
+          "required": [
+            "is_revision",
+            "quote"
+          ],
+          "title": "QuotesResourceFromQuote",
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "Details of the quote that was cloned. See the [cloning documentation](https://stripe.com/docs/quotes/clone) for more details.",
-      "nullable": true
+      "description": "Details of the quote that was cloned. See the [cloning documentation](https://stripe.com/docs/quotes/clone) for more details."
     },
     "header": {
       "description": "A header that will be displayed on the quote PDF.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "id": {
       "description": "Unique identifier for the object.",
@@ -444,58 +449,62 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/invoice"
-        },
+          "type": "null"
+        }
+      ],
+      "description": "The invoice that was created from this quote."
+    },
+    "invoice_settings": {
+      "anyOf": [
         {
           "description": "",
           "properties": {
-            "deleted": {
-              "description": "Always true for a deleted object",
-              "enum": [
-                true
-              ],
-              "type": "boolean"
-            },
-            "id": {
-              "description": "Unique identifier for the object.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "object": {
-              "description": "String representing the object's type. Objects of the same type share the same value.",
-              "enum": [
-                "invoice"
-              ],
-              "type": "string"
+            "days_until_due": {
+              "description": "Number of days within which a customer must pay invoices generated by this quote. This value will be `null` for quotes where `collection_method=charge_automatically`.",
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           },
-          "required": [
-            "deleted",
-            "id",
-            "object"
-          ],
-          "title": "DeletedInvoice",
-          "type": "object",
-          "x-expandableFields": [],
-          "x-resourceId": "deleted_invoice"
+          "title": "InvoiceSettingQuoteSetting",
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "The invoice that was created from this quote.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/invoice"
-          },
-          {
-            "description": "",
+      "description": "All invoices will be billed using the specified settings."
+    },
+    "line_items": {
+      "description": "A list of items the customer is being quoted for.",
+      "properties": {
+        "data": {
+          "description": "Details about each object.",
+          "items": {
+            "description": "A line item.",
             "properties": {
-              "deleted": {
-                "description": "Always true for a deleted object",
-                "enum": [
-                  true
-                ],
-                "type": "boolean"
+              "amount_subtotal": {
+                "description": "Total before any discounts or taxes are applied.",
+                "type": "integer"
+              },
+              "amount_total": {
+                "description": "Total after discounts and taxes.",
+                "type": "integer"
+              },
+              "currency": {
+                "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                "type": "string"
+              },
+              "description": {
+                "description": "An arbitrary string attached to the object. Often useful for displaying to users. Defaults to product name.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "discounts": {
+                "description": "The discounts applied to the line item.",
+                "items": {},
+                "type": "array"
               },
               "id": {
                 "description": "Unique identifier for the object.",
@@ -505,50 +514,40 @@
               "object": {
                 "description": "String representing the object's type. Objects of the same type share the same value.",
                 "enum": [
-                  "invoice"
+                  "item"
                 ],
                 "type": "string"
+              },
+              "price": {
+                "anyOf": [
+                  {}
+                ],
+                "description": "The price used to generate the line item."
+              },
+              "quantity": {
+                "description": "The quantity of products being purchased.",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "taxes": {
+                "description": "The taxes applied to the line item.",
+                "items": {},
+                "type": "array"
               }
             },
             "required": [
-              "deleted",
+              "amount_subtotal",
+              "amount_total",
+              "currency",
+              "description",
               "id",
               "object"
             ],
-            "title": "DeletedInvoice",
+            "title": "LineItem",
             "type": "object",
-            "x-expandableFields": [],
-            "x-resourceId": "deleted_invoice"
-          }
-        ]
-      }
-    },
-    "invoice_settings": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "days_until_due": {
-              "description": "Number of days within which a customer must pay invoices generated by this quote. This value will be `null` for quotes where `collection_method=charge_automatically`.",
-              "nullable": true,
-              "type": "integer"
-            }
-          },
-          "title": "InvoiceSettingQuoteSetting",
-          "type": "object",
-          "x-expandableFields": []
-        }
-      ],
-      "description": "All invoices will be billed using the specified settings.",
-      "nullable": true
-    },
-    "line_items": {
-      "description": "A list of items the customer is being quoted for.",
-      "properties": {
-        "data": {
-          "description": "Details about each object.",
-          "items": {
-            "$ref": "#/components/schemas/item"
+            "x-resourceId": "item"
           },
           "type": "array"
         },
@@ -576,28 +575,20 @@
         "url"
       ],
       "title": "QuotesResourceListLineItems",
-      "type": "object",
-      "x-expandableFields": [
-        "data"
-      ]
+      "type": "object"
     },
     "livemode": {
       "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
       "type": "boolean"
     },
-    "metadata": {
-      "additionalProperties": {
-        "maxLength": 500,
-        "type": "string"
-      },
-      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-      "type": "object"
-    },
+    "metadata": {},
     "number": {
       "description": "A unique number that identifies this particular quote. This number is assigned once the quote is [finalized](https://stripe.com/docs/quotes/overview#finalize).",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "object": {
       "description": "String representing the object's type. Objects of the same type share the same value.",
@@ -613,18 +604,10 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/account"
+          "type": "null"
         }
       ],
-      "description": "The account on behalf of which to charge. See the [Connect documentation](https://support.stripe.com/questions/sending-invoices-on-behalf-of-connected-accounts) for details.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/account"
-          }
-        ]
-      }
+      "description": "The account on behalf of which to charge. See the [Connect documentation](https://support.stripe.com/questions/sending-invoices-on-behalf-of-connected-accounts) for details."
     },
     "status": {
       "description": "The status of the quote.",
@@ -642,25 +625,30 @@
         "accepted_at": {
           "description": "The time that the quote was accepted. Measured in seconds since Unix epoch.",
           "format": "unix-time",
-          "nullable": true,
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ]
         },
         "canceled_at": {
           "description": "The time that the quote was canceled. Measured in seconds since Unix epoch.",
           "format": "unix-time",
-          "nullable": true,
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ]
         },
         "finalized_at": {
           "description": "The time that the quote was finalized. Measured in seconds since Unix epoch.",
           "format": "unix-time",
-          "nullable": true,
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ]
         }
       },
       "title": "QuotesResourceStatusTransitions",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "subscription": {
       "anyOf": [
@@ -669,18 +657,10 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/subscription"
+          "type": "null"
         }
       ],
-      "description": "The subscription that was created or updated from this quote.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/subscription"
-          }
-        ]
-      }
+      "description": "The subscription that was created or updated from this quote."
     },
     "subscription_data": {
       "description": "",
@@ -688,18 +668,21 @@
         "effective_date": {
           "description": "When creating a new subscription, the date of which the subscription schedule will start after the quote is accepted. This date is ignored if it is in the past when the quote is accepted. Measured in seconds since the Unix epoch.",
           "format": "unix-time",
-          "nullable": true,
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ]
         },
         "trial_period_days": {
           "description": "Integer representing the number of trial period days before the customer is charged for the first time.",
-          "nullable": true,
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ]
         }
       },
       "title": "QuotesResourceSubscriptionData",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "subscription_schedule": {
       "anyOf": [
@@ -708,30 +691,98 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/subscription_schedule"
+          "type": "null"
         }
       ],
-      "description": "The subscription schedule that was created or updated from this quote.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/subscription_schedule"
-          }
-        ]
-      }
+      "description": "The subscription schedule that was created or updated from this quote."
     },
     "total_details": {
-      "$ref": "#/components/schemas/quotes_resource_total_details"
+      "description": "",
+      "properties": {
+        "amount_discount": {
+          "description": "This is the sum of all the line item discounts.",
+          "type": "integer"
+        },
+        "amount_shipping": {
+          "description": "This is the sum of all the line item shipping amounts.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "amount_tax": {
+          "description": "This is the sum of all the line item tax amounts.",
+          "type": "integer"
+        },
+        "breakdown": {
+          "description": "",
+          "properties": {
+            "discounts": {
+              "description": "The aggregated line item discounts.",
+              "items": {},
+              "type": "array"
+            },
+            "taxes": {
+              "description": "The aggregated line item tax amounts by rate.",
+              "items": {},
+              "type": "array"
+            }
+          },
+          "required": [
+            "discounts",
+            "taxes"
+          ],
+          "title": "QuotesResourceTotalDetailsResourceBreakdown",
+          "type": "object"
+        }
+      },
+      "required": [
+        "amount_discount",
+        "amount_tax"
+      ],
+      "title": "QuotesResourceTotalDetails",
+      "type": "object"
     },
     "transfer_data": {
       "anyOf": [
         {
-          "$ref": "#/components/schemas/quotes_resource_transfer_data"
+          "description": "",
+          "properties": {
+            "amount": {
+              "description": "The amount in %s that will be transferred to the destination account when the invoice is paid. By default, the entire amount is transferred to the destination.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "amount_percent": {
+              "description": "A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the destination account. By default, the entire amount will be transferred to the destination.",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "destination": {
+              "anyOf": [
+                {
+                  "maxLength": 5000,
+                  "type": "string"
+                }
+              ],
+              "description": "The account where funds from the payment will be transferred to upon payment success."
+            }
+          },
+          "required": [
+            "destination"
+          ],
+          "title": "QuotesResourceTransferData",
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "The account (if any) the payments will be attributed to for tax reporting, and where funds from each payment will be transferred to for each of the invoices.",
-      "nullable": true
+      "description": "The account (if any) the payments will be attributed to for tax reporting, and where funds from each payment will be transferred to for each of the invoices."
     }
   },
   "required": [
@@ -754,23 +805,157 @@
   ],
   "title": "Quote",
   "type": "object",
-  "x-expandableFields": [
-    "automatic_tax",
-    "computed",
-    "customer",
-    "default_tax_rates",
-    "discounts",
-    "from_quote",
-    "invoice",
-    "invoice_settings",
-    "line_items",
-    "on_behalf_of",
-    "status_transitions",
-    "subscription",
-    "subscription_data",
-    "subscription_schedule",
-    "total_details",
-    "transfer_data"
-  ],
-  "x-resourceId": "quote"
+  "x-resourceId": "quote",
+  "default": {
+    "amount_subtotal": 0,
+    "amount_total": 0,
+    "application_fee_amount": 0,
+    "application_fee_percent": 0,
+    "automatic_tax": {
+      "enabled": true,
+      "status": "complete"
+    },
+    "collection_method": "charge_automatically",
+    "computed": {
+      "recurring": {
+        "amount_subtotal": 0,
+        "amount_total": 0,
+        "interval": "day",
+        "interval_count": 0,
+        "total_details": {
+          "amount_discount": 0,
+          "amount_shipping": 0,
+          "amount_tax": 0,
+          "breakdown": {
+            "discounts": [
+              {}
+            ],
+            "taxes": [
+              {}
+            ]
+          }
+        }
+      },
+      "upfront": {
+        "amount_subtotal": 0,
+        "amount_total": 0,
+        "line_items": {
+          "data": [
+            {
+              "amount_subtotal": 0,
+              "amount_total": 0,
+              "currency": "string",
+              "description": "string",
+              "discounts": [
+                {}
+              ],
+              "id": "string",
+              "object": "item",
+              "price": {},
+              "quantity": 0,
+              "taxes": [
+                {}
+              ]
+            }
+          ],
+          "has_more": true,
+          "object": "list",
+          "url": "string"
+        },
+        "total_details": {
+          "amount_discount": 0,
+          "amount_shipping": 0,
+          "amount_tax": 0,
+          "breakdown": {
+            "discounts": [
+              {}
+            ],
+            "taxes": [
+              {}
+            ]
+          }
+        }
+      }
+    },
+    "created": 0,
+    "currency": "string",
+    "customer": "string",
+    "default_tax_rates": [
+      "string"
+    ],
+    "description": "string",
+    "discounts": [
+      "string"
+    ],
+    "expires_at": 0,
+    "footer": "string",
+    "from_quote": {
+      "is_revision": true,
+      "quote": "string"
+    },
+    "header": "string",
+    "id": "string",
+    "invoice": "string",
+    "invoice_settings": {
+      "days_until_due": 0
+    },
+    "line_items": {
+      "data": [
+        {
+          "amount_subtotal": 0,
+          "amount_total": 0,
+          "currency": "string",
+          "description": "string",
+          "discounts": [
+            {}
+          ],
+          "id": "string",
+          "object": "item",
+          "price": {},
+          "quantity": 0,
+          "taxes": [
+            {}
+          ]
+        }
+      ],
+      "has_more": true,
+      "object": "list",
+      "url": "string"
+    },
+    "livemode": true,
+    "metadata": {},
+    "number": "string",
+    "object": "quote",
+    "on_behalf_of": "string",
+    "status": "accepted",
+    "status_transitions": {
+      "accepted_at": 0,
+      "canceled_at": 0,
+      "finalized_at": 0
+    },
+    "subscription": "string",
+    "subscription_data": {
+      "effective_date": 0,
+      "trial_period_days": 0
+    },
+    "subscription_schedule": "string",
+    "total_details": {
+      "amount_discount": 0,
+      "amount_shipping": 0,
+      "amount_tax": 0,
+      "breakdown": {
+        "discounts": [
+          {}
+        ],
+        "taxes": [
+          {}
+        ]
+      }
+    },
+    "transfer_data": {
+      "amount": 0,
+      "amount_percent": 0,
+      "destination": "string"
+    }
+  }
 }

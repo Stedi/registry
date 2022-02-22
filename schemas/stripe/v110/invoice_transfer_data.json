@@ -3,27 +3,19 @@
   "properties": {
     "amount": {
       "description": "The amount in %s that will be transferred to the destination account when the invoice is paid. By default, the entire amount is transferred to the destination.",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "destination": {
       "anyOf": [
         {
           "maxLength": 5000,
           "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/account"
         }
       ],
-      "description": "The account where funds from the payment will be transferred to upon payment success.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/account"
-          }
-        ]
-      }
+      "description": "The account where funds from the payment will be transferred to upon payment success."
     }
   },
   "required": [
@@ -31,7 +23,8 @@
   ],
   "title": "InvoiceTransferData",
   "type": "object",
-  "x-expandableFields": [
-    "destination"
-  ]
+  "default": {
+    "amount": 0,
+    "destination": "string"
+  }
 }

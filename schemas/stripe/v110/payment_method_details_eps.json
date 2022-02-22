@@ -30,19 +30,27 @@
         "sparda_bank_wien",
         "volksbank_gruppe",
         "volkskreditbank_ag",
-        "vr_bank_braunau"
+        "vr_bank_braunau",
+        null
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "verified_name": {
       "description": "Owner's verified full name. Values are verified or provided by EPS directly\n(if supported) at the time of authorization or settlement. They cannot be set or mutated.\nEPS rarely provides this information so the attribute is usually empty.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "payment_method_details_eps",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "bank": "arzte_und_apotheker_bank",
+    "verified_name": "string"
+  }
 }

@@ -4,14 +4,18 @@
     "date": {
       "description": "The Unix timestamp marking when the account representative accepted their service agreement",
       "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "ip": {
       "description": "The IP address from which the account representative accepted their service agreement",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "service_agreement": {
       "description": "The user's service agreement type",
@@ -21,11 +25,18 @@
     "user_agent": {
       "description": "The user agent of the browser from which the account representative accepted their service agreement",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "AccountTOSAcceptance",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "date": 0,
+    "ip": "string",
+    "service_agreement": "string",
+    "user_agent": "string"
+  }
 }

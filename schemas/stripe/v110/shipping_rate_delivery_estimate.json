@@ -27,12 +27,13 @@
             "value"
           ],
           "title": "ShippingRateDeliveryEstimateBound",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "The upper bound of the estimated range. If empty, represents no upper bound i.e., infinite.",
-      "nullable": true
+      "description": "The upper bound of the estimated range. If empty, represents no upper bound i.e., infinite."
     },
     "minimum": {
       "anyOf": [
@@ -60,18 +61,25 @@
             "value"
           ],
           "title": "ShippingRateDeliveryEstimateBound",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "The lower bound of the estimated range. If empty, represents no lower bound.",
-      "nullable": true
+      "description": "The lower bound of the estimated range. If empty, represents no lower bound."
     }
   },
   "title": "ShippingRateDeliveryEstimate",
   "type": "object",
-  "x-expandableFields": [
-    "maximum",
-    "minimum"
-  ]
+  "default": {
+    "maximum": {
+      "unit": "business_day",
+      "value": 0
+    },
+    "minimum": {
+      "unit": "business_day",
+      "value": 0
+    }
+  }
 }

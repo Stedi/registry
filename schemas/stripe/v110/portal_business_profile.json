@@ -4,8 +4,10 @@
     "headline": {
       "description": "The messaging shown to customers in the portal.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "privacy_policy_url": {
       "description": "A link to the business’s publicly available privacy policy.",
@@ -24,5 +26,9 @@
   ],
   "title": "PortalBusinessProfile",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "headline": "string",
+    "privacy_policy_url": "string",
+    "terms_of_service_url": "string"
+  }
 }

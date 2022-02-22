@@ -8,18 +8,10 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/file"
+          "type": "null"
         }
       ],
-      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
-      }
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute."
     },
     "card_statement": {
       "anyOf": [
@@ -28,18 +20,10 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/file"
+          "type": "null"
         }
       ],
-      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Copy of the card statement showing that the product had already been paid for.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
-      }
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Copy of the card statement showing that the product had already been paid for."
     },
     "cash_receipt": {
       "anyOf": [
@@ -48,18 +32,10 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/file"
+          "type": "null"
         }
       ],
-      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Copy of the receipt showing that the product had been paid for in cash.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
-      }
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Copy of the receipt showing that the product had been paid for in cash."
     },
     "check_image": {
       "anyOf": [
@@ -68,38 +44,36 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/file"
+          "type": "null"
         }
       ],
-      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Image of the front and back of the check that was used to pay for the product.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
-      }
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Image of the front and back of the check that was used to pay for the product."
     },
     "explanation": {
       "description": "Explanation of why the cardholder is disputing this transaction.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "original_transaction": {
       "description": "Transaction (e.g., ipi_...) that the disputed transaction is a duplicate of. Of the two or more transactions that are copies of each other, this is original undisputed one.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "IssuingDisputeDuplicateEvidence",
   "type": "object",
-  "x-expandableFields": [
-    "additional_documentation",
-    "card_statement",
-    "cash_receipt",
-    "check_image"
-  ]
+  "default": {
+    "additional_documentation": "string",
+    "card_statement": "string",
+    "cash_receipt": "string",
+    "check_image": "string",
+    "explanation": "string",
+    "original_transaction": "string"
+  }
 }

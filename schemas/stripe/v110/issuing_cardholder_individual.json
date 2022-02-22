@@ -8,27 +8,34 @@
           "properties": {
             "day": {
               "description": "The day of birth, between 1 and 31.",
-              "nullable": true,
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "month": {
               "description": "The month of birth, between 1 and 12.",
-              "nullable": true,
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "year": {
               "description": "The four-digit year of birth.",
-              "nullable": true,
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           },
           "title": "IssuingCardholderIndividualDOB",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "The date of birth of this cardholder.",
-      "nullable": true
+      "description": "The date of birth of this cardholder."
     },
     "first_name": {
       "description": "The first name of this cardholder.",
@@ -43,11 +50,56 @@
     "verification": {
       "anyOf": [
         {
-          "$ref": "#/components/schemas/issuing_cardholder_verification"
+          "description": "",
+          "properties": {
+            "document": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "back": {
+                      "anyOf": [
+                        {
+                          "maxLength": 5000,
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The back of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`."
+                    },
+                    "front": {
+                      "anyOf": [
+                        {
+                          "maxLength": 5000,
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The front of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`."
+                    }
+                  },
+                  "title": "IssuingCardholderIdDocument",
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "An identifying document, either a passport or local ID card."
+            }
+          },
+          "title": "IssuingCardholderVerification",
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "Government-issued ID document for this cardholder.",
-      "nullable": true
+      "description": "Government-issued ID document for this cardholder."
     }
   },
   "required": [
@@ -56,8 +108,19 @@
   ],
   "title": "IssuingCardholderIndividual",
   "type": "object",
-  "x-expandableFields": [
-    "dob",
-    "verification"
-  ]
+  "default": {
+    "dob": {
+      "day": 0,
+      "month": 0,
+      "year": 0
+    },
+    "first_name": "string",
+    "last_name": "string",
+    "verification": {
+      "document": {
+        "back": "string",
+        "front": "string"
+      }
+    }
+  }
 }

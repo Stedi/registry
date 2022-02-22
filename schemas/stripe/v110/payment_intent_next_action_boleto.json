@@ -4,29 +4,42 @@
     "expires_at": {
       "description": "The timestamp after which the boleto expires.",
       "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "hosted_voucher_url": {
       "description": "The URL to the hosted boleto voucher page, which allows customers to view the boleto voucher.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "number": {
       "description": "The boleto number.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "pdf": {
       "description": "The URL to the downloadable boleto voucher PDF.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "payment_intent_next_action_boleto",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "expires_at": 0,
+    "hosted_voucher_url": "string",
+    "number": "string",
+    "pdf": "string"
+  }
 }

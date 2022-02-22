@@ -39,12 +39,13 @@
             "type"
           ],
           "title": "DeliveryEstimate",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "The estimated delivery date for the given shipping method. Can be either a specific date or a range.",
-      "nullable": true
+      "description": "The estimated delivery date for the given shipping method. Can be either a specific date or a range."
     },
     "description": {
       "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
@@ -65,7 +66,16 @@
   ],
   "title": "ShippingMethod",
   "type": "object",
-  "x-expandableFields": [
-    "delivery_estimate"
-  ]
+  "default": {
+    "amount": 0,
+    "currency": "string",
+    "delivery_estimate": {
+      "date": "string",
+      "earliest": "string",
+      "latest": "string",
+      "type": "string"
+    },
+    "description": "string",
+    "id": "string"
+  }
 }

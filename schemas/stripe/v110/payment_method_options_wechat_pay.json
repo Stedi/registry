@@ -4,22 +4,30 @@
     "app_id": {
       "description": "The app ID registered with WeChat Pay. Only required when client is ios or android.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "client": {
       "description": "The client type that the end customer will pay from",
       "enum": [
         "android",
         "ios",
-        "web"
+        "web",
+        null
       ],
-      "nullable": true,
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "x-stripeBypassValidation": true
     }
   },
   "title": "payment_method_options_wechat_pay",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "app_id": "string",
+    "client": "android"
+  }
 }

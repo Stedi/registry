@@ -296,8 +296,10 @@
         ],
         "type": "string"
       },
-      "nullable": true,
-      "type": "array"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "blocked_categories": {
       "description": "Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) of authorizations to decline. All other categories will be allowed. Cannot be set with `allowed_categories`.",
@@ -594,8 +596,10 @@
         ],
         "type": "string"
       },
-      "nullable": true,
-      "type": "array"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "spending_limits": {
       "description": "Limit spending with amount-based rules that apply across this cardholder's cards.",
@@ -901,8 +905,10 @@
               ],
               "type": "string"
             },
-            "nullable": true,
-            "type": "array"
+            "type": [
+              "array",
+              "null"
+            ]
           },
           "interval": {
             "description": "Interval (or event) to which the amount applies.",
@@ -922,21 +928,39 @@
           "interval"
         ],
         "title": "IssuingCardholderSpendingLimit",
-        "type": "object",
-        "x-expandableFields": []
+        "type": "object"
       },
-      "nullable": true,
-      "type": "array"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "spending_limits_currency": {
       "description": "Currency of the amounts within `spending_limits`.",
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "IssuingCardholderAuthorizationControls",
   "type": "object",
-  "x-expandableFields": [
-    "spending_limits"
-  ]
+  "default": {
+    "allowed_categories": [
+      "ac_refrigeration_repair"
+    ],
+    "blocked_categories": [
+      "ac_refrigeration_repair"
+    ],
+    "spending_limits": [
+      {
+        "amount": 0,
+        "categories": [
+          "ac_refrigeration_repair"
+        ],
+        "interval": "all_time"
+      }
+    ],
+    "spending_limits_currency": "string"
+  }
 }

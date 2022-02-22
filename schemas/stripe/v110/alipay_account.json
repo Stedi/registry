@@ -13,84 +13,10 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/customer"
-        },
-        {
-          "description": "",
-          "properties": {
-            "deleted": {
-              "description": "Always true for a deleted object",
-              "enum": [
-                true
-              ],
-              "type": "boolean"
-            },
-            "id": {
-              "description": "Unique identifier for the object.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "object": {
-              "description": "String representing the object's type. Objects of the same type share the same value.",
-              "enum": [
-                "customer"
-              ],
-              "type": "string"
-            }
-          },
-          "required": [
-            "deleted",
-            "id",
-            "object"
-          ],
-          "title": "DeletedCustomer",
-          "type": "object",
-          "x-expandableFields": [],
-          "x-resourceId": "deleted_customer"
+          "type": "null"
         }
       ],
-      "description": "The ID of the customer associated with this Alipay Account.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/customer"
-          },
-          {
-            "description": "",
-            "properties": {
-              "deleted": {
-                "description": "Always true for a deleted object",
-                "enum": [
-                  true
-                ],
-                "type": "boolean"
-              },
-              "id": {
-                "description": "Unique identifier for the object.",
-                "maxLength": 5000,
-                "type": "string"
-              },
-              "object": {
-                "description": "String representing the object's type. Objects of the same type share the same value.",
-                "enum": [
-                  "customer"
-                ],
-                "type": "string"
-              }
-            },
-            "required": [
-              "deleted",
-              "id",
-              "object"
-            ],
-            "title": "DeletedCustomer",
-            "type": "object",
-            "x-expandableFields": [],
-            "x-resourceId": "deleted_customer"
-          }
-        ]
-      }
+      "description": "The ID of the customer associated with this Alipay Account."
     },
     "fingerprint": {
       "description": "Uniquely identifies the account and will be the same across all Alipay account objects that are linked to the same Alipay account.",
@@ -106,14 +32,7 @@
       "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
       "type": "boolean"
     },
-    "metadata": {
-      "additionalProperties": {
-        "maxLength": 500,
-        "type": "string"
-      },
-      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-      "type": "object"
-    },
+    "metadata": {},
     "object": {
       "description": "String representing the object's type. Objects of the same type share the same value.",
       "enum": [
@@ -123,13 +42,17 @@
     },
     "payment_amount": {
       "description": "If the Alipay account object is not reusable, the exact amount that you can create a charge for.",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "payment_currency": {
       "description": "If the Alipay account object is not reusable, the exact currency that you can create a charge for.",
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "reusable": {
       "description": "True if you can create multiple payments using this account. If the account is reusable, then you can freely choose the amount of each payment.",
@@ -157,8 +80,19 @@
   ],
   "title": "AlipayAccount",
   "type": "object",
-  "x-expandableFields": [
-    "customer"
-  ],
-  "x-resourceId": "alipay_account"
+  "x-resourceId": "alipay_account",
+  "default": {
+    "created": 0,
+    "customer": "string",
+    "fingerprint": "string",
+    "id": "string",
+    "livemode": true,
+    "metadata": {},
+    "object": "alipay_account",
+    "payment_amount": 0,
+    "payment_currency": "string",
+    "reusable": true,
+    "used": true,
+    "username": "string"
+  }
 }

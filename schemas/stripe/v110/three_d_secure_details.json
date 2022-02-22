@@ -5,10 +5,13 @@
       "description": "For authenticated transactions: how the customer was authenticated by\nthe issuing bank.",
       "enum": [
         "challenge",
-        "frictionless"
+        "frictionless",
+        null
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "result": {
       "description": "Indicates the outcome of 3D Secure authentication.",
@@ -17,10 +20,13 @@
         "authenticated",
         "failed",
         "not_supported",
-        "processing_error"
+        "processing_error",
+        null
       ],
-      "nullable": true,
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "x-stripeBypassValidation": true
     },
     "result_reason": {
@@ -32,24 +38,35 @@
         "card_not_enrolled",
         "network_not_supported",
         "protocol_error",
-        "rejected"
+        "rejected",
+        null
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "version": {
       "description": "The version of 3D Secure that was used.",
       "enum": [
         "1.0.2",
         "2.1.0",
-        "2.2.0"
+        "2.2.0",
+        null
       ],
-      "nullable": true,
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "x-stripeBypassValidation": true
     }
   },
   "title": "three_d_secure_details",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "authentication_flow": "challenge",
+    "result": "attempt_acknowledged",
+    "result_reason": "abandoned",
+    "version": "1.0.2"
+  }
 }

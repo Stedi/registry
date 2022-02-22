@@ -14,14 +14,18 @@
     "verified_address": {
       "description": "Verified address.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "verified_name": {
       "description": "Verified name.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "required": [
@@ -29,5 +33,9 @@
   ],
   "title": "tax_id_verification",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "status": "pending",
+    "verified_address": "string",
+    "verified_name": "string"
+  }
 }

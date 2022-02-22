@@ -8,18 +8,10 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/file"
+          "type": "null"
         }
       ],
-      "description": "The back of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
-      }
+      "description": "The back of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`."
     },
     "front": {
       "anyOf": [
@@ -28,24 +20,16 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/file"
+          "type": "null"
         }
       ],
-      "description": "The front of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
-      }
+      "description": "The front of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`."
     }
   },
   "title": "IssuingCardholderIdDocument",
   "type": "object",
-  "x-expandableFields": [
-    "back",
-    "front"
-  ]
+  "default": {
+    "back": "string",
+    "front": "string"
+  }
 }

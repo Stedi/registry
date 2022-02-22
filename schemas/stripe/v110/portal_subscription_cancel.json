@@ -31,8 +31,7 @@
         "options"
       ],
       "title": "PortalSubscriptionCancellationReason",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "enabled": {
       "description": "Whether the feature is enabled.",
@@ -64,7 +63,15 @@
   ],
   "title": "PortalSubscriptionCancel",
   "type": "object",
-  "x-expandableFields": [
-    "cancellation_reason"
-  ]
+  "default": {
+    "cancellation_reason": {
+      "enabled": true,
+      "options": [
+        "customer_service"
+      ]
+    },
+    "enabled": true,
+    "mode": "at_period_end",
+    "proration_behavior": "always_invoice"
+  }
 }

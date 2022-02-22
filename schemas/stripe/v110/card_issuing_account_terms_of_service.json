@@ -3,14 +3,18 @@
   "properties": {
     "date": {
       "description": "The Unix timestamp marking when the account representative accepted the service agreement.",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "ip": {
       "description": "The IP address from which the account representative accepted the service agreement.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "user_agent": {
       "description": "The user agent of the browser from which the account representative accepted the service agreement.",
@@ -20,5 +24,9 @@
   },
   "title": "CardIssuingAccountTermsOfService",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "date": 0,
+    "ip": "string",
+    "user_agent": "string"
+  }
 }

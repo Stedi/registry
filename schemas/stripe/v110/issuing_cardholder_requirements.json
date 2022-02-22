@@ -6,10 +6,13 @@
       "enum": [
         "listed",
         "rejected.listed",
-        "under_review"
+        "under_review",
+        null
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "past_due": {
       "description": "Array of fields that need to be collected in order to verify and re-enable the cardholder.",
@@ -26,11 +29,18 @@
         "type": "string",
         "x-stripeBypassValidation": true
       },
-      "nullable": true,
-      "type": "array"
+      "type": [
+        "array",
+        "null"
+      ]
     }
   },
   "title": "IssuingCardholderRequirements",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "disabled_reason": "listed",
+    "past_due": [
+      "company.tax_id"
+    ]
+  }
 }

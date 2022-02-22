@@ -8,18 +8,10 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/file"
+          "type": "null"
         }
       ],
-      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) An icon for the account. Must be square and at least 128px x 128px.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
-      }
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) An icon for the account. Must be square and at least 128px x 128px."
     },
     "logo": {
       "anyOf": [
@@ -28,36 +20,34 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/file"
+          "type": "null"
         }
       ],
-      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for the account that will be used in Checkout instead of the icon and without the account's name next to it if provided. Must be at least 128px x 128px.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
-      }
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for the account that will be used in Checkout instead of the icon and without the account's name next to it if provided. Must be at least 128px x 128px."
     },
     "primary_color": {
       "description": "A CSS hex color value representing the primary branding color for this account",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "secondary_color": {
       "description": "A CSS hex color value representing the secondary branding color for this account",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "AccountBrandingSettings",
   "type": "object",
-  "x-expandableFields": [
-    "icon",
-    "logo"
-  ]
+  "default": {
+    "icon": "string",
+    "logo": "string",
+    "primary_color": "string",
+    "secondary_color": "string"
+  }
 }

@@ -18,17 +18,7 @@
       ],
       "type": "string"
     },
-    "supported_bank_account_currencies": {
-      "additionalProperties": {
-        "items": {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "type": "array"
-      },
-      "description": "Currencies that can be accepted in the specific country (for transfers).",
-      "type": "object"
-    },
+    "supported_bank_account_currencies": {},
     "supported_payment_currencies": {
       "description": "Currencies that can be accepted in the specified country (for payments).",
       "items": {
@@ -81,8 +71,7 @@
             "minimum"
           ],
           "title": "CountrySpecVerificationFieldDetails",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "individual": {
           "description": "",
@@ -109,8 +98,7 @@
             "minimum"
           ],
           "title": "CountrySpecVerificationFieldDetails",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         }
       },
       "required": [
@@ -118,11 +106,7 @@
         "individual"
       ],
       "title": "CountrySpecVerificationFields",
-      "type": "object",
-      "x-expandableFields": [
-        "company",
-        "individual"
-      ]
+      "type": "object"
     }
   },
   "required": [
@@ -137,8 +121,38 @@
   ],
   "title": "CountrySpec",
   "type": "object",
-  "x-expandableFields": [
-    "verification_fields"
-  ],
-  "x-resourceId": "country_spec"
+  "x-resourceId": "country_spec",
+  "default": {
+    "default_currency": "string",
+    "id": "string",
+    "object": "country_spec",
+    "supported_bank_account_currencies": {},
+    "supported_payment_currencies": [
+      "string"
+    ],
+    "supported_payment_methods": [
+      "string"
+    ],
+    "supported_transfer_countries": [
+      "string"
+    ],
+    "verification_fields": {
+      "company": {
+        "additional": [
+          "string"
+        ],
+        "minimum": [
+          "string"
+        ]
+      },
+      "individual": {
+        "additional": [
+          "string"
+        ],
+        "minimum": [
+          "string"
+        ]
+      }
+    }
+  }
 }

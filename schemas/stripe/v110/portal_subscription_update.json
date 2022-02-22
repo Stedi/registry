@@ -41,11 +41,12 @@
           "product"
         ],
         "title": "PortalSubscriptionUpdateProduct",
-        "type": "object",
-        "x-expandableFields": []
+        "type": "object"
       },
-      "nullable": true,
-      "type": "array"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "proration_behavior": {
       "description": "Determines how to handle prorations resulting from subscription updates. Valid values are `none`, `create_prorations`, and `always_invoice`.",
@@ -64,7 +65,19 @@
   ],
   "title": "PortalSubscriptionUpdate",
   "type": "object",
-  "x-expandableFields": [
-    "products"
-  ]
+  "default": {
+    "default_allowed_updates": [
+      "price"
+    ],
+    "enabled": true,
+    "products": [
+      {
+        "prices": [
+          "string"
+        ],
+        "product": "string"
+      }
+    ],
+    "proration_behavior": "always_invoice"
+  }
 }

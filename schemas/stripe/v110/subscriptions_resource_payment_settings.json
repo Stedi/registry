@@ -18,15 +18,17 @@
                           "description": "Transaction type of the mandate.",
                           "enum": [
                             "business",
-                            "personal"
+                            "personal",
+                            null
                           ],
-                          "nullable": true,
-                          "type": "string"
+                          "type": [
+                            "string",
+                            "null"
+                          ]
                         }
                       },
                       "title": "invoice_payment_method_options_acss_debit_mandate_options",
-                      "type": "object",
-                      "x-expandableFields": []
+                      "type": "object"
                     },
                     "verification_method": {
                       "description": "Bank account verification method.",
@@ -40,14 +42,13 @@
                     }
                   },
                   "title": "invoice_payment_method_options_acss_debit",
-                  "type": "object",
-                  "x-expandableFields": [
-                    "mandate_options"
-                  ]
+                  "type": "object"
+                },
+                {
+                  "type": "null"
                 }
               ],
-              "description": "This sub-hash contains details about the Canadian pre-authorized debit payment method options to pass to invoices created by the subscription.",
-              "nullable": true
+              "description": "This sub-hash contains details about the Canadian pre-authorized debit payment method options to pass to invoices created by the subscription."
             },
             "bancontact": {
               "anyOf": [
@@ -69,12 +70,13 @@
                     "preferred_language"
                   ],
                   "title": "invoice_payment_method_options_bancontact",
-                  "type": "object",
-                  "x-expandableFields": []
+                  "type": "object"
+                },
+                {
+                  "type": "null"
                 }
               ],
-              "description": "This sub-hash contains details about the Bancontact payment method options to pass to invoices created by the subscription.",
-              "nullable": true
+              "description": "This sub-hash contains details about the Bancontact payment method options to pass to invoices created by the subscription."
             },
             "card": {
               "anyOf": [
@@ -86,61 +88,66 @@
                       "properties": {
                         "amount": {
                           "description": "Amount to be charged for future payments.",
-                          "nullable": true,
-                          "type": "integer"
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
                         },
                         "amount_type": {
                           "description": "One of `fixed` or `maximum`. If `fixed`, the `amount` param refers to the exact amount to be charged in future payments. If `maximum`, the amount charged can be up to the value passed for the `amount` param.",
                           "enum": [
                             "fixed",
-                            "maximum"
+                            "maximum",
+                            null
                           ],
-                          "nullable": true,
-                          "type": "string"
+                          "type": [
+                            "string",
+                            "null"
+                          ]
                         },
                         "description": {
                           "description": "A description of the mandate or subscription that is meant to be displayed to the customer.",
                           "maxLength": 200,
-                          "nullable": true,
-                          "type": "string"
+                          "type": [
+                            "string",
+                            "null"
+                          ]
                         }
                       },
                       "title": "invoice_mandate_options_card",
-                      "type": "object",
-                      "x-expandableFields": []
+                      "type": "object"
                     },
                     "request_three_d_secure": {
                       "description": "We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.",
                       "enum": [
                         "any",
-                        "automatic"
+                        "automatic",
+                        null
                       ],
-                      "nullable": true,
-                      "type": "string"
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     }
                   },
                   "title": "subscription_payment_method_options_card",
-                  "type": "object",
-                  "x-expandableFields": [
-                    "mandate_options"
-                  ]
+                  "type": "object"
+                },
+                {
+                  "type": "null"
                 }
               ],
-              "description": "This sub-hash contains details about the Card payment method options to pass to invoices created by the subscription.",
-              "nullable": true
+              "description": "This sub-hash contains details about the Card payment method options to pass to invoices created by the subscription."
             }
           },
           "title": "SubscriptionsResourcePaymentMethodOptions",
-          "type": "object",
-          "x-expandableFields": [
-            "acss_debit",
-            "bancontact",
-            "card"
-          ]
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "Payment-method-specific configuration to provide to invoices created by the subscription.",
-      "nullable": true
+      "description": "Payment-method-specific configuration to provide to invoices created by the subscription."
     },
     "payment_method_types": {
       "description": "The list of payment method types to provide to every invoice created by the subscription. If not set, Stripe attempts to automatically determine the types to use by looking at the invoice’s default payment method, the subscription’s default payment method, the customer’s default payment method, and your [invoice template settings](https://dashboard.stripe.com/settings/billing/invoice).",
@@ -165,13 +172,36 @@
         "type": "string",
         "x-stripeBypassValidation": true
       },
-      "nullable": true,
-      "type": "array"
+      "type": [
+        "array",
+        "null"
+      ]
     }
   },
   "title": "SubscriptionsResourcePaymentSettings",
   "type": "object",
-  "x-expandableFields": [
-    "payment_method_options"
-  ]
+  "default": {
+    "payment_method_options": {
+      "acss_debit": {
+        "mandate_options": {
+          "transaction_type": "business"
+        },
+        "verification_method": "automatic"
+      },
+      "bancontact": {
+        "preferred_language": "de"
+      },
+      "card": {
+        "mandate_options": {
+          "amount": 0,
+          "amount_type": "fixed",
+          "description": "string"
+        },
+        "request_three_d_secure": "any"
+      }
+    },
+    "payment_method_types": [
+      "ach_credit_transfer"
+    ]
+  }
 }

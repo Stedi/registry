@@ -3,16 +3,23 @@
   "properties": {
     "check_in_at": {
       "description": "The time of checking into the lodging.",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "nights": {
       "description": "The number of nights stayed at the lodging.",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     }
   },
   "title": "IssuingTransactionLodgingData",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "check_in_at": 0,
+    "nights": 0
+  }
 }

@@ -22,11 +22,12 @@
           "value"
         ],
         "title": "InvoiceSettingCustomField",
-        "type": "object",
-        "x-expandableFields": []
+        "type": "object"
       },
-      "nullable": true,
-      "type": "array"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "default_payment_method": {
       "anyOf": [
@@ -35,30 +36,30 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/payment_method"
+          "type": "null"
         }
       ],
-      "description": "ID of a payment method that's attached to the customer, to be used as the customer's default payment method for subscriptions and invoices.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/payment_method"
-          }
-        ]
-      }
+      "description": "ID of a payment method that's attached to the customer, to be used as the customer's default payment method for subscriptions and invoices."
     },
     "footer": {
       "description": "Default footer to be displayed on invoices for this customer.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "InvoiceSettingCustomerSetting",
   "type": "object",
-  "x-expandableFields": [
-    "custom_fields",
-    "default_payment_method"
-  ]
+  "default": {
+    "custom_fields": [
+      {
+        "name": "string",
+        "value": "string"
+      }
+    ],
+    "default_payment_method": "string",
+    "footer": "string"
+  }
 }

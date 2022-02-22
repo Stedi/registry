@@ -19,8 +19,10 @@
     "volume_decimal": {
       "description": "The volume of the fuel that was pumped, represented as a decimal string with at most 12 decimal places.",
       "format": "decimal",
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "required": [
@@ -30,5 +32,10 @@
   ],
   "title": "IssuingTransactionFuelData",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "type": "string",
+    "unit": "string",
+    "unit_cost_decimal": "0.0",
+    "volume_decimal": "0.0"
+  }
 }

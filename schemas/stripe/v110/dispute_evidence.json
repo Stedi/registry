@@ -4,14 +4,18 @@
     "access_activity_log": {
       "description": "Any server or activity logs showing proof that the customer accessed or downloaded the purchased digital product. This information should include IP addresses, corresponding timestamps, and any detailed recorded activity.",
       "maxLength": 150000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "billing_address": {
       "description": "The billing address provided by the customer.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "cancellation_policy": {
       "anyOf": [
@@ -20,30 +24,26 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/file"
+          "type": "null"
         }
       ],
-      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your subscription cancellation policy, as shown to the customer.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
-      }
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your subscription cancellation policy, as shown to the customer."
     },
     "cancellation_policy_disclosure": {
       "description": "An explanation of how and when the customer was shown your refund policy prior to purchase.",
       "maxLength": 150000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "cancellation_rebuttal": {
       "description": "A justification for why the customer's subscription was not canceled.",
       "maxLength": 150000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "customer_communication": {
       "anyOf": [
@@ -52,36 +52,34 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/file"
+          "type": "null"
         }
       ],
-      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any communication with the customer that you feel is relevant to your case. Examples include emails proving that the customer received the product or service, or demonstrating their use of or satisfaction with the product or service.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
-      }
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any communication with the customer that you feel is relevant to your case. Examples include emails proving that the customer received the product or service, or demonstrating their use of or satisfaction with the product or service."
     },
     "customer_email_address": {
       "description": "The email address of the customer.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "customer_name": {
       "description": "The name of the customer.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "customer_purchase_ip": {
       "description": "The IP address that the customer used when making the purchase.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "customer_signature": {
       "anyOf": [
@@ -90,18 +88,10 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/file"
+          "type": "null"
         }
       ],
-      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A relevant document or contract showing the customer's signature.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
-      }
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A relevant document or contract showing the customer's signature."
     },
     "duplicate_charge_documentation": {
       "anyOf": [
@@ -110,36 +100,34 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/file"
+          "type": "null"
         }
       ],
-      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation for the prior charge that can uniquely identify the charge, such as a receipt, shipping label, work order, etc. This document should be paired with a similar document from the disputed payment that proves the two payments are separate.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
-      }
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation for the prior charge that can uniquely identify the charge, such as a receipt, shipping label, work order, etc. This document should be paired with a similar document from the disputed payment that proves the two payments are separate."
     },
     "duplicate_charge_explanation": {
       "description": "An explanation of the difference between the disputed charge versus the prior charge that appears to be a duplicate.",
       "maxLength": 150000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "duplicate_charge_id": {
       "description": "The Stripe ID for the prior charge which appears to be a duplicate of the disputed charge.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "product_description": {
       "description": "A description of the product or service that was sold.",
       "maxLength": 150000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "receipt": {
       "anyOf": [
@@ -148,18 +136,10 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/file"
+          "type": "null"
         }
       ],
-      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any receipt or message sent to the customer notifying them of the charge.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
-      }
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any receipt or message sent to the customer notifying them of the charge."
     },
     "refund_policy": {
       "anyOf": [
@@ -168,36 +148,34 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/file"
+          "type": "null"
         }
       ],
-      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your refund policy, as shown to the customer.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
-      }
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your refund policy, as shown to the customer."
     },
     "refund_policy_disclosure": {
       "description": "Documentation demonstrating that the customer was shown your refund policy prior to purchase.",
       "maxLength": 150000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "refund_refusal_explanation": {
       "description": "A justification for why the customer is not entitled to a refund.",
       "maxLength": 150000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "service_date": {
       "description": "The date on which the customer received or began receiving the purchased service, in a clear human-readable format.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "service_documentation": {
       "anyOf": [
@@ -206,36 +184,34 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/file"
+          "type": "null"
         }
       ],
-      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing proof that a service was provided to the customer. This could include a copy of a signed contract, work order, or other form of written agreement.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
-      }
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing proof that a service was provided to the customer. This could include a copy of a signed contract, work order, or other form of written agreement."
     },
     "shipping_address": {
       "description": "The address to which a physical product was shipped. You should try to include as complete address information as possible.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "shipping_carrier": {
       "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. If multiple carriers were used for this purchase, please separate them with commas.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "shipping_date": {
       "description": "The date on which a physical product began its route to the shipping address, in a clear human-readable format.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "shipping_documentation": {
       "anyOf": [
@@ -244,24 +220,18 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/file"
+          "type": "null"
         }
       ],
-      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing proof that a product was shipped to the customer at the same address the customer provided to you. This could include a copy of the shipment receipt, shipping label, etc. It should show the customer's full shipping address, if possible.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
-      }
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing proof that a product was shipped to the customer at the same address the customer provided to you. This could include a copy of the shipment receipt, shipping label, etc. It should show the customer's full shipping address, if possible."
     },
     "shipping_tracking_number": {
       "description": "The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "uncategorized_file": {
       "anyOf": [
@@ -270,37 +240,49 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/file"
+          "type": "null"
         }
       ],
-      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any additional evidence or statements.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/file"
-          }
-        ]
-      }
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any additional evidence or statements."
     },
     "uncategorized_text": {
       "description": "Any additional evidence or statements.",
       "maxLength": 150000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "DisputeEvidence",
   "type": "object",
-  "x-expandableFields": [
-    "cancellation_policy",
-    "customer_communication",
-    "customer_signature",
-    "duplicate_charge_documentation",
-    "receipt",
-    "refund_policy",
-    "service_documentation",
-    "shipping_documentation",
-    "uncategorized_file"
-  ]
+  "default": {
+    "access_activity_log": "string",
+    "billing_address": "string",
+    "cancellation_policy": "string",
+    "cancellation_policy_disclosure": "string",
+    "cancellation_rebuttal": "string",
+    "customer_communication": "string",
+    "customer_email_address": "string",
+    "customer_name": "string",
+    "customer_purchase_ip": "string",
+    "customer_signature": "string",
+    "duplicate_charge_documentation": "string",
+    "duplicate_charge_explanation": "string",
+    "duplicate_charge_id": "string",
+    "product_description": "string",
+    "receipt": "string",
+    "refund_policy": "string",
+    "refund_policy_disclosure": "string",
+    "refund_refusal_explanation": "string",
+    "service_date": "string",
+    "service_documentation": "string",
+    "shipping_address": "string",
+    "shipping_carrier": "string",
+    "shipping_date": "string",
+    "shipping_documentation": "string",
+    "shipping_tracking_number": "string",
+    "uncategorized_file": "string",
+    "uncategorized_text": "string"
+  }
 }

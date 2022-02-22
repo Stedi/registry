@@ -8,18 +8,10 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/charge"
+          "type": "null"
         }
       ],
-      "description": "The ID of the Charge that generated this PaymentMethod, if any.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/charge"
-          }
-        ]
-      }
+      "description": "The ID of the Charge that generated this PaymentMethod, if any."
     },
     "setup_attempt": {
       "anyOf": [
@@ -28,24 +20,16 @@
           "type": "string"
         },
         {
-          "$ref": "#/components/schemas/setup_attempt"
+          "type": "null"
         }
       ],
-      "description": "The ID of the SetupAttempt that generated this PaymentMethod, if any.",
-      "nullable": true,
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/setup_attempt"
-          }
-        ]
-      }
+      "description": "The ID of the SetupAttempt that generated this PaymentMethod, if any."
     }
   },
   "title": "sepa_debit_generated_from",
   "type": "object",
-  "x-expandableFields": [
-    "charge",
-    "setup_attempt"
-  ]
+  "default": {
+    "charge": "string",
+    "setup_attempt": "string"
+  }
 }

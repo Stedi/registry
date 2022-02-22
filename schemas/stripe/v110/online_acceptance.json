@@ -4,17 +4,24 @@
     "ip_address": {
       "description": "The IP address from which the Mandate was accepted by the customer.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "user_agent": {
       "description": "The user agent of the browser from which the Mandate was accepted by the customer.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "online_acceptance",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "ip_address": "string",
+    "user_agent": "string"
+  }
 }

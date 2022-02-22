@@ -7,29 +7,29 @@
         "return_url": {
           "description": "If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "url": {
           "description": "The URL you must redirect your customer to in order to authenticate.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "title": "SetupIntentNextActionRedirectToUrl",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "type": {
       "description": "Type of the next action to perform, one of `redirect_to_url`, `use_stripe_sdk`, `alipay_handle_redirect`, `oxxo_display_details`, or `verify_with_microdeposits`.",
       "maxLength": 5000,
       "type": "string"
     },
-    "use_stripe_sdk": {
-      "description": "When confirming a SetupIntent with Stripe.js, Stripe.js depends on the contents of this dictionary to invoke authentication flows. The shape of the contents is subject to change and is only intended to be used by Stripe.js.",
-      "type": "object"
-    },
+    "use_stripe_sdk": {},
     "verify_with_microdeposits": {
       "description": "",
       "properties": {
@@ -49,8 +49,7 @@
         "hosted_verification_url"
       ],
       "title": "SetupIntentNextActionVerifyWithMicrodeposits",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     }
   },
   "required": [
@@ -58,8 +57,16 @@
   ],
   "title": "SetupIntentNextAction",
   "type": "object",
-  "x-expandableFields": [
-    "redirect_to_url",
-    "verify_with_microdeposits"
-  ]
+  "default": {
+    "redirect_to_url": {
+      "return_url": "string",
+      "url": "string"
+    },
+    "type": "string",
+    "use_stripe_sdk": {},
+    "verify_with_microdeposits": {
+      "arrival_date": 0,
+      "hosted_verification_url": "string"
+    }
+  }
 }

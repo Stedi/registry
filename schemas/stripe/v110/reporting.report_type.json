@@ -17,8 +17,10 @@
         "maxLength": 5000,
         "type": "string"
       },
-      "nullable": true,
-      "type": "array"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "id": {
       "description": "The [ID of the Report Type](https://stripe.com/docs/reporting/statements/api#available-report-types), such as `balance.summary.1`.",
@@ -63,6 +65,18 @@
   ],
   "title": "reporting_report_type",
   "type": "object",
-  "x-expandableFields": [],
-  "x-resourceId": "reporting.report_type"
+  "x-resourceId": "reporting.report_type",
+  "default": {
+    "data_available_end": 0,
+    "data_available_start": 0,
+    "default_columns": [
+      "string"
+    ],
+    "id": "string",
+    "livemode": true,
+    "name": "string",
+    "object": "reporting.report_type",
+    "updated": 0,
+    "version": 0
+  }
 }

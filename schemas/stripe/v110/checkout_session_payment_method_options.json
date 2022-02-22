@@ -34,32 +34,39 @@
             "interval_description": {
               "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
               "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "payment_schedule": {
               "description": "Payment schedule for the mandate.",
               "enum": [
                 "combined",
                 "interval",
-                "sporadic"
+                "sporadic",
+                null
               ],
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "transaction_type": {
               "description": "Transaction type of the mandate.",
               "enum": [
                 "business",
-                "personal"
+                "personal",
+                null
               ],
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "title": "CheckoutAcssDebitMandateOptions",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "verification_method": {
           "description": "Bank account verification method.",
@@ -73,10 +80,7 @@
         }
       },
       "title": "CheckoutAcssDebitPaymentMethodOptions",
-      "type": "object",
-      "x-expandableFields": [
-        "mandate_options"
-      ]
+      "type": "object"
     },
     "boleto": {
       "description": "",
@@ -90,8 +94,7 @@
         "expires_after_days"
       ],
       "title": "CheckoutBoletoPaymentMethodOptions",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "oxxo": {
       "description": "",
@@ -105,15 +108,30 @@
         "expires_after_days"
       ],
       "title": "CheckoutOxxoPaymentMethodOptions",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     }
   },
   "title": "CheckoutSessionPaymentMethodOptions",
   "type": "object",
-  "x-expandableFields": [
-    "acss_debit",
-    "boleto",
-    "oxxo"
-  ]
+  "default": {
+    "acss_debit": {
+      "currency": "cad",
+      "mandate_options": {
+        "custom_mandate_url": "string",
+        "default_for": [
+          "invoice"
+        ],
+        "interval_description": "string",
+        "payment_schedule": "combined",
+        "transaction_type": "business"
+      },
+      "verification_method": "automatic"
+    },
+    "boleto": {
+      "expires_after_days": 0
+    },
+    "oxxo": {
+      "expires_after_days": 0
+    }
+  }
 }

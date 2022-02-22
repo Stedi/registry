@@ -8,27 +8,34 @@
           "properties": {
             "day": {
               "description": "Numerical day between 1 and 31.",
-              "nullable": true,
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "month": {
               "description": "Numerical month between 1 and 12.",
-              "nullable": true,
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "year": {
               "description": "The four-digit year.",
-              "nullable": true,
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           },
           "title": "GelatoDataIdNumberReportDate",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "Date of birth.",
-      "nullable": true
+      "description": "Date of birth."
     },
     "error": {
       "anyOf": [
@@ -40,53 +47,68 @@
               "enum": [
                 "id_number_insufficient_document_data",
                 "id_number_mismatch",
-                "id_number_unverified_other"
+                "id_number_unverified_other",
+                null
               ],
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "reason": {
               "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
               "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "title": "GelatoIdNumberReportError",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "Details on the verification error. Present when status is `unverified`.",
-      "nullable": true
+      "description": "Details on the verification error. Present when status is `unverified`."
     },
     "first_name": {
       "description": "First name.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "id_number": {
       "description": "ID number.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "id_number_type": {
       "description": "Type of ID number.",
       "enum": [
         "br_cpf",
         "sg_nric",
-        "us_ssn"
+        "us_ssn",
+        null
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "last_name": {
       "description": "Last name.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "status": {
       "description": "Status of this `id_number` check.",
@@ -103,8 +125,20 @@
   ],
   "title": "GelatoIdNumberReport",
   "type": "object",
-  "x-expandableFields": [
-    "dob",
-    "error"
-  ]
+  "default": {
+    "dob": {
+      "day": 0,
+      "month": 0,
+      "year": 0
+    },
+    "error": {
+      "code": "id_number_insufficient_document_data",
+      "reason": "string"
+    },
+    "first_name": "string",
+    "id_number": "string",
+    "id_number_type": "br_cpf",
+    "last_name": "string",
+    "status": "unverified"
+  }
 }

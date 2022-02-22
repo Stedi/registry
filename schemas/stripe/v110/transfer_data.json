@@ -10,19 +10,9 @@
         {
           "maxLength": 5000,
           "type": "string"
-        },
-        {
-          "$ref": "#/components/schemas/account"
         }
       ],
-      "description": "The account (if any) the payment will be attributed to for tax\nreporting, and where funds from the payment will be transferred to upon\npayment success.",
-      "x-expansionResources": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/account"
-          }
-        ]
-      }
+      "description": "The account (if any) the payment will be attributed to for tax\nreporting, and where funds from the payment will be transferred to upon\npayment success."
     }
   },
   "required": [
@@ -30,7 +20,8 @@
   ],
   "title": "transfer_data",
   "type": "object",
-  "x-expandableFields": [
-    "destination"
-  ]
+  "default": {
+    "amount": 0,
+    "destination": "string"
+  }
 }

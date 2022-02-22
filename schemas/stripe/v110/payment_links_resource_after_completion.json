@@ -7,13 +7,14 @@
         "custom_message": {
           "description": "The custom message that is displayed to the customer after the purchase is complete.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "title": "PaymentLinksResourceCompletionBehaviorConfirmationPage",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "redirect": {
       "description": "",
@@ -28,8 +29,7 @@
         "url"
       ],
       "title": "PaymentLinksResourceCompletionBehaviorRedirect",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "type": {
       "description": "The specified behavior after the purchase is complete.",
@@ -45,8 +45,13 @@
   ],
   "title": "PaymentLinksResourceAfterCompletion",
   "type": "object",
-  "x-expandableFields": [
-    "hosted_confirmation",
-    "redirect"
-  ]
+  "default": {
+    "hosted_confirmation": {
+      "custom_message": "string"
+    },
+    "redirect": {
+      "url": "string"
+    },
+    "type": "hosted_confirmation"
+  }
 }

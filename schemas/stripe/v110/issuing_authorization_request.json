@@ -12,17 +12,20 @@
           "properties": {
             "atm_fee": {
               "description": "The fee charged by the ATM for the cash withdrawal.",
-              "nullable": true,
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           },
           "title": "IssuingAuthorizationAmountDetails",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
+        },
+        {
+          "type": "null"
         }
       ],
-      "description": "Detailed breakdown of amount components. These amounts are denominated in `currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).",
-      "nullable": true
+      "description": "Detailed breakdown of amount components. These amounts are denominated in `currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal)."
     },
     "approved": {
       "description": "Whether this request was approved.",
@@ -79,7 +82,16 @@
   ],
   "title": "IssuingAuthorizationRequest",
   "type": "object",
-  "x-expandableFields": [
-    "amount_details"
-  ]
+  "default": {
+    "amount": 0,
+    "amount_details": {
+      "atm_fee": 0
+    },
+    "approved": true,
+    "created": 0,
+    "currency": "string",
+    "merchant_amount": 0,
+    "merchant_currency": "string",
+    "reason": "account_disabled"
+  }
 }

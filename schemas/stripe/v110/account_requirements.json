@@ -28,17 +28,20 @@
           "original_fields_due"
         ],
         "title": "AccountRequirementsAlternative",
-        "type": "object",
-        "x-expandableFields": []
+        "type": "object"
       },
-      "nullable": true,
-      "type": "array"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "current_deadline": {
       "description": "Date by which the fields in `currently_due` must be collected to keep the account enabled. These fields may disable the account sooner if the next threshold is reached before they are collected.",
       "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "currently_due": {
       "description": "Fields that need to be collected to keep the account enabled. If not collected by `current_deadline`, these fields appear in `past_due` as well, and the account is disabled.",
@@ -46,14 +49,18 @@
         "maxLength": 5000,
         "type": "string"
       },
-      "nullable": true,
-      "type": "array"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "disabled_reason": {
       "description": "If the account is disabled, this string describes why. Can be `requirements.past_due`, `requirements.pending_verification`, `listed`, `platform_paused`, `rejected.fraud`, `rejected.listed`, `rejected.terms_of_service`, `rejected.other`, `under_review`, or `other`.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "errors": {
       "description": "Fields that are `currently_due` and need to be collected again because validation or verification failed.",
@@ -129,11 +136,12 @@
           "requirement"
         ],
         "title": "AccountRequirementsError",
-        "type": "object",
-        "x-expandableFields": []
+        "type": "object"
       },
-      "nullable": true,
-      "type": "array"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "eventually_due": {
       "description": "Fields that need to be collected assuming all volume thresholds are reached. As they become required, they appear in `currently_due` as well, and `current_deadline` becomes set.",
@@ -141,8 +149,10 @@
         "maxLength": 5000,
         "type": "string"
       },
-      "nullable": true,
-      "type": "array"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "past_due": {
       "description": "Fields that weren't collected by `current_deadline`. These fields need to be collected to enable the account.",
@@ -150,8 +160,10 @@
         "maxLength": 5000,
         "type": "string"
       },
-      "nullable": true,
-      "type": "array"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "pending_verification": {
       "description": "Fields that may become required depending on the results of verification or review. Will be an empty array unless an asynchronous verification is pending. If verification fails, these fields move to `eventually_due`, `currently_due`, or `past_due`.",
@@ -159,14 +171,45 @@
         "maxLength": 5000,
         "type": "string"
       },
-      "nullable": true,
-      "type": "array"
+      "type": [
+        "array",
+        "null"
+      ]
     }
   },
   "title": "AccountRequirements",
   "type": "object",
-  "x-expandableFields": [
-    "alternatives",
-    "errors"
-  ]
+  "default": {
+    "alternatives": [
+      {
+        "alternative_fields_due": [
+          "string"
+        ],
+        "original_fields_due": [
+          "string"
+        ]
+      }
+    ],
+    "current_deadline": 0,
+    "currently_due": [
+      "string"
+    ],
+    "disabled_reason": "string",
+    "errors": [
+      {
+        "code": "invalid_address_city_state_postal_code",
+        "reason": "string",
+        "requirement": "string"
+      }
+    ],
+    "eventually_due": [
+      "string"
+    ],
+    "past_due": [
+      "string"
+    ],
+    "pending_verification": [
+      "string"
+    ]
+  }
 }

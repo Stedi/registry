@@ -5,13 +5,18 @@
       "description": "If `opt_in`, the customer consents to receiving promotional communications\nfrom the merchant about this Checkout Session.",
       "enum": [
         "opt_in",
-        "opt_out"
+        "opt_out",
+        null
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "PaymentPagesCheckoutSessionConsent",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "promotions": "opt_in"
+  }
 }

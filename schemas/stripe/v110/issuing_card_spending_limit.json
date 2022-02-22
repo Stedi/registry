@@ -300,8 +300,10 @@
         ],
         "type": "string"
       },
-      "nullable": true,
-      "type": "array"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "interval": {
       "description": "Interval (or event) to which the amount applies.",
@@ -322,5 +324,11 @@
   ],
   "title": "IssuingCardSpendingLimit",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "amount": 0,
+    "categories": [
+      "ac_refrigeration_repair"
+    ],
+    "interval": "all_time"
+  }
 }

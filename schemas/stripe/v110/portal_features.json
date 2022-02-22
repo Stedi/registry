@@ -28,8 +28,7 @@
         "enabled"
       ],
       "title": "PortalCustomerUpdate",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "invoice_history": {
       "description": "",
@@ -43,8 +42,7 @@
         "enabled"
       ],
       "title": "PortalInvoiceList",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "payment_method_update": {
       "description": "",
@@ -58,8 +56,7 @@
         "enabled"
       ],
       "title": "PortalPaymentMethodUpdate",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "subscription_cancel": {
       "description": "",
@@ -94,8 +91,7 @@
             "options"
           ],
           "title": "PortalSubscriptionCancellationReason",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "enabled": {
           "description": "Whether the feature is enabled.",
@@ -126,10 +122,7 @@
         "proration_behavior"
       ],
       "title": "PortalSubscriptionCancel",
-      "type": "object",
-      "x-expandableFields": [
-        "cancellation_reason"
-      ]
+      "type": "object"
     },
     "subscription_pause": {
       "description": "",
@@ -143,8 +136,7 @@
         "enabled"
       ],
       "title": "PortalSubscriptionPause",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "subscription_update": {
       "description": "",
@@ -189,11 +181,12 @@
               "product"
             ],
             "title": "PortalSubscriptionUpdateProduct",
-            "type": "object",
-            "x-expandableFields": []
+            "type": "object"
           },
-          "nullable": true,
-          "type": "array"
+          "type": [
+            "array",
+            "null"
+          ]
         },
         "proration_behavior": {
           "description": "Determines how to handle prorations resulting from subscription updates. Valid values are `none`, `create_prorations`, and `always_invoice`.",
@@ -211,10 +204,7 @@
         "proration_behavior"
       ],
       "title": "PortalSubscriptionUpdate",
-      "type": "object",
-      "x-expandableFields": [
-        "products"
-      ]
+      "type": "object"
     }
   },
   "required": [
@@ -227,12 +217,47 @@
   ],
   "title": "PortalFeatures",
   "type": "object",
-  "x-expandableFields": [
-    "customer_update",
-    "invoice_history",
-    "payment_method_update",
-    "subscription_cancel",
-    "subscription_pause",
-    "subscription_update"
-  ]
+  "default": {
+    "customer_update": {
+      "allowed_updates": [
+        "address"
+      ],
+      "enabled": true
+    },
+    "invoice_history": {
+      "enabled": true
+    },
+    "payment_method_update": {
+      "enabled": true
+    },
+    "subscription_cancel": {
+      "cancellation_reason": {
+        "enabled": true,
+        "options": [
+          "customer_service"
+        ]
+      },
+      "enabled": true,
+      "mode": "at_period_end",
+      "proration_behavior": "always_invoice"
+    },
+    "subscription_pause": {
+      "enabled": true
+    },
+    "subscription_update": {
+      "default_allowed_updates": [
+        "price"
+      ],
+      "enabled": true,
+      "products": [
+        {
+          "prices": [
+            "string"
+          ],
+          "product": "string"
+        }
+      ],
+      "proration_behavior": "always_invoice"
+    }
+  }
 }

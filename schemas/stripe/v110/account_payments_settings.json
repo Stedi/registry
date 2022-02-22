@@ -4,23 +4,33 @@
     "statement_descriptor": {
       "description": "The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "statement_descriptor_kana": {
       "description": "The Kana variation of the default text that appears on credit card statements when a charge is made (Japan only)",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "statement_descriptor_kanji": {
       "description": "The Kanji variation of the default text that appears on credit card statements when a charge is made (Japan only)",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "AccountPaymentsSettings",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "statement_descriptor": "string",
+    "statement_descriptor_kana": "string",
+    "statement_descriptor_kanji": "string"
+  }
 }

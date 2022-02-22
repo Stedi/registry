@@ -4,23 +4,33 @@
     "expires_after": {
       "description": "The timestamp after which the OXXO voucher expires.",
       "format": "unix-time",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "hosted_voucher_url": {
       "description": "The URL for the hosted OXXO voucher page, which allows customers to view and print an OXXO voucher.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "number": {
       "description": "OXXO reference number.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "PaymentIntentNextActionDisplayOxxoDetails",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "expires_after": 0,
+    "hosted_voucher_url": "string",
+    "number": "string"
+  }
 }

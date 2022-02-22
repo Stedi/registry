@@ -30,21 +30,26 @@
         }
       },
       "title": "GelatoReportDocumentOptions",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "id_number": {
       "description": "",
       "properties": {},
       "title": "GelatoReportIdNumberOptions",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     }
   },
   "title": "GelatoVerificationReportOptions",
   "type": "object",
-  "x-expandableFields": [
-    "document",
-    "id_number"
-  ]
+  "default": {
+    "document": {
+      "allowed_types": [
+        "driving_license"
+      ],
+      "require_id_number": true,
+      "require_live_capture": true,
+      "require_matching_selfie": true
+    },
+    "id_number": {}
+  }
 }

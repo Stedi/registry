@@ -4,8 +4,10 @@
     "currency": {
       "description": "Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank account.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "deleted": {
       "description": "Always true for a deleted object",
@@ -34,5 +36,10 @@
   ],
   "title": "DeletedBankAccount",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "currency": "string",
+    "deleted": true,
+    "id": "string",
+    "object": "bank_account"
+  }
 }

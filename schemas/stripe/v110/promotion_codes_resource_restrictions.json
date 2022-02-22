@@ -7,14 +7,18 @@
     },
     "minimum_amount": {
       "description": "Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "minimum_amount_currency": {
       "description": "Three-letter [ISO code](https://stripe.com/docs/currencies) for minimum_amount",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "required": [
@@ -22,5 +26,9 @@
   ],
   "title": "PromotionCodesResourceRestrictions",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "first_time_transaction": true,
+    "minimum_amount": 0,
+    "minimum_amount_currency": "string"
+  }
 }

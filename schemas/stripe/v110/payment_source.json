@@ -1,39 +1,800 @@
 {
   "anyOf": [
     {
-      "$ref": "#/components/schemas/account"
-    },
-    {
-      "$ref": "#/components/schemas/alipay_account"
-    },
-    {
-      "$ref": "#/components/schemas/bank_account"
-    },
-    {
-      "description": "",
+      "description": "This is an object representing a Stripe account. You can retrieve it to see\nproperties on the account like its current e-mail address or if the account is\nenabled yet to make live charges.\n\nSome properties, marked below, are available only to platforms that want to\n[create and manage Express or Custom accounts](https://stripe.com/docs/connect/accounts).",
       "properties": {
-        "active": {
-          "description": "True when this bitcoin receiver has received a non-zero amount of bitcoin.",
+        "business_profile": {
+          "anyOf": [
+            {
+              "description": "",
+              "properties": {
+                "mcc": {
+                  "description": "[The merchant category code for the account](https://stripe.com/docs/connect/setting-mcc). MCCs are used to classify businesses based on the goods or services they provide.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "description": "The customer-facing business name.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "product_description": {
+                  "description": "Internal-only description of the product sold or service provided by the business. It's used by Stripe for risk and underwriting purposes.",
+                  "maxLength": 40000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "support_address": {
+                  "anyOf": [
+                    {
+                      "description": "",
+                      "properties": {
+                        "city": {
+                          "description": "City, district, suburb, town, or village.",
+                          "maxLength": 5000,
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "country": {
+                          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                          "maxLength": 5000,
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "line1": {
+                          "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                          "maxLength": 5000,
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "line2": {
+                          "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                          "maxLength": 5000,
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "postal_code": {
+                          "description": "ZIP or postal code.",
+                          "maxLength": 5000,
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "state": {
+                          "description": "State, county, province, or region.",
+                          "maxLength": 5000,
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      },
+                      "title": "Address",
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "description": "A publicly available mailing address for sending support issues to."
+                },
+                "support_email": {
+                  "description": "A publicly available email address for sending support issues to.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "support_phone": {
+                  "description": "A publicly available phone number to call with support issues.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "support_url": {
+                  "description": "A publicly available website for handling support issues.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "url": {
+                  "description": "The business's publicly available website.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "title": "AccountBusinessProfile",
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Business information about the account."
+        },
+        "business_type": {
+          "description": "The business type.",
+          "enum": [
+            "company",
+            "government_entity",
+            "individual",
+            "non_profit",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-stripeBypassValidation": true
+        },
+        "capabilities": {
+          "description": "",
+          "properties": {
+            "acss_debit_payments": {
+              "description": "The status of the Canadian pre-authorized debits payments capability of the account, or whether the account can directly process Canadian pre-authorized debits charges.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "afterpay_clearpay_payments": {
+              "description": "The status of the Afterpay Clearpay capability of the account, or whether the account can directly process Afterpay Clearpay charges.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "au_becs_debit_payments": {
+              "description": "The status of the BECS Direct Debit (AU) payments capability of the account, or whether the account can directly process BECS Direct Debit (AU) charges.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "bacs_debit_payments": {
+              "description": "The status of the Bacs Direct Debits payments capability of the account, or whether the account can directly process Bacs Direct Debits charges.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "bancontact_payments": {
+              "description": "The status of the Bancontact payments capability of the account, or whether the account can directly process Bancontact charges.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "boleto_payments": {
+              "description": "The status of the boleto payments capability of the account, or whether the account can directly process boleto charges.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "card_issuing": {
+              "description": "The status of the card issuing capability of the account, or whether you can use Issuing to distribute funds on cards",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "card_payments": {
+              "description": "The status of the card payments capability of the account, or whether the account can directly process credit and debit card charges.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "cartes_bancaires_payments": {
+              "description": "The status of the Cartes Bancaires payments capability of the account, or whether the account can directly process Cartes Bancaires card charges in EUR currency.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "eps_payments": {
+              "description": "The status of the EPS payments capability of the account, or whether the account can directly process EPS charges.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "fpx_payments": {
+              "description": "The status of the FPX payments capability of the account, or whether the account can directly process FPX charges.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "giropay_payments": {
+              "description": "The status of the giropay payments capability of the account, or whether the account can directly process giropay charges.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "grabpay_payments": {
+              "description": "The status of the GrabPay payments capability of the account, or whether the account can directly process GrabPay charges.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "ideal_payments": {
+              "description": "The status of the iDEAL payments capability of the account, or whether the account can directly process iDEAL charges.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "jcb_payments": {
+              "description": "The status of the JCB payments capability of the account, or whether the account (Japan only) can directly process JCB credit card charges in JPY currency.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "klarna_payments": {
+              "description": "The status of the Klarna payments capability of the account, or whether the account can directly process Klarna charges.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "legacy_payments": {
+              "description": "The status of the legacy payments capability of the account.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "oxxo_payments": {
+              "description": "The status of the OXXO payments capability of the account, or whether the account can directly process OXXO charges.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "p24_payments": {
+              "description": "The status of the P24 payments capability of the account, or whether the account can directly process P24 charges.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "sepa_debit_payments": {
+              "description": "The status of the SEPA Direct Debits payments capability of the account, or whether the account can directly process SEPA Direct Debits charges.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "sofort_payments": {
+              "description": "The status of the Sofort payments capability of the account, or whether the account can directly process Sofort charges.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "tax_reporting_us_1099_k": {
+              "description": "The status of the tax reporting 1099-K (US) capability of the account.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "tax_reporting_us_1099_misc": {
+              "description": "The status of the tax reporting 1099-MISC (US) capability of the account.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            },
+            "transfers": {
+              "description": "The status of the transfers capability of the account, or whether your platform can transfer funds to the account.",
+              "enum": [
+                "active",
+                "inactive",
+                "pending"
+              ],
+              "type": "string"
+            }
+          },
+          "title": "AccountCapabilities",
+          "type": "object"
+        },
+        "charges_enabled": {
+          "description": "Whether the account can create live charges.",
           "type": "boolean"
         },
-        "amount": {
-          "description": "The amount of `currency` that you are collecting as payment.",
-          "type": "integer"
+        "company": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "properties": {
+                "city": {
+                  "description": "City, district, suburb, town, or village.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "country": {
+                  "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "line1": {
+                  "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "line2": {
+                  "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "postal_code": {
+                  "description": "ZIP or postal code.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "state": {
+                  "description": "State, county, province, or region.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "title": "Address",
+              "type": "object"
+            },
+            "address_kana": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "city": {
+                      "description": "City/Ward.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "country": {
+                      "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "line1": {
+                      "description": "Block/Building number.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "line2": {
+                      "description": "Building details.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "postal_code": {
+                      "description": "ZIP or postal code.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "state": {
+                      "description": "Prefecture.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "town": {
+                      "description": "Town/cho-me.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "title": "LegalEntityJapanAddress",
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The Kana variation of the company's primary address (Japan only)."
+            },
+            "address_kanji": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "city": {
+                      "description": "City/Ward.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "country": {
+                      "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "line1": {
+                      "description": "Block/Building number.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "line2": {
+                      "description": "Building details.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "postal_code": {
+                      "description": "ZIP or postal code.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "state": {
+                      "description": "Prefecture.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "town": {
+                      "description": "Town/cho-me.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "title": "LegalEntityJapanAddress",
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The Kanji variation of the company's primary address (Japan only)."
+            },
+            "directors_provided": {
+              "description": "Whether the company's directors have been provided. This Boolean will be `true` if you've manually indicated that all directors are provided via [the `directors_provided` parameter](https://stripe.com/docs/api/accounts/update#update_account-company-directors_provided).",
+              "type": "boolean"
+            },
+            "executives_provided": {
+              "description": "Whether the company's executives have been provided. This Boolean will be `true` if you've manually indicated that all executives are provided via [the `executives_provided` parameter](https://stripe.com/docs/api/accounts/update#update_account-company-executives_provided), or if Stripe determined that sufficient executives were provided.",
+              "type": "boolean"
+            },
+            "name": {
+              "description": "The company's legal name.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "name_kana": {
+              "description": "The Kana variation of the company's legal name (Japan only).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "name_kanji": {
+              "description": "The Kanji variation of the company's legal name (Japan only).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "owners_provided": {
+              "description": "Whether the company's owners have been provided. This Boolean will be `true` if you've manually indicated that all owners are provided via [the `owners_provided` parameter](https://stripe.com/docs/api/accounts/update#update_account-company-owners_provided), or if Stripe determined that sufficient owners were provided. Stripe determines ownership requirements using both the number of owners provided and their total percent ownership (calculated by adding the `percent_ownership` of each owner together).",
+              "type": "boolean"
+            },
+            "ownership_declaration": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "date": {
+                      "description": "The Unix timestamp marking when the beneficial owner attestation was made.",
+                      "format": "unix-time",
+                      "type": [
+                        "integer",
+                        "null"
+                      ]
+                    },
+                    "ip": {
+                      "description": "The IP address from which the beneficial owner attestation was made.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "user_agent": {
+                      "description": "The user-agent string from the browser where the beneficial owner attestation was made.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "title": "LegalEntityUBODeclaration",
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "This hash is used to attest that the beneficial owner information provided to Stripe is both current and correct."
+            },
+            "phone": {
+              "description": "The company's phone number (used for verification).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "structure": {
+              "description": "The category identifying the legal structure of the company or legal entity. See [Business structure](https://stripe.com/docs/connect/identity-verification#business-structure) for more details.",
+              "enum": [
+                "free_zone_establishment",
+                "free_zone_llc",
+                "government_instrumentality",
+                "governmental_unit",
+                "incorporated_non_profit",
+                "limited_liability_partnership",
+                "llc",
+                "multi_member_llc",
+                "private_company",
+                "private_corporation",
+                "private_partnership",
+                "public_company",
+                "public_corporation",
+                "public_partnership",
+                "single_member_llc",
+                "sole_establishment",
+                "sole_proprietorship",
+                "tax_exempt_government_instrumentality",
+                "unincorporated_association",
+                "unincorporated_non_profit"
+              ],
+              "type": "string",
+              "x-stripeBypassValidation": true
+            },
+            "tax_id_provided": {
+              "description": "Whether the company's business ID number was provided.",
+              "type": "boolean"
+            },
+            "tax_id_registrar": {
+              "description": "The jurisdiction in which the `tax_id` is registered (Germany-based companies only).",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "vat_id_provided": {
+              "description": "Whether the company's business VAT number was provided.",
+              "type": "boolean"
+            },
+            "verification": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "document": {
+                      "description": "",
+                      "properties": {
+                        "back": {
+                          "anyOf": [
+                            {
+                              "maxLength": 5000,
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "The back of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `additional_verification`."
+                        },
+                        "details": {
+                          "description": "A user-displayable string describing the verification state of this document.",
+                          "maxLength": 5000,
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "details_code": {
+                          "description": "One of `document_corrupt`, `document_expired`, `document_failed_copy`, `document_failed_greyscale`, `document_failed_other`, `document_failed_test_mode`, `document_fraudulent`, `document_incomplete`, `document_invalid`, `document_manipulated`, `document_not_readable`, `document_not_uploaded`, `document_type_not_supported`, or `document_too_large`. A machine-readable code specifying the verification state for this document.",
+                          "maxLength": 5000,
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "front": {
+                          "anyOf": [
+                            {
+                              "maxLength": 5000,
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "The front of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `additional_verification`."
+                        }
+                      },
+                      "title": "LegalEntityCompanyVerificationDocument",
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "document"
+                  ],
+                  "title": "LegalEntityCompanyVerification",
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Information on the verification state of the company."
+            }
+          },
+          "title": "LegalEntityCompany",
+          "type": "object"
         },
-        "amount_received": {
-          "description": "The amount of `currency` to which `bitcoin_amount_received` has been converted.",
-          "type": "integer"
+        "controller": {
+          "description": "",
+          "properties": {
+            "is_controller": {
+              "description": "`true` if the Connect application retrieving the resource controls the account and can therefore exercise [platform controls](https://stripe.com/docs/connect/platform-controls-for-standard-accounts). Otherwise, this field is null.",
+              "type": "boolean"
+            },
+            "type": {
+              "description": "The controller type. Can be `application`, if a Connect application controls the account, or `account`, if the account controls itself.",
+              "enum": [
+                "account",
+                "application"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "title": "AccountUnificationAccountController",
+          "type": "object"
         },
-        "bitcoin_amount": {
-          "description": "The amount of bitcoin that the customer should send to fill the receiver. The `bitcoin_amount` is denominated in Satoshi: there are 10^8 Satoshi in one bitcoin.",
-          "type": "integer"
-        },
-        "bitcoin_amount_received": {
-          "description": "The amount of bitcoin that has been sent by the customer to this receiver.",
-          "type": "integer"
-        },
-        "bitcoin_uri": {
-          "description": "This URI can be displayed to the customer as a clickable link (to activate their bitcoin client) or as a QR code (for mobile wallets).",
+        "country": {
+          "description": "The account's country.",
           "maxLength": 5000,
           "type": "string"
         },
@@ -42,130 +803,174 @@
           "format": "unix-time",
           "type": "integer"
         },
-        "currency": {
-          "description": "Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) to which the bitcoin will be converted.",
+        "default_currency": {
+          "description": "Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).",
+          "maxLength": 5000,
           "type": "string"
         },
-        "customer": {
-          "description": "The customer ID of the bitcoin receiver.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
-        },
-        "description": {
-          "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+        "details_submitted": {
+          "description": "Whether account details have been submitted. Standard accounts cannot receive payouts before this is true.",
+          "type": "boolean"
         },
         "email": {
-          "description": "The customer's email address, set by the API call that creates the receiver.",
+          "description": "An email address associated with the account. You can treat this as metadata: it is not used for authentication or messaging account holders.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
-        "filled": {
-          "description": "This flag is initially false and updates to true when the customer sends the `bitcoin_amount` to this receiver.",
-          "type": "boolean"
-        },
-        "id": {
-          "description": "Unique identifier for the object.",
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "inbound_address": {
-          "description": "A bitcoin address that is specific to this receiver. The customer can send bitcoin to this address to fill the receiver.",
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "livemode": {
-          "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-          "type": "boolean"
-        },
-        "metadata": {
-          "additionalProperties": {
-            "maxLength": 500,
-            "type": "string"
-          },
-          "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-          "nullable": true,
-          "type": "object"
-        },
-        "object": {
-          "description": "String representing the object's type. Objects of the same type share the same value.",
-          "enum": [
-            "bitcoin_receiver"
-          ],
-          "type": "string"
-        },
-        "payment": {
-          "description": "The ID of the payment created from the receiver, if any. Hidden when viewing the receiver with a publishable key.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
-        },
-        "refund_address": {
-          "description": "The refund address of this bitcoin receiver.",
-          "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
-        },
-        "transactions": {
-          "description": "A list with one entry for each time that the customer sent bitcoin to the receiver. Hidden when viewing the receiver with a publishable key.",
+        "external_accounts": {
+          "description": "External accounts (bank accounts and debit cards) currently attached to this account",
           "properties": {
             "data": {
-              "description": "Details about each object.",
+              "description": "The list contains all external accounts that have been attached to the Stripe account. These may be bank accounts or cards.",
               "items": {
-                "description": "",
-                "properties": {
-                  "amount": {
-                    "description": "The amount of `currency` that the transaction was converted to in real-time.",
-                    "type": "integer"
-                  },
-                  "bitcoin_amount": {
-                    "description": "The amount of bitcoin contained in the transaction.",
-                    "type": "integer"
-                  },
-                  "created": {
-                    "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                    "format": "unix-time",
-                    "type": "integer"
-                  },
-                  "currency": {
-                    "description": "Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) to which this transaction was converted.",
-                    "type": "string"
-                  },
-                  "id": {
-                    "description": "Unique identifier for the object.",
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  "object": {
-                    "description": "String representing the object's type. Objects of the same type share the same value.",
-                    "enum": [
-                      "bitcoin_transaction"
+                "anyOf": [
+                  {
+                    "description": "These bank accounts are payment methods on `Customer` objects.\n\nOn the other hand [External Accounts](https://stripe.com/docs/api#external_accounts) are transfer\ndestinations on `Account` objects for [Custom accounts](https://stripe.com/docs/connect/custom-accounts).\nThey can be bank accounts or debit cards as well, and are documented in the links above.\n\nRelated guide: [Bank Debits and Transfers](https://stripe.com/docs/payments/bank-debits-transfers).",
+                    "properties": {
+                      "account": {
+                        "anyOf": [
+                          {
+                            "maxLength": 5000,
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "description": "The ID of the account that the bank account is associated with."
+                      },
+                      "account_holder_name": {
+                        "description": "The name of the person or business that owns the bank account.",
+                        "maxLength": 5000,
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "account_holder_type": {
+                        "description": "The type of entity that holds the account. This can be either `individual` or `company`.",
+                        "maxLength": 5000,
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "account_type": {
+                        "description": "The bank account type. This can only be `checking` or `savings` in most countries. In Japan, this can only be `futsu` or `toza`.",
+                        "maxLength": 5000,
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "available_payout_methods": {
+                        "description": "A set of available payout methods for this bank account. Only values from this set should be passed as the `method` when creating a payout.",
+                        "items": {
+                          "enum": [
+                            "instant",
+                            "standard"
+                          ],
+                          "type": "string"
+                        },
+                        "type": [
+                          "array",
+                          "null"
+                        ]
+                      },
+                      "bank_name": {
+                        "description": "Name of the bank associated with the routing number (e.g., `WELLS FARGO`).",
+                        "maxLength": 5000,
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "country": {
+                        "description": "Two-letter ISO code representing the country the bank account is located in.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "currency": {
+                        "description": "Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank account.",
+                        "type": "string"
+                      },
+                      "customer": {
+                        "anyOf": [
+                          {
+                            "maxLength": 5000,
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "description": "The ID of the customer that the bank account is associated with."
+                      },
+                      "default_for_currency": {
+                        "description": "Whether this bank account is the default external account for its currency.",
+                        "type": [
+                          "boolean",
+                          "null"
+                        ]
+                      },
+                      "fingerprint": {
+                        "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
+                        "maxLength": 5000,
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "id": {
+                        "description": "Unique identifier for the object.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "last4": {
+                        "description": "The last four digits of the bank account number.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "metadata": {},
+                      "object": {
+                        "description": "String representing the object's type. Objects of the same type share the same value.",
+                        "enum": [
+                          "bank_account"
+                        ],
+                        "type": "string"
+                      },
+                      "routing_number": {
+                        "description": "The routing transit number for the bank account.",
+                        "maxLength": 5000,
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "status": {
+                        "description": "For bank accounts, possible values are `new`, `validated`, `verified`, `verification_failed`, or `errored`. A bank account that hasn't had any activity or validation performed is `new`. If Stripe can determine that the bank account exists, its status will be `validated`. Note that there often isn’t enough information to know (e.g., for smaller credit unions), and the validation is not always run. If customer bank account verification has succeeded, the bank account status will be `verified`. If the verification failed for any reason, such as microdeposit failure, the status will be `verification_failed`. If a transfer sent to this bank account fails, we'll set the status to `errored` and will not continue to send transfers until the bank details are updated.\n\nFor external accounts, possible values are `new` and `errored`. Validations aren't run against external accounts because they're only used for payouts. This means the other statuses don't apply. If a transfer fails, the status is set to `errored` and transfers are stopped until account details are updated.",
+                        "maxLength": 5000,
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "country",
+                      "currency",
+                      "id",
+                      "last4",
+                      "object",
+                      "status"
                     ],
-                    "type": "string"
-                  },
-                  "receiver": {
-                    "description": "The receiver to which this transaction was sent.",
-                    "maxLength": 5000,
-                    "type": "string"
+                    "title": "BankAccount",
+                    "type": "object",
+                    "x-resourceId": "bank_account"
                   }
-                },
-                "required": [
-                  "amount",
-                  "bitcoin_amount",
-                  "created",
-                  "currency",
-                  "id",
-                  "object",
-                  "receiver"
                 ],
-                "title": "BitcoinTransaction",
-                "type": "object",
-                "x-expandableFields": [],
-                "x-resourceId": "bitcoin_transaction"
+                "title": "Polymorphic",
+                "x-stripeBypassValidation": true
               },
               "type": "array"
             },
@@ -192,454 +997,189 @@
             "object",
             "url"
           ],
-          "title": "BitcoinTransactionList",
-          "type": "object",
-          "x-expandableFields": [
-            "data"
-          ]
-        },
-        "uncaptured_funds": {
-          "description": "This receiver contains uncaptured funds that can be used for a payment or refunded.",
-          "type": "boolean"
-        },
-        "used_for_payment": {
-          "description": "Indicate if this source is used for payment.",
-          "nullable": true,
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "active",
-        "amount",
-        "amount_received",
-        "bitcoin_amount",
-        "bitcoin_amount_received",
-        "bitcoin_uri",
-        "created",
-        "currency",
-        "filled",
-        "id",
-        "inbound_address",
-        "livemode",
-        "object",
-        "uncaptured_funds"
-      ],
-      "title": "BitcoinReceiver",
-      "type": "object",
-      "x-expandableFields": [
-        "transactions"
-      ],
-      "x-resourceId": "bitcoin_receiver"
-    },
-    {
-      "$ref": "#/components/schemas/card"
-    },
-    {
-      "description": "`Source` objects allow you to accept a variety of payment methods. They\nrepresent a customer's payment instrument, and can be used with the Stripe API\njust like a `Card` object: once chargeable, they can be charged, or can be\nattached to customers.\n\nRelated guides: [Sources API](https://stripe.com/docs/sources) and [Sources & Customers](https://stripe.com/docs/sources/customers).",
-      "properties": {
-        "ach_credit_transfer": {
-          "properties": {
-            "account_number": {
-              "nullable": true,
-              "type": "string"
-            },
-            "bank_name": {
-              "nullable": true,
-              "type": "string"
-            },
-            "fingerprint": {
-              "nullable": true,
-              "type": "string"
-            },
-            "refund_account_holder_name": {
-              "nullable": true,
-              "type": "string"
-            },
-            "refund_account_holder_type": {
-              "nullable": true,
-              "type": "string"
-            },
-            "refund_routing_number": {
-              "nullable": true,
-              "type": "string"
-            },
-            "routing_number": {
-              "nullable": true,
-              "type": "string"
-            },
-            "swift_code": {
-              "nullable": true,
-              "type": "string"
-            }
-          },
+          "title": "ExternalAccountList",
           "type": "object"
         },
-        "ach_debit": {
-          "properties": {
-            "bank_name": {
-              "nullable": true,
-              "type": "string"
-            },
-            "country": {
-              "nullable": true,
-              "type": "string"
-            },
-            "fingerprint": {
-              "nullable": true,
-              "type": "string"
-            },
-            "last4": {
-              "nullable": true,
-              "type": "string"
-            },
-            "routing_number": {
-              "nullable": true,
-              "type": "string"
-            },
-            "type": {
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "acss_debit": {
-          "properties": {
-            "bank_address_city": {
-              "nullable": true,
-              "type": "string"
-            },
-            "bank_address_line_1": {
-              "nullable": true,
-              "type": "string"
-            },
-            "bank_address_line_2": {
-              "nullable": true,
-              "type": "string"
-            },
-            "bank_address_postal_code": {
-              "nullable": true,
-              "type": "string"
-            },
-            "bank_name": {
-              "nullable": true,
-              "type": "string"
-            },
-            "category": {
-              "nullable": true,
-              "type": "string"
-            },
-            "country": {
-              "nullable": true,
-              "type": "string"
-            },
-            "fingerprint": {
-              "nullable": true,
-              "type": "string"
-            },
-            "last4": {
-              "nullable": true,
-              "type": "string"
-            },
-            "routing_number": {
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "alipay": {
-          "properties": {
-            "data_string": {
-              "nullable": true,
-              "type": "string"
-            },
-            "native_url": {
-              "nullable": true,
-              "type": "string"
-            },
-            "statement_descriptor": {
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "amount": {
-          "description": "A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount associated with the source. This is the amount for which the source will be chargeable once ready. Required for `single_use` sources.",
-          "nullable": true,
-          "type": "integer"
-        },
-        "au_becs_debit": {
-          "properties": {
-            "bsb_number": {
-              "nullable": true,
-              "type": "string"
-            },
-            "fingerprint": {
-              "nullable": true,
-              "type": "string"
-            },
-            "last4": {
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "bancontact": {
-          "properties": {
-            "bank_code": {
-              "nullable": true,
-              "type": "string"
-            },
-            "bank_name": {
-              "nullable": true,
-              "type": "string"
-            },
-            "bic": {
-              "nullable": true,
-              "type": "string"
-            },
-            "iban_last4": {
-              "nullable": true,
-              "type": "string"
-            },
-            "preferred_language": {
-              "nullable": true,
-              "type": "string"
-            },
-            "statement_descriptor": {
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "card": {
-          "properties": {
-            "address_line1_check": {
-              "nullable": true,
-              "type": "string"
-            },
-            "address_zip_check": {
-              "nullable": true,
-              "type": "string"
-            },
-            "brand": {
-              "nullable": true,
-              "type": "string"
-            },
-            "country": {
-              "nullable": true,
-              "type": "string"
-            },
-            "cvc_check": {
-              "nullable": true,
-              "type": "string"
-            },
-            "dynamic_last4": {
-              "nullable": true,
-              "type": "string"
-            },
-            "exp_month": {
-              "nullable": true,
-              "type": "integer"
-            },
-            "exp_year": {
-              "nullable": true,
-              "type": "integer"
-            },
-            "fingerprint": {
-              "type": "string"
-            },
-            "funding": {
-              "nullable": true,
-              "type": "string"
-            },
-            "last4": {
-              "nullable": true,
-              "type": "string"
-            },
-            "name": {
-              "nullable": true,
-              "type": "string"
-            },
-            "three_d_secure": {
-              "type": "string"
-            },
-            "tokenization_method": {
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "card_present": {
-          "properties": {
-            "application_cryptogram": {
-              "type": "string"
-            },
-            "application_preferred_name": {
-              "type": "string"
-            },
-            "authorization_code": {
-              "nullable": true,
-              "type": "string"
-            },
-            "authorization_response_code": {
-              "type": "string"
-            },
-            "brand": {
-              "nullable": true,
-              "type": "string"
-            },
-            "country": {
-              "nullable": true,
-              "type": "string"
-            },
-            "cvm_type": {
-              "type": "string"
-            },
-            "data_type": {
-              "nullable": true,
-              "type": "string"
-            },
-            "dedicated_file_name": {
-              "type": "string"
-            },
-            "emv_auth_data": {
-              "type": "string"
-            },
-            "evidence_customer_signature": {
-              "nullable": true,
-              "type": "string"
-            },
-            "evidence_transaction_certificate": {
-              "nullable": true,
-              "type": "string"
-            },
-            "exp_month": {
-              "nullable": true,
-              "type": "integer"
-            },
-            "exp_year": {
-              "nullable": true,
-              "type": "integer"
-            },
-            "fingerprint": {
-              "type": "string"
-            },
-            "funding": {
-              "nullable": true,
-              "type": "string"
-            },
-            "last4": {
-              "nullable": true,
-              "type": "string"
-            },
-            "pos_device_id": {
-              "nullable": true,
-              "type": "string"
-            },
-            "pos_entry_mode": {
-              "type": "string"
-            },
-            "read_method": {
-              "nullable": true,
-              "type": "string"
-            },
-            "reader": {
-              "nullable": true,
-              "type": "string"
-            },
-            "terminal_verification_results": {
-              "type": "string"
-            },
-            "transaction_status_information": {
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "client_secret": {
-          "description": "The client secret of the source. Used for client-side retrieval using a publishable key.",
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "code_verification": {
+        "future_requirements": {
           "description": "",
           "properties": {
-            "attempts_remaining": {
-              "description": "The number of attempts remaining to authenticate the source object with a verification code.",
-              "type": "integer"
+            "alternatives": {
+              "description": "Fields that are due and can be satisfied by providing the corresponding alternative fields instead.",
+              "items": {
+                "description": "",
+                "properties": {
+                  "alternative_fields_due": {
+                    "description": "Fields that can be provided to satisfy all fields in `original_fields_due`.",
+                    "items": {
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "original_fields_due": {
+                    "description": "Fields that are due and can be satisfied by providing all fields in `alternative_fields_due`.",
+                    "items": {
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "alternative_fields_due",
+                  "original_fields_due"
+                ],
+                "title": "AccountRequirementsAlternative",
+                "type": "object"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
             },
-            "status": {
-              "description": "The status of the code verification, either `pending` (awaiting verification, `attempts_remaining` should be greater than 0), `succeeded` (successful verification) or `failed` (failed verification, cannot be verified anymore as `attempts_remaining` should be 0).",
+            "current_deadline": {
+              "description": "Date on which `future_requirements` merges with the main `requirements` hash and `future_requirements` becomes empty. After the transition, `currently_due` requirements may immediately become `past_due`, but the account may also be given a grace period depending on its enablement state prior to transitioning.",
+              "format": "unix-time",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "currently_due": {
+              "description": "Fields that need to be collected to keep the account enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "disabled_reason": {
+              "description": "This is typed as a string for consistency with `requirements.disabled_reason`, but it safe to assume `future_requirements.disabled_reason` is empty because fields in `future_requirements` will never disable the account.",
               "maxLength": 5000,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "errors": {
+              "description": "Fields that are `currently_due` and need to be collected again because validation or verification failed.",
+              "items": {
+                "description": "",
+                "properties": {
+                  "code": {
+                    "description": "The code for the type of error.",
+                    "enum": [
+                      "invalid_address_city_state_postal_code",
+                      "invalid_street_address",
+                      "invalid_value_other",
+                      "verification_document_address_mismatch",
+                      "verification_document_address_missing",
+                      "verification_document_corrupt",
+                      "verification_document_country_not_supported",
+                      "verification_document_dob_mismatch",
+                      "verification_document_duplicate_type",
+                      "verification_document_expired",
+                      "verification_document_failed_copy",
+                      "verification_document_failed_greyscale",
+                      "verification_document_failed_other",
+                      "verification_document_failed_test_mode",
+                      "verification_document_fraudulent",
+                      "verification_document_id_number_mismatch",
+                      "verification_document_id_number_missing",
+                      "verification_document_incomplete",
+                      "verification_document_invalid",
+                      "verification_document_issue_or_expiry_date_missing",
+                      "verification_document_manipulated",
+                      "verification_document_missing_back",
+                      "verification_document_missing_front",
+                      "verification_document_name_mismatch",
+                      "verification_document_name_missing",
+                      "verification_document_nationality_mismatch",
+                      "verification_document_not_readable",
+                      "verification_document_not_signed",
+                      "verification_document_not_uploaded",
+                      "verification_document_photo_mismatch",
+                      "verification_document_too_large",
+                      "verification_document_type_not_supported",
+                      "verification_failed_address_match",
+                      "verification_failed_business_iec_number",
+                      "verification_failed_document_match",
+                      "verification_failed_id_number_match",
+                      "verification_failed_keyed_identity",
+                      "verification_failed_keyed_match",
+                      "verification_failed_name_match",
+                      "verification_failed_other",
+                      "verification_failed_tax_id_match",
+                      "verification_failed_tax_id_not_issued",
+                      "verification_missing_executives",
+                      "verification_missing_owners",
+                      "verification_requires_additional_memorandum_of_associations"
+                    ],
+                    "type": "string",
+                    "x-stripeBypassValidation": true
+                  },
+                  "reason": {
+                    "description": "An informative message that indicates the error type and provides additional details about the error.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "requirement": {
+                    "description": "The specific user onboarding requirement field (in the requirements hash) that needs to be resolved.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "reason",
+                  "requirement"
+                ],
+                "title": "AccountRequirementsError",
+                "type": "object"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "eventually_due": {
+              "description": "Fields that need to be collected assuming all volume thresholds are reached. As they become required, they appear in `currently_due` as well.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "past_due": {
+              "description": "Fields that weren't collected by `requirements.current_deadline`. These fields need to be collected to enable the capability on the account. New fields will never appear here; `future_requirements.past_due` will always be a subset of `requirements.past_due`.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "pending_verification": {
+              "description": "Fields that may become required depending on the results of verification or review. Will be an empty array unless an asynchronous verification is pending. If verification fails, these fields move to `eventually_due` or `currently_due`.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
             }
           },
-          "required": [
-            "attempts_remaining",
-            "status"
-          ],
-          "title": "SourceCodeVerificationFlow",
-          "type": "object",
-          "x-expandableFields": []
-        },
-        "created": {
-          "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-          "format": "unix-time",
-          "type": "integer"
-        },
-        "currency": {
-          "description": "Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) associated with the source. This is the currency for which the source will be chargeable once ready. Required for `single_use` sources.",
-          "nullable": true,
-          "type": "string"
-        },
-        "customer": {
-          "description": "The ID of the customer to which this source is attached. This will not be present when the source has not been attached to a customer.",
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "eps": {
-          "properties": {
-            "reference": {
-              "nullable": true,
-              "type": "string"
-            },
-            "statement_descriptor": {
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "flow": {
-          "description": "The authentication `flow` of the source. `flow` is one of `redirect`, `receiver`, `code_verification`, `none`.",
-          "maxLength": 5000,
-          "type": "string"
-        },
-        "giropay": {
-          "properties": {
-            "bank_code": {
-              "nullable": true,
-              "type": "string"
-            },
-            "bank_name": {
-              "nullable": true,
-              "type": "string"
-            },
-            "bic": {
-              "nullable": true,
-              "type": "string"
-            },
-            "statement_descriptor": {
-              "nullable": true,
-              "type": "string"
-            }
-          },
+          "title": "AccountFutureRequirements",
           "type": "object"
         },
         "id": {
@@ -647,784 +1187,1795 @@
           "maxLength": 5000,
           "type": "string"
         },
-        "ideal": {
+        "individual": {
+          "description": "This is an object representing a person associated with a Stripe account.\n\nA platform cannot access a Standard or Express account's persons after the account starts onboarding, such as after generating an account link for the account.\nSee the [Standard onboarding](https://stripe.com/docs/connect/standard-accounts) or [Express onboarding documentation](https://stripe.com/docs/connect/express-accounts) for information about platform pre-filling and account onboarding steps.\n\nRelated guide: [Handling Identity Verification with the API](https://stripe.com/docs/connect/identity-verification-api#person-information).",
           "properties": {
-            "bank": {
-              "nullable": true,
+            "account": {
+              "description": "The account the person is associated with.",
+              "maxLength": 5000,
               "type": "string"
             },
-            "bic": {
-              "nullable": true,
-              "type": "string"
-            },
-            "iban_last4": {
-              "nullable": true,
-              "type": "string"
-            },
-            "statement_descriptor": {
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "klarna": {
-          "properties": {
-            "background_image_url": {
-              "type": "string"
-            },
-            "client_token": {
-              "nullable": true,
-              "type": "string"
-            },
-            "first_name": {
-              "type": "string"
-            },
-            "last_name": {
-              "type": "string"
-            },
-            "locale": {
-              "type": "string"
-            },
-            "logo_url": {
-              "type": "string"
-            },
-            "page_title": {
-              "type": "string"
-            },
-            "pay_later_asset_urls_descriptive": {
-              "type": "string"
-            },
-            "pay_later_asset_urls_standard": {
-              "type": "string"
-            },
-            "pay_later_name": {
-              "type": "string"
-            },
-            "pay_later_redirect_url": {
-              "type": "string"
-            },
-            "pay_now_asset_urls_descriptive": {
-              "type": "string"
-            },
-            "pay_now_asset_urls_standard": {
-              "type": "string"
-            },
-            "pay_now_name": {
-              "type": "string"
-            },
-            "pay_now_redirect_url": {
-              "type": "string"
-            },
-            "pay_over_time_asset_urls_descriptive": {
-              "type": "string"
-            },
-            "pay_over_time_asset_urls_standard": {
-              "type": "string"
-            },
-            "pay_over_time_name": {
-              "type": "string"
-            },
-            "pay_over_time_redirect_url": {
-              "type": "string"
-            },
-            "payment_method_categories": {
-              "type": "string"
-            },
-            "purchase_country": {
-              "type": "string"
-            },
-            "purchase_type": {
-              "type": "string"
-            },
-            "redirect_url": {
-              "type": "string"
-            },
-            "shipping_delay": {
-              "type": "integer"
-            },
-            "shipping_first_name": {
-              "type": "string"
-            },
-            "shipping_last_name": {
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "livemode": {
-          "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-          "type": "boolean"
-        },
-        "metadata": {
-          "additionalProperties": {
-            "maxLength": 500,
-            "type": "string"
-          },
-          "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-          "nullable": true,
-          "type": "object"
-        },
-        "multibanco": {
-          "properties": {
-            "entity": {
-              "nullable": true,
-              "type": "string"
-            },
-            "reference": {
-              "nullable": true,
-              "type": "string"
-            },
-            "refund_account_holder_address_city": {
-              "nullable": true,
-              "type": "string"
-            },
-            "refund_account_holder_address_country": {
-              "nullable": true,
-              "type": "string"
-            },
-            "refund_account_holder_address_line1": {
-              "nullable": true,
-              "type": "string"
-            },
-            "refund_account_holder_address_line2": {
-              "nullable": true,
-              "type": "string"
-            },
-            "refund_account_holder_address_postal_code": {
-              "nullable": true,
-              "type": "string"
-            },
-            "refund_account_holder_address_state": {
-              "nullable": true,
-              "type": "string"
-            },
-            "refund_account_holder_name": {
-              "nullable": true,
-              "type": "string"
-            },
-            "refund_iban": {
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "object": {
-          "description": "String representing the object's type. Objects of the same type share the same value.",
-          "enum": [
-            "source"
-          ],
-          "type": "string"
-        },
-        "owner": {
-          "anyOf": [
-            {
+            "address": {
               "description": "",
               "properties": {
-                "address": {
-                  "anyOf": [
-                    {
-                      "description": "",
-                      "properties": {
-                        "city": {
-                          "description": "City, district, suburb, town, or village.",
-                          "maxLength": 5000,
-                          "nullable": true,
-                          "type": "string"
-                        },
-                        "country": {
-                          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-                          "maxLength": 5000,
-                          "nullable": true,
-                          "type": "string"
-                        },
-                        "line1": {
-                          "description": "Address line 1 (e.g., street, PO Box, or company name).",
-                          "maxLength": 5000,
-                          "nullable": true,
-                          "type": "string"
-                        },
-                        "line2": {
-                          "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
-                          "maxLength": 5000,
-                          "nullable": true,
-                          "type": "string"
-                        },
-                        "postal_code": {
-                          "description": "ZIP or postal code.",
-                          "maxLength": 5000,
-                          "nullable": true,
-                          "type": "string"
-                        },
-                        "state": {
-                          "description": "State, county, province, or region.",
-                          "maxLength": 5000,
-                          "nullable": true,
-                          "type": "string"
-                        }
-                      },
-                      "title": "Address",
-                      "type": "object",
-                      "x-expandableFields": []
-                    }
-                  ],
-                  "description": "Owner's address.",
-                  "nullable": true
-                },
-                "email": {
-                  "description": "Owner's email address.",
+                "city": {
+                  "description": "City, district, suburb, town, or village.",
                   "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
-                "name": {
-                  "description": "Owner's full name.",
+                "country": {
+                  "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
                   "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
-                "phone": {
-                  "description": "Owner's phone number (including extension).",
+                "line1": {
+                  "description": "Address line 1 (e.g., street, PO Box, or company name).",
                   "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
-                "verified_address": {
-                  "anyOf": [
-                    {
-                      "description": "",
-                      "properties": {
-                        "city": {
-                          "description": "City, district, suburb, town, or village.",
-                          "maxLength": 5000,
-                          "nullable": true,
-                          "type": "string"
-                        },
-                        "country": {
-                          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-                          "maxLength": 5000,
-                          "nullable": true,
-                          "type": "string"
-                        },
-                        "line1": {
-                          "description": "Address line 1 (e.g., street, PO Box, or company name).",
-                          "maxLength": 5000,
-                          "nullable": true,
-                          "type": "string"
-                        },
-                        "line2": {
-                          "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
-                          "maxLength": 5000,
-                          "nullable": true,
-                          "type": "string"
-                        },
-                        "postal_code": {
-                          "description": "ZIP or postal code.",
-                          "maxLength": 5000,
-                          "nullable": true,
-                          "type": "string"
-                        },
-                        "state": {
-                          "description": "State, county, province, or region.",
-                          "maxLength": 5000,
-                          "nullable": true,
-                          "type": "string"
-                        }
-                      },
-                      "title": "Address",
-                      "type": "object",
-                      "x-expandableFields": []
-                    }
-                  ],
-                  "description": "Verified owner's address. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.",
-                  "nullable": true
-                },
-                "verified_email": {
-                  "description": "Verified owner's email address. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                "line2": {
+                  "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
                   "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
-                "verified_name": {
-                  "description": "Verified owner's full name. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                "postal_code": {
+                  "description": "ZIP or postal code.",
                   "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
-                "verified_phone": {
-                  "description": "Verified owner's phone number (including extension). Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+                "state": {
+                  "description": "State, county, province, or region.",
                   "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               },
-              "title": "SourceOwner",
-              "type": "object",
-              "x-expandableFields": [
-                "address",
-                "verified_address"
-              ]
-            }
-          ],
-          "description": "Information about the owner of the payment instrument that may be used or required by particular source types.",
-          "nullable": true
-        },
-        "p24": {
-          "properties": {
-            "reference": {
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "receiver": {
-          "description": "",
-          "properties": {
-            "address": {
-              "description": "The address of the receiver source. This is the value that should be communicated to the customer to send their funds to.",
-              "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
+              "title": "Address",
+              "type": "object"
             },
-            "amount_charged": {
-              "description": "The total amount that was moved to your balance. This is almost always equal to the amount charged. In rare cases when customers deposit excess funds and we are unable to refund those, those funds get moved to your balance and show up in amount_charged as well. The amount charged is expressed in the source's currency.",
-              "type": "integer"
-            },
-            "amount_received": {
-              "description": "The total amount received by the receiver source. `amount_received = amount_returned + amount_charged` should be true for consumed sources unless customers deposit excess funds. The amount received is expressed in the source's currency.",
-              "type": "integer"
-            },
-            "amount_returned": {
-              "description": "The total amount that was returned to the customer. The amount returned is expressed in the source's currency.",
-              "type": "integer"
-            },
-            "refund_attributes_method": {
-              "description": "Type of refund attribute method, one of `email`, `manual`, or `none`.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "refund_attributes_status": {
-              "description": "Type of refund attribute status, one of `missing`, `requested`, or `available`.",
-              "maxLength": 5000,
-              "type": "string"
-            }
-          },
-          "required": [
-            "amount_charged",
-            "amount_received",
-            "amount_returned",
-            "refund_attributes_method",
-            "refund_attributes_status"
-          ],
-          "title": "SourceReceiverFlow",
-          "type": "object",
-          "x-expandableFields": []
-        },
-        "redirect": {
-          "description": "",
-          "properties": {
-            "failure_reason": {
-              "description": "The failure reason for the redirect, either `user_abort` (the customer aborted or dropped out of the redirect flow), `declined` (the authentication failed or the transaction was declined), or `processing_error` (the redirect failed due to a technical error). Present only if the redirect status is `failed`.",
-              "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
-            },
-            "return_url": {
-              "description": "The URL you provide to redirect the customer to after they authenticated their payment.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "status": {
-              "description": "The status of the redirect, either `pending` (ready to be used by your customer to authenticate the transaction), `succeeded` (succesful authentication, cannot be reused) or `not_required` (redirect should not be used) or `failed` (failed authentication, cannot be reused).",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "url": {
-              "description": "The URL provided to you to redirect a customer to as part of a `redirect` authentication flow.",
-              "maxLength": 2048,
-              "type": "string"
-            }
-          },
-          "required": [
-            "return_url",
-            "status",
-            "url"
-          ],
-          "title": "SourceRedirectFlow",
-          "type": "object",
-          "x-expandableFields": []
-        },
-        "sepa_debit": {
-          "properties": {
-            "bank_code": {
-              "nullable": true,
-              "type": "string"
-            },
-            "branch_code": {
-              "nullable": true,
-              "type": "string"
-            },
-            "country": {
-              "nullable": true,
-              "type": "string"
-            },
-            "fingerprint": {
-              "nullable": true,
-              "type": "string"
-            },
-            "last4": {
-              "nullable": true,
-              "type": "string"
-            },
-            "mandate_reference": {
-              "nullable": true,
-              "type": "string"
-            },
-            "mandate_url": {
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "sofort": {
-          "properties": {
-            "bank_code": {
-              "nullable": true,
-              "type": "string"
-            },
-            "bank_name": {
-              "nullable": true,
-              "type": "string"
-            },
-            "bic": {
-              "nullable": true,
-              "type": "string"
-            },
-            "country": {
-              "nullable": true,
-              "type": "string"
-            },
-            "iban_last4": {
-              "nullable": true,
-              "type": "string"
-            },
-            "preferred_language": {
-              "nullable": true,
-              "type": "string"
-            },
-            "statement_descriptor": {
-              "nullable": true,
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "source_order": {
-          "description": "",
-          "properties": {
-            "amount": {
-              "description": "A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the order.",
-              "type": "integer"
-            },
-            "currency": {
-              "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-              "type": "string"
-            },
-            "email": {
-              "description": "The email address of the customer placing the order.",
-              "maxLength": 5000,
-              "type": "string"
-            },
-            "items": {
-              "description": "List of items constituting the order.",
-              "items": {
-                "description": "",
-                "properties": {
-                  "amount": {
-                    "description": "The amount (price) for this order item.",
-                    "nullable": true,
-                    "type": "integer"
-                  },
-                  "currency": {
-                    "description": "This currency of this order item. Required when `amount` is present.",
-                    "maxLength": 5000,
-                    "nullable": true,
-                    "type": "string"
-                  },
-                  "description": {
-                    "description": "Human-readable description for this order item.",
-                    "maxLength": 5000,
-                    "nullable": true,
-                    "type": "string"
-                  },
-                  "parent": {
-                    "description": "The ID of the associated object for this line item. Expandable if not null (e.g., expandable to a SKU).",
-                    "maxLength": 5000,
-                    "nullable": true,
-                    "type": "string"
-                  },
-                  "quantity": {
-                    "description": "The quantity of this order item. When type is `sku`, this is the number of instances of the SKU to be ordered.",
-                    "type": "integer"
-                  },
-                  "type": {
-                    "description": "The type of this order item. Must be `sku`, `tax`, or `shipping`.",
-                    "maxLength": 5000,
-                    "nullable": true,
-                    "type": "string"
-                  }
-                },
-                "title": "SourceOrderItem",
-                "type": "object",
-                "x-expandableFields": []
-              },
-              "nullable": true,
-              "type": "array"
-            },
-            "shipping": {
-              "description": "",
-              "properties": {
-                "address": {
+            "address_kana": {
+              "anyOf": [
+                {
                   "description": "",
                   "properties": {
                     "city": {
-                      "description": "City, district, suburb, town, or village.",
+                      "description": "City/Ward.",
                       "maxLength": 5000,
-                      "nullable": true,
-                      "type": "string"
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     },
                     "country": {
                       "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
                       "maxLength": 5000,
-                      "nullable": true,
-                      "type": "string"
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     },
                     "line1": {
-                      "description": "Address line 1 (e.g., street, PO Box, or company name).",
+                      "description": "Block/Building number.",
                       "maxLength": 5000,
-                      "nullable": true,
-                      "type": "string"
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     },
                     "line2": {
-                      "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+                      "description": "Building details.",
                       "maxLength": 5000,
-                      "nullable": true,
-                      "type": "string"
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     },
                     "postal_code": {
                       "description": "ZIP or postal code.",
                       "maxLength": 5000,
-                      "nullable": true,
-                      "type": "string"
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     },
                     "state": {
-                      "description": "State, county, province, or region.",
+                      "description": "Prefecture.",
                       "maxLength": 5000,
-                      "nullable": true,
-                      "type": "string"
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "town": {
+                      "description": "Town/cho-me.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     }
                   },
-                  "title": "Address",
-                  "type": "object",
-                  "x-expandableFields": []
+                  "title": "LegalEntityJapanAddress",
+                  "type": "object"
                 },
-                "carrier": {
-                  "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.",
-                  "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "address_kanji": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "city": {
+                      "description": "City/Ward.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "country": {
+                      "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "line1": {
+                      "description": "Block/Building number.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "line2": {
+                      "description": "Building details.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "postal_code": {
+                      "description": "ZIP or postal code.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "state": {
+                      "description": "Prefecture.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "town": {
+                      "description": "Town/cho-me.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "title": "LegalEntityJapanAddress",
+                  "type": "object"
                 },
-                "name": {
-                  "description": "Recipient name.",
-                  "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "created": {
+              "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+              "format": "unix-time",
+              "type": "integer"
+            },
+            "dob": {
+              "description": "",
+              "properties": {
+                "day": {
+                  "description": "The day of birth, between 1 and 31.",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
                 },
-                "phone": {
-                  "description": "Recipient phone (including extension).",
-                  "maxLength": 5000,
-                  "nullable": true,
-                  "type": "string"
+                "month": {
+                  "description": "The month of birth, between 1 and 12.",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
                 },
-                "tracking_number": {
-                  "description": "The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.",
+                "year": {
+                  "description": "The four-digit year of birth.",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                }
+              },
+              "title": "LegalEntityDOB",
+              "type": "object"
+            },
+            "email": {
+              "description": "The person's email address.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "first_name": {
+              "description": "The person's first name.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "first_name_kana": {
+              "description": "The Kana variation of the person's first name (Japan only).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "first_name_kanji": {
+              "description": "The Kanji variation of the person's first name (Japan only).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "full_name_aliases": {
+              "description": "A list of alternate names or aliases that the person is known by.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "future_requirements": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "alternatives": {
+                      "description": "Fields that are due and can be satisfied by providing the corresponding alternative fields instead.",
+                      "items": {
+                        "description": "",
+                        "properties": {
+                          "alternative_fields_due": {
+                            "description": "Fields that can be provided to satisfy all fields in `original_fields_due`.",
+                            "items": {
+                              "maxLength": 5000,
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          "original_fields_due": {
+                            "description": "Fields that are due and can be satisfied by providing all fields in `alternative_fields_due`.",
+                            "items": {
+                              "maxLength": 5000,
+                              "type": "string"
+                            },
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "alternative_fields_due",
+                          "original_fields_due"
+                        ],
+                        "title": "AccountRequirementsAlternative",
+                        "type": "object"
+                      },
+                      "type": [
+                        "array",
+                        "null"
+                      ]
+                    },
+                    "currently_due": {
+                      "description": "Fields that need to be collected to keep the person's account enabled. If not collected by the account's `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash, and may immediately become `past_due`, but the account may also be given a grace period depending on the account's enablement state prior to transition.",
+                      "items": {
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "errors": {
+                      "description": "Fields that are `currently_due` and need to be collected again because validation or verification failed.",
+                      "items": {
+                        "description": "",
+                        "properties": {
+                          "code": {
+                            "description": "The code for the type of error.",
+                            "enum": [
+                              "invalid_address_city_state_postal_code",
+                              "invalid_street_address",
+                              "invalid_value_other",
+                              "verification_document_address_mismatch",
+                              "verification_document_address_missing",
+                              "verification_document_corrupt",
+                              "verification_document_country_not_supported",
+                              "verification_document_dob_mismatch",
+                              "verification_document_duplicate_type",
+                              "verification_document_expired",
+                              "verification_document_failed_copy",
+                              "verification_document_failed_greyscale",
+                              "verification_document_failed_other",
+                              "verification_document_failed_test_mode",
+                              "verification_document_fraudulent",
+                              "verification_document_id_number_mismatch",
+                              "verification_document_id_number_missing",
+                              "verification_document_incomplete",
+                              "verification_document_invalid",
+                              "verification_document_issue_or_expiry_date_missing",
+                              "verification_document_manipulated",
+                              "verification_document_missing_back",
+                              "verification_document_missing_front",
+                              "verification_document_name_mismatch",
+                              "verification_document_name_missing",
+                              "verification_document_nationality_mismatch",
+                              "verification_document_not_readable",
+                              "verification_document_not_signed",
+                              "verification_document_not_uploaded",
+                              "verification_document_photo_mismatch",
+                              "verification_document_too_large",
+                              "verification_document_type_not_supported",
+                              "verification_failed_address_match",
+                              "verification_failed_business_iec_number",
+                              "verification_failed_document_match",
+                              "verification_failed_id_number_match",
+                              "verification_failed_keyed_identity",
+                              "verification_failed_keyed_match",
+                              "verification_failed_name_match",
+                              "verification_failed_other",
+                              "verification_failed_tax_id_match",
+                              "verification_failed_tax_id_not_issued",
+                              "verification_missing_executives",
+                              "verification_missing_owners",
+                              "verification_requires_additional_memorandum_of_associations"
+                            ],
+                            "type": "string",
+                            "x-stripeBypassValidation": true
+                          },
+                          "reason": {
+                            "description": "An informative message that indicates the error type and provides additional details about the error.",
+                            "maxLength": 5000,
+                            "type": "string"
+                          },
+                          "requirement": {
+                            "description": "The specific user onboarding requirement field (in the requirements hash) that needs to be resolved.",
+                            "maxLength": 5000,
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "code",
+                          "reason",
+                          "requirement"
+                        ],
+                        "title": "AccountRequirementsError",
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "eventually_due": {
+                      "description": "Fields that need to be collected assuming all volume thresholds are reached. As they become required, they appear in `currently_due` as well, and the account's `future_requirements[current_deadline]` becomes set.",
+                      "items": {
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "past_due": {
+                      "description": "Fields that weren't collected by the account's `requirements.current_deadline`. These fields need to be collected to enable the person's account. New fields will never appear here; `future_requirements.past_due` will always be a subset of `requirements.past_due`.",
+                      "items": {
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "pending_verification": {
+                      "description": "Fields that may become required depending on the results of verification or review. Will be an empty array unless an asynchronous verification is pending. If verification fails, these fields move to `eventually_due` or `currently_due`.",
+                      "items": {
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "currently_due",
+                    "errors",
+                    "eventually_due",
+                    "past_due",
+                    "pending_verification"
+                  ],
+                  "title": "PersonFutureRequirements",
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "gender": {
+              "description": "The person's gender (International regulations require either \"male\" or \"female\").",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "id": {
+              "description": "Unique identifier for the object.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "id_number_provided": {
+              "description": "Whether the person's `id_number` was provided.",
+              "type": "boolean"
+            },
+            "last_name": {
+              "description": "The person's last name.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "last_name_kana": {
+              "description": "The Kana variation of the person's last name (Japan only).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "last_name_kanji": {
+              "description": "The Kanji variation of the person's last name (Japan only).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "maiden_name": {
+              "description": "The person's maiden name.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "metadata": {},
+            "nationality": {
+              "description": "The country where the person is a national.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "object": {
+              "description": "String representing the object's type. Objects of the same type share the same value.",
+              "enum": [
+                "person"
+              ],
+              "type": "string"
+            },
+            "phone": {
+              "description": "The person's phone number.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "political_exposure": {
+              "description": "Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.",
+              "enum": [
+                "existing",
+                "none"
+              ],
+              "type": "string"
+            },
+            "relationship": {
+              "description": "",
+              "properties": {
+                "director": {
+                  "description": "Whether the person is a director of the account's legal entity. Directors are typically members of the governing board of the company, or responsible for ensuring the company meets its regulatory obligations.",
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "executive": {
+                  "description": "Whether the person has significant responsibility to control, manage, or direct the organization.",
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "owner": {
+                  "description": "Whether the person is an owner of the account’s legal entity.",
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "percent_ownership": {
+                  "description": "The percent owned by the person of the account's legal entity.",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "representative": {
+                  "description": "Whether the person is authorized as the primary representative of the account. This is the person nominated by the business to provide information about themselves, and general information about the account. There can only be one representative at any given time. At the time the account is created, this person should be set to the person responsible for opening the account.",
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "title": {
+                  "description": "The person's title (e.g., CEO, Support Engineer).",
                   "maxLength": 5000,
-                  "nullable": true,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "title": "PersonRelationship",
+              "type": "object"
+            },
+            "requirements": {
+              "anyOf": [
+                {
+                  "description": "",
+                  "properties": {
+                    "alternatives": {
+                      "description": "Fields that are due and can be satisfied by providing the corresponding alternative fields instead.",
+                      "items": {
+                        "description": "",
+                        "properties": {
+                          "alternative_fields_due": {
+                            "description": "Fields that can be provided to satisfy all fields in `original_fields_due`.",
+                            "items": {
+                              "maxLength": 5000,
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          "original_fields_due": {
+                            "description": "Fields that are due and can be satisfied by providing all fields in `alternative_fields_due`.",
+                            "items": {
+                              "maxLength": 5000,
+                              "type": "string"
+                            },
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "alternative_fields_due",
+                          "original_fields_due"
+                        ],
+                        "title": "AccountRequirementsAlternative",
+                        "type": "object"
+                      },
+                      "type": [
+                        "array",
+                        "null"
+                      ]
+                    },
+                    "currently_due": {
+                      "description": "Fields that need to be collected to keep the person's account enabled. If not collected by the account's `current_deadline`, these fields appear in `past_due` as well, and the account is disabled.",
+                      "items": {
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "errors": {
+                      "description": "Fields that are `currently_due` and need to be collected again because validation or verification failed.",
+                      "items": {
+                        "description": "",
+                        "properties": {
+                          "code": {
+                            "description": "The code for the type of error.",
+                            "enum": [
+                              "invalid_address_city_state_postal_code",
+                              "invalid_street_address",
+                              "invalid_value_other",
+                              "verification_document_address_mismatch",
+                              "verification_document_address_missing",
+                              "verification_document_corrupt",
+                              "verification_document_country_not_supported",
+                              "verification_document_dob_mismatch",
+                              "verification_document_duplicate_type",
+                              "verification_document_expired",
+                              "verification_document_failed_copy",
+                              "verification_document_failed_greyscale",
+                              "verification_document_failed_other",
+                              "verification_document_failed_test_mode",
+                              "verification_document_fraudulent",
+                              "verification_document_id_number_mismatch",
+                              "verification_document_id_number_missing",
+                              "verification_document_incomplete",
+                              "verification_document_invalid",
+                              "verification_document_issue_or_expiry_date_missing",
+                              "verification_document_manipulated",
+                              "verification_document_missing_back",
+                              "verification_document_missing_front",
+                              "verification_document_name_mismatch",
+                              "verification_document_name_missing",
+                              "verification_document_nationality_mismatch",
+                              "verification_document_not_readable",
+                              "verification_document_not_signed",
+                              "verification_document_not_uploaded",
+                              "verification_document_photo_mismatch",
+                              "verification_document_too_large",
+                              "verification_document_type_not_supported",
+                              "verification_failed_address_match",
+                              "verification_failed_business_iec_number",
+                              "verification_failed_document_match",
+                              "verification_failed_id_number_match",
+                              "verification_failed_keyed_identity",
+                              "verification_failed_keyed_match",
+                              "verification_failed_name_match",
+                              "verification_failed_other",
+                              "verification_failed_tax_id_match",
+                              "verification_failed_tax_id_not_issued",
+                              "verification_missing_executives",
+                              "verification_missing_owners",
+                              "verification_requires_additional_memorandum_of_associations"
+                            ],
+                            "type": "string",
+                            "x-stripeBypassValidation": true
+                          },
+                          "reason": {
+                            "description": "An informative message that indicates the error type and provides additional details about the error.",
+                            "maxLength": 5000,
+                            "type": "string"
+                          },
+                          "requirement": {
+                            "description": "The specific user onboarding requirement field (in the requirements hash) that needs to be resolved.",
+                            "maxLength": 5000,
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "code",
+                          "reason",
+                          "requirement"
+                        ],
+                        "title": "AccountRequirementsError",
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "eventually_due": {
+                      "description": "Fields that need to be collected assuming all volume thresholds are reached. As they become required, they appear in `currently_due` as well, and the account's `current_deadline` becomes set.",
+                      "items": {
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "past_due": {
+                      "description": "Fields that weren't collected by the account's `current_deadline`. These fields need to be collected to enable the person's account.",
+                      "items": {
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "pending_verification": {
+                      "description": "Fields that may become required depending on the results of verification or review. Will be an empty array unless an asynchronous verification is pending. If verification fails, these fields move to `eventually_due`, `currently_due`, or `past_due`.",
+                      "items": {
+                        "maxLength": 5000,
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "currently_due",
+                    "errors",
+                    "eventually_due",
+                    "past_due",
+                    "pending_verification"
+                  ],
+                  "title": "PersonRequirements",
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "ssn_last_4_provided": {
+              "description": "Whether the last four digits of the person's Social Security number have been provided (U.S. only).",
+              "type": "boolean"
+            },
+            "verification": {
+              "description": "",
+              "properties": {
+                "additional_document": {
+                  "anyOf": [
+                    {
+                      "description": "",
+                      "properties": {
+                        "back": {
+                          "anyOf": [
+                            {
+                              "maxLength": 5000,
+                              "type": "string"
+                            }
+                          ],
+                          "description": "The back of an ID returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`."
+                        },
+                        "details": {
+                          "description": "A user-displayable string describing the verification state of this document. For example, if a document is uploaded and the picture is too fuzzy, this may say \"Identity document is too unclear to read\".",
+                          "maxLength": 5000,
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "details_code": {
+                          "description": "One of `document_corrupt`, `document_country_not_supported`, `document_expired`, `document_failed_copy`, `document_failed_other`, `document_failed_test_mode`, `document_fraudulent`, `document_failed_greyscale`, `document_incomplete`, `document_invalid`, `document_manipulated`, `document_missing_back`, `document_missing_front`, `document_not_readable`, `document_not_uploaded`, `document_photo_mismatch`, `document_too_large`, or `document_type_not_supported`. A machine-readable code specifying the verification state for this document.",
+                          "maxLength": 5000,
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "front": {
+                          "anyOf": [
+                            {
+                              "maxLength": 5000,
+                              "type": "string"
+                            }
+                          ],
+                          "description": "The front of an ID returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`."
+                        }
+                      },
+                      "title": "LegalEntityPersonVerificationDocument",
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "description": "A document showing address, either a passport, local ID card, or utility bill from a well-known utility company."
+                },
+                "details": {
+                  "description": "A user-displayable string describing the verification state for the person. For example, this may say \"Provided identity information could not be verified\".",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "details_code": {
+                  "description": "One of `document_address_mismatch`, `document_dob_mismatch`, `document_duplicate_type`, `document_id_number_mismatch`, `document_name_mismatch`, `document_nationality_mismatch`, `failed_keyed_identity`, or `failed_other`. A machine-readable code specifying the verification state for the person.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document": {
+                  "description": "",
+                  "properties": {
+                    "back": {
+                      "anyOf": [
+                        {
+                          "maxLength": 5000,
+                          "type": "string"
+                        }
+                      ],
+                      "description": "The back of an ID returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`."
+                    },
+                    "details": {
+                      "description": "A user-displayable string describing the verification state of this document. For example, if a document is uploaded and the picture is too fuzzy, this may say \"Identity document is too unclear to read\".",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "details_code": {
+                      "description": "One of `document_corrupt`, `document_country_not_supported`, `document_expired`, `document_failed_copy`, `document_failed_other`, `document_failed_test_mode`, `document_fraudulent`, `document_failed_greyscale`, `document_incomplete`, `document_invalid`, `document_manipulated`, `document_missing_back`, `document_missing_front`, `document_not_readable`, `document_not_uploaded`, `document_photo_mismatch`, `document_too_large`, or `document_type_not_supported`. A machine-readable code specifying the verification state for this document.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "front": {
+                      "anyOf": [
+                        {
+                          "maxLength": 5000,
+                          "type": "string"
+                        }
+                      ],
+                      "description": "The front of an ID returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`."
+                    }
+                  },
+                  "title": "LegalEntityPersonVerificationDocument",
+                  "type": "object"
+                },
+                "status": {
+                  "description": "The state of verification for the person. Possible values are `unverified`, `pending`, or `verified`.",
+                  "maxLength": 5000,
                   "type": "string"
                 }
               },
-              "title": "Shipping",
-              "type": "object",
-              "x-expandableFields": [
-                "address"
-              ]
+              "required": [
+                "status"
+              ],
+              "title": "LegalEntityPersonVerification",
+              "type": "object"
             }
           },
           "required": [
-            "amount",
-            "currency"
+            "account",
+            "created",
+            "id",
+            "object"
           ],
-          "title": "SourceOrder",
+          "title": "Person",
           "type": "object",
-          "x-expandableFields": [
-            "items",
-            "shipping"
-          ]
+          "x-resourceId": "person"
         },
-        "statement_descriptor": {
-          "description": "Extra information about a source. This will appear on your customer's statement every time you charge the source.",
-          "maxLength": 5000,
-          "nullable": true,
+        "metadata": {},
+        "object": {
+          "description": "String representing the object's type. Objects of the same type share the same value.",
+          "enum": [
+            "account"
+          ],
           "type": "string"
         },
-        "status": {
-          "description": "The status of the source, one of `canceled`, `chargeable`, `consumed`, `failed`, or `pending`. Only `chargeable` sources can be used to create a charge.",
-          "maxLength": 5000,
-          "type": "string"
+        "payouts_enabled": {
+          "description": "Whether Stripe can send payouts to this account.",
+          "type": "boolean"
         },
-        "three_d_secure": {
+        "requirements": {
+          "description": "",
           "properties": {
-            "address_line1_check": {
-              "nullable": true,
-              "type": "string"
+            "alternatives": {
+              "description": "Fields that are due and can be satisfied by providing the corresponding alternative fields instead.",
+              "items": {
+                "description": "",
+                "properties": {
+                  "alternative_fields_due": {
+                    "description": "Fields that can be provided to satisfy all fields in `original_fields_due`.",
+                    "items": {
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "original_fields_due": {
+                    "description": "Fields that are due and can be satisfied by providing all fields in `alternative_fields_due`.",
+                    "items": {
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "alternative_fields_due",
+                  "original_fields_due"
+                ],
+                "title": "AccountRequirementsAlternative",
+                "type": "object"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
             },
-            "address_zip_check": {
-              "nullable": true,
-              "type": "string"
+            "current_deadline": {
+              "description": "Date by which the fields in `currently_due` must be collected to keep the account enabled. These fields may disable the account sooner if the next threshold is reached before they are collected.",
+              "format": "unix-time",
+              "type": [
+                "integer",
+                "null"
+              ]
             },
-            "authenticated": {
-              "nullable": true,
-              "type": "boolean"
+            "currently_due": {
+              "description": "Fields that need to be collected to keep the account enabled. If not collected by `current_deadline`, these fields appear in `past_due` as well, and the account is disabled.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
             },
-            "brand": {
-              "nullable": true,
-              "type": "string"
+            "disabled_reason": {
+              "description": "If the account is disabled, this string describes why. Can be `requirements.past_due`, `requirements.pending_verification`, `listed`, `platform_paused`, `rejected.fraud`, `rejected.listed`, `rejected.terms_of_service`, `rejected.other`, `under_review`, or `other`.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
             },
-            "card": {
-              "nullable": true,
-              "type": "string"
+            "errors": {
+              "description": "Fields that are `currently_due` and need to be collected again because validation or verification failed.",
+              "items": {
+                "description": "",
+                "properties": {
+                  "code": {
+                    "description": "The code for the type of error.",
+                    "enum": [
+                      "invalid_address_city_state_postal_code",
+                      "invalid_street_address",
+                      "invalid_value_other",
+                      "verification_document_address_mismatch",
+                      "verification_document_address_missing",
+                      "verification_document_corrupt",
+                      "verification_document_country_not_supported",
+                      "verification_document_dob_mismatch",
+                      "verification_document_duplicate_type",
+                      "verification_document_expired",
+                      "verification_document_failed_copy",
+                      "verification_document_failed_greyscale",
+                      "verification_document_failed_other",
+                      "verification_document_failed_test_mode",
+                      "verification_document_fraudulent",
+                      "verification_document_id_number_mismatch",
+                      "verification_document_id_number_missing",
+                      "verification_document_incomplete",
+                      "verification_document_invalid",
+                      "verification_document_issue_or_expiry_date_missing",
+                      "verification_document_manipulated",
+                      "verification_document_missing_back",
+                      "verification_document_missing_front",
+                      "verification_document_name_mismatch",
+                      "verification_document_name_missing",
+                      "verification_document_nationality_mismatch",
+                      "verification_document_not_readable",
+                      "verification_document_not_signed",
+                      "verification_document_not_uploaded",
+                      "verification_document_photo_mismatch",
+                      "verification_document_too_large",
+                      "verification_document_type_not_supported",
+                      "verification_failed_address_match",
+                      "verification_failed_business_iec_number",
+                      "verification_failed_document_match",
+                      "verification_failed_id_number_match",
+                      "verification_failed_keyed_identity",
+                      "verification_failed_keyed_match",
+                      "verification_failed_name_match",
+                      "verification_failed_other",
+                      "verification_failed_tax_id_match",
+                      "verification_failed_tax_id_not_issued",
+                      "verification_missing_executives",
+                      "verification_missing_owners",
+                      "verification_requires_additional_memorandum_of_associations"
+                    ],
+                    "type": "string",
+                    "x-stripeBypassValidation": true
+                  },
+                  "reason": {
+                    "description": "An informative message that indicates the error type and provides additional details about the error.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "requirement": {
+                    "description": "The specific user onboarding requirement field (in the requirements hash) that needs to be resolved.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "reason",
+                  "requirement"
+                ],
+                "title": "AccountRequirementsError",
+                "type": "object"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
             },
-            "country": {
-              "nullable": true,
-              "type": "string"
+            "eventually_due": {
+              "description": "Fields that need to be collected assuming all volume thresholds are reached. As they become required, they appear in `currently_due` as well, and `current_deadline` becomes set.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
             },
-            "customer": {
-              "nullable": true,
-              "type": "string"
+            "past_due": {
+              "description": "Fields that weren't collected by `current_deadline`. These fields need to be collected to enable the account.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
             },
-            "cvc_check": {
-              "nullable": true,
-              "type": "string"
-            },
-            "dynamic_last4": {
-              "nullable": true,
-              "type": "string"
-            },
-            "exp_month": {
-              "nullable": true,
-              "type": "integer"
-            },
-            "exp_year": {
-              "nullable": true,
-              "type": "integer"
-            },
-            "fingerprint": {
-              "type": "string"
-            },
-            "funding": {
-              "nullable": true,
-              "type": "string"
-            },
-            "last4": {
-              "nullable": true,
-              "type": "string"
-            },
-            "name": {
-              "nullable": true,
-              "type": "string"
-            },
-            "three_d_secure": {
-              "type": "string"
-            },
-            "tokenization_method": {
-              "nullable": true,
-              "type": "string"
+            "pending_verification": {
+              "description": "Fields that may become required depending on the results of verification or review. Will be an empty array unless an asynchronous verification is pending. If verification fails, these fields move to `eventually_due`, `currently_due`, or `past_due`.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
             }
           },
+          "title": "AccountRequirements",
+          "type": "object"
+        },
+        "settings": {
+          "anyOf": [
+            {
+              "description": "",
+              "properties": {
+                "bacs_debit_payments": {
+                  "description": "",
+                  "properties": {
+                    "display_name": {
+                      "description": "The Bacs Direct Debit Display Name for this account. For payments made with Bacs Direct Debit, this will appear on the mandate, and as the statement descriptor.",
+                      "maxLength": 5000,
+                      "type": "string"
+                    }
+                  },
+                  "title": "AccountBacsDebitPaymentsSettings",
+                  "type": "object"
+                },
+                "branding": {
+                  "description": "",
+                  "properties": {
+                    "icon": {
+                      "anyOf": [
+                        {
+                          "maxLength": 5000,
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) An icon for the account. Must be square and at least 128px x 128px."
+                    },
+                    "logo": {
+                      "anyOf": [
+                        {
+                          "maxLength": 5000,
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for the account that will be used in Checkout instead of the icon and without the account's name next to it if provided. Must be at least 128px x 128px."
+                    },
+                    "primary_color": {
+                      "description": "A CSS hex color value representing the primary branding color for this account",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "secondary_color": {
+                      "description": "A CSS hex color value representing the secondary branding color for this account",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "title": "AccountBrandingSettings",
+                  "type": "object"
+                },
+                "card_issuing": {
+                  "description": "",
+                  "properties": {
+                    "tos_acceptance": {
+                      "description": "",
+                      "properties": {
+                        "date": {
+                          "description": "The Unix timestamp marking when the account representative accepted the service agreement.",
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        },
+                        "ip": {
+                          "description": "The IP address from which the account representative accepted the service agreement.",
+                          "maxLength": 5000,
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "user_agent": {
+                          "description": "The user agent of the browser from which the account representative accepted the service agreement.",
+                          "maxLength": 5000,
+                          "type": "string"
+                        }
+                      },
+                      "title": "CardIssuingAccountTermsOfService",
+                      "type": "object"
+                    }
+                  },
+                  "title": "AccountCardIssuingSettings",
+                  "type": "object"
+                },
+                "card_payments": {
+                  "description": "",
+                  "properties": {
+                    "decline_on": {
+                      "description": "",
+                      "properties": {
+                        "avs_failure": {
+                          "description": "Whether Stripe automatically declines charges with an incorrect ZIP or postal code. This setting only applies when a ZIP or postal code is provided and they fail bank verification.",
+                          "type": "boolean"
+                        },
+                        "cvc_failure": {
+                          "description": "Whether Stripe automatically declines charges with an incorrect CVC. This setting only applies when a CVC is provided and it fails bank verification.",
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "avs_failure",
+                        "cvc_failure"
+                      ],
+                      "title": "AccountDeclineChargeOn",
+                      "type": "object"
+                    },
+                    "statement_descriptor_prefix": {
+                      "description": "The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge. `statement_descriptor_prefix` is useful for maximizing descriptor space for the dynamic portion.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "title": "AccountCardPaymentsSettings",
+                  "type": "object"
+                },
+                "dashboard": {
+                  "description": "",
+                  "properties": {
+                    "display_name": {
+                      "description": "The display name for this account. This is used on the Stripe Dashboard to differentiate between accounts.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "timezone": {
+                      "description": "The timezone used in the Stripe Dashboard for this account. A list of possible time zone values is maintained at the [IANA Time Zone Database](http://www.iana.org/time-zones).",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "title": "AccountDashboardSettings",
+                  "type": "object"
+                },
+                "payments": {
+                  "description": "",
+                  "properties": {
+                    "statement_descriptor": {
+                      "description": "The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "statement_descriptor_kana": {
+                      "description": "The Kana variation of the default text that appears on credit card statements when a charge is made (Japan only)",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "statement_descriptor_kanji": {
+                      "description": "The Kanji variation of the default text that appears on credit card statements when a charge is made (Japan only)",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "title": "AccountPaymentsSettings",
+                  "type": "object"
+                },
+                "payouts": {
+                  "description": "",
+                  "properties": {
+                    "debit_negative_balances": {
+                      "description": "A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank account. See our [Understanding Connect Account Balances](https://stripe.com/docs/connect/account-balances) documentation for details. Default value is `false` for Custom accounts, otherwise `true`.",
+                      "type": "boolean"
+                    },
+                    "schedule": {
+                      "description": "",
+                      "properties": {
+                        "delay_days": {
+                          "description": "The number of days charges for the account will be held before being paid out.",
+                          "type": "integer"
+                        },
+                        "interval": {
+                          "description": "How frequently funds will be paid out. One of `manual` (payouts only created via API call), `daily`, `weekly`, or `monthly`.",
+                          "maxLength": 5000,
+                          "type": "string"
+                        },
+                        "monthly_anchor": {
+                          "description": "The day of the month funds will be paid out. Only shown if `interval` is monthly. Payouts scheduled between the 29th and 31st of the month are sent on the last day of shorter months.",
+                          "type": "integer"
+                        },
+                        "weekly_anchor": {
+                          "description": "The day of the week funds will be paid out, of the style 'monday', 'tuesday', etc. Only shown if `interval` is weekly.",
+                          "maxLength": 5000,
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "delay_days",
+                        "interval"
+                      ],
+                      "title": "TransferSchedule",
+                      "type": "object"
+                    },
+                    "statement_descriptor": {
+                      "description": "The text that appears on the bank account statement for payouts. If not set, this defaults to the platform's bank descriptor as set in the Dashboard.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "debit_negative_balances",
+                    "schedule"
+                  ],
+                  "title": "AccountPayoutSettings",
+                  "type": "object"
+                },
+                "sepa_debit_payments": {
+                  "description": "",
+                  "properties": {
+                    "creditor_id": {
+                      "description": "SEPA creditor identifier that identifies the company making the payment.",
+                      "maxLength": 5000,
+                      "type": "string"
+                    }
+                  },
+                  "title": "AccountSepaDebitPaymentsSettings",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "branding",
+                "card_payments",
+                "dashboard",
+                "payments"
+              ],
+              "title": "AccountSettings",
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Options for customizing how the account functions within Stripe."
+        },
+        "tos_acceptance": {
+          "description": "",
+          "properties": {
+            "date": {
+              "description": "The Unix timestamp marking when the account representative accepted their service agreement",
+              "format": "unix-time",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "ip": {
+              "description": "The IP address from which the account representative accepted their service agreement",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "service_agreement": {
+              "description": "The user's service agreement type",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "user_agent": {
+              "description": "The user agent of the browser from which the account representative accepted their service agreement",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "title": "AccountTOSAcceptance",
           "type": "object"
         },
         "type": {
-          "description": "The `type` of the source. The `type` is a payment method, one of `ach_credit_transfer`, `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`, `multibanco`, `klarna`, `p24`, `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An additional hash is included on the source with a name matching this value. It contains additional information specific to the [payment method](https://stripe.com/docs/sources) used.",
+          "description": "The Stripe account type. Can be `standard`, `express`, or `custom`.",
           "enum": [
-            "ach_credit_transfer",
-            "ach_debit",
-            "acss_debit",
-            "alipay",
-            "au_becs_debit",
-            "bancontact",
-            "card",
-            "card_present",
-            "eps",
-            "giropay",
-            "ideal",
-            "klarna",
-            "multibanco",
-            "p24",
-            "sepa_debit",
-            "sofort",
-            "three_d_secure",
-            "wechat"
+            "custom",
+            "express",
+            "standard"
           ],
-          "type": "string",
-          "x-stripeBypassValidation": true
-        },
-        "usage": {
-          "description": "Either `reusable` or `single_use`. Whether this source should be reusable or not. Some source types may or may not be reusable by construction, while others may leave the option at creation. If an incompatible value is passed, an error will be returned.",
-          "maxLength": 5000,
-          "nullable": true,
           "type": "string"
-        },
-        "wechat": {
-          "properties": {
-            "prepay_id": {
-              "type": "string"
-            },
-            "qr_code_url": {
-              "nullable": true,
-              "type": "string"
-            },
-            "statement_descriptor": {
-              "type": "string"
-            }
-          },
-          "type": "object"
         }
       },
       "required": [
-        "client_secret",
-        "created",
-        "flow",
         "id",
-        "livemode",
-        "object",
-        "status",
-        "type"
+        "object"
       ],
-      "title": "Source",
+      "title": "Account",
       "type": "object",
-      "x-expandableFields": [
-        "code_verification",
-        "owner",
-        "receiver",
-        "redirect",
-        "source_order"
-      ],
-      "x-resourceId": "source"
+      "x-resourceId": "account"
     }
   ],
   "title": "Polymorphic",
-  "x-resourceId": "payment_source"
+  "x-resourceId": "payment_source",
+  "default": {
+    "business_profile": {
+      "mcc": "string",
+      "name": "string",
+      "product_description": "string",
+      "support_address": {
+        "city": "string",
+        "country": "string",
+        "line1": "string",
+        "line2": "string",
+        "postal_code": "string",
+        "state": "string"
+      },
+      "support_email": "string",
+      "support_phone": "string",
+      "support_url": "string",
+      "url": "string"
+    },
+    "business_type": "company",
+    "capabilities": {
+      "acss_debit_payments": "active",
+      "afterpay_clearpay_payments": "active",
+      "au_becs_debit_payments": "active",
+      "bacs_debit_payments": "active",
+      "bancontact_payments": "active",
+      "boleto_payments": "active",
+      "card_issuing": "active",
+      "card_payments": "active",
+      "cartes_bancaires_payments": "active",
+      "eps_payments": "active",
+      "fpx_payments": "active",
+      "giropay_payments": "active",
+      "grabpay_payments": "active",
+      "ideal_payments": "active",
+      "jcb_payments": "active",
+      "klarna_payments": "active",
+      "legacy_payments": "active",
+      "oxxo_payments": "active",
+      "p24_payments": "active",
+      "sepa_debit_payments": "active",
+      "sofort_payments": "active",
+      "tax_reporting_us_1099_k": "active",
+      "tax_reporting_us_1099_misc": "active",
+      "transfers": "active"
+    },
+    "charges_enabled": true,
+    "company": {
+      "address": {
+        "city": "string",
+        "country": "string",
+        "line1": "string",
+        "line2": "string",
+        "postal_code": "string",
+        "state": "string"
+      },
+      "address_kana": {
+        "city": "string",
+        "country": "string",
+        "line1": "string",
+        "line2": "string",
+        "postal_code": "string",
+        "state": "string",
+        "town": "string"
+      },
+      "address_kanji": {
+        "city": "string",
+        "country": "string",
+        "line1": "string",
+        "line2": "string",
+        "postal_code": "string",
+        "state": "string",
+        "town": "string"
+      },
+      "directors_provided": true,
+      "executives_provided": true,
+      "name": "string",
+      "name_kana": "string",
+      "name_kanji": "string",
+      "owners_provided": true,
+      "ownership_declaration": {
+        "date": 0,
+        "ip": "string",
+        "user_agent": "string"
+      },
+      "phone": "string",
+      "structure": "free_zone_establishment",
+      "tax_id_provided": true,
+      "tax_id_registrar": "string",
+      "vat_id_provided": true,
+      "verification": {
+        "document": {
+          "back": "string",
+          "details": "string",
+          "details_code": "string",
+          "front": "string"
+        }
+      }
+    },
+    "controller": {
+      "is_controller": true,
+      "type": "account"
+    },
+    "country": "string",
+    "created": 0,
+    "default_currency": "string",
+    "details_submitted": true,
+    "email": "string",
+    "external_accounts": {
+      "data": [
+        {
+          "account": "string",
+          "account_holder_name": "string",
+          "account_holder_type": "string",
+          "account_type": "string",
+          "available_payout_methods": [
+            "instant"
+          ],
+          "bank_name": "string",
+          "country": "string",
+          "currency": "string",
+          "customer": "string",
+          "default_for_currency": true,
+          "fingerprint": "string",
+          "id": "string",
+          "last4": "string",
+          "metadata": {},
+          "object": "bank_account",
+          "routing_number": "string",
+          "status": "string"
+        }
+      ],
+      "has_more": true,
+      "object": "list",
+      "url": "string"
+    },
+    "future_requirements": {
+      "alternatives": [
+        {
+          "alternative_fields_due": [
+            "string"
+          ],
+          "original_fields_due": [
+            "string"
+          ]
+        }
+      ],
+      "current_deadline": 0,
+      "currently_due": [
+        "string"
+      ],
+      "disabled_reason": "string",
+      "errors": [
+        {
+          "code": "invalid_address_city_state_postal_code",
+          "reason": "string",
+          "requirement": "string"
+        }
+      ],
+      "eventually_due": [
+        "string"
+      ],
+      "past_due": [
+        "string"
+      ],
+      "pending_verification": [
+        "string"
+      ]
+    },
+    "id": "string",
+    "individual": {
+      "account": "string",
+      "address": {
+        "city": "string",
+        "country": "string",
+        "line1": "string",
+        "line2": "string",
+        "postal_code": "string",
+        "state": "string"
+      },
+      "address_kana": {
+        "city": "string",
+        "country": "string",
+        "line1": "string",
+        "line2": "string",
+        "postal_code": "string",
+        "state": "string",
+        "town": "string"
+      },
+      "address_kanji": {
+        "city": "string",
+        "country": "string",
+        "line1": "string",
+        "line2": "string",
+        "postal_code": "string",
+        "state": "string",
+        "town": "string"
+      },
+      "created": 0,
+      "dob": {
+        "day": 0,
+        "month": 0,
+        "year": 0
+      },
+      "email": "string",
+      "first_name": "string",
+      "first_name_kana": "string",
+      "first_name_kanji": "string",
+      "full_name_aliases": [
+        "string"
+      ],
+      "future_requirements": {
+        "alternatives": [
+          {
+            "alternative_fields_due": [
+              "string"
+            ],
+            "original_fields_due": [
+              "string"
+            ]
+          }
+        ],
+        "currently_due": [
+          "string"
+        ],
+        "errors": [
+          {
+            "code": "invalid_address_city_state_postal_code",
+            "reason": "string",
+            "requirement": "string"
+          }
+        ],
+        "eventually_due": [
+          "string"
+        ],
+        "past_due": [
+          "string"
+        ],
+        "pending_verification": [
+          "string"
+        ]
+      },
+      "gender": "string",
+      "id": "string",
+      "id_number_provided": true,
+      "last_name": "string",
+      "last_name_kana": "string",
+      "last_name_kanji": "string",
+      "maiden_name": "string",
+      "metadata": {},
+      "nationality": "string",
+      "object": "person",
+      "phone": "string",
+      "political_exposure": "existing",
+      "relationship": {
+        "director": true,
+        "executive": true,
+        "owner": true,
+        "percent_ownership": 0,
+        "representative": true,
+        "title": "string"
+      },
+      "requirements": {
+        "alternatives": [
+          {
+            "alternative_fields_due": [
+              "string"
+            ],
+            "original_fields_due": [
+              "string"
+            ]
+          }
+        ],
+        "currently_due": [
+          "string"
+        ],
+        "errors": [
+          {
+            "code": "invalid_address_city_state_postal_code",
+            "reason": "string",
+            "requirement": "string"
+          }
+        ],
+        "eventually_due": [
+          "string"
+        ],
+        "past_due": [
+          "string"
+        ],
+        "pending_verification": [
+          "string"
+        ]
+      },
+      "ssn_last_4_provided": true,
+      "verification": {
+        "additional_document": {
+          "back": "string",
+          "details": "string",
+          "details_code": "string",
+          "front": "string"
+        },
+        "details": "string",
+        "details_code": "string",
+        "document": {
+          "back": "string",
+          "details": "string",
+          "details_code": "string",
+          "front": "string"
+        },
+        "status": "string"
+      }
+    },
+    "metadata": {},
+    "object": "account",
+    "payouts_enabled": true,
+    "requirements": {
+      "alternatives": [
+        {
+          "alternative_fields_due": [
+            "string"
+          ],
+          "original_fields_due": [
+            "string"
+          ]
+        }
+      ],
+      "current_deadline": 0,
+      "currently_due": [
+        "string"
+      ],
+      "disabled_reason": "string",
+      "errors": [
+        {
+          "code": "invalid_address_city_state_postal_code",
+          "reason": "string",
+          "requirement": "string"
+        }
+      ],
+      "eventually_due": [
+        "string"
+      ],
+      "past_due": [
+        "string"
+      ],
+      "pending_verification": [
+        "string"
+      ]
+    },
+    "settings": {
+      "bacs_debit_payments": {
+        "display_name": "string"
+      },
+      "branding": {
+        "icon": "string",
+        "logo": "string",
+        "primary_color": "string",
+        "secondary_color": "string"
+      },
+      "card_issuing": {
+        "tos_acceptance": {
+          "date": 0,
+          "ip": "string",
+          "user_agent": "string"
+        }
+      },
+      "card_payments": {
+        "decline_on": {
+          "avs_failure": true,
+          "cvc_failure": true
+        },
+        "statement_descriptor_prefix": "string"
+      },
+      "dashboard": {
+        "display_name": "string",
+        "timezone": "string"
+      },
+      "payments": {
+        "statement_descriptor": "string",
+        "statement_descriptor_kana": "string",
+        "statement_descriptor_kanji": "string"
+      },
+      "payouts": {
+        "debit_negative_balances": true,
+        "schedule": {
+          "delay_days": 0,
+          "interval": "string",
+          "monthly_anchor": 0,
+          "weekly_anchor": "string"
+        },
+        "statement_descriptor": "string"
+      },
+      "sepa_debit_payments": {
+        "creditor_id": "string"
+      }
+    },
+    "tos_acceptance": {
+      "date": 0,
+      "ip": "string",
+      "service_agreement": "string",
+      "user_agent": "string"
+    },
+    "type": "custom"
+  }
 }

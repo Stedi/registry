@@ -28,11 +28,12 @@
           "original_fields_due"
         ],
         "title": "AccountRequirementsAlternative",
-        "type": "object",
-        "x-expandableFields": []
+        "type": "object"
       },
-      "nullable": true,
-      "type": "array"
+      "type": [
+        "array",
+        "null"
+      ]
     },
     "currently_due": {
       "description": "Fields that need to be collected to keep the person's account enabled. If not collected by the account's `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash, and may immediately become `past_due`, but the account may also be given a grace period depending on the account's enablement state prior to transition.",
@@ -116,8 +117,7 @@
           "requirement"
         ],
         "title": "AccountRequirementsError",
-        "type": "object",
-        "x-expandableFields": []
+        "type": "object"
       },
       "type": "array"
     },
@@ -155,8 +155,35 @@
   ],
   "title": "PersonFutureRequirements",
   "type": "object",
-  "x-expandableFields": [
-    "alternatives",
-    "errors"
-  ]
+  "default": {
+    "alternatives": [
+      {
+        "alternative_fields_due": [
+          "string"
+        ],
+        "original_fields_due": [
+          "string"
+        ]
+      }
+    ],
+    "currently_due": [
+      "string"
+    ],
+    "errors": [
+      {
+        "code": "invalid_address_city_state_postal_code",
+        "reason": "string",
+        "requirement": "string"
+      }
+    ],
+    "eventually_due": [
+      "string"
+    ],
+    "past_due": [
+      "string"
+    ],
+    "pending_verification": [
+      "string"
+    ]
+  }
 }

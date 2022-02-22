@@ -4,14 +4,18 @@
     "api_version": {
       "description": "The API version events are rendered as for this webhook endpoint.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "application": {
       "description": "The ID of the associated Connect application.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -21,8 +25,10 @@
     "description": {
       "description": "An optional description of what the webhook is used for.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "enabled_events": {
       "description": "The list of events to enable for this endpoint. `['*']` indicates that all events are enabled, except those that require explicit selection.",
@@ -41,14 +47,7 @@
       "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
       "type": "boolean"
     },
-    "metadata": {
-      "additionalProperties": {
-        "maxLength": 500,
-        "type": "string"
-      },
-      "description": "Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.",
-      "type": "object"
-    },
+    "metadata": {},
     "object": {
       "description": "String representing the object's type. Objects of the same type share the same value.",
       "enum": [
@@ -84,6 +83,21 @@
   ],
   "title": "NotificationWebhookEndpoint",
   "type": "object",
-  "x-expandableFields": [],
-  "x-resourceId": "webhook_endpoint"
+  "x-resourceId": "webhook_endpoint",
+  "default": {
+    "api_version": "string",
+    "application": "string",
+    "created": 0,
+    "description": "string",
+    "enabled_events": [
+      "string"
+    ],
+    "id": "string",
+    "livemode": true,
+    "metadata": {},
+    "object": "webhook_endpoint",
+    "secret": "string",
+    "status": "string",
+    "url": "string"
+  }
 }

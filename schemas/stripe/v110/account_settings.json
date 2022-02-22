@@ -11,11 +11,54 @@
         }
       },
       "title": "AccountBacsDebitPaymentsSettings",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "branding": {
-      "$ref": "#/components/schemas/account_branding_settings"
+      "description": "",
+      "properties": {
+        "icon": {
+          "anyOf": [
+            {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) An icon for the account. Must be square and at least 128px x 128px."
+        },
+        "logo": {
+          "anyOf": [
+            {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for the account that will be used in Checkout instead of the icon and without the account's name next to it if provided. Must be at least 128px x 128px."
+        },
+        "primary_color": {
+          "description": "A CSS hex color value representing the primary branding color for this account",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "secondary_color": {
+          "description": "A CSS hex color value representing the secondary branding color for this account",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "title": "AccountBrandingSettings",
+      "type": "object"
     },
     "card_issuing": {
       "description": "",
@@ -25,14 +68,18 @@
           "properties": {
             "date": {
               "description": "The Unix timestamp marking when the account representative accepted the service agreement.",
-              "nullable": true,
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "ip": {
               "description": "The IP address from which the account representative accepted the service agreement.",
               "maxLength": 5000,
-              "nullable": true,
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "user_agent": {
               "description": "The user agent of the browser from which the account representative accepted the service agreement.",
@@ -41,15 +88,11 @@
             }
           },
           "title": "CardIssuingAccountTermsOfService",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         }
       },
       "title": "AccountCardIssuingSettings",
-      "type": "object",
-      "x-expandableFields": [
-        "tos_acceptance"
-      ]
+      "type": "object"
     },
     "card_payments": {
       "description": "",
@@ -71,21 +114,19 @@
             "cvc_failure"
           ],
           "title": "AccountDeclineChargeOn",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "statement_descriptor_prefix": {
           "description": "The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge. `statement_descriptor_prefix` is useful for maximizing descriptor space for the dynamic portion.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "title": "AccountCardPaymentsSettings",
-      "type": "object",
-      "x-expandableFields": [
-        "decline_on"
-      ]
+      "type": "object"
     },
     "dashboard": {
       "description": "",
@@ -93,19 +134,22 @@
         "display_name": {
           "description": "The display name for this account. This is used on the Stripe Dashboard to differentiate between accounts.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "timezone": {
           "description": "The timezone used in the Stripe Dashboard for this account. A list of possible time zone values is maintained at the [IANA Time Zone Database](http://www.iana.org/time-zones).",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "title": "AccountDashboardSettings",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "payments": {
       "description": "",
@@ -113,25 +157,30 @@
         "statement_descriptor": {
           "description": "The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "statement_descriptor_kana": {
           "description": "The Kana variation of the default text that appears on credit card statements when a charge is made (Japan only)",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "statement_descriptor_kanji": {
           "description": "The Kanji variation of the default text that appears on credit card statements when a charge is made (Japan only)",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "title": "AccountPaymentsSettings",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     },
     "payouts": {
       "description": "",
@@ -167,14 +216,15 @@
             "interval"
           ],
           "title": "TransferSchedule",
-          "type": "object",
-          "x-expandableFields": []
+          "type": "object"
         },
         "statement_descriptor": {
           "description": "The text that appears on the bank account statement for payouts. If not set, this defaults to the platform's bank descriptor as set in the Dashboard.",
           "maxLength": 5000,
-          "nullable": true,
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": [
@@ -182,10 +232,7 @@
         "schedule"
       ],
       "title": "AccountPayoutSettings",
-      "type": "object",
-      "x-expandableFields": [
-        "schedule"
-      ]
+      "type": "object"
     },
     "sepa_debit_payments": {
       "description": "",
@@ -197,8 +244,7 @@
         }
       },
       "title": "AccountSepaDebitPaymentsSettings",
-      "type": "object",
-      "x-expandableFields": []
+      "type": "object"
     }
   },
   "required": [
@@ -209,14 +255,51 @@
   ],
   "title": "AccountSettings",
   "type": "object",
-  "x-expandableFields": [
-    "bacs_debit_payments",
-    "branding",
-    "card_issuing",
-    "card_payments",
-    "dashboard",
-    "payments",
-    "payouts",
-    "sepa_debit_payments"
-  ]
+  "default": {
+    "bacs_debit_payments": {
+      "display_name": "string"
+    },
+    "branding": {
+      "icon": "string",
+      "logo": "string",
+      "primary_color": "string",
+      "secondary_color": "string"
+    },
+    "card_issuing": {
+      "tos_acceptance": {
+        "date": 0,
+        "ip": "string",
+        "user_agent": "string"
+      }
+    },
+    "card_payments": {
+      "decline_on": {
+        "avs_failure": true,
+        "cvc_failure": true
+      },
+      "statement_descriptor_prefix": "string"
+    },
+    "dashboard": {
+      "display_name": "string",
+      "timezone": "string"
+    },
+    "payments": {
+      "statement_descriptor": "string",
+      "statement_descriptor_kana": "string",
+      "statement_descriptor_kanji": "string"
+    },
+    "payouts": {
+      "debit_negative_balances": true,
+      "schedule": {
+        "delay_days": 0,
+        "interval": "string",
+        "monthly_anchor": 0,
+        "weekly_anchor": "string"
+      },
+      "statement_descriptor": "string"
+    },
+    "sepa_debit_payments": {
+      "creditor_id": "string"
+    }
+  }
 }

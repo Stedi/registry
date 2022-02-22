@@ -4,8 +4,10 @@
     "address": {
       "description": "The address of the receiver source. This is the value that should be communicated to the customer to send their funds to.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "amount_charged": {
       "description": "The total amount that was moved to your balance. This is almost always equal to the amount charged. In rare cases when customers deposit excess funds and we are unable to refund those, those funds get moved to your balance and show up in amount_charged as well. The amount charged is expressed in the source's currency.",
@@ -39,5 +41,12 @@
   ],
   "title": "SourceReceiverFlow",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "address": "string",
+    "amount_charged": 0,
+    "amount_received": 0,
+    "amount_returned": 0,
+    "refund_attributes_method": "string",
+    "refund_attributes_status": "string"
+  }
 }

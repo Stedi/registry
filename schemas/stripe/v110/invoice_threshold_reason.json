@@ -3,8 +3,10 @@
   "properties": {
     "amount_gte": {
       "description": "The total invoice amount threshold boundary if it triggered the threshold invoice.",
-      "nullable": true,
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "item_reasons": {
       "description": "Indicates which line items triggered a threshold invoice.",
@@ -29,8 +31,7 @@
           "usage_gte"
         ],
         "title": "InvoiceItemThresholdReason",
-        "type": "object",
-        "x-expandableFields": []
+        "type": "object"
       },
       "type": "array"
     }
@@ -40,7 +41,15 @@
   ],
   "title": "InvoiceThresholdReason",
   "type": "object",
-  "x-expandableFields": [
-    "item_reasons"
-  ]
+  "default": {
+    "amount_gte": 0,
+    "item_reasons": [
+      {
+        "line_item_ids": [
+          "string"
+        ],
+        "usage_gte": 0
+      }
+    ]
+  }
 }

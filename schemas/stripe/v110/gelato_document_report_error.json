@@ -6,19 +6,27 @@
       "enum": [
         "document_expired",
         "document_type_not_supported",
-        "document_unverified_other"
+        "document_unverified_other",
+        null
       ],
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "reason": {
       "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
       "maxLength": 5000,
-      "nullable": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "title": "GelatoDocumentReportError",
   "type": "object",
-  "x-expandableFields": []
+  "default": {
+    "code": "document_expired",
+    "reason": "string"
+  }
 }
