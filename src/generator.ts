@@ -54,6 +54,7 @@ export async function generateForVersion(
     const target = path.join(baseDir, `${schema.name}.json`);
     schema.schema = providers[providerName].getSchemaWithoutCircularReferences(schema.schema as OpenAPIV3.SchemaObject);
     (schema.schema as any)["default"] = mock(schema.schema as OpenAPIV3.SchemaObject);
+    (schema.schema as any)["$schema"] = "https://json-schema.org/draft/2020-12/schema";
     fs.writeFileSync(target, JSON.stringify(schema.schema, null, 2));
   }
 }
