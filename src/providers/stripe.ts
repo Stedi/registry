@@ -118,5 +118,12 @@ function traverse(schema: OpenAPIV3.SchemaObject, parents: Set<String>): any {
       delete (schema as any)["format"];
     }
   }
+
+  if (type === 'string') {
+    const { format } = schema;
+    if (format === "decimal") {
+      delete (schema as any)["format"];
+    }
+  }
   return schema;
 }
