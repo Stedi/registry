@@ -7,7 +7,17 @@ export interface OpenAPI3Schema {
   value: unknown;
 }
 
-export type SchemaPackage = OpenAPI3Schema;
+export interface GraphQLIntrospectionSchema {
+  type: "graphql";
+  versionName: string;
+  value: unknown;
+  /**
+   * List of GraphQL types that should be included. If not specified, all entities will be included.
+   */
+  entities?: string[];
+}
+
+export type SchemaPackage = OpenAPI3Schema | GraphQLIntrospectionSchema;
 
 export interface Provider {
   getVersions: () => Promise<string[]>;
