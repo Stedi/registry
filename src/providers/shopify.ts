@@ -1,6 +1,7 @@
 import { getIntrospectionQuery } from "graphql";
 import axios from "axios";
 import { GraphQLIntrospectionSchema, Provider } from "../provider";
+import { OpenAPIV3 } from "openapi-types";
 
 export class ShopifyProvider implements Provider {
   async getVersions(): Promise<string[]> {
@@ -26,5 +27,11 @@ export class ShopifyProvider implements Provider {
       value: schema.data,
       entities: ["ProductInput", "CustomerInput", "OrderInput"],
     };
+  }
+
+  getSchemaWithoutCircularReferences(
+    schema: OpenAPIV3.SchemaObject
+  ): OpenAPIV3.SchemaObject {
+    return schema;
   }
 }

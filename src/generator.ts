@@ -29,6 +29,7 @@ async function unbundle(bundle: SchemaPackage): Promise<Schema[]> {
         }
       );
 
+      // Introspection schema lacks QueryRoot definition - adding it manually so it won't crash on dereferencing
       jsonSchema.definitions!["QueryRoot"] = {
         type: "object",
         title: "root",
@@ -52,9 +53,7 @@ async function unbundle(bundle: SchemaPackage): Promise<Schema[]> {
           schema: v,
         }));
     case "openapi-v3":
-      const dereferenced = await openAPIParser.dereference(
-        bundle.value as any,
-      );
+      const dereferenced = await openAPIParser.dereference(bundle.value as any);
       if (!("components" in dereferenced))
         throw new Error("Expected components");
       return Object.entries(dereferenced.components?.schemas ?? {}).map(
@@ -83,8 +82,12 @@ export async function generateForVersion(
   console.log(`Generating [${providerName}, ${version}]...`);
   for (const schema of schemas) {
     const target = path.join(baseDir, `${schema.name}.json`);
-    schema.schema = providers[providerName].getSchemaWithoutCircularReferences(schema.schema as OpenAPIV3.SchemaObject);
-    (schema.schema as any)["default"] = mock(schema.schema as OpenAPIV3.SchemaObject);
+    schema.schema = providers[providerName].getSchemaWithoutCircularReferences(
+      schema.schema as OpenAPIV3.SchemaObject
+    );
+    (schema.schema as any)["default"] = mock(
+      schema.schema as OpenAPIV3.SchemaObject
+    );
     fs.writeFileSync(target, JSON.stringify(schema.schema, null, 2));
   }
 }
@@ -104,4 +107,3 @@ export async function generateAll(
   await generateAll("./schemas", "ramp");
   await generateAll("./schemas", "shopify");
 })();
-
