@@ -40,6 +40,8 @@ function traverse(schema: OpenAPIV3.SchemaObject, parents: Set<String>): any {
   // delete stripe specific attributes
   delete (schema as any)["x-expansionResources"];
   delete (schema as any)["x-expandableFields"];
+  delete (schema as any)["x-stripeBypassValidation"];
+  delete (schema as any)["x-resourceId"];
 
   // we might need to do this for a few schemas above 100kb
   // delete (schema as any)["description"];
