@@ -9,8 +9,8 @@ export class ShopifyProvider implements Provider {
   }
 
   async getSchema(version: string): Promise<GraphQLIntrospectionSchema> {
-    const schema = await axios.post(
-      `${process.env.SHOPIFY_URL}/admin/api/2022-01/graphql.json`,
+    const { data } = await axios.post(
+      `https://${process.env.SHOPIFY_URL}/admin/api/2022-01/graphql.json`,
       getIntrospectionQuery(),
       {
         headers: {
@@ -24,7 +24,7 @@ export class ShopifyProvider implements Provider {
     return {
       versionName: version,
       type: "graphql",
-      value: schema.data,
+      value: data.data,
       entities: ["ProductInput", "CustomerInput", "OrderInput"],
     };
   }

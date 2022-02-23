@@ -1,0 +1,320 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Customer",
+  "description": "The Customer resource stores information about a shop's customers, such as their contact details, their order history, and whether they've agreed to receive email marketing.",
+  "type": "object",
+  "properties": {
+    "accepts_marketing": {
+      "type": "boolean",
+      "description": "Whether the customer has consented to receive marketing material via email."
+    },
+    "accepts_marketing_updated_at": {
+      "type": "string",
+      "description": "The date and time (ISO 8601 format) when the customer consented or objected to receiving marketing material by email. Set this value whenever the customer consents or objects to marketing materials."
+    },
+    "addresses": {
+      "type": "array",
+      "description": "A list of the ten most recently updated addresses for the customer.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "A unique identifier for the address."
+          },
+          "zip": {
+            "type": "string",
+            "description": "The customer's postal code, also known as zip, postcode, Eircode, etc."
+          },
+          "city": {
+            "type": "string",
+            "description": "The customer's city, town, or village."
+          },
+          "phone": {
+            "type": "string",
+            "description": "The customer's phone number at this address."
+          },
+          "company": {
+            "type": "string",
+            "description": "The customer's company."
+          },
+          "country": {
+            "type": "string",
+            "description": "The customer's country."
+          },
+          "default": {
+            "type": "boolean",
+            "description": "Whether this address is the default address for the customer."
+          },
+          "address1": {
+            "type": "string",
+            "description": "The customer's mailing address."
+          },
+          "address2": {
+            "type": "string",
+            "description": "An additional field for the customer's mailing address."
+          },
+          "province": {
+            "type": "string",
+            "description": "The customer's region name. Typically a province, a state, or a prefecture."
+          },
+          "last_name": {
+            "type": "string",
+            "description": "The customer's last name."
+          },
+          "first_name": {
+            "type": "string",
+            "description": "The customer's first name."
+          },
+          "customer_id": {
+            "type": "number",
+            "description": "A unique identifier for the customer."
+          },
+          "country_code": {
+            "type": "string",
+            "description": "The two-letter country code corresponding to the customer's country."
+          },
+          "country_name": {
+            "type": "string",
+            "description": "The customer's normalized country name."
+          },
+          "province_code": {
+            "type": "string",
+            "description": "The code for the region of the address, such as the province, state, or district. For example QC for Quebec, Canada."
+          }
+        },
+        "required": ["id"]
+      }
+    },
+    "currency": {
+      "type": "string",
+      "description": "The three-letter code (ISO 4217 format) for the currency that the customer used when they paid for their last order. Defaults to the shop currency. Returns the shop currency for test orders."
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The date and time (ISO 8601 format) when the customer was created."
+    },
+    "default_address": {
+      "type": "object",
+      "description": "The default address for the customer.",
+      "properties": {
+        "id": {
+          "type": "number",
+          "description": "A unique identifier for the address."
+        },
+        "zip": {
+          "type": "string",
+          "description": "The customer's postal code, also known as zip, postcode, Eircode, etc."
+        },
+        "city": {
+          "type": "string",
+          "description": "The customer's city, town, or village."
+        },
+        "phone": {
+          "type": "string",
+          "description": "The customer's phone number at this address."
+        },
+        "company": {
+          "type": "string",
+          "description": "The customer's company."
+        },
+        "country": {
+          "type": "string",
+          "description": "The customer's country."
+        },
+        "default": {
+          "type": "boolean",
+          "description": "Whether this address is the default address for the customer."
+        },
+        "address1": {
+          "type": "string",
+          "description": "The customer's mailing address."
+        },
+        "address2": {
+          "type": "string",
+          "description": "An additional field for the customer's mailing address."
+        },
+        "province": {
+          "type": "string",
+          "description": "The customer's region name. Typically a province, a state, or a prefecture."
+        },
+        "last_name": {
+          "type": "string",
+          "description": "The customer's last name."
+        },
+        "first_name": {
+          "type": "string",
+          "description": "The customer's first name."
+        },
+        "customer_id": {
+          "type": "number",
+          "description": "A unique identifier for the customer."
+        },
+        "country_code": {
+          "type": "string",
+          "description": "The two-letter country code corresponding to the customer's country."
+        },
+        "country_name": {
+          "type": "string",
+          "description": "The customer's normalized country name."
+        },
+        "province_code": {
+          "type": "string",
+          "description": "The code for the region of the address, such as the province, state, or district. For example QC for Quebec, Canada."
+        }
+      }
+    },
+    "email": {
+      "type": "string",
+      "description": "The unique email address of the customer. Attempting to assign the same email address to multiple customers returns an error."
+    },
+    "first_name": {
+      "type": "string",
+      "description": "The customer's first name."
+    },
+    "id": {
+      "type": "number",
+      "description": "A unique identifier for the customer."
+    },
+    "last_name": {
+      "type": "string",
+      "description": "The customer's last name."
+    },
+    "last_order_id": {
+      "type": "number",
+      "description": "The ID of the customer's last order."
+    },
+    "last_order_name": {
+      "type": "string",
+      "description": "The name of the customer's last order. This is directly related to the name field on the Order resource."
+    },
+    "metafield": {
+      "type": "object",
+      "description": "Attaches additional metadata to a shop's resources",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "An identifier for the metafield (maximum of 30 characters)."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type"
+        },
+        "value": {
+          "type": "string",
+          "description": "Information to be stored as metadata."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "A container for a set of metadata (maximum of 20 characters). Namespaces help distinguish between metadata that you created and metadata created by another individual with a similar namespace."
+        },
+        "description": {
+          "type": "string",
+          "description": "Additional information about the metafield."
+        }
+      },
+      "required": ["key", "type", "value", "namespace"]
+    },
+    "marketing_opt_in_level": {
+      "type": "string",
+      "description": "The marketing subscription opt-in level (as described by [the M3AAWG best practices guideline](https://www.m3aawg.org/sites/maawg/files/news/M3AAWG_Senders_BCP_Ver3-2015-02.pdf)) that the customer gave when they consented to receive marketing material by email. If the customer does not accept email marketing, then this property will be set to `null`.",
+      "enum": ["single_opt_in", "confirmed_opt_in", "unknown"]
+    },
+    "note": {
+      "type": "string",
+      "description": "A note about the customer."
+    },
+    "orders_count": {
+      "type": "number",
+      "description": "The number of orders associated with this customer."
+    },
+    "phone": {
+      "type": "string",
+      "description": "The unique phone number ([E.164 format](https://en.wikipedia.org/wiki/E.164)) for this customer. Attempting to assign the same phone number to multiple customers returns an error. The property can be set using different formats, but each format must represent a number that can be dialed from anywhere in the world."
+    },
+    "sms_marketing_consent": {
+      "type": "object",
+      "description": "The marketing consent information when the customer consented to receiving marketing material by SMS. The phone property is required to create a customer with SMS consent information and to perform an SMS update on a customer that doesn't have a phone number recorded. The customer must have a unique phone number associated to the record.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The current SMS marketing state for the customer."
+        },
+        "opt_in_level": {
+          "type": "string",
+          "description": "The marketing subscription opt-in level, as described by the M3AAWG best practices guidelines, that the customer gave when they consented to receive marketing material by SMS."
+        },
+        "consent_updated_at": {
+          "type": "string",
+          "description": "The date and time at which the customer consented to receive marketing material by SMS. The customer's consent state reflects the consent record with the most recent `last_consent_updated_at` date. If no date is provided, then the date and time at which the consent information was sent is used."
+        },
+        "consent_collected_from": {
+          "type": "string",
+          "description": "The source for whether the customer has consented to receive marketing material by SMS."
+        }
+      },
+      "required": [
+        "state",
+        "opt_in_level",
+        "consent_updated_at",
+        "consent_collected_from"
+      ]
+    },
+    "state": {
+      "type": "string",
+      "description": "The state of the customer's account with a shop. Default value: `disabled`. Valid values:\ndisabled: The customer doesn't have an active account. Customer accounts can be disabled from the Shopify admin at any time.\ninvited: The customer has received an email invite to create an account.\nenabled: The customer has created an account.\ndeclined: The customer declined the email invite to create an account.",
+      "enum": ["disabled", "invited", "enabled", "declined"]
+    },
+    "tags": {
+      "type": "string",
+      "description": "Tags that the shop owner has attached to the customer, formatted as a string of comma-separated values. A customer can have up to 250 tags. Each tag can have up to 255 characters."
+    },
+    "tax_exempt": {
+      "type": "boolean",
+      "description": "Whether the customer is exempt from paying taxes on their order. If `true`, then taxes won't be applied to an order at checkout. If `false`, then taxes will be applied at checkout."
+    },
+    "tax_exemptions": {
+      "type": "array",
+      "description": "Whether the customer is exempt from paying specific taxes on their order. Canadian taxes only. Valid values: EXEMPT_ALL: This customer is exempt from all Canadian taxes.\nCA_STATUS_CARD_EXEMPTION: This customer is exempt from specific taxes for holding a valid STATUS_CARD_EXEMPTION in Canada.\nCA_DIPLOMAT_EXEMPTION: This customer is exempt from specific taxes for holding a valid DIPLOMAT_EXEMPTION in Canada.\nCA_BC_RESELLER_EXEMPTION: This customer is exempt from specific taxes for holding a valid RESELLER_EXEMPTION in British Columbia.\nCA_MB_RESELLER_EXEMPTION: This customer is exempt from specific taxes for holding a valid RESELLER_EXEMPTION in Manitoba.\nCA_SK_RESELLER_EXEMPTION: This customer is exempt from specific taxes for holding a valid RESELLER_EXEMPTION in Saskatchewan.\nCA_BC_COMMERCIAL_FISHERY_EXEMPTION: This customer is exempt from specific taxes for holding a valid COMMERCIAL_FISHERY_EXEMPTION in British Columbia.\nCA_MB_COMMERCIAL_FISHERY_EXEMPTION: This customer is exempt from specific taxes for holding a valid COMMERCIAL_FISHERY_EXEMPTION in Manitoba.\nCA_NS_COMMERCIAL_FISHERY_EXEMPTION: This customer is exempt from specific taxes for holding a valid COMMERCIAL_FISHERY_EXEMPTION in Nova Scotia.\nCA_PE_COMMERCIAL_FISHERY_EXEMPTION: This customer is exempt from specific taxes for holding a valid COMMERCIAL_FISHERY_EXEMPTION in Prince Edward Island.\nCA_SK_COMMERCIAL_FISHERY_EXEMPTION: This customer is exempt from specific taxes for holding a valid COMMERCIAL_FISHERY_EXEMPTION in Saskatchewan.\nCA_BC_PRODUCTION_AND_MACHINERY_EXEMPTION: This customer is exempt from specific taxes for holding a valid PRODUCTION_AND_MACHINERY_EXEMPTION in British Columbia.\nCA_SK_PRODUCTION_AND_MACHINERY_EXEMPTION: This customer is exempt from specific taxes for holding a valid PRODUCTION_AND_MACHINERY_EXEMPTION in Saskatchewan.\nCA_BC_SUB_CONTRACTOR_EXEMPTION: This customer is exempt from specific taxes for holding a valid SUB_CONTRACTOR_EXEMPTION in British Columbia.\nCA_SK_SUB_CONTRACTOR_EXEMPTION: This customer is exempt from specific taxes for holding a valid SUB_CONTRACTOR_EXEMPTION in Saskatchewan.\nCA_BC_CONTRACTOR_EXEMPTION: This customer is exempt from specific taxes for holding a valid CONTRACTOR_EXEMPTION in British Columbia.\nCA_SK_CONTRACTOR_EXEMPTION: This customer is exempt from specific taxes for holding a valid CONTRACTOR_EXEMPTION in Saskatchewan.\nCA_ON_PURCHASE_EXEMPTION: This customer is exempt from specific taxes for holding a valid PURCHASE_EXEMPTION in Ontario.\nCA_MB_FARMER_EXEMPTION: This customer is exempt from specific taxes for holding a valid FARMER_EXEMPTION in Manitoba.\nCA_NS_FARMER_EXEMPTION: This customer is exempt from specific taxes for holding a valid FARMER_EXEMPTION in Nova Scotia.\nCA_SK_FARMER_EXEMPTION: This customer is exempt from specific taxes for holding a valid FARMER_EXEMPTION in Saskatchewan.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "EXEMPT_ALL",
+          "CA_STATUS_CARD_EXEMPTION",
+          "CA_DIPLOMAT_EXEMPTION",
+          "CA_BC_RESELLER_EXEMPTION",
+          "CA_MB_RESELLER_EXEMPTION",
+          "CA_SK_RESELLER_EXEMPTION",
+          "CA_BC_COMMERCIAL_FISHERY_EXEMPTION",
+          "CA_MB_COMMERCIAL_FISHERY_EXEMPTION",
+          "CA_NS_COMMERCIAL_FISHERY_EXEMPTION",
+          "CA_PE_COMMERCIAL_FISHERY_EXEMPTION",
+          "CA_SK_COMMERCIAL_FISHERY_EXEMPTION",
+          "CA_BC_PRODUCTION_AND_MACHINERY_EXEMPTION",
+          "CA_SK_PRODUCTION_AND_MACHINERY_EXEMPTION",
+          "CA_BC_SUB_CONTRACTOR_EXEMPTION",
+          "CA_SK_SUB_CONTRACTOR_EXEMPTION",
+          "CA_BC_CONTRACTOR_EXEMPTION",
+          "CA_SK_CONTRACTOR_EXEMPTION",
+          "CA_ON_PURCHASE_EXEMPTION",
+          "CA_MB_FARMER_EXEMPTION",
+          "CA_NS_FARMER_EXEMPTION",
+          "CA_SK_FARMER_EXEMPTION"
+        ]
+      }
+    },
+    "total_spent": {
+      "type": "string",
+      "description": "The total amount of money that the customer has spent across their order history."
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "The date and time (ISO 8601 format) when the customer information was last updated."
+    },
+    "verified_email": {
+      "type": "boolean",
+      "description": "Whether the customer has verified their email address."
+    }
+  },
+  "required": ["id"]
+}

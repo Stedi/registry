@@ -1870,12 +1870,12 @@
             "title": "ID",
             "description": "Represents a unique identifier, often used to refetch an object.\nThe ID type appears in a JSON response as a String, but it is not intended to be human-readable.\n\nExample value: `\"gid://shopify/Product/10079785100\"`\n"
           },
-          "key": {
+          "namespace": {
             "type": "string",
             "title": "String",
             "description": "Represents textual data as UTF-8 character sequences. This type is most often used by GraphQL to represent free-form human-readable text."
           },
-          "namespace": {
+          "key": {
             "type": "string",
             "title": "String",
             "description": "Represents textual data as UTF-8 character sequences. This type is most often used by GraphQL to represent free-form human-readable text."
@@ -1892,7 +1892,7 @@
           }
         },
         "required": [],
-        "description": "Specifies the input fields for a metafield."
+        "description": "The input fields to use to create or update a metafield through a mutation on the owning resource.\nAn alternative way to create or update a metafield is by using the\n[metafieldsSet](https://shopify.dev/api/admin-graphql/latest/mutations/metafieldsSet) mutation.\n"
       },
       "description": "Additional metafields to associate to the customer."
     },
@@ -2226,5 +2226,86 @@
     }
   },
   "required": [],
-  "description": "Provides the fields and values to use when creating or updating a customer."
+  "description": "Provides the fields and values to use when creating or updating a customer.",
+  "default": {
+    "acceptsMarketing": true,
+    "acceptsMarketingUpdatedAt": {},
+    "addresses": [
+      {
+        "address1": "string",
+        "address2": "string",
+        "city": "string",
+        "company": "string",
+        "country": "string",
+        "countryCode": "AF",
+        "firstName": "string",
+        "id": {},
+        "lastName": "string",
+        "phone": "string",
+        "province": "string",
+        "provinceCode": "string",
+        "zip": "string"
+      }
+    ],
+    "email": "string",
+    "firstName": "string",
+    "id": {},
+    "lastName": "string",
+    "locale": "string",
+    "marketingOptInLevel": "SINGLE_OPT_IN",
+    "metafields": [
+      {
+        "description": "string",
+        "id": {},
+        "namespace": "string",
+        "key": "string",
+        "value": "string",
+        "type": "string"
+      }
+    ],
+    "note": "string",
+    "phone": "string",
+    "privateMetafields": [
+      {
+        "owner": {},
+        "namespace": "string",
+        "key": "string",
+        "valueInput": {
+          "value": "string",
+          "valueType": "STRING"
+        }
+      }
+    ],
+    "tags": [
+      "string"
+    ],
+    "smsMarketingConsent": {
+      "marketingOptInLevel": "SINGLE_OPT_IN",
+      "marketingState": "NOT_SUBSCRIBED",
+      "consentUpdatedAt": {}
+    },
+    "taxExempt": true,
+    "taxExemptions": [
+      "CA_STATUS_CARD_EXEMPTION",
+      "CA_BC_RESELLER_EXEMPTION",
+      "CA_MB_RESELLER_EXEMPTION",
+      "CA_SK_RESELLER_EXEMPTION",
+      "CA_DIPLOMAT_EXEMPTION",
+      "CA_BC_COMMERCIAL_FISHERY_EXEMPTION",
+      "CA_MB_COMMERCIAL_FISHERY_EXEMPTION",
+      "CA_NS_COMMERCIAL_FISHERY_EXEMPTION",
+      "CA_PE_COMMERCIAL_FISHERY_EXEMPTION",
+      "CA_SK_COMMERCIAL_FISHERY_EXEMPTION",
+      "CA_BC_PRODUCTION_AND_MACHINERY_EXEMPTION",
+      "CA_SK_PRODUCTION_AND_MACHINERY_EXEMPTION",
+      "CA_BC_SUB_CONTRACTOR_EXEMPTION",
+      "CA_SK_SUB_CONTRACTOR_EXEMPTION",
+      "CA_BC_CONTRACTOR_EXEMPTION",
+      "CA_SK_CONTRACTOR_EXEMPTION",
+      "CA_ON_PURCHASE_EXEMPTION",
+      "CA_MB_FARMER_EXEMPTION",
+      "CA_NS_FARMER_EXEMPTION",
+      "CA_SK_FARMER_EXEMPTION"
+    ]
+  }
 }

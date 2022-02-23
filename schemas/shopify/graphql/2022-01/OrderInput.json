@@ -1852,12 +1852,12 @@
             "title": "ID",
             "description": "Represents a unique identifier, often used to refetch an object.\nThe ID type appears in a JSON response as a String, but it is not intended to be human-readable.\n\nExample value: `\"gid://shopify/Product/10079785100\"`\n"
           },
-          "key": {
+          "namespace": {
             "type": "string",
             "title": "String",
             "description": "Represents textual data as UTF-8 character sequences. This type is most often used by GraphQL to represent free-form human-readable text."
           },
-          "namespace": {
+          "key": {
             "type": "string",
             "title": "String",
             "description": "Represents textual data as UTF-8 character sequences. This type is most often used by GraphQL to represent free-form human-readable text."
@@ -1874,7 +1874,7 @@
           }
         },
         "required": [],
-        "description": "Specifies the input fields for a metafield."
+        "description": "The input fields to use to create or update a metafield through a mutation on the owning resource.\nAn alternative way to create or update a metafield is by using the\n[metafieldsSet](https://shopify.dev/api/admin-graphql/latest/mutations/metafieldsSet) mutation.\n"
       },
       "description": "A list of new metafields to add to the existing metafields for the order."
     },
@@ -1949,5 +1949,50 @@
   "required": [
     "id"
   ],
-  "description": "Specifies the information to be updated on an order when using the orderUpdate mutation."
+  "description": "Specifies the information to be updated on an order when using the orderUpdate mutation.",
+  "default": {
+    "id": {},
+    "email": "string",
+    "note": "string",
+    "tags": [
+      "string"
+    ],
+    "shippingAddress": {
+      "address1": "string",
+      "address2": "string",
+      "city": "string",
+      "company": "string",
+      "country": "string",
+      "countryCode": "AF",
+      "firstName": "string",
+      "id": {},
+      "lastName": "string",
+      "phone": "string",
+      "province": "string",
+      "provinceCode": "string",
+      "zip": "string"
+    },
+    "customAttributes": [
+      {
+        "key": "string",
+        "value": "string"
+      }
+    ],
+    "metafields": [
+      {
+        "description": "string",
+        "id": {},
+        "namespace": "string",
+        "key": "string",
+        "value": "string",
+        "type": "string"
+      }
+    ],
+    "localizationExtensions": [
+      {
+        "key": "TAX_CREDENTIAL_BR",
+        "value": "string"
+      }
+    ]
+  }
 }
