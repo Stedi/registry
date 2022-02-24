@@ -4,12 +4,14 @@ import openAPIParser from "@readme/openapi-parser";
 import jsonSchemaRefParser from "@apidevtools/json-schema-ref-parser";
 import path from "path";
 import fs from "fs";
-import copyfiles from "copyfiles";
+import rimraf from "rimraf";
 import { fromIntrospectionQuery } from "graphql-2-json-schema";
 import { IntrospectionQuery } from "graphql";
 import { OpenAPIV3 } from "openapi-types";
 import { mock } from "./util";
 import { promisify } from "util";
+
+const asyncRimraf = promisify(rimraf);
 
 interface Schema {
   name: string;
@@ -76,6 +78,8 @@ export async function generateForVersion(
   const baseDir = customPath
     ? path.join(rootPath, customPath)
     : path.join(rootPath, providerName, version);
+  await asyncRimraf(baseDir);
+
   const folderExists = !fs.mkdirSync(baseDir, { recursive: true });
 
   if (folderExists) {
@@ -109,18 +113,8 @@ export async function generateAll(
   }
 }
 
-export async function copyManualSchemas() {
-  const copyFilesPromise = promisify<string[], copyfiles.Options>(copyfiles);
-  return copyFilesPromise(["./manual/**/*.json", "./schemas"], {
-    exclude: "*.md",
-    error: true,
-    up: 1,
-  });
-}
-
 (async () => {
   await generateAll("./schemas", "stripe");
   await generateAll("./schemas", "ramp");
   await generateAll("./schemas", "shopify", "./shopify/graphql/2022-01");
-  await copyManualSchemas();
 })();
