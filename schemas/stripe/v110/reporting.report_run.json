@@ -3,6 +3,7 @@
   "properties": {
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
       "type": "integer"
     },
     "error": {
@@ -51,10 +52,12 @@
         },
         "interval_end": {
           "description": "Ending timestamp of data to be included in the report run (exclusive).",
+          "format": "unix-time",
           "type": "integer"
         },
         "interval_start": {
           "description": "Starting timestamp of data to be included in the report run.",
+          "format": "unix-time",
           "type": "integer"
         },
         "payout": {
@@ -88,10 +91,12 @@
           "properties": {
             "created": {
               "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+              "format": "unix-time",
               "type": "integer"
             },
             "expires_at": {
               "description": "The time at which the file expires and is no longer available in epoch seconds.",
+              "format": "unix-time",
               "type": [
                 "integer",
                 "null"
@@ -120,6 +125,7 @@
                     "properties": {
                       "created": {
                         "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                        "format": "unix-time",
                         "type": "integer"
                       },
                       "expired": {
@@ -128,6 +134,7 @@
                       },
                       "expires_at": {
                         "description": "Time at which the link expires.",
+                        "format": "unix-time",
                         "type": [
                           "integer",
                           "null"
@@ -290,6 +297,7 @@
     },
     "succeeded_at": {
       "description": "Timestamp at which this run successfully finished (populated when\n `status=succeeded`). Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
       "type": [
         "integer",
         "null"

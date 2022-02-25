@@ -111,12 +111,5 @@ function traverse(schema: OpenAPIV3.SchemaObject, parents: Set<String>): any {
     (schema as OpenAPIV3.ArraySchemaObject).items = traverse(items, parents);
     return schema;
   }
-
-  if (type === 'integer') {
-    const { format } = schema;
-    if (format === "unix-time") {
-      delete (schema as any)["format"];
-    }
-  }
   return schema;
 }
