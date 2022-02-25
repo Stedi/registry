@@ -1,0 +1,79 @@
+{
+  "description": "",
+  "properties": {
+    "additional_documentation": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute."
+    },
+    "card_statement": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Copy of the card statement showing that the product had already been paid for."
+    },
+    "cash_receipt": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Copy of the receipt showing that the product had been paid for in cash."
+    },
+    "check_image": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Image of the front and back of the check that was used to pay for the product."
+    },
+    "explanation": {
+      "description": "Explanation of why the cardholder is disputing this transaction.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "original_transaction": {
+      "description": "Transaction (e.g., ipi_...) that the disputed transaction is a duplicate of. Of the two or more transactions that are copies of each other, this is original undisputed one.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "title": "IssuingDisputeDuplicateEvidence",
+  "type": "object",
+  "default": {
+    "additional_documentation": "string",
+    "card_statement": "string",
+    "cash_receipt": "string",
+    "check_image": "string",
+    "explanation": "string",
+    "original_transaction": "string"
+  }
+}

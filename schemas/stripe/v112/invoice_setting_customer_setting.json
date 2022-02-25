@@ -1,0 +1,65 @@
+{
+  "description": "",
+  "properties": {
+    "custom_fields": {
+      "description": "Default custom fields to be displayed on invoices for this customer.",
+      "items": {
+        "description": "",
+        "properties": {
+          "name": {
+            "description": "The name of the custom field.",
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "value": {
+            "description": "The value of the custom field.",
+            "maxLength": 5000,
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ],
+        "title": "InvoiceSettingCustomField",
+        "type": "object"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "default_payment_method": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "ID of a payment method that's attached to the customer, to be used as the customer's default payment method for subscriptions and invoices."
+    },
+    "footer": {
+      "description": "Default footer to be displayed on invoices for this customer.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "title": "InvoiceSettingCustomerSetting",
+  "type": "object",
+  "default": {
+    "custom_fields": [
+      {
+        "name": "string",
+        "value": "string"
+      }
+    ],
+    "default_payment_method": "string",
+    "footer": "string"
+  }
+}

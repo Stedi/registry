@@ -1,0 +1,54 @@
+{
+  "description": "",
+  "properties": {
+    "created": {
+      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "expires": {
+      "description": "Time at which the key will expire. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "livemode": {
+      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+      "type": "boolean"
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "ephemeral_key"
+      ],
+      "type": "string"
+    },
+    "secret": {
+      "description": "The key's secret. You can use this value to make authorized requests to the Stripe API.",
+      "maxLength": 5000,
+      "type": "string"
+    }
+  },
+  "required": [
+    "created",
+    "expires",
+    "id",
+    "livemode",
+    "object"
+  ],
+  "title": "EphemeralKey",
+  "type": "object",
+  "x-resourceId": "ephemeral_key",
+  "default": {
+    "created": 0,
+    "expires": 0,
+    "id": "string",
+    "livemode": true,
+    "object": "ephemeral_key",
+    "secret": "string"
+  }
+}

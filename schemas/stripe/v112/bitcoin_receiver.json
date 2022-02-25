@@ -1,0 +1,258 @@
+{
+  "description": "",
+  "properties": {
+    "active": {
+      "description": "True when this bitcoin receiver has received a non-zero amount of bitcoin.",
+      "type": "boolean"
+    },
+    "amount": {
+      "description": "The amount of `currency` that you are collecting as payment.",
+      "type": "integer"
+    },
+    "amount_received": {
+      "description": "The amount of `currency` to which `bitcoin_amount_received` has been converted.",
+      "type": "integer"
+    },
+    "bitcoin_amount": {
+      "description": "The amount of bitcoin that the customer should send to fill the receiver. The `bitcoin_amount` is denominated in Satoshi: there are 10^8 Satoshi in one bitcoin.",
+      "type": "integer"
+    },
+    "bitcoin_amount_received": {
+      "description": "The amount of bitcoin that has been sent by the customer to this receiver.",
+      "type": "integer"
+    },
+    "bitcoin_uri": {
+      "description": "This URI can be displayed to the customer as a clickable link (to activate their bitcoin client) or as a QR code (for mobile wallets).",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "created": {
+      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "currency": {
+      "description": "Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) to which the bitcoin will be converted.",
+      "type": "string"
+    },
+    "customer": {
+      "description": "The customer ID of the bitcoin receiver.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "email": {
+      "description": "The customer's email address, set by the API call that creates the receiver.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "filled": {
+      "description": "This flag is initially false and updates to true when the customer sends the `bitcoin_amount` to this receiver.",
+      "type": "boolean"
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "inbound_address": {
+      "description": "A bitcoin address that is specific to this receiver. The customer can send bitcoin to this address to fill the receiver.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "livemode": {
+      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+      "type": "boolean"
+    },
+    "metadata": {},
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "bitcoin_receiver"
+      ],
+      "type": "string"
+    },
+    "payment": {
+      "description": "The ID of the payment created from the receiver, if any. Hidden when viewing the receiver with a publishable key.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "refund_address": {
+      "description": "The refund address of this bitcoin receiver.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "transactions": {
+      "description": "A list with one entry for each time that the customer sent bitcoin to the receiver. Hidden when viewing the receiver with a publishable key.",
+      "properties": {
+        "data": {
+          "description": "Details about each object.",
+          "items": {
+            "description": "",
+            "properties": {
+              "amount": {
+                "description": "The amount of `currency` that the transaction was converted to in real-time.",
+                "type": "integer"
+              },
+              "bitcoin_amount": {
+                "description": "The amount of bitcoin contained in the transaction.",
+                "type": "integer"
+              },
+              "created": {
+                "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                "format": "unix-time",
+                "type": "integer"
+              },
+              "currency": {
+                "description": "Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) to which this transaction was converted.",
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique identifier for the object.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "bitcoin_transaction"
+                ],
+                "type": "string"
+              },
+              "receiver": {
+                "description": "The receiver to which this transaction was sent.",
+                "maxLength": 5000,
+                "type": "string"
+              }
+            },
+            "required": [
+              "amount",
+              "bitcoin_amount",
+              "created",
+              "currency",
+              "id",
+              "object",
+              "receiver"
+            ],
+            "title": "BitcoinTransaction",
+            "type": "object",
+            "x-resourceId": "bitcoin_transaction"
+          },
+          "type": "array"
+        },
+        "has_more": {
+          "description": "True if this list has another page of items after this one that can be fetched.",
+          "type": "boolean"
+        },
+        "object": {
+          "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
+          "enum": [
+            "list"
+          ],
+          "type": "string"
+        },
+        "url": {
+          "description": "The URL where this list can be accessed.",
+          "maxLength": 5000,
+          "type": "string"
+        }
+      },
+      "required": [
+        "data",
+        "has_more",
+        "object",
+        "url"
+      ],
+      "title": "BitcoinTransactionList",
+      "type": "object"
+    },
+    "uncaptured_funds": {
+      "description": "This receiver contains uncaptured funds that can be used for a payment or refunded.",
+      "type": "boolean"
+    },
+    "used_for_payment": {
+      "description": "Indicate if this source is used for payment.",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "active",
+    "amount",
+    "amount_received",
+    "bitcoin_amount",
+    "bitcoin_amount_received",
+    "bitcoin_uri",
+    "created",
+    "currency",
+    "filled",
+    "id",
+    "inbound_address",
+    "livemode",
+    "object",
+    "uncaptured_funds"
+  ],
+  "title": "BitcoinReceiver",
+  "type": "object",
+  "x-resourceId": "bitcoin_receiver",
+  "default": {
+    "active": true,
+    "amount": 0,
+    "amount_received": 0,
+    "bitcoin_amount": 0,
+    "bitcoin_amount_received": 0,
+    "bitcoin_uri": "string",
+    "created": 0,
+    "currency": "string",
+    "customer": "string",
+    "description": "string",
+    "email": "string",
+    "filled": true,
+    "id": "string",
+    "inbound_address": "string",
+    "livemode": true,
+    "metadata": {},
+    "object": "bitcoin_receiver",
+    "payment": "string",
+    "refund_address": "string",
+    "transactions": {
+      "data": [
+        {
+          "amount": 0,
+          "bitcoin_amount": 0,
+          "created": 0,
+          "currency": "string",
+          "id": "string",
+          "object": "bitcoin_transaction",
+          "receiver": "string"
+        }
+      ],
+      "has_more": true,
+      "object": "list",
+      "url": "string"
+    },
+    "uncaptured_funds": true,
+    "used_for_payment": true
+  }
+}
