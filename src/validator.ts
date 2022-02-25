@@ -16,8 +16,7 @@ function validateSchema(jsonSchema: string): SchemaObject {
 
     if (!isSchemaVersionSupported(schemaObject)) {
       throw new Error(
-        `the "${
-          schemaObject.$schema
+        `the "${schemaObject.$schema
         }" is not allowed. Use one of [${supportedSchemaVersions.join(
           ","
         )}] instead`
@@ -64,6 +63,17 @@ function getAjvInstance(type: "json-schema-2020-12" = "json-schema-2020-12") {
     defaultMeta: metaSchemas[type],
   });
   AjvFormats(instance);
+  instance.addFormat("unix-time", {
+    type: "number",
+    validate: (x: number) => x > 0,
+  });
+
+  instance.addFormat("decimal", {
+    validate: (x: string) => {
+      const regex = /^[-+]?[0-9]+\.[0-9]+$/;
+      return regex.test(x);
+    },
+  });
 
   return instance;
 }
