@@ -1,0 +1,71 @@
+{
+  "description": "",
+  "properties": {
+    "mandate_options": {
+      "description": "",
+      "properties": {
+        "custom_mandate_url": {
+          "description": "A URL for custom mandate text",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "interval_description": {
+          "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "payment_schedule": {
+          "description": "Payment schedule for the mandate.",
+          "enum": [
+            "combined",
+            "interval",
+            "sporadic",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "transaction_type": {
+          "description": "Transaction type of the mandate.",
+          "enum": [
+            "business",
+            "personal",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "title": "payment_intent_payment_method_options_mandate_options_acss_debit",
+      "type": "object"
+    },
+    "verification_method": {
+      "description": "Bank account verification method.",
+      "enum": [
+        "automatic",
+        "instant",
+        "microdeposits"
+      ],
+      "type": "string",
+      "x-stripeBypassValidation": true
+    }
+  },
+  "title": "payment_intent_payment_method_options_acss_debit",
+  "type": "object",
+  "default": {
+    "mandate_options": {
+      "custom_mandate_url": "string",
+      "interval_description": "string",
+      "payment_schedule": "combined",
+      "transaction_type": "business"
+    },
+    "verification_method": "automatic"
+  }
+}

@@ -728,7 +728,8 @@
                   "status"
                 ],
                 "title": "Charge",
-                "type": "object"
+                "type": "object",
+                "x-resourceId": "charge"
               },
               "type": "array"
             },
@@ -1278,7 +1279,8 @@
                             "instant",
                             "microdeposits"
                           ],
-                          "type": "string"
+                          "type": "string",
+                          "x-stripeBypassValidation": true
                         }
                       },
                       "title": "payment_intent_payment_method_options_acss_debit",
@@ -1837,7 +1839,8 @@
                           "type": [
                             "string",
                             "null"
-                          ]
+                          ],
+                          "x-stripeBypassValidation": true
                         },
                         "setup_future_usage": {
                           "description": "Indicates that you intend to make future payments with this PaymentIntent's payment method.\n\nProviding this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.\n\nWhen processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).",
@@ -2063,7 +2066,8 @@
         "status"
       ],
       "title": "PaymentIntent",
-      "type": "object"
+      "type": "object",
+      "x-resourceId": "payment_intent"
     },
     "payment_method": {
       "description": "PaymentMethod objects represent your customer's payment instruments.\nThey can be used with [PaymentIntents](https://stripe.com/docs/payments/payment-intents) to collect payments or saved to\nCustomer objects to store instrument details for future payments.\n\nRelated guides: [Payment Methods](https://stripe.com/docs/payments/payment-methods) and [More Payment Scenarios](https://stripe.com/docs/payments/more-payment-scenarios).",
@@ -2881,7 +2885,8 @@
               "type": [
                 "string",
                 "null"
-              ]
+              ],
+              "x-stripeBypassValidation": true
             }
           },
           "title": "payment_method_p24",
@@ -3014,7 +3019,8 @@
             "sofort",
             "wechat_pay"
           ],
-          "type": "string"
+          "type": "string",
+          "x-stripeBypassValidation": true
         },
         "wechat_pay": {
           "description": "",
@@ -3032,7 +3038,8 @@
         "type"
       ],
       "title": "PaymentMethod",
-      "type": "object"
+      "type": "object",
+      "x-resourceId": "payment_method"
     },
     "payment_method_type": {
       "description": "If the error is specific to the type of payment method, the payment method type that had a problem. This field is only populated for invoice-related errors.",
@@ -3327,7 +3334,8 @@
                             "instant",
                             "microdeposits"
                           ],
-                          "type": "string"
+                          "type": "string",
+                          "x-stripeBypassValidation": true
                         }
                       },
                       "title": "setup_intent_payment_method_options_acss_debit",
@@ -3430,7 +3438,8 @@
         "usage"
       ],
       "title": "SetupIntent",
-      "type": "object"
+      "type": "object",
+      "x-resourceId": "setup_intent"
     },
     "source": {
       "anyOf": [
@@ -3572,7 +3581,8 @@
             "status"
           ],
           "title": "BankAccount",
-          "type": "object"
+          "type": "object",
+          "x-resourceId": "bank_account"
         }
       ],
       "description": "The source object for errors returned on a request involving a source."
@@ -4125,6 +4135,5 @@
       "status": "string"
     },
     "type": "api_error"
-  },
-  "$schema": "https://json-schema.org/draft/2020-12/schema"
+  }
 }
