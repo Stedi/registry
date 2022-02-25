@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Customer",
   "description": "The Customer resource stores information about a shop's customers, such as their contact details, their order history, and whether they've agreed to receive email marketing.",
   "type": "object",
@@ -83,7 +83,9 @@
             "description": "The code for the region of the address, such as the province, state, or district. For example QC for Quebec, Canada."
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       }
     },
     "currency": {
@@ -213,12 +215,21 @@
           "description": "Additional information about the metafield."
         }
       },
-      "required": ["key", "type", "value", "namespace"]
+      "required": [
+        "key",
+        "type",
+        "value",
+        "namespace"
+      ]
     },
     "marketing_opt_in_level": {
       "type": "string",
       "description": "The marketing subscription opt-in level (as described by [the M3AAWG best practices guideline](https://www.m3aawg.org/sites/maawg/files/news/M3AAWG_Senders_BCP_Ver3-2015-02.pdf)) that the customer gave when they consented to receive marketing material by email. If the customer does not accept email marketing, then this property will be set to `null`.",
-      "enum": ["single_opt_in", "confirmed_opt_in", "unknown"]
+      "enum": [
+        "single_opt_in",
+        "confirmed_opt_in",
+        "unknown"
+      ]
     },
     "note": {
       "type": "string",
@@ -263,7 +274,12 @@
     "state": {
       "type": "string",
       "description": "The state of the customer's account with a shop. Default value: `disabled`. Valid values:\ndisabled: The customer doesn't have an active account. Customer accounts can be disabled from the Shopify admin at any time.\ninvited: The customer has received an email invite to create an account.\nenabled: The customer has created an account.\ndeclined: The customer declined the email invite to create an account.",
-      "enum": ["disabled", "invited", "enabled", "declined"]
+      "enum": [
+        "disabled",
+        "invited",
+        "enabled",
+        "declined"
+      ]
     },
     "tags": {
       "type": "string",
@@ -316,5 +332,7 @@
       "description": "Whether the customer has verified their email address."
     }
   },
-  "required": ["id"]
+  "required": [
+    "id"
+  ]
 }
