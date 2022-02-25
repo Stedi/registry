@@ -1,0 +1,42 @@
+{
+  "description": "Account Links are the means by which a Connect platform grants a connected account permission to access\nStripe-hosted applications, such as Connect Onboarding.\n\nRelated guide: [Connect Onboarding](https://stripe.com/docs/connect/connect-onboarding).",
+  "properties": {
+    "created": {
+      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "expires_at": {
+      "description": "The timestamp at which this account link will expire.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "account_link"
+      ],
+      "type": "string"
+    },
+    "url": {
+      "description": "The URL for the account link.",
+      "maxLength": 5000,
+      "type": "string"
+    }
+  },
+  "required": [
+    "created",
+    "expires_at",
+    "object",
+    "url"
+  ],
+  "title": "AccountLink",
+  "type": "object",
+  "x-resourceId": "account_link",
+  "default": {
+    "created": 0,
+    "expires_at": 0,
+    "object": "account_link",
+    "url": "string"
+  }
+}

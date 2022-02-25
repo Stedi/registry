@@ -1,0 +1,35 @@
+{
+  "description": "",
+  "properties": {
+    "quantity": {
+      "description": "The count of inventory available. Will be present if and only if `type` is `finite`.",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "type": {
+      "description": "Inventory type. Possible values are `finite`, `bucket` (not quantified), and `infinite`.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "value": {
+      "description": "An indicator of the inventory available. Possible values are `in_stock`, `limited`, and `out_of_stock`. Will be present if and only if `type` is `bucket`.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "type"
+  ],
+  "title": "SKUInventory",
+  "type": "object",
+  "default": {
+    "quantity": 0,
+    "type": "string",
+    "value": "string"
+  }
+}

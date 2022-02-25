@@ -1,0 +1,41 @@
+{
+  "description": "",
+  "properties": {
+    "store": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "chain": {
+              "description": "The name of the convenience store chain where the payment was completed.",
+              "enum": [
+                "familymart",
+                "lawson",
+                "ministop",
+                "seicomart",
+                null
+              ],
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "title": "payment_method_details_konbini_store",
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "If the payment succeeded, this contains the details of the convenience store where the payment was completed."
+    }
+  },
+  "title": "payment_method_details_konbini",
+  "type": "object",
+  "default": {
+    "store": {
+      "chain": "familymart"
+    }
+  }
+}

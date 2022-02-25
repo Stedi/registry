@@ -1,0 +1,73 @@
+{
+  "description": "`Application Fee Refund` objects allow you to refund an application fee that\nhas previously been created but not yet refunded. Funds will be refunded to\nthe Stripe account from which the fee was originally collected.\n\nRelated guide: [Refunding Application Fees](https://stripe.com/docs/connect/destination-charges#refunding-app-fee).",
+  "properties": {
+    "amount": {
+      "description": "Amount, in %s.",
+      "type": "integer"
+    },
+    "balance_transaction": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Balance transaction that describes the impact on your account balance."
+    },
+    "created": {
+      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "currency": {
+      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+      "type": "string"
+    },
+    "fee": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "ID of the application fee that was refunded."
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "metadata": {},
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "fee_refund"
+      ],
+      "type": "string"
+    }
+  },
+  "required": [
+    "amount",
+    "created",
+    "currency",
+    "fee",
+    "id",
+    "object"
+  ],
+  "title": "FeeRefund",
+  "type": "object",
+  "x-resourceId": "fee_refund",
+  "default": {
+    "amount": 0,
+    "balance_transaction": "string",
+    "created": 0,
+    "currency": "string",
+    "fee": "string",
+    "id": "string",
+    "metadata": {},
+    "object": "fee_refund"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "description": "",
+  "properties": {
+    "amount": {
+      "description": "The amount in %s that will be transferred to the destination account. By default, the entire amount is transferred to the destination.",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "destination": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "The connected account receiving the transfer."
+    }
+  },
+  "required": [
+    "destination"
+  ],
+  "title": "PaymentLinksResourceTransferData",
+  "type": "object",
+  "default": {
+    "amount": 0,
+    "destination": "string"
+  }
+}

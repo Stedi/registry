@@ -1,0 +1,438 @@
+{
+  "description": "",
+  "properties": {
+    "discounts": {
+      "description": "The aggregated line item discounts.",
+      "items": {
+        "description": "",
+        "properties": {
+          "amount": {
+            "description": "The amount discounted.",
+            "type": "integer"
+          },
+          "discount": {
+            "description": "A discount represents the actual application of a coupon to a particular\ncustomer. It contains information about when the discount began and when it\nwill end.\n\nRelated guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).",
+            "properties": {
+              "checkout_session": {
+                "description": "The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.",
+                "maxLength": 5000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "coupon": {
+                "description": "A coupon contains information about a percent-off or amount-off discount you\nmight want to apply to a customer. Coupons may be applied to [invoices](https://stripe.com/docs/api#invoices) or\n[orders](https://stripe.com/docs/api#create_order_legacy-coupon). Coupons do not work with conventional one-off [charges](https://stripe.com/docs/api#create_charge).",
+                "properties": {
+                  "amount_off": {
+                    "description": "Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for this customer.",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "applies_to": {
+                    "description": "",
+                    "properties": {
+                      "products": {
+                        "description": "A list of product IDs this coupon applies to",
+                        "items": {
+                          "maxLength": 5000,
+                          "type": "string"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "products"
+                    ],
+                    "title": "CouponAppliesTo",
+                    "type": "object"
+                  },
+                  "created": {
+                    "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                    "format": "unix-time",
+                    "type": "integer"
+                  },
+                  "currency": {
+                    "description": "If `amount_off` has been set, the three-letter [ISO code for the currency](https://stripe.com/docs/currencies) of the amount to take off.",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "duration": {
+                    "description": "One of `forever`, `once`, and `repeating`. Describes how long a customer who applies this coupon will get the discount.",
+                    "enum": [
+                      "forever",
+                      "once",
+                      "repeating"
+                    ],
+                    "type": "string"
+                  },
+                  "duration_in_months": {
+                    "description": "If `duration` is `repeating`, the number of months the coupon applies. Null if coupon `duration` is `forever` or `once`.",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "id": {
+                    "description": "Unique identifier for the object.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "livemode": {
+                    "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                    "type": "boolean"
+                  },
+                  "max_redemptions": {
+                    "description": "Maximum number of times this coupon can be redeemed, in total, across all customers, before it is no longer valid.",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "metadata": {},
+                  "name": {
+                    "description": "Name of the coupon displayed to customers on for instance invoices or receipts.",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "object": {
+                    "description": "String representing the object's type. Objects of the same type share the same value.",
+                    "enum": [
+                      "coupon"
+                    ],
+                    "type": "string"
+                  },
+                  "percent_off": {
+                    "description": "Percent that will be taken off the subtotal of any invoices for this customer for the duration of the coupon. For example, a coupon with percent_off of 50 will make a %s100 invoice %s50 instead.",
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "redeem_by": {
+                    "description": "Date after which the coupon can no longer be redeemed.",
+                    "format": "unix-time",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "times_redeemed": {
+                    "description": "Number of times this coupon has been applied to a customer.",
+                    "type": "integer"
+                  },
+                  "valid": {
+                    "description": "Taking account of the above properties, whether this coupon can still be applied to a customer.",
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "created",
+                  "duration",
+                  "id",
+                  "livemode",
+                  "object",
+                  "times_redeemed",
+                  "valid"
+                ],
+                "title": "Coupon",
+                "type": "object",
+                "x-resourceId": "coupon"
+              },
+              "customer": {
+                "anyOf": [
+                  {
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The ID of the customer associated with this discount."
+              },
+              "end": {
+                "description": "If the coupon has a duration of `repeating`, the date that this discount will end. If the coupon has a duration of `once` or `forever`, this attribute will be null.",
+                "format": "unix-time",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "id": {
+                "description": "The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "invoice": {
+                "description": "The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.",
+                "maxLength": 5000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "invoice_item": {
+                "description": "The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's coupon was applied to, if it was applied directly to a particular invoice item or invoice line item.",
+                "maxLength": 5000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "discount"
+                ],
+                "type": "string"
+              },
+              "promotion_code": {
+                "anyOf": [
+                  {
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The promotion code applied to create this discount."
+              },
+              "start": {
+                "description": "Date that the coupon was applied.",
+                "format": "unix-time",
+                "type": "integer"
+              },
+              "subscription": {
+                "description": "The subscription that this coupon is applied to, if it is applied to a particular subscription.",
+                "maxLength": 5000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "coupon",
+              "id",
+              "object",
+              "start"
+            ],
+            "title": "Discount",
+            "type": "object",
+            "x-resourceId": "discount"
+          }
+        },
+        "required": [
+          "amount",
+          "discount"
+        ],
+        "title": "LineItemsDiscountAmount",
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "taxes": {
+      "description": "The aggregated line item tax amounts by rate.",
+      "items": {
+        "description": "",
+        "properties": {
+          "amount": {
+            "description": "Amount of tax applied for this rate.",
+            "type": "integer"
+          },
+          "rate": {
+            "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
+            "properties": {
+              "active": {
+                "description": "Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.",
+                "type": "boolean"
+              },
+              "country": {
+                "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                "maxLength": 5000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "created": {
+                "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                "format": "unix-time",
+                "type": "integer"
+              },
+              "description": {
+                "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
+                "maxLength": 5000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "display_name": {
+                "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique identifier for the object.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "inclusive": {
+                "description": "This specifies if the tax rate is inclusive or exclusive.",
+                "type": "boolean"
+              },
+              "jurisdiction": {
+                "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
+                "maxLength": 5000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "livemode": {
+                "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                "type": "boolean"
+              },
+              "metadata": {},
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "tax_rate"
+                ],
+                "type": "string"
+              },
+              "percentage": {
+                "description": "This represents the tax rate percent out of 100.",
+                "type": "number"
+              },
+              "state": {
+                "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
+                "maxLength": 5000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "tax_type": {
+                "description": "The high-level tax type, such as `vat` or `sales_tax`.",
+                "enum": [
+                  "gst",
+                  "hst",
+                  "jct",
+                  "pst",
+                  "qst",
+                  "rst",
+                  "sales_tax",
+                  "vat",
+                  null
+                ],
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "active",
+              "created",
+              "display_name",
+              "id",
+              "inclusive",
+              "livemode",
+              "object",
+              "percentage"
+            ],
+            "title": "TaxRate",
+            "type": "object",
+            "x-resourceId": "tax_rate"
+          }
+        },
+        "required": [
+          "amount",
+          "rate"
+        ],
+        "title": "LineItemsTaxAmount",
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "discounts",
+    "taxes"
+  ],
+  "title": "PaymentPagesCheckoutSessionTotalDetailsResourceBreakdown",
+  "type": "object",
+  "default": {
+    "discounts": [
+      {
+        "amount": 0,
+        "discount": {
+          "checkout_session": "string",
+          "coupon": {
+            "amount_off": 0,
+            "applies_to": {
+              "products": [
+                "string"
+              ]
+            },
+            "created": 0,
+            "currency": "string",
+            "duration": "forever",
+            "duration_in_months": 0,
+            "id": "string",
+            "livemode": true,
+            "max_redemptions": 0,
+            "metadata": {},
+            "name": "string",
+            "object": "coupon",
+            "percent_off": 0,
+            "redeem_by": 0,
+            "times_redeemed": 0,
+            "valid": true
+          },
+          "customer": "string",
+          "end": 0,
+          "id": "string",
+          "invoice": "string",
+          "invoice_item": "string",
+          "object": "discount",
+          "promotion_code": "string",
+          "start": 0,
+          "subscription": "string"
+        }
+      }
+    ],
+    "taxes": [
+      {
+        "amount": 0,
+        "rate": {
+          "active": true,
+          "country": "string",
+          "created": 0,
+          "description": "string",
+          "display_name": "string",
+          "id": "string",
+          "inclusive": true,
+          "jurisdiction": "string",
+          "livemode": true,
+          "metadata": {},
+          "object": "tax_rate",
+          "percentage": 0,
+          "state": "string",
+          "tax_type": "gst"
+        }
+      }
+    ]
+  }
+}

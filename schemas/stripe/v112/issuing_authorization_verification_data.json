@@ -1,0 +1,55 @@
+{
+  "description": "",
+  "properties": {
+    "address_line1_check": {
+      "description": "Whether the cardholder provided an address first line and if it matched the cardholder’s `billing.address.line1`.",
+      "enum": [
+        "match",
+        "mismatch",
+        "not_provided"
+      ],
+      "type": "string"
+    },
+    "address_postal_code_check": {
+      "description": "Whether the cardholder provided a postal code and if it matched the cardholder’s `billing.address.postal_code`.",
+      "enum": [
+        "match",
+        "mismatch",
+        "not_provided"
+      ],
+      "type": "string"
+    },
+    "cvc_check": {
+      "description": "Whether the cardholder provided a CVC and if it matched Stripe’s record.",
+      "enum": [
+        "match",
+        "mismatch",
+        "not_provided"
+      ],
+      "type": "string"
+    },
+    "expiry_check": {
+      "description": "Whether the cardholder provided an expiry date and if it matched Stripe’s record.",
+      "enum": [
+        "match",
+        "mismatch",
+        "not_provided"
+      ],
+      "type": "string"
+    }
+  },
+  "required": [
+    "address_line1_check",
+    "address_postal_code_check",
+    "cvc_check",
+    "expiry_check"
+  ],
+  "title": "IssuingAuthorizationVerificationData",
+  "type": "object",
+  "default": {
+    "address_line1_check": "match",
+    "address_postal_code_check": "match",
+    "cvc_check": "match",
+    "expiry_check": "match"
+  }
+}

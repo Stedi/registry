@@ -1,0 +1,58 @@
+{
+  "description": "",
+  "properties": {
+    "recovery": {
+      "anyOf": [
+        {
+          "description": "",
+          "properties": {
+            "allow_promotion_codes": {
+              "description": "Enables user redeemable promotion codes on the recovered Checkout Sessions. Defaults to `false`",
+              "type": "boolean"
+            },
+            "enabled": {
+              "description": "If `true`, a recovery url will be generated to recover this Checkout Session if it\nexpires before a transaction is completed. It will be attached to the\nCheckout Session object upon expiration.",
+              "type": "boolean"
+            },
+            "expires_at": {
+              "description": "The timestamp at which the recovery URL will expire.",
+              "format": "unix-time",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "url": {
+              "description": "URL that creates a new Checkout Session when clicked that is a copy of this expired Checkout Session",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "allow_promotion_codes",
+            "enabled"
+          ],
+          "title": "PaymentPagesCheckoutSessionAfterExpirationRecovery",
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "When set, configuration used to recover the Checkout Session on expiry."
+    }
+  },
+  "title": "PaymentPagesCheckoutSessionAfterExpiration",
+  "type": "object",
+  "default": {
+    "recovery": {
+      "allow_promotion_codes": true,
+      "enabled": true,
+      "expires_at": 0,
+      "url": "string"
+    }
+  }
+}

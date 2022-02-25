@@ -1,0 +1,615 @@
+{
+  "description": "Issue a credit note to adjust an invoice's amount after the invoice is finalized.\n\nRelated guide: [Credit Notes](https://stripe.com/docs/billing/invoices/credit-notes).",
+  "properties": {
+    "amount": {
+      "description": "The integer amount in %s representing the total amount of the credit note, including tax.",
+      "type": "integer"
+    },
+    "created": {
+      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "currency": {
+      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+      "type": "string"
+    },
+    "customer": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "ID of the customer."
+    },
+    "customer_balance_transaction": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Customer balance transaction related to this credit note."
+    },
+    "discount_amount": {
+      "description": "The integer amount in %s representing the total amount of discount that was credited.",
+      "type": "integer"
+    },
+    "discount_amounts": {
+      "description": "The aggregate amounts calculated per discount for all line items.",
+      "items": {
+        "description": "",
+        "properties": {
+          "amount": {
+            "description": "The amount, in %s, of the discount.",
+            "type": "integer"
+          },
+          "discount": {
+            "anyOf": [
+              {
+                "maxLength": 5000,
+                "type": "string"
+              }
+            ],
+            "description": "The discount that was applied to get this discount amount."
+          }
+        },
+        "required": [
+          "amount",
+          "discount"
+        ],
+        "title": "DiscountsResourceDiscountAmount",
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "invoice": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        }
+      ],
+      "description": "ID of the invoice."
+    },
+    "lines": {
+      "description": "Line items that make up the credit note",
+      "properties": {
+        "data": {
+          "description": "Details about each object.",
+          "items": {
+            "description": "",
+            "properties": {
+              "amount": {
+                "description": "The integer amount in %s representing the gross amount being credited for this line item, excluding (exclusive) tax and discounts.",
+                "type": "integer"
+              },
+              "description": {
+                "description": "Description of the item being credited.",
+                "maxLength": 5000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "discount_amount": {
+                "description": "The integer amount in %s representing the discount being credited for this line item.",
+                "type": "integer"
+              },
+              "discount_amounts": {
+                "description": "The amount of discount calculated per discount for this line item",
+                "items": {
+                  "description": "",
+                  "properties": {
+                    "amount": {
+                      "description": "The amount, in %s, of the discount.",
+                      "type": "integer"
+                    },
+                    "discount": {
+                      "anyOf": [
+                        {
+                          "maxLength": 5000,
+                          "type": "string"
+                        }
+                      ],
+                      "description": "The discount that was applied to get this discount amount."
+                    }
+                  },
+                  "required": [
+                    "amount",
+                    "discount"
+                  ],
+                  "title": "DiscountsResourceDiscountAmount",
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "id": {
+                "description": "Unique identifier for the object.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "invoice_line_item": {
+                "description": "ID of the invoice line item being credited",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "livemode": {
+                "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                "type": "boolean"
+              },
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "credit_note_line_item"
+                ],
+                "type": "string"
+              },
+              "quantity": {
+                "description": "The number of units of product being credited.",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "tax_amounts": {
+                "description": "The amount of tax calculated per tax rate for this line item",
+                "items": {
+                  "description": "",
+                  "properties": {
+                    "amount": {
+                      "description": "The amount, in %s, of the tax.",
+                      "type": "integer"
+                    },
+                    "inclusive": {
+                      "description": "Whether this tax amount is inclusive or exclusive.",
+                      "type": "boolean"
+                    },
+                    "tax_rate": {
+                      "anyOf": [
+                        {
+                          "maxLength": 5000,
+                          "type": "string"
+                        }
+                      ],
+                      "description": "The tax rate that was applied to get this tax amount."
+                    }
+                  },
+                  "required": [
+                    "amount",
+                    "inclusive",
+                    "tax_rate"
+                  ],
+                  "title": "CreditNoteTaxAmount",
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "tax_rates": {
+                "description": "The tax rates which apply to the line item.",
+                "items": {
+                  "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
+                  "properties": {
+                    "active": {
+                      "description": "Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.",
+                      "type": "boolean"
+                    },
+                    "country": {
+                      "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "created": {
+                      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                      "format": "unix-time",
+                      "type": "integer"
+                    },
+                    "description": {
+                      "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "display_name": {
+                      "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "Unique identifier for the object.",
+                      "maxLength": 5000,
+                      "type": "string"
+                    },
+                    "inclusive": {
+                      "description": "This specifies if the tax rate is inclusive or exclusive.",
+                      "type": "boolean"
+                    },
+                    "jurisdiction": {
+                      "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "livemode": {
+                      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                      "type": "boolean"
+                    },
+                    "metadata": {},
+                    "object": {
+                      "description": "String representing the object's type. Objects of the same type share the same value.",
+                      "enum": [
+                        "tax_rate"
+                      ],
+                      "type": "string"
+                    },
+                    "percentage": {
+                      "description": "This represents the tax rate percent out of 100.",
+                      "type": "number"
+                    },
+                    "state": {
+                      "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "tax_type": {
+                      "description": "The high-level tax type, such as `vat` or `sales_tax`.",
+                      "enum": [
+                        "gst",
+                        "hst",
+                        "jct",
+                        "pst",
+                        "qst",
+                        "rst",
+                        "sales_tax",
+                        "vat",
+                        null
+                      ],
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "active",
+                    "created",
+                    "display_name",
+                    "id",
+                    "inclusive",
+                    "livemode",
+                    "object",
+                    "percentage"
+                  ],
+                  "title": "TaxRate",
+                  "type": "object",
+                  "x-resourceId": "tax_rate"
+                },
+                "type": "array"
+              },
+              "type": {
+                "description": "The type of the credit note line item, one of `invoice_line_item` or `custom_line_item`. When the type is `invoice_line_item` there is an additional `invoice_line_item` property on the resource the value of which is the id of the credited line item on the invoice.",
+                "enum": [
+                  "custom_line_item",
+                  "invoice_line_item"
+                ],
+                "type": "string"
+              },
+              "unit_amount": {
+                "description": "The cost of each unit of product being credited.",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "unit_amount_decimal": {
+                "description": "Same as `unit_amount`, but contains a decimal value with at most 12 decimal places.",
+                "format": "decimal",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "amount",
+              "discount_amount",
+              "discount_amounts",
+              "id",
+              "livemode",
+              "object",
+              "tax_amounts",
+              "tax_rates",
+              "type"
+            ],
+            "title": "CreditNoteLineItem",
+            "type": "object",
+            "x-resourceId": "credit_note_line_item"
+          },
+          "type": "array"
+        },
+        "has_more": {
+          "description": "True if this list has another page of items after this one that can be fetched.",
+          "type": "boolean"
+        },
+        "object": {
+          "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
+          "enum": [
+            "list"
+          ],
+          "type": "string"
+        },
+        "url": {
+          "description": "The URL where this list can be accessed.",
+          "maxLength": 5000,
+          "type": "string"
+        }
+      },
+      "required": [
+        "data",
+        "has_more",
+        "object",
+        "url"
+      ],
+      "title": "CreditNoteLinesList",
+      "type": "object"
+    },
+    "livemode": {
+      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+      "type": "boolean"
+    },
+    "memo": {
+      "description": "Customer-facing text that appears on the credit note PDF.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "metadata": {},
+    "number": {
+      "description": "A unique number that identifies this particular credit note and appears on the PDF of the credit note and its associated invoice.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "credit_note"
+      ],
+      "type": "string"
+    },
+    "out_of_band_amount": {
+      "description": "Amount that was credited outside of Stripe.",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "pdf": {
+      "description": "The link to download the PDF of the credit note.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "reason": {
+      "description": "Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`",
+      "enum": [
+        "duplicate",
+        "fraudulent",
+        "order_change",
+        "product_unsatisfactory",
+        null
+      ],
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "refund": {
+      "anyOf": [
+        {
+          "maxLength": 5000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Refund related to this credit note."
+    },
+    "status": {
+      "description": "Status of this credit note, one of `issued` or `void`. Learn more about [voiding credit notes](https://stripe.com/docs/billing/invoices/credit-notes#voiding).",
+      "enum": [
+        "issued",
+        "void"
+      ],
+      "type": "string"
+    },
+    "subtotal": {
+      "description": "The integer amount in %s representing the amount of the credit note, excluding tax and invoice level discounts.",
+      "type": "integer"
+    },
+    "tax_amounts": {
+      "description": "The aggregate amounts calculated per tax rate for all line items.",
+      "items": {
+        "description": "",
+        "properties": {
+          "amount": {
+            "description": "The amount, in %s, of the tax.",
+            "type": "integer"
+          },
+          "inclusive": {
+            "description": "Whether this tax amount is inclusive or exclusive.",
+            "type": "boolean"
+          },
+          "tax_rate": {
+            "anyOf": [
+              {
+                "maxLength": 5000,
+                "type": "string"
+              }
+            ],
+            "description": "The tax rate that was applied to get this tax amount."
+          }
+        },
+        "required": [
+          "amount",
+          "inclusive",
+          "tax_rate"
+        ],
+        "title": "CreditNoteTaxAmount",
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "total": {
+      "description": "The integer amount in %s representing the total amount of the credit note, including tax and all discount.",
+      "type": "integer"
+    },
+    "type": {
+      "description": "Type of this credit note, one of `pre_payment` or `post_payment`. A `pre_payment` credit note means it was issued when the invoice was open. A `post_payment` credit note means it was issued when the invoice was paid.",
+      "enum": [
+        "post_payment",
+        "pre_payment"
+      ],
+      "type": "string"
+    },
+    "voided_at": {
+      "description": "The time that the credit note was voided.",
+      "format": "unix-time",
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "amount",
+    "created",
+    "currency",
+    "customer",
+    "discount_amount",
+    "discount_amounts",
+    "id",
+    "invoice",
+    "lines",
+    "livemode",
+    "number",
+    "object",
+    "pdf",
+    "status",
+    "subtotal",
+    "tax_amounts",
+    "total",
+    "type"
+  ],
+  "title": "CreditNote",
+  "type": "object",
+  "x-resourceId": "credit_note",
+  "default": {
+    "amount": 0,
+    "created": 0,
+    "currency": "string",
+    "customer": "string",
+    "customer_balance_transaction": "string",
+    "discount_amount": 0,
+    "discount_amounts": [
+      {
+        "amount": 0,
+        "discount": "string"
+      }
+    ],
+    "id": "string",
+    "invoice": "string",
+    "lines": {
+      "data": [
+        {
+          "amount": 0,
+          "description": "string",
+          "discount_amount": 0,
+          "discount_amounts": [
+            {
+              "amount": 0,
+              "discount": "string"
+            }
+          ],
+          "id": "string",
+          "invoice_line_item": "string",
+          "livemode": true,
+          "object": "credit_note_line_item",
+          "quantity": 0,
+          "tax_amounts": [
+            {
+              "amount": 0,
+              "inclusive": true,
+              "tax_rate": "string"
+            }
+          ],
+          "tax_rates": [
+            {
+              "active": true,
+              "country": "string",
+              "created": 0,
+              "description": "string",
+              "display_name": "string",
+              "id": "string",
+              "inclusive": true,
+              "jurisdiction": "string",
+              "livemode": true,
+              "metadata": {},
+              "object": "tax_rate",
+              "percentage": 0,
+              "state": "string",
+              "tax_type": "gst"
+            }
+          ],
+          "type": "custom_line_item",
+          "unit_amount": 0,
+          "unit_amount_decimal": "0.0"
+        }
+      ],
+      "has_more": true,
+      "object": "list",
+      "url": "string"
+    },
+    "livemode": true,
+    "memo": "string",
+    "metadata": {},
+    "number": "string",
+    "object": "credit_note",
+    "out_of_band_amount": 0,
+    "pdf": "string",
+    "reason": "duplicate",
+    "refund": "string",
+    "status": "issued",
+    "subtotal": 0,
+    "tax_amounts": [
+      {
+        "amount": 0,
+        "inclusive": true,
+        "tax_rate": "string"
+      }
+    ],
+    "total": 0,
+    "type": "post_payment",
+    "voided_at": 0
+  }
+}

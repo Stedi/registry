@@ -1,0 +1,262 @@
+{
+  "description": "Some payment methods have no required amount that a customer must send.\nCustomers can be instructed to send any amount, and it can be made up of\nmultiple transactions. As such, sources can have multiple associated\ntransactions.",
+  "properties": {
+    "ach_credit_transfer": {
+      "description": "",
+      "properties": {
+        "customer_data": {
+          "description": "Customer data associated with the transfer.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "fingerprint": {
+          "description": "Bank account fingerprint associated with the transfer.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "last4": {
+          "description": "Last 4 digits of the account number associated with the transfer.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "routing_number": {
+          "description": "Routing number associated with the transfer.",
+          "maxLength": 5000,
+          "type": "string"
+        }
+      },
+      "title": "SourceTransactionAchCreditTransferData",
+      "type": "object"
+    },
+    "amount": {
+      "description": "A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the amount your customer has pushed to the receiver.",
+      "type": "integer"
+    },
+    "chf_credit_transfer": {
+      "description": "",
+      "properties": {
+        "reference": {
+          "description": "Reference associated with the transfer.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "sender_address_country": {
+          "description": "Sender's country address.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "sender_address_line1": {
+          "description": "Sender's line 1 address.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "sender_iban": {
+          "description": "Sender's bank account IBAN.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "sender_name": {
+          "description": "Sender's name.",
+          "maxLength": 5000,
+          "type": "string"
+        }
+      },
+      "title": "SourceTransactionChfCreditTransferData",
+      "type": "object"
+    },
+    "created": {
+      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "currency": {
+      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+      "type": "string"
+    },
+    "gbp_credit_transfer": {
+      "description": "",
+      "properties": {
+        "fingerprint": {
+          "description": "Bank account fingerprint associated with the Stripe owned bank account receiving the transfer.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "funding_method": {
+          "description": "The credit transfer rails the sender used to push this transfer. The possible rails are: Faster Payments, BACS, CHAPS, and wire transfers. Currently only Faster Payments is supported.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "last4": {
+          "description": "Last 4 digits of sender account number associated with the transfer.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "reference": {
+          "description": "Sender entered arbitrary information about the transfer.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "sender_account_number": {
+          "description": "Sender account number associated with the transfer.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "sender_name": {
+          "description": "Sender name associated with the transfer.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "sender_sort_code": {
+          "description": "Sender sort code associated with the transfer.",
+          "maxLength": 5000,
+          "type": "string"
+        }
+      },
+      "title": "SourceTransactionGbpCreditTransferData",
+      "type": "object"
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "livemode": {
+      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+      "type": "boolean"
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "source_transaction"
+      ],
+      "type": "string"
+    },
+    "paper_check": {
+      "description": "",
+      "properties": {
+        "available_at": {
+          "description": "Time at which the deposited funds will be available for use. Measured in seconds since the Unix epoch.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "invoices": {
+          "description": "Comma-separated list of invoice IDs associated with the paper check.",
+          "maxLength": 5000,
+          "type": "string"
+        }
+      },
+      "title": "SourceTransactionPaperCheckData",
+      "type": "object"
+    },
+    "sepa_credit_transfer": {
+      "description": "",
+      "properties": {
+        "reference": {
+          "description": "Reference associated with the transfer.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "sender_iban": {
+          "description": "Sender's bank account IBAN.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "sender_name": {
+          "description": "Sender's name.",
+          "maxLength": 5000,
+          "type": "string"
+        }
+      },
+      "title": "SourceTransactionSepaCreditTransferData",
+      "type": "object"
+    },
+    "source": {
+      "description": "The ID of the source this transaction is attached to.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "status": {
+      "description": "The status of the transaction, one of `succeeded`, `pending`, or `failed`.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "type": {
+      "description": "The type of source this transaction is attached to.",
+      "enum": [
+        "ach_credit_transfer",
+        "ach_debit",
+        "alipay",
+        "bancontact",
+        "card",
+        "card_present",
+        "eps",
+        "giropay",
+        "ideal",
+        "klarna",
+        "multibanco",
+        "p24",
+        "sepa_debit",
+        "sofort",
+        "three_d_secure",
+        "wechat"
+      ],
+      "type": "string"
+    }
+  },
+  "required": [
+    "amount",
+    "created",
+    "currency",
+    "id",
+    "livemode",
+    "object",
+    "source",
+    "status",
+    "type"
+  ],
+  "title": "SourceTransaction",
+  "type": "object",
+  "x-resourceId": "source_transaction",
+  "default": {
+    "ach_credit_transfer": {
+      "customer_data": "string",
+      "fingerprint": "string",
+      "last4": "string",
+      "routing_number": "string"
+    },
+    "amount": 0,
+    "chf_credit_transfer": {
+      "reference": "string",
+      "sender_address_country": "string",
+      "sender_address_line1": "string",
+      "sender_iban": "string",
+      "sender_name": "string"
+    },
+    "created": 0,
+    "currency": "string",
+    "gbp_credit_transfer": {
+      "fingerprint": "string",
+      "funding_method": "string",
+      "last4": "string",
+      "reference": "string",
+      "sender_account_number": "string",
+      "sender_name": "string",
+      "sender_sort_code": "string"
+    },
+    "id": "string",
+    "livemode": true,
+    "object": "source_transaction",
+    "paper_check": {
+      "available_at": "string",
+      "invoices": "string"
+    },
+    "sepa_credit_transfer": {
+      "reference": "string",
+      "sender_iban": "string",
+      "sender_name": "string"
+    },
+    "source": "string",
+    "status": "string",
+    "type": "ach_credit_transfer"
+  }
+}
