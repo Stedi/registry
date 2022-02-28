@@ -13,8 +13,8 @@ Take a look at the [`schemas` directory](https://github.com/Stedi/registry/tree/
 
 | Schema           | Map this schema using Mappings                                                                                                                                                                                     |
 |------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Stripe's Invoice | [![Map from this schema](/schemas/MapFromThisSchema.svg)](https://terminal.stedi.com/mappings/import?source_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/schemas/stripe/v112/invoice.json)    |
-| Shopify's Order  | [![Map from this schema](/schemas/MapFromThisSchema.svg)](https://terminal.stedi.com/mappings/import?source_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/shopify/webhooks/2022-01/Order.json) |
+| Stripe's Invoice | [![Map from this schema](/images/MapFromThisSchema.svg)](https://terminal.stedi.com/mappings/import?source_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/schemas/stripe/v112/invoice.json)    |
+| Shopify's Order  | [![Map from this schema](/images/MapFromThisSchema.svg)](https://terminal.stedi.com/mappings/import?source_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/shopify/webhooks/2022-01/Order.json) |
 
 ## Read our documentation
 - [Mappings guide](https://www.stedi.com/docs/mappings)
