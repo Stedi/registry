@@ -5,7 +5,9 @@
 </p>
 
 
-The `registry` repository contains a number of JSONSchemas to help you get started building your own custom B2B integrations on Stedi using [Mappings](https://stedi.com/mappings). Please see the [`schemas` directory](https://github.com/Stedi/registry/tree/main/schemas) to see available providers.
+Stedi's `Registry` project is a collection of high quality JSON Schemas for popular APIs like Stripe, Shopify, and more. Schemas are helpful to have handy when building integrations; if you're using Stedi, you can use them to quickly create accurate [Mappings](https://stedi.com/mappings). 
+
+Take a look at the [`schemas` directory](https://github.com/Stedi/registry/tree/main/schemas) to see available providers.
 
 #### Featured examples
 
@@ -20,5 +22,5 @@ The `registry` repository contains a number of JSONSchemas to help you get start
 - [How to use mappings - Video](https://www.youtube.com/watch?v=b0sPfOrPL3o)
 
 ## Get in touch
-- [Send us an email](mailto:team@stedi.com) to talk to our customer development team
+- [Send us an email](mailto:team@stedi.com) to connect with our team
 - [Create an issue](https://github.com/Stedi/registry/issues) in this repo if you encounter a bug or if you have any feedback on how we can improve this resource
