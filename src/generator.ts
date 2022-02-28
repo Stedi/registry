@@ -120,7 +120,7 @@ export async function generateForVersion(
 }
 
 function runOnStediButtonWithSource(target: string) {
-  return `[![Map from this schema](schemas/MapFromThisSchema.svg)](https://terminal.stedi.com/mappings/import?source_json=https://raw.githubusercontent.com/Stedi/registry/main/${target})`;
+  return `[![Map from this schema](/schemas/MapFromThisSchema.svg)](https://terminal.stedi.com/mappings/import?source_json=https://raw.githubusercontent.com/Stedi/registry/main/${target})`;
 }
 
 export async function generateAll(
