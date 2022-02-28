@@ -7,7 +7,7 @@
 
 The `registry` repository contains a number of JSONSchemas to help you get started building your own custom B2B integrations on Stedi using [Mappings](https://stedi.com/mappings). Please see the [`schemas` directory](https://github.com/Stedi/registry/tree/main/schemas) to see available providers.
 
-#### Notable examples:
+#### Featured examples
 
 | Schema           | Map this schema using Mappings                                                                                                                                                                                     |
 |------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
