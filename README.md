@@ -17,6 +17,7 @@ The `registry` repository contains a number of JSONSchemas to help you get start
 ## Read our documentation
 - [Mappings guide](https://www.stedi.com/docs/mappings)
 - [API Reference](https://www.stedi.com/docs/api/mappings)
+- [How to use mappings - Video](https://www.youtube.com/watch?v=b0sPfOrPL3o)
 
 ## Get in touch
 - [Send us an email](mailto:team@stedi.com) to talk to our customer development team
