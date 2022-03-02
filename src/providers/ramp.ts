@@ -13,6 +13,7 @@ export default openAPIUrlProvider({
 
       for (let modelName in (document as any).components.models) {
         delete (document as any).components.models[modelName]["x-examples"];
+        delete (document as any).components.models[modelName]["x-tags"];
       }
 
 

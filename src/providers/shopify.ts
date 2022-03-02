@@ -1,4 +1,4 @@
-import { getIntrospectionQuery } from "graphql";
+import gql from "graphql";
 import axios from "axios";
 import { GraphQLIntrospectionSchema, Provider } from "../provider";
 import { OpenAPIV3 } from "openapi-types";
@@ -11,7 +11,7 @@ export class ShopifyProvider implements Provider {
   async getSchema(version: string): Promise<GraphQLIntrospectionSchema> {
     const { data } = await axios.post(
       `https://${process.env.SHOPIFY_URL}/admin/api/2022-01/graphql.json`,
-      getIntrospectionQuery(),
+      gql.getIntrospectionQuery(),
       {
         headers: {
           "X-Shopify-Access-Token": process.env.SHOPIFY_ACCESS_TOKEN as string,
