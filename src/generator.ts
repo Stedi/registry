@@ -114,7 +114,7 @@ export async function generateForVersion(
   }
 
   const readmeFileContents = markdownTable([
-    ["Source Schema", "Map on Stedi"],
+    ["Source Schema"],
     ...markdownTableRows,
   ]);
   fs.writeFileSync(path.join(baseDir, `README.md`), readmeFileContents);
