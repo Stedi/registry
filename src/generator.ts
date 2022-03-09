@@ -125,7 +125,7 @@ function mapFromThisSchemaWithSource(target: string) {
 }
 
 function mapToThisSchemaWithSource(target: string) {
-  return `[![Map to this schema  ](/images/MapToThisSchema.svg)](https://terminal.stedi.com/mappings/import?source_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/${target})`;
+  return `[![Map to this schema](/images/MapToThisSchema.svg)](https://terminal.stedi.com/mappings/import?source_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/${target})`;
 }
 
 export async function generateAll(
