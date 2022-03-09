@@ -12,7 +12,8 @@ export class StripeProvider implements Provider {
     for await (const tag of github.getTags("stripe", "openapi")) {
       tags.push(tag.name);
     }
-    return tags.slice(0, 1);
+    console.log("latest stripe schema version is: ", tags[0])
+    return ["v112"];
   }
 
   async getSchema(version: string): Promise<OpenAPI3Schema> {
