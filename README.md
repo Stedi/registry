@@ -10,8 +10,8 @@ Take a look at the [`schemas` directory](https://github.com/Stedi/registry/tree/
 
 #### Featured examples
 
-| Schema           | Map this schema using [Mappings](https://www.stedi.com/products/mappings)                                                                                                                                                 |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Schema           | [Map](https://www.stedi.com/products/mappings) from this schema   |[Map](https://www.stedi.com/products/mappings) to this schema                                                                                                                                  |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |-------------------------|
 | Stripe's Invoice | [![Map from this schema](/images/MapFromThisSchema.svg)](https://terminal.stedi.com/mappings/import?source_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/schemas/stripe/v112/invoice.json)            | [![Map to this schema](/images/MapToThisSchema.svg)](https://terminal.stedi.com/mappings/import?target_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/schemas/stripe/v112/invoice.json) |
 | Shopify's Order  | [![Map from this schema](/images/MapFromThisSchema.svg)](https://terminal.stedi.com/mappings/import?source_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/schemas/shopify/webhooks/2022-01/Order.json) | [![Map from this schema](/images/MapToThisSchema.svg)](https://terminal.stedi.com/mappings/import?target_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/schemas/shopify/webhooks/2022-01/Order.json) |
 
