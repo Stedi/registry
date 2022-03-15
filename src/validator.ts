@@ -16,7 +16,8 @@ function validateSchema(jsonSchema: string): SchemaObject {
 
     if (!isSchemaVersionSupported(schemaObject)) {
       throw new Error(
-        `the "${schemaObject.$schema
+        `the "${
+          schemaObject.$schema
         }" is not allowed. Use one of [${supportedSchemaVersions.join(
           ","
         )}] instead`
@@ -43,6 +44,21 @@ function validateSchema(jsonSchema: string): SchemaObject {
     return schemaObject;
   } catch (e) {
     throw e;
+  }
+}
+
+function validateSchemasDefault(schemaObject: SchemaObject): void {
+  if (!schemaObject.default) {
+    return;
+  }
+
+  const ajv = getAjvInstance("json-schema-2020-12");
+  const validate = ajv.compile(schemaObject);
+
+  const isValid = validate(schemaObject.default);
+
+  if (!isValid) {
+    throw validate.errors;
   }
 }
 
@@ -101,7 +117,8 @@ async function validateAll() {
 
   paths.forEach((path: string) => {
     try {
-      validateSchema(readFileSync(path, "utf-8"));
+      const schema = validateSchema(readFileSync(path, "utf-8"));
+      validateSchemasDefault(schema);
     } catch (e) {
       errors.push([path, e as Error]);
       console.error(`${path} failed validation: `);
