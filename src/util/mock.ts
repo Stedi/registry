@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { OpenAPIV3 } from "openapi-types";
+import RandExp from "randexp";
 
 export type SchemaLike = OpenAPIV3.SchemaObject;
 
@@ -98,6 +99,12 @@ export function mock(schema: SchemaLike): any {
       _default: "string",
     };
     const val = format ? formatExamples[format] : formatExamples._default;
+    if (schema.pattern) {
+      const randexp = new RandExp(schema.pattern);
+      randexp.max = schema.maxLength ?? 10;
+      return randexp.gen();
+    }
+
     if (val === undefined) {
       console.log(format);
     }
@@ -106,7 +113,8 @@ export function mock(schema: SchemaLike): any {
     if (val === formatExamples._default && val.length < minln) {
       return _.padEnd(val, minln, val);
     }
-    return val.substr(0, _.clamp(val.length, minln, maxln));
+
+    return val.substring(0, _.clamp(val.length, minln, maxln));
   }
 
   if (type === "number") {
