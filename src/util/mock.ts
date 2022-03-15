@@ -102,6 +102,10 @@ export function mock(schema: SchemaLike): any {
     if (schema.pattern) {
       const randexp = new RandExp(schema.pattern);
       randexp.max = schema.maxLength ?? 10;
+      let val = randexp.gen();
+      while (val.length < (schema.minLength ?? 0)) {
+        val = randexp.gen();
+      }
       return randexp.gen();
     }
 
