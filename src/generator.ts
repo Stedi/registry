@@ -108,8 +108,8 @@ export async function generateForVersion(
 
     markdownTableRows.push([
       `${schema.name}.json`,
-      mapFromThisSchemaWithSource(target, schema.name),
-      mapToThisSchemaWithSource(target, schema.name),
+      mapFromThisSchemaWithSource(target, providerName, schema.name),
+      mapToThisSchemaWithSource(target, providerName, schema.name),
     ]);
   }
 
@@ -120,13 +120,25 @@ export async function generateForVersion(
   fs.writeFileSync(path.join(baseDir, `README.md`), readmeFileContents);
 }
 
-function mapFromThisSchemaWithSource(target: string, schemaName: string) {
-  const mappingName = encodeURIComponent(`Mapping from ${schemaName}`);
+function mapFromThisSchemaWithSource(
+  target: string,
+  providerName: string,
+  schemaName: string
+) {
+  const mappingName = encodeURIComponent(
+    `Mapping from ${providerName}'s ${schemaName} schema`
+  );
   return `[![Map from this schema](/images/MapFromThisSchema.svg)](https://terminal.stedi.com/mappings/import?name=${mappingName}&source_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/${target})`;
 }
 
-function mapToThisSchemaWithSource(target: string, schemaName: string) {
-  const mappingName = encodeURIComponent(`Mapping to ${schemaName}`);
+function mapToThisSchemaWithSource(
+  target: string,
+  providerName: string,
+  schemaName: string
+) {
+  const mappingName = encodeURIComponent(
+    `Mapping to ${providerName}'s ${schemaName} schema`
+  );
   return `[![Map to this schema](/images/MapToThisSchema.svg)](https://terminal.stedi.com/mappings/import?name=${mappingName}&target_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/${target})`;
 }
 
