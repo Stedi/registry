@@ -107,7 +107,7 @@ export async function generateForVersion(
     fs.writeFileSync(target, JSON.stringify(schema.schema, null, 2));
 
     markdownTableRows.push([
-      `${schema.name}.json`,
+      `[${schema.name}.json](https://raw.githubusercontent.com/Stedi/registry/main/${target})`,
       mapFromThisSchemaWithSource(target, providerName, schema.name),
       mapToThisSchemaWithSource(target, providerName, schema.name),
     ]);
