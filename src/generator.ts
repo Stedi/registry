@@ -126,7 +126,7 @@ function mapFromThisSchemaWithSource(
   schemaName: string
 ) {
   const mappingName = encodeURIComponent(
-    `Mapping from ${providerName}'s ${schemaName} schema`
+    `Mapping from ${capitalizeFirstLetter(providerName)}'s ${schemaName} schema`
   );
   return `[![Map from this schema](/images/MapFromThisSchema.svg)](https://terminal.stedi.com/mappings/import?name=${mappingName}&source_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/${target})`;
 }
@@ -137,7 +137,7 @@ function mapToThisSchemaWithSource(
   schemaName: string
 ) {
   const mappingName = encodeURIComponent(
-    `Mapping to ${providerName}'s ${schemaName} schema`
+    `Mapping to ${capitalizeFirstLetter(providerName)}'s ${schemaName} schema`
   );
   return `[![Map to this schema](/images/MapToThisSchema.svg)](https://terminal.stedi.com/mappings/import?name=${mappingName}&target_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/${target})`;
 }
@@ -151,6 +151,10 @@ export async function generateAll(
   for (const version of versions) {
     await generateForVersion(rootPath, providerName, version, customPath);
   }
+}
+
+function capitalizeFirstLetter(str: string) {
+  return str[0].toUpperCase() + str.slice(1);
 }
 
 (async () => {
