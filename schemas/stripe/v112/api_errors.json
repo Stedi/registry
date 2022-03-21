@@ -152,7 +152,9 @@
                     "maxLength": 5000,
                     "type": "string"
                   },
-                  "billing_details": {},
+                  "billing_details": {
+                    "type": "object"
+                  },
                   "calculated_statement_descriptor": {
                     "description": "The full statement descriptor that is passed to card networks, and that is displayed on your customers' credit card and bank statements. Allows you to see what the statement descriptor looks like after the static and dynamic portions are combined.",
                     "maxLength": 5000,
@@ -210,7 +212,8 @@
                   },
                   "fraud_details": {
                     "description": "Information on fraud assessments for the charge.",
-                    "nullable": true
+                    "nullable": true,
+                    "type": "object"
                   },
                   "id": {
                     "description": "Unique identifier for the object.",
@@ -227,7 +230,9 @@
                     "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
                     "type": "boolean"
                   },
-                  "metadata": {},
+                  "metadata": {
+                    "type": "object"
+                  },
                   "object": {
                     "description": "String representing the object's type. Objects of the same type share the same value.",
                     "enum": [
@@ -249,7 +254,8 @@
                   },
                   "outcome": {
                     "description": "Details about whether the payment was accepted, and why. See [understanding declines](https://stripe.com/docs/declines) for details.",
-                    "nullable": true
+                    "nullable": true,
+                    "type": "object"
                   },
                   "paid": {
                     "description": "`true` if the charge succeeded, or was successfully authorized for later capture.",
@@ -271,7 +277,8 @@
                   },
                   "payment_method_details": {
                     "description": "Details about the payment method at the time of the transaction.",
-                    "nullable": true
+                    "nullable": true,
+                    "type": "object"
                   },
                   "receipt_email": {
                     "description": "This is the email address that the receipt for this charge was sent to.",
@@ -301,7 +308,9 @@
                     "description": "Whether the charge has been fully refunded. If the charge is only partially refunded, this attribute will still be false.",
                     "type": "boolean"
                   },
-                  "refunds": {},
+                  "refunds": {
+                    "type": "object"
+                  },
                   "review": {
                     "description": "ID of the review associated with this charge if one exists.",
                     "nullable": true,
@@ -310,7 +319,8 @@
                   },
                   "shipping": {
                     "description": "Shipping information for the charge.",
-                    "nullable": true
+                    "nullable": true,
+                    "type": "object"
                   },
                   "source_transfer": {
                     "description": "The transfer ID which created this charge. Only present if the charge came from another Stripe account. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details.",
@@ -350,7 +360,8 @@
                   },
                   "transfer_data": {
                     "description": "An optional dictionary including the account to automatically transfer to as part of a destination charge. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details.",
-                    "nullable": true
+                    "nullable": true,
+                    "type": "object"
                   },
                   "transfer_group": {
                     "description": "A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.",
@@ -461,7 +472,8 @@
         },
         "last_payment_error": {
           "description": "The payment error encountered in the previous PaymentIntent confirmation. It will be cleared if the PaymentIntent is later updated for any reason.",
-          "nullable": true
+          "nullable": true,
+          "type": "object"
         },
         "livemode": {
           "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
@@ -566,7 +578,9 @@
                     "null"
                   ]
                 },
-                "stores": {}
+                "stores": {
+                  "type": "object"
+                }
               },
               "required": [
                 "expires_at",
@@ -788,7 +802,9 @@
             "acss_debit": {
               "description": "",
               "properties": {
-                "mandate_options": {},
+                "mandate_options": {
+                  "type": "object"
+                },
                 "setup_future_usage": {
                   "description": "Indicates that you intend to make future payments with this PaymentIntent's payment method.\n\nProviding this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.\n\nWhen processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).",
                   "enum": [
@@ -936,7 +952,8 @@
               "properties": {
                 "installments": {
                   "description": "Installment details for this payment (Mexico only).\n\nFor more information, see the [installments integration guide](https://stripe.com/docs/payments/installments).",
-                  "nullable": true
+                  "nullable": true,
+                  "type": "object"
                 },
                 "network": {
                   "description": "Selected network to process this payment intent on. Depends on the available networks of the card attached to the payment intent. Can be only set confirm-time.",
@@ -1172,7 +1189,9 @@
             "sepa_debit": {
               "description": "",
               "properties": {
-                "mandate_options": {},
+                "mandate_options": {
+                  "type": "object"
+                },
                 "setup_future_usage": {
                   "description": "Indicates that you intend to make future payments with this PaymentIntent's payment method.\n\nProviding this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.\n\nWhen processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).",
                   "enum": [
@@ -1798,7 +1817,8 @@
                 },
                 "payment_method_details": {
                   "description": "Transaction-specific details of the payment method used in the payment.",
-                  "nullable": true
+                  "nullable": true,
+                  "type": "object"
                 },
                 "setup_attempt": {
                   "description": "The ID of the SetupAttempt that generated this PaymentMethod, if any.",
@@ -1861,8 +1881,12 @@
               "description": "",
               "nullable": true,
               "properties": {
-                "amex_express_checkout": {},
-                "apple_pay": {},
+                "amex_express_checkout": {
+                  "type": "object"
+                },
+                "apple_pay": {
+                  "type": "object"
+                },
                 "dynamic_last4": {
                   "description": "(For tokenized numbers only.) The last four digits of the device account number.",
                   "maxLength": 5000,
@@ -1871,9 +1895,15 @@
                     "null"
                   ]
                 },
-                "google_pay": {},
-                "masterpass": {},
-                "samsung_pay": {},
+                "google_pay": {
+                  "type": "object"
+                },
+                "masterpass": {
+                  "type": "object"
+                },
+                "samsung_pay": {
+                  "type": "object"
+                },
                 "type": {
                   "description": "The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.",
                   "enum": [
@@ -1886,7 +1916,9 @@
                   ],
                   "type": "string"
                 },
-                "visa_checkout": {}
+                "visa_checkout": {
+                  "type": "object"
+                }
               },
               "required": [
                 "type"
@@ -2370,7 +2402,8 @@
         },
         "last_setup_error": {
           "description": "The error encountered in the previous SetupIntent confirmation.",
-          "nullable": true
+          "nullable": true,
+          "type": "object"
         },
         "latest_attempt": {
           "description": "The most recent SetupAttempt for this SetupIntent.",
@@ -2488,7 +2521,9 @@
                     "null"
                   ]
                 },
-                "mandate_options": {},
+                "mandate_options": {
+                  "type": "object"
+                },
                 "verification_method": {
                   "description": "Bank account verification method.",
                   "enum": [
@@ -2525,7 +2560,9 @@
             "sepa_debit": {
               "description": "",
               "properties": {
-                "mandate_options": {}
+                "mandate_options": {
+                  "type": "object"
+                }
               },
               "title": "setup_intent_payment_method_options_sepa_debit",
               "type": "object"

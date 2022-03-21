@@ -746,7 +746,8 @@
               "properties": {
                 "plan": {
                   "description": "Installment plan selected for the payment.",
-                  "nullable": true
+                  "nullable": true,
+                  "type": "object"
                 }
               },
               "title": "payment_method_details_card_installments",
@@ -837,8 +838,12 @@
               "description": "",
               "nullable": true,
               "properties": {
-                "amex_express_checkout": {},
-                "apple_pay": {},
+                "amex_express_checkout": {
+                  "type": "object"
+                },
+                "apple_pay": {
+                  "type": "object"
+                },
                 "dynamic_last4": {
                   "description": "(For tokenized numbers only.) The last four digits of the device account number.",
                   "maxLength": 5000,
@@ -847,9 +852,15 @@
                     "null"
                   ]
                 },
-                "google_pay": {},
-                "masterpass": {},
-                "samsung_pay": {},
+                "google_pay": {
+                  "type": "object"
+                },
+                "masterpass": {
+                  "type": "object"
+                },
+                "samsung_pay": {
+                  "type": "object"
+                },
                 "type": {
                   "description": "The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.",
                   "enum": [
@@ -862,7 +873,9 @@
                   ],
                   "type": "string"
                 },
-                "visa_checkout": {}
+                "visa_checkout": {
+                  "type": "object"
+                }
               },
               "required": [
                 "type"

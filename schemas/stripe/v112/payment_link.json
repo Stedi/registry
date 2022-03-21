@@ -132,7 +132,9 @@
                       "description": "The amount discounted.",
                       "type": "integer"
                     },
-                    "discount": {}
+                    "discount": {
+                      "type": "object"
+                    }
                   },
                   "required": [
                     "amount",
@@ -197,7 +199,9 @@
                       "null"
                     ]
                   },
-                  "metadata": {},
+                  "metadata": {
+                    "type": "object"
+                  },
                   "nickname": {
                     "description": "A brief description of the price, hidden from customers.",
                     "maxLength": 5000,
@@ -220,7 +224,8 @@
                   },
                   "recurring": {
                     "description": "The recurring components of a price such as `interval` and `usage_type`.",
-                    "nullable": true
+                    "nullable": true,
+                    "type": "object"
                   },
                   "tax_behavior": {
                     "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.",
@@ -237,7 +242,9 @@
                   },
                   "tiers": {
                     "description": "Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.",
-                    "items": {},
+                    "items": {
+                      "type": "object"
+                    },
                     "type": "array"
                   },
                   "tiers_mode": {
@@ -254,7 +261,8 @@
                   },
                   "transform_quantity": {
                     "description": "Apply a transformation to the reported usage or set quantity before computing the amount billed. Cannot be combined with `tiers`.",
-                    "nullable": true
+                    "nullable": true,
+                    "type": "object"
                   },
                   "type": {
                     "description": "One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.",
@@ -311,7 +319,9 @@
                       "description": "Amount of tax applied for this rate.",
                       "type": "integer"
                     },
-                    "rate": {}
+                    "rate": {
+                      "type": "object"
+                    }
                   },
                   "required": [
                     "amount",

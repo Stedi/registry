@@ -115,7 +115,9 @@
               "properties": {
                 "data": {
                   "description": "This list only contains the latest charge, even if there were previously multiple unsuccessful charges. To view all previous charges for a PaymentIntent, you can filter the charges list using the `payment_intent` [parameter](https://stripe.com/docs/api/charges/list#list_charges-payment_intent).",
-                  "items": {},
+                  "items": {
+                    "type": "object"
+                  },
                   "type": "array"
                 },
                 "has_more": {
@@ -195,7 +197,8 @@
             },
             "last_payment_error": {
               "description": "The payment error encountered in the previous PaymentIntent confirmation. It will be cleared if the PaymentIntent is later updated for any reason.",
-              "nullable": true
+              "nullable": true,
+              "type": "object"
             },
             "livemode": {
               "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
@@ -206,21 +209,41 @@
               "description": "",
               "nullable": true,
               "properties": {
-                "alipay_handle_redirect": {},
-                "boleto_display_details": {},
-                "konbini_display_details": {},
-                "oxxo_display_details": {},
-                "redirect_to_url": {},
+                "alipay_handle_redirect": {
+                  "type": "object"
+                },
+                "boleto_display_details": {
+                  "type": "object"
+                },
+                "konbini_display_details": {
+                  "type": "object"
+                },
+                "oxxo_display_details": {
+                  "type": "object"
+                },
+                "redirect_to_url": {
+                  "type": "object"
+                },
                 "type": {
                   "description": "Type of the next action to perform, one of `redirect_to_url`, `use_stripe_sdk`, `alipay_handle_redirect`, `oxxo_display_details`, or `verify_with_microdeposits`.",
                   "maxLength": 5000,
                   "type": "string"
                 },
-                "use_stripe_sdk": {},
-                "verify_with_microdeposits": {},
-                "wechat_pay_display_qr_code": {},
-                "wechat_pay_redirect_to_android_app": {},
-                "wechat_pay_redirect_to_ios_app": {}
+                "use_stripe_sdk": {
+                  "type": "object"
+                },
+                "verify_with_microdeposits": {
+                  "type": "object"
+                },
+                "wechat_pay_display_qr_code": {
+                  "type": "object"
+                },
+                "wechat_pay_redirect_to_android_app": {
+                  "type": "object"
+                },
+                "wechat_pay_redirect_to_ios_app": {
+                  "type": "object"
+                }
               },
               "required": [
                 "type"
@@ -251,28 +274,72 @@
               "description": "",
               "nullable": true,
               "properties": {
-                "acss_debit": {},
-                "afterpay_clearpay": {},
-                "alipay": {},
-                "au_becs_debit": {},
-                "bacs_debit": {},
-                "bancontact": {},
-                "boleto": {},
-                "card": {},
-                "card_present": {},
-                "eps": {},
-                "fpx": {},
-                "giropay": {},
-                "grabpay": {},
-                "ideal": {},
-                "interac_present": {},
-                "klarna": {},
-                "konbini": {},
-                "oxxo": {},
-                "p24": {},
-                "sepa_debit": {},
-                "sofort": {},
-                "wechat_pay": {}
+                "acss_debit": {
+                  "type": "object"
+                },
+                "afterpay_clearpay": {
+                  "type": "object"
+                },
+                "alipay": {
+                  "type": "object"
+                },
+                "au_becs_debit": {
+                  "type": "object"
+                },
+                "bacs_debit": {
+                  "type": "object"
+                },
+                "bancontact": {
+                  "type": "object"
+                },
+                "boleto": {
+                  "type": "object"
+                },
+                "card": {
+                  "type": "object"
+                },
+                "card_present": {
+                  "type": "object"
+                },
+                "eps": {
+                  "type": "object"
+                },
+                "fpx": {
+                  "type": "object"
+                },
+                "giropay": {
+                  "type": "object"
+                },
+                "grabpay": {
+                  "type": "object"
+                },
+                "ideal": {
+                  "type": "object"
+                },
+                "interac_present": {
+                  "type": "object"
+                },
+                "klarna": {
+                  "type": "object"
+                },
+                "konbini": {
+                  "type": "object"
+                },
+                "oxxo": {
+                  "type": "object"
+                },
+                "p24": {
+                  "type": "object"
+                },
+                "sepa_debit": {
+                  "type": "object"
+                },
+                "sofort": {
+                  "type": "object"
+                },
+                "wechat_pay": {
+                  "type": "object"
+                }
               },
               "title": "PaymentIntentPaymentMethodOptions",
               "type": "object"
@@ -289,7 +356,9 @@
               "description": "",
               "nullable": true,
               "properties": {
-                "card": {},
+                "card": {
+                  "type": "object"
+                },
                 "type": {
                   "description": "Type of the payment method for which payment is in `processing` state, one of `card`.",
                   "enum": [
@@ -334,7 +403,9 @@
               "description": "",
               "nullable": true,
               "properties": {
-                "address": {},
+                "address": {
+                  "type": "object"
+                },
                 "carrier": {
                   "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.",
                   "maxLength": 5000,
@@ -579,7 +650,8 @@
               "properties": {
                 "address": {
                   "description": "Billing address.",
-                  "nullable": true
+                  "nullable": true,
+                  "type": "object"
                 },
                 "email": {
                   "description": "Email address.",
@@ -634,7 +706,8 @@
                 },
                 "checks": {
                   "description": "Checks on Card address and CVC if provided.",
-                  "nullable": true
+                  "nullable": true,
+                  "type": "object"
                 },
                 "country": {
                   "description": "Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.",
@@ -667,7 +740,8 @@
                 },
                 "generated_from": {
                   "description": "Details of the original PaymentMethod that created this object.",
-                  "nullable": true
+                  "nullable": true,
+                  "type": "object"
                 },
                 "last4": {
                   "description": "The last four digits of the card.",
@@ -676,15 +750,18 @@
                 },
                 "networks": {
                   "description": "Contains information about card networks that can be used to process the payment.",
-                  "nullable": true
+                  "nullable": true,
+                  "type": "object"
                 },
                 "three_d_secure_usage": {
                   "description": "Contains details on how this Card maybe be used for 3D Secure authentication.",
-                  "nullable": true
+                  "nullable": true,
+                  "type": "object"
                 },
                 "wallet": {
                   "description": "If this Card is part of a card wallet, this contains the details of the card wallet.",
-                  "nullable": true
+                  "nullable": true,
+                  "type": "object"
                 }
               },
               "required": [
@@ -876,7 +953,8 @@
               "properties": {
                 "dob": {
                   "description": "The customer's date of birth, if provided.",
-                  "nullable": true
+                  "nullable": true,
+                  "type": "object"
                 }
               },
               "title": "payment_method_klarna",
@@ -985,7 +1063,8 @@
                 },
                 "generated_from": {
                   "description": "Information about the object that generated this PaymentMethod.",
-                  "nullable": true
+                  "nullable": true,
+                  "type": "object"
                 },
                 "last4": {
                   "description": "Last four characters of the IBAN.",
@@ -1121,7 +1200,8 @@
             },
             "last_setup_error": {
               "description": "The error encountered in the previous SetupIntent confirmation.",
-              "nullable": true
+              "nullable": true,
+              "type": "object"
             },
             "latest_attempt": {
               "description": "The most recent SetupAttempt for this SetupIntent.",
@@ -1144,14 +1224,20 @@
               "description": "",
               "nullable": true,
               "properties": {
-                "redirect_to_url": {},
+                "redirect_to_url": {
+                  "type": "object"
+                },
                 "type": {
                   "description": "Type of the next action to perform, one of `redirect_to_url`, `use_stripe_sdk`, `alipay_handle_redirect`, `oxxo_display_details`, or `verify_with_microdeposits`.",
                   "maxLength": 5000,
                   "type": "string"
                 },
-                "use_stripe_sdk": {},
-                "verify_with_microdeposits": {}
+                "use_stripe_sdk": {
+                  "type": "object"
+                },
+                "verify_with_microdeposits": {
+                  "type": "object"
+                }
               },
               "required": [
                 "type"
@@ -1182,9 +1268,15 @@
               "description": "",
               "nullable": true,
               "properties": {
-                "acss_debit": {},
-                "card": {},
-                "sepa_debit": {}
+                "acss_debit": {
+                  "type": "object"
+                },
+                "card": {
+                  "type": "object"
+                },
+                "sepa_debit": {
+                  "type": "object"
+                }
               },
               "title": "SetupIntentPaymentMethodOptions",
               "type": "object"

@@ -86,7 +86,7 @@ function traverse(schema: OpenAPIV3.SchemaObject, parents: Set<String>): any {
       (schema.title != undefined && parents.has(schema.title)) ||
       parents.size > maxDepth
     ) {
-      return {};
+      return { type };
     }
 
     const obj = schema as OpenAPIV3.NonArraySchemaObject;
