@@ -49,41 +49,34 @@
       "type": "string"
     },
     "package_dimensions": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "height": {
-              "description": "Height, in inches.",
-              "type": "number"
-            },
-            "length": {
-              "description": "Length, in inches.",
-              "type": "number"
-            },
-            "weight": {
-              "description": "Weight, in ounces.",
-              "type": "number"
-            },
-            "width": {
-              "description": "Width, in inches.",
-              "type": "number"
-            }
-          },
-          "required": [
-            "height",
-            "length",
-            "weight",
-            "width"
-          ],
-          "title": "PackageDimensions",
-          "type": "object"
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "height": {
+          "description": "Height, in inches.",
+          "type": "number"
         },
-        {
-          "type": "null"
+        "length": {
+          "description": "Length, in inches.",
+          "type": "number"
+        },
+        "weight": {
+          "description": "Weight, in ounces.",
+          "type": "number"
+        },
+        "width": {
+          "description": "Width, in inches.",
+          "type": "number"
         }
+      },
+      "required": [
+        "height",
+        "length",
+        "weight",
+        "width"
       ],
-      "description": "The dimensions of this product for shipping purposes."
+      "title": "PackageDimensions",
+      "type": "object"
     },
     "shippable": {
       "description": "Whether this product is shipped (i.e., physical goods).",
@@ -101,16 +94,10 @@
       ]
     },
     "tax_code": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "A [tax code](https://stripe.com/docs/tax/tax-codes) ID."
+      "description": "A [tax code](https://stripe.com/docs/tax/tax-codes) ID.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "unit_label": {
       "description": "A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.",

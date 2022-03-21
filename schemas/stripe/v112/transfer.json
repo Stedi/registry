@@ -10,16 +10,10 @@
       "type": "integer"
     },
     "balance_transaction": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "Balance transaction that describes the impact of this transfer on your account balance."
+      "description": "Balance transaction that describes the impact of this transfer on your account balance.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "created": {
       "description": "Time that this record of the transfer was first created.",
@@ -39,25 +33,15 @@
       ]
     },
     "destination": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "ID of the Stripe account the transfer was sent to."
+      "description": "ID of the Stripe account the transfer was sent to.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "destination_payment": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        }
-      ],
-      "description": "If the destination is a Stripe account, this will be the ID of the payment that the destination account received for the transfer."
+      "description": "If the destination is a Stripe account, this will be the ID of the payment that the destination account received for the transfer.",
+      "maxLength": 5000,
+      "type": "string"
     },
     "id": {
       "description": "Unique identifier for the object.",
@@ -89,16 +73,10 @@
                 "type": "integer"
               },
               "balance_transaction": {
-                "anyOf": [
-                  {
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "Balance transaction that describes the impact on your account balance."
+                "description": "Balance transaction that describes the impact on your account balance.",
+                "nullable": true,
+                "maxLength": 5000,
+                "type": "string"
               },
               "created": {
                 "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -110,16 +88,10 @@
                 "type": "string"
               },
               "destination_payment_refund": {
-                "anyOf": [
-                  {
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "Linked payment refund for the transfer reversal."
+                "description": "Linked payment refund for the transfer reversal.",
+                "nullable": true,
+                "maxLength": 5000,
+                "type": "string"
               },
               "id": {
                 "description": "Unique identifier for the object.",
@@ -135,25 +107,15 @@
                 "type": "string"
               },
               "source_refund": {
-                "anyOf": [
-                  {
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "ID of the refund responsible for the transfer reversal."
+                "description": "ID of the refund responsible for the transfer reversal.",
+                "nullable": true,
+                "maxLength": 5000,
+                "type": "string"
               },
               "transfer": {
-                "anyOf": [
-                  {
-                    "maxLength": 5000,
-                    "type": "string"
-                  }
-                ],
-                "description": "ID of the transfer that was reversed."
+                "description": "ID of the transfer that was reversed.",
+                "maxLength": 5000,
+                "type": "string"
               }
             },
             "required": [
@@ -200,16 +162,10 @@
       "type": "boolean"
     },
     "source_transaction": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "ID of the charge or payment that was used to fund the transfer. If null, the transfer was funded from the available balance."
+      "description": "ID of the charge or payment that was used to fund the transfer. If null, the transfer was funded from the available balance.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "source_type": {
       "description": "The source balance this transfer came from. One of `card`, `fpx`, or `bank_account`.",

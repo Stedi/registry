@@ -15,16 +15,10 @@
       "type": "integer"
     },
     "customer": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "ID of the customer."
+      "description": "ID of the customer.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "id": {
       "description": "Unique identifier for the object.",
@@ -97,48 +91,41 @@
       "type": "string"
     },
     "verification": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "status": {
-              "description": "Verification status, one of `pending`, `verified`, `unverified`, or `unavailable`.",
-              "enum": [
-                "pending",
-                "unavailable",
-                "unverified",
-                "verified"
-              ],
-              "type": "string"
-            },
-            "verified_address": {
-              "description": "Verified address.",
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "verified_name": {
-              "description": "Verified name.",
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
-            }
-          },
-          "required": [
-            "status"
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "status": {
+          "description": "Verification status, one of `pending`, `verified`, `unverified`, or `unavailable`.",
+          "enum": [
+            "pending",
+            "unavailable",
+            "unverified",
+            "verified"
           ],
-          "title": "tax_id_verification",
-          "type": "object"
+          "type": "string"
         },
-        {
-          "type": "null"
+        "verified_address": {
+          "description": "Verified address.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "verified_name": {
+          "description": "Verified name.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
         }
+      },
+      "required": [
+        "status"
       ],
-      "description": "Tax ID verification information."
+      "title": "tax_id_verification",
+      "type": "object"
     }
   },
   "required": [

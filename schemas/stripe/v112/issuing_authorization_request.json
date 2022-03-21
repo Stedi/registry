@@ -6,26 +6,19 @@
       "type": "integer"
     },
     "amount_details": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "atm_fee": {
-              "description": "The fee charged by the ATM for the cash withdrawal.",
-              "type": [
-                "integer",
-                "null"
-              ]
-            }
-          },
-          "title": "IssuingAuthorizationAmountDetails",
-          "type": "object"
-        },
-        {
-          "type": "null"
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "atm_fee": {
+          "description": "The fee charged by the ATM for the cash withdrawal.",
+          "type": [
+            "integer",
+            "null"
+          ]
         }
-      ],
-      "description": "Detailed breakdown of amount components. These amounts are denominated in `currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal)."
+      },
+      "title": "IssuingAuthorizationAmountDetails",
+      "type": "object"
     },
     "approved": {
       "description": "Whether this request was approved.",

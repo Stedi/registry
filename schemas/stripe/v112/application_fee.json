@@ -2,13 +2,9 @@
   "description": "",
   "properties": {
     "account": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        }
-      ],
-      "description": "ID of the Stripe account this fee was taken from."
+      "description": "ID of the Stripe account this fee was taken from.",
+      "maxLength": 5000,
+      "type": "string"
     },
     "amount": {
       "description": "Amount earned, in %s.",
@@ -19,34 +15,20 @@
       "type": "integer"
     },
     "application": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        }
-      ],
-      "description": "ID of the Connect application that earned the fee."
+      "description": "ID of the Connect application that earned the fee.",
+      "maxLength": 5000,
+      "type": "string"
     },
     "balance_transaction": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "Balance transaction that describes the impact of this collected application fee on your account balance (not including refunds)."
+      "description": "Balance transaction that describes the impact of this collected application fee on your account balance (not including refunds).",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "charge": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        }
-      ],
-      "description": "ID of the charge that the application fee was taken from."
+      "description": "ID of the charge that the application fee was taken from.",
+      "maxLength": 5000,
+      "type": "string"
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -74,16 +56,10 @@
       "type": "string"
     },
     "originating_transaction": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "ID of the corresponding charge on the platform account, if this fee was the result of a charge using the `destination` parameter."
+      "description": "ID of the corresponding charge on the platform account, if this fee was the result of a charge using the `destination` parameter.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "refunded": {
       "description": "Whether the fee has been fully refunded. If the fee is only partially refunded, this attribute will still be false.",
@@ -102,16 +78,10 @@
                 "type": "integer"
               },
               "balance_transaction": {
-                "anyOf": [
-                  {
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "Balance transaction that describes the impact on your account balance."
+                "description": "Balance transaction that describes the impact on your account balance.",
+                "nullable": true,
+                "maxLength": 5000,
+                "type": "string"
               },
               "created": {
                 "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -123,13 +93,9 @@
                 "type": "string"
               },
               "fee": {
-                "anyOf": [
-                  {
-                    "maxLength": 5000,
-                    "type": "string"
-                  }
-                ],
-                "description": "ID of the application fee that was refunded."
+                "description": "ID of the application fee that was refunded.",
+                "maxLength": 5000,
+                "type": "string"
               },
               "id": {
                 "description": "Unique identifier for the object.",

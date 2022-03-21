@@ -2,86 +2,17 @@
   "description": "",
   "properties": {
     "acss_debit": {
-      "anyOf": [
-        {
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "mandate_options": {
           "description": "",
           "properties": {
-            "mandate_options": {
-              "description": "",
-              "properties": {
-                "transaction_type": {
-                  "description": "Transaction type of the mandate.",
-                  "enum": [
-                    "business",
-                    "personal",
-                    null
-                  ],
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              },
-              "title": "invoice_payment_method_options_acss_debit_mandate_options",
-              "type": "object"
-            },
-            "verification_method": {
-              "description": "Bank account verification method.",
+            "transaction_type": {
+              "description": "Transaction type of the mandate.",
               "enum": [
-                "automatic",
-                "instant",
-                "microdeposits"
-              ],
-              "type": "string"
-            }
-          },
-          "title": "invoice_payment_method_options_acss_debit",
-          "type": "object"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "If paying by `acss_debit`, this sub-hash contains details about the Canadian pre-authorized debit payment method options to pass to the invoice’s PaymentIntent."
-    },
-    "bancontact": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "preferred_language": {
-              "description": "Preferred language of the Bancontact authorization page that the customer is redirected to.",
-              "enum": [
-                "de",
-                "en",
-                "fr",
-                "nl"
-              ],
-              "type": "string"
-            }
-          },
-          "required": [
-            "preferred_language"
-          ],
-          "title": "invoice_payment_method_options_bancontact",
-          "type": "object"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "If paying by `bancontact`, this sub-hash contains details about the Bancontact payment method options to pass to the invoice’s PaymentIntent."
-    },
-    "card": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "request_three_d_secure": {
-              "description": "We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.",
-              "enum": [
-                "any",
-                "automatic",
+                "business",
+                "personal",
                 null
               ],
               "type": [
@@ -90,28 +21,69 @@
               ]
             }
           },
-          "title": "invoice_payment_method_options_card",
+          "title": "invoice_payment_method_options_acss_debit_mandate_options",
           "type": "object"
         },
-        {
-          "type": "null"
+        "verification_method": {
+          "description": "Bank account verification method.",
+          "enum": [
+            "automatic",
+            "instant",
+            "microdeposits"
+          ],
+          "type": "string"
         }
+      },
+      "title": "invoice_payment_method_options_acss_debit",
+      "type": "object"
+    },
+    "bancontact": {
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "preferred_language": {
+          "description": "Preferred language of the Bancontact authorization page that the customer is redirected to.",
+          "enum": [
+            "de",
+            "en",
+            "fr",
+            "nl"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "preferred_language"
       ],
-      "description": "If paying by `card`, this sub-hash contains details about the Card payment method options to pass to the invoice’s PaymentIntent."
+      "title": "invoice_payment_method_options_bancontact",
+      "type": "object"
+    },
+    "card": {
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "request_three_d_secure": {
+          "description": "We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.",
+          "enum": [
+            "any",
+            "automatic",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "title": "invoice_payment_method_options_card",
+      "type": "object"
     },
     "konbini": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {},
-          "title": "invoice_payment_method_options_konbini",
-          "type": "object"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "If paying by `konbini`, this sub-hash contains details about the Konbini payment method options to pass to the invoice’s PaymentIntent."
+      "description": "",
+      "nullable": true,
+      "properties": {},
+      "title": "invoice_payment_method_options_konbini",
+      "type": "object"
     }
   },
   "title": "InvoicesPaymentMethodOptions",

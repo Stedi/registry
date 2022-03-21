@@ -2,111 +2,97 @@
   "description": "",
   "properties": {
     "installments": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "available_plans": {
-              "description": "Installment plans that may be selected for this PaymentIntent.",
-              "items": {
-                "description": "",
-                "properties": {
-                  "count": {
-                    "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
-                    "type": [
-                      "integer",
-                      "null"
-                    ]
-                  },
-                  "interval": {
-                    "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
-                    "enum": [
-                      "month",
-                      null
-                    ],
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "type": {
-                    "description": "Type of installment plan, one of `fixed_count`.",
-                    "enum": [
-                      "fixed_count"
-                    ],
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "type"
-                ],
-                "title": "payment_method_details_card_installments_plan",
-                "type": "object"
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "available_plans": {
+          "description": "Installment plans that may be selected for this PaymentIntent.",
+          "items": {
+            "description": "",
+            "properties": {
+              "count": {
+                "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
+                "type": [
+                  "integer",
+                  "null"
+                ]
               },
+              "interval": {
+                "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
+                "enum": [
+                  "month",
+                  null
+                ],
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "type": {
+                "description": "Type of installment plan, one of `fixed_count`.",
+                "enum": [
+                  "fixed_count"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "title": "payment_method_details_card_installments_plan",
+            "type": "object"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "enabled": {
+          "description": "Whether Installments are enabled for this PaymentIntent.",
+          "type": "boolean"
+        },
+        "plan": {
+          "description": "",
+          "nullable": true,
+          "properties": {
+            "count": {
+              "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
               "type": [
-                "array",
+                "integer",
                 "null"
               ]
             },
-            "enabled": {
-              "description": "Whether Installments are enabled for this PaymentIntent.",
-              "type": "boolean"
-            },
-            "plan": {
-              "anyOf": [
-                {
-                  "description": "",
-                  "properties": {
-                    "count": {
-                      "description": "For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.",
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "interval": {
-                      "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
-                      "enum": [
-                        "month",
-                        null
-                      ],
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "type": {
-                      "description": "Type of installment plan, one of `fixed_count`.",
-                      "enum": [
-                        "fixed_count"
-                      ],
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "type"
-                  ],
-                  "title": "payment_method_details_card_installments_plan",
-                  "type": "object"
-                },
-                {
-                  "type": "null"
-                }
+            "interval": {
+              "description": "For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.\nOne of `month`.",
+              "enum": [
+                "month",
+                null
               ],
-              "description": "Installment plan selected for this PaymentIntent."
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "type": {
+              "description": "Type of installment plan, one of `fixed_count`.",
+              "enum": [
+                "fixed_count"
+              ],
+              "type": "string"
             }
           },
           "required": [
-            "enabled"
+            "type"
           ],
-          "title": "payment_method_options_card_installments",
+          "title": "payment_method_details_card_installments_plan",
           "type": "object"
-        },
-        {
-          "type": "null"
         }
+      },
+      "required": [
+        "enabled"
       ],
-      "description": "Installment details for this payment (Mexico only).\n\nFor more information, see the [installments integration guide](https://stripe.com/docs/payments/installments)."
+      "title": "payment_method_options_card_installments",
+      "type": "object"
     },
     "network": {
       "description": "Selected network to process this payment intent on. Depends on the available networks of the card attached to the payment intent. Can be only set confirm-time.",

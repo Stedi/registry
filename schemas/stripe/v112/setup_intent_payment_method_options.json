@@ -2,15 +2,53 @@
   "description": "",
   "properties": {
     "acss_debit": {
-      "anyOf": [
-        {
+      "description": "",
+      "properties": {
+        "currency": {
+          "description": "Currency supported by the bank account",
+          "enum": [
+            "cad",
+            "usd",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "mandate_options": {
           "description": "",
           "properties": {
-            "currency": {
-              "description": "Currency supported by the bank account",
+            "custom_mandate_url": {
+              "description": "A URL for custom mandate text",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "default_for": {
+              "description": "List of Stripe products where this mandate can be selected automatically.",
+              "items": {
+                "enum": [
+                  "invoice",
+                  "subscription"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "interval_description": {
+              "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "payment_schedule": {
+              "description": "Payment schedule for the mandate.",
               "enum": [
-                "cad",
-                "usd",
+                "combined",
+                "interval",
+                "sporadic",
                 null
               ],
               "type": [
@@ -18,76 +56,34 @@
                 "null"
               ]
             },
-            "mandate_options": {
-              "description": "",
-              "properties": {
-                "custom_mandate_url": {
-                  "description": "A URL for custom mandate text",
-                  "maxLength": 5000,
-                  "type": "string"
-                },
-                "default_for": {
-                  "description": "List of Stripe products where this mandate can be selected automatically.",
-                  "items": {
-                    "enum": [
-                      "invoice",
-                      "subscription"
-                    ],
-                    "type": "string"
-                  },
-                  "type": "array"
-                },
-                "interval_description": {
-                  "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "payment_schedule": {
-                  "description": "Payment schedule for the mandate.",
-                  "enum": [
-                    "combined",
-                    "interval",
-                    "sporadic",
-                    null
-                  ],
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "transaction_type": {
-                  "description": "Transaction type of the mandate.",
-                  "enum": [
-                    "business",
-                    "personal",
-                    null
-                  ],
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              },
-              "title": "setup_intent_payment_method_options_mandate_options_acss_debit",
-              "type": "object"
-            },
-            "verification_method": {
-              "description": "Bank account verification method.",
+            "transaction_type": {
+              "description": "Transaction type of the mandate.",
               "enum": [
-                "automatic",
-                "instant",
-                "microdeposits"
+                "business",
+                "personal",
+                null
               ],
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
-          "title": "setup_intent_payment_method_options_acss_debit",
+          "title": "setup_intent_payment_method_options_mandate_options_acss_debit",
           "type": "object"
+        },
+        "verification_method": {
+          "description": "Bank account verification method.",
+          "enum": [
+            "automatic",
+            "instant",
+            "microdeposits"
+          ],
+          "type": "string"
         }
-      ]
+      },
+      "title": "setup_intent_payment_method_options_acss_debit",
+      "type": "object"
     },
     "card": {
       "description": "",
@@ -110,21 +106,17 @@
       "type": "object"
     },
     "sepa_debit": {
-      "anyOf": [
-        {
+      "description": "",
+      "properties": {
+        "mandate_options": {
           "description": "",
-          "properties": {
-            "mandate_options": {
-              "description": "",
-              "properties": {},
-              "title": "setup_intent_payment_method_options_mandate_options_sepa_debit",
-              "type": "object"
-            }
-          },
-          "title": "setup_intent_payment_method_options_sepa_debit",
+          "properties": {},
+          "title": "setup_intent_payment_method_options_mandate_options_sepa_debit",
           "type": "object"
         }
-      ]
+      },
+      "title": "setup_intent_payment_method_options_sepa_debit",
+      "type": "object"
     }
   },
   "title": "SetupIntentPaymentMethodOptions",

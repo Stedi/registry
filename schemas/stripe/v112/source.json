@@ -741,178 +741,55 @@
       "type": "string"
     },
     "owner": {
-      "anyOf": [
-        {
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "address": {
           "description": "",
+          "nullable": true,
           "properties": {
-            "address": {
-              "anyOf": [
-                {
-                  "description": "",
-                  "properties": {
-                    "city": {
-                      "description": "City, district, suburb, town, or village.",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "country": {
-                      "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "line1": {
-                      "description": "Address line 1 (e.g., street, PO Box, or company name).",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "line2": {
-                      "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "postal_code": {
-                      "description": "ZIP or postal code.",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "state": {
-                      "description": "State, county, province, or region.",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  },
-                  "title": "Address",
-                  "type": "object"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Owner's address."
-            },
-            "email": {
-              "description": "Owner's email address.",
+            "city": {
+              "description": "City, district, suburb, town, or village.",
               "maxLength": 5000,
               "type": [
                 "string",
                 "null"
               ]
             },
-            "name": {
-              "description": "Owner's full name.",
+            "country": {
+              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
               "maxLength": 5000,
               "type": [
                 "string",
                 "null"
               ]
             },
-            "phone": {
-              "description": "Owner's phone number (including extension).",
+            "line1": {
+              "description": "Address line 1 (e.g., street, PO Box, or company name).",
               "maxLength": 5000,
               "type": [
                 "string",
                 "null"
               ]
             },
-            "verified_address": {
-              "anyOf": [
-                {
-                  "description": "",
-                  "properties": {
-                    "city": {
-                      "description": "City, district, suburb, town, or village.",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "country": {
-                      "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "line1": {
-                      "description": "Address line 1 (e.g., street, PO Box, or company name).",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "line2": {
-                      "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "postal_code": {
-                      "description": "ZIP or postal code.",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "state": {
-                      "description": "State, county, province, or region.",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  },
-                  "title": "Address",
-                  "type": "object"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Verified owner's address. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated."
-            },
-            "verified_email": {
-              "description": "Verified owner's email address. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+            "line2": {
+              "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
               "maxLength": 5000,
               "type": [
                 "string",
                 "null"
               ]
             },
-            "verified_name": {
-              "description": "Verified owner's full name. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+            "postal_code": {
+              "description": "ZIP or postal code.",
               "maxLength": 5000,
               "type": [
                 "string",
                 "null"
               ]
             },
-            "verified_phone": {
-              "description": "Verified owner's phone number (including extension). Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+            "state": {
+              "description": "State, county, province, or region.",
               "maxLength": 5000,
               "type": [
                 "string",
@@ -920,14 +797,116 @@
               ]
             }
           },
-          "title": "SourceOwner",
+          "title": "Address",
           "type": "object"
         },
-        {
-          "type": "null"
+        "email": {
+          "description": "Owner's email address.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "description": "Owner's full name.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "phone": {
+          "description": "Owner's phone number (including extension).",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "verified_address": {
+          "description": "",
+          "nullable": true,
+          "properties": {
+            "city": {
+              "description": "City, district, suburb, town, or village.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "country": {
+              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "line1": {
+              "description": "Address line 1 (e.g., street, PO Box, or company name).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "line2": {
+              "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "postal_code": {
+              "description": "ZIP or postal code.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "state": {
+              "description": "State, county, province, or region.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "title": "Address",
+          "type": "object"
+        },
+        "verified_email": {
+          "description": "Verified owner's email address. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "verified_name": {
+          "description": "Verified owner's full name. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "verified_phone": {
+          "description": "Verified owner's phone number (including extension). Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
         }
-      ],
-      "description": "Information about the owner of the payment instrument that may be used or required by particular source types."
+      },
+      "title": "SourceOwner",
+      "type": "object"
     },
     "p24": {
       "properties": {

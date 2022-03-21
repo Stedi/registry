@@ -20,64 +20,51 @@
       "type": "string"
     },
     "last_error": {
-      "anyOf": [
-        {
-          "description": "Shows last VerificationSession error",
-          "properties": {
-            "code": {
-              "description": "A short machine-readable string giving the reason for the verification or user-session failure.",
-              "enum": [
-                "abandoned",
-                "consent_declined",
-                "country_not_supported",
-                "device_not_supported",
-                "document_expired",
-                "document_type_not_supported",
-                "document_unverified_other",
-                "id_number_insufficient_document_data",
-                "id_number_mismatch",
-                "id_number_unverified_other",
-                "selfie_document_missing_photo",
-                "selfie_face_mismatch",
-                "selfie_manipulated",
-                "selfie_unverified_other",
-                "under_supported_age",
-                null
-              ],
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "reason": {
-              "description": "A message that explains the reason for verification or user-session failure.",
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
-            }
-          },
-          "title": "GelatoSessionLastError",
-          "type": "object"
+      "description": "Shows last VerificationSession error",
+      "nullable": true,
+      "properties": {
+        "code": {
+          "description": "A short machine-readable string giving the reason for the verification or user-session failure.",
+          "enum": [
+            "abandoned",
+            "consent_declined",
+            "country_not_supported",
+            "device_not_supported",
+            "document_expired",
+            "document_type_not_supported",
+            "document_unverified_other",
+            "id_number_insufficient_document_data",
+            "id_number_mismatch",
+            "id_number_unverified_other",
+            "selfie_document_missing_photo",
+            "selfie_face_mismatch",
+            "selfie_manipulated",
+            "selfie_unverified_other",
+            "under_supported_age",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
         },
-        {
-          "type": "null"
+        "reason": {
+          "description": "A message that explains the reason for verification or user-session failure.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
         }
-      ],
-      "description": "If present, this property tells you the last error encountered when processing the verification."
+      },
+      "title": "GelatoSessionLastError",
+      "type": "object"
     },
     "last_verification_report": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "ID of the most recent VerificationReport. [Learn more about accessing detailed verification results.](https://stripe.com/docs/identity/verification-sessions#results)"
+      "description": "ID of the most recent VerificationReport. [Learn more about accessing detailed verification results.](https://stripe.com/docs/identity/verification-sessions#results)",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "livemode": {
       "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
@@ -136,30 +123,23 @@
       "type": "object"
     },
     "redaction": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "status": {
-              "description": "Indicates whether this object and its related objects have been redacted or not.",
-              "enum": [
-                "processing",
-                "redacted"
-              ],
-              "type": "string"
-            }
-          },
-          "required": [
-            "status"
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "status": {
+          "description": "Indicates whether this object and its related objects have been redacted or not.",
+          "enum": [
+            "processing",
+            "redacted"
           ],
-          "title": "verification_session_redaction",
-          "type": "object"
-        },
-        {
-          "type": "null"
+          "type": "string"
         }
+      },
+      "required": [
+        "status"
       ],
-      "description": "Redaction status of this VerificationSession. If the VerificationSession is not redacted, this field will be null."
+      "title": "verification_session_redaction",
+      "type": "object"
     },
     "status": {
       "description": "Status of this VerificationSession. [Learn more about the lifecycle of sessions](https://stripe.com/docs/identity/how-sessions-work).",
@@ -188,140 +168,55 @@
       ]
     },
     "verified_outputs": {
-      "anyOf": [
-        {
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "address": {
           "description": "",
+          "nullable": true,
           "properties": {
-            "address": {
-              "anyOf": [
-                {
-                  "description": "",
-                  "properties": {
-                    "city": {
-                      "description": "City, district, suburb, town, or village.",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "country": {
-                      "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "line1": {
-                      "description": "Address line 1 (e.g., street, PO Box, or company name).",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "line2": {
-                      "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "postal_code": {
-                      "description": "ZIP or postal code.",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "state": {
-                      "description": "State, county, province, or region.",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  },
-                  "title": "Address",
-                  "type": "object"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "The user's verified address."
-            },
-            "dob": {
-              "anyOf": [
-                {
-                  "description": "Point in Time",
-                  "properties": {
-                    "day": {
-                      "description": "Numerical day between 1 and 31.",
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "month": {
-                      "description": "Numerical month between 1 and 12.",
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "year": {
-                      "description": "The four-digit year.",
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    }
-                  },
-                  "title": "GelatoDataVerifiedOutputsDate",
-                  "type": "object"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "The user’s verified date of birth."
-            },
-            "first_name": {
-              "description": "The user's verified first name.",
+            "city": {
+              "description": "City, district, suburb, town, or village.",
               "maxLength": 5000,
               "type": [
                 "string",
                 "null"
               ]
             },
-            "id_number": {
-              "description": "The user's verified id number.",
+            "country": {
+              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
               "maxLength": 5000,
               "type": [
                 "string",
                 "null"
               ]
             },
-            "id_number_type": {
-              "description": "The user's verified id number type.",
-              "enum": [
-                "br_cpf",
-                "sg_nric",
-                "us_ssn",
-                null
-              ],
+            "line1": {
+              "description": "Address line 1 (e.g., street, PO Box, or company name).",
+              "maxLength": 5000,
               "type": [
                 "string",
                 "null"
               ]
             },
-            "last_name": {
-              "description": "The user's verified last name.",
+            "line2": {
+              "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "postal_code": {
+              "description": "ZIP or postal code.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "state": {
+              "description": "State, county, province, or region.",
               "maxLength": 5000,
               "type": [
                 "string",
@@ -329,14 +224,78 @@
               ]
             }
           },
-          "title": "GelatoVerifiedOutputs",
+          "title": "Address",
           "type": "object"
         },
-        {
-          "type": "null"
+        "dob": {
+          "description": "Point in Time",
+          "nullable": true,
+          "properties": {
+            "day": {
+              "description": "Numerical day between 1 and 31.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "month": {
+              "description": "Numerical month between 1 and 12.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "year": {
+              "description": "The four-digit year.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          },
+          "title": "GelatoDataVerifiedOutputsDate",
+          "type": "object"
+        },
+        "first_name": {
+          "description": "The user's verified first name.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id_number": {
+          "description": "The user's verified id number.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id_number_type": {
+          "description": "The user's verified id number type.",
+          "enum": [
+            "br_cpf",
+            "sg_nric",
+            "us_ssn",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "last_name": {
+          "description": "The user's verified last name.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
         }
-      ],
-      "description": "The user’s verified data."
+      },
+      "title": "GelatoVerifiedOutputs",
+      "type": "object"
     }
   },
   "required": [

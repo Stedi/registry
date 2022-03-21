@@ -10,175 +10,147 @@
       "description": "Result from a document check",
       "properties": {
         "address": {
-          "anyOf": [
-            {
-              "description": "",
-              "properties": {
-                "city": {
-                  "description": "City, district, suburb, town, or village.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "country": {
-                  "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "line1": {
-                  "description": "Address line 1 (e.g., street, PO Box, or company name).",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "line2": {
-                  "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "postal_code": {
-                  "description": "ZIP or postal code.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "state": {
-                  "description": "State, county, province, or region.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              },
-              "title": "Address",
-              "type": "object"
+          "description": "",
+          "nullable": true,
+          "properties": {
+            "city": {
+              "description": "City, district, suburb, town, or village.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
             },
-            {
-              "type": "null"
+            "country": {
+              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "line1": {
+              "description": "Address line 1 (e.g., street, PO Box, or company name).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "line2": {
+              "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "postal_code": {
+              "description": "ZIP or postal code.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "state": {
+              "description": "State, county, province, or region.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
             }
-          ],
-          "description": "Address as it appears in the document."
+          },
+          "title": "Address",
+          "type": "object"
         },
         "dob": {
-          "anyOf": [
-            {
-              "description": "Point in Time",
-              "properties": {
-                "day": {
-                  "description": "Numerical day between 1 and 31.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "month": {
-                  "description": "Numerical month between 1 and 12.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "year": {
-                  "description": "The four-digit year.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                }
-              },
-              "title": "GelatoDataDocumentReportDateOfBirth",
-              "type": "object"
+          "description": "Point in Time",
+          "nullable": true,
+          "properties": {
+            "day": {
+              "description": "Numerical day between 1 and 31.",
+              "type": [
+                "integer",
+                "null"
+              ]
             },
-            {
-              "type": "null"
+            "month": {
+              "description": "Numerical month between 1 and 12.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "year": {
+              "description": "The four-digit year.",
+              "type": [
+                "integer",
+                "null"
+              ]
             }
-          ],
-          "description": "Date of birth as it appears in the document."
+          },
+          "title": "GelatoDataDocumentReportDateOfBirth",
+          "type": "object"
         },
         "error": {
-          "anyOf": [
-            {
-              "description": "",
-              "properties": {
-                "code": {
-                  "description": "A short machine-readable string giving the reason for the verification failure.",
-                  "enum": [
-                    "document_expired",
-                    "document_type_not_supported",
-                    "document_unverified_other",
-                    null
-                  ],
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "reason": {
-                  "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              },
-              "title": "GelatoDocumentReportError",
-              "type": "object"
+          "description": "",
+          "nullable": true,
+          "properties": {
+            "code": {
+              "description": "A short machine-readable string giving the reason for the verification failure.",
+              "enum": [
+                "document_expired",
+                "document_type_not_supported",
+                "document_unverified_other",
+                null
+              ],
+              "type": [
+                "string",
+                "null"
+              ]
             },
-            {
-              "type": "null"
+            "reason": {
+              "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
             }
-          ],
-          "description": "Details on the verification error. Present when status is `unverified`."
+          },
+          "title": "GelatoDocumentReportError",
+          "type": "object"
         },
         "expiration_date": {
-          "anyOf": [
-            {
-              "description": "Point in Time",
-              "properties": {
-                "day": {
-                  "description": "Numerical day between 1 and 31.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "month": {
-                  "description": "Numerical month between 1 and 12.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "year": {
-                  "description": "The four-digit year.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                }
-              },
-              "title": "GelatoDataDocumentReportExpirationDate",
-              "type": "object"
+          "description": "Point in Time",
+          "nullable": true,
+          "properties": {
+            "day": {
+              "description": "Numerical day between 1 and 31.",
+              "type": [
+                "integer",
+                "null"
+              ]
             },
-            {
-              "type": "null"
+            "month": {
+              "description": "Numerical month between 1 and 12.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "year": {
+              "description": "The four-digit year.",
+              "type": [
+                "integer",
+                "null"
+              ]
             }
-          ],
-          "description": "Expiration date of the document."
+          },
+          "title": "GelatoDataDocumentReportExpirationDate",
+          "type": "object"
         },
         "files": {
           "description": "Array of [File](https://stripe.com/docs/api/files) ids containing images for this document.",
@@ -200,40 +172,33 @@
           ]
         },
         "issued_date": {
-          "anyOf": [
-            {
-              "description": "Point in Time",
-              "properties": {
-                "day": {
-                  "description": "Numerical day between 1 and 31.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "month": {
-                  "description": "Numerical month between 1 and 12.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "year": {
-                  "description": "The four-digit year.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                }
-              },
-              "title": "GelatoDataDocumentReportIssuedDate",
-              "type": "object"
+          "description": "Point in Time",
+          "nullable": true,
+          "properties": {
+            "day": {
+              "description": "Numerical day between 1 and 31.",
+              "type": [
+                "integer",
+                "null"
+              ]
             },
-            {
-              "type": "null"
+            "month": {
+              "description": "Numerical month between 1 and 12.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "year": {
+              "description": "The four-digit year.",
+              "type": [
+                "integer",
+                "null"
+              ]
             }
-          ],
-          "description": "Issued date of the document."
+          },
+          "title": "GelatoDataDocumentReportIssuedDate",
+          "type": "object"
         },
         "issuing_country": {
           "description": "Issuing country of the document.",
@@ -296,76 +261,62 @@
       "description": "Result from an id_number check",
       "properties": {
         "dob": {
-          "anyOf": [
-            {
-              "description": "Point in Time",
-              "properties": {
-                "day": {
-                  "description": "Numerical day between 1 and 31.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "month": {
-                  "description": "Numerical month between 1 and 12.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "year": {
-                  "description": "The four-digit year.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                }
-              },
-              "title": "GelatoDataIdNumberReportDate",
-              "type": "object"
+          "description": "Point in Time",
+          "nullable": true,
+          "properties": {
+            "day": {
+              "description": "Numerical day between 1 and 31.",
+              "type": [
+                "integer",
+                "null"
+              ]
             },
-            {
-              "type": "null"
+            "month": {
+              "description": "Numerical month between 1 and 12.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "year": {
+              "description": "The four-digit year.",
+              "type": [
+                "integer",
+                "null"
+              ]
             }
-          ],
-          "description": "Date of birth."
+          },
+          "title": "GelatoDataIdNumberReportDate",
+          "type": "object"
         },
         "error": {
-          "anyOf": [
-            {
-              "description": "",
-              "properties": {
-                "code": {
-                  "description": "A short machine-readable string giving the reason for the verification failure.",
-                  "enum": [
-                    "id_number_insufficient_document_data",
-                    "id_number_mismatch",
-                    "id_number_unverified_other",
-                    null
-                  ],
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "reason": {
-                  "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              },
-              "title": "GelatoIdNumberReportError",
-              "type": "object"
+          "description": "",
+          "nullable": true,
+          "properties": {
+            "code": {
+              "description": "A short machine-readable string giving the reason for the verification failure.",
+              "enum": [
+                "id_number_insufficient_document_data",
+                "id_number_mismatch",
+                "id_number_unverified_other",
+                null
+              ],
+              "type": [
+                "string",
+                "null"
+              ]
             },
-            {
-              "type": "null"
+            "reason": {
+              "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
             }
-          ],
-          "description": "Details on the verification error. Present when status is `unverified`."
+          },
+          "title": "GelatoIdNumberReportError",
+          "type": "object"
         },
         "first_name": {
           "description": "First name.",
@@ -486,41 +437,34 @@
           ]
         },
         "error": {
-          "anyOf": [
-            {
-              "description": "",
-              "properties": {
-                "code": {
-                  "description": "A short machine-readable string giving the reason for the verification failure.",
-                  "enum": [
-                    "selfie_document_missing_photo",
-                    "selfie_face_mismatch",
-                    "selfie_manipulated",
-                    "selfie_unverified_other",
-                    null
-                  ],
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "reason": {
-                  "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              },
-              "title": "GelatoSelfieReportError",
-              "type": "object"
+          "description": "",
+          "nullable": true,
+          "properties": {
+            "code": {
+              "description": "A short machine-readable string giving the reason for the verification failure.",
+              "enum": [
+                "selfie_document_missing_photo",
+                "selfie_face_mismatch",
+                "selfie_manipulated",
+                "selfie_unverified_other",
+                null
+              ],
+              "type": [
+                "string",
+                "null"
+              ]
             },
-            {
-              "type": "null"
+            "reason": {
+              "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
             }
-          ],
-          "description": "Details on the verification error. Present when status is `unverified`."
+          },
+          "title": "GelatoSelfieReportError",
+          "type": "object"
         },
         "selfie": {
           "description": "ID of the [File](https://stripe.com/docs/api/files) holding the image of the selfie used in this check.",

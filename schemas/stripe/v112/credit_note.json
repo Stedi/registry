@@ -15,25 +15,15 @@
       "type": "string"
     },
     "customer": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        }
-      ],
-      "description": "ID of the customer."
+      "description": "ID of the customer.",
+      "maxLength": 5000,
+      "type": "string"
     },
     "customer_balance_transaction": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "Customer balance transaction related to this credit note."
+      "description": "Customer balance transaction related to this credit note.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "discount_amount": {
       "description": "The integer amount in %s representing the total amount of discount that was credited.",
@@ -49,13 +39,9 @@
             "type": "integer"
           },
           "discount": {
-            "anyOf": [
-              {
-                "maxLength": 5000,
-                "type": "string"
-              }
-            ],
-            "description": "The discount that was applied to get this discount amount."
+            "description": "The discount that was applied to get this discount amount.",
+            "maxLength": 5000,
+            "type": "string"
           }
         },
         "required": [
@@ -73,13 +59,9 @@
       "type": "string"
     },
     "invoice": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        }
-      ],
-      "description": "ID of the invoice."
+      "description": "ID of the invoice.",
+      "maxLength": 5000,
+      "type": "string"
     },
     "lines": {
       "description": "Line items that make up the credit note",
@@ -115,13 +97,9 @@
                       "type": "integer"
                     },
                     "discount": {
-                      "anyOf": [
-                        {
-                          "maxLength": 5000,
-                          "type": "string"
-                        }
-                      ],
-                      "description": "The discount that was applied to get this discount amount."
+                      "description": "The discount that was applied to get this discount amount.",
+                      "maxLength": 5000,
+                      "type": "string"
                     }
                   },
                   "required": [
@@ -175,13 +153,9 @@
                       "type": "boolean"
                     },
                     "tax_rate": {
-                      "anyOf": [
-                        {
-                          "maxLength": 5000,
-                          "type": "string"
-                        }
-                      ],
-                      "description": "The tax rate that was applied to get this tax amount."
+                      "description": "The tax rate that was applied to get this tax amount.",
+                      "maxLength": 5000,
+                      "type": "string"
                     }
                   },
                   "required": [
@@ -422,16 +396,10 @@
       ]
     },
     "refund": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "Refund related to this credit note."
+      "description": "Refund related to this credit note.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "status": {
       "description": "Status of this credit note, one of `issued` or `void`. Learn more about [voiding credit notes](https://stripe.com/docs/billing/invoices/credit-notes#voiding).",
@@ -459,13 +427,9 @@
             "type": "boolean"
           },
           "tax_rate": {
-            "anyOf": [
-              {
-                "maxLength": 5000,
-                "type": "string"
-              }
-            ],
-            "description": "The tax rate that was applied to get this tax amount."
+            "description": "The tax rate that was applied to get this tax amount.",
+            "maxLength": 5000,
+            "type": "string"
           }
         },
         "required": [

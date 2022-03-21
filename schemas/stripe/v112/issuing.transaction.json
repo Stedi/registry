@@ -6,71 +6,42 @@
       "type": "integer"
     },
     "amount_details": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "atm_fee": {
-              "description": "The fee charged by the ATM for the cash withdrawal.",
-              "type": [
-                "integer",
-                "null"
-              ]
-            }
-          },
-          "title": "IssuingTransactionAmountDetails",
-          "type": "object"
-        },
-        {
-          "type": "null"
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "atm_fee": {
+          "description": "The fee charged by the ATM for the cash withdrawal.",
+          "type": [
+            "integer",
+            "null"
+          ]
         }
-      ],
-      "description": "Detailed breakdown of amount components. These amounts are denominated in `currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal)."
+      },
+      "title": "IssuingTransactionAmountDetails",
+      "type": "object"
     },
     "authorization": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "The `Authorization` object that led to this transaction."
+      "description": "The `Authorization` object that led to this transaction.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "balance_transaction": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "ID of the [balance transaction](https://stripe.com/docs/api/balance_transactions) associated with this transaction."
+      "description": "ID of the [balance transaction](https://stripe.com/docs/api/balance_transactions) associated with this transaction.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "card": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        }
-      ],
-      "description": "The card used to make this transaction."
+      "description": "The card used to make this transaction.",
+      "maxLength": 5000,
+      "type": "string"
     },
     "cardholder": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "The cardholder to whom this transaction belongs."
+      "description": "The cardholder to whom this transaction belongs.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -82,16 +53,10 @@
       "type": "string"
     },
     "dispute": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "If you've disputed the transaction, the ID of the dispute."
+      "description": "If you've disputed the transaction, the ID of the dispute.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "id": {
       "description": "Unique identifier for the object.",
@@ -186,224 +151,89 @@
       "type": "string"
     },
     "purchase_details": {
-      "anyOf": [
-        {
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "flight": {
           "description": "",
+          "nullable": true,
           "properties": {
-            "flight": {
-              "anyOf": [
-                {
-                  "description": "",
-                  "properties": {
-                    "departure_at": {
-                      "description": "The time that the flight departed.",
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "passenger_name": {
-                      "description": "The name of the passenger.",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "refundable": {
-                      "description": "Whether the ticket is refundable.",
-                      "type": [
-                        "boolean",
-                        "null"
-                      ]
-                    },
-                    "segments": {
-                      "description": "The legs of the trip.",
-                      "items": {
-                        "description": "",
-                        "properties": {
-                          "arrival_airport_code": {
-                            "description": "The three-letter IATA airport code of the flight's destination.",
-                            "maxLength": 5000,
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "carrier": {
-                            "description": "The airline carrier code.",
-                            "maxLength": 5000,
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "departure_airport_code": {
-                            "description": "The three-letter IATA airport code that the flight departed from.",
-                            "maxLength": 5000,
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "flight_number": {
-                            "description": "The flight number.",
-                            "maxLength": 5000,
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "service_class": {
-                            "description": "The flight's service class.",
-                            "maxLength": 5000,
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "stopover_allowed": {
-                            "description": "Whether a stopover is allowed on this flight.",
-                            "type": [
-                              "boolean",
-                              "null"
-                            ]
-                          }
-                        },
-                        "title": "IssuingTransactionFlightDataLeg",
-                        "type": "object"
-                      },
-                      "type": [
-                        "array",
-                        "null"
-                      ]
-                    },
-                    "travel_agency": {
-                      "description": "The travel agency that issued the ticket.",
-                      "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  },
-                  "title": "IssuingTransactionFlightData",
-                  "type": "object"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Information about the flight that was purchased with this transaction."
+            "departure_at": {
+              "description": "The time that the flight departed.",
+              "type": [
+                "integer",
+                "null"
+              ]
             },
-            "fuel": {
-              "anyOf": [
-                {
-                  "description": "",
-                  "properties": {
-                    "type": {
-                      "description": "The type of fuel that was purchased. One of `diesel`, `unleaded_plus`, `unleaded_regular`, `unleaded_super`, or `other`.",
-                      "maxLength": 5000,
-                      "type": "string"
-                    },
-                    "unit": {
-                      "description": "The units for `volume_decimal`. One of `us_gallon` or `liter`.",
-                      "maxLength": 5000,
-                      "type": "string"
-                    },
-                    "unit_cost_decimal": {
-                      "description": "The cost in cents per each unit of fuel, represented as a decimal string with at most 12 decimal places.",
-                      "format": "decimal",
-                      "type": "string"
-                    },
-                    "volume_decimal": {
-                      "description": "The volume of the fuel that was pumped, represented as a decimal string with at most 12 decimal places.",
-                      "format": "decimal",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "type",
-                    "unit",
-                    "unit_cost_decimal"
-                  ],
-                  "title": "IssuingTransactionFuelData",
-                  "type": "object"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Information about fuel that was purchased with this transaction."
+            "passenger_name": {
+              "description": "The name of the passenger.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
             },
-            "lodging": {
-              "anyOf": [
-                {
-                  "description": "",
-                  "properties": {
-                    "check_in_at": {
-                      "description": "The time of checking into the lodging.",
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "nights": {
-                      "description": "The number of nights stayed at the lodging.",
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    }
-                  },
-                  "title": "IssuingTransactionLodgingData",
-                  "type": "object"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Information about lodging that was purchased with this transaction."
+            "refundable": {
+              "description": "Whether the ticket is refundable.",
+              "type": [
+                "boolean",
+                "null"
+              ]
             },
-            "receipt": {
-              "description": "The line items in the purchase.",
+            "segments": {
+              "description": "The legs of the trip.",
               "items": {
                 "description": "",
                 "properties": {
-                  "description": {
-                    "description": "The description of the item. The maximum length of this field is 26 characters.",
+                  "arrival_airport_code": {
+                    "description": "The three-letter IATA airport code of the flight's destination.",
                     "maxLength": 5000,
                     "type": [
                       "string",
                       "null"
                     ]
                   },
-                  "quantity": {
-                    "description": "The quantity of the item.",
+                  "carrier": {
+                    "description": "The airline carrier code.",
+                    "maxLength": 5000,
                     "type": [
-                      "number",
+                      "string",
                       "null"
                     ]
                   },
-                  "total": {
-                    "description": "The total for this line item in cents.",
+                  "departure_airport_code": {
+                    "description": "The three-letter IATA airport code that the flight departed from.",
+                    "maxLength": 5000,
                     "type": [
-                      "integer",
+                      "string",
                       "null"
                     ]
                   },
-                  "unit_cost": {
-                    "description": "The unit cost of the item in cents.",
+                  "flight_number": {
+                    "description": "The flight number.",
+                    "maxLength": 5000,
                     "type": [
-                      "integer",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "service_class": {
+                    "description": "The flight's service class.",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "stopover_allowed": {
+                    "description": "Whether a stopover is allowed on this flight.",
+                    "type": [
+                      "boolean",
                       "null"
                     ]
                   }
                 },
-                "title": "IssuingTransactionReceiptData",
+                "title": "IssuingTransactionFlightDataLeg",
                 "type": "object"
               },
               "type": [
@@ -411,8 +241,8 @@
                 "null"
               ]
             },
-            "reference": {
-              "description": "A merchant-specific order number.",
+            "travel_agency": {
+              "description": "The travel agency that issued the ticket.",
               "maxLength": 5000,
               "type": [
                 "string",
@@ -420,14 +250,121 @@
               ]
             }
           },
-          "title": "IssuingTransactionPurchaseDetails",
+          "title": "IssuingTransactionFlightData",
           "type": "object"
         },
-        {
-          "type": "null"
+        "fuel": {
+          "description": "",
+          "nullable": true,
+          "properties": {
+            "type": {
+              "description": "The type of fuel that was purchased. One of `diesel`, `unleaded_plus`, `unleaded_regular`, `unleaded_super`, or `other`.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "unit": {
+              "description": "The units for `volume_decimal`. One of `us_gallon` or `liter`.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "unit_cost_decimal": {
+              "description": "The cost in cents per each unit of fuel, represented as a decimal string with at most 12 decimal places.",
+              "format": "decimal",
+              "type": "string"
+            },
+            "volume_decimal": {
+              "description": "The volume of the fuel that was pumped, represented as a decimal string with at most 12 decimal places.",
+              "format": "decimal",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "unit",
+            "unit_cost_decimal"
+          ],
+          "title": "IssuingTransactionFuelData",
+          "type": "object"
+        },
+        "lodging": {
+          "description": "",
+          "nullable": true,
+          "properties": {
+            "check_in_at": {
+              "description": "The time of checking into the lodging.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "nights": {
+              "description": "The number of nights stayed at the lodging.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          },
+          "title": "IssuingTransactionLodgingData",
+          "type": "object"
+        },
+        "receipt": {
+          "description": "The line items in the purchase.",
+          "items": {
+            "description": "",
+            "properties": {
+              "description": {
+                "description": "The description of the item. The maximum length of this field is 26 characters.",
+                "maxLength": 5000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "quantity": {
+                "description": "The quantity of the item.",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "total": {
+                "description": "The total for this line item in cents.",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "unit_cost": {
+                "description": "The unit cost of the item in cents.",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
+            },
+            "title": "IssuingTransactionReceiptData",
+            "type": "object"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "reference": {
+          "description": "A merchant-specific order number.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
         }
-      ],
-      "description": "Additional purchase information that is optionally provided by the merchant."
+      },
+      "title": "IssuingTransactionPurchaseDetails",
+      "type": "object"
     },
     "type": {
       "description": "The nature of the transaction.",
