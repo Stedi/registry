@@ -63,9 +63,7 @@ async function unbundle(bundle: SchemaPackage): Promise<Schema[]> {
       if (!("components" in dereferenced))
         throw new Error("Expected components");
       return Object.entries(dereferenced.components?.schemas ?? {})
-        .filter(([key]) =>
-          !bundle.entities || bundle.entities.includes(key)
-        )
+        .filter(([key]) => !bundle.entities || bundle.entities.includes(key))
         .map(([k, v]) => ({
           name: k,
           schema: v,
@@ -161,6 +159,6 @@ function capitalizeFirstLetter(str: string) {
 
 (async () => {
   await generateAll("./schemas", "stripe");
-  // await generateAll("./schemas", "ramp");
-  // await generateAll("./schemas", "shopify", "./shopify/graphql/2022-01");
+  await generateAll("./schemas", "ramp");
+  await generateAll("./schemas", "shopify", "./shopify/graphql/2022-01");
 })();
