@@ -64,7 +64,7 @@ async function unbundle(bundle: SchemaPackage): Promise<Schema[]> {
         throw new Error("Expected components");
       return Object.entries(dereferenced.components?.schemas ?? {})
         .filter(([key]) =>
-          !bundle.entities ? true : bundle.entities.includes(key)
+          !bundle.entities || bundle.entities.includes(key)
         )
         .map(([k, v]) => ({
           name: k,
