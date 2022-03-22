@@ -44,9 +44,6 @@ function traverse(schema: OpenAPIV3.SchemaObject, parents: Set<String>): any {
   delete (schema as any)["x-stripeBypassValidation"];
   delete (schema as any)["x-resourceId"];
 
-  // we might need to do this for a few schemas above 100kb
-  // delete (schema as any)["description"];
-
   // oneOf, use first
   if (schema.oneOf && schema.oneOf[0]) {
     schema.oneOf = schema.oneOf.slice(0, 1);
@@ -55,19 +52,11 @@ function traverse(schema: OpenAPIV3.SchemaObject, parents: Set<String>): any {
 
   if (schema.anyOf && schema.anyOf[0]) {
     const { anyOf, ...rest } = schema;
+
     return {
       ...rest,
-      ...traverse(schema.anyOf[0] as OpenAPIV3.SchemaObject, parents),
+      ...(traverse(schema.anyOf[0] as OpenAPIV3.SchemaObject, parents) ?? {}),
     };
-    /*
-    schema.anyOf = schema.anyOf.filter((element: any) => {
-      return element.title === undefined || !(parents.has(element.title) || parents.size > maxDepth - 2);
-    });
-    schema.anyOf = _.map(schema.anyOf as OpenAPIV3.SchemaObject, (element: any) => {
-      return traverse(element, parents);
-    });
-    return schema;
-    */
   }
 
   if (!_.isArray(schema.type) && schema.nullable) {
@@ -82,10 +71,11 @@ function traverse(schema: OpenAPIV3.SchemaObject, parents: Set<String>): any {
   const type = _.isArray(schema.type) ? _.first(schema.type) : schema.type;
 
   if (type === "object") {
-    if (
+    const isTraveralDepthExceeded =
       (schema.title != undefined && parents.has(schema.title)) ||
-      parents.size > maxDepth
-    ) {
+      parents.size > maxDepth;
+
+    if (isTraveralDepthExceeded) {
       return { type };
     }
 
