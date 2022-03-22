@@ -4,7 +4,7 @@ import { OpenAPIV3 } from "openapi-types";
 import _ from "lodash";
 import deepcopy from "deepcopy";
 
-const maxDepth = 4;
+const maxDepth = 3;
 
 export class StripeProvider implements Provider {
   async getVersions(): Promise<string[]> {
@@ -84,9 +84,6 @@ function traverse(schema: OpenAPIV3.SchemaObject, parents: Set<String>): any {
   delete (schema as any)["x-stripeBypassValidation"];
   delete (schema as any)["x-resourceId"];
 
-  // we might need to do this for a few schemas above 100kb
-  // delete (schema as any)["description"];
-
   // oneOf, use first
   if (schema.oneOf && schema.oneOf[0]) {
     schema.oneOf = schema.oneOf.slice(0, 1);
@@ -94,25 +91,12 @@ function traverse(schema: OpenAPIV3.SchemaObject, parents: Set<String>): any {
   }
 
   if (schema.anyOf && schema.anyOf[0]) {
-    schema.anyOf = schema.anyOf.slice(0, 1);
-    schema.anyOf[0] = traverse(
-      schema.anyOf[0] as OpenAPIV3.SchemaObject,
-      parents
-    );
-    if (schema.nullable) {
-      schema.anyOf[1] = { type: "null" } as any;
-      delete (schema as any)["nullable"];
-    }
-    return schema;
-    /*
-    schema.anyOf = schema.anyOf.filter((element: any) => {
-      return element.title === undefined || !(parents.has(element.title) || parents.size > maxDepth - 2);
-    });
-    schema.anyOf = _.map(schema.anyOf as OpenAPIV3.SchemaObject, (element: any) => {
-      return traverse(element, parents);
-    });
-    return schema;
-    */
+    const { anyOf, ...rest } = schema;
+
+    return {
+      ...rest,
+      ...(traverse(schema.anyOf[0] as OpenAPIV3.SchemaObject, parents) ?? {}),
+    };
   }
 
   if (!_.isArray(schema.type) && schema.nullable) {
@@ -127,11 +111,12 @@ function traverse(schema: OpenAPIV3.SchemaObject, parents: Set<String>): any {
   const type = _.isArray(schema.type) ? _.first(schema.type) : schema.type;
 
   if (type === "object") {
-    if (
+    const isTraveralDepthExceeded =
       (schema.title != undefined && parents.has(schema.title)) ||
-      parents.size > maxDepth
-    ) {
-      return {};
+      parents.size > maxDepth;
+
+    if (isTraveralDepthExceeded) {
+      return { type };
     }
 
     const obj = schema as OpenAPIV3.NonArraySchemaObject;

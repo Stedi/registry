@@ -1,0 +1,334 @@
+{
+  "description": "",
+  "properties": {
+    "recurring": {
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "amount_subtotal": {
+          "description": "Total before any discounts or taxes are applied.",
+          "type": "integer"
+        },
+        "amount_total": {
+          "description": "Total after discounts and taxes are applied.",
+          "type": "integer"
+        },
+        "interval": {
+          "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
+          "enum": [
+            "day",
+            "month",
+            "week",
+            "year"
+          ],
+          "type": "string"
+        },
+        "interval_count": {
+          "description": "The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.",
+          "type": "integer"
+        },
+        "total_details": {
+          "description": "",
+          "properties": {
+            "amount_discount": {
+              "description": "This is the sum of all the line item discounts.",
+              "type": "integer"
+            },
+            "amount_shipping": {
+              "description": "This is the sum of all the line item shipping amounts.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "amount_tax": {
+              "description": "This is the sum of all the line item tax amounts.",
+              "type": "integer"
+            },
+            "breakdown": {
+              "description": "",
+              "properties": {
+                "discounts": {
+                  "description": "The aggregated line item discounts.",
+                  "items": {
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "taxes": {
+                  "description": "The aggregated line item tax amounts by rate.",
+                  "items": {
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "discounts",
+                "taxes"
+              ],
+              "title": "QuotesResourceTotalDetailsResourceBreakdown",
+              "type": "object"
+            }
+          },
+          "required": [
+            "amount_discount",
+            "amount_tax"
+          ],
+          "title": "QuotesResourceTotalDetails",
+          "type": "object"
+        }
+      },
+      "required": [
+        "amount_subtotal",
+        "amount_total",
+        "interval",
+        "interval_count",
+        "total_details"
+      ],
+      "title": "QuotesResourceRecurring",
+      "type": "object"
+    },
+    "upfront": {
+      "description": "",
+      "properties": {
+        "amount_subtotal": {
+          "description": "Total before any discounts or taxes are applied.",
+          "type": "integer"
+        },
+        "amount_total": {
+          "description": "Total after discounts and taxes are applied.",
+          "type": "integer"
+        },
+        "line_items": {
+          "description": "The line items that will appear on the next invoice after this quote is accepted. This does not include pending invoice items that exist on the customer but may still be included in the next invoice.",
+          "properties": {
+            "data": {
+              "description": "Details about each object.",
+              "items": {
+                "description": "A line item.",
+                "properties": {
+                  "amount_subtotal": {
+                    "description": "Total before any discounts or taxes are applied.",
+                    "type": "integer"
+                  },
+                  "amount_total": {
+                    "description": "Total after discounts and taxes.",
+                    "type": "integer"
+                  },
+                  "currency": {
+                    "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "An arbitrary string attached to the object. Often useful for displaying to users. Defaults to product name.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "discounts": {
+                    "description": "The discounts applied to the line item.",
+                    "items": {
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "id": {
+                    "description": "Unique identifier for the object.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "object": {
+                    "description": "String representing the object's type. Objects of the same type share the same value.",
+                    "enum": [
+                      "item"
+                    ],
+                    "type": "string"
+                  },
+                  "price": {
+                    "description": "The price used to generate the line item.",
+                    "nullable": true,
+                    "type": "object"
+                  },
+                  "quantity": {
+                    "description": "The quantity of products being purchased.",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "taxes": {
+                    "description": "The taxes applied to the line item.",
+                    "items": {
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "amount_subtotal",
+                  "amount_total",
+                  "currency",
+                  "description",
+                  "id",
+                  "object"
+                ],
+                "title": "LineItem",
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "has_more": {
+              "description": "True if this list has another page of items after this one that can be fetched.",
+              "type": "boolean"
+            },
+            "object": {
+              "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
+              "enum": [
+                "list"
+              ],
+              "type": "string"
+            },
+            "url": {
+              "description": "The URL where this list can be accessed.",
+              "maxLength": 5000,
+              "type": "string"
+            }
+          },
+          "required": [
+            "data",
+            "has_more",
+            "object",
+            "url"
+          ],
+          "title": "QuotesResourceListLineItems",
+          "type": "object"
+        },
+        "total_details": {
+          "description": "",
+          "properties": {
+            "amount_discount": {
+              "description": "This is the sum of all the line item discounts.",
+              "type": "integer"
+            },
+            "amount_shipping": {
+              "description": "This is the sum of all the line item shipping amounts.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "amount_tax": {
+              "description": "This is the sum of all the line item tax amounts.",
+              "type": "integer"
+            },
+            "breakdown": {
+              "description": "",
+              "properties": {
+                "discounts": {
+                  "description": "The aggregated line item discounts.",
+                  "items": {
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "taxes": {
+                  "description": "The aggregated line item tax amounts by rate.",
+                  "items": {
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "discounts",
+                "taxes"
+              ],
+              "title": "QuotesResourceTotalDetailsResourceBreakdown",
+              "type": "object"
+            }
+          },
+          "required": [
+            "amount_discount",
+            "amount_tax"
+          ],
+          "title": "QuotesResourceTotalDetails",
+          "type": "object"
+        }
+      },
+      "required": [
+        "amount_subtotal",
+        "amount_total",
+        "total_details"
+      ],
+      "title": "QuotesResourceUpfront",
+      "type": "object"
+    }
+  },
+  "required": [
+    "upfront"
+  ],
+  "title": "QuotesResourceComputed",
+  "type": "object",
+  "default": {
+    "recurring": {
+      "amount_subtotal": 0,
+      "amount_total": 0,
+      "interval": "day",
+      "interval_count": 0,
+      "total_details": {
+        "amount_discount": 0,
+        "amount_shipping": 0,
+        "amount_tax": 0,
+        "breakdown": {
+          "discounts": [
+            {}
+          ],
+          "taxes": [
+            {}
+          ]
+        }
+      }
+    },
+    "upfront": {
+      "amount_subtotal": 0,
+      "amount_total": 0,
+      "line_items": {
+        "data": [
+          {
+            "amount_subtotal": 0,
+            "amount_total": 0,
+            "currency": "string",
+            "description": "string",
+            "discounts": [
+              {}
+            ],
+            "id": "string",
+            "object": "item",
+            "price": {},
+            "quantity": 0,
+            "taxes": [
+              {}
+            ]
+          }
+        ],
+        "has_more": true,
+        "object": "list",
+        "url": "string"
+      },
+      "total_details": {
+        "amount_discount": 0,
+        "amount_shipping": 0,
+        "amount_tax": 0,
+        "breakdown": {
+          "discounts": [
+            {}
+          ],
+          "taxes": [
+            {}
+          ]
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

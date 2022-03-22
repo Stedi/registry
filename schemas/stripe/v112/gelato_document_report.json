@@ -1,0 +1,285 @@
+{
+  "description": "Result from a document check",
+  "properties": {
+    "address": {
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "city": {
+          "description": "City, district, suburb, town, or village.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "country": {
+          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "line1": {
+          "description": "Address line 1 (e.g., street, PO Box, or company name).",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "line2": {
+          "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "postal_code": {
+          "description": "ZIP or postal code.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "state": {
+          "description": "State, county, province, or region.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "title": "Address",
+      "type": "object"
+    },
+    "dob": {
+      "description": "Point in Time",
+      "nullable": true,
+      "properties": {
+        "day": {
+          "description": "Numerical day between 1 and 31.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "month": {
+          "description": "Numerical month between 1 and 12.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "year": {
+          "description": "The four-digit year.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "title": "GelatoDataDocumentReportDateOfBirth",
+      "type": "object"
+    },
+    "error": {
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "code": {
+          "description": "A short machine-readable string giving the reason for the verification failure.",
+          "enum": [
+            "document_expired",
+            "document_type_not_supported",
+            "document_unverified_other",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reason": {
+          "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "title": "GelatoDocumentReportError",
+      "type": "object"
+    },
+    "expiration_date": {
+      "description": "Point in Time",
+      "nullable": true,
+      "properties": {
+        "day": {
+          "description": "Numerical day between 1 and 31.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "month": {
+          "description": "Numerical month between 1 and 12.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "year": {
+          "description": "The four-digit year.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "title": "GelatoDataDocumentReportExpirationDate",
+      "type": "object"
+    },
+    "files": {
+      "description": "Array of [File](https://stripe.com/docs/api/files) ids containing images for this document.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "first_name": {
+      "description": "First name as it appears in the document.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "issued_date": {
+      "description": "Point in Time",
+      "nullable": true,
+      "properties": {
+        "day": {
+          "description": "Numerical day between 1 and 31.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "month": {
+          "description": "Numerical month between 1 and 12.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "year": {
+          "description": "The four-digit year.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "title": "GelatoDataDocumentReportIssuedDate",
+      "type": "object"
+    },
+    "issuing_country": {
+      "description": "Issuing country of the document.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "last_name": {
+      "description": "Last name as it appears in the document.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "number": {
+      "description": "Document ID number.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "description": "Status of this `document` check.",
+      "enum": [
+        "unverified",
+        "verified"
+      ],
+      "type": "string"
+    },
+    "type": {
+      "description": "Type of the document.",
+      "enum": [
+        "driving_license",
+        "id_card",
+        "passport",
+        null
+      ],
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "status"
+  ],
+  "title": "GelatoDocumentReport",
+  "type": "object",
+  "default": {
+    "address": {
+      "city": "string",
+      "country": "string",
+      "line1": "string",
+      "line2": "string",
+      "postal_code": "string",
+      "state": "string"
+    },
+    "dob": {
+      "day": 0,
+      "month": 0,
+      "year": 0
+    },
+    "error": {
+      "code": "document_expired",
+      "reason": "string"
+    },
+    "expiration_date": {
+      "day": 0,
+      "month": 0,
+      "year": 0
+    },
+    "files": [
+      "string"
+    ],
+    "first_name": "string",
+    "issued_date": {
+      "day": 0,
+      "month": 0,
+      "year": 0
+    },
+    "issuing_country": "string",
+    "last_name": "string",
+    "number": "string",
+    "status": "unverified",
+    "type": "driving_license"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

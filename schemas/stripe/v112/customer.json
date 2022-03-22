@@ -2,67 +2,60 @@
   "description": "This object represents a customer of your business. It lets you create recurring charges and track payments that belong to the same customer.\n\nRelated guide: [Save a card during payment](https://stripe.com/docs/payments/save-during-payment).",
   "properties": {
     "address": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "city": {
-              "description": "City, district, suburb, town, or village.",
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "country": {
-              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "line1": {
-              "description": "Address line 1 (e.g., street, PO Box, or company name).",
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "line2": {
-              "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "postal_code": {
-              "description": "ZIP or postal code.",
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "state": {
-              "description": "State, county, province, or region.",
-              "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
-            }
-          },
-          "title": "Address",
-          "type": "object"
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "city": {
+          "description": "City, district, suburb, town, or village.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
         },
-        {
-          "type": "null"
+        "country": {
+          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "line1": {
+          "description": "Address line 1 (e.g., street, PO Box, or company name).",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "line2": {
+          "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "postal_code": {
+          "description": "ZIP or postal code.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "state": {
+          "description": "State, county, province, or region.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
         }
-      ],
-      "description": "The customer's address."
+      },
+      "title": "Address",
+      "type": "object"
     },
     "balance": {
       "description": "Current balance, if any, being stored on the customer. If negative, the customer has credit to apply to their next invoice. If positive, the customer has an amount owed that will be added to their next invoice. The balance does not refer to any unpaid invoices; it solely takes into account amounts that have yet to be successfully applied to any invoice. This balance is only taken into account as invoices are finalized.",
@@ -82,16 +75,10 @@
       ]
     },
     "default_source": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "ID of the default payment source for the customer.\n\nIf you are using payment methods created via the PaymentMethods API, see the [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) field instead."
+      "description": "ID of the default payment source for the customer.\n\nIf you are using payment methods created via the PaymentMethods API, see the [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) field instead.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "delinquent": {
       "description": "When the customer's latest invoice is billed by charging automatically, `delinquent` is `true` if the invoice's latest charge failed. When the customer's latest invoice is billed by sending an invoice, `delinquent` is `true` if the invoice isn't paid by its due date.\n\nIf an invoice is marked uncollectible by [dunning](https://stripe.com/docs/billing/automatic-collection), `delinquent` doesn't get reset to `false`.",
@@ -109,157 +96,92 @@
       ]
     },
     "discount": {
-      "anyOf": [
-        {
-          "description": "A discount represents the actual application of a coupon to a particular\ncustomer. It contains information about when the discount began and when it\nwill end.\n\nRelated guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).",
+      "description": "A discount represents the actual application of a coupon to a particular\ncustomer. It contains information about when the discount began and when it\nwill end.\n\nRelated guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).",
+      "nullable": true,
+      "properties": {
+        "checkout_session": {
+          "description": "The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "coupon": {
+          "description": "A coupon contains information about a percent-off or amount-off discount you\nmight want to apply to a customer. Coupons may be applied to [invoices](https://stripe.com/docs/api#invoices) or\n[orders](https://stripe.com/docs/api#create_order_legacy-coupon). Coupons do not work with conventional one-off [charges](https://stripe.com/docs/api#create_charge).",
           "properties": {
-            "checkout_session": {
-              "description": "The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.",
-              "maxLength": 5000,
+            "amount_off": {
+              "description": "Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for this customer.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "applies_to": {
+              "description": "",
+              "properties": {
+                "products": {
+                  "description": "A list of product IDs this coupon applies to",
+                  "items": {
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "products"
+              ],
+              "title": "CouponAppliesTo",
+              "type": "object"
+            },
+            "created": {
+              "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+              "format": "unix-time",
+              "type": "integer"
+            },
+            "currency": {
+              "description": "If `amount_off` has been set, the three-letter [ISO code for the currency](https://stripe.com/docs/currencies) of the amount to take off.",
               "type": [
                 "string",
                 "null"
               ]
             },
-            "coupon": {
-              "description": "A coupon contains information about a percent-off or amount-off discount you\nmight want to apply to a customer. Coupons may be applied to [invoices](https://stripe.com/docs/api#invoices) or\n[orders](https://stripe.com/docs/api#create_order_legacy-coupon). Coupons do not work with conventional one-off [charges](https://stripe.com/docs/api#create_charge).",
-              "properties": {
-                "amount_off": {
-                  "description": "Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for this customer.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "applies_to": {},
-                "created": {
-                  "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                  "format": "unix-time",
-                  "type": "integer"
-                },
-                "currency": {
-                  "description": "If `amount_off` has been set, the three-letter [ISO code for the currency](https://stripe.com/docs/currencies) of the amount to take off.",
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "duration": {
-                  "description": "One of `forever`, `once`, and `repeating`. Describes how long a customer who applies this coupon will get the discount.",
-                  "enum": [
-                    "forever",
-                    "once",
-                    "repeating"
-                  ],
-                  "type": "string"
-                },
-                "duration_in_months": {
-                  "description": "If `duration` is `repeating`, the number of months the coupon applies. Null if coupon `duration` is `forever` or `once`.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "id": {
-                  "description": "Unique identifier for the object.",
-                  "maxLength": 5000,
-                  "type": "string"
-                },
-                "livemode": {
-                  "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                  "type": "boolean"
-                },
-                "max_redemptions": {
-                  "description": "Maximum number of times this coupon can be redeemed, in total, across all customers, before it is no longer valid.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "metadata": {},
-                "name": {
-                  "description": "Name of the coupon displayed to customers on for instance invoices or receipts.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "object": {
-                  "description": "String representing the object's type. Objects of the same type share the same value.",
-                  "enum": [
-                    "coupon"
-                  ],
-                  "type": "string"
-                },
-                "percent_off": {
-                  "description": "Percent that will be taken off the subtotal of any invoices for this customer for the duration of the coupon. For example, a coupon with percent_off of 50 will make a %s100 invoice %s50 instead.",
-                  "type": [
-                    "number",
-                    "null"
-                  ]
-                },
-                "redeem_by": {
-                  "description": "Date after which the coupon can no longer be redeemed.",
-                  "format": "unix-time",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "times_redeemed": {
-                  "description": "Number of times this coupon has been applied to a customer.",
-                  "type": "integer"
-                },
-                "valid": {
-                  "description": "Taking account of the above properties, whether this coupon can still be applied to a customer.",
-                  "type": "boolean"
-                }
-              },
-              "required": [
-                "created",
-                "duration",
-                "id",
-                "livemode",
-                "object",
-                "times_redeemed",
-                "valid"
+            "duration": {
+              "description": "One of `forever`, `once`, and `repeating`. Describes how long a customer who applies this coupon will get the discount.",
+              "enum": [
+                "forever",
+                "once",
+                "repeating"
               ],
-              "title": "Coupon",
-              "type": "object"
+              "type": "string"
             },
-            "customer": {
-              "anyOf": [
-                {
-                  "maxLength": 5000,
-                  "type": "string"
-                }
-              ],
-              "description": "The ID of the customer associated with this discount."
-            },
-            "end": {
-              "description": "If the coupon has a duration of `repeating`, the date that this discount will end. If the coupon has a duration of `once` or `forever`, this attribute will be null.",
-              "format": "unix-time",
+            "duration_in_months": {
+              "description": "If `duration` is `repeating`, the number of months the coupon applies. Null if coupon `duration` is `forever` or `once`.",
               "type": [
                 "integer",
                 "null"
               ]
             },
             "id": {
-              "description": "The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.",
+              "description": "Unique identifier for the object.",
               "maxLength": 5000,
               "type": "string"
             },
-            "invoice": {
-              "description": "The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.",
-              "maxLength": 5000,
+            "livemode": {
+              "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+              "type": "boolean"
+            },
+            "max_redemptions": {
+              "description": "Maximum number of times this coupon can be redeemed, in total, across all customers, before it is no longer valid.",
               "type": [
-                "string",
+                "integer",
                 "null"
               ]
             },
-            "invoice_item": {
-              "description": "The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's coupon was applied to, if it was applied directly to a particular invoice item or invoice line item.",
+            "metadata": {},
+            "name": {
+              "description": "Name of the coupon displayed to customers on for instance invoices or receipts.",
               "maxLength": 5000,
               "type": [
                 "string",
@@ -269,47 +191,120 @@
             "object": {
               "description": "String representing the object's type. Objects of the same type share the same value.",
               "enum": [
-                "discount"
+                "coupon"
               ],
               "type": "string"
             },
-            "promotion_code": {
-              "anyOf": [
-                {
-                  "maxLength": 5000,
-                  "type": "string"
-                }
-              ],
-              "description": "The promotion code applied to create this discount."
-            },
-            "start": {
-              "description": "Date that the coupon was applied.",
-              "format": "unix-time",
-              "type": "integer"
-            },
-            "subscription": {
-              "description": "The subscription that this coupon is applied to, if it is applied to a particular subscription.",
-              "maxLength": 5000,
+            "percent_off": {
+              "description": "Percent that will be taken off the subtotal of any invoices for this customer for the duration of the coupon. For example, a coupon with percent_off of 50 will make a %s100 invoice %s50 instead.",
               "type": [
-                "string",
+                "number",
                 "null"
               ]
+            },
+            "redeem_by": {
+              "description": "Date after which the coupon can no longer be redeemed.",
+              "format": "unix-time",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "times_redeemed": {
+              "description": "Number of times this coupon has been applied to a customer.",
+              "type": "integer"
+            },
+            "valid": {
+              "description": "Taking account of the above properties, whether this coupon can still be applied to a customer.",
+              "type": "boolean"
             }
           },
           "required": [
-            "coupon",
+            "created",
+            "duration",
             "id",
+            "livemode",
             "object",
-            "start"
+            "times_redeemed",
+            "valid"
           ],
-          "title": "Discount",
+          "title": "Coupon",
           "type": "object"
         },
-        {
-          "type": "null"
+        "customer": {
+          "description": "The ID of the customer associated with this discount.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "end": {
+          "description": "If the coupon has a duration of `repeating`, the date that this discount will end. If the coupon has a duration of `once` or `forever`, this attribute will be null.",
+          "format": "unix-time",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "id": {
+          "description": "The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "invoice": {
+          "description": "The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "invoice_item": {
+          "description": "The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's coupon was applied to, if it was applied directly to a particular invoice item or invoice line item.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "object": {
+          "description": "String representing the object's type. Objects of the same type share the same value.",
+          "enum": [
+            "discount"
+          ],
+          "type": "string"
+        },
+        "promotion_code": {
+          "description": "The promotion code applied to create this discount.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "start": {
+          "description": "Date that the coupon was applied.",
+          "format": "unix-time",
+          "type": "integer"
+        },
+        "subscription": {
+          "description": "The subscription that this coupon is applied to, if it is applied to a particular subscription.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
         }
+      },
+      "required": [
+        "coupon",
+        "id",
+        "object",
+        "start"
       ],
-      "description": "Describes the current discount active on the customer, if there is one."
+      "title": "Discount",
+      "type": "object"
     },
     "email": {
       "description": "The customer's email address.",
@@ -364,16 +359,10 @@
           ]
         },
         "default_payment_method": {
-          "anyOf": [
-            {
-              "maxLength": 5000,
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "description": "ID of a payment method that's attached to the customer, to be used as the customer's default payment method for subscriptions and invoices."
+          "description": "ID of a payment method that's attached to the customer, to be used as the customer's default payment method for subscriptions and invoices.",
+          "nullable": true,
+          "maxLength": 5000,
+          "type": "string"
         },
         "footer": {
           "description": "Default footer to be displayed on invoices for this customer.",
@@ -431,91 +420,54 @@
       ]
     },
     "shipping": {
-      "anyOf": [
-        {
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "address": {
           "description": "",
           "properties": {
-            "address": {
-              "description": "",
-              "properties": {
-                "city": {
-                  "description": "City, district, suburb, town, or village.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "country": {
-                  "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "line1": {
-                  "description": "Address line 1 (e.g., street, PO Box, or company name).",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "line2": {
-                  "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "postal_code": {
-                  "description": "ZIP or postal code.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "state": {
-                  "description": "State, county, province, or region.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              },
-              "title": "Address",
-              "type": "object"
-            },
-            "carrier": {
-              "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.",
+            "city": {
+              "description": "City, district, suburb, town, or village.",
               "maxLength": 5000,
               "type": [
                 "string",
                 "null"
               ]
             },
-            "name": {
-              "description": "Recipient name.",
+            "country": {
+              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
               "maxLength": 5000,
               "type": [
                 "string",
                 "null"
               ]
             },
-            "phone": {
-              "description": "Recipient phone (including extension).",
+            "line1": {
+              "description": "Address line 1 (e.g., street, PO Box, or company name).",
               "maxLength": 5000,
               "type": [
                 "string",
                 "null"
               ]
             },
-            "tracking_number": {
-              "description": "The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.",
+            "line2": {
+              "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "postal_code": {
+              "description": "ZIP or postal code.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "state": {
+              "description": "State, county, province, or region.",
               "maxLength": 5000,
               "type": [
                 "string",
@@ -523,14 +475,44 @@
               ]
             }
           },
-          "title": "Shipping",
+          "title": "Address",
           "type": "object"
         },
-        {
-          "type": "null"
+        "carrier": {
+          "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "description": "Recipient name.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "phone": {
+          "description": "Recipient phone (including extension).",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tracking_number": {
+          "description": "The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
         }
-      ],
-      "description": "Mailing and shipping address for the customer. Appears on invoices emailed to this customer."
+      },
+      "title": "Shipping",
+      "type": "object"
     },
     "sources": {
       "description": "The customer's payment sources, if any.",
@@ -538,92 +520,81 @@
         "data": {
           "description": "Details about each object.",
           "items": {
-            "anyOf": [
-              {
-                "description": "",
-                "properties": {
-                  "created": {
-                    "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                    "format": "unix-time",
-                    "type": "integer"
-                  },
-                  "customer": {
-                    "anyOf": [
-                      {
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "description": "The ID of the customer associated with this Alipay Account."
-                  },
-                  "fingerprint": {
-                    "description": "Uniquely identifies the account and will be the same across all Alipay account objects that are linked to the same Alipay account.",
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  "id": {
-                    "description": "Unique identifier for the object.",
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  "livemode": {
-                    "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                    "type": "boolean"
-                  },
-                  "metadata": {},
-                  "object": {
-                    "description": "String representing the object's type. Objects of the same type share the same value.",
-                    "enum": [
-                      "alipay_account"
-                    ],
-                    "type": "string"
-                  },
-                  "payment_amount": {
-                    "description": "If the Alipay account object is not reusable, the exact amount that you can create a charge for.",
-                    "type": [
-                      "integer",
-                      "null"
-                    ]
-                  },
-                  "payment_currency": {
-                    "description": "If the Alipay account object is not reusable, the exact currency that you can create a charge for.",
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "reusable": {
-                    "description": "True if you can create multiple payments using this account. If the account is reusable, then you can freely choose the amount of each payment.",
-                    "type": "boolean"
-                  },
-                  "used": {
-                    "description": "Whether this Alipay account object has ever been used for a payment.",
-                    "type": "boolean"
-                  },
-                  "username": {
-                    "description": "The username for the Alipay account.",
-                    "maxLength": 5000,
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "created",
-                  "fingerprint",
-                  "id",
-                  "livemode",
-                  "object",
-                  "reusable",
-                  "used",
-                  "username"
+            "title": "AlipayAccount",
+            "description": "",
+            "properties": {
+              "created": {
+                "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                "format": "unix-time",
+                "type": "integer"
+              },
+              "customer": {
+                "description": "The ID of the customer associated with this Alipay Account.",
+                "nullable": true,
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "fingerprint": {
+                "description": "Uniquely identifies the account and will be the same across all Alipay account objects that are linked to the same Alipay account.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique identifier for the object.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "livemode": {
+                "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                "type": "boolean"
+              },
+              "metadata": {},
+              "object": {
+                "description": "String representing the object's type. Objects of the same type share the same value.",
+                "enum": [
+                  "alipay_account"
                 ],
-                "title": "AlipayAccount",
-                "type": "object"
+                "type": "string"
+              },
+              "payment_amount": {
+                "description": "If the Alipay account object is not reusable, the exact amount that you can create a charge for.",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "payment_currency": {
+                "description": "If the Alipay account object is not reusable, the exact currency that you can create a charge for.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "reusable": {
+                "description": "True if you can create multiple payments using this account. If the account is reusable, then you can freely choose the amount of each payment.",
+                "type": "boolean"
+              },
+              "used": {
+                "description": "Whether this Alipay account object has ever been used for a payment.",
+                "type": "boolean"
+              },
+              "username": {
+                "description": "The username for the Alipay account.",
+                "maxLength": 5000,
+                "type": "string"
               }
+            },
+            "required": [
+              "created",
+              "fingerprint",
+              "id",
+              "livemode",
+              "object",
+              "reusable",
+              "used",
+              "username"
             ],
-            "title": "Polymorphic"
+            "type": "object"
           },
           "type": "array"
         },
@@ -688,33 +659,26 @@
                 "type": "integer"
               },
               "billing_thresholds": {
-                "anyOf": [
-                  {
-                    "description": "",
-                    "properties": {
-                      "amount_gte": {
-                        "description": "Monetary threshold that triggers the subscription to create an invoice",
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "reset_billing_cycle_anchor": {
-                        "description": "Indicates if the `billing_cycle_anchor` should be reset when a threshold is reached. If true, `billing_cycle_anchor` will be updated to the date/time the threshold was last reached; otherwise, the value will remain unchanged. This value may not be `true` if the subscription contains items with plans that have `aggregate_usage=last_ever`.",
-                        "type": [
-                          "boolean",
-                          "null"
-                        ]
-                      }
-                    },
-                    "title": "SubscriptionBillingThresholds",
-                    "type": "object"
+                "description": "",
+                "nullable": true,
+                "properties": {
+                  "amount_gte": {
+                    "description": "Monetary threshold that triggers the subscription to create an invoice",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
-                  {
-                    "type": "null"
+                  "reset_billing_cycle_anchor": {
+                    "description": "Indicates if the `billing_cycle_anchor` should be reset when a threshold is reached. If true, `billing_cycle_anchor` will be updated to the date/time the threshold was last reached; otherwise, the value will remain unchanged. This value may not be `true` if the subscription contains items with plans that have `aggregate_usage=last_ever`.",
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
                   }
-                ],
-                "description": "Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period"
+                },
+                "title": "SubscriptionBillingThresholds",
+                "type": "object"
               },
               "cancel_at": {
                 "description": "A date in the future at which the subscription will automatically get canceled",
@@ -760,13 +724,9 @@
                 "type": "integer"
               },
               "customer": {
-                "anyOf": [
-                  {
-                    "maxLength": 5000,
-                    "type": "string"
-                  }
-                ],
-                "description": "ID of the customer who owns the subscription."
+                "description": "ID of the customer who owns the subscription.",
+                "maxLength": 5000,
+                "type": "string"
               },
               "days_until_due": {
                 "description": "Number of days a customer has to pay invoices generated by this subscription. This value will be `null` for subscriptions where `collection_method=charge_automatically`.",
@@ -776,28 +736,16 @@
                 ]
               },
               "default_payment_method": {
-                "anyOf": [
-                  {
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over `default_source`. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source)."
+                "description": "ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over `default_source`. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).",
+                "nullable": true,
+                "maxLength": 5000,
+                "type": "string"
               },
               "default_source": {
-                "anyOf": [
-                  {
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If `default_payment_method` is also set, `default_payment_method` will take precedence. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source)."
+                "description": "ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If `default_payment_method` is also set, `default_payment_method` will take precedence. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).",
+                "nullable": true,
+                "maxLength": 5000,
+                "type": "string"
               },
               "default_tax_rates": {
                 "description": "The tax rates that will apply to any subscription item that does not have `tax_rates` set. Invoices created will have their `default_tax_rates` populated from the subscription.",
@@ -855,7 +803,9 @@
                       "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
                       "type": "boolean"
                     },
-                    "metadata": {},
+                    "metadata": {
+                      "type": "object"
+                    },
                     "object": {
                       "description": "String representing the object's type. Objects of the same type share the same value.",
                       "enum": [
@@ -913,207 +863,94 @@
                 ]
               },
               "discount": {
-                "anyOf": [
-                  {
-                    "description": "A discount represents the actual application of a coupon to a particular\ncustomer. It contains information about when the discount began and when it\nwill end.\n\nRelated guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).",
-                    "properties": {
-                      "checkout_session": {
-                        "description": "The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.",
-                        "maxLength": 5000,
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "coupon": {
-                        "description": "A coupon contains information about a percent-off or amount-off discount you\nmight want to apply to a customer. Coupons may be applied to [invoices](https://stripe.com/docs/api#invoices) or\n[orders](https://stripe.com/docs/api#create_order_legacy-coupon). Coupons do not work with conventional one-off [charges](https://stripe.com/docs/api#create_charge).",
-                        "properties": {
-                          "amount_off": {
-                            "description": "Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for this customer.",
-                            "type": [
-                              "integer",
-                              "null"
-                            ]
-                          },
-                          "applies_to": {},
-                          "created": {
-                            "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                            "format": "unix-time",
-                            "type": "integer"
-                          },
-                          "currency": {
-                            "description": "If `amount_off` has been set, the three-letter [ISO code for the currency](https://stripe.com/docs/currencies) of the amount to take off.",
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "duration": {
-                            "description": "One of `forever`, `once`, and `repeating`. Describes how long a customer who applies this coupon will get the discount.",
-                            "enum": [
-                              "forever",
-                              "once",
-                              "repeating"
-                            ],
-                            "type": "string"
-                          },
-                          "duration_in_months": {
-                            "description": "If `duration` is `repeating`, the number of months the coupon applies. Null if coupon `duration` is `forever` or `once`.",
-                            "type": [
-                              "integer",
-                              "null"
-                            ]
-                          },
-                          "id": {
-                            "description": "Unique identifier for the object.",
-                            "maxLength": 5000,
-                            "type": "string"
-                          },
-                          "livemode": {
-                            "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                            "type": "boolean"
-                          },
-                          "max_redemptions": {
-                            "description": "Maximum number of times this coupon can be redeemed, in total, across all customers, before it is no longer valid.",
-                            "type": [
-                              "integer",
-                              "null"
-                            ]
-                          },
-                          "metadata": {},
-                          "name": {
-                            "description": "Name of the coupon displayed to customers on for instance invoices or receipts.",
-                            "maxLength": 5000,
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "object": {
-                            "description": "String representing the object's type. Objects of the same type share the same value.",
-                            "enum": [
-                              "coupon"
-                            ],
-                            "type": "string"
-                          },
-                          "percent_off": {
-                            "description": "Percent that will be taken off the subtotal of any invoices for this customer for the duration of the coupon. For example, a coupon with percent_off of 50 will make a %s100 invoice %s50 instead.",
-                            "type": [
-                              "number",
-                              "null"
-                            ]
-                          },
-                          "redeem_by": {
-                            "description": "Date after which the coupon can no longer be redeemed.",
-                            "format": "unix-time",
-                            "type": [
-                              "integer",
-                              "null"
-                            ]
-                          },
-                          "times_redeemed": {
-                            "description": "Number of times this coupon has been applied to a customer.",
-                            "type": "integer"
-                          },
-                          "valid": {
-                            "description": "Taking account of the above properties, whether this coupon can still be applied to a customer.",
-                            "type": "boolean"
-                          }
-                        },
-                        "required": [
-                          "created",
-                          "duration",
-                          "id",
-                          "livemode",
-                          "object",
-                          "times_redeemed",
-                          "valid"
-                        ],
-                        "title": "Coupon",
-                        "type": "object"
-                      },
-                      "customer": {
-                        "anyOf": [
-                          {
-                            "maxLength": 5000,
-                            "type": "string"
-                          }
-                        ],
-                        "description": "The ID of the customer associated with this discount."
-                      },
-                      "end": {
-                        "description": "If the coupon has a duration of `repeating`, the date that this discount will end. If the coupon has a duration of `once` or `forever`, this attribute will be null.",
-                        "format": "unix-time",
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "id": {
-                        "description": "The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.",
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "invoice": {
-                        "description": "The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.",
-                        "maxLength": 5000,
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "invoice_item": {
-                        "description": "The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's coupon was applied to, if it was applied directly to a particular invoice item or invoice line item.",
-                        "maxLength": 5000,
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "object": {
-                        "description": "String representing the object's type. Objects of the same type share the same value.",
-                        "enum": [
-                          "discount"
-                        ],
-                        "type": "string"
-                      },
-                      "promotion_code": {
-                        "anyOf": [
-                          {
-                            "maxLength": 5000,
-                            "type": "string"
-                          }
-                        ],
-                        "description": "The promotion code applied to create this discount."
-                      },
-                      "start": {
-                        "description": "Date that the coupon was applied.",
-                        "format": "unix-time",
-                        "type": "integer"
-                      },
-                      "subscription": {
-                        "description": "The subscription that this coupon is applied to, if it is applied to a particular subscription.",
-                        "maxLength": 5000,
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "coupon",
-                      "id",
-                      "object",
-                      "start"
-                    ],
-                    "title": "Discount",
+                "description": "A discount represents the actual application of a coupon to a particular\ncustomer. It contains information about when the discount began and when it\nwill end.\n\nRelated guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).",
+                "nullable": true,
+                "properties": {
+                  "checkout_session": {
+                    "description": "The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "coupon": {
                     "type": "object"
                   },
-                  {
-                    "type": "null"
+                  "customer": {
+                    "description": "The ID of the customer associated with this discount.",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "end": {
+                    "description": "If the coupon has a duration of `repeating`, the date that this discount will end. If the coupon has a duration of `once` or `forever`, this attribute will be null.",
+                    "format": "unix-time",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "id": {
+                    "description": "The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "invoice": {
+                    "description": "The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "invoice_item": {
+                    "description": "The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's coupon was applied to, if it was applied directly to a particular invoice item or invoice line item.",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "object": {
+                    "description": "String representing the object's type. Objects of the same type share the same value.",
+                    "enum": [
+                      "discount"
+                    ],
+                    "type": "string"
+                  },
+                  "promotion_code": {
+                    "description": "The promotion code applied to create this discount.",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "start": {
+                    "description": "Date that the coupon was applied.",
+                    "format": "unix-time",
+                    "type": "integer"
+                  },
+                  "subscription": {
+                    "description": "The subscription that this coupon is applied to, if it is applied to a particular subscription.",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
+                },
+                "required": [
+                  "coupon",
+                  "id",
+                  "object",
+                  "start"
                 ],
-                "description": "Describes the current discount applied to this subscription, if there is one. When billing, a discount applied to a subscription overrides a discount applied on a customer-wide basis."
+                "title": "Discount",
+                "type": "object"
               },
               "ended_at": {
                 "description": "If the subscription has ended, the date the subscription ended.",
@@ -1134,59 +971,6 @@
                   "data": {
                     "description": "Details about each object.",
                     "items": {
-                      "description": "Subscription items allow you to create customer subscriptions with more than\none plan, making it easy to represent complex billing relationships.",
-                      "properties": {
-                        "billing_thresholds": {
-                          "anyOf": [
-                            {}
-                          ],
-                          "description": "Define thresholds at which an invoice will be sent, and the related subscription advanced to a new billing period"
-                        },
-                        "created": {
-                          "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                          "type": "integer"
-                        },
-                        "id": {
-                          "description": "Unique identifier for the object.",
-                          "maxLength": 5000,
-                          "type": "string"
-                        },
-                        "metadata": {},
-                        "object": {
-                          "description": "String representing the object's type. Objects of the same type share the same value.",
-                          "enum": [
-                            "subscription_item"
-                          ],
-                          "type": "string"
-                        },
-                        "price": {},
-                        "quantity": {
-                          "description": "The [quantity](https://stripe.com/docs/subscriptions/quantities) of the plan to which the customer should be subscribed.",
-                          "type": "integer"
-                        },
-                        "subscription": {
-                          "description": "The `subscription` this `subscription_item` belongs to.",
-                          "maxLength": 5000,
-                          "type": "string"
-                        },
-                        "tax_rates": {
-                          "description": "The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on the subscription do not apply to this `subscription_item`.",
-                          "items": {},
-                          "type": [
-                            "array",
-                            "null"
-                          ]
-                        }
-                      },
-                      "required": [
-                        "created",
-                        "id",
-                        "metadata",
-                        "object",
-                        "price",
-                        "subscription"
-                      ],
-                      "title": "SubscriptionItem",
                       "type": "object"
                     },
                     "type": "array"
@@ -1218,16 +1002,10 @@
                 "type": "object"
               },
               "latest_invoice": {
-                "anyOf": [
-                  {
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "The most recent invoice this subscription has generated."
+                "description": "The most recent invoice this subscription has generated.",
+                "nullable": true,
+                "maxLength": 5000,
+                "type": "string"
               },
               "livemode": {
                 "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
@@ -1250,299 +1028,160 @@
                 "type": "string"
               },
               "pause_collection": {
-                "anyOf": [
-                  {
-                    "description": "The Pause Collection settings determine how we will pause collection for this subscription and for how long the subscription\nshould be paused.",
-                    "properties": {
-                      "behavior": {
-                        "description": "The payment collection behavior for this subscription while paused. One of `keep_as_draft`, `mark_uncollectible`, or `void`.",
-                        "enum": [
-                          "keep_as_draft",
-                          "mark_uncollectible",
-                          "void"
-                        ],
-                        "type": "string"
-                      },
-                      "resumes_at": {
-                        "description": "The time after which the subscription will resume collecting payments.",
-                        "format": "unix-time",
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "behavior"
+                "description": "The Pause Collection settings determine how we will pause collection for this subscription and for how long the subscription\nshould be paused.",
+                "nullable": true,
+                "properties": {
+                  "behavior": {
+                    "description": "The payment collection behavior for this subscription while paused. One of `keep_as_draft`, `mark_uncollectible`, or `void`.",
+                    "enum": [
+                      "keep_as_draft",
+                      "mark_uncollectible",
+                      "void"
                     ],
-                    "title": "SubscriptionsResourcePauseCollection",
-                    "type": "object"
+                    "type": "string"
                   },
-                  {
-                    "type": "null"
+                  "resumes_at": {
+                    "description": "The time after which the subscription will resume collecting payments.",
+                    "format": "unix-time",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   }
+                },
+                "required": [
+                  "behavior"
                 ],
-                "description": "If specified, payment collection for this subscription will be paused."
+                "title": "SubscriptionsResourcePauseCollection",
+                "type": "object"
               },
               "payment_settings": {
-                "anyOf": [
-                  {
-                    "description": "",
-                    "properties": {
-                      "payment_method_options": {
-                        "anyOf": [
-                          {
-                            "description": "",
-                            "properties": {
-                              "acss_debit": {
-                                "anyOf": [
-                                  {},
-                                  {
-                                    "type": "null"
-                                  }
-                                ],
-                                "description": "This sub-hash contains details about the Canadian pre-authorized debit payment method options to pass to invoices created by the subscription."
-                              },
-                              "bancontact": {
-                                "anyOf": [
-                                  {},
-                                  {
-                                    "type": "null"
-                                  }
-                                ],
-                                "description": "This sub-hash contains details about the Bancontact payment method options to pass to invoices created by the subscription."
-                              },
-                              "card": {
-                                "anyOf": [
-                                  {},
-                                  {
-                                    "type": "null"
-                                  }
-                                ],
-                                "description": "This sub-hash contains details about the Card payment method options to pass to invoices created by the subscription."
-                              },
-                              "konbini": {
-                                "anyOf": [
-                                  {},
-                                  {
-                                    "type": "null"
-                                  }
-                                ],
-                                "description": "This sub-hash contains details about the Konbini payment method options to pass to invoices created by the subscription."
-                              }
-                            },
-                            "title": "SubscriptionsResourcePaymentMethodOptions",
-                            "type": "object"
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ],
-                        "description": "Payment-method-specific configuration to provide to invoices created by the subscription."
-                      },
-                      "payment_method_types": {
-                        "description": "The list of payment method types to provide to every invoice created by the subscription. If not set, Stripe attempts to automatically determine the types to use by looking at the invoice’s default payment method, the subscription’s default payment method, the customer’s default payment method, and your [invoice template settings](https://dashboard.stripe.com/settings/billing/invoice).",
-                        "items": {
-                          "enum": [
-                            "ach_credit_transfer",
-                            "ach_debit",
-                            "acss_debit",
-                            "au_becs_debit",
-                            "bacs_debit",
-                            "bancontact",
-                            "boleto",
-                            "card",
-                            "fpx",
-                            "giropay",
-                            "grabpay",
-                            "ideal",
-                            "konbini",
-                            "sepa_debit",
-                            "sofort",
-                            "wechat_pay"
-                          ],
-                          "type": "string"
-                        },
-                        "type": [
-                          "array",
-                          "null"
-                        ]
-                      }
-                    },
-                    "title": "SubscriptionsResourcePaymentSettings",
+                "description": "",
+                "nullable": true,
+                "properties": {
+                  "payment_method_options": {
+                    "description": "Payment-method-specific configuration to provide to invoices created by the subscription.",
+                    "nullable": true,
                     "type": "object"
                   },
-                  {
-                    "type": "null"
+                  "payment_method_types": {
+                    "description": "The list of payment method types to provide to every invoice created by the subscription. If not set, Stripe attempts to automatically determine the types to use by looking at the invoice’s default payment method, the subscription’s default payment method, the customer’s default payment method, and your [invoice template settings](https://dashboard.stripe.com/settings/billing/invoice).",
+                    "items": {
+                      "enum": [
+                        "ach_credit_transfer",
+                        "ach_debit",
+                        "acss_debit",
+                        "au_becs_debit",
+                        "bacs_debit",
+                        "bancontact",
+                        "boleto",
+                        "card",
+                        "fpx",
+                        "giropay",
+                        "grabpay",
+                        "ideal",
+                        "konbini",
+                        "sepa_debit",
+                        "sofort",
+                        "wechat_pay"
+                      ],
+                      "type": "string"
+                    },
+                    "type": [
+                      "array",
+                      "null"
+                    ]
                   }
-                ],
-                "description": "Payment settings passed on to invoices created by the subscription."
+                },
+                "title": "SubscriptionsResourcePaymentSettings",
+                "type": "object"
               },
               "pending_invoice_item_interval": {
-                "anyOf": [
-                  {
-                    "description": "",
-                    "properties": {
-                      "interval": {
-                        "description": "Specifies invoicing frequency. Either `day`, `week`, `month` or `year`.",
-                        "enum": [
-                          "day",
-                          "month",
-                          "week",
-                          "year"
-                        ],
-                        "type": "string"
-                      },
-                      "interval_count": {
-                        "description": "The number of intervals between invoices. For example, `interval=month` and `interval_count=3` bills every 3 months. Maximum of one year interval allowed (1 year, 12 months, or 52 weeks).",
-                        "type": "integer"
-                      }
-                    },
-                    "required": [
-                      "interval",
-                      "interval_count"
+                "description": "",
+                "nullable": true,
+                "properties": {
+                  "interval": {
+                    "description": "Specifies invoicing frequency. Either `day`, `week`, `month` or `year`.",
+                    "enum": [
+                      "day",
+                      "month",
+                      "week",
+                      "year"
                     ],
-                    "title": "SubscriptionPendingInvoiceItemInterval",
-                    "type": "object"
+                    "type": "string"
                   },
-                  {
-                    "type": "null"
+                  "interval_count": {
+                    "description": "The number of intervals between invoices. For example, `interval=month` and `interval_count=3` bills every 3 months. Maximum of one year interval allowed (1 year, 12 months, or 52 weeks).",
+                    "type": "integer"
                   }
+                },
+                "required": [
+                  "interval",
+                  "interval_count"
                 ],
-                "description": "Specifies an interval for how often to bill for any pending invoice items. It is analogous to calling [Create an invoice](https://stripe.com/docs/api#create_invoice) for the given subscription at the specified interval."
+                "title": "SubscriptionPendingInvoiceItemInterval",
+                "type": "object"
               },
               "pending_setup_intent": {
-                "anyOf": [
-                  {
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "You can use this [SetupIntent](https://stripe.com/docs/api/setup_intents) to collect user authentication when creating a subscription without immediate payment or updating a subscription's payment method, allowing you to optimize for off-session payments. Learn more in the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication#scenario-2)."
+                "description": "You can use this [SetupIntent](https://stripe.com/docs/api/setup_intents) to collect user authentication when creating a subscription without immediate payment or updating a subscription's payment method, allowing you to optimize for off-session payments. Learn more in the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication#scenario-2).",
+                "nullable": true,
+                "maxLength": 5000,
+                "type": "string"
               },
               "pending_update": {
-                "anyOf": [
-                  {
-                    "description": "Pending Updates store the changes pending from a previous update that will be applied\nto the Subscription upon successful payment.",
-                    "properties": {
-                      "billing_cycle_anchor": {
-                        "description": "If the update is applied, determines the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices.",
-                        "format": "unix-time",
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "expires_at": {
-                        "description": "The point after which the changes reflected by this update will be discarded and no longer applied.",
-                        "format": "unix-time",
-                        "type": "integer"
-                      },
-                      "subscription_items": {
-                        "description": "List of subscription items, each with an attached plan, that will be set if the update is applied.",
-                        "items": {
-                          "description": "Subscription items allow you to create customer subscriptions with more than\none plan, making it easy to represent complex billing relationships.",
-                          "properties": {
-                            "billing_thresholds": {
-                              "anyOf": [
-                                {}
-                              ],
-                              "description": "Define thresholds at which an invoice will be sent, and the related subscription advanced to a new billing period"
-                            },
-                            "created": {
-                              "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                              "type": "integer"
-                            },
-                            "id": {
-                              "description": "Unique identifier for the object.",
-                              "maxLength": 5000,
-                              "type": "string"
-                            },
-                            "metadata": {},
-                            "object": {
-                              "description": "String representing the object's type. Objects of the same type share the same value.",
-                              "enum": [
-                                "subscription_item"
-                              ],
-                              "type": "string"
-                            },
-                            "price": {},
-                            "quantity": {
-                              "description": "The [quantity](https://stripe.com/docs/subscriptions/quantities) of the plan to which the customer should be subscribed.",
-                              "type": "integer"
-                            },
-                            "subscription": {
-                              "description": "The `subscription` this `subscription_item` belongs to.",
-                              "maxLength": 5000,
-                              "type": "string"
-                            },
-                            "tax_rates": {
-                              "description": "The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on the subscription do not apply to this `subscription_item`.",
-                              "items": {},
-                              "type": [
-                                "array",
-                                "null"
-                              ]
-                            }
-                          },
-                          "required": [
-                            "created",
-                            "id",
-                            "metadata",
-                            "object",
-                            "price",
-                            "subscription"
-                          ],
-                          "title": "SubscriptionItem",
-                          "type": "object"
-                        },
-                        "type": [
-                          "array",
-                          "null"
-                        ]
-                      },
-                      "trial_end": {
-                        "description": "Unix timestamp representing the end of the trial period the customer will get before being charged for the first time, if the update is applied.",
-                        "format": "unix-time",
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "trial_from_plan": {
-                        "description": "Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.",
-                        "type": [
-                          "boolean",
-                          "null"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "expires_at"
-                    ],
-                    "title": "SubscriptionsResourcePendingUpdate",
-                    "type": "object"
+                "description": "Pending Updates store the changes pending from a previous update that will be applied\nto the Subscription upon successful payment.",
+                "nullable": true,
+                "properties": {
+                  "billing_cycle_anchor": {
+                    "description": "If the update is applied, determines the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices.",
+                    "format": "unix-time",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
-                  {
-                    "type": "null"
+                  "expires_at": {
+                    "description": "The point after which the changes reflected by this update will be discarded and no longer applied.",
+                    "format": "unix-time",
+                    "type": "integer"
+                  },
+                  "subscription_items": {
+                    "description": "List of subscription items, each with an attached plan, that will be set if the update is applied.",
+                    "items": {
+                      "type": "object"
+                    },
+                    "type": [
+                      "array",
+                      "null"
+                    ]
+                  },
+                  "trial_end": {
+                    "description": "Unix timestamp representing the end of the trial period the customer will get before being charged for the first time, if the update is applied.",
+                    "format": "unix-time",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "trial_from_plan": {
+                    "description": "Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.",
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
                   }
+                },
+                "required": [
+                  "expires_at"
                 ],
-                "description": "If specified, [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates) that will be applied to the subscription once the `latest_invoice` has been paid."
+                "title": "SubscriptionsResourcePendingUpdate",
+                "type": "object"
               },
               "schedule": {
-                "anyOf": [
-                  {
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "The schedule attached to the subscription"
+                "description": "The schedule attached to the subscription",
+                "nullable": true,
+                "maxLength": 5000,
+                "type": "string"
               },
               "start_date": {
                 "description": "Date when the subscription was first created. The date might differ from the `created` date due to backdating.",
@@ -1563,38 +1202,27 @@
                 "type": "string"
               },
               "transfer_data": {
-                "anyOf": [
-                  {
-                    "description": "",
-                    "properties": {
-                      "amount_percent": {
-                        "description": "A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the destination account. By default, the entire amount is transferred to the destination.",
-                        "type": [
-                          "number",
-                          "null"
-                        ]
-                      },
-                      "destination": {
-                        "anyOf": [
-                          {
-                            "maxLength": 5000,
-                            "type": "string"
-                          }
-                        ],
-                        "description": "The account where funds from the payment will be transferred to upon payment success."
-                      }
-                    },
-                    "required": [
-                      "destination"
-                    ],
-                    "title": "SubscriptionTransferData",
-                    "type": "object"
+                "description": "",
+                "nullable": true,
+                "properties": {
+                  "amount_percent": {
+                    "description": "A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the destination account. By default, the entire amount is transferred to the destination.",
+                    "type": [
+                      "number",
+                      "null"
+                    ]
                   },
-                  {
-                    "type": "null"
+                  "destination": {
+                    "description": "The account where funds from the payment will be transferred to upon payment success.",
+                    "maxLength": 5000,
+                    "type": "string"
                   }
+                },
+                "required": [
+                  "destination"
                 ],
-                "description": "The account (if any) the subscription's payments will be attributed to for tax reporting, and where funds from each payment will be transferred to for each of the subscription's invoices."
+                "title": "SubscriptionTransferData",
+                "type": "object"
               },
               "trial_end": {
                 "description": "If the subscription has a trial, the end of that trial.",
@@ -1683,46 +1311,39 @@
           ]
         },
         "location": {
-          "anyOf": [
-            {
-              "description": "",
-              "properties": {
-                "country": {
-                  "description": "The customer's country as identified by Stripe Tax.",
-                  "maxLength": 5000,
-                  "type": "string"
-                },
-                "source": {
-                  "description": "The data source used to infer the customer's location.",
-                  "enum": [
-                    "billing_address",
-                    "ip_address",
-                    "payment_method",
-                    "shipping_destination"
-                  ],
-                  "type": "string"
-                },
-                "state": {
-                  "description": "The customer's state, county, province, or region as identified by Stripe Tax.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              },
-              "required": [
-                "country",
-                "source"
-              ],
-              "title": "CustomerTaxLocation",
-              "type": "object"
+          "description": "",
+          "nullable": true,
+          "properties": {
+            "country": {
+              "description": "The customer's country as identified by Stripe Tax.",
+              "maxLength": 5000,
+              "type": "string"
             },
-            {
-              "type": "null"
+            "source": {
+              "description": "The data source used to infer the customer's location.",
+              "enum": [
+                "billing_address",
+                "ip_address",
+                "payment_method",
+                "shipping_destination"
+              ],
+              "type": "string"
+            },
+            "state": {
+              "description": "The customer's state, county, province, or region as identified by Stripe Tax.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
             }
+          },
+          "required": [
+            "country",
+            "source"
           ],
-          "description": "The customer's location as identified by Stripe Tax."
+          "title": "CustomerTaxLocation",
+          "type": "object"
         }
       },
       "required": [
@@ -1766,16 +1387,10 @@
                 "type": "integer"
               },
               "customer": {
-                "anyOf": [
-                  {
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "ID of the customer."
+                "description": "ID of the customer.",
+                "nullable": true,
+                "maxLength": 5000,
+                "type": "string"
               },
               "id": {
                 "description": "Unique identifier for the object.",
@@ -1848,48 +1463,41 @@
                 "type": "string"
               },
               "verification": {
-                "anyOf": [
-                  {
-                    "description": "",
-                    "properties": {
-                      "status": {
-                        "description": "Verification status, one of `pending`, `verified`, `unverified`, or `unavailable`.",
-                        "enum": [
-                          "pending",
-                          "unavailable",
-                          "unverified",
-                          "verified"
-                        ],
-                        "type": "string"
-                      },
-                      "verified_address": {
-                        "description": "Verified address.",
-                        "maxLength": 5000,
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "verified_name": {
-                        "description": "Verified name.",
-                        "maxLength": 5000,
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "status"
+                "description": "",
+                "nullable": true,
+                "properties": {
+                  "status": {
+                    "description": "Verification status, one of `pending`, `verified`, `unverified`, or `unavailable`.",
+                    "enum": [
+                      "pending",
+                      "unavailable",
+                      "unverified",
+                      "verified"
                     ],
-                    "title": "tax_id_verification",
-                    "type": "object"
+                    "type": "string"
                   },
-                  {
-                    "type": "null"
+                  "verified_address": {
+                    "description": "Verified address.",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "verified_name": {
+                    "description": "Verified name.",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
+                },
+                "required": [
+                  "status"
                 ],
-                "description": "Tax ID verification information."
+                "title": "tax_id_verification",
+                "type": "object"
               }
             },
             "required": [
@@ -1959,7 +1567,11 @@
       "checkout_session": "string",
       "coupon": {
         "amount_off": 0,
-        "applies_to": {},
+        "applies_to": {
+          "products": [
+            "string"
+          ]
+        },
         "created": 1647352387,
         "currency": "string",
         "duration": "forever",
@@ -2085,24 +1697,7 @@
           ],
           "discount": {
             "checkout_session": "string",
-            "coupon": {
-              "amount_off": 0,
-              "applies_to": {},
-              "created": 1647352387,
-              "currency": "string",
-              "duration": "forever",
-              "duration_in_months": 0,
-              "id": "string",
-              "livemode": true,
-              "max_redemptions": 0,
-              "metadata": {},
-              "name": "string",
-              "object": "coupon",
-              "percent_off": 0,
-              "redeem_by": 1647352387,
-              "times_redeemed": 0,
-              "valid": true
-            },
+            "coupon": {},
             "customer": "string",
             "end": 1647352387,
             "id": "string",
@@ -2117,19 +1712,7 @@
           "id": "string",
           "items": {
             "data": [
-              {
-                "billing_thresholds": {},
-                "created": 0,
-                "id": "string",
-                "metadata": {},
-                "object": "subscription_item",
-                "price": {},
-                "quantity": 0,
-                "subscription": "string",
-                "tax_rates": [
-                  {}
-                ]
-              }
+              {}
             ],
             "has_more": true,
             "object": "list",
@@ -2145,12 +1728,7 @@
             "resumes_at": 1647352387
           },
           "payment_settings": {
-            "payment_method_options": {
-              "acss_debit": {},
-              "bancontact": {},
-              "card": {},
-              "konbini": {}
-            },
+            "payment_method_options": {},
             "payment_method_types": [
               "ach_credit_transfer"
             ]
@@ -2164,19 +1742,7 @@
             "billing_cycle_anchor": 1647352387,
             "expires_at": 1647352387,
             "subscription_items": [
-              {
-                "billing_thresholds": {},
-                "created": 0,
-                "id": "string",
-                "metadata": {},
-                "object": "subscription_item",
-                "price": {},
-                "quantity": 0,
-                "subscription": "string",
-                "tax_rates": [
-                  {}
-                ]
-              }
+              {}
             ],
             "trial_end": 1647352387,
             "trial_from_plan": true

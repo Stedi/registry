@@ -1,0 +1,74 @@
+{
+  "description": "Result from a selfie check",
+  "properties": {
+    "document": {
+      "description": "ID of the [File](https://stripe.com/docs/api/files) holding the image of the identity document used in this check.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "error": {
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "code": {
+          "description": "A short machine-readable string giving the reason for the verification failure.",
+          "enum": [
+            "selfie_document_missing_photo",
+            "selfie_face_mismatch",
+            "selfie_manipulated",
+            "selfie_unverified_other",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reason": {
+          "description": "A human-readable message giving the reason for the failure. These messages can be shown to your users.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "title": "GelatoSelfieReportError",
+      "type": "object"
+    },
+    "selfie": {
+      "description": "ID of the [File](https://stripe.com/docs/api/files) holding the image of the selfie used in this check.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "description": "Status of this `selfie` check.",
+      "enum": [
+        "unverified",
+        "verified"
+      ],
+      "type": "string"
+    }
+  },
+  "required": [
+    "status"
+  ],
+  "title": "GelatoSelfieReport",
+  "type": "object",
+  "default": {
+    "document": "string",
+    "error": {
+      "code": "selfie_document_missing_photo",
+      "reason": "string"
+    },
+    "selfie": "string",
+    "status": "unverified"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

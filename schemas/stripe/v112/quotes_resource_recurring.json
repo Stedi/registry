@@ -1,0 +1,143 @@
+{
+  "description": "",
+  "properties": {
+    "amount_subtotal": {
+      "description": "Total before any discounts or taxes are applied.",
+      "type": "integer"
+    },
+    "amount_total": {
+      "description": "Total after discounts and taxes are applied.",
+      "type": "integer"
+    },
+    "interval": {
+      "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
+      "enum": [
+        "day",
+        "month",
+        "week",
+        "year"
+      ],
+      "type": "string"
+    },
+    "interval_count": {
+      "description": "The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.",
+      "type": "integer"
+    },
+    "total_details": {
+      "description": "",
+      "properties": {
+        "amount_discount": {
+          "description": "This is the sum of all the line item discounts.",
+          "type": "integer"
+        },
+        "amount_shipping": {
+          "description": "This is the sum of all the line item shipping amounts.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "amount_tax": {
+          "description": "This is the sum of all the line item tax amounts.",
+          "type": "integer"
+        },
+        "breakdown": {
+          "description": "",
+          "properties": {
+            "discounts": {
+              "description": "The aggregated line item discounts.",
+              "items": {
+                "description": "",
+                "properties": {
+                  "amount": {
+                    "description": "The amount discounted.",
+                    "type": "integer"
+                  },
+                  "discount": {
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "amount",
+                  "discount"
+                ],
+                "title": "LineItemsDiscountAmount",
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "taxes": {
+              "description": "The aggregated line item tax amounts by rate.",
+              "items": {
+                "description": "",
+                "properties": {
+                  "amount": {
+                    "description": "Amount of tax applied for this rate.",
+                    "type": "integer"
+                  },
+                  "rate": {
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "amount",
+                  "rate"
+                ],
+                "title": "LineItemsTaxAmount",
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "discounts",
+            "taxes"
+          ],
+          "title": "QuotesResourceTotalDetailsResourceBreakdown",
+          "type": "object"
+        }
+      },
+      "required": [
+        "amount_discount",
+        "amount_tax"
+      ],
+      "title": "QuotesResourceTotalDetails",
+      "type": "object"
+    }
+  },
+  "required": [
+    "amount_subtotal",
+    "amount_total",
+    "interval",
+    "interval_count",
+    "total_details"
+  ],
+  "title": "QuotesResourceRecurring",
+  "type": "object",
+  "default": {
+    "amount_subtotal": 0,
+    "amount_total": 0,
+    "interval": "day",
+    "interval_count": 0,
+    "total_details": {
+      "amount_discount": 0,
+      "amount_shipping": 0,
+      "amount_tax": 0,
+      "breakdown": {
+        "discounts": [
+          {
+            "amount": 0,
+            "discount": {}
+          }
+        ],
+        "taxes": [
+          {
+            "amount": 0,
+            "rate": {}
+          }
+        ]
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

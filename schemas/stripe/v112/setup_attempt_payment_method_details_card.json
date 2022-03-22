@@ -1,0 +1,81 @@
+{
+  "description": "",
+  "properties": {
+    "three_d_secure": {
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "authentication_flow": {
+          "description": "For authenticated transactions: how the customer was authenticated by\nthe issuing bank.",
+          "enum": [
+            "challenge",
+            "frictionless",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "result": {
+          "description": "Indicates the outcome of 3D Secure authentication.",
+          "enum": [
+            "attempt_acknowledged",
+            "authenticated",
+            "failed",
+            "not_supported",
+            "processing_error",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "result_reason": {
+          "description": "Additional information about why 3D Secure succeeded or failed based\non the `result`.",
+          "enum": [
+            "abandoned",
+            "bypassed",
+            "canceled",
+            "card_not_enrolled",
+            "network_not_supported",
+            "protocol_error",
+            "rejected",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "version": {
+          "description": "The version of 3D Secure that was used.",
+          "enum": [
+            "1.0.2",
+            "2.1.0",
+            "2.2.0",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "title": "three_d_secure_details",
+      "type": "object"
+    }
+  },
+  "title": "setup_attempt_payment_method_details_card",
+  "type": "object",
+  "default": {
+    "three_d_secure": {
+      "authentication_flow": "challenge",
+      "result": "attempt_acknowledged",
+      "result_reason": "abandoned",
+      "version": "1.0.2"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

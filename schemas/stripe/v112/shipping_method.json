@@ -1,0 +1,75 @@
+{
+  "description": "",
+  "properties": {
+    "amount": {
+      "description": "A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the line item.",
+      "type": "integer"
+    },
+    "currency": {
+      "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+      "type": "string"
+    },
+    "delivery_estimate": {
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "date": {
+          "description": "If `type` is `\"exact\"`, `date` will be the expected delivery date in the format YYYY-MM-DD.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "earliest": {
+          "description": "If `type` is `\"range\"`, `earliest` will be be the earliest delivery date in the format YYYY-MM-DD.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "latest": {
+          "description": "If `type` is `\"range\"`, `latest` will be the latest delivery date in the format YYYY-MM-DD.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of estimate. Must be either `\"range\"` or `\"exact\"`.",
+          "maxLength": 5000,
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "DeliveryEstimate",
+      "type": "object"
+    },
+    "description": {
+      "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    }
+  },
+  "required": [
+    "amount",
+    "currency",
+    "description",
+    "id"
+  ],
+  "title": "ShippingMethod",
+  "type": "object",
+  "default": {
+    "amount": 0,
+    "currency": "string",
+    "delivery_estimate": {
+      "date": "string",
+      "earliest": "string",
+      "latest": "string",
+      "type": "string"
+    },
+    "description": "string",
+    "id": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

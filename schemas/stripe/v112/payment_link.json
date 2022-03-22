@@ -133,98 +133,6 @@
                       "type": "integer"
                     },
                     "discount": {
-                      "description": "A discount represents the actual application of a coupon to a particular\ncustomer. It contains information about when the discount began and when it\nwill end.\n\nRelated guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).",
-                      "properties": {
-                        "checkout_session": {
-                          "description": "The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "coupon": {},
-                        "customer": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": "string"
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "The ID of the customer associated with this discount."
-                        },
-                        "end": {
-                          "description": "If the coupon has a duration of `repeating`, the date that this discount will end. If the coupon has a duration of `once` or `forever`, this attribute will be null.",
-                          "format": "unix-time",
-                          "type": [
-                            "integer",
-                            "null"
-                          ]
-                        },
-                        "id": {
-                          "description": "The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.",
-                          "maxLength": 5000,
-                          "type": "string"
-                        },
-                        "invoice": {
-                          "description": "The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "invoice_item": {
-                          "description": "The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's coupon was applied to, if it was applied directly to a particular invoice item or invoice line item.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "object": {
-                          "description": "String representing the object's type. Objects of the same type share the same value.",
-                          "enum": [
-                            "discount"
-                          ],
-                          "type": "string"
-                        },
-                        "promotion_code": {
-                          "anyOf": [
-                            {
-                              "maxLength": 5000,
-                              "type": "string"
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "The promotion code applied to create this discount."
-                        },
-                        "start": {
-                          "description": "Date that the coupon was applied.",
-                          "format": "unix-time",
-                          "type": "integer"
-                        },
-                        "subscription": {
-                          "description": "The subscription that this coupon is applied to, if it is applied to a particular subscription.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        }
-                      },
-                      "required": [
-                        "coupon",
-                        "id",
-                        "object",
-                        "start"
-                      ],
-                      "title": "Discount",
                       "type": "object"
                     }
                   },
@@ -250,277 +158,150 @@
                 "type": "string"
               },
               "price": {
-                "anyOf": [
-                  {
-                    "description": "Prices define the unit cost, currency, and (optional) billing cycle for both recurring and one-time purchases of products.\n[Products](https://stripe.com/docs/api#products) help you track inventory or provisioning, and prices help you track payment terms. Different physical goods or levels of service should be represented by products, and pricing options should be represented by prices. This approach lets you change prices without having to change your provisioning scheme.\n\nFor example, you might have a single \"gold\" product that has prices for $10/month, $100/year, and €9 once.\n\nRelated guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription), [create an invoice](https://stripe.com/docs/billing/invoices/create), and more about [products and prices](https://stripe.com/docs/products-prices/overview).",
-                    "properties": {
-                      "active": {
-                        "description": "Whether the price can be used for new purchases.",
-                        "type": "boolean"
-                      },
-                      "billing_scheme": {
-                        "description": "Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.",
-                        "enum": [
-                          "per_unit",
-                          "tiered"
-                        ],
-                        "type": "string"
-                      },
-                      "created": {
-                        "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                        "format": "unix-time",
-                        "type": "integer"
-                      },
-                      "currency": {
-                        "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-                        "type": "string"
-                      },
-                      "id": {
-                        "description": "Unique identifier for the object.",
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "livemode": {
-                        "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                        "type": "boolean"
-                      },
-                      "lookup_key": {
-                        "description": "A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.",
-                        "maxLength": 5000,
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "metadata": {},
-                      "nickname": {
-                        "description": "A brief description of the price, hidden from customers.",
-                        "maxLength": 5000,
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "object": {
-                        "description": "String representing the object's type. Objects of the same type share the same value.",
-                        "enum": [
-                          "price"
-                        ],
-                        "type": "string"
-                      },
-                      "product": {
-                        "anyOf": [
-                          {
-                            "maxLength": 5000,
-                            "type": "string"
-                          }
-                        ],
-                        "description": "The ID of the product this price is associated with."
-                      },
-                      "recurring": {
-                        "anyOf": [
-                          {
-                            "description": "",
-                            "properties": {
-                              "aggregate_usage": {
-                                "description": "Specifies a usage aggregation strategy for prices of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.",
-                                "enum": [
-                                  "last_during_period",
-                                  "last_ever",
-                                  "max",
-                                  "sum",
-                                  null
-                                ],
-                                "type": [
-                                  "string",
-                                  "null"
-                                ]
-                              },
-                              "interval": {
-                                "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
-                                "enum": [
-                                  "day",
-                                  "month",
-                                  "week",
-                                  "year"
-                                ],
-                                "type": "string"
-                              },
-                              "interval_count": {
-                                "description": "The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.",
-                                "type": "integer"
-                              },
-                              "usage_type": {
-                                "description": "Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.",
-                                "enum": [
-                                  "licensed",
-                                  "metered"
-                                ],
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "interval",
-                              "interval_count",
-                              "usage_type"
-                            ],
-                            "title": "Recurring",
-                            "type": "object"
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ],
-                        "description": "The recurring components of a price such as `interval` and `usage_type`."
-                      },
-                      "tax_behavior": {
-                        "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.",
-                        "enum": [
-                          "exclusive",
-                          "inclusive",
-                          "unspecified",
-                          null
-                        ],
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "tiers": {
-                        "description": "Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.",
-                        "items": {
-                          "description": "",
-                          "properties": {
-                            "flat_amount": {
-                              "description": "Price for the entire tier.",
-                              "type": [
-                                "integer",
-                                "null"
-                              ]
-                            },
-                            "flat_amount_decimal": {
-                              "description": "Same as `flat_amount`, but contains a decimal value with at most 12 decimal places.",
-                              "format": "decimal",
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            "unit_amount": {
-                              "description": "Per unit price for units relevant to the tier.",
-                              "type": [
-                                "integer",
-                                "null"
-                              ]
-                            },
-                            "unit_amount_decimal": {
-                              "description": "Same as `unit_amount`, but contains a decimal value with at most 12 decimal places.",
-                              "format": "decimal",
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            "up_to": {
-                              "description": "Up to and including to this quantity will be contained in the tier.",
-                              "type": [
-                                "integer",
-                                "null"
-                              ]
-                            }
-                          },
-                          "title": "PriceTier",
-                          "type": "object"
-                        },
-                        "type": "array"
-                      },
-                      "tiers_mode": {
-                        "description": "Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.",
-                        "enum": [
-                          "graduated",
-                          "volume",
-                          null
-                        ],
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "transform_quantity": {
-                        "anyOf": [
-                          {
-                            "description": "",
-                            "properties": {
-                              "divide_by": {
-                                "description": "Divide usage by this number.",
-                                "type": "integer"
-                              },
-                              "round": {
-                                "description": "After division, either round the result `up` or `down`.",
-                                "enum": [
-                                  "down",
-                                  "up"
-                                ],
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "divide_by",
-                              "round"
-                            ],
-                            "title": "TransformQuantity",
-                            "type": "object"
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ],
-                        "description": "Apply a transformation to the reported usage or set quantity before computing the amount billed. Cannot be combined with `tiers`."
-                      },
-                      "type": {
-                        "description": "One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.",
-                        "enum": [
-                          "one_time",
-                          "recurring"
-                        ],
-                        "type": "string"
-                      },
-                      "unit_amount": {
-                        "description": "The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.",
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "unit_amount_decimal": {
-                        "description": "The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.",
-                        "format": "decimal",
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "active",
-                      "billing_scheme",
-                      "created",
-                      "currency",
-                      "id",
-                      "livemode",
-                      "metadata",
-                      "object",
-                      "product",
-                      "type"
+                "description": "Prices define the unit cost, currency, and (optional) billing cycle for both recurring and one-time purchases of products.\n[Products](https://stripe.com/docs/api#products) help you track inventory or provisioning, and prices help you track payment terms. Different physical goods or levels of service should be represented by products, and pricing options should be represented by prices. This approach lets you change prices without having to change your provisioning scheme.\n\nFor example, you might have a single \"gold\" product that has prices for $10/month, $100/year, and €9 once.\n\nRelated guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription), [create an invoice](https://stripe.com/docs/billing/invoices/create), and more about [products and prices](https://stripe.com/docs/products-prices/overview).",
+                "nullable": true,
+                "properties": {
+                  "active": {
+                    "description": "Whether the price can be used for new purchases.",
+                    "type": "boolean"
+                  },
+                  "billing_scheme": {
+                    "description": "Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.",
+                    "enum": [
+                      "per_unit",
+                      "tiered"
                     ],
-                    "title": "Price",
+                    "type": "string"
+                  },
+                  "created": {
+                    "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                    "format": "unix-time",
+                    "type": "integer"
+                  },
+                  "currency": {
+                    "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Unique identifier for the object.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "livemode": {
+                    "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                    "type": "boolean"
+                  },
+                  "lookup_key": {
+                    "description": "A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "metadata": {
                     "type": "object"
                   },
-                  {
-                    "type": "null"
+                  "nickname": {
+                    "description": "A brief description of the price, hidden from customers.",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "object": {
+                    "description": "String representing the object's type. Objects of the same type share the same value.",
+                    "enum": [
+                      "price"
+                    ],
+                    "type": "string"
+                  },
+                  "product": {
+                    "description": "The ID of the product this price is associated with.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "recurring": {
+                    "description": "The recurring components of a price such as `interval` and `usage_type`.",
+                    "nullable": true,
+                    "type": "object"
+                  },
+                  "tax_behavior": {
+                    "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.",
+                    "enum": [
+                      "exclusive",
+                      "inclusive",
+                      "unspecified",
+                      null
+                    ],
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "tiers": {
+                    "description": "Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.",
+                    "items": {
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "tiers_mode": {
+                    "description": "Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.",
+                    "enum": [
+                      "graduated",
+                      "volume",
+                      null
+                    ],
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "transform_quantity": {
+                    "description": "Apply a transformation to the reported usage or set quantity before computing the amount billed. Cannot be combined with `tiers`.",
+                    "nullable": true,
+                    "type": "object"
+                  },
+                  "type": {
+                    "description": "One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.",
+                    "enum": [
+                      "one_time",
+                      "recurring"
+                    ],
+                    "type": "string"
+                  },
+                  "unit_amount": {
+                    "description": "The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "unit_amount_decimal": {
+                    "description": "The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.",
+                    "format": "decimal",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
+                },
+                "required": [
+                  "active",
+                  "billing_scheme",
+                  "created",
+                  "currency",
+                  "id",
+                  "livemode",
+                  "metadata",
+                  "object",
+                  "product",
+                  "type"
                 ],
-                "description": "The price used to generate the line item."
+                "title": "Price",
+                "type": "object"
               },
               "quantity": {
                 "description": "The quantity of products being purchased.",
@@ -539,109 +320,6 @@
                       "type": "integer"
                     },
                     "rate": {
-                      "description": "Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.\n\nRelated guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).",
-                      "properties": {
-                        "active": {
-                          "description": "Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.",
-                          "type": "boolean"
-                        },
-                        "country": {
-                          "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "created": {
-                          "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
-                          "format": "unix-time",
-                          "type": "integer"
-                        },
-                        "description": {
-                          "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "display_name": {
-                          "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
-                          "maxLength": 5000,
-                          "type": "string"
-                        },
-                        "id": {
-                          "description": "Unique identifier for the object.",
-                          "maxLength": 5000,
-                          "type": "string"
-                        },
-                        "inclusive": {
-                          "description": "This specifies if the tax rate is inclusive or exclusive.",
-                          "type": "boolean"
-                        },
-                        "jurisdiction": {
-                          "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "livemode": {
-                          "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
-                          "type": "boolean"
-                        },
-                        "metadata": {},
-                        "object": {
-                          "description": "String representing the object's type. Objects of the same type share the same value.",
-                          "enum": [
-                            "tax_rate"
-                          ],
-                          "type": "string"
-                        },
-                        "percentage": {
-                          "description": "This represents the tax rate percent out of 100.",
-                          "type": "number"
-                        },
-                        "state": {
-                          "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
-                          "maxLength": 5000,
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "tax_type": {
-                          "description": "The high-level tax type, such as `vat` or `sales_tax`.",
-                          "enum": [
-                            "gst",
-                            "hst",
-                            "jct",
-                            "pst",
-                            "qst",
-                            "rst",
-                            "sales_tax",
-                            "vat",
-                            null
-                          ],
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        }
-                      },
-                      "required": [
-                        "active",
-                        "created",
-                        "display_name",
-                        "id",
-                        "inclusive",
-                        "livemode",
-                        "object",
-                        "percentage"
-                      ],
-                      "title": "TaxRate",
                       "type": "object"
                     }
                   },
@@ -707,16 +385,10 @@
       "type": "string"
     },
     "on_behalf_of": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "The account on behalf of which to charge. See the [Connect documentation](https://support.stripe.com/questions/sending-invoices-on-behalf-of-connected-accounts) for details."
+      "description": "The account on behalf of which to charge. See the [Connect documentation](https://support.stripe.com/questions/sending-invoices-on-behalf-of-connected-accounts) for details.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "payment_method_types": {
       "description": "The list of payment method types that customers can use. When `null`, Stripe will dynamically show relevant payment methods you've enabled in your [payment method settings](https://dashboard.stripe.com/settings/payment_methods).",
@@ -746,324 +418,299 @@
       "type": "object"
     },
     "shipping_address_collection": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "allowed_countries": {
-              "description": "An array of two-letter ISO country codes representing which countries Checkout should provide as options for shipping locations. Unsupported country codes: `AS, CX, CC, CU, HM, IR, KP, MH, FM, NF, MP, PW, SD, SY, UM, VI`.",
-              "items": {
-                "enum": [
-                  "AC",
-                  "AD",
-                  "AE",
-                  "AF",
-                  "AG",
-                  "AI",
-                  "AL",
-                  "AM",
-                  "AO",
-                  "AQ",
-                  "AR",
-                  "AT",
-                  "AU",
-                  "AW",
-                  "AX",
-                  "AZ",
-                  "BA",
-                  "BB",
-                  "BD",
-                  "BE",
-                  "BF",
-                  "BG",
-                  "BH",
-                  "BI",
-                  "BJ",
-                  "BL",
-                  "BM",
-                  "BN",
-                  "BO",
-                  "BQ",
-                  "BR",
-                  "BS",
-                  "BT",
-                  "BV",
-                  "BW",
-                  "BY",
-                  "BZ",
-                  "CA",
-                  "CD",
-                  "CF",
-                  "CG",
-                  "CH",
-                  "CI",
-                  "CK",
-                  "CL",
-                  "CM",
-                  "CN",
-                  "CO",
-                  "CR",
-                  "CV",
-                  "CW",
-                  "CY",
-                  "CZ",
-                  "DE",
-                  "DJ",
-                  "DK",
-                  "DM",
-                  "DO",
-                  "DZ",
-                  "EC",
-                  "EE",
-                  "EG",
-                  "EH",
-                  "ER",
-                  "ES",
-                  "ET",
-                  "FI",
-                  "FJ",
-                  "FK",
-                  "FO",
-                  "FR",
-                  "GA",
-                  "GB",
-                  "GD",
-                  "GE",
-                  "GF",
-                  "GG",
-                  "GH",
-                  "GI",
-                  "GL",
-                  "GM",
-                  "GN",
-                  "GP",
-                  "GQ",
-                  "GR",
-                  "GS",
-                  "GT",
-                  "GU",
-                  "GW",
-                  "GY",
-                  "HK",
-                  "HN",
-                  "HR",
-                  "HT",
-                  "HU",
-                  "ID",
-                  "IE",
-                  "IL",
-                  "IM",
-                  "IN",
-                  "IO",
-                  "IQ",
-                  "IS",
-                  "IT",
-                  "JE",
-                  "JM",
-                  "JO",
-                  "JP",
-                  "KE",
-                  "KG",
-                  "KH",
-                  "KI",
-                  "KM",
-                  "KN",
-                  "KR",
-                  "KW",
-                  "KY",
-                  "KZ",
-                  "LA",
-                  "LB",
-                  "LC",
-                  "LI",
-                  "LK",
-                  "LR",
-                  "LS",
-                  "LT",
-                  "LU",
-                  "LV",
-                  "LY",
-                  "MA",
-                  "MC",
-                  "MD",
-                  "ME",
-                  "MF",
-                  "MG",
-                  "MK",
-                  "ML",
-                  "MM",
-                  "MN",
-                  "MO",
-                  "MQ",
-                  "MR",
-                  "MS",
-                  "MT",
-                  "MU",
-                  "MV",
-                  "MW",
-                  "MX",
-                  "MY",
-                  "MZ",
-                  "NA",
-                  "NC",
-                  "NE",
-                  "NG",
-                  "NI",
-                  "NL",
-                  "NO",
-                  "NP",
-                  "NR",
-                  "NU",
-                  "NZ",
-                  "OM",
-                  "PA",
-                  "PE",
-                  "PF",
-                  "PG",
-                  "PH",
-                  "PK",
-                  "PL",
-                  "PM",
-                  "PN",
-                  "PR",
-                  "PS",
-                  "PT",
-                  "PY",
-                  "QA",
-                  "RE",
-                  "RO",
-                  "RS",
-                  "RU",
-                  "RW",
-                  "SA",
-                  "SB",
-                  "SC",
-                  "SE",
-                  "SG",
-                  "SH",
-                  "SI",
-                  "SJ",
-                  "SK",
-                  "SL",
-                  "SM",
-                  "SN",
-                  "SO",
-                  "SR",
-                  "SS",
-                  "ST",
-                  "SV",
-                  "SX",
-                  "SZ",
-                  "TA",
-                  "TC",
-                  "TD",
-                  "TF",
-                  "TG",
-                  "TH",
-                  "TJ",
-                  "TK",
-                  "TL",
-                  "TM",
-                  "TN",
-                  "TO",
-                  "TR",
-                  "TT",
-                  "TV",
-                  "TW",
-                  "TZ",
-                  "UA",
-                  "UG",
-                  "US",
-                  "UY",
-                  "UZ",
-                  "VA",
-                  "VC",
-                  "VE",
-                  "VG",
-                  "VN",
-                  "VU",
-                  "WF",
-                  "WS",
-                  "XK",
-                  "YE",
-                  "YT",
-                  "ZA",
-                  "ZM",
-                  "ZW",
-                  "ZZ"
-                ],
-                "type": "string"
-              },
-              "type": "array"
-            }
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "allowed_countries": {
+          "description": "An array of two-letter ISO country codes representing which countries Checkout should provide as options for shipping locations. Unsupported country codes: `AS, CX, CC, CU, HM, IR, KP, MH, FM, NF, MP, PW, SD, SY, UM, VI`.",
+          "items": {
+            "enum": [
+              "AC",
+              "AD",
+              "AE",
+              "AF",
+              "AG",
+              "AI",
+              "AL",
+              "AM",
+              "AO",
+              "AQ",
+              "AR",
+              "AT",
+              "AU",
+              "AW",
+              "AX",
+              "AZ",
+              "BA",
+              "BB",
+              "BD",
+              "BE",
+              "BF",
+              "BG",
+              "BH",
+              "BI",
+              "BJ",
+              "BL",
+              "BM",
+              "BN",
+              "BO",
+              "BQ",
+              "BR",
+              "BS",
+              "BT",
+              "BV",
+              "BW",
+              "BY",
+              "BZ",
+              "CA",
+              "CD",
+              "CF",
+              "CG",
+              "CH",
+              "CI",
+              "CK",
+              "CL",
+              "CM",
+              "CN",
+              "CO",
+              "CR",
+              "CV",
+              "CW",
+              "CY",
+              "CZ",
+              "DE",
+              "DJ",
+              "DK",
+              "DM",
+              "DO",
+              "DZ",
+              "EC",
+              "EE",
+              "EG",
+              "EH",
+              "ER",
+              "ES",
+              "ET",
+              "FI",
+              "FJ",
+              "FK",
+              "FO",
+              "FR",
+              "GA",
+              "GB",
+              "GD",
+              "GE",
+              "GF",
+              "GG",
+              "GH",
+              "GI",
+              "GL",
+              "GM",
+              "GN",
+              "GP",
+              "GQ",
+              "GR",
+              "GS",
+              "GT",
+              "GU",
+              "GW",
+              "GY",
+              "HK",
+              "HN",
+              "HR",
+              "HT",
+              "HU",
+              "ID",
+              "IE",
+              "IL",
+              "IM",
+              "IN",
+              "IO",
+              "IQ",
+              "IS",
+              "IT",
+              "JE",
+              "JM",
+              "JO",
+              "JP",
+              "KE",
+              "KG",
+              "KH",
+              "KI",
+              "KM",
+              "KN",
+              "KR",
+              "KW",
+              "KY",
+              "KZ",
+              "LA",
+              "LB",
+              "LC",
+              "LI",
+              "LK",
+              "LR",
+              "LS",
+              "LT",
+              "LU",
+              "LV",
+              "LY",
+              "MA",
+              "MC",
+              "MD",
+              "ME",
+              "MF",
+              "MG",
+              "MK",
+              "ML",
+              "MM",
+              "MN",
+              "MO",
+              "MQ",
+              "MR",
+              "MS",
+              "MT",
+              "MU",
+              "MV",
+              "MW",
+              "MX",
+              "MY",
+              "MZ",
+              "NA",
+              "NC",
+              "NE",
+              "NG",
+              "NI",
+              "NL",
+              "NO",
+              "NP",
+              "NR",
+              "NU",
+              "NZ",
+              "OM",
+              "PA",
+              "PE",
+              "PF",
+              "PG",
+              "PH",
+              "PK",
+              "PL",
+              "PM",
+              "PN",
+              "PR",
+              "PS",
+              "PT",
+              "PY",
+              "QA",
+              "RE",
+              "RO",
+              "RS",
+              "RU",
+              "RW",
+              "SA",
+              "SB",
+              "SC",
+              "SE",
+              "SG",
+              "SH",
+              "SI",
+              "SJ",
+              "SK",
+              "SL",
+              "SM",
+              "SN",
+              "SO",
+              "SR",
+              "SS",
+              "ST",
+              "SV",
+              "SX",
+              "SZ",
+              "TA",
+              "TC",
+              "TD",
+              "TF",
+              "TG",
+              "TH",
+              "TJ",
+              "TK",
+              "TL",
+              "TM",
+              "TN",
+              "TO",
+              "TR",
+              "TT",
+              "TV",
+              "TW",
+              "TZ",
+              "UA",
+              "UG",
+              "US",
+              "UY",
+              "UZ",
+              "VA",
+              "VC",
+              "VE",
+              "VG",
+              "VN",
+              "VU",
+              "WF",
+              "WS",
+              "XK",
+              "YE",
+              "YT",
+              "ZA",
+              "ZM",
+              "ZW",
+              "ZZ"
+            ],
+            "type": "string"
           },
-          "required": [
-            "allowed_countries"
-          ],
-          "title": "PaymentLinksResourceShippingAddressCollection",
-          "type": "object"
-        },
-        {
-          "type": "null"
+          "type": "array"
         }
+      },
+      "required": [
+        "allowed_countries"
       ],
-      "description": "Configuration for collecting the customer's shipping address."
+      "title": "PaymentLinksResourceShippingAddressCollection",
+      "type": "object"
     },
     "subscription_data": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "trial_period_days": {
-              "description": "Integer representing the number of trial period days before the customer is charged for the first time.",
-              "type": [
-                "integer",
-                "null"
-              ]
-            }
-          },
-          "title": "PaymentLinksResourceSubscriptionData",
-          "type": "object"
-        },
-        {
-          "type": "null"
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "trial_period_days": {
+          "description": "Integer representing the number of trial period days before the customer is charged for the first time.",
+          "type": [
+            "integer",
+            "null"
+          ]
         }
-      ],
-      "description": "When creating a subscription, the specified configuration data will be used. There must be at least one line item with a recurring price to use `subscription_data`."
+      },
+      "title": "PaymentLinksResourceSubscriptionData",
+      "type": "object"
     },
     "transfer_data": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "amount": {
-              "description": "The amount in %s that will be transferred to the destination account. By default, the entire amount is transferred to the destination.",
-              "type": [
-                "integer",
-                "null"
-              ]
-            },
-            "destination": {
-              "anyOf": [
-                {
-                  "maxLength": 5000,
-                  "type": "string"
-                }
-              ],
-              "description": "The connected account receiving the transfer."
-            }
-          },
-          "required": [
-            "destination"
-          ],
-          "title": "PaymentLinksResourceTransferData",
-          "type": "object"
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "amount": {
+          "description": "The amount in %s that will be transferred to the destination account. By default, the entire amount is transferred to the destination.",
+          "type": [
+            "integer",
+            "null"
+          ]
         },
-        {
-          "type": "null"
+        "destination": {
+          "description": "The connected account receiving the transfer.",
+          "maxLength": 5000,
+          "type": "string"
         }
+      },
+      "required": [
+        "destination"
       ],
-      "description": "The account (if any) the payments will be attributed to for tax reporting, and where funds from each payment will be transferred to."
+      "title": "PaymentLinksResourceTransferData",
+      "type": "object"
     },
     "url": {
       "description": "The public URL that can be shared with customers.",
@@ -1115,19 +762,7 @@
           "discounts": [
             {
               "amount": 0,
-              "discount": {
-                "checkout_session": "string",
-                "coupon": {},
-                "customer": "string",
-                "end": 1647352387,
-                "id": "string",
-                "invoice": "string",
-                "invoice_item": "string",
-                "object": "discount",
-                "promotion_code": "string",
-                "start": 1647352387,
-                "subscription": "string"
-              }
+              "discount": {}
             }
           ],
           "id": "string",
@@ -1144,27 +779,13 @@
             "nickname": "string",
             "object": "price",
             "product": "string",
-            "recurring": {
-              "aggregate_usage": "last_during_period",
-              "interval": "day",
-              "interval_count": 0,
-              "usage_type": "licensed"
-            },
+            "recurring": {},
             "tax_behavior": "exclusive",
             "tiers": [
-              {
-                "flat_amount": 0,
-                "flat_amount_decimal": "0.0",
-                "unit_amount": 0,
-                "unit_amount_decimal": "0.0",
-                "up_to": 0
-              }
+              {}
             ],
             "tiers_mode": "graduated",
-            "transform_quantity": {
-              "divide_by": 0,
-              "round": "down"
-            },
+            "transform_quantity": {},
             "type": "one_time",
             "unit_amount": 0,
             "unit_amount_decimal": "0.0"
@@ -1173,22 +794,7 @@
           "taxes": [
             {
               "amount": 0,
-              "rate": {
-                "active": true,
-                "country": "string",
-                "created": 1647352387,
-                "description": "string",
-                "display_name": "string",
-                "id": "string",
-                "inclusive": true,
-                "jurisdiction": "string",
-                "livemode": true,
-                "metadata": {},
-                "object": "tax_rate",
-                "percentage": 0,
-                "state": "string",
-                "tax_type": "gst"
-              }
+              "rate": {}
             }
           ]
         }

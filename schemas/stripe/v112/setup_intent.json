@@ -1,0 +1,1883 @@
+{
+  "description": "A SetupIntent guides you through the process of setting up and saving a customer's payment credentials for future payments.\nFor example, you could use a SetupIntent to set up and save your customer's card without immediately collecting a payment.\nLater, you can use [PaymentIntents](https://stripe.com/docs/api#payment_intents) to drive the payment flow.\n\nCreate a SetupIntent as soon as you're ready to collect your customer's payment credentials.\nDo not maintain long-lived, unconfirmed SetupIntents as they may no longer be valid.\nThe SetupIntent then transitions through multiple [statuses](https://stripe.com/docs/payments/intents#intent-statuses) as it guides\nyou through the setup process.\n\nSuccessful SetupIntents result in payment credentials that are optimized for future payments.\nFor example, cardholders in [certain regions](/guides/strong-customer-authentication) may need to be run through\n[Strong Customer Authentication](https://stripe.com/docs/strong-customer-authentication) at the time of payment method collection\nin order to streamline later [off-session payments](https://stripe.com/docs/payments/setup-intents).\nIf the SetupIntent is used with a [Customer](https://stripe.com/docs/api#setup_intent_object-customer), upon success,\nit will automatically attach the resulting payment method to that Customer.\nWe recommend using SetupIntents or [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage) on\nPaymentIntents to save payment methods in order to prevent saving invalid or unoptimized payment methods.\n\nBy using SetupIntents, you ensure that your customers experience the minimum set of required friction,\neven as regulations change over time.\n\nRelated guide: [Setup Intents API](https://stripe.com/docs/payments/setup-intents).",
+  "properties": {
+    "application": {
+      "description": "ID of the Connect application that created the SetupIntent.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "cancellation_reason": {
+      "description": "Reason for cancellation of this SetupIntent, one of `abandoned`, `requested_by_customer`, or `duplicate`.",
+      "enum": [
+        "abandoned",
+        "duplicate",
+        "requested_by_customer",
+        null
+      ],
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "client_secret": {
+      "description": "The client secret of this SetupIntent. Used for client-side retrieval using a publishable key.\n\nThe client secret can be used to complete payment setup from your frontend. It should not be stored, logged, embedded in URLs, or exposed to anyone other than the customer. Make sure that you have TLS enabled on any page that includes the client secret.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created": {
+      "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+      "format": "unix-time",
+      "type": "integer"
+    },
+    "customer": {
+      "description": "ID of the Customer this SetupIntent belongs to, if one exists.\n\nIf present, the SetupIntent's payment method will be attached to the Customer on successful setup. Payment methods attached to other Customers cannot be used with this SetupIntent.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "description": {
+      "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "description": "Unique identifier for the object.",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "last_setup_error": {
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "charge": {
+          "description": "For card errors, the ID of the failed charge.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "code": {
+          "description": "For some errors that could be handled programmatically, a short string indicating the [error code](https://stripe.com/docs/error-codes) reported.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "decline_code": {
+          "description": "For card errors resulting from a card issuer decline, a short string indicating the [card issuer's reason for the decline](https://stripe.com/docs/declines#issuer-declines) if they provide one.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "doc_url": {
+          "description": "A URL to more information about the [error code](https://stripe.com/docs/error-codes) reported.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "message": {
+          "description": "A human-readable message providing more details about the error. For card errors, these messages can be shown to your users.",
+          "maxLength": 40000,
+          "type": "string"
+        },
+        "param": {
+          "description": "If the error is parameter-specific, the parameter related to the error. For example, you can use this to display a message near the correct form field.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "payment_intent": {
+          "description": "A PaymentIntent guides you through the process of collecting a payment from your customer.\nWe recommend that you create exactly one PaymentIntent for each order or\ncustomer session in your system. You can reference the PaymentIntent later to\nsee the history of payment attempts for a particular session.\n\nA PaymentIntent transitions through\n[multiple statuses](https://stripe.com/docs/payments/intents#intent-statuses)\nthroughout its lifetime as it interfaces with Stripe.js to perform\nauthentication flows and ultimately creates at most one successful charge.\n\nRelated guide: [Payment Intents API](https://stripe.com/docs/payments/payment-intents).",
+          "properties": {
+            "amount": {
+              "description": "Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).",
+              "type": "integer"
+            },
+            "amount_capturable": {
+              "description": "Amount that can be captured from this PaymentIntent.",
+              "type": "integer"
+            },
+            "amount_received": {
+              "description": "Amount that was collected by this PaymentIntent.",
+              "type": "integer"
+            },
+            "application": {
+              "description": "ID of the Connect application that created the PaymentIntent.",
+              "nullable": true,
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "application_fee_amount": {
+              "description": "The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "automatic_payment_methods": {
+              "description": "",
+              "nullable": true,
+              "properties": {
+                "enabled": {
+                  "description": "Automatically calculates compatible payment methods",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "enabled"
+              ],
+              "title": "PaymentFlowsAutomaticPaymentMethodsPaymentIntent",
+              "type": "object"
+            },
+            "canceled_at": {
+              "description": "Populated when `status` is `canceled`, this is the time at which the PaymentIntent was canceled. Measured in seconds since the Unix epoch.",
+              "format": "unix-time",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "cancellation_reason": {
+              "description": "Reason for cancellation of this PaymentIntent, either user-provided (`duplicate`, `fraudulent`, `requested_by_customer`, or `abandoned`) or generated by Stripe internally (`failed_invoice`, `void_invoice`, or `automatic`).",
+              "enum": [
+                "abandoned",
+                "automatic",
+                "duplicate",
+                "failed_invoice",
+                "fraudulent",
+                "requested_by_customer",
+                "void_invoice",
+                null
+              ],
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "capture_method": {
+              "description": "Controls when the funds will be captured from the customer's account.",
+              "enum": [
+                "automatic",
+                "manual"
+              ],
+              "type": "string"
+            },
+            "charges": {
+              "description": "Charges that were created by this PaymentIntent, if any.",
+              "properties": {
+                "data": {
+                  "description": "This list only contains the latest charge, even if there were previously multiple unsuccessful charges. To view all previous charges for a PaymentIntent, you can filter the charges list using the `payment_intent` [parameter](https://stripe.com/docs/api/charges/list#list_charges-payment_intent).",
+                  "items": {
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "has_more": {
+                  "description": "True if this list has another page of items after this one that can be fetched.",
+                  "type": "boolean"
+                },
+                "object": {
+                  "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
+                  "enum": [
+                    "list"
+                  ],
+                  "type": "string"
+                },
+                "url": {
+                  "description": "The URL where this list can be accessed.",
+                  "maxLength": 5000,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "data",
+                "has_more",
+                "object",
+                "url"
+              ],
+              "title": "PaymentFlowsPaymentIntentResourceChargeList",
+              "type": "object"
+            },
+            "client_secret": {
+              "description": "The client secret of this PaymentIntent. Used for client-side retrieval using a publishable key. \n\nThe client secret can be used to complete a payment from your frontend. It should not be stored, logged, embedded in URLs, or exposed to anyone other than the customer. Make sure that you have TLS enabled on any page that includes the client secret.\n\nRefer to our docs to [accept a payment](https://stripe.com/docs/payments/accept-a-payment?integration=elements) and learn about how `client_secret` should be handled.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "confirmation_method": {
+              "enum": [
+                "automatic",
+                "manual"
+              ],
+              "type": "string"
+            },
+            "created": {
+              "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+              "format": "unix-time",
+              "type": "integer"
+            },
+            "currency": {
+              "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+              "type": "string"
+            },
+            "customer": {
+              "description": "ID of the Customer this PaymentIntent belongs to, if one exists.\n\nPayment methods attached to other Customers cannot be used with this PaymentIntent.\n\nIf present in combination with [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage), this PaymentIntent's payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.",
+              "nullable": true,
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "description": {
+              "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "id": {
+              "description": "Unique identifier for the object.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "invoice": {
+              "description": "ID of the invoice that created this PaymentIntent, if it exists.",
+              "nullable": true,
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "last_payment_error": {
+              "description": "The payment error encountered in the previous PaymentIntent confirmation. It will be cleared if the PaymentIntent is later updated for any reason.",
+              "nullable": true,
+              "type": "object"
+            },
+            "livemode": {
+              "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+              "type": "boolean"
+            },
+            "metadata": {},
+            "next_action": {
+              "description": "",
+              "nullable": true,
+              "properties": {
+                "alipay_handle_redirect": {
+                  "type": "object"
+                },
+                "boleto_display_details": {
+                  "type": "object"
+                },
+                "konbini_display_details": {
+                  "type": "object"
+                },
+                "oxxo_display_details": {
+                  "type": "object"
+                },
+                "redirect_to_url": {
+                  "type": "object"
+                },
+                "type": {
+                  "description": "Type of the next action to perform, one of `redirect_to_url`, `use_stripe_sdk`, `alipay_handle_redirect`, `oxxo_display_details`, or `verify_with_microdeposits`.",
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                "use_stripe_sdk": {
+                  "type": "object"
+                },
+                "verify_with_microdeposits": {
+                  "type": "object"
+                },
+                "wechat_pay_display_qr_code": {
+                  "type": "object"
+                },
+                "wechat_pay_redirect_to_android_app": {
+                  "type": "object"
+                },
+                "wechat_pay_redirect_to_ios_app": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "title": "PaymentIntentNextAction",
+              "type": "object"
+            },
+            "object": {
+              "description": "String representing the object's type. Objects of the same type share the same value.",
+              "enum": [
+                "payment_intent"
+              ],
+              "type": "string"
+            },
+            "on_behalf_of": {
+              "description": "The account (if any) for which the funds of the PaymentIntent are intended. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.",
+              "nullable": true,
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "payment_method": {
+              "description": "ID of the payment method used in this PaymentIntent.",
+              "nullable": true,
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "payment_method_options": {
+              "description": "",
+              "nullable": true,
+              "properties": {
+                "acss_debit": {
+                  "type": "object"
+                },
+                "afterpay_clearpay": {
+                  "type": "object"
+                },
+                "alipay": {
+                  "type": "object"
+                },
+                "au_becs_debit": {
+                  "type": "object"
+                },
+                "bacs_debit": {
+                  "type": "object"
+                },
+                "bancontact": {
+                  "type": "object"
+                },
+                "boleto": {
+                  "type": "object"
+                },
+                "card": {
+                  "type": "object"
+                },
+                "card_present": {
+                  "type": "object"
+                },
+                "eps": {
+                  "type": "object"
+                },
+                "fpx": {
+                  "type": "object"
+                },
+                "giropay": {
+                  "type": "object"
+                },
+                "grabpay": {
+                  "type": "object"
+                },
+                "ideal": {
+                  "type": "object"
+                },
+                "interac_present": {
+                  "type": "object"
+                },
+                "klarna": {
+                  "type": "object"
+                },
+                "konbini": {
+                  "type": "object"
+                },
+                "oxxo": {
+                  "type": "object"
+                },
+                "p24": {
+                  "type": "object"
+                },
+                "sepa_debit": {
+                  "type": "object"
+                },
+                "sofort": {
+                  "type": "object"
+                },
+                "wechat_pay": {
+                  "type": "object"
+                }
+              },
+              "title": "PaymentIntentPaymentMethodOptions",
+              "type": "object"
+            },
+            "payment_method_types": {
+              "description": "The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.",
+              "items": {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "processing": {
+              "description": "",
+              "nullable": true,
+              "properties": {
+                "card": {
+                  "type": "object"
+                },
+                "type": {
+                  "description": "Type of the payment method for which payment is in `processing` state, one of `card`.",
+                  "enum": [
+                    "card"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "title": "PaymentIntentProcessing",
+              "type": "object"
+            },
+            "receipt_email": {
+              "description": "Email address that the receipt for the resulting payment will be sent to. If `receipt_email` is specified for a payment in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "review": {
+              "description": "ID of the review associated with this PaymentIntent, if any.",
+              "nullable": true,
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "setup_future_usage": {
+              "description": "Indicates that you intend to make future payments with this PaymentIntent's payment method.\n\nProviding this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.\n\nWhen processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).",
+              "enum": [
+                "off_session",
+                "on_session",
+                null
+              ],
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "shipping": {
+              "description": "",
+              "nullable": true,
+              "properties": {
+                "address": {
+                  "type": "object"
+                },
+                "carrier": {
+                  "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "description": "Recipient name.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "phone": {
+                  "description": "Recipient phone (including extension).",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tracking_number": {
+                  "description": "The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "title": "Shipping",
+              "type": "object"
+            },
+            "statement_descriptor": {
+              "description": "For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "statement_descriptor_suffix": {
+              "description": "Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "status": {
+              "description": "Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`. Read more about each PaymentIntent [status](https://stripe.com/docs/payments/intents#intent-statuses).",
+              "enum": [
+                "canceled",
+                "processing",
+                "requires_action",
+                "requires_capture",
+                "requires_confirmation",
+                "requires_payment_method",
+                "succeeded"
+              ],
+              "type": "string"
+            },
+            "transfer_data": {
+              "description": "",
+              "nullable": true,
+              "properties": {
+                "amount": {
+                  "description": "Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).",
+                  "type": "integer"
+                },
+                "destination": {
+                  "description": "The account (if any) the payment will be attributed to for tax\nreporting, and where funds from the payment will be transferred to upon\npayment success.",
+                  "maxLength": 5000,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "destination"
+              ],
+              "title": "transfer_data",
+              "type": "object"
+            },
+            "transfer_group": {
+              "description": "A string that identifies the resulting payment as part of a group. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "amount",
+            "capture_method",
+            "confirmation_method",
+            "created",
+            "currency",
+            "id",
+            "livemode",
+            "object",
+            "payment_method_types",
+            "status"
+          ],
+          "title": "PaymentIntent",
+          "type": "object"
+        },
+        "payment_method": {
+          "description": "PaymentMethod objects represent your customer's payment instruments.\nThey can be used with [PaymentIntents](https://stripe.com/docs/payments/payment-intents) to collect payments or saved to\nCustomer objects to store instrument details for future payments.\n\nRelated guides: [Payment Methods](https://stripe.com/docs/payments/payment-methods) and [More Payment Scenarios](https://stripe.com/docs/payments/more-payment-scenarios).",
+          "properties": {
+            "acss_debit": {
+              "description": "",
+              "properties": {
+                "bank_name": {
+                  "description": "Name of the bank associated with the bank account.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "fingerprint": {
+                  "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "institution_number": {
+                  "description": "Institution number of the bank account.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "last4": {
+                  "description": "Last four digits of the bank account number.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "transit_number": {
+                  "description": "Transit number of the bank account.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "title": "payment_method_acss_debit",
+              "type": "object"
+            },
+            "afterpay_clearpay": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_afterpay_clearpay",
+              "type": "object"
+            },
+            "alipay": {
+              "description": "",
+              "properties": {},
+              "title": "PaymentFlowsPrivatePaymentMethodsAlipay",
+              "type": "object"
+            },
+            "au_becs_debit": {
+              "description": "",
+              "properties": {
+                "bsb_number": {
+                  "description": "Six-digit number identifying bank and branch associated with this bank account.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "fingerprint": {
+                  "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "last4": {
+                  "description": "Last four digits of the bank account number.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "title": "payment_method_au_becs_debit",
+              "type": "object"
+            },
+            "bacs_debit": {
+              "description": "",
+              "properties": {
+                "fingerprint": {
+                  "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "last4": {
+                  "description": "Last four digits of the bank account number.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "sort_code": {
+                  "description": "Sort code of the bank account. (e.g., `10-20-30`)",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "title": "payment_method_bacs_debit",
+              "type": "object"
+            },
+            "bancontact": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_bancontact",
+              "type": "object"
+            },
+            "billing_details": {
+              "description": "",
+              "properties": {
+                "address": {
+                  "description": "Billing address.",
+                  "nullable": true,
+                  "type": "object"
+                },
+                "email": {
+                  "description": "Email address.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "description": "Full name.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "phone": {
+                  "description": "Billing phone number (including extension).",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "title": "billing_details",
+              "type": "object"
+            },
+            "boleto": {
+              "description": "",
+              "properties": {
+                "tax_id": {
+                  "description": "Uniquely identifies the customer tax id (CNPJ or CPF)",
+                  "maxLength": 5000,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "tax_id"
+              ],
+              "title": "payment_method_boleto",
+              "type": "object"
+            },
+            "card": {
+              "description": "",
+              "properties": {
+                "brand": {
+                  "description": "Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.",
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                "checks": {
+                  "description": "Checks on Card address and CVC if provided.",
+                  "nullable": true,
+                  "type": "object"
+                },
+                "country": {
+                  "description": "Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "exp_month": {
+                  "description": "Two-digit number representing the card's expiration month.",
+                  "type": "integer"
+                },
+                "exp_year": {
+                  "description": "Four-digit number representing the card's expiration year.",
+                  "type": "integer"
+                },
+                "fingerprint": {
+                  "description": "Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.\n\n*Starting May 1, 2021, card fingerprint in India for Connect will change to allow two fingerprints for the same card --- one for India and one for the rest of the world.*",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "funding": {
+                  "description": "Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.",
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                "generated_from": {
+                  "description": "Details of the original PaymentMethod that created this object.",
+                  "nullable": true,
+                  "type": "object"
+                },
+                "last4": {
+                  "description": "The last four digits of the card.",
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                "networks": {
+                  "description": "Contains information about card networks that can be used to process the payment.",
+                  "nullable": true,
+                  "type": "object"
+                },
+                "three_d_secure_usage": {
+                  "description": "Contains details on how this Card maybe be used for 3D Secure authentication.",
+                  "nullable": true,
+                  "type": "object"
+                },
+                "wallet": {
+                  "description": "If this Card is part of a card wallet, this contains the details of the card wallet.",
+                  "nullable": true,
+                  "type": "object"
+                }
+              },
+              "required": [
+                "brand",
+                "exp_month",
+                "exp_year",
+                "funding",
+                "last4"
+              ],
+              "title": "payment_method_card",
+              "type": "object"
+            },
+            "card_present": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_card_present",
+              "type": "object"
+            },
+            "created": {
+              "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+              "format": "unix-time",
+              "type": "integer"
+            },
+            "customer": {
+              "description": "The ID of the Customer to which this PaymentMethod is saved. This will not be set when the PaymentMethod has not been saved to a Customer.",
+              "nullable": true,
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "eps": {
+              "description": "",
+              "properties": {
+                "bank": {
+                  "description": "The customer's bank. Should be one of `arzte_und_apotheker_bank`, `austrian_anadi_bank_ag`, `bank_austria`, `bankhaus_carl_spangler`, `bankhaus_schelhammer_und_schattera_ag`, `bawag_psk_ag`, `bks_bank_ag`, `brull_kallmus_bank_ag`, `btv_vier_lander_bank`, `capital_bank_grawe_gruppe_ag`, `dolomitenbank`, `easybank_ag`, `erste_bank_und_sparkassen`, `hypo_alpeadriabank_international_ag`, `hypo_noe_lb_fur_niederosterreich_u_wien`, `hypo_oberosterreich_salzburg_steiermark`, `hypo_tirol_bank_ag`, `hypo_vorarlberg_bank_ag`, `hypo_bank_burgenland_aktiengesellschaft`, `marchfelder_bank`, `oberbank_ag`, `raiffeisen_bankengruppe_osterreich`, `schoellerbank_ag`, `sparda_bank_wien`, `volksbank_gruppe`, `volkskreditbank_ag`, or `vr_bank_braunau`.",
+                  "enum": [
+                    "arzte_und_apotheker_bank",
+                    "austrian_anadi_bank_ag",
+                    "bank_austria",
+                    "bankhaus_carl_spangler",
+                    "bankhaus_schelhammer_und_schattera_ag",
+                    "bawag_psk_ag",
+                    "bks_bank_ag",
+                    "brull_kallmus_bank_ag",
+                    "btv_vier_lander_bank",
+                    "capital_bank_grawe_gruppe_ag",
+                    "dolomitenbank",
+                    "easybank_ag",
+                    "erste_bank_und_sparkassen",
+                    "hypo_alpeadriabank_international_ag",
+                    "hypo_bank_burgenland_aktiengesellschaft",
+                    "hypo_noe_lb_fur_niederosterreich_u_wien",
+                    "hypo_oberosterreich_salzburg_steiermark",
+                    "hypo_tirol_bank_ag",
+                    "hypo_vorarlberg_bank_ag",
+                    "marchfelder_bank",
+                    "oberbank_ag",
+                    "raiffeisen_bankengruppe_osterreich",
+                    "schoellerbank_ag",
+                    "sparda_bank_wien",
+                    "volksbank_gruppe",
+                    "volkskreditbank_ag",
+                    "vr_bank_braunau",
+                    null
+                  ],
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "title": "payment_method_eps",
+              "type": "object"
+            },
+            "fpx": {
+              "description": "",
+              "properties": {
+                "bank": {
+                  "description": "The customer's bank, if provided. Can be one of `affin_bank`, `agrobank`, `alliance_bank`, `ambank`, `bank_islam`, `bank_muamalat`, `bank_rakyat`, `bsn`, `cimb`, `hong_leong_bank`, `hsbc`, `kfh`, `maybank2u`, `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`, `deutsche_bank`, `maybank2e`, or `pb_enterprise`.",
+                  "enum": [
+                    "affin_bank",
+                    "agrobank",
+                    "alliance_bank",
+                    "ambank",
+                    "bank_islam",
+                    "bank_muamalat",
+                    "bank_rakyat",
+                    "bsn",
+                    "cimb",
+                    "deutsche_bank",
+                    "hong_leong_bank",
+                    "hsbc",
+                    "kfh",
+                    "maybank2e",
+                    "maybank2u",
+                    "ocbc",
+                    "pb_enterprise",
+                    "public_bank",
+                    "rhb",
+                    "standard_chartered",
+                    "uob"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "bank"
+              ],
+              "title": "payment_method_fpx",
+              "type": "object"
+            },
+            "giropay": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_giropay",
+              "type": "object"
+            },
+            "grabpay": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_grabpay",
+              "type": "object"
+            },
+            "id": {
+              "description": "Unique identifier for the object.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "ideal": {
+              "description": "",
+              "properties": {
+                "bank": {
+                  "description": "The customer's bank, if provided. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, or `van_lanschot`.",
+                  "enum": [
+                    "abn_amro",
+                    "asn_bank",
+                    "bunq",
+                    "handelsbanken",
+                    "ing",
+                    "knab",
+                    "moneyou",
+                    "rabobank",
+                    "regiobank",
+                    "revolut",
+                    "sns_bank",
+                    "triodos_bank",
+                    "van_lanschot",
+                    null
+                  ],
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "bic": {
+                  "description": "The Bank Identifier Code of the customer's bank, if the bank was provided.",
+                  "enum": [
+                    "ABNANL2A",
+                    "ASNBNL21",
+                    "BUNQNL2A",
+                    "FVLBNL22",
+                    "HANDNL2A",
+                    "INGBNL2A",
+                    "KNABNL2H",
+                    "MOYONL21",
+                    "RABONL2U",
+                    "RBRBNL21",
+                    "REVOLT21",
+                    "SNSBNL2A",
+                    "TRIONL2U",
+                    null
+                  ],
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "title": "payment_method_ideal",
+              "type": "object"
+            },
+            "interac_present": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_interac_present",
+              "type": "object"
+            },
+            "klarna": {
+              "description": "",
+              "properties": {
+                "dob": {
+                  "description": "The customer's date of birth, if provided.",
+                  "nullable": true,
+                  "type": "object"
+                }
+              },
+              "title": "payment_method_klarna",
+              "type": "object"
+            },
+            "konbini": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_konbini",
+              "type": "object"
+            },
+            "livemode": {
+              "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+              "type": "boolean"
+            },
+            "metadata": {},
+            "object": {
+              "description": "String representing the object's type. Objects of the same type share the same value.",
+              "enum": [
+                "payment_method"
+              ],
+              "type": "string"
+            },
+            "oxxo": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_oxxo",
+              "type": "object"
+            },
+            "p24": {
+              "description": "",
+              "properties": {
+                "bank": {
+                  "description": "The customer's bank, if provided.",
+                  "enum": [
+                    "alior_bank",
+                    "bank_millennium",
+                    "bank_nowy_bfg_sa",
+                    "bank_pekao_sa",
+                    "banki_spbdzielcze",
+                    "blik",
+                    "bnp_paribas",
+                    "boz",
+                    "citi_handlowy",
+                    "credit_agricole",
+                    "envelobank",
+                    "etransfer_pocztowy24",
+                    "getin_bank",
+                    "ideabank",
+                    "ing",
+                    "inteligo",
+                    "mbank_mtransfer",
+                    "nest_przelew",
+                    "noble_pay",
+                    "pbac_z_ipko",
+                    "plus_bank",
+                    "santander_przelew24",
+                    "tmobile_usbugi_bankowe",
+                    "toyota_bank",
+                    "volkswagen_bank",
+                    null
+                  ],
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "title": "payment_method_p24",
+              "type": "object"
+            },
+            "sepa_debit": {
+              "description": "",
+              "properties": {
+                "bank_code": {
+                  "description": "Bank code of bank associated with the bank account.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "branch_code": {
+                  "description": "Branch code of bank associated with the bank account.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "country": {
+                  "description": "Two-letter ISO code representing the country the bank account is located in.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "fingerprint": {
+                  "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "generated_from": {
+                  "description": "Information about the object that generated this PaymentMethod.",
+                  "nullable": true,
+                  "type": "object"
+                },
+                "last4": {
+                  "description": "Last four characters of the IBAN.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "title": "payment_method_sepa_debit",
+              "type": "object"
+            },
+            "sofort": {
+              "description": "",
+              "properties": {
+                "country": {
+                  "description": "Two-letter ISO code representing the country the bank account is located in.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "title": "payment_method_sofort",
+              "type": "object"
+            },
+            "type": {
+              "description": "The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.",
+              "enum": [
+                "acss_debit",
+                "afterpay_clearpay",
+                "alipay",
+                "au_becs_debit",
+                "bacs_debit",
+                "bancontact",
+                "boleto",
+                "card",
+                "card_present",
+                "eps",
+                "fpx",
+                "giropay",
+                "grabpay",
+                "ideal",
+                "interac_present",
+                "klarna",
+                "konbini",
+                "oxxo",
+                "p24",
+                "sepa_debit",
+                "sofort",
+                "wechat_pay"
+              ],
+              "type": "string"
+            },
+            "wechat_pay": {
+              "description": "",
+              "properties": {},
+              "title": "payment_method_wechat_pay",
+              "type": "object"
+            }
+          },
+          "required": [
+            "billing_details",
+            "created",
+            "id",
+            "livemode",
+            "object",
+            "type"
+          ],
+          "title": "PaymentMethod",
+          "type": "object"
+        },
+        "payment_method_type": {
+          "description": "If the error is specific to the type of payment method, the payment method type that had a problem. This field is only populated for invoice-related errors.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "setup_intent": {
+          "type": "object"
+        },
+        "source": {
+          "description": "These bank accounts are payment methods on `Customer` objects.\n\nOn the other hand [External Accounts](https://stripe.com/docs/api#external_accounts) are transfer\ndestinations on `Account` objects for [Custom accounts](https://stripe.com/docs/connect/custom-accounts).\nThey can be bank accounts or debit cards as well, and are documented in the links above.\n\nRelated guide: [Bank Debits and Transfers](https://stripe.com/docs/payments/bank-debits-transfers).",
+          "properties": {
+            "account": {
+              "description": "The ID of the account that the bank account is associated with.",
+              "nullable": true,
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "account_holder_name": {
+              "description": "The name of the person or business that owns the bank account.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "account_holder_type": {
+              "description": "The type of entity that holds the account. This can be either `individual` or `company`.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "account_type": {
+              "description": "The bank account type. This can only be `checking` or `savings` in most countries. In Japan, this can only be `futsu` or `toza`.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "available_payout_methods": {
+              "description": "A set of available payout methods for this bank account. Only values from this set should be passed as the `method` when creating a payout.",
+              "items": {
+                "enum": [
+                  "instant",
+                  "standard"
+                ],
+                "type": "string"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "bank_name": {
+              "description": "Name of the bank associated with the routing number (e.g., `WELLS FARGO`).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "country": {
+              "description": "Two-letter ISO code representing the country the bank account is located in.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "currency": {
+              "description": "Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank account.",
+              "type": "string"
+            },
+            "customer": {
+              "description": "The ID of the customer that the bank account is associated with.",
+              "nullable": true,
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "default_for_currency": {
+              "description": "Whether this bank account is the default external account for its currency.",
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "fingerprint": {
+              "description": "Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "id": {
+              "description": "Unique identifier for the object.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "last4": {
+              "description": "The last four digits of the bank account number.",
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "metadata": {},
+            "object": {
+              "description": "String representing the object's type. Objects of the same type share the same value.",
+              "enum": [
+                "bank_account"
+              ],
+              "type": "string"
+            },
+            "routing_number": {
+              "description": "The routing transit number for the bank account.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "status": {
+              "description": "For bank accounts, possible values are `new`, `validated`, `verified`, `verification_failed`, or `errored`. A bank account that hasn't had any activity or validation performed is `new`. If Stripe can determine that the bank account exists, its status will be `validated`. Note that there often isn’t enough information to know (e.g., for smaller credit unions), and the validation is not always run. If customer bank account verification has succeeded, the bank account status will be `verified`. If the verification failed for any reason, such as microdeposit failure, the status will be `verification_failed`. If a transfer sent to this bank account fails, we'll set the status to `errored` and will not continue to send transfers until the bank details are updated.\n\nFor external accounts, possible values are `new` and `errored`. Validations aren't run against external accounts because they're only used for payouts. This means the other statuses don't apply. If a transfer fails, the status is set to `errored` and transfers are stopped until account details are updated.",
+              "maxLength": 5000,
+              "type": "string"
+            }
+          },
+          "required": [
+            "country",
+            "currency",
+            "id",
+            "last4",
+            "object",
+            "status"
+          ],
+          "title": "BankAccount",
+          "type": "object"
+        },
+        "type": {
+          "description": "The type of error returned. One of `api_error`, `card_error`, `idempotency_error`, or `invalid_request_error`",
+          "enum": [
+            "api_error",
+            "card_error",
+            "idempotency_error",
+            "invalid_request_error"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "APIErrors",
+      "type": "object"
+    },
+    "latest_attempt": {
+      "description": "The most recent SetupAttempt for this SetupIntent.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "livemode": {
+      "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+      "type": "boolean"
+    },
+    "mandate": {
+      "description": "ID of the multi use Mandate generated by the SetupIntent.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "metadata": {},
+    "next_action": {
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "redirect_to_url": {
+          "description": "",
+          "properties": {
+            "return_url": {
+              "description": "If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "url": {
+              "description": "The URL you must redirect your customer to in order to authenticate.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "title": "SetupIntentNextActionRedirectToUrl",
+          "type": "object"
+        },
+        "type": {
+          "description": "Type of the next action to perform, one of `redirect_to_url`, `use_stripe_sdk`, `alipay_handle_redirect`, `oxxo_display_details`, or `verify_with_microdeposits`.",
+          "maxLength": 5000,
+          "type": "string"
+        },
+        "use_stripe_sdk": {},
+        "verify_with_microdeposits": {
+          "description": "",
+          "properties": {
+            "arrival_date": {
+              "description": "The timestamp when the microdeposits are expected to land.",
+              "format": "unix-time",
+              "type": "integer"
+            },
+            "hosted_verification_url": {
+              "description": "The URL for the hosted verification page, which allows customers to verify their bank account.",
+              "maxLength": 5000,
+              "type": "string"
+            }
+          },
+          "required": [
+            "arrival_date",
+            "hosted_verification_url"
+          ],
+          "title": "SetupIntentNextActionVerifyWithMicrodeposits",
+          "type": "object"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "SetupIntentNextAction",
+      "type": "object"
+    },
+    "object": {
+      "description": "String representing the object's type. Objects of the same type share the same value.",
+      "enum": [
+        "setup_intent"
+      ],
+      "type": "string"
+    },
+    "on_behalf_of": {
+      "description": "The account (if any) for which the setup is intended.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "payment_method": {
+      "description": "ID of the payment method used with this SetupIntent.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "payment_method_options": {
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "acss_debit": {
+          "description": "",
+          "properties": {
+            "currency": {
+              "description": "Currency supported by the bank account",
+              "enum": [
+                "cad",
+                "usd",
+                null
+              ],
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "mandate_options": {
+              "description": "",
+              "properties": {
+                "custom_mandate_url": {
+                  "description": "A URL for custom mandate text",
+                  "maxLength": 5000,
+                  "type": "string"
+                },
+                "default_for": {
+                  "description": "List of Stripe products where this mandate can be selected automatically.",
+                  "items": {
+                    "enum": [
+                      "invoice",
+                      "subscription"
+                    ],
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "interval_description": {
+                  "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
+                  "maxLength": 5000,
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "payment_schedule": {
+                  "description": "Payment schedule for the mandate.",
+                  "enum": [
+                    "combined",
+                    "interval",
+                    "sporadic",
+                    null
+                  ],
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "transaction_type": {
+                  "description": "Transaction type of the mandate.",
+                  "enum": [
+                    "business",
+                    "personal",
+                    null
+                  ],
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "title": "setup_intent_payment_method_options_mandate_options_acss_debit",
+              "type": "object"
+            },
+            "verification_method": {
+              "description": "Bank account verification method.",
+              "enum": [
+                "automatic",
+                "instant",
+                "microdeposits"
+              ],
+              "type": "string"
+            }
+          },
+          "title": "setup_intent_payment_method_options_acss_debit",
+          "type": "object"
+        },
+        "card": {
+          "description": "",
+          "properties": {
+            "request_three_d_secure": {
+              "description": "We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.",
+              "enum": [
+                "any",
+                "automatic",
+                "challenge_only",
+                null
+              ],
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "title": "setup_intent_payment_method_options_card",
+          "type": "object"
+        },
+        "sepa_debit": {
+          "description": "",
+          "properties": {
+            "mandate_options": {
+              "description": "",
+              "properties": {},
+              "title": "setup_intent_payment_method_options_mandate_options_sepa_debit",
+              "type": "object"
+            }
+          },
+          "title": "setup_intent_payment_method_options_sepa_debit",
+          "type": "object"
+        }
+      },
+      "title": "SetupIntentPaymentMethodOptions",
+      "type": "object"
+    },
+    "payment_method_types": {
+      "description": "The list of payment method types (e.g. card) that this SetupIntent is allowed to set up.",
+      "items": {
+        "maxLength": 5000,
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "single_use_mandate": {
+      "description": "ID of the single_use Mandate generated by the SetupIntent.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "status": {
+      "description": "[Status](https://stripe.com/docs/payments/intents#intent-statuses) of this SetupIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `canceled`, or `succeeded`.",
+      "enum": [
+        "canceled",
+        "processing",
+        "requires_action",
+        "requires_confirmation",
+        "requires_payment_method",
+        "succeeded"
+      ],
+      "type": "string"
+    },
+    "usage": {
+      "description": "Indicates how the payment method is intended to be used in the future.\n\nUse `on_session` if you intend to only reuse the payment method when the customer is in your checkout flow. Use `off_session` if your customer may or may not be in your checkout flow. If not provided, this value defaults to `off_session`.",
+      "maxLength": 5000,
+      "type": "string"
+    }
+  },
+  "required": [
+    "created",
+    "id",
+    "livemode",
+    "object",
+    "payment_method_types",
+    "status",
+    "usage"
+  ],
+  "title": "SetupIntent",
+  "type": "object",
+  "default": {
+    "application": "string",
+    "cancellation_reason": "abandoned",
+    "client_secret": "string",
+    "created": 1647352387,
+    "customer": "string",
+    "description": "string",
+    "id": "string",
+    "last_setup_error": {
+      "charge": "string",
+      "code": "string",
+      "decline_code": "string",
+      "doc_url": "string",
+      "message": "string",
+      "param": "string",
+      "payment_intent": {
+        "amount": 0,
+        "amount_capturable": 0,
+        "amount_received": 0,
+        "application": "string",
+        "application_fee_amount": 0,
+        "automatic_payment_methods": {
+          "enabled": true
+        },
+        "canceled_at": 1647352387,
+        "cancellation_reason": "abandoned",
+        "capture_method": "automatic",
+        "charges": {
+          "data": [
+            {}
+          ],
+          "has_more": true,
+          "object": "list",
+          "url": "string"
+        },
+        "client_secret": "string",
+        "confirmation_method": "automatic",
+        "created": 1647352387,
+        "currency": "string",
+        "customer": "string",
+        "description": "string",
+        "id": "string",
+        "invoice": "string",
+        "last_payment_error": {},
+        "livemode": true,
+        "metadata": {},
+        "next_action": {
+          "alipay_handle_redirect": {},
+          "boleto_display_details": {},
+          "konbini_display_details": {},
+          "oxxo_display_details": {},
+          "redirect_to_url": {},
+          "type": "string",
+          "use_stripe_sdk": {},
+          "verify_with_microdeposits": {},
+          "wechat_pay_display_qr_code": {},
+          "wechat_pay_redirect_to_android_app": {},
+          "wechat_pay_redirect_to_ios_app": {}
+        },
+        "object": "payment_intent",
+        "on_behalf_of": "string",
+        "payment_method": "string",
+        "payment_method_options": {
+          "acss_debit": {},
+          "afterpay_clearpay": {},
+          "alipay": {},
+          "au_becs_debit": {},
+          "bacs_debit": {},
+          "bancontact": {},
+          "boleto": {},
+          "card": {},
+          "card_present": {},
+          "eps": {},
+          "fpx": {},
+          "giropay": {},
+          "grabpay": {},
+          "ideal": {},
+          "interac_present": {},
+          "klarna": {},
+          "konbini": {},
+          "oxxo": {},
+          "p24": {},
+          "sepa_debit": {},
+          "sofort": {},
+          "wechat_pay": {}
+        },
+        "payment_method_types": [
+          "string"
+        ],
+        "processing": {
+          "card": {},
+          "type": "card"
+        },
+        "receipt_email": "string",
+        "review": "string",
+        "setup_future_usage": "off_session",
+        "shipping": {
+          "address": {},
+          "carrier": "string",
+          "name": "string",
+          "phone": "string",
+          "tracking_number": "string"
+        },
+        "statement_descriptor": "string",
+        "statement_descriptor_suffix": "string",
+        "status": "canceled",
+        "transfer_data": {
+          "amount": 0,
+          "destination": "string"
+        },
+        "transfer_group": "string"
+      },
+      "payment_method": {
+        "acss_debit": {
+          "bank_name": "string",
+          "fingerprint": "string",
+          "institution_number": "string",
+          "last4": "string",
+          "transit_number": "string"
+        },
+        "afterpay_clearpay": {},
+        "alipay": {},
+        "au_becs_debit": {
+          "bsb_number": "string",
+          "fingerprint": "string",
+          "last4": "string"
+        },
+        "bacs_debit": {
+          "fingerprint": "string",
+          "last4": "string",
+          "sort_code": "string"
+        },
+        "bancontact": {},
+        "billing_details": {
+          "address": {},
+          "email": "string",
+          "name": "string",
+          "phone": "string"
+        },
+        "boleto": {
+          "tax_id": "string"
+        },
+        "card": {
+          "brand": "string",
+          "checks": {},
+          "country": "string",
+          "exp_month": 0,
+          "exp_year": 0,
+          "fingerprint": "string",
+          "funding": "string",
+          "generated_from": {},
+          "last4": "string",
+          "networks": {},
+          "three_d_secure_usage": {},
+          "wallet": {}
+        },
+        "card_present": {},
+        "created": 1647352387,
+        "customer": "string",
+        "eps": {
+          "bank": "arzte_und_apotheker_bank"
+        },
+        "fpx": {
+          "bank": "affin_bank"
+        },
+        "giropay": {},
+        "grabpay": {},
+        "id": "string",
+        "ideal": {
+          "bank": "abn_amro",
+          "bic": "ABNANL2A"
+        },
+        "interac_present": {},
+        "klarna": {
+          "dob": {}
+        },
+        "konbini": {},
+        "livemode": true,
+        "metadata": {},
+        "object": "payment_method",
+        "oxxo": {},
+        "p24": {
+          "bank": "alior_bank"
+        },
+        "sepa_debit": {
+          "bank_code": "string",
+          "branch_code": "string",
+          "country": "string",
+          "fingerprint": "string",
+          "generated_from": {},
+          "last4": "string"
+        },
+        "sofort": {
+          "country": "string"
+        },
+        "type": "acss_debit",
+        "wechat_pay": {}
+      },
+      "payment_method_type": "string",
+      "setup_intent": {},
+      "source": {
+        "account": "string",
+        "account_holder_name": "string",
+        "account_holder_type": "string",
+        "account_type": "string",
+        "available_payout_methods": [
+          "instant"
+        ],
+        "bank_name": "string",
+        "country": "string",
+        "currency": "string",
+        "customer": "string",
+        "default_for_currency": true,
+        "fingerprint": "string",
+        "id": "string",
+        "last4": "string",
+        "metadata": {},
+        "object": "bank_account",
+        "routing_number": "string",
+        "status": "string"
+      },
+      "type": "api_error"
+    },
+    "latest_attempt": "string",
+    "livemode": true,
+    "mandate": "string",
+    "metadata": {},
+    "next_action": {
+      "redirect_to_url": {
+        "return_url": "string",
+        "url": "string"
+      },
+      "type": "string",
+      "use_stripe_sdk": {},
+      "verify_with_microdeposits": {
+        "arrival_date": 1647352387,
+        "hosted_verification_url": "string"
+      }
+    },
+    "object": "setup_intent",
+    "on_behalf_of": "string",
+    "payment_method": "string",
+    "payment_method_options": {
+      "acss_debit": {
+        "currency": "cad",
+        "mandate_options": {
+          "custom_mandate_url": "string",
+          "default_for": [
+            "invoice"
+          ],
+          "interval_description": "string",
+          "payment_schedule": "combined",
+          "transaction_type": "business"
+        },
+        "verification_method": "automatic"
+      },
+      "card": {
+        "request_three_d_secure": "any"
+      },
+      "sepa_debit": {
+        "mandate_options": {}
+      }
+    },
+    "payment_method_types": [
+      "string"
+    ],
+    "single_use_mandate": "string",
+    "status": "canceled",
+    "usage": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

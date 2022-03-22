@@ -114,16 +114,10 @@
             "type": "string"
           },
           "source": {
-            "anyOf": [
-              {
-                "maxLength": 5000,
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The Stripe object to which this transaction is related."
+            "description": "The Stripe object to which this transaction is related.",
+            "nullable": true,
+            "maxLength": 5000,
+            "type": "string"
           },
           "status": {
             "description": "If the transaction's net funds are available in the Stripe balance yet. Either `available` or `pending`.",
@@ -189,13 +183,9 @@
       "type": "array"
     },
     "charge": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        }
-      ],
-      "description": "ID of the charge that was disputed."
+      "description": "ID of the charge that was disputed.",
+      "maxLength": 5000,
+      "type": "string"
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -226,16 +216,10 @@
           ]
         },
         "cancellation_policy": {
-          "anyOf": [
-            {
-              "maxLength": 5000,
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your subscription cancellation policy, as shown to the customer."
+          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your subscription cancellation policy, as shown to the customer.",
+          "nullable": true,
+          "maxLength": 5000,
+          "type": "string"
         },
         "cancellation_policy_disclosure": {
           "description": "An explanation of how and when the customer was shown your refund policy prior to purchase.",
@@ -254,16 +238,10 @@
           ]
         },
         "customer_communication": {
-          "anyOf": [
-            {
-              "maxLength": 5000,
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any communication with the customer that you feel is relevant to your case. Examples include emails proving that the customer received the product or service, or demonstrating their use of or satisfaction with the product or service."
+          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any communication with the customer that you feel is relevant to your case. Examples include emails proving that the customer received the product or service, or demonstrating their use of or satisfaction with the product or service.",
+          "nullable": true,
+          "maxLength": 5000,
+          "type": "string"
         },
         "customer_email_address": {
           "description": "The email address of the customer.",
@@ -290,28 +268,16 @@
           ]
         },
         "customer_signature": {
-          "anyOf": [
-            {
-              "maxLength": 5000,
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A relevant document or contract showing the customer's signature."
+          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A relevant document or contract showing the customer's signature.",
+          "nullable": true,
+          "maxLength": 5000,
+          "type": "string"
         },
         "duplicate_charge_documentation": {
-          "anyOf": [
-            {
-              "maxLength": 5000,
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation for the prior charge that can uniquely identify the charge, such as a receipt, shipping label, work order, etc. This document should be paired with a similar document from the disputed payment that proves the two payments are separate."
+          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation for the prior charge that can uniquely identify the charge, such as a receipt, shipping label, work order, etc. This document should be paired with a similar document from the disputed payment that proves the two payments are separate.",
+          "nullable": true,
+          "maxLength": 5000,
+          "type": "string"
         },
         "duplicate_charge_explanation": {
           "description": "An explanation of the difference between the disputed charge versus the prior charge that appears to be a duplicate.",
@@ -338,28 +304,16 @@
           ]
         },
         "receipt": {
-          "anyOf": [
-            {
-              "maxLength": 5000,
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any receipt or message sent to the customer notifying them of the charge."
+          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any receipt or message sent to the customer notifying them of the charge.",
+          "nullable": true,
+          "maxLength": 5000,
+          "type": "string"
         },
         "refund_policy": {
-          "anyOf": [
-            {
-              "maxLength": 5000,
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your refund policy, as shown to the customer."
+          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your refund policy, as shown to the customer.",
+          "nullable": true,
+          "maxLength": 5000,
+          "type": "string"
         },
         "refund_policy_disclosure": {
           "description": "Documentation demonstrating that the customer was shown your refund policy prior to purchase.",
@@ -386,16 +340,10 @@
           ]
         },
         "service_documentation": {
-          "anyOf": [
-            {
-              "maxLength": 5000,
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing proof that a service was provided to the customer. This could include a copy of a signed contract, work order, or other form of written agreement."
+          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing proof that a service was provided to the customer. This could include a copy of a signed contract, work order, or other form of written agreement.",
+          "nullable": true,
+          "maxLength": 5000,
+          "type": "string"
         },
         "shipping_address": {
           "description": "The address to which a physical product was shipped. You should try to include as complete address information as possible.",
@@ -422,16 +370,10 @@
           ]
         },
         "shipping_documentation": {
-          "anyOf": [
-            {
-              "maxLength": 5000,
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing proof that a product was shipped to the customer at the same address the customer provided to you. This could include a copy of the shipment receipt, shipping label, etc. It should show the customer's full shipping address, if possible."
+          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing proof that a product was shipped to the customer at the same address the customer provided to you. This could include a copy of the shipment receipt, shipping label, etc. It should show the customer's full shipping address, if possible.",
+          "nullable": true,
+          "maxLength": 5000,
+          "type": "string"
         },
         "shipping_tracking_number": {
           "description": "The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.",
@@ -442,16 +384,10 @@
           ]
         },
         "uncategorized_file": {
-          "anyOf": [
-            {
-              "maxLength": 5000,
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any additional evidence or statements."
+          "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any additional evidence or statements.",
+          "nullable": true,
+          "maxLength": 5000,
+          "type": "string"
         },
         "uncategorized_text": {
           "description": "Any additional evidence or statements.",
@@ -519,16 +455,10 @@
       "type": "string"
     },
     "payment_intent": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "ID of the PaymentIntent that was disputed."
+      "description": "ID of the PaymentIntent that was disputed.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "reason": {
       "description": "Reason given by cardholder for dispute. Possible values are `bank_cannot_process`, `check_returned`, `credit_not_processed`, `customer_initiated`, `debit_not_authorized`, `duplicate`, `fraudulent`, `general`, `incorrect_account_details`, `insufficient_funds`, `product_not_received`, `product_unacceptable`, `subscription_canceled`, or `unrecognized`. Read more about [dispute reasons](https://stripe.com/docs/disputes/categories).",

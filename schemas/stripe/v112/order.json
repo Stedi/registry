@@ -28,16 +28,10 @@
       ]
     },
     "charge": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "The ID of the payment used to pay for the order. Present if the order status is `paid`, `fulfilled`, or `refunded`."
+      "description": "The ID of the payment used to pay for the order. Present if the order status is `paid`, `fulfilled`, or `refunded`.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -49,16 +43,10 @@
       "type": "string"
     },
     "customer": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "The customer used for the order."
+      "description": "The customer used for the order.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "email": {
       "description": "The email address of the customer placing the order.",
@@ -104,13 +92,12 @@
             "type": "string"
           },
           "parent": {
-            "anyOf": [
-              {
-                "maxLength": 5000,
-                "type": "string"
-              }
-            ],
-            "description": "The ID of the associated object for this line item. Expandable if not null (e.g., expandable to a SKU)."
+            "description": "The ID of the associated object for this line item. Expandable if not null (e.g., expandable to a SKU).",
+            "maxLength": 5000,
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "quantity": {
             "description": "A positive integer representing the number of instances of `parent` that are included in this order item. Applicable/present only if `type` is `sku`.",
@@ -201,13 +188,12 @@
                       "type": "string"
                     },
                     "parent": {
-                      "anyOf": [
-                        {
-                          "maxLength": 5000,
-                          "type": "string"
-                        }
-                      ],
-                      "description": "The ID of the associated object for this line item. Expandable if not null (e.g., expandable to a SKU)."
+                      "description": "The ID of the associated object for this line item. Expandable if not null (e.g., expandable to a SKU).",
+                      "maxLength": 5000,
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     },
                     "quantity": {
                       "description": "A positive integer representing the number of instances of `parent` that are included in this order item. Applicable/present only if `type` is `sku`.",
@@ -246,28 +232,16 @@
                 "type": "string"
               },
               "order": {
-                "anyOf": [
-                  {
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "The order that this return includes items from."
+                "description": "The order that this return includes items from.",
+                "nullable": true,
+                "maxLength": 5000,
+                "type": "string"
               },
               "refund": {
-                "anyOf": [
-                  {
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "The ID of the refund issued for this return."
+                "description": "The ID of the refund issued for this return.",
+                "nullable": true,
+                "maxLength": 5000,
+                "type": "string"
               }
             },
             "required": [
@@ -322,91 +296,54 @@
       ]
     },
     "shipping": {
-      "anyOf": [
-        {
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "address": {
           "description": "",
           "properties": {
-            "address": {
-              "description": "",
-              "properties": {
-                "city": {
-                  "description": "City, district, suburb, town, or village.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "country": {
-                  "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "line1": {
-                  "description": "Address line 1 (e.g., street, PO Box, or company name).",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "line2": {
-                  "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "postal_code": {
-                  "description": "ZIP or postal code.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "state": {
-                  "description": "State, county, province, or region.",
-                  "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              },
-              "title": "Address",
-              "type": "object"
-            },
-            "carrier": {
-              "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.",
+            "city": {
+              "description": "City, district, suburb, town, or village.",
               "maxLength": 5000,
               "type": [
                 "string",
                 "null"
               ]
             },
-            "name": {
-              "description": "Recipient name.",
+            "country": {
+              "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
               "maxLength": 5000,
               "type": [
                 "string",
                 "null"
               ]
             },
-            "phone": {
-              "description": "Recipient phone (including extension).",
+            "line1": {
+              "description": "Address line 1 (e.g., street, PO Box, or company name).",
               "maxLength": 5000,
               "type": [
                 "string",
                 "null"
               ]
             },
-            "tracking_number": {
-              "description": "The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.",
+            "line2": {
+              "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "postal_code": {
+              "description": "ZIP or postal code.",
+              "maxLength": 5000,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "state": {
+              "description": "State, county, province, or region.",
               "maxLength": 5000,
               "type": [
                 "string",
@@ -414,14 +351,44 @@
               ]
             }
           },
-          "title": "Shipping",
+          "title": "Address",
           "type": "object"
         },
-        {
-          "type": "null"
+        "carrier": {
+          "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "description": "Recipient name.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "phone": {
+          "description": "Recipient phone (including extension).",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tracking_number": {
+          "description": "The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.",
+          "maxLength": 5000,
+          "type": [
+            "string",
+            "null"
+          ]
         }
-      ],
-      "description": "The shipping address for the order. Present if the order is for goods to be shipped."
+      },
+      "title": "Shipping",
+      "type": "object"
     },
     "shipping_methods": {
       "description": "A list of supported shipping methods for this order. The desired shipping method can be specified either by updating the order, or when paying it.",
@@ -437,42 +404,35 @@
             "type": "string"
           },
           "delivery_estimate": {
-            "anyOf": [
-              {
-                "description": "",
-                "properties": {
-                  "date": {
-                    "description": "If `type` is `\"exact\"`, `date` will be the expected delivery date in the format YYYY-MM-DD.",
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  "earliest": {
-                    "description": "If `type` is `\"range\"`, `earliest` will be be the earliest delivery date in the format YYYY-MM-DD.",
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  "latest": {
-                    "description": "If `type` is `\"range\"`, `latest` will be the latest delivery date in the format YYYY-MM-DD.",
-                    "maxLength": 5000,
-                    "type": "string"
-                  },
-                  "type": {
-                    "description": "The type of estimate. Must be either `\"range\"` or `\"exact\"`.",
-                    "maxLength": 5000,
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "type"
-                ],
-                "title": "DeliveryEstimate",
-                "type": "object"
+            "description": "",
+            "nullable": true,
+            "properties": {
+              "date": {
+                "description": "If `type` is `\"exact\"`, `date` will be the expected delivery date in the format YYYY-MM-DD.",
+                "maxLength": 5000,
+                "type": "string"
               },
-              {
-                "type": "null"
+              "earliest": {
+                "description": "If `type` is `\"range\"`, `earliest` will be be the earliest delivery date in the format YYYY-MM-DD.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "latest": {
+                "description": "If `type` is `\"range\"`, `latest` will be the latest delivery date in the format YYYY-MM-DD.",
+                "maxLength": 5000,
+                "type": "string"
+              },
+              "type": {
+                "description": "The type of estimate. Must be either `\"range\"` or `\"exact\"`.",
+                "maxLength": 5000,
+                "type": "string"
               }
+            },
+            "required": [
+              "type"
             ],
-            "description": "The estimated delivery date for the given shipping method. Can be either a specific date or a range."
+            "title": "DeliveryEstimate",
+            "type": "object"
           },
           "description": {
             "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
@@ -505,51 +465,44 @@
       "type": "string"
     },
     "status_transitions": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "canceled": {
-              "description": "The time that the order was canceled.",
-              "format": "unix-time",
-              "type": [
-                "integer",
-                "null"
-              ]
-            },
-            "fulfiled": {
-              "description": "The time that the order was fulfilled.",
-              "format": "unix-time",
-              "type": [
-                "integer",
-                "null"
-              ]
-            },
-            "paid": {
-              "description": "The time that the order was paid.",
-              "format": "unix-time",
-              "type": [
-                "integer",
-                "null"
-              ]
-            },
-            "returned": {
-              "description": "The time that the order was returned.",
-              "format": "unix-time",
-              "type": [
-                "integer",
-                "null"
-              ]
-            }
-          },
-          "title": "StatusTransitions",
-          "type": "object"
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "canceled": {
+          "description": "The time that the order was canceled.",
+          "format": "unix-time",
+          "type": [
+            "integer",
+            "null"
+          ]
         },
-        {
-          "type": "null"
+        "fulfiled": {
+          "description": "The time that the order was fulfilled.",
+          "format": "unix-time",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "paid": {
+          "description": "The time that the order was paid.",
+          "format": "unix-time",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "returned": {
+          "description": "The time that the order was returned.",
+          "format": "unix-time",
+          "type": [
+            "integer",
+            "null"
+          ]
         }
-      ],
-      "description": "The timestamps at which the order status was updated."
+      },
+      "title": "StatusTransitions",
+      "type": "object"
     },
     "updated": {
       "description": "Time at which the object was last updated. Measured in seconds since the Unix epoch.",

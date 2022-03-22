@@ -1,0 +1,66 @@
+{
+  "description": "",
+  "properties": {
+    "additional_documentation": {
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "explanation": {
+      "description": "Explanation of why the cardholder is disputing this transaction.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "received_at": {
+      "description": "Date when the product was received.",
+      "format": "unix-time",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "return_description": {
+      "description": "Description of the cardholder's attempt to return the product.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "return_status": {
+      "description": "Result of cardholder's attempt to return the product.",
+      "enum": [
+        "merchant_rejected",
+        "successful",
+        null
+      ],
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "returned_at": {
+      "description": "Date when the product was returned or attempted to be returned.",
+      "format": "unix-time",
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "title": "IssuingDisputeMerchandiseNotAsDescribedEvidence",
+  "type": "object",
+  "default": {
+    "additional_documentation": "string",
+    "explanation": "string",
+    "received_at": 1647352387,
+    "return_description": "string",
+    "return_status": "merchant_rejected",
+    "returned_at": 1647352387
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

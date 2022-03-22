@@ -62,95 +62,68 @@
       "description": "",
       "properties": {
         "recurring": {
-          "anyOf": [
-            {
+          "description": "",
+          "nullable": true,
+          "properties": {
+            "amount_subtotal": {
+              "description": "Total before any discounts or taxes are applied.",
+              "type": "integer"
+            },
+            "amount_total": {
+              "description": "Total after discounts and taxes are applied.",
+              "type": "integer"
+            },
+            "interval": {
+              "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
+              "enum": [
+                "day",
+                "month",
+                "week",
+                "year"
+              ],
+              "type": "string"
+            },
+            "interval_count": {
+              "description": "The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.",
+              "type": "integer"
+            },
+            "total_details": {
               "description": "",
               "properties": {
-                "amount_subtotal": {
-                  "description": "Total before any discounts or taxes are applied.",
+                "amount_discount": {
+                  "description": "This is the sum of all the line item discounts.",
                   "type": "integer"
                 },
-                "amount_total": {
-                  "description": "Total after discounts and taxes are applied.",
+                "amount_shipping": {
+                  "description": "This is the sum of all the line item shipping amounts.",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "amount_tax": {
+                  "description": "This is the sum of all the line item tax amounts.",
                   "type": "integer"
                 },
-                "interval": {
-                  "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
-                  "enum": [
-                    "day",
-                    "month",
-                    "week",
-                    "year"
-                  ],
-                  "type": "string"
-                },
-                "interval_count": {
-                  "description": "The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.",
-                  "type": "integer"
-                },
-                "total_details": {
-                  "description": "",
-                  "properties": {
-                    "amount_discount": {
-                      "description": "This is the sum of all the line item discounts.",
-                      "type": "integer"
-                    },
-                    "amount_shipping": {
-                      "description": "This is the sum of all the line item shipping amounts.",
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "amount_tax": {
-                      "description": "This is the sum of all the line item tax amounts.",
-                      "type": "integer"
-                    },
-                    "breakdown": {
-                      "description": "",
-                      "properties": {
-                        "discounts": {
-                          "description": "The aggregated line item discounts.",
-                          "items": {},
-                          "type": "array"
-                        },
-                        "taxes": {
-                          "description": "The aggregated line item tax amounts by rate.",
-                          "items": {},
-                          "type": "array"
-                        }
-                      },
-                      "required": [
-                        "discounts",
-                        "taxes"
-                      ],
-                      "title": "QuotesResourceTotalDetailsResourceBreakdown",
-                      "type": "object"
-                    }
-                  },
-                  "required": [
-                    "amount_discount",
-                    "amount_tax"
-                  ],
-                  "title": "QuotesResourceTotalDetails",
-                  "type": "object"
-                }
+                "breakdown": {}
               },
               "required": [
-                "amount_subtotal",
-                "amount_total",
-                "interval",
-                "interval_count",
-                "total_details"
+                "amount_discount",
+                "amount_tax"
               ],
-              "title": "QuotesResourceRecurring",
+              "title": "QuotesResourceTotalDetails",
               "type": "object"
-            },
-            {
-              "type": "null"
             }
+          },
+          "required": [
+            "amount_subtotal",
+            "amount_total",
+            "interval",
+            "interval_count",
+            "total_details"
           ],
-          "description": "The definitive totals and line items the customer will be charged on a recurring basis. Takes into account the line items with recurring prices and discounts with `duration=forever` coupons only. Defaults to `null` if no inputted line items with recurring prices."
+          "title": "QuotesResourceRecurring",
+          "type": "object"
         },
         "upfront": {
           "description": "",
@@ -169,70 +142,6 @@
                 "data": {
                   "description": "Details about each object.",
                   "items": {
-                    "description": "A line item.",
-                    "properties": {
-                      "amount_subtotal": {
-                        "description": "Total before any discounts or taxes are applied.",
-                        "type": "integer"
-                      },
-                      "amount_total": {
-                        "description": "Total after discounts and taxes.",
-                        "type": "integer"
-                      },
-                      "currency": {
-                        "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-                        "type": "string"
-                      },
-                      "description": {
-                        "description": "An arbitrary string attached to the object. Often useful for displaying to users. Defaults to product name.",
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "discounts": {
-                        "description": "The discounts applied to the line item.",
-                        "items": {},
-                        "type": "array"
-                      },
-                      "id": {
-                        "description": "Unique identifier for the object.",
-                        "maxLength": 5000,
-                        "type": "string"
-                      },
-                      "object": {
-                        "description": "String representing the object's type. Objects of the same type share the same value.",
-                        "enum": [
-                          "item"
-                        ],
-                        "type": "string"
-                      },
-                      "price": {
-                        "anyOf": [
-                          {}
-                        ],
-                        "description": "The price used to generate the line item."
-                      },
-                      "quantity": {
-                        "description": "The quantity of products being purchased.",
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "taxes": {
-                        "description": "The taxes applied to the line item.",
-                        "items": {},
-                        "type": "array"
-                      }
-                    },
-                    "required": [
-                      "amount_subtotal",
-                      "amount_total",
-                      "currency",
-                      "description",
-                      "id",
-                      "object"
-                    ],
-                    "title": "LineItem",
                     "type": "object"
                   },
                   "type": "array"
@@ -281,27 +190,7 @@
                   "description": "This is the sum of all the line item tax amounts.",
                   "type": "integer"
                 },
-                "breakdown": {
-                  "description": "",
-                  "properties": {
-                    "discounts": {
-                      "description": "The aggregated line item discounts.",
-                      "items": {},
-                      "type": "array"
-                    },
-                    "taxes": {
-                      "description": "The aggregated line item tax amounts by rate.",
-                      "items": {},
-                      "type": "array"
-                    }
-                  },
-                  "required": [
-                    "discounts",
-                    "taxes"
-                  ],
-                  "title": "QuotesResourceTotalDetailsResourceBreakdown",
-                  "type": "object"
-                }
+                "breakdown": {}
               },
               "required": [
                 "amount_discount",
@@ -340,26 +229,16 @@
       ]
     },
     "customer": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "The customer which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed."
+      "description": "The customer which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "default_tax_rates": {
       "description": "The tax rates applied to this quote.",
       "items": {
-        "anyOf": [
-          {
-            "maxLength": 5000,
-            "type": "string"
-          }
-        ]
+        "maxLength": 5000,
+        "type": "string"
       },
       "type": "array"
     },
@@ -374,12 +253,8 @@
     "discounts": {
       "description": "The discounts applied to this quote.",
       "items": {
-        "anyOf": [
-          {
-            "maxLength": 5000,
-            "type": "string"
-          }
-        ]
+        "maxLength": 5000,
+        "type": "string"
       },
       "type": "array"
     },
@@ -397,36 +272,25 @@
       ]
     },
     "from_quote": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "is_revision": {
-              "description": "Whether this quote is a revision of a different quote.",
-              "type": "boolean"
-            },
-            "quote": {
-              "anyOf": [
-                {
-                  "maxLength": 5000,
-                  "type": "string"
-                }
-              ],
-              "description": "The quote that was cloned."
-            }
-          },
-          "required": [
-            "is_revision",
-            "quote"
-          ],
-          "title": "QuotesResourceFromQuote",
-          "type": "object"
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "is_revision": {
+          "description": "Whether this quote is a revision of a different quote.",
+          "type": "boolean"
         },
-        {
-          "type": "null"
+        "quote": {
+          "description": "The quote that was cloned.",
+          "maxLength": 5000,
+          "type": "string"
         }
+      },
+      "required": [
+        "is_revision",
+        "quote"
       ],
-      "description": "Details of the quote that was cloned. See the [cloning documentation](https://stripe.com/docs/quotes/clone) for more details."
+      "title": "QuotesResourceFromQuote",
+      "type": "object"
     },
     "header": {
       "description": "A header that will be displayed on the quote PDF.",
@@ -442,38 +306,25 @@
       "type": "string"
     },
     "invoice": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "The invoice that was created from this quote."
+      "description": "The invoice that was created from this quote.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "invoice_settings": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "days_until_due": {
-              "description": "Number of days within which a customer must pay invoices generated by this quote. This value will be `null` for quotes where `collection_method=charge_automatically`.",
-              "type": [
-                "integer",
-                "null"
-              ]
-            }
-          },
-          "title": "InvoiceSettingQuoteSetting",
-          "type": "object"
-        },
-        {
-          "type": "null"
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "days_until_due": {
+          "description": "Number of days within which a customer must pay invoices generated by this quote. This value will be `null` for quotes where `collection_method=charge_automatically`.",
+          "type": [
+            "integer",
+            "null"
+          ]
         }
-      ],
-      "description": "All invoices will be billed using the specified settings."
+      },
+      "title": "InvoiceSettingQuoteSetting",
+      "type": "object"
     },
     "line_items": {
       "description": "A list of items the customer is being quoted for.",
@@ -502,7 +353,24 @@
               },
               "discounts": {
                 "description": "The discounts applied to the line item.",
-                "items": {},
+                "items": {
+                  "description": "",
+                  "properties": {
+                    "amount": {
+                      "description": "The amount discounted.",
+                      "type": "integer"
+                    },
+                    "discount": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "amount",
+                    "discount"
+                  ],
+                  "title": "LineItemsDiscountAmount",
+                  "type": "object"
+                },
                 "type": "array"
               },
               "id": {
@@ -518,10 +386,150 @@
                 "type": "string"
               },
               "price": {
-                "anyOf": [
-                  {}
+                "description": "Prices define the unit cost, currency, and (optional) billing cycle for both recurring and one-time purchases of products.\n[Products](https://stripe.com/docs/api#products) help you track inventory or provisioning, and prices help you track payment terms. Different physical goods or levels of service should be represented by products, and pricing options should be represented by prices. This approach lets you change prices without having to change your provisioning scheme.\n\nFor example, you might have a single \"gold\" product that has prices for $10/month, $100/year, and €9 once.\n\nRelated guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription), [create an invoice](https://stripe.com/docs/billing/invoices/create), and more about [products and prices](https://stripe.com/docs/products-prices/overview).",
+                "nullable": true,
+                "properties": {
+                  "active": {
+                    "description": "Whether the price can be used for new purchases.",
+                    "type": "boolean"
+                  },
+                  "billing_scheme": {
+                    "description": "Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.",
+                    "enum": [
+                      "per_unit",
+                      "tiered"
+                    ],
+                    "type": "string"
+                  },
+                  "created": {
+                    "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+                    "format": "unix-time",
+                    "type": "integer"
+                  },
+                  "currency": {
+                    "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Unique identifier for the object.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "livemode": {
+                    "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
+                    "type": "boolean"
+                  },
+                  "lookup_key": {
+                    "description": "A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "metadata": {
+                    "type": "object"
+                  },
+                  "nickname": {
+                    "description": "A brief description of the price, hidden from customers.",
+                    "maxLength": 5000,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "object": {
+                    "description": "String representing the object's type. Objects of the same type share the same value.",
+                    "enum": [
+                      "price"
+                    ],
+                    "type": "string"
+                  },
+                  "product": {
+                    "description": "The ID of the product this price is associated with.",
+                    "maxLength": 5000,
+                    "type": "string"
+                  },
+                  "recurring": {
+                    "description": "The recurring components of a price such as `interval` and `usage_type`.",
+                    "nullable": true,
+                    "type": "object"
+                  },
+                  "tax_behavior": {
+                    "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.",
+                    "enum": [
+                      "exclusive",
+                      "inclusive",
+                      "unspecified",
+                      null
+                    ],
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "tiers": {
+                    "description": "Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.",
+                    "items": {
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "tiers_mode": {
+                    "description": "Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.",
+                    "enum": [
+                      "graduated",
+                      "volume",
+                      null
+                    ],
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "transform_quantity": {
+                    "description": "Apply a transformation to the reported usage or set quantity before computing the amount billed. Cannot be combined with `tiers`.",
+                    "nullable": true,
+                    "type": "object"
+                  },
+                  "type": {
+                    "description": "One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.",
+                    "enum": [
+                      "one_time",
+                      "recurring"
+                    ],
+                    "type": "string"
+                  },
+                  "unit_amount": {
+                    "description": "The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "unit_amount_decimal": {
+                    "description": "The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.",
+                    "format": "decimal",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "active",
+                  "billing_scheme",
+                  "created",
+                  "currency",
+                  "id",
+                  "livemode",
+                  "metadata",
+                  "object",
+                  "product",
+                  "type"
                 ],
-                "description": "The price used to generate the line item."
+                "title": "Price",
+                "type": "object"
               },
               "quantity": {
                 "description": "The quantity of products being purchased.",
@@ -532,7 +540,24 @@
               },
               "taxes": {
                 "description": "The taxes applied to the line item.",
-                "items": {},
+                "items": {
+                  "description": "",
+                  "properties": {
+                    "amount": {
+                      "description": "Amount of tax applied for this rate.",
+                      "type": "integer"
+                    },
+                    "rate": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "amount",
+                    "rate"
+                  ],
+                  "title": "LineItemsTaxAmount",
+                  "type": "object"
+                },
                 "type": "array"
               }
             },
@@ -596,16 +621,10 @@
       "type": "string"
     },
     "on_behalf_of": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "The account on behalf of which to charge. See the [Connect documentation](https://support.stripe.com/questions/sending-invoices-on-behalf-of-connected-accounts) for details."
+      "description": "The account on behalf of which to charge. See the [Connect documentation](https://support.stripe.com/questions/sending-invoices-on-behalf-of-connected-accounts) for details.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "status": {
       "description": "The status of the quote.",
@@ -649,16 +668,10 @@
       "type": "object"
     },
     "subscription": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "The subscription that was created or updated from this quote."
+      "description": "The subscription that was created or updated from this quote.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "subscription_data": {
       "description": "",
@@ -683,16 +696,10 @@
       "type": "object"
     },
     "subscription_schedule": {
-      "anyOf": [
-        {
-          "maxLength": 5000,
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "The subscription schedule that was created or updated from this quote."
+      "description": "The subscription schedule that was created or updated from this quote.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
     },
     "total_details": {
       "description": "",
@@ -712,27 +719,7 @@
           "description": "This is the sum of all the line item tax amounts.",
           "type": "integer"
         },
-        "breakdown": {
-          "description": "",
-          "properties": {
-            "discounts": {
-              "description": "The aggregated line item discounts.",
-              "items": {},
-              "type": "array"
-            },
-            "taxes": {
-              "description": "The aggregated line item tax amounts by rate.",
-              "items": {},
-              "type": "array"
-            }
-          },
-          "required": [
-            "discounts",
-            "taxes"
-          ],
-          "title": "QuotesResourceTotalDetailsResourceBreakdown",
-          "type": "object"
-        }
+        "breakdown": {}
       },
       "required": [
         "amount_discount",
@@ -742,45 +729,34 @@
       "type": "object"
     },
     "transfer_data": {
-      "anyOf": [
-        {
-          "description": "",
-          "properties": {
-            "amount": {
-              "description": "The amount in %s that will be transferred to the destination account when the invoice is paid. By default, the entire amount is transferred to the destination.",
-              "type": [
-                "integer",
-                "null"
-              ]
-            },
-            "amount_percent": {
-              "description": "A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the destination account. By default, the entire amount will be transferred to the destination.",
-              "type": [
-                "number",
-                "null"
-              ]
-            },
-            "destination": {
-              "anyOf": [
-                {
-                  "maxLength": 5000,
-                  "type": "string"
-                }
-              ],
-              "description": "The account where funds from the payment will be transferred to upon payment success."
-            }
-          },
-          "required": [
-            "destination"
-          ],
-          "title": "QuotesResourceTransferData",
-          "type": "object"
+      "description": "",
+      "nullable": true,
+      "properties": {
+        "amount": {
+          "description": "The amount in %s that will be transferred to the destination account when the invoice is paid. By default, the entire amount is transferred to the destination.",
+          "type": [
+            "integer",
+            "null"
+          ]
         },
-        {
-          "type": "null"
+        "amount_percent": {
+          "description": "A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the destination account. By default, the entire amount will be transferred to the destination.",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "destination": {
+          "description": "The account where funds from the payment will be transferred to upon payment success.",
+          "maxLength": 5000,
+          "type": "string"
         }
+      },
+      "required": [
+        "destination"
       ],
-      "description": "The account (if any) the payments will be attributed to for tax reporting, and where funds from each payment will be transferred to for each of the invoices."
+      "title": "QuotesResourceTransferData",
+      "type": "object"
     }
   },
   "required": [
@@ -823,14 +799,7 @@
           "amount_discount": 0,
           "amount_shipping": 0,
           "amount_tax": 0,
-          "breakdown": {
-            "discounts": [
-              {}
-            ],
-            "taxes": [
-              {}
-            ]
-          }
+          "breakdown": {}
         }
       },
       "upfront": {
@@ -838,22 +807,7 @@
         "amount_total": 0,
         "line_items": {
           "data": [
-            {
-              "amount_subtotal": 0,
-              "amount_total": 0,
-              "currency": "string",
-              "description": "string",
-              "discounts": [
-                {}
-              ],
-              "id": "string",
-              "object": "item",
-              "price": {},
-              "quantity": 0,
-              "taxes": [
-                {}
-              ]
-            }
+            {}
           ],
           "has_more": true,
           "object": "list",
@@ -863,14 +817,7 @@
           "amount_discount": 0,
           "amount_shipping": 0,
           "amount_tax": 0,
-          "breakdown": {
-            "discounts": [
-              {}
-            ],
-            "taxes": [
-              {}
-            ]
-          }
+          "breakdown": {}
         }
       }
     },
@@ -904,14 +851,42 @@
           "currency": "string",
           "description": "string",
           "discounts": [
-            {}
+            {
+              "amount": 0,
+              "discount": {}
+            }
           ],
           "id": "string",
           "object": "item",
-          "price": {},
+          "price": {
+            "active": true,
+            "billing_scheme": "per_unit",
+            "created": 1647352387,
+            "currency": "string",
+            "id": "string",
+            "livemode": true,
+            "lookup_key": "string",
+            "metadata": {},
+            "nickname": "string",
+            "object": "price",
+            "product": "string",
+            "recurring": {},
+            "tax_behavior": "exclusive",
+            "tiers": [
+              {}
+            ],
+            "tiers_mode": "graduated",
+            "transform_quantity": {},
+            "type": "one_time",
+            "unit_amount": 0,
+            "unit_amount_decimal": "0.0"
+          },
           "quantity": 0,
           "taxes": [
-            {}
+            {
+              "amount": 0,
+              "rate": {}
+            }
           ]
         }
       ],
@@ -940,14 +915,7 @@
       "amount_discount": 0,
       "amount_shipping": 0,
       "amount_tax": 0,
-      "breakdown": {
-        "discounts": [
-          {}
-        ],
-        "taxes": [
-          {}
-        ]
-      }
+      "breakdown": {}
     },
     "transfer_data": {
       "amount": 0,

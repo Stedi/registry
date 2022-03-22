@@ -1,0 +1,56 @@
+{
+  "description": "",
+  "properties": {
+    "additional_documentation": {
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "card_statement": {
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Copy of the card statement showing that the product had already been paid for.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "cash_receipt": {
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Copy of the receipt showing that the product had been paid for in cash.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "check_image": {
+      "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Image of the front and back of the check that was used to pay for the product.",
+      "nullable": true,
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "explanation": {
+      "description": "Explanation of why the cardholder is disputing this transaction.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "original_transaction": {
+      "description": "Transaction (e.g., ipi_...) that the disputed transaction is a duplicate of. Of the two or more transactions that are copies of each other, this is original undisputed one.",
+      "maxLength": 5000,
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "title": "IssuingDisputeDuplicateEvidence",
+  "type": "object",
+  "default": {
+    "additional_documentation": "string",
+    "card_statement": "string",
+    "cash_receipt": "string",
+    "check_image": "string",
+    "explanation": "string",
+    "original_transaction": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
