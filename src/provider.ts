@@ -5,6 +5,10 @@ export interface OpenAPI3Schema {
   type: "openapi-v3";
   versionName: string;
   value: unknown;
+  /**
+   * List of Schemas that should be included. If not specified, all schemas will be included.
+   */
+  entities?: string[];
 }
 
 export interface GraphQLIntrospectionSchema {
@@ -22,7 +26,9 @@ export type SchemaPackage = OpenAPI3Schema | GraphQLIntrospectionSchema;
 export interface Provider {
   getVersions: () => Promise<string[]>;
   getSchema: (version: string) => Promise<SchemaPackage>;
-  getSchemaWithoutCircularReferences(schema: OpenAPIV3.SchemaObject): OpenAPIV3.SchemaObject;
+  getSchemaWithoutCircularReferences(
+    schema: OpenAPIV3.SchemaObject
+  ): OpenAPIV3.SchemaObject;
 }
 
 export function openAPIUrlProvider(
@@ -45,8 +51,10 @@ export function openAPIUrlProvider(
         value: !!transform ? await transform(data) : data,
       };
     },
-    getSchemaWithoutCircularReferences(schema: OpenAPIV3.SchemaObject): OpenAPIV3.SchemaObject {
+    getSchemaWithoutCircularReferences(
+      schema: OpenAPIV3.SchemaObject
+    ): OpenAPIV3.SchemaObject {
       return schema;
-    }
+    },
   };
 }

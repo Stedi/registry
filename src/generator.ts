@@ -62,12 +62,14 @@ async function unbundle(bundle: SchemaPackage): Promise<Schema[]> {
       const dereferenced = await openAPIParser.dereference(bundle.value as any);
       if (!("components" in dereferenced))
         throw new Error("Expected components");
-      return Object.entries(dereferenced.components?.schemas ?? {}).map(
-        ([k, v]) => ({
+      return Object.entries(dereferenced.components?.schemas ?? {})
+        .filter(([key]) =>
+          !bundle.entities ? true : bundle.entities.includes(key)
+        )
+        .map(([k, v]) => ({
           name: k,
           schema: v,
-        })
-      );
+        }));
   }
 }
 
