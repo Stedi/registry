@@ -63,7 +63,7 @@ export class NetsuiteProvider {
       const cleanSchema = JSON.parse(
         JSON.stringify(schema, (key, value) => {
           // Unsupported in JSONSchema's strict mode
-          if (key === "x-ns-filterable") {
+          if (key === "x-ns-filterable" || key == "x-ns-custom-field") {
             return undefined;
           }
 
