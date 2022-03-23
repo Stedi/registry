@@ -3,7 +3,7 @@ import axios from "axios";
 import {
   GraphQLIntrospectionSchema,
   GraphQLProvider,
-  Schema,
+  EntitySchema,
 } from "../provider";
 import { fromIntrospectionQuery } from "graphql-2-json-schema";
 import { IntrospectionQuery } from "graphql";
@@ -14,7 +14,7 @@ export class ShopifyProvider implements GraphQLProvider {
     return ["2022-01"];
   }
 
-  async unbundle(bundle: GraphQLIntrospectionSchema): Promise<Schema[]> {
+  async unbundle(bundle: GraphQLIntrospectionSchema): Promise<EntitySchema[]> {
     const jsonSchema = fromIntrospectionQuery(
       bundle.value as IntrospectionQuery,
       {

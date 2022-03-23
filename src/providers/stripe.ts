@@ -1,4 +1,4 @@
-import { OpenAPI3Schema, OpenAPIProvider, Schema } from "../provider";
+import { OpenAPI3Schema, OpenAPIProvider, EntitySchema } from "../provider";
 import * as github from "../github";
 import { OpenAPIV3 } from "openapi-types";
 import _ from "lodash";
@@ -17,7 +17,7 @@ export class StripeProvider implements OpenAPIProvider {
     return ["v112"];
   }
 
-  async unbundle(bundle: OpenAPI3Schema): Promise<Schema[]> {
+  async unbundle(bundle: OpenAPI3Schema): Promise<EntitySchema[]> {
     const dereferenced = await openAPIParser.dereference(bundle.value as any);
 
     if (!("components" in dereferenced)) throw new Error("Expected components");
@@ -26,7 +26,7 @@ export class StripeProvider implements OpenAPIProvider {
       .filter(([key]) => !bundle.entities || bundle.entities.includes(key))
       .map(([k, v]) => ({
         name: k,
-        schema: v,
+        schema: traverse(deepcopy(v), new Set<string>()),
       }));
   }
 
@@ -37,6 +37,7 @@ export class StripeProvider implements OpenAPIProvider {
       version,
       "openapi/spec3.json"
     );
+
     return {
       type: "openapi-v3",
       versionName: version,
@@ -82,12 +83,6 @@ export class StripeProvider implements OpenAPIProvider {
         "transfer",
       ],
     };
-  }
-
-  getSchemaWithoutCircularReferences(
-    schema: OpenAPIV3.SchemaObject
-  ): OpenAPIV3.SchemaObject {
-    return traverse(deepcopy(schema), new Set<string>());
   }
 }
 

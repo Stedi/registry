@@ -31,17 +31,17 @@ export async function generateForVersion(
     console.log(`Skipping [${providerName}, ${version}]...`);
     return;
   }
+
   const bundle = await providers[providerName].getSchema(version);
   const schemas = await providers[providerName].unbundle(bundle);
 
   const markdownTableRows: string[][] = [];
+
   console.log(`Generating [${providerName}, ${version}]...`);
 
   for (const schema of schemas) {
     const target = path.join(baseDir, `${schema.name}.json`);
-    schema.schema = providers[providerName].getSchemaWithoutCircularReferences(
-      schema.schema as OpenAPIV3.SchemaObject
-    );
+
     (schema.schema as any)["default"] = mock(
       schema.schema as OpenAPIV3.SchemaObject
     );
@@ -79,6 +79,6 @@ export async function generateAll(
 (async () => {
   await generateAll("./schemas", "stripe");
   await generateAll("./schemas", "ramp");
-  await generateAll("./netsuite", "netsuite");
-  await generateAll("./schemas", "shopify", "./shopify/graphql/2022-01");
+  await generateAll("./schemas", "netsuite");
+  // await generateAll("./schemas", "shopify", "./shopify/graphql/2022-01");
 })();

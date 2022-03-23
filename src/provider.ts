@@ -1,14 +1,12 @@
-import http from "axios";
-import { OpenAPIV3 } from "openapi-types";
 import { NetsuiteProvider } from "./providers/netsuite";
 
-export interface Schema {
+export interface EntitySchema {
   name: string;
   schema: unknown;
 }
 
-export interface OpenAPI3Schema {
-  type: "openapi-v3";
+export interface APISchema {
+  type: string;
   versionName: string;
   value: unknown;
   /**
@@ -17,14 +15,12 @@ export interface OpenAPI3Schema {
   entities?: string[];
 }
 
-export interface GraphQLIntrospectionSchema {
+export interface OpenAPI3Schema extends APISchema {
+  type: "openapi-v3";
+}
+
+export interface GraphQLIntrospectionSchema extends APISchema {
   type: "graphql";
-  versionName: string;
-  value: unknown;
-  /**
-   * List of GraphQL types that should be included. If not specified, all entities will be included.
-   */
-  entities?: string[];
 }
 
 export type SchemaPackage = OpenAPI3Schema | GraphQLIntrospectionSchema;
@@ -33,15 +29,12 @@ export type Provider = GraphQLProvider | OpenAPIProvider | NetsuiteProvider;
 
 export interface OpenAPIProvider {
   getVersions: () => Promise<string[]>;
-  getSchema: (version: string) => Promise<OpenAPI3Schema>;
-  getSchemaWithoutCircularReferences(
-    schema: OpenAPIV3.SchemaObject
-  ): OpenAPIV3.SchemaObject;
-  unbundle: (bundle: OpenAPI3Schema) => Promise<Schema[]>;
+  getSchema: (version: string) => Promise<APISchema>;
+  unbundle: (bundle: OpenAPI3Schema) => Promise<EntitySchema[]>;
 }
 
 export interface GraphQLProvider {
   getVersions: () => Promise<string[]>;
-  getSchema: (version: string) => Promise<GraphQLIntrospectionSchema>;
-  unbundle: (bundle: GraphQLIntrospectionSchema) => Promise<Schema[]>;
+  getSchema: (version: string) => Promise<APISchema>;
+  unbundle: (bundle: GraphQLIntrospectionSchema) => Promise<EntitySchema[]>;
 }

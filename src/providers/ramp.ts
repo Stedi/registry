@@ -2,7 +2,7 @@ import OpenAPIParser from "@readme/openapi-parser";
 import _ from "lodash";
 import { OpenAPIV3 } from "openapi-types";
 import http from "axios";
-import { OpenAPI3Schema, OpenAPIProvider, Schema } from "../provider";
+import { OpenAPI3Schema, OpenAPIProvider, EntitySchema } from "../provider";
 import openAPIParser from "@readme/openapi-parser";
 
 export class RampProvider implements OpenAPIProvider {
@@ -10,7 +10,7 @@ export class RampProvider implements OpenAPIProvider {
     return ["v1"];
   }
 
-  async unbundle(bundle: OpenAPI3Schema): Promise<Schema[]> {
+  async unbundle(bundle: OpenAPI3Schema): Promise<EntitySchema[]> {
     const dereferenced = await openAPIParser.dereference(bundle.value as any);
 
     if (!("components" in dereferenced)) throw new Error("Expected components");
@@ -51,11 +51,5 @@ export class RampProvider implements OpenAPIProvider {
         schemas: (document as any).components.models,
       },
     };
-  }
-
-  getSchemaWithoutCircularReferences(
-    schema: OpenAPIV3.SchemaObject
-  ): OpenAPIV3.SchemaObject {
-    return schema;
   }
 }
