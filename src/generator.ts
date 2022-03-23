@@ -81,5 +81,5 @@ export async function generateAll(
   await generateAll("./schemas", "stripe");
   await generateAll("./schemas", "ramp");
   await generateAll("./schemas", "netsuite");
-  // await generateAll("./schemas", "shopify", "./shopify/graphql/2022-01");
+  await generateAll("./schemas", "shopify", "./shopify/graphql/2022-01");
 })();
