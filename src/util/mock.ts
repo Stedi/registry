@@ -15,9 +15,9 @@ function resolveAllOf(schema: SchemaLike): SchemaLike {
   return schema;
 }
 
-export function mock(schema: SchemaLike): any {
+export function mock(schemalike: SchemaLike): any {
   // allOf, merge all subschemas
-  schema = resolveAllOf(schema);
+  let schema = resolveAllOf({ ...schemalike });
 
   if (schema.example !== undefined) {
     return schema.example;
@@ -82,22 +82,6 @@ export function mock(schema: SchemaLike): any {
 
   if (type === "string") {
     const { format } = schema;
-    const formatExamples: { [format: string]: string } = {
-      email: "user@example.com",
-      hostname: "http://example.com",
-      ipv4: "8.8.8.8",
-      ipv6: "2001:4860:4860::8888",
-      uri: "https://example.com/path",
-      decimal: "0.0",
-      "uri-reference": "/path#anchor",
-      "uri-template": "/path/{param}",
-      "json-pointer": "/foo/bar",
-      "date-time": new Date("1970-01-01").toJSON(),
-      date: "1970-01-01",
-      uuid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "unix-time": "1647352387",
-      _default: "string",
-    };
     const val = format ? formatExamples[format] : formatExamples._default;
     if (schema.pattern) {
       const randexp = new RandExp(schema.pattern);
@@ -112,8 +96,10 @@ export function mock(schema: SchemaLike): any {
     if (val === undefined) {
       console.log(format);
     }
+
     const minln = !_.isNil(schema.minLength) ? schema.minLength : 0;
     const maxln = !_.isNil(schema.maxLength) ? schema.maxLength : val.length;
+
     if (val === formatExamples._default && val.length < minln) {
       return _.padEnd(val, minln, val);
     }
@@ -144,3 +130,21 @@ export function mock(schema: SchemaLike): any {
   // unknown type
   return {};
 }
+
+const formatExamples: { [format: string]: string } = {
+  email: "user@example.com",
+  hostname: "http://example.com",
+  ipv4: "8.8.8.8",
+  ipv6: "2001:4860:4860::8888",
+  uri: "https://example.com/path",
+  decimal: "0.0",
+  "uri-reference": "/path#anchor",
+  "uri-template": "/path/{param}",
+  "json-pointer": "/foo/bar",
+  "date-time": "1970-01-01T00:00:00.000Z",
+  date: "1970-01-01",
+  uuid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "unix-time": "1647352387",
+  string: "string",
+  _default: "string",
+};
