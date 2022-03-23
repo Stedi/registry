@@ -51,9 +51,9 @@ export class NetsuiteProvider {
     const schemas: EntitySchema[] = [];
 
     for (let index in entities) {
-      const entity = entities[index];
+      const entityName = entities[index];
       const schemaRequest = await nsApi.request({
-        path: `record/${versionName}/metadata-catalog/${entity}`,
+        path: `record/${versionName}/metadata-catalog/${entityName}`,
         heads: {
           Accept: "application/schema+json",
         },
@@ -75,12 +75,25 @@ export class NetsuiteProvider {
             return nsLinkSchema;
           }
 
+          // Drop all other references
+          if (key === "$ref") {
+            return undefined;
+          }
+
+          // Bug in Netsuite's schema, "type": "object" is missing
+          if (key === "quantity" && entityName === "inventoryitem") {
+            return {
+              type: "object",
+              ...value,
+            };
+          }
+
           return value;
         })
       );
 
       schemas.push({
-        name: entity,
+        name: entityName,
         schema: cleanSchema,
       });
     }
