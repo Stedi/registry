@@ -29,7 +29,6 @@
     },
     "charge": {
       "description": "The ID of the payment used to pay for the order. Present if the order status is `paid`, `fulfilled`, or `refunded`.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
@@ -44,7 +43,6 @@
     },
     "customer": {
       "description": "The customer used for the order.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
@@ -94,10 +92,7 @@
           "parent": {
             "description": "The ID of the associated object for this line item. Expandable if not null (e.g., expandable to a SKU).",
             "maxLength": 5000,
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "quantity": {
             "description": "A positive integer representing the number of instances of `parent` that are included in this order item. Applicable/present only if `type` is `sku`.",
@@ -190,10 +185,7 @@
                     "parent": {
                       "description": "The ID of the associated object for this line item. Expandable if not null (e.g., expandable to a SKU).",
                       "maxLength": 5000,
-                      "type": [
-                        "string",
-                        "null"
-                      ]
+                      "type": "string"
                     },
                     "quantity": {
                       "description": "A positive integer representing the number of instances of `parent` that are included in this order item. Applicable/present only if `type` is `sku`.",
@@ -233,13 +225,11 @@
               },
               "order": {
                 "description": "The order that this return includes items from.",
-                "nullable": true,
                 "maxLength": 5000,
                 "type": "string"
               },
               "refund": {
                 "description": "The ID of the refund issued for this return.",
-                "nullable": true,
                 "maxLength": 5000,
                 "type": "string"
               }
@@ -297,7 +287,6 @@
     },
     "shipping": {
       "description": "",
-      "nullable": true,
       "properties": {
         "address": {
           "description": "",
@@ -405,7 +394,6 @@
           },
           "delivery_estimate": {
             "description": "",
-            "nullable": true,
             "properties": {
               "date": {
                 "description": "If `type` is `\"exact\"`, `date` will be the expected delivery date in the format YYYY-MM-DD.",
@@ -466,7 +454,6 @@
     },
     "status_transitions": {
       "description": "",
-      "nullable": true,
       "properties": {
         "canceled": {
           "description": "The time that the order was canceled.",

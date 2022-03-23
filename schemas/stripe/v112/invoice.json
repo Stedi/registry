@@ -107,7 +107,6 @@
     },
     "charge": {
       "description": "ID of the latest charge generated for this invoice, if any.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
@@ -158,13 +157,11 @@
     },
     "customer": {
       "description": "The ID of the customer who will be billed.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
     "customer_address": {
       "description": "",
-      "nullable": true,
       "properties": {
         "city": {
           "description": "City, district, suburb, town, or village.",
@@ -244,7 +241,6 @@
     },
     "customer_shipping": {
       "description": "",
-      "nullable": true,
       "properties": {
         "address": {
           "description": "",
@@ -426,13 +422,11 @@
     },
     "default_payment_method": {
       "description": "ID of the default payment method for the invoice. It must belong to the customer associated with the invoice. If not set, defaults to the subscription's default payment method, if any, or to the default payment method in the customer's invoice settings.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
     "default_source": {
       "description": "ID of the default payment source for the invoice. It must belong to the customer associated with the invoice and be in a chargeable state. If not set, defaults to the subscription's default source, if any, or to the customer's default source.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
@@ -556,7 +550,6 @@
     },
     "discount": {
       "description": "A discount represents the actual application of a coupon to a particular\ncustomer. It contains information about when the discount began and when it\nwill end.\n\nRelated guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).",
-      "nullable": true,
       "properties": {
         "checkout_session": {
           "description": "The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.",
@@ -692,7 +685,6 @@
         },
         "customer": {
           "description": "The ID of the customer associated with this discount.",
-          "nullable": true,
           "maxLength": 5000,
           "type": "string"
         },
@@ -734,7 +726,6 @@
         },
         "promotion_code": {
           "description": "The promotion code applied to create this discount.",
-          "nullable": true,
           "maxLength": 5000,
           "type": "string"
         },
@@ -818,7 +809,6 @@
     },
     "last_finalization_error": {
       "description": "",
-      "nullable": true,
       "properties": {
         "charge": {
           "description": "For card errors, the ID of the failed charge.",
@@ -867,7 +857,6 @@
             },
             "application": {
               "description": "ID of the Connect application that created the PaymentIntent.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -880,7 +869,6 @@
             },
             "automatic_payment_methods": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "enabled": {
                   "description": "Automatically calculates compatible payment methods",
@@ -988,7 +976,6 @@
             },
             "customer": {
               "description": "ID of the Customer this PaymentIntent belongs to, if one exists.\n\nPayment methods attached to other Customers cannot be used with this PaymentIntent.\n\nIf present in combination with [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage), this PaymentIntent's payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -1007,13 +994,11 @@
             },
             "invoice": {
               "description": "ID of the invoice that created this PaymentIntent, if it exists.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
             "last_payment_error": {
               "description": "The payment error encountered in the previous PaymentIntent confirmation. It will be cleared if the PaymentIntent is later updated for any reason.",
-              "nullable": true,
               "type": "object"
             },
             "livemode": {
@@ -1023,7 +1008,6 @@
             "metadata": {},
             "next_action": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "alipay_handle_redirect": {
                   "type": "object"
@@ -1076,19 +1060,16 @@
             },
             "on_behalf_of": {
               "description": "The account (if any) for which the funds of the PaymentIntent are intended. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
             "payment_method": {
               "description": "ID of the payment method used in this PaymentIntent.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
             "payment_method_options": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "acss_debit": {
                   "type": "object"
@@ -1170,7 +1151,6 @@
             },
             "processing": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "card": {
                   "type": "object"
@@ -1199,7 +1179,6 @@
             },
             "review": {
               "description": "ID of the review associated with this PaymentIntent, if any.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -1217,7 +1196,6 @@
             },
             "shipping": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "address": {
                   "type": "object"
@@ -1289,7 +1267,6 @@
             },
             "transfer_data": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "amount": {
                   "description": "Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).",
@@ -1466,7 +1443,6 @@
               "properties": {
                 "address": {
                   "description": "Billing address.",
-                  "nullable": true,
                   "type": "object"
                 },
                 "email": {
@@ -1522,7 +1498,6 @@
                 },
                 "checks": {
                   "description": "Checks on Card address and CVC if provided.",
-                  "nullable": true,
                   "type": "object"
                 },
                 "country": {
@@ -1556,7 +1531,6 @@
                 },
                 "generated_from": {
                   "description": "Details of the original PaymentMethod that created this object.",
-                  "nullable": true,
                   "type": "object"
                 },
                 "last4": {
@@ -1566,17 +1540,14 @@
                 },
                 "networks": {
                   "description": "Contains information about card networks that can be used to process the payment.",
-                  "nullable": true,
                   "type": "object"
                 },
                 "three_d_secure_usage": {
                   "description": "Contains details on how this Card maybe be used for 3D Secure authentication.",
-                  "nullable": true,
                   "type": "object"
                 },
                 "wallet": {
                   "description": "If this Card is part of a card wallet, this contains the details of the card wallet.",
-                  "nullable": true,
                   "type": "object"
                 }
               },
@@ -1603,7 +1574,6 @@
             },
             "customer": {
               "description": "The ID of the Customer to which this PaymentMethod is saved. This will not be set when the PaymentMethod has not been saved to a Customer.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -1769,7 +1739,6 @@
               "properties": {
                 "dob": {
                   "description": "The customer's date of birth, if provided.",
-                  "nullable": true,
                   "type": "object"
                 }
               },
@@ -1879,7 +1848,6 @@
                 },
                 "generated_from": {
                   "description": "Information about the object that generated this PaymentMethod.",
-                  "nullable": true,
                   "type": "object"
                 },
                 "last4": {
@@ -1965,7 +1933,6 @@
           "properties": {
             "application": {
               "description": "ID of the Connect application that created the SetupIntent.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -1997,7 +1964,6 @@
             },
             "customer": {
               "description": "ID of the Customer this SetupIntent belongs to, if one exists.\n\nIf present, the SetupIntent's payment method will be attached to the Customer on successful setup. Payment methods attached to other Customers cannot be used with this SetupIntent.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -2016,12 +1982,10 @@
             },
             "last_setup_error": {
               "description": "The error encountered in the previous SetupIntent confirmation.",
-              "nullable": true,
               "type": "object"
             },
             "latest_attempt": {
               "description": "The most recent SetupAttempt for this SetupIntent.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -2031,14 +1995,12 @@
             },
             "mandate": {
               "description": "ID of the multi use Mandate generated by the SetupIntent.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
             "metadata": {},
             "next_action": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "redirect_to_url": {
                   "type": "object"
@@ -2070,19 +2032,16 @@
             },
             "on_behalf_of": {
               "description": "The account (if any) for which the setup is intended.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
             "payment_method": {
               "description": "ID of the payment method used with this SetupIntent.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
             "payment_method_options": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "acss_debit": {
                   "type": "object"
@@ -2107,7 +2066,6 @@
             },
             "single_use_mandate": {
               "description": "ID of the single_use Mandate generated by the SetupIntent.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -2146,7 +2104,6 @@
           "properties": {
             "account": {
               "description": "The ID of the account that the bank account is associated with.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -2207,7 +2164,6 @@
             },
             "customer": {
               "description": "The ID of the customer that the bank account is associated with.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -2397,7 +2353,6 @@
               },
               "price": {
                 "description": "Prices define the unit cost, currency, and (optional) billing cycle for both recurring and one-time purchases of products.\n[Products](https://stripe.com/docs/api#products) help you track inventory or provisioning, and prices help you track payment terms. Different physical goods or levels of service should be represented by products, and pricing options should be represented by prices. This approach lets you change prices without having to change your provisioning scheme.\n\nFor example, you might have a single \"gold\" product that has prices for $10/month, $100/year, and €9 once.\n\nRelated guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription), [create an invoice](https://stripe.com/docs/billing/invoices/create), and more about [products and prices](https://stripe.com/docs/products-prices/overview).",
-                "nullable": true,
                 "properties": {
                   "active": {
                     "description": "Whether the price can be used for new purchases.",
@@ -2462,7 +2417,6 @@
                   },
                   "recurring": {
                     "description": "The recurring components of a price such as `interval` and `usage_type`.",
-                    "nullable": true,
                     "type": "object"
                   },
                   "tax_behavior": {
@@ -2499,7 +2453,6 @@
                   },
                   "transform_quantity": {
                     "description": "Apply a transformation to the reported usage or set quantity before computing the amount billed. Cannot be combined with `tiers`.",
-                    "nullable": true,
                     "type": "object"
                   },
                   "type": {
@@ -2786,7 +2739,6 @@
     },
     "on_behalf_of": {
       "description": "The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
@@ -2800,7 +2752,6 @@
     },
     "payment_intent": {
       "description": "The PaymentIntent associated with this invoice. The PaymentIntent is generated when the invoice is finalized, and can then be used to pay the invoice. Note that voiding an invoice will cancel the PaymentIntent.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
@@ -2809,11 +2760,9 @@
       "properties": {
         "payment_method_options": {
           "description": "",
-          "nullable": true,
           "properties": {
             "acss_debit": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "mandate_options": {
                   "type": "object"
@@ -2833,7 +2782,6 @@
             },
             "bancontact": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "preferred_language": {
                   "description": "Preferred language of the Bancontact authorization page that the customer is redirected to.",
@@ -2854,7 +2802,6 @@
             },
             "card": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "request_three_d_secure": {
                   "description": "We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.",
@@ -2874,7 +2821,6 @@
             },
             "konbini": {
               "description": "",
-              "nullable": true,
               "properties": {},
               "title": "invoice_payment_method_options_konbini",
               "type": "object"
@@ -2935,7 +2881,6 @@
     },
     "quote": {
       "description": "The quote this invoice was generated from.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
@@ -3016,7 +2961,6 @@
     },
     "subscription": {
       "description": "The subscription that this invoice was prepared for, if any.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
@@ -3141,7 +3085,6 @@
     },
     "transfer_data": {
       "description": "",
-      "nullable": true,
       "properties": {
         "amount": {
           "description": "The amount in %s that will be transferred to the destination account when the invoice is paid. By default, the entire amount is transferred to the destination.",

@@ -3,7 +3,6 @@
   "properties": {
     "address": {
       "description": "",
-      "nullable": true,
       "properties": {
         "city": {
           "description": "City, district, suburb, town, or village.",
@@ -76,7 +75,6 @@
     },
     "default_source": {
       "description": "ID of the default payment source for the customer.\n\nIf you are using payment methods created via the PaymentMethods API, see the [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) field instead.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
@@ -97,7 +95,6 @@
     },
     "discount": {
       "description": "A discount represents the actual application of a coupon to a particular\ncustomer. It contains information about when the discount began and when it\nwill end.\n\nRelated guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).",
-      "nullable": true,
       "properties": {
         "checkout_session": {
           "description": "The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.",
@@ -234,10 +231,7 @@
         "customer": {
           "description": "The ID of the customer associated with this discount.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "end": {
           "description": "If the coupon has a duration of `repeating`, the date that this discount will end. If the coupon has a duration of `once` or `forever`, this attribute will be null.",
@@ -278,10 +272,7 @@
         "promotion_code": {
           "description": "The promotion code applied to create this discount.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "start": {
           "description": "Date that the coupon was applied.",
@@ -360,7 +351,6 @@
         },
         "default_payment_method": {
           "description": "ID of a payment method that's attached to the customer, to be used as the customer's default payment method for subscriptions and invoices.",
-          "nullable": true,
           "maxLength": 5000,
           "type": "string"
         },
@@ -421,7 +411,6 @@
     },
     "shipping": {
       "description": "",
-      "nullable": true,
       "properties": {
         "address": {
           "description": "",
@@ -530,7 +519,6 @@
               },
               "customer": {
                 "description": "The ID of the customer associated with this Alipay Account.",
-                "nullable": true,
                 "maxLength": 5000,
                 "type": "string"
               },
@@ -660,7 +648,6 @@
               },
               "billing_thresholds": {
                 "description": "",
-                "nullable": true,
                 "properties": {
                   "amount_gte": {
                     "description": "Monetary threshold that triggers the subscription to create an invoice",
@@ -737,13 +724,11 @@
               },
               "default_payment_method": {
                 "description": "ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over `default_source`. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).",
-                "nullable": true,
                 "maxLength": 5000,
                 "type": "string"
               },
               "default_source": {
                 "description": "ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If `default_payment_method` is also set, `default_payment_method` will take precedence. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).",
-                "nullable": true,
                 "maxLength": 5000,
                 "type": "string"
               },
@@ -864,7 +849,6 @@
               },
               "discount": {
                 "description": "A discount represents the actual application of a coupon to a particular\ncustomer. It contains information about when the discount began and when it\nwill end.\n\nRelated guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).",
-                "nullable": true,
                 "properties": {
                   "checkout_session": {
                     "description": "The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.",
@@ -880,10 +864,7 @@
                   "customer": {
                     "description": "The ID of the customer associated with this discount.",
                     "maxLength": 5000,
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "type": "string"
                   },
                   "end": {
                     "description": "If the coupon has a duration of `repeating`, the date that this discount will end. If the coupon has a duration of `once` or `forever`, this attribute will be null.",
@@ -924,10 +905,7 @@
                   "promotion_code": {
                     "description": "The promotion code applied to create this discount.",
                     "maxLength": 5000,
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "type": "string"
                   },
                   "start": {
                     "description": "Date that the coupon was applied.",
@@ -1003,7 +981,6 @@
               },
               "latest_invoice": {
                 "description": "The most recent invoice this subscription has generated.",
-                "nullable": true,
                 "maxLength": 5000,
                 "type": "string"
               },
@@ -1029,7 +1006,6 @@
               },
               "pause_collection": {
                 "description": "The Pause Collection settings determine how we will pause collection for this subscription and for how long the subscription\nshould be paused.",
-                "nullable": true,
                 "properties": {
                   "behavior": {
                     "description": "The payment collection behavior for this subscription while paused. One of `keep_as_draft`, `mark_uncollectible`, or `void`.",
@@ -1057,11 +1033,9 @@
               },
               "payment_settings": {
                 "description": "",
-                "nullable": true,
                 "properties": {
                   "payment_method_options": {
                     "description": "Payment-method-specific configuration to provide to invoices created by the subscription.",
-                    "nullable": true,
                     "type": "object"
                   },
                   "payment_method_types": {
@@ -1098,7 +1072,6 @@
               },
               "pending_invoice_item_interval": {
                 "description": "",
-                "nullable": true,
                 "properties": {
                   "interval": {
                     "description": "Specifies invoicing frequency. Either `day`, `week`, `month` or `year`.",
@@ -1124,13 +1097,11 @@
               },
               "pending_setup_intent": {
                 "description": "You can use this [SetupIntent](https://stripe.com/docs/api/setup_intents) to collect user authentication when creating a subscription without immediate payment or updating a subscription's payment method, allowing you to optimize for off-session payments. Learn more in the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication#scenario-2).",
-                "nullable": true,
                 "maxLength": 5000,
                 "type": "string"
               },
               "pending_update": {
                 "description": "Pending Updates store the changes pending from a previous update that will be applied\nto the Subscription upon successful payment.",
-                "nullable": true,
                 "properties": {
                   "billing_cycle_anchor": {
                     "description": "If the update is applied, determines the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices.",
@@ -1179,7 +1150,6 @@
               },
               "schedule": {
                 "description": "The schedule attached to the subscription",
-                "nullable": true,
                 "maxLength": 5000,
                 "type": "string"
               },
@@ -1203,7 +1173,6 @@
               },
               "transfer_data": {
                 "description": "",
-                "nullable": true,
                 "properties": {
                   "amount_percent": {
                     "description": "A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the destination account. By default, the entire amount is transferred to the destination.",
@@ -1312,7 +1281,6 @@
         },
         "location": {
           "description": "",
-          "nullable": true,
           "properties": {
             "country": {
               "description": "The customer's country as identified by Stripe Tax.",
@@ -1388,7 +1356,6 @@
               },
               "customer": {
                 "description": "ID of the customer.",
-                "nullable": true,
                 "maxLength": 5000,
                 "type": "string"
               },
@@ -1464,7 +1431,6 @@
               },
               "verification": {
                 "description": "",
-                "nullable": true,
                 "properties": {
                   "status": {
                     "description": "Verification status, one of `pending`, `verified`, `unverified`, or `unavailable`.",

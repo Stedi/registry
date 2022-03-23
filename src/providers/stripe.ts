@@ -91,7 +91,7 @@ function traverse(schema: OpenAPIV3.SchemaObject, parents: Set<String>): any {
   }
 
   if (schema.anyOf && schema.anyOf[0]) {
-    const { anyOf, ...rest } = schema;
+    const { anyOf, nullable, ...rest } = schema;
 
     return {
       ...rest,

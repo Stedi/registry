@@ -51,7 +51,6 @@
             },
             "application": {
               "description": "ID of the Connect application that created the PaymentIntent.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -64,7 +63,6 @@
             },
             "automatic_payment_methods": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "enabled": {
                   "description": "Automatically calculates compatible payment methods",
@@ -172,7 +170,6 @@
             },
             "customer": {
               "description": "ID of the Customer this PaymentIntent belongs to, if one exists.\n\nPayment methods attached to other Customers cannot be used with this PaymentIntent.\n\nIf present in combination with [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage), this PaymentIntent's payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -191,13 +188,11 @@
             },
             "invoice": {
               "description": "ID of the invoice that created this PaymentIntent, if it exists.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
             "last_payment_error": {
               "description": "The payment error encountered in the previous PaymentIntent confirmation. It will be cleared if the PaymentIntent is later updated for any reason.",
-              "nullable": true,
               "type": "object"
             },
             "livemode": {
@@ -207,7 +202,6 @@
             "metadata": {},
             "next_action": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "alipay_handle_redirect": {
                   "type": "object"
@@ -260,19 +254,16 @@
             },
             "on_behalf_of": {
               "description": "The account (if any) for which the funds of the PaymentIntent are intended. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
             "payment_method": {
               "description": "ID of the payment method used in this PaymentIntent.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
             "payment_method_options": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "acss_debit": {
                   "type": "object"
@@ -354,7 +345,6 @@
             },
             "processing": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "card": {
                   "type": "object"
@@ -383,7 +373,6 @@
             },
             "review": {
               "description": "ID of the review associated with this PaymentIntent, if any.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -401,7 +390,6 @@
             },
             "shipping": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "address": {
                   "type": "object"
@@ -473,7 +461,6 @@
             },
             "transfer_data": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "amount": {
                   "description": "Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).",
@@ -650,7 +637,6 @@
               "properties": {
                 "address": {
                   "description": "Billing address.",
-                  "nullable": true,
                   "type": "object"
                 },
                 "email": {
@@ -706,7 +692,6 @@
                 },
                 "checks": {
                   "description": "Checks on Card address and CVC if provided.",
-                  "nullable": true,
                   "type": "object"
                 },
                 "country": {
@@ -740,7 +725,6 @@
                 },
                 "generated_from": {
                   "description": "Details of the original PaymentMethod that created this object.",
-                  "nullable": true,
                   "type": "object"
                 },
                 "last4": {
@@ -750,17 +734,14 @@
                 },
                 "networks": {
                   "description": "Contains information about card networks that can be used to process the payment.",
-                  "nullable": true,
                   "type": "object"
                 },
                 "three_d_secure_usage": {
                   "description": "Contains details on how this Card maybe be used for 3D Secure authentication.",
-                  "nullable": true,
                   "type": "object"
                 },
                 "wallet": {
                   "description": "If this Card is part of a card wallet, this contains the details of the card wallet.",
-                  "nullable": true,
                   "type": "object"
                 }
               },
@@ -787,7 +768,6 @@
             },
             "customer": {
               "description": "The ID of the Customer to which this PaymentMethod is saved. This will not be set when the PaymentMethod has not been saved to a Customer.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -953,7 +933,6 @@
               "properties": {
                 "dob": {
                   "description": "The customer's date of birth, if provided.",
-                  "nullable": true,
                   "type": "object"
                 }
               },
@@ -1063,7 +1042,6 @@
                 },
                 "generated_from": {
                   "description": "Information about the object that generated this PaymentMethod.",
-                  "nullable": true,
                   "type": "object"
                 },
                 "last4": {
@@ -1149,7 +1127,6 @@
           "properties": {
             "application": {
               "description": "ID of the Connect application that created the SetupIntent.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -1181,7 +1158,6 @@
             },
             "customer": {
               "description": "ID of the Customer this SetupIntent belongs to, if one exists.\n\nIf present, the SetupIntent's payment method will be attached to the Customer on successful setup. Payment methods attached to other Customers cannot be used with this SetupIntent.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -1200,12 +1176,10 @@
             },
             "last_setup_error": {
               "description": "The error encountered in the previous SetupIntent confirmation.",
-              "nullable": true,
               "type": "object"
             },
             "latest_attempt": {
               "description": "The most recent SetupAttempt for this SetupIntent.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -1215,14 +1189,12 @@
             },
             "mandate": {
               "description": "ID of the multi use Mandate generated by the SetupIntent.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
             "metadata": {},
             "next_action": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "redirect_to_url": {
                   "type": "object"
@@ -1254,19 +1226,16 @@
             },
             "on_behalf_of": {
               "description": "The account (if any) for which the setup is intended.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
             "payment_method": {
               "description": "ID of the payment method used with this SetupIntent.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
             "payment_method_options": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "acss_debit": {
                   "type": "object"
@@ -1291,7 +1260,6 @@
             },
             "single_use_mandate": {
               "description": "ID of the single_use Mandate generated by the SetupIntent.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -1330,7 +1298,6 @@
           "properties": {
             "account": {
               "description": "The ID of the account that the bank account is associated with.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
@@ -1391,7 +1358,6 @@
             },
             "customer": {
               "description": "The ID of the customer that the bank account is associated with.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },

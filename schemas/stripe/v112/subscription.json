@@ -29,7 +29,6 @@
     },
     "billing_thresholds": {
       "description": "",
-      "nullable": true,
       "properties": {
         "amount_gte": {
           "description": "Monetary threshold that triggers the subscription to create an invoice",
@@ -106,13 +105,11 @@
     },
     "default_payment_method": {
       "description": "ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over `default_source`. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
     "default_source": {
       "description": "ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If `default_payment_method` is also set, `default_payment_method` will take precedence. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
@@ -231,7 +228,6 @@
     },
     "discount": {
       "description": "A discount represents the actual application of a coupon to a particular\ncustomer. It contains information about when the discount began and when it\nwill end.\n\nRelated guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).",
-      "nullable": true,
       "properties": {
         "checkout_session": {
           "description": "The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.",
@@ -367,7 +363,6 @@
         },
         "customer": {
           "description": "The ID of the customer associated with this discount.",
-          "nullable": true,
           "maxLength": 5000,
           "type": "string"
         },
@@ -409,7 +404,6 @@
         },
         "promotion_code": {
           "description": "The promotion code applied to create this discount.",
-          "nullable": true,
           "maxLength": 5000,
           "type": "string"
         },
@@ -469,10 +463,7 @@
                   }
                 },
                 "title": "SubscriptionItemBillingThresholds",
-                "type": [
-                  "object",
-                  "null"
-                ]
+                "type": "object"
               },
               "created": {
                 "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -796,7 +787,6 @@
     },
     "latest_invoice": {
       "description": "The most recent invoice this subscription has generated.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
@@ -822,7 +812,6 @@
     },
     "pause_collection": {
       "description": "The Pause Collection settings determine how we will pause collection for this subscription and for how long the subscription\nshould be paused.",
-      "nullable": true,
       "properties": {
         "behavior": {
           "description": "The payment collection behavior for this subscription while paused. One of `keep_as_draft`, `mark_uncollectible`, or `void`.",
@@ -850,15 +839,12 @@
     },
     "payment_settings": {
       "description": "",
-      "nullable": true,
       "properties": {
         "payment_method_options": {
           "description": "",
-          "nullable": true,
           "properties": {
             "acss_debit": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "mandate_options": {
                   "type": "object"
@@ -878,7 +864,6 @@
             },
             "bancontact": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "preferred_language": {
                   "description": "Preferred language of the Bancontact authorization page that the customer is redirected to.",
@@ -899,7 +884,6 @@
             },
             "card": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "mandate_options": {
                   "type": "object"
@@ -922,7 +906,6 @@
             },
             "konbini": {
               "description": "",
-              "nullable": true,
               "properties": {},
               "title": "invoice_payment_method_options_konbini",
               "type": "object"
@@ -965,7 +948,6 @@
     },
     "pending_invoice_item_interval": {
       "description": "",
-      "nullable": true,
       "properties": {
         "interval": {
           "description": "Specifies invoicing frequency. Either `day`, `week`, `month` or `year`.",
@@ -991,13 +973,11 @@
     },
     "pending_setup_intent": {
       "description": "You can use this [SetupIntent](https://stripe.com/docs/api/setup_intents) to collect user authentication when creating a subscription without immediate payment or updating a subscription's payment method, allowing you to optimize for off-session payments. Learn more in the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication#scenario-2).",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
     "pending_update": {
       "description": "Pending Updates store the changes pending from a previous update that will be applied\nto the Subscription upon successful payment.",
-      "nullable": true,
       "properties": {
         "billing_cycle_anchor": {
           "description": "If the update is applied, determines the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices.",
@@ -1029,10 +1009,7 @@
                   }
                 },
                 "title": "SubscriptionItemBillingThresholds",
-                "type": [
-                  "object",
-                  "null"
-                ]
+                "type": "object"
               },
               "created": {
                 "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -1355,7 +1332,6 @@
     },
     "schedule": {
       "description": "The schedule attached to the subscription",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
@@ -1379,7 +1355,6 @@
     },
     "transfer_data": {
       "description": "",
-      "nullable": true,
       "properties": {
         "amount_percent": {
           "description": "A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the destination account. By default, the entire amount is transferred to the destination.",

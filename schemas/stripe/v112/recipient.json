@@ -3,11 +3,9 @@
   "properties": {
     "active_account": {
       "description": "These bank accounts are payment methods on `Customer` objects.\n\nOn the other hand [External Accounts](https://stripe.com/docs/api#external_accounts) are transfer\ndestinations on `Account` objects for [Custom accounts](https://stripe.com/docs/connect/custom-accounts).\nThey can be bank accounts or debit cards as well, and are documented in the links above.\n\nRelated guide: [Bank Debits and Transfers](https://stripe.com/docs/payments/bank-debits-transfers).",
-      "nullable": true,
       "properties": {
         "account": {
           "description": "The ID of the account that the bank account is associated with.",
-          "nullable": true,
           "maxLength": 5000,
           "type": "string"
         },
@@ -68,7 +66,6 @@
         },
         "customer": {
           "description": "The ID of the customer that the bank account is associated with.",
-          "nullable": true,
           "maxLength": 5000,
           "type": "string"
         },
@@ -139,7 +136,6 @@
             "properties": {
               "account": {
                 "description": "The account this card belongs to. This attribute will not be in the card object if the card belongs to a customer or recipient instead.",
-                "nullable": true,
                 "maxLength": 5000,
                 "type": "string"
               },
@@ -243,7 +239,6 @@
               },
               "customer": {
                 "description": "The customer that this card belongs to. This attribute will not be in the card object if the card belongs to an account or recipient instead.",
-                "nullable": true,
                 "maxLength": 5000,
                 "type": "string"
               },
@@ -319,7 +314,6 @@
               },
               "recipient": {
                 "description": "The recipient that this card belongs to. This attribute will not be in the card object if the card belongs to a customer or account instead.",
-                "nullable": true,
                 "maxLength": 5000,
                 "type": "string"
               },
@@ -382,7 +376,6 @@
     },
     "default_card": {
       "description": "The default card to use for creating transfers to this recipient.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
@@ -413,7 +406,6 @@
     "metadata": {},
     "migrated_to": {
       "description": "The ID of the [Custom account](https://stripe.com/docs/connect/custom-accounts) this recipient was migrated to. If set, the recipient can no longer be updated, nor can transfers be made to it: use the Custom account instead.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },

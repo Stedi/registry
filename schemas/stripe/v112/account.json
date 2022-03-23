@@ -3,7 +3,6 @@
   "properties": {
     "business_profile": {
       "description": "",
-      "nullable": true,
       "properties": {
         "mcc": {
           "description": "[The merchant category code for the account](https://stripe.com/docs/connect/setting-mcc). MCCs are used to classify businesses based on the goods or services they provide.",
@@ -31,7 +30,6 @@
         },
         "support_address": {
           "description": "",
-          "nullable": true,
           "properties": {
             "city": {
               "description": "City, district, suburb, town, or village.",
@@ -431,7 +429,6 @@
         },
         "address_kana": {
           "description": "",
-          "nullable": true,
           "properties": {
             "city": {
               "description": "City/Ward.",
@@ -495,7 +492,6 @@
         },
         "address_kanji": {
           "description": "",
-          "nullable": true,
           "properties": {
             "city": {
               "description": "City/Ward.",
@@ -595,7 +591,6 @@
         },
         "ownership_declaration": {
           "description": "",
-          "nullable": true,
           "properties": {
             "date": {
               "description": "The Unix timestamp marking when the beneficial owner attestation was made.",
@@ -674,14 +669,12 @@
         },
         "verification": {
           "description": "",
-          "nullable": true,
           "properties": {
             "document": {
               "description": "",
               "properties": {
                 "back": {
                   "description": "The back of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `additional_verification`.",
-                  "nullable": true,
                   "maxLength": 5000,
                   "type": "string"
                 },
@@ -703,7 +696,6 @@
                 },
                 "front": {
                   "description": "The front of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `additional_verification`.",
-                  "nullable": true,
                   "maxLength": 5000,
                   "type": "string"
                 }
@@ -782,7 +774,6 @@
             "properties": {
               "account": {
                 "description": "The ID of the account that the bank account is associated with.",
-                "nullable": true,
                 "maxLength": 5000,
                 "type": "string"
               },
@@ -843,7 +834,6 @@
               },
               "customer": {
                 "description": "The ID of the customer that the bank account is associated with.",
-                "nullable": true,
                 "maxLength": 5000,
                 "type": "string"
               },
@@ -1182,7 +1172,6 @@
           "type": "object"
         },
         "address_kana": {
-          "nullable": true,
           "description": "",
           "properties": {
             "city": {
@@ -1246,7 +1235,6 @@
           "type": "object"
         },
         "address_kanji": {
-          "nullable": true,
           "description": "",
           "properties": {
             "city": {
@@ -1383,7 +1371,6 @@
           "type": "array"
         },
         "future_requirements": {
-          "nullable": true,
           "description": "",
           "properties": {
             "alternatives": {
@@ -1671,7 +1658,6 @@
           "type": "object"
         },
         "requirements": {
-          "nullable": true,
           "description": "",
           "properties": {
             "alternatives": {
@@ -1837,15 +1823,11 @@
           "properties": {
             "additional_document": {
               "description": "",
-              "nullable": true,
               "properties": {
                 "back": {
                   "description": "The back of an ID returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`.",
                   "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": "string"
                 },
                 "details": {
                   "description": "A user-displayable string describing the verification state of this document. For example, if a document is uploaded and the picture is too fuzzy, this may say \"Identity document is too unclear to read\".",
@@ -1866,10 +1848,7 @@
                 "front": {
                   "description": "The front of an ID returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`.",
                   "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": "string"
                 }
               },
               "title": "LegalEntityPersonVerificationDocument",
@@ -1897,10 +1876,7 @@
                 "back": {
                   "description": "The back of an ID returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`.",
                   "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": "string"
                 },
                 "details": {
                   "description": "A user-displayable string describing the verification state of this document. For example, if a document is uploaded and the picture is too fuzzy, this may say \"Identity document is too unclear to read\".",
@@ -1921,10 +1897,7 @@
                 "front": {
                   "description": "The front of an ID returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`.",
                   "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": "string"
                 }
               },
               "title": "LegalEntityPersonVerificationDocument",
@@ -2147,7 +2120,6 @@
     },
     "settings": {
       "description": "",
-      "nullable": true,
       "properties": {
         "bacs_debit_payments": {
           "description": "",
@@ -2166,13 +2138,11 @@
           "properties": {
             "icon": {
               "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) An icon for the account. Must be square and at least 128px x 128px.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },
             "logo": {
               "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for the account that will be used in Checkout instead of the icon and without the account's name next to it if provided. Must be at least 128px x 128px.",
-              "nullable": true,
               "maxLength": 5000,
               "type": "string"
             },

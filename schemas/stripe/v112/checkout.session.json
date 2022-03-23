@@ -3,11 +3,9 @@
   "properties": {
     "after_expiration": {
       "description": "",
-      "nullable": true,
       "properties": {
         "recovery": {
           "description": "",
-          "nullable": true,
           "properties": {
             "allow_promotion_codes": {
               "description": "Enables user redeemable promotion codes on the recovered Checkout Sessions. Defaults to `false`",
@@ -120,7 +118,6 @@
     },
     "consent": {
       "description": "",
-      "nullable": true,
       "properties": {
         "promotions": {
           "description": "If `opt_in`, the customer consents to receiving promotional communications\nfrom the merchant about this Checkout Session.",
@@ -140,7 +137,6 @@
     },
     "consent_collection": {
       "description": "",
-      "nullable": true,
       "properties": {
         "promotions": {
           "description": "If set to `auto`, enables the collection of customer consent for promotional communications. The Checkout\nSession will determine whether to display an option to opt into promotional communication\nfrom the merchant depending on the customer's locale. Only available to US merchants.",
@@ -166,7 +162,6 @@
     },
     "customer": {
       "description": "The ID of the customer for this Session.\nFor Checkout Sessions in `payment` or `subscription` mode, Checkout\nwill create a new customer object based on information provided\nduring the payment flow unless an existing customer was provided when\nthe Session was created.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
@@ -184,7 +179,6 @@
     },
     "customer_details": {
       "description": "",
-      "nullable": true,
       "properties": {
         "email": {
           "description": "The email associated with the Customer, if one exists, on the Checkout Session at the time of checkout or at time of session expiry.\nOtherwise, if the customer has consented to promotional content, this value is the most recent valid email provided by the customer on the Checkout form.",
@@ -372,7 +366,6 @@
               },
               "price": {
                 "description": "Prices define the unit cost, currency, and (optional) billing cycle for both recurring and one-time purchases of products.\n[Products](https://stripe.com/docs/api#products) help you track inventory or provisioning, and prices help you track payment terms. Different physical goods or levels of service should be represented by products, and pricing options should be represented by prices. This approach lets you change prices without having to change your provisioning scheme.\n\nFor example, you might have a single \"gold\" product that has prices for $10/month, $100/year, and €9 once.\n\nRelated guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription), [create an invoice](https://stripe.com/docs/billing/invoices/create), and more about [products and prices](https://stripe.com/docs/products-prices/overview).",
-                "nullable": true,
                 "properties": {
                   "active": {
                     "description": "Whether the price can be used for new purchases.",
@@ -437,7 +430,6 @@
                   },
                   "recurring": {
                     "description": "The recurring components of a price such as `interval` and `usage_type`.",
-                    "nullable": true,
                     "type": "object"
                   },
                   "tax_behavior": {
@@ -474,7 +466,6 @@
                   },
                   "transform_quantity": {
                     "description": "Apply a transformation to the reported usage or set quantity before computing the amount billed. Cannot be combined with `tiers`.",
-                    "nullable": true,
                     "type": "object"
                   },
                   "type": {
@@ -659,19 +650,16 @@
     },
     "payment_intent": {
       "description": "The ID of the PaymentIntent for Checkout Sessions in `payment` mode.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
     "payment_link": {
       "description": "The ID of the Payment Link that created this Session.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
     "payment_method_options": {
       "description": "",
-      "nullable": true,
       "properties": {
         "acss_debit": {
           "description": "",
@@ -840,13 +828,11 @@
     },
     "setup_intent": {
       "description": "The ID of the SetupIntent for Checkout Sessions in `setup` mode.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
     "shipping": {
       "description": "",
-      "nullable": true,
       "properties": {
         "address": {
           "description": "",
@@ -941,7 +927,6 @@
     },
     "shipping_address_collection": {
       "description": "",
-      "nullable": true,
       "properties": {
         "allowed_countries": {
           "description": "An array of two-letter ISO country codes representing which countries Checkout should provide as options for\nshipping locations. Unsupported country codes: `AS, CX, CC, CU, HM, IR, KP, MH, FM, NF, MP, PW, SD, SY, UM, VI`.",
@@ -1222,7 +1207,6 @@
     },
     "shipping_rate": {
       "description": "The ID of the ShippingRate for Checkout Sessions in `payment` mode.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
@@ -1255,7 +1239,6 @@
     },
     "subscription": {
       "description": "The ID of the subscription for Checkout Sessions in `subscription` mode.",
-      "nullable": true,
       "maxLength": 5000,
       "type": "string"
     },
@@ -1280,7 +1263,6 @@
     },
     "total_details": {
       "description": "",
-      "nullable": true,
       "properties": {
         "amount_discount": {
           "description": "This is the sum of all the line item discounts.",
