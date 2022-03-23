@@ -2,8 +2,12 @@ import { APISchema, EntitySchema } from "../provider";
 import NetsuiteAPI from "netsuite-rest";
 
 const nsApi = new NetsuiteAPI({
-  realm: "TSTDRV1982068",
-  base_url: "https://tstdrv1982068.suitetalk.api.netsuite.com",
+  consumer_key: process.env.NETSUITE_CONSUMER_KEY,
+  consumer_secret_key: process.env.NETSUITE_CONSUMER_SECRET_KEY,
+  token: process.env.NETSUITE_TOKEN,
+  token_secret: process.env.NETSUITE_TOKEN_SECRET,
+  realm: process.env.NETSUITE_REALM,
+  base_url: process.env.NETSUITE_BASE_URL,
 });
 
 export class NetsuiteProvider {
