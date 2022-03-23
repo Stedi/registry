@@ -1,0 +1,417 @@
+{
+  "type": "object",
+  "properties": {
+    "customForm": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "name": {
+      "title": "Name",
+      "type": "string",
+      "description": "Enter a name to identify the subscription. If you leave this field blank, NetSuite automatically generates a subscription name upon saving.",
+      "nullable": true
+    },
+    "externalId": {
+      "title": "External ID",
+      "type": "string",
+      "nullable": true
+    },
+    "id": {
+      "title": "Internal ID",
+      "type": "string",
+      "nullable": true
+    },
+    "refName": {
+      "title": "Reference Name",
+      "type": "string"
+    },
+    "links": {
+      "title": "Links",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+      }
+    },
+    "subscriptionPlan": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "priceInterval": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        },
+        "totalResults": {
+          "title": "Total Results",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hasMore": {
+          "title": "Has More Results",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "offset": {
+          "title": "Query Offset",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "links": {
+                "title": "Links",
+                "type": "array",
+                "readOnly": true,
+                "items": {
+                  "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+                }
+              },
+              "lineNumber": {
+                "title": "Line Number",
+                "type": "integer",
+                "format": "int64",
+                "nullable": true
+              },
+              "subscriptionPlanLineNumber": {
+                "type": "integer",
+                "format": "int64",
+                "nullable": true
+              },
+              "isRequired": {
+                "title": "Required",
+                "type": "boolean"
+              },
+              "discount": {
+                "title": "Discount",
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              },
+              "repeatEvery": {
+                "title": "Repeat Every",
+                "type": "integer",
+                "format": "int64",
+                "nullable": true
+              },
+              "frequency": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string",
+                    "enum": [
+                      "SEMIMONTHLY",
+                      "STARTOFPERIOD",
+                      "WEEKLY",
+                      "QUADWEEKLY",
+                      "BIENNIALLY",
+                      "DAILY",
+                      "NEVER",
+                      "SEMIANNUALLY",
+                      "ONETIME",
+                      "ENDOFPERIOD",
+                      "MONTHLY",
+                      "TRIENNIALLY",
+                      "HOURLY",
+                      "QUARTERLY",
+                      "ANNUALLY",
+                      "CUSTOM",
+                      "BIMONTHLY",
+                      "BIWEEKLY"
+                    ]
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  }
+                }
+              },
+              "id": {
+                "title": "Internal ID",
+                "type": "integer",
+                "format": "int64",
+                "nullable": true
+              },
+              "chargeType": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string",
+                    "enum": [
+                      "1",
+                      "2",
+                      "3",
+                      "4"
+                    ]
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  }
+                }
+              },
+              "prorateBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string",
+                    "enum": [
+                      "",
+                      "DAY",
+                      "MONTH"
+                    ]
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  }
+                }
+              },
+              "startOffsetUnit": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string",
+                    "enum": [
+                      "MONTH",
+                      "YEAR",
+                      "WEEK"
+                    ]
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  }
+                }
+              },
+              "startOffsetValue": {
+                "title": "Start On",
+                "type": "integer",
+                "format": "int64",
+                "nullable": true
+              },
+              "refName": {
+                "title": "Reference Name",
+                "type": "string"
+              },
+              "item": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string"
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "title": "External identifier",
+                    "type": "string"
+                  },
+                  "links": {
+                    "title": "Links",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                      "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+                    }
+                  }
+                }
+              },
+              "pricePlan": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string"
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "title": "External identifier",
+                    "type": "string"
+                  },
+                  "links": {
+                    "title": "Links",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                      "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+                    }
+                  }
+                }
+              }
+            },
+            "x-ns-filterable": []
+          }
+        }
+      }
+    },
+    "currency": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x-ns-filterable": [],
+  "default": {
+    "customForm": {
+      "id": "string",
+      "refName": "string"
+    },
+    "name": "string",
+    "externalId": "string",
+    "id": "string",
+    "refName": "string",
+    "links": [
+      {}
+    ],
+    "subscriptionPlan": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "priceInterval": {
+      "links": [
+        {}
+      ],
+      "totalResults": 0,
+      "count": 0,
+      "hasMore": true,
+      "offset": 0,
+      "items": [
+        {
+          "links": [
+            {}
+          ],
+          "lineNumber": 0,
+          "subscriptionPlanLineNumber": 0,
+          "isRequired": true,
+          "discount": 0,
+          "repeatEvery": 0,
+          "frequency": {
+            "id": "SEMIMONTHLY",
+            "refName": "string"
+          },
+          "id": 0,
+          "chargeType": {
+            "id": "1",
+            "refName": "string"
+          },
+          "prorateBy": {
+            "id": "",
+            "refName": "string"
+          },
+          "startOffsetUnit": {
+            "id": "MONTH",
+            "refName": "string"
+          },
+          "startOffsetValue": 0,
+          "refName": "string",
+          "item": {
+            "id": "string",
+            "refName": "string",
+            "externalId": "string",
+            "links": [
+              {}
+            ]
+          },
+          "pricePlan": {
+            "id": "string",
+            "refName": "string",
+            "externalId": "string",
+            "links": [
+              {}
+            ]
+          }
+        }
+      ]
+    },
+    "currency": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    }
+  }
+}

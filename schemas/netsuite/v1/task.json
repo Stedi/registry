@@ -1,0 +1,632 @@
+{
+  "type": "object",
+  "properties": {
+    "createdDate": {
+      "title": "Date Created",
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "timezone": {
+      "title": "Time Zone",
+      "type": "string",
+      "nullable": true
+    },
+    "accessLevel": {
+      "title": "Private",
+      "type": "boolean",
+      "description": "Check this box so that only the creator of this task or person assigned this task can view the task. If you don&apos;t check this box, this task is considered public and can be viewed on all task lists."
+    },
+    "externalId": {
+      "title": "External ID",
+      "type": "string",
+      "nullable": true
+    },
+    "startTime": {
+      "title": "Start Time",
+      "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$",
+      "type": "string",
+      "description": "Enter the start time for placing this task on the assignee&apos;s calendar. You must check the Block Out Time box to set a time in this field.",
+      "nullable": true
+    },
+    "startDate": {
+      "title": "Start Date",
+      "type": "string",
+      "description": "This is the date the task should be started. If you are entering or editing the task, type or pick the start date of the task. This date is included in the e-mail to the assignee.",
+      "format": "date",
+      "nullable": true
+    },
+    "title": {
+      "title": "Title",
+      "type": "string",
+      "description": "Enter a name for this task. This name is the subject line of the e-mail sent to the assignee if you check the Send e-mail box. This title also appears to others if the Private Task box is not checked. The title shows on the Tasks list.",
+      "nullable": true
+    },
+    "estimatedTime": {
+      "title": "Initial Time Budget",
+      "type": "string",
+      "description": "In the Initial Time Budget field, enter your first approximation of the amount of time this task will take. Later, you can increase or decrease your time estimate in the Current Time Budget field. By maintaining an initial time estimate in this field, you can compare your initial estimate to your altered estimate. If you entered a time estimate on a job task template, that amount shows here.",
+      "nullable": true
+    },
+    "id": {
+      "title": "Internal ID",
+      "type": "string",
+      "nullable": true
+    },
+    "order": {
+      "title": "Insert Before",
+      "type": "string",
+      "description": "Choose the placement of this task on your task list or the person&apos;s tasks list you are assigning this to. Leave this field blank to place this task last on the tasks list.",
+      "nullable": true
+    },
+    "reminderType": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "POPUP",
+            "EMAIL"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "actualTime": {
+      "title": "Actual Time",
+      "type": "string",
+      "description": "The Actual Time field shows the total amount of time entered against this task.",
+      "nullable": true
+    },
+    "percentComplete": {
+      "title": "Percent Complete",
+      "type": "number",
+      "description": "In the Percent Complete field, enter an estimate of how much of the total amount of work for this task is already completed. For example, if half the work toward completion is done, enter 50%. Note: The percentage you enter in this field overrides the auto-calculated figure in the Percent Time Complete field and is used for task calculations.",
+      "format": "double",
+      "nullable": true
+    },
+    "lastModifiedDate": {
+      "title": "Last Modified Date",
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "estimatedTimeOverride": {
+      "title": "Current Time Budget",
+      "type": "string",
+      "description": "If your estimate of the time this task will take increases or decreases from your original estimate, enter the altered estimate in the Current Time Budget field.",
+      "nullable": true
+    },
+    "timeRemaining": {
+      "title": "Time Remaining",
+      "type": "string",
+      "description": "The Time Remaining field shows the estimated remaining amount of time for this task. Time remaining is calculated as follows: (Initial Time Budget - Actual Time) If you have entered a Current Time Budget to update your Initial Time Budget, then the time remaining for the task is calculated as: (Current Time Budget - Actual Time)",
+      "nullable": true
+    },
+    "endTime": {
+      "title": "End time",
+      "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$",
+      "type": "string",
+      "description": "Enter the end time for placing this task on the assignee&apos;s calendar. You must check the Block Out Time box to set a time in this field.",
+      "nullable": true
+    },
+    "priority": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "HIGH",
+            "MEDIUM",
+            "LOW"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "message": {
+      "title": "Comments",
+      "type": "string",
+      "description": "Enter any comments about this task. These comments appear in the e-mail sent to the person this task is assigned to.",
+      "nullable": true
+    },
+    "percentTimeComplete": {
+      "title": "Percent Complete (Time)",
+      "type": "number",
+      "description": "The system auto-calculates a value for the Percent Time Complete field, by dividing Actual Time by Current Time Budget (or by Initial Time Budget, if no Current Time Budget has been entered). This value indicates how much of the budgeted time for the task has been completed. You can override this value by entering a percentage value in the Percent Complete field.",
+      "format": "double",
+      "nullable": true
+    },
+    "milestone": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "customForm": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "-120"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "dueDate": {
+      "title": "Due Date",
+      "type": "string",
+      "description": "Enter the projected date when this task needs to be complete.",
+      "format": "date",
+      "nullable": true
+    },
+    "timedEvent": {
+      "title": "Timed Event",
+      "type": "boolean",
+      "description": "Check this box to schedule this task on the calendar of the person the task is assigned to. Enter the start and end times in the From and To fields. This time is scheduled on the calendar for the start date."
+    },
+    "completedDate": {
+      "title": "Date Completed",
+      "type": "string",
+      "description": "Enter the date this task was actually completed.",
+      "format": "date",
+      "nullable": true
+    },
+    "sendEmail": {
+      "title": "Send email",
+      "type": "boolean",
+      "description": "Check this box to send an email message to the person this task is assigned to. The person the task is assigned to also receives an e-mail message when this task is updated if the Send e-mail box is checked. If this person&apos;s record does not include an email address, no message will be sent."
+    },
+    "reminderMinutes": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "0",
+            "5",
+            "10",
+            "15",
+            "30"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "NOTSTART",
+            "PROGRESS",
+            "COMPLETE"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "refName": {
+      "title": "Reference Name",
+      "type": "string"
+    },
+    "links": {
+      "title": "Links",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+      }
+    },
+    "supportCase": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "relatedItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "owner": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "transaction": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "parent": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "company": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "mfgRouting": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "assigned": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x-ns-filterable": [
+    "parent",
+    "createdDate",
+    "accessLevel",
+    "externalId",
+    "startDate",
+    "title",
+    "supportCase",
+    "contact",
+    "company",
+    "id",
+    "order",
+    "reminderType",
+    "relatedItem",
+    "owner",
+    "mfgRouting",
+    "percentComplete",
+    "lastModifiedDate",
+    "priority",
+    "message",
+    "percentTimeComplete",
+    "milestone",
+    "dueDate",
+    "assigned",
+    "timedEvent",
+    "completedDate",
+    "reminderMinutes",
+    "transaction",
+    "status"
+  ],
+  "default": {
+    "createdDate": "1970-01-01T00:00:00.000Z",
+    "timezone": "string",
+    "accessLevel": true,
+    "externalId": "string",
+    "startTime": "12:37",
+    "startDate": "1970-01-01",
+    "title": "string",
+    "estimatedTime": "string",
+    "id": "string",
+    "order": "string",
+    "reminderType": {
+      "id": "POPUP",
+      "refName": "string"
+    },
+    "actualTime": "string",
+    "percentComplete": 0,
+    "lastModifiedDate": "1970-01-01T00:00:00.000Z",
+    "estimatedTimeOverride": "string",
+    "timeRemaining": "string",
+    "endTime": "23:15",
+    "priority": {
+      "id": "HIGH",
+      "refName": "string"
+    },
+    "message": "string",
+    "percentTimeComplete": 0,
+    "milestone": {
+      "id": "string",
+      "refName": "string"
+    },
+    "customForm": {
+      "id": "-120",
+      "refName": "string"
+    },
+    "dueDate": "1970-01-01",
+    "timedEvent": true,
+    "completedDate": "1970-01-01",
+    "sendEmail": true,
+    "reminderMinutes": {
+      "id": "0",
+      "refName": "string"
+    },
+    "status": {
+      "id": "NOTSTART",
+      "refName": "string"
+    },
+    "refName": "string",
+    "links": [
+      {}
+    ],
+    "supportCase": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "contact": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "relatedItem": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "owner": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "transaction": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "parent": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "company": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "mfgRouting": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "assigned": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    }
+  }
+}

@@ -1,0 +1,1513 @@
+{
+  "type": "object",
+  "properties": {
+    "idNumber": {
+      "title": "Number",
+      "type": "string",
+      "description": "The automatically generated number identifying this subscription.",
+      "nullable": true
+    },
+    "renewalNumber": {
+      "title": "Number of Renewal",
+      "type": "integer",
+      "format": "int64",
+      "nullable": true
+    },
+    "externalId": {
+      "title": "External ID",
+      "type": "string",
+      "nullable": true
+    },
+    "subscriptionPlanName": {
+      "title": "Subscription Plan",
+      "type": "string",
+      "nullable": true
+    },
+    "advanceRenewalPeriodUnit": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "DAYS"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "startDate": {
+      "title": "Start Date",
+      "type": "string",
+      "description": "The contracted start date for the subscription. You must specify the subscription-level start date, or it defaults to the current date. Defines the earliest possible activation date for the subscription line items. Remains editable until any subscription line item becomes active. ",
+      "format": "date",
+      "nullable": true
+    },
+    "nextBillCycleDate": {
+      "title": "Next Bill Cycle Date",
+      "type": "string",
+      "description": "The next bill date for this Billing Account.",
+      "format": "date",
+      "nullable": true
+    },
+    "frequency": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "SEMIMONTHLY",
+            "STARTOFPERIOD",
+            "WEEKLY",
+            "QUADWEEKLY",
+            "BIENNIALLY",
+            "DAILY",
+            "NEVER",
+            "SEMIANNUALLY",
+            "ONETIME",
+            "ENDOFPERIOD",
+            "MONTHLY",
+            "TRIENNIALLY",
+            "HOURLY",
+            "QUARTERLY",
+            "ANNUALLY",
+            "CUSTOM",
+            "BIMONTHLY",
+            "BIWEEKLY"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "autoRenewal": {
+      "title": "Automatically Initiate Renewal Process",
+      "type": "boolean",
+      "description": "Check this box to automatically renew the subscription. After checking this box, enter a date by which you want to renew the subscription before it expires. The renewal process can include negotiating pricing, subscription terms, and other subscription details."
+    },
+    "billingSubscriptionStatus": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "PENDING_ACTIVATION",
+            "SUSPENDED",
+            "DRAFT",
+            "CLOSED",
+            "TERMINATED",
+            "NOT_INCLUDED"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "advanceRenewalPeriodNumber": {
+      "title": "Advance Renewal Period",
+      "type": "integer",
+      "format": "int64",
+      "nullable": true
+    },
+    "subscriptionRevision": {
+      "title": "Subscription Revision",
+      "type": "integer",
+      "description": "The current revision number for the subscription. The revision number increases when you create a change order on the subscription. The first activation is revision 1. Another revision is created whenever a change order is saved. ",
+      "format": "int64",
+      "nullable": true
+    },
+    "id": {
+      "title": "Internal ID",
+      "type": "string",
+      "nullable": true
+    },
+    "billingAccountStartDate": {
+      "title": "Start Date",
+      "type": "string",
+      "description": "The Billing Account start date.",
+      "format": "date",
+      "nullable": true
+    },
+    "lastBillCycleDate": {
+      "title": "Last Bill Cycle Date",
+      "type": "string",
+      "description": "The start date for the next billing cycle.",
+      "format": "date",
+      "nullable": true
+    },
+    "defaultRenewalMethod": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "",
+            "EXTEND_EXISTING_SUBSCRIPTION",
+            "CREATE_NEW_SUBSCRIPTION"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "lastBillDate": {
+      "title": "Last Bill Date",
+      "type": "string",
+      "description": "The date of the last invoice.",
+      "format": "date",
+      "nullable": true
+    },
+    "endDate": {
+      "title": "End Date",
+      "type": "string",
+      "description": "The contracted end of the subscription. For a standard-term subscription, equal to the subscription start date plus the indicated subscription term. For a custom-term subscription, the subscription-level end date also must be set at the subscription level.",
+      "format": "date",
+      "nullable": true
+    },
+    "customForm": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "autoName": {
+      "title": "Auto",
+      "type": "boolean"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string",
+      "description": "Enter a name to identify the subscription. If you leave this field blank, NetSuite automatically generates a subscription name upon saving.",
+      "nullable": true
+    },
+    "nextRenewalStartDate": {
+      "title": "Next Renewal Start Date",
+      "type": "string",
+      "description": "The start date for the next renewal of this subscription.",
+      "format": "date",
+      "nullable": true
+    },
+    "defaultRenewalTranType": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "Opprtnty",
+            "Estimate",
+            "SalesOrd"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "refName": {
+      "title": "Reference Name",
+      "type": "string"
+    },
+    "links": {
+      "title": "Links",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+      }
+    },
+    "salesOrder": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "priceInterval": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        },
+        "totalResults": {
+          "title": "Total Results",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hasMore": {
+          "title": "Has More Results",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "offset": {
+          "title": "Query Offset",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "links": {
+                "title": "Links",
+                "type": "array",
+                "readOnly": true,
+                "items": {
+                  "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+                }
+              },
+              "lineNumber": {
+                "title": "Line Number",
+                "type": "integer",
+                "format": "int64",
+                "nullable": true
+              },
+              "subscriptionPlanLineNumber": {
+                "type": "integer",
+                "format": "int64",
+                "nullable": true
+              },
+              "quantity": {
+                "title": "Quantity",
+                "type": "number",
+                "format": "float",
+                "nullable": true
+              },
+              "discount": {
+                "title": "Discount",
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              },
+              "includedQuantity": {
+                "title": "Included Quantity",
+                "type": "number",
+                "format": "float",
+                "nullable": true
+              },
+              "startDate": {
+                "title": "Start Date",
+                "type": "string",
+                "format": "date",
+                "nullable": true
+              },
+              "repeatEvery": {
+                "title": "Repeat Every",
+                "type": "integer",
+                "format": "int64",
+                "nullable": true
+              },
+              "frequency": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string",
+                    "enum": [
+                      "SEMIMONTHLY",
+                      "STARTOFPERIOD",
+                      "WEEKLY",
+                      "QUADWEEKLY",
+                      "BIENNIALLY",
+                      "DAILY",
+                      "NEVER",
+                      "SEMIANNUALLY",
+                      "ONETIME",
+                      "ENDOFPERIOD",
+                      "MONTHLY",
+                      "TRIENNIALLY",
+                      "HOURLY",
+                      "QUARTERLY",
+                      "ANNUALLY",
+                      "CUSTOM",
+                      "BIMONTHLY",
+                      "BIWEEKLY"
+                    ]
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  }
+                }
+              },
+              "recurringAmount": {
+                "title": "Recurring Amount",
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              },
+              "id": {
+                "title": "Internal ID",
+                "type": "integer",
+                "format": "int64",
+                "nullable": true
+              },
+              "chargeType": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string",
+                    "enum": [
+                      "1",
+                      "2",
+                      "3",
+                      "4"
+                    ]
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  }
+                }
+              },
+              "prorateBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string",
+                    "enum": [
+                      "",
+                      "DAY",
+                      "MONTH"
+                    ]
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  }
+                }
+              },
+              "startOffsetValue": {
+                "title": "Start On",
+                "type": "integer",
+                "format": "int64",
+                "nullable": true
+              },
+              "totalintervalvalue": {
+                "title": "Total Interval Value",
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              },
+              "status": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string",
+                    "enum": [
+                      "NOT_INCLUDED",
+                      "ACTIVE",
+                      "CLOSED",
+                      "PENDING_ACTIVATION",
+                      "DRAFT",
+                      "TERMINATED",
+                      "SUSPENDED"
+                    ]
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  }
+                }
+              },
+              "refName": {
+                "title": "Reference Name",
+                "type": "string"
+              },
+              "item": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string"
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "title": "External identifier",
+                    "type": "string"
+                  },
+                  "links": {
+                    "title": "Links",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                      "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+                    }
+                  }
+                }
+              },
+              "pricePlan": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string"
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "title": "External identifier",
+                    "type": "string"
+                  },
+                  "links": {
+                    "title": "Links",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                      "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+                    }
+                  }
+                }
+              }
+            },
+            "x-ns-filterable": []
+          }
+        }
+      }
+    },
+    "subscriptionPlan": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "subsidiary": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "currency": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "department": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "subscriptionLine": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        },
+        "totalResults": {
+          "title": "Total Results",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hasMore": {
+          "title": "Has More Results",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "offset": {
+          "title": "Query Offset",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "links": {
+                "title": "Links",
+                "type": "array",
+                "readOnly": true,
+                "items": {
+                  "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+                }
+              },
+              "lineNumber": {
+                "title": "Line Number",
+                "type": "integer",
+                "format": "int64",
+                "nullable": true
+              },
+              "terminationDate": {
+                "title": "Termination Date",
+                "type": "string",
+                "format": "date",
+                "nullable": true
+              },
+              "quantity": {
+                "title": "Quantity",
+                "type": "number",
+                "format": "float",
+                "nullable": true
+              },
+              "isRequired": {
+                "type": "boolean"
+              },
+              "discount": {
+                "title": "Discount",
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              },
+              "startDate": {
+                "title": "Start Date",
+                "type": "string",
+                "format": "date",
+                "nullable": true
+              },
+              "changeOrderLine": {
+                "type": "integer",
+                "format": "int64",
+                "nullable": true
+              },
+              "recurrenceStartDate": {
+                "title": "Recurrence Start Date",
+                "type": "string",
+                "format": "date",
+                "nullable": true
+              },
+              "revRecOption": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string",
+                    "enum": [
+                      "ONE_TIME",
+                      "OVER_TERM"
+                    ]
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  }
+                }
+              },
+              "prorateStartDate": {
+                "title": "Prorate Start Date",
+                "type": "boolean"
+              },
+              "endDate": {
+                "title": "End Date",
+                "type": "string",
+                "format": "date",
+                "nullable": true
+              },
+              "catalogType": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string",
+                    "enum": [
+                      "ADD_ON",
+                      "OPTIONAL",
+                      "REQUIRED"
+                    ]
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  }
+                }
+              },
+              "billingMode": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string",
+                    "enum": [
+                      "IN_ARREARS",
+                      "IN_ADVANCE"
+                    ]
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  }
+                }
+              },
+              "planItem": {
+                "type": "integer",
+                "format": "int64",
+                "nullable": true
+              },
+              "renewalOption": {
+                "type": "string",
+                "nullable": true
+              },
+              "isIncluded": {
+                "title": "Include",
+                "type": "boolean"
+              },
+              "prorateEndDate": {
+                "title": "Prorate End Date",
+                "type": "boolean"
+              },
+              "subscriptionLine": {
+                "type": "integer",
+                "format": "int64",
+                "nullable": true
+              },
+              "subscriptionLineType": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string"
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  }
+                }
+              },
+              "status": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string",
+                    "enum": [
+                      "NOT_INCLUDED",
+                      "ACTIVE",
+                      "CLOSED",
+                      "PENDING_ACTIVATION",
+                      "DRAFT",
+                      "TERMINATED",
+                      "SUSPENDED"
+                    ]
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  }
+                }
+              },
+              "refName": {
+                "title": "Reference Name",
+                "type": "string"
+              },
+              "location": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string"
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "title": "External identifier",
+                    "type": "string"
+                  },
+                  "links": {
+                    "title": "Links",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                      "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+                    }
+                  }
+                }
+              },
+              "item": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string"
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "title": "External identifier",
+                    "type": "string"
+                  },
+                  "links": {
+                    "title": "Links",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                      "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+                    }
+                  }
+                }
+              },
+              "class": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string"
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "title": "External identifier",
+                    "type": "string"
+                  },
+                  "links": {
+                    "title": "Links",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                      "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+                    }
+                  }
+                }
+              },
+              "department": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string"
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "title": "External identifier",
+                    "type": "string"
+                  },
+                  "links": {
+                    "title": "Links",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                      "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+                    }
+                  }
+                }
+              }
+            },
+            "x-ns-filterable": []
+          }
+        }
+      }
+    },
+    "defaultRenewalTerm": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "defaultRenewalPlan": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "class": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "billingAccount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "priceBook": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "initialTerm": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "defaultRenewalPriceBook": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "customer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "billingSchedule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x-ns-filterable": [],
+  "default": {
+    "idNumber": "string",
+    "renewalNumber": 0,
+    "externalId": "string",
+    "subscriptionPlanName": "string",
+    "advanceRenewalPeriodUnit": {
+      "id": "DAYS",
+      "refName": "string"
+    },
+    "startDate": "1970-01-01",
+    "nextBillCycleDate": "1970-01-01",
+    "frequency": {
+      "id": "SEMIMONTHLY",
+      "refName": "string"
+    },
+    "autoRenewal": true,
+    "billingSubscriptionStatus": {
+      "id": "ACTIVE",
+      "refName": "string"
+    },
+    "advanceRenewalPeriodNumber": 0,
+    "subscriptionRevision": 0,
+    "id": "string",
+    "billingAccountStartDate": "1970-01-01",
+    "lastBillCycleDate": "1970-01-01",
+    "defaultRenewalMethod": {
+      "id": "",
+      "refName": "string"
+    },
+    "lastBillDate": "1970-01-01",
+    "endDate": "1970-01-01",
+    "customForm": {
+      "id": "string",
+      "refName": "string"
+    },
+    "autoName": true,
+    "name": "string",
+    "nextRenewalStartDate": "1970-01-01",
+    "defaultRenewalTranType": {
+      "id": "Opprtnty",
+      "refName": "string"
+    },
+    "refName": "string",
+    "links": [
+      {}
+    ],
+    "salesOrder": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "priceInterval": {
+      "links": [
+        {}
+      ],
+      "totalResults": 0,
+      "count": 0,
+      "hasMore": true,
+      "offset": 0,
+      "items": [
+        {
+          "links": [
+            {}
+          ],
+          "lineNumber": 0,
+          "subscriptionPlanLineNumber": 0,
+          "quantity": 0,
+          "discount": 0,
+          "includedQuantity": 0,
+          "startDate": "1970-01-01",
+          "repeatEvery": 0,
+          "frequency": {
+            "id": "SEMIMONTHLY",
+            "refName": "string"
+          },
+          "recurringAmount": 0,
+          "id": 0,
+          "chargeType": {
+            "id": "1",
+            "refName": "string"
+          },
+          "prorateBy": {
+            "id": "",
+            "refName": "string"
+          },
+          "startOffsetValue": 0,
+          "totalintervalvalue": 0,
+          "status": {
+            "id": "NOT_INCLUDED",
+            "refName": "string"
+          },
+          "refName": "string",
+          "item": {
+            "id": "string",
+            "refName": "string",
+            "externalId": "string",
+            "links": [
+              {}
+            ]
+          },
+          "pricePlan": {
+            "id": "string",
+            "refName": "string",
+            "externalId": "string",
+            "links": [
+              {}
+            ]
+          }
+        }
+      ]
+    },
+    "subscriptionPlan": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "subsidiary": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "currency": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "department": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "subscriptionLine": {
+      "links": [
+        {}
+      ],
+      "totalResults": 0,
+      "count": 0,
+      "hasMore": true,
+      "offset": 0,
+      "items": [
+        {
+          "links": [
+            {}
+          ],
+          "lineNumber": 0,
+          "terminationDate": "1970-01-01",
+          "quantity": 0,
+          "isRequired": true,
+          "discount": 0,
+          "startDate": "1970-01-01",
+          "changeOrderLine": 0,
+          "recurrenceStartDate": "1970-01-01",
+          "revRecOption": {
+            "id": "ONE_TIME",
+            "refName": "string"
+          },
+          "prorateStartDate": true,
+          "endDate": "1970-01-01",
+          "catalogType": {
+            "id": "ADD_ON",
+            "refName": "string"
+          },
+          "billingMode": {
+            "id": "IN_ARREARS",
+            "refName": "string"
+          },
+          "planItem": 0,
+          "renewalOption": "string",
+          "isIncluded": true,
+          "prorateEndDate": true,
+          "subscriptionLine": 0,
+          "subscriptionLineType": {
+            "id": "string",
+            "refName": "string"
+          },
+          "status": {
+            "id": "NOT_INCLUDED",
+            "refName": "string"
+          },
+          "refName": "string",
+          "location": {
+            "id": "string",
+            "refName": "string",
+            "externalId": "string",
+            "links": [
+              {}
+            ]
+          },
+          "item": {
+            "id": "string",
+            "refName": "string",
+            "externalId": "string",
+            "links": [
+              {}
+            ]
+          },
+          "class": {
+            "id": "string",
+            "refName": "string",
+            "externalId": "string",
+            "links": [
+              {}
+            ]
+          },
+          "department": {
+            "id": "string",
+            "refName": "string",
+            "externalId": "string",
+            "links": [
+              {}
+            ]
+          }
+        }
+      ]
+    },
+    "defaultRenewalTerm": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "defaultRenewalPlan": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "class": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "billingAccount": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "priceBook": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "initialTerm": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "defaultRenewalPriceBook": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "customer": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "billingSchedule": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "location": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    }
+  }
+}

@@ -1,0 +1,518 @@
+{
+  "type": "object",
+  "properties": {
+    "createdDate": {
+      "title": "Created",
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "shipAddressList": {
+      "title": "Ship To Select",
+      "type": "string",
+      "description": "Select the shipping address you want to use for this billing account. Options are sourced from the customer record.",
+      "nullable": true
+    },
+    "shipAddress": {
+      "title": "Ship To",
+      "type": "string",
+      "description": "The shipping address for this billing account.",
+      "nullable": true
+    },
+    "idNumber": {
+      "title": "Account Number",
+      "type": "string",
+      "description": "The number of the billing account. This number is automatically generated upon save.",
+      "nullable": true
+    },
+    "memo": {
+      "title": "Account Description",
+      "type": "string",
+      "description": "Enter a description for this billing account.",
+      "nullable": true
+    },
+    "externalId": {
+      "title": "External ID",
+      "type": "string",
+      "nullable": true
+    },
+    "billAddressList": {
+      "title": "Bill To Select",
+      "type": "string",
+      "description": "Select the billing address you want to use for this billing account. Options are sourced from the customer record.",
+      "nullable": true
+    },
+    "startDate": {
+      "title": "Start Date",
+      "type": "string",
+      "description": "Enter the date this person or company became a customer, lead or prospect. If this person or company has a contract with you, enter the start date of the contract. If you enter an estimate or an opportunity for this customer, this field will be updated with the date of that transaction.",
+      "format": "date",
+      "nullable": true
+    },
+    "nextBillCycleDate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "frequency": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "SEMIMONTHLY",
+            "STARTOFPERIOD",
+            "WEEKLY",
+            "QUADWEEKLY",
+            "BIENNIALLY",
+            "DAILY",
+            "NEVER",
+            "SEMIANNUALLY",
+            "ONETIME",
+            "ENDOFPERIOD",
+            "MONTHLY",
+            "TRIENNIALLY",
+            "HOURLY",
+            "QUARTERLY",
+            "ANNUALLY",
+            "CUSTOM",
+            "BIMONTHLY",
+            "BIWEEKLY"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "inactive": {
+      "title": "Inactive",
+      "type": "boolean",
+      "description": "Check this box if the billing account is no longer active."
+    },
+    "createdBy": {
+      "title": "Created By",
+      "type": "string",
+      "nullable": true
+    },
+    "invoiceForm": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "-9907",
+            "99",
+            "-9908",
+            "-9909",
+            "69",
+            "178",
+            "189",
+            "102",
+            "224",
+            "90",
+            "-9910",
+            "91",
+            "92",
+            "-9901",
+            "93",
+            "-9913",
+            "-9931",
+            "87"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "requestOffCycleInvoice": {
+      "title": "Use Off-Cycle Invoice for Advance Charges",
+      "type": "boolean",
+      "description": "Check this box if you want advance charges for this billing account invoiced before the first scheduled bill date."
+    },
+    "id": {
+      "title": "Internal ID",
+      "type": "string",
+      "description": "The internal ID for this record is shown here. If you do not want to show internal IDs, clear the Show Internal IDs box at Home &gt; Set Preferences.",
+      "nullable": true
+    },
+    "lastBillCycleDate": {
+      "title": "Last Bill Cycle Date",
+      "type": "string",
+      "format": "date",
+      "nullable": true
+    },
+    "lastModifiedDate": {
+      "title": "Last Modified Date",
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "lastBillDate": {
+      "title": "Last Bill Date",
+      "type": "string",
+      "format": "date",
+      "nullable": true
+    },
+    "billAddress": {
+      "title": "Bill To",
+      "type": "string",
+      "nullable": true
+    },
+    "cashSaleForm": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "101",
+            "-9905",
+            "95"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "customForm": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "autoName": {
+      "title": "Auto",
+      "type": "boolean",
+      "description": "Clear this box to manually enter a name for this record. If you leave this box marked, NetSuite assigns a name or number for this record based on your settings at Setup &gt; Set Up Auto-Generated Numbers."
+    },
+    "displayName": {
+      "type": "string",
+      "nullable": true
+    },
+    "name": {
+      "title": "Name",
+      "type": "string",
+      "description": "The name of this billing account.",
+      "nullable": true
+    },
+    "customerDefault": {
+      "title": "Customer Default",
+      "type": "boolean",
+      "description": "If checked, this field indicates that this is the default billing account for this customer."
+    },
+    "refName": {
+      "title": "Reference Name",
+      "type": "string"
+    },
+    "links": {
+      "title": "Links",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+      }
+    },
+    "class": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "subsidiary": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "billingSchedule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "currency": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "department": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    },
+    "customer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "/services/rest/record/v1/metadata-catalog/nsLink"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x-ns-filterable": [],
+  "default": {
+    "createdDate": "1970-01-01T00:00:00.000Z",
+    "shipAddressList": "string",
+    "shipAddress": "string",
+    "idNumber": "string",
+    "memo": "string",
+    "externalId": "string",
+    "billAddressList": "string",
+    "startDate": "1970-01-01",
+    "nextBillCycleDate": {
+      "id": "string",
+      "refName": "string"
+    },
+    "frequency": {
+      "id": "SEMIMONTHLY",
+      "refName": "string"
+    },
+    "inactive": true,
+    "createdBy": "string",
+    "invoiceForm": {
+      "id": "-9907",
+      "refName": "string"
+    },
+    "requestOffCycleInvoice": true,
+    "id": "string",
+    "lastBillCycleDate": "1970-01-01",
+    "lastModifiedDate": "1970-01-01T00:00:00.000Z",
+    "lastBillDate": "1970-01-01",
+    "billAddress": "string",
+    "cashSaleForm": {
+      "id": "101",
+      "refName": "string"
+    },
+    "customForm": {
+      "id": "string",
+      "refName": "string"
+    },
+    "autoName": true,
+    "displayName": "string",
+    "name": "string",
+    "customerDefault": true,
+    "refName": "string",
+    "links": [
+      {}
+    ],
+    "class": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "location": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "subsidiary": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "billingSchedule": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "currency": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "department": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    },
+    "customer": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {}
+      ]
+    }
+  }
+}
