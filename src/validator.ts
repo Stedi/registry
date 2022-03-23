@@ -91,6 +91,8 @@ function getAjvInstance(type: "json-schema-2020-12" = "json-schema-2020-12") {
     },
   });
 
+  instance.addKeyword("example");
+
   return instance;
 }
 
