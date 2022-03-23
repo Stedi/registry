@@ -1,9 +1,11 @@
 import { StripeProvider } from "./stripe";
 import { ShopifyProvider } from "./shopify";
-import ramp from "./ramp";
+import { NetsuiteProvider } from "./netsuite";
+import { RampProvider } from "./ramp";
 
 export default {
   stripe: new StripeProvider(),
   shopify: new ShopifyProvider(),
-  ramp,
+  netsuite: new NetsuiteProvider(),
+  ramp: new RampProvider(),
 };

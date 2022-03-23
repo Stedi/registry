@@ -1,11 +1,51 @@
 import { getIntrospectionQuery } from "graphql";
 import axios from "axios";
-import { GraphQLIntrospectionSchema, Provider } from "../provider";
-import { OpenAPIV3 } from "openapi-types";
+import {
+  GraphQLIntrospectionSchema,
+  GraphQLProvider,
+  Schema,
+} from "../provider";
+import { fromIntrospectionQuery } from "graphql-2-json-schema";
+import { IntrospectionQuery } from "graphql";
+import jsonSchemaRefParser from "@apidevtools/json-schema-ref-parser";
 
-export class ShopifyProvider implements Provider {
+export class ShopifyProvider implements GraphQLProvider {
   async getVersions(): Promise<string[]> {
     return ["2022-01"];
+  }
+
+  async unbundle(bundle: GraphQLIntrospectionSchema): Promise<Schema[]> {
+    const jsonSchema = fromIntrospectionQuery(
+      bundle.value as IntrospectionQuery,
+      {
+        ignoreInternals: true,
+        nullableArrayItems: true,
+      }
+    );
+
+    // Introspection schema lacks QueryRoot definition - adding it manually so it won't crash on dereferencing
+    jsonSchema.definitions!["QueryRoot"] = {
+      type: "object",
+      title: "root",
+      description: "root",
+    };
+
+    const dereferencedSchemas = await jsonSchemaRefParser.dereference(
+      jsonSchema,
+      { dereference: { circular: "ignore" } }
+    );
+
+    if (!("definitions" in dereferencedSchemas))
+      throw new Error("Expected definitions");
+
+    return Object.entries(dereferencedSchemas.definitions ?? {})
+      .filter(([key]) =>
+        !bundle.entities ? true : bundle.entities.includes(key)
+      )
+      .map(([k, v]) => ({
+        name: k,
+        schema: v,
+      }));
   }
 
   async getSchema(version: string): Promise<GraphQLIntrospectionSchema> {
@@ -27,11 +67,5 @@ export class ShopifyProvider implements Provider {
       value: data.data,
       entities: ["ProductInput", "CustomerInput", "OrderInput"],
     };
-  }
-
-  getSchemaWithoutCircularReferences(
-    schema: OpenAPIV3.SchemaObject
-  ): OpenAPIV3.SchemaObject {
-    return schema;
   }
 }
