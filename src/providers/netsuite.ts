@@ -59,10 +59,24 @@ export class NetsuiteProvider {
         },
       });
       const schema = schemaRequest.data;
+
       const cleanSchema = JSON.parse(
-        JSON.stringify(schema, (k, v) =>
-          k === "x-ns-filterable" ? undefined : v
-        )
+        JSON.stringify(schema, (key, value) => {
+          // Unsupported in JSONSchema's strict mode
+          if (key === "x-ns-filterable") {
+            return undefined;
+          }
+
+          // Denormalize nsLinks
+          if (
+            key === "items" &&
+            value["$ref"] === "/services/rest/record/v1/metadata-catalog/nsLink"
+          ) {
+            return nsLinkSchema;
+          }
+
+          return value;
+        })
       );
 
       schemas.push({
@@ -74,3 +88,19 @@ export class NetsuiteProvider {
     return schemas;
   }
 }
+
+const nsLinkSchema = {
+  type: "object",
+  properties: {
+    rel: {
+      title: "Relationship",
+      type: "string",
+      readOnly: true,
+    },
+    href: {
+      title: "Hypertext Reference",
+      type: "string",
+      readOnly: true,
+    },
+  },
+};
