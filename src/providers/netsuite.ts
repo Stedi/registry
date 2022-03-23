@@ -59,10 +59,15 @@ export class NetsuiteProvider {
         },
       });
       const schema = schemaRequest.data;
+      const cleanSchema = JSON.parse(
+        JSON.stringify(schema, (k, v) =>
+          k === "x-ns-filterable" ? undefined : v
+        )
+      );
 
       schemas.push({
         name: entity,
-        schema,
+        schema: cleanSchema,
       });
     }
 
