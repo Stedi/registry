@@ -1,0 +1,103 @@
+{
+  "properties": {
+    "account_sid": {
+      "description": "The SID of the Account that created this resource",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^AC[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "api_version": {
+      "description": "The API version used to create this conference",
+      "nullable": true,
+      "type": "string"
+    },
+    "call_sid_ending_conference": {
+      "description": "The call SID that caused the conference to end",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^CA[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "date_created": {
+      "description": "The RFC 2822 date and time in GMT that this resource was created",
+      "format": "date-time-rfc-2822",
+      "nullable": true,
+      "type": "string"
+    },
+    "date_updated": {
+      "description": "The RFC 2822 date and time in GMT that this resource was last updated",
+      "format": "date-time-rfc-2822",
+      "nullable": true,
+      "type": "string"
+    },
+    "friendly_name": {
+      "description": "A string that you assigned to describe this conference room",
+      "nullable": true,
+      "type": "string"
+    },
+    "reason_conference_ended": {
+      "description": "The reason why a conference ended.",
+      "enum": [
+        "conference-ended-via-api",
+        "participant-with-end-conference-on-exit-left",
+        "participant-with-end-conference-on-exit-kicked",
+        "last-participant-kicked",
+        "last-participant-left"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "region": {
+      "description": "A string that represents the Twilio Region where the conference was mixed",
+      "nullable": true,
+      "type": "string"
+    },
+    "sid": {
+      "description": "The unique string that identifies this resource",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^CF[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "status": {
+      "description": "The status of this conference",
+      "enum": [
+        "init",
+        "in-progress",
+        "completed"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "subresource_uris": {
+      "description": "A list of related resources identified by their relative URIs",
+      "nullable": true,
+      "type": "object"
+    },
+    "uri": {
+      "description": "The URI of this resource, relative to `https://api.twilio.com`",
+      "nullable": true,
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "default": {
+    "account_sid": "ACaab29daC8e5f767AC09E3Dfd5575145e",
+    "api_version": "string",
+    "call_sid_ending_conference": "CAeFc9EA83bFdCdbDCC8270310FBa8bA15",
+    "date_created": "01 Jun 2016 14:31:46 -0700",
+    "date_updated": "01 Jun 2016 14:31:46 -0700",
+    "friendly_name": "string",
+    "reason_conference_ended": "conference-ended-via-api",
+    "region": "string",
+    "sid": "CFbF1Bf2E2dAd6cACa37bfbBf01c0c5402",
+    "status": "init",
+    "subresource_uris": {},
+    "uri": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

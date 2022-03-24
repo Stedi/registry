@@ -96,6 +96,8 @@ export function mock(schema: SchemaLike): any {
       date: "1970-01-01",
       uuid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       "unix-time": "1647352387",
+      "date-time-rfc-2822": "01 Jun 2016 14:31:46 -0700",
+      string: "string",
       _default: "string",
     };
     const val = format ? formatExamples[format] : formatExamples._default;
@@ -113,6 +115,9 @@ export function mock(schema: SchemaLike): any {
       console.log(format);
     }
     const minln = !_.isNil(schema.minLength) ? schema.minLength : 0;
+    if (!val) {
+      console.log(schema, val);
+    }
     const maxln = !_.isNil(schema.maxLength) ? schema.maxLength : val.length;
     if (val === formatExamples._default && val.length < minln) {
       return _.padEnd(val, minln, val);

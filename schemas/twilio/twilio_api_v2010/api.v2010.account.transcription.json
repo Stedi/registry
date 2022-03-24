@@ -1,0 +1,103 @@
+{
+  "properties": {
+    "account_sid": {
+      "description": "The SID of the Account that created the resource",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^AC[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "api_version": {
+      "description": "The API version used to create the transcription",
+      "nullable": true,
+      "type": "string"
+    },
+    "date_created": {
+      "description": "The RFC 2822 date and time in GMT that the resource was created",
+      "format": "date-time-rfc-2822",
+      "nullable": true,
+      "type": "string"
+    },
+    "date_updated": {
+      "description": "The RFC 2822 date and time in GMT that the resource was last updated",
+      "format": "date-time-rfc-2822",
+      "nullable": true,
+      "type": "string"
+    },
+    "duration": {
+      "description": "The duration of the transcribed audio in seconds.",
+      "nullable": true,
+      "type": "string"
+    },
+    "price": {
+      "description": "The charge for the transcription",
+      "nullable": true,
+      "type": "number"
+    },
+    "price_unit": {
+      "description": "The currency in which price is measured",
+      "nullable": true,
+      "type": "string"
+    },
+    "recording_sid": {
+      "description": "The SID that identifies the transcription's recording",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^RE[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "sid": {
+      "description": "The unique string that identifies the resource",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^TR[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "status": {
+      "description": "The status of the transcription",
+      "enum": [
+        "in-progress",
+        "completed",
+        "failed"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "transcription_text": {
+      "description": "The text content of the transcription.",
+      "nullable": true,
+      "type": "string"
+    },
+    "type": {
+      "description": "The transcription type",
+      "nullable": true,
+      "type": "string"
+    },
+    "uri": {
+      "description": "The URI of the resource, relative to `https://api.twilio.com`",
+      "format": "uri",
+      "nullable": true,
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "default": {
+    "account_sid": "ACbE167eDc8Ee010e45fAc7a4FF2274E24",
+    "api_version": "string",
+    "date_created": "01 Jun 2016 14:31:46 -0700",
+    "date_updated": "01 Jun 2016 14:31:46 -0700",
+    "duration": "string",
+    "price": 0,
+    "price_unit": "string",
+    "recording_sid": "REAB0BdCbbCFB16EabEdE025b838cC0EbD",
+    "sid": "TRccC6f1D10c6fe2ec95C8cE2B979548AB",
+    "status": "in-progress",
+    "transcription_text": "string",
+    "type": "string",
+    "uri": "https://example.com/path"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,179 @@
+{
+  "properties": {
+    "account_sid": {
+      "description": "The SID of the Account that created the resource",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^AC[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "area_code_geomatch": {
+      "description": "Whether to enable Area Code Geomatch on the Service Instance",
+      "nullable": true,
+      "type": "boolean"
+    },
+    "date_created": {
+      "description": "The ISO 8601 date and time in GMT when the resource was created",
+      "format": "date-time",
+      "nullable": true,
+      "type": "string"
+    },
+    "date_updated": {
+      "description": "The ISO 8601 date and time in GMT when the resource was last updated",
+      "format": "date-time",
+      "nullable": true,
+      "type": "string"
+    },
+    "fallback_method": {
+      "description": "The HTTP method we use to call fallback_url",
+      "enum": [
+        "HEAD",
+        "GET",
+        "POST",
+        "PATCH",
+        "PUT",
+        "DELETE"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "fallback_to_long_code": {
+      "description": "Whether to enable Fallback to Long Code for messages sent through the Service instance",
+      "nullable": true,
+      "type": "boolean"
+    },
+    "fallback_url": {
+      "description": "The URL that we call using fallback_method if an error occurs while retrieving or executing the TwiML from the Inbound Request URL. This field will be overridden if the `use_inbound_webhook_on_number` field is enabled.",
+      "format": "uri",
+      "nullable": true,
+      "type": "string"
+    },
+    "friendly_name": {
+      "description": "The string that you assigned to describe the resource",
+      "nullable": true,
+      "type": "string"
+    },
+    "inbound_method": {
+      "description": "The HTTP method we use to call inbound_request_url",
+      "enum": [
+        "HEAD",
+        "GET",
+        "POST",
+        "PATCH",
+        "PUT",
+        "DELETE"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "inbound_request_url": {
+      "description": "The URL we call using inbound_method when a message is received by any phone number or short code in the Service. This field will be overridden if the `use_inbound_webhook_on_number` field is enabled.",
+      "format": "uri",
+      "nullable": true,
+      "type": "string"
+    },
+    "links": {
+      "description": "The absolute URLs of related resources",
+      "nullable": true,
+      "type": "object"
+    },
+    "mms_converter": {
+      "description": "Whether to enable the MMS Converter for messages sent through the Service instance",
+      "nullable": true,
+      "type": "boolean"
+    },
+    "scan_message_content": {
+      "description": "Reserved",
+      "enum": [
+        "inherit",
+        "enable",
+        "disable"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "sid": {
+      "description": "The unique string that identifies the resource",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^MG[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "smart_encoding": {
+      "description": "Whether to enable Encoding for messages sent through the Service instance",
+      "nullable": true,
+      "type": "boolean"
+    },
+    "status_callback": {
+      "description": "The URL we call to pass status updates about message delivery",
+      "format": "uri",
+      "nullable": true,
+      "type": "string"
+    },
+    "sticky_sender": {
+      "description": "Whether to enable Sticky Sender on the Service instance",
+      "nullable": true,
+      "type": "boolean"
+    },
+    "synchronous_validation": {
+      "description": "Reserved",
+      "nullable": true,
+      "type": "boolean"
+    },
+    "url": {
+      "description": "The absolute URL of the Service resource",
+      "format": "uri",
+      "nullable": true,
+      "type": "string"
+    },
+    "us_app_to_person_registered": {
+      "description": "Whether US A2P campaign is registered for this Service.",
+      "nullable": true,
+      "type": "boolean"
+    },
+    "use_inbound_webhook_on_number": {
+      "description": "If enabled, the webhook url configured on the phone number will be used and will override the `inbound_request_url`/`fallback_url` url called when an inbound message is received.",
+      "nullable": true,
+      "type": "boolean"
+    },
+    "usecase": {
+      "description": "A string describing the scenario in which the Messaging Service will be used",
+      "nullable": true,
+      "type": "string"
+    },
+    "validity_period": {
+      "description": "How long, in seconds, messages sent from the Service are valid",
+      "nullable": true,
+      "type": "integer"
+    }
+  },
+  "type": "object",
+  "default": {
+    "account_sid": "AC2BFF964e1c3A2bC50E12b1FA46ccbb8b",
+    "area_code_geomatch": true,
+    "date_created": "1970-01-01T00:00:00.000Z",
+    "date_updated": "1970-01-01T00:00:00.000Z",
+    "fallback_method": "HEAD",
+    "fallback_to_long_code": true,
+    "fallback_url": "https://example.com/path",
+    "friendly_name": "string",
+    "inbound_method": "HEAD",
+    "inbound_request_url": "https://example.com/path",
+    "links": {},
+    "mms_converter": true,
+    "scan_message_content": "inherit",
+    "sid": "MG3bDe82Bd5dEB2Fdb21EaFe6d87C9D900",
+    "smart_encoding": true,
+    "status_callback": "https://example.com/path",
+    "sticky_sender": true,
+    "synchronous_validation": true,
+    "url": "https://example.com/path",
+    "us_app_to_person_registered": true,
+    "use_inbound_webhook_on_number": true,
+    "usecase": "string",
+    "validity_period": 0
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

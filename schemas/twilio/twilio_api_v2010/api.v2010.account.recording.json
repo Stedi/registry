@@ -1,0 +1,150 @@
+{
+  "properties": {
+    "account_sid": {
+      "description": "The SID of the Account that created the resource",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^AC[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "api_version": {
+      "description": "The API version used during the recording.",
+      "nullable": true,
+      "type": "string"
+    },
+    "call_sid": {
+      "description": "The SID of the Call the resource is associated with",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^CA[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "channels": {
+      "description": "The number of channels in the final recording file as an integer.",
+      "nullable": true,
+      "type": "integer"
+    },
+    "conference_sid": {
+      "description": "The unique ID for the conference associated with the recording.",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^CF[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "date_created": {
+      "description": "The RFC 2822 date and time in GMT that the resource was created",
+      "format": "date-time-rfc-2822",
+      "nullable": true,
+      "type": "string"
+    },
+    "date_updated": {
+      "description": "The RFC 2822 date and time in GMT that the resource was last updated",
+      "format": "date-time-rfc-2822",
+      "nullable": true,
+      "type": "string"
+    },
+    "duration": {
+      "description": "The length of the recording in seconds.",
+      "nullable": true,
+      "type": "string"
+    },
+    "encryption_details": {
+      "description": "How to decrypt the recording.",
+      "nullable": true,
+      "type": "object"
+    },
+    "error_code": {
+      "description": "More information about why the recording is missing, if status is `absent`.",
+      "nullable": true,
+      "type": "integer"
+    },
+    "price": {
+      "description": "The one-time cost of creating the recording.",
+      "nullable": true,
+      "type": "string"
+    },
+    "price_unit": {
+      "description": "The currency used in the price property.",
+      "nullable": true,
+      "type": "string"
+    },
+    "sid": {
+      "description": "The unique string that identifies the resource",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^RE[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "source": {
+      "description": "How the recording was created",
+      "enum": [
+        "DialVerb",
+        "Conference",
+        "OutboundAPI",
+        "Trunking",
+        "RecordVerb",
+        "StartCallRecordingAPI",
+        "StartConferenceRecordingAPI"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "start_time": {
+      "description": "The start time of the recording, given in RFC 2822 format",
+      "format": "date-time-rfc-2822",
+      "nullable": true,
+      "type": "string"
+    },
+    "status": {
+      "description": "The status of the recording.",
+      "enum": [
+        "in-progress",
+        "paused",
+        "stopped",
+        "processing",
+        "completed",
+        "absent",
+        "deleted"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "subresource_uris": {
+      "description": "A list of related resources identified by their relative URIs",
+      "nullable": true,
+      "type": "object"
+    },
+    "uri": {
+      "description": "The URI of the resource, relative to `https://api.twilio.com`",
+      "format": "uri",
+      "nullable": true,
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "default": {
+    "account_sid": "AC4a7063D8bfd0FD6cd63dFe0D954b9261",
+    "api_version": "string",
+    "call_sid": "CA560a4E76c7f81d31bED7C2ebcb645Bdc",
+    "channels": 0,
+    "conference_sid": "CFD9ED5668d91a39FbB5FEBaB7A71A9AF7",
+    "date_created": "01 Jun 2016 14:31:46 -0700",
+    "date_updated": "01 Jun 2016 14:31:46 -0700",
+    "duration": "string",
+    "encryption_details": {},
+    "error_code": 0,
+    "price": "string",
+    "price_unit": "string",
+    "sid": "REB37f215b1fe82b98e9B92Ff1666cA7Ad",
+    "source": "DialVerb",
+    "start_time": "01 Jun 2016 14:31:46 -0700",
+    "status": "in-progress",
+    "subresource_uris": {},
+    "uri": "https://example.com/path"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
