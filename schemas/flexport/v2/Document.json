@@ -3,12 +3,10 @@
   "properties": {
     "_object": {
       "type": "string",
-      "description": "Type of the object. Always /document for this object.",
-      "example": "/document"
+      "description": "Type of the object. Always /document for this object."
     },
     "id": {
       "type": "string",
-      "format": "string",
       "description": "Unique identifier for the document"
     },
     "file_name": {
@@ -16,7 +14,6 @@
     },
     "document_type": {
       "type": "string",
-      "format": "string",
       "description": "Type of the document."
     },
     "memo": {
@@ -31,7 +28,6 @@
     },
     "archived_at": {
       "type": "string",
-      "format": "string",
       "description": "Date string this document was archived. Null if not archived."
     },
     "file_metadata": {
@@ -39,17 +35,14 @@
       "properties": {
         "_object": {
           "type": "string",
-          "description": "Type of the object. Always /file_metadata for this object.",
-          "example": "/file_metadata"
+          "description": "Type of the object. Always /file_metadata for this object."
         },
         "size": {
           "type": "integer",
-          "description": "Size of the file in bytes",
-          "example": 20000
+          "description": "Size of the file in bytes"
         },
         "uploaded_at": {
           "type": "string",
-          "format": "string",
           "description": "Date this document was uploaded."
         }
       }
@@ -58,42 +51,18 @@
       "type": "object",
       "properties": {
         "_object": {
-          "type": "string",
-          "example": "/api/refs/object"
+          "type": "string"
         },
         "ref_type": {
-          "type": "string",
-          "example": "/shipment"
+          "type": "string"
         },
         "link": {
-          "type": "string",
-          "example": "https://api.flexport.com/shipments/123"
+          "type": "string"
         },
         "id": {
-          "type": "integer",
-          "example": 123
+          "type": "integer"
         }
       }
-    }
-  },
-  "default": {
-    "_object": "/document",
-    "id": "string",
-    "file_name": "string",
-    "document_type": "string",
-    "memo": "string",
-    "file_link": "https://example.com/path",
-    "archived_at": "string",
-    "file_metadata": {
-      "_object": "/file_metadata",
-      "size": 20000,
-      "uploaded_at": "string"
-    },
-    "shipment": {
-      "_object": "/api/refs/object",
-      "ref_type": "/shipment",
-      "link": "https://api.flexport.com/shipments/123",
-      "id": 123
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema"
