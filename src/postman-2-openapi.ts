@@ -1,7 +1,8 @@
 import postmanToOpenApi from "postman-to-openapi";
-import fs from "fs";
+import {mkdirSync, writeFileSync} from "fs";
 import {promisify} from "util";
 import rimraf from "rimraf";
+import yaml from "js-yaml";
 
 const asyncRimraf = promisify(rimraf);
 
@@ -11,12 +12,13 @@ export async function generate(
     collectionFile: string,
 ) {
     const inputFile = `${rootPath}/${provider}/${collectionFile}`;
-    const outputFile = `./generated/${provider}.yml`;
+    const schema = await postmanToOpenApi(inputFile, undefined);
+    const doc = yaml.load(schema);
 
-    await asyncRimraf(outputFile);
-    fs.mkdirSync(`./generated`, { recursive: true });
-
-    await postmanToOpenApi(inputFile, outputFile, {defaultTag: 'General'})
+    await asyncRimraf('./generated');
+    mkdirSync(`./generated`, { recursive: true });
+    const outputFile = `./generated/${provider}.json`;
+    writeFileSync(outputFile, JSON.stringify(doc, null, 2));
 }
 
 (async () => {
