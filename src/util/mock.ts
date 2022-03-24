@@ -5,7 +5,7 @@ import RandExp from "randexp";
 export type SchemaLike = OpenAPIV3.SchemaObject;
 
 function resolveAllOf(schema: SchemaLike): SchemaLike {
-  if (schema.allOf && schema.allOf[0]) {
+  if (schema && schema.allOf && schema.allOf[0]) {
     schema = _.reduce(
       schema.allOf as SchemaLike,
       (combined, subschema: SchemaLike) => _.merge({}, resolveAllOf(subschema)),
@@ -18,6 +18,10 @@ function resolveAllOf(schema: SchemaLike): SchemaLike {
 export function mock(schema: SchemaLike): any {
   // allOf, merge all subschemas
   schema = resolveAllOf(schema);
+
+  if (!schema) {
+    return schema;
+  }
 
   if (schema.example !== undefined) {
     return schema.example;
@@ -96,6 +100,7 @@ export function mock(schema: SchemaLike): any {
       date: "1970-01-01",
       uuid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       "unix-time": "1647352387",
+      byte: "0x01",
       _default: "string",
     };
     const val = format ? formatExamples[format] : formatExamples._default;

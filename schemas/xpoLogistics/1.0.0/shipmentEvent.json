@@ -1,0 +1,368 @@
+{
+  "allOf": [
+    {
+      "description": "Order Status Details.",
+      "type": "object",
+      "properties": {
+        "partnerIdentifierCode": {
+          "type": "string",
+          "description": "Unique identifier for the Partners in XPO."
+        },
+        "eventTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "date time when the event was reported."
+        },
+        "estimatedTimeOfArrival": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Shipment Estimated time of arrival."
+        },
+        "lateReasonCode": {
+          "type": "string",
+          "description": "If the shipment is arrived late, this field hold the value of late reason code."
+        },
+        "eventCategory": {
+          "enum": [
+            "Order",
+            "Shipment"
+          ],
+          "type": "string",
+          "description": "This enum value which represents, this is a Shipment event or Order event."
+        }
+      }
+    },
+    {
+      "description": "Event object which contains event related information for Shipment.",
+      "type": "object",
+      "properties": {
+        "event": {
+          "type": "object",
+          "properties": {
+            "shipmentId": {
+              "type": "string",
+              "description": "Unique identifier of shipment in XPO."
+            },
+            "code": {
+              "type": "string",
+              "description": "Represents type of events.",
+              "enum": [
+                "AA : PICKUP_APPOINTMENT",
+                "AB : DELIVERY_APPOINTMENT",
+                "X3 : ARRIVED_AT_PICKUP",
+                "CP : COMPLETED_LODING",
+                "AF : DEPARTED_FROM_PICKUP",
+                "X6 : IN_TRANSIT",
+                "X1 : ARRIVED_AT_DELIVERY",
+                "D1 : COMPLETED_UNLOADING",
+                "CD : DELIVERED",
+                "AH : ATTEMPTED_DELIVERY",
+                "SD : SHIPMENT_DELAYED"
+              ]
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the event."
+            },
+            "description": {
+              "type": "string",
+              "description": "Indicate the description of event."
+            },
+            "distanceToStop": {
+              "type": "number",
+              "description": "Distance to the last stop."
+            },
+            "distanceToStopUom": {
+              "type": "string",
+              "description": "Distance to the last stop unit of measure."
+            },
+            "orderDetails": {
+              "type": "object",
+              "properties": {
+                "orderId": {
+                  "type": "integer",
+                  "description": "Unique identifier of order in XPO Connect."
+                }
+              },
+              "description": "This object contains the order related information."
+            },
+            "locationInformation": {
+              "type": "object",
+              "properties": {
+                "addressInformation": {
+                  "type": "object",
+                  "properties": {
+                    "locationName": {
+                      "type": "string",
+                      "description": "Name of location."
+                    },
+                    "addressLine1": {
+                      "type": "string",
+                      "description": "Address line 1 of stop location."
+                    },
+                    "addressLine2": {
+                      "type": "string",
+                      "description": "Address line 2 of stop location."
+                    },
+                    "cityName": {
+                      "type": "string",
+                      "description": "City name belongs to stop location."
+                    },
+                    "stateCode": {
+                      "type": "string",
+                      "description": "State code of the stop location."
+                    },
+                    "country": {
+                      "type": "string",
+                      "description": "Country belongs to stop location."
+                    },
+                    "zipCode": {
+                      "type": "string",
+                      "description": "Postal Code."
+                    },
+                    "region": {
+                      "type": "string",
+                      "description": "Region."
+                    },
+                    "geoCode": {
+                      "type": "object",
+                      "properties": {
+                        "latitude": {
+                          "type": "number",
+                          "description": "latitude value of location."
+                        },
+                        "longitude": {
+                          "type": "number",
+                          "description": "longitude value of location."
+                        },
+                        "s2CellId": {
+                          "type": "string",
+                          "description": "s2CellId  of location."
+                        }
+                      }
+                    }
+                  },
+                  "description": "Address Details."
+                }
+              },
+              "description": "Location Information including Address Details."
+            },
+            "contactInformation": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "description": "First name of contact person."
+                },
+                "lastName": {
+                  "type": "string",
+                  "description": "Last name of contact person."
+                },
+                "email": {
+                  "type": "string",
+                  "description": "Email for communication."
+                },
+                "phoneNumbers": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Type": {
+                        "type": "string",
+                        "description": "Phone number types.",
+                        "enum": [
+                          "MOBILE",
+                          "WORK",
+                          "HOME"
+                        ]
+                      },
+                      "number": {
+                        "type": "string",
+                        "description": "Contact number."
+                      },
+                      "isPrimary": {
+                        "type": "boolean",
+                        "description": "Is contact primary information."
+                      }
+                    }
+                  },
+                  "description": "Primary and alternate numbers for communication."
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Title of contact person."
+                },
+                "isPrimary": {
+                  "type": "boolean",
+                  "description": "Is it the primary contact information?."
+                }
+              },
+              "description": "Contact Information."
+            },
+            "carrierInformation": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "Carrier Code."
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Carrier Name."
+                },
+                "scac": {
+                  "type": "string",
+                  "description": "Carrier SCAC value."
+                }
+              },
+              "description": "Carrier Details."
+            },
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "productCode": {
+                    "type": "string",
+                    "description": "Item's Product Code."
+                  },
+                  "units": {
+                    "type": "number",
+                    "description": "Number of units."
+                  },
+                  "unitTypeCode": {
+                    "type": "string",
+                    "description": "Item's unit type."
+                  },
+                  "packageUnits": {
+                    "type": "number",
+                    "description": "Number of packages."
+                  },
+                  "packageTypeCode": {
+                    "type": "string",
+                    "description": "Package type."
+                  },
+                  "weight": {
+                    "type": "number",
+                    "description": "Item's weight."
+                  },
+                  "weightUom": {
+                    "type": "string",
+                    "description": "Weight- Unit of measure."
+                  },
+                  "height": {
+                    "type": "number",
+                    "description": "Item's height."
+                  },
+                  "heightUom": {
+                    "type": "string",
+                    "description": "Height- Unit of measure."
+                  },
+                  "length": {
+                    "type": "number",
+                    "description": "Item's length."
+                  },
+                  "lengthUom": {
+                    "type": "string",
+                    "description": "Length - Unit of measure."
+                  },
+                  "width": {
+                    "type": "number",
+                    "description": "Item's width."
+                  },
+                  "widthUom": {
+                    "type": "string",
+                    "description": "Width - Unit of measure."
+                  },
+                  "sku": {
+                    "type": "string",
+                    "description": "Stock-keeping unit or SKU refers to a specific item stored to a specific location."
+                  },
+                  "class": {
+                    "type": "string",
+                    "description": "This code represents product freight class.."
+                  },
+                  "nmfcCode": {
+                    "type": "string",
+                    "description": "Commodity or type of product is assigned a National Motor Freight Classification"
+                  }
+                }
+              },
+              "description": "All item details."
+            }
+          }
+        }
+      }
+    }
+  ],
+  "default": {
+    "event": {
+      "shipmentId": "string",
+      "code": "AA : PICKUP_APPOINTMENT",
+      "name": "string",
+      "description": "string",
+      "distanceToStop": 0,
+      "distanceToStopUom": "string",
+      "orderDetails": {
+        "orderId": 0
+      },
+      "locationInformation": {
+        "addressInformation": {
+          "locationName": "string",
+          "addressLine1": "string",
+          "addressLine2": "string",
+          "cityName": "string",
+          "stateCode": "string",
+          "country": "string",
+          "zipCode": "string",
+          "region": "string",
+          "geoCode": {
+            "latitude": 0,
+            "longitude": 0,
+            "s2CellId": "string"
+          }
+        }
+      },
+      "contactInformation": {
+        "firstName": "string",
+        "lastName": "string",
+        "email": "string",
+        "phoneNumbers": [
+          {
+            "Type": "MOBILE",
+            "number": "string",
+            "isPrimary": true
+          }
+        ],
+        "title": "string",
+        "isPrimary": true
+      },
+      "carrierInformation": {
+        "code": "string",
+        "name": "string",
+        "scac": "string"
+      },
+      "items": [
+        {
+          "productCode": "string",
+          "units": 0,
+          "unitTypeCode": "string",
+          "packageUnits": 0,
+          "packageTypeCode": "string",
+          "weight": 0,
+          "weightUom": "string",
+          "height": 0,
+          "heightUom": "string",
+          "length": 0,
+          "lengthUom": "string",
+          "width": 0,
+          "widthUom": "string",
+          "sku": "string",
+          "class": "string",
+          "nmfcCode": "string"
+        }
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
