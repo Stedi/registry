@@ -28,7 +28,7 @@ export function mock(schemalike: SchemaLike): any {
   }
 
   // use default
-  if (schema.default !== undefined) {
+  if (!schema.default) {
     return schema.default;
   }
 
@@ -87,19 +87,17 @@ export function mock(schemalike: SchemaLike): any {
   if (type === "string") {
     const { format } = schema;
     const val = format ? formatExamples[format] : formatExamples._default;
-    
     if (schema.pattern) {
       const randexp = new RandExp(schema.pattern);
       randexp.max = schema.maxLength ?? 10;
+
       let val = randexp.gen();
+
       while (val.length < (schema.minLength ?? 0)) {
         val = randexp.gen();
       }
-      return randexp.gen();
-    }
 
-    if (val === undefined) {
-      console.log(format);
+      return randexp.gen();
     }
 
     const minln = !_.isNil(schema.minLength) ? schema.minLength : 0;
