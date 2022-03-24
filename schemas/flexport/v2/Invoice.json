@@ -1,0 +1,584 @@
+{
+  "type": "object",
+  "properties": {
+    "_object": {
+      "type": "string",
+      "description": "Type of the object. Always '/invoice' for this object.",
+      "example": "/invoice"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique ID for the invoice",
+      "example": "gwdpaYrhTI-T1ljn1M7o7w"
+    },
+    "name": {
+      "type": "string",
+      "description": "Unique name for the invoice",
+      "example": "FLEX-123456-1"
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the invoice was issued",
+      "example": "2019-05-22T18:39:53.679Z"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Due date of the invoice",
+      "example": "2019-05-22"
+    },
+    "total": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object. Always /money for this object.",
+          "example": "/money"
+        },
+        "amount": {
+          "type": "string",
+          "format": "decimal",
+          "example": "12.34"
+        },
+        "currency_code": {
+          "type": "string",
+          "example": "USD"
+        }
+      },
+      "description": "Sum of charges on the invoice"
+    },
+    "balance": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object. Always /money for this object.",
+          "example": "/money"
+        },
+        "amount": {
+          "type": "string",
+          "format": "decimal",
+          "example": "12.34"
+        },
+        "currency_code": {
+          "type": "string",
+          "example": "USD"
+        }
+      },
+      "description": "Outstanding balance on the invoice"
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of the invoice",
+      "enum": [
+        "outstanding",
+        "past_due",
+        "void",
+        "paid",
+        "payment_pending"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "What the invoice is being issued for. Shipment related charges are type `Shipment` and non-shipment related charges are type `Client`",
+      "enum": [
+        "Shipment",
+        "Client"
+      ]
+    },
+    "voided_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the invoice was voided (if applicable)",
+      "example": "2019-05-22T20:49:15.639Z"
+    },
+    "last_updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time of the last adjustment to in invoice",
+      "example": "2019-05-22T20:49:15.639Z"
+    },
+    "recipient": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object",
+          "example": "/company_entity"
+        },
+        "id": {
+          "type": "integer",
+          "example": 9281
+        },
+        "name": {
+          "type": "string",
+          "example": "Zoomit"
+        },
+        "ref": {
+          "type": "string",
+          "example": "zoomit_ref"
+        },
+        "mailing_address": {
+          "type": "object",
+          "properties": {
+            "_object": {
+              "type": "string",
+              "description": "Type of the object",
+              "example": "/address"
+            },
+            "street_address": {
+              "type": "string",
+              "example": "1641 Settlers Lane"
+            },
+            "street_address2": {
+              "type": "string",
+              "example": "STE 2918"
+            },
+            "city": {
+              "type": "string",
+              "example": "Albany"
+            },
+            "state": {
+              "type": "string",
+              "example": "MN"
+            },
+            "country": {
+              "type": "string",
+              "example": "United States of America"
+            },
+            "country_code": {
+              "type": "string",
+              "example": "US"
+            },
+            "zip": {
+              "type": "string",
+              "example": "56307"
+            },
+            "timezone": {
+              "type": "string",
+              "example": "America/Los_Angeles"
+            },
+            "ref": {
+              "type": "string",
+              "example": "address_ref_x"
+            },
+            "unlocode": {
+              "type": "string",
+              "example": "US AL2"
+            }
+          }
+        },
+        "vat_numbers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "Type of the object",
+                "example": "/company_entity/vat_number"
+              },
+              "country_code": {
+                "type": "string",
+                "description": "ISO 3166 two-letter country code",
+                "example": "GB"
+              },
+              "number": {
+                "type": "string",
+                "example": "GB 123456789"
+              }
+            }
+          }
+        }
+      },
+      "description": "Entity receiving the invoice (i.e. the customer)"
+    },
+    "issuer": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object",
+          "example": "/company_entity"
+        },
+        "id": {
+          "type": "integer",
+          "example": 9281
+        },
+        "name": {
+          "type": "string",
+          "example": "Zoomit"
+        },
+        "ref": {
+          "type": "string",
+          "example": "zoomit_ref"
+        },
+        "mailing_address": {
+          "type": "object",
+          "properties": {
+            "_object": {
+              "type": "string",
+              "description": "Type of the object",
+              "example": "/address"
+            },
+            "street_address": {
+              "type": "string",
+              "example": "1641 Settlers Lane"
+            },
+            "street_address2": {
+              "type": "string",
+              "example": "STE 2918"
+            },
+            "city": {
+              "type": "string",
+              "example": "Albany"
+            },
+            "state": {
+              "type": "string",
+              "example": "MN"
+            },
+            "country": {
+              "type": "string",
+              "example": "United States of America"
+            },
+            "country_code": {
+              "type": "string",
+              "example": "US"
+            },
+            "zip": {
+              "type": "string",
+              "example": "56307"
+            },
+            "timezone": {
+              "type": "string",
+              "example": "America/Los_Angeles"
+            },
+            "ref": {
+              "type": "string",
+              "example": "address_ref_x"
+            },
+            "unlocode": {
+              "type": "string",
+              "example": "US AL2"
+            }
+          }
+        },
+        "vat_numbers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "Type of the object",
+                "example": "/company_entity/vat_number"
+              },
+              "country_code": {
+                "type": "string",
+                "description": "ISO 3166 two-letter country code",
+                "example": "GB"
+              },
+              "number": {
+                "type": "string",
+                "example": "GB 123456789"
+              }
+            }
+          }
+        }
+      },
+      "description": "Entity issuing the invoice (i.e. Flexport)"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_object": {
+            "type": "string",
+            "description": "Type of the object.",
+            "example": "/invoice_item"
+          },
+          "name": {
+            "type": "string",
+            "description": "Description of charge.",
+            "example": "FCL 40' HQ"
+          },
+          "slug": {
+            "type": "string",
+            "description": "Code describing the charge.",
+            "example": "fcl_40_hq"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category of the charge.",
+            "enum": [
+              "freight",
+              "origin",
+              "destination",
+              "customs",
+              "additional",
+              "capital"
+            ]
+          },
+          "amount": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "Type of the object. Always /money for this object.",
+                "example": "/money"
+              },
+              "amount": {
+                "type": "string",
+                "format": "decimal",
+                "example": "12.34"
+              },
+              "currency_code": {
+                "type": "string",
+                "example": "USD"
+              }
+            }
+          },
+          "rate": {
+            "description": "Describes the rate per unit used to calculate the price of a line item",
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "The type of the object",
+                "example": "/invoice/rate"
+              },
+              "value": {
+                "type": "string",
+                "format": "decimal",
+                "description": "numeric value described by qualifier",
+                "example": "2.31"
+              },
+              "qualifier": {
+                "type": "string",
+                "example": "'USD', '% Drayage Base'",
+                "description": "describes what the value represents"
+              }
+            }
+          },
+          "quantity": {
+            "description": "Describes the number of units used to calculate the price of a line item",
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "The type of the object",
+                "example": "/invoice/quantity"
+              },
+              "value": {
+                "type": "string",
+                "format": "decimal",
+                "description": "numeric value described by qualifier",
+                "example": "1000"
+              },
+              "qualifier": {
+                "type": "string",
+                "example": "'kg', 'bill of lading', 'USD'",
+                "description": "describes what the value represents"
+              }
+            }
+          }
+        }
+      }
+    },
+    "notes": {
+      "example": "['Markdown formatted note 1', 'Markdown formatted note 2']",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "credit_memos": {
+      "type": "array",
+      "description": "List of any credits applied to this invoice.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_object": {
+            "type": "string",
+            "description": "The type of the object",
+            "example": "/credit_memo"
+          },
+          "amount": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "Type of the object. Always /money for this object.",
+                "example": "/money"
+              },
+              "amount": {
+                "type": "string",
+                "format": "decimal",
+                "example": "12.34"
+              },
+              "currency_code": {
+                "type": "string",
+                "example": "USD"
+              }
+            }
+          },
+          "category": {
+            "type": "string",
+            "description": "Category of the credit memo",
+            "example": "additional"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why the credit was applied to the invoice"
+          },
+          "credited_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2019-07-12T20:40:11.572Z"
+          }
+        }
+      }
+    },
+    "shipments": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "example": "/api/refs/object"
+        },
+        "ref_type": {
+          "type": "string",
+          "example": "/shipment"
+        },
+        "link": {
+          "type": "string",
+          "example": "https://api.flexport.com/shipments/123"
+        },
+        "id": {
+          "type": "integer",
+          "example": 123
+        }
+      },
+      "description": "Expandable link to shipment(s) related to this invoice."
+    }
+  },
+  "default": {
+    "_object": "/invoice",
+    "id": "gwdpaYrhTI-T1ljn1M7o7w",
+    "name": "FLEX-123456-1",
+    "issued_at": "2019-05-22T18:39:53.679Z",
+    "due_date": "2019-05-22",
+    "total": {
+      "_object": "/money",
+      "amount": "12.34",
+      "currency_code": "USD"
+    },
+    "balance": {
+      "_object": "/money",
+      "amount": "12.34",
+      "currency_code": "USD"
+    },
+    "status": "outstanding",
+    "type": "Shipment",
+    "voided_at": "2019-05-22T20:49:15.639Z",
+    "last_updated_at": "2019-05-22T20:49:15.639Z",
+    "recipient": {
+      "_object": "/company_entity",
+      "id": 9281,
+      "name": "Zoomit",
+      "ref": "zoomit_ref",
+      "mailing_address": {
+        "_object": "/address",
+        "street_address": "1641 Settlers Lane",
+        "street_address2": "STE 2918",
+        "city": "Albany",
+        "state": "MN",
+        "country": "United States of America",
+        "country_code": "US",
+        "zip": "56307",
+        "timezone": "America/Los_Angeles",
+        "ref": "address_ref_x",
+        "unlocode": "US AL2"
+      },
+      "vat_numbers": [
+        {
+          "_object": "/company_entity/vat_number",
+          "country_code": "GB",
+          "number": "GB 123456789"
+        }
+      ]
+    },
+    "issuer": {
+      "_object": "/company_entity",
+      "id": 9281,
+      "name": "Zoomit",
+      "ref": "zoomit_ref",
+      "mailing_address": {
+        "_object": "/address",
+        "street_address": "1641 Settlers Lane",
+        "street_address2": "STE 2918",
+        "city": "Albany",
+        "state": "MN",
+        "country": "United States of America",
+        "country_code": "US",
+        "zip": "56307",
+        "timezone": "America/Los_Angeles",
+        "ref": "address_ref_x",
+        "unlocode": "US AL2"
+      },
+      "vat_numbers": [
+        {
+          "_object": "/company_entity/vat_number",
+          "country_code": "GB",
+          "number": "GB 123456789"
+        }
+      ]
+    },
+    "items": [
+      {
+        "_object": "/invoice_item",
+        "name": "FCL 40' HQ",
+        "slug": "fcl_40_hq",
+        "category": "freight",
+        "amount": {
+          "_object": "/money",
+          "amount": "12.34",
+          "currency_code": "USD"
+        },
+        "rate": {
+          "_object": "/invoice/rate",
+          "value": "2.31",
+          "qualifier": "'USD', '% Drayage Base'"
+        },
+        "quantity": {
+          "_object": "/invoice/quantity",
+          "value": "1000",
+          "qualifier": "'kg', 'bill of lading', 'USD'"
+        }
+      }
+    ],
+    "notes": "['Markdown formatted note 1', 'Markdown formatted note 2']",
+    "credit_memos": [
+      {
+        "_object": "/credit_memo",
+        "amount": {
+          "_object": "/money",
+          "amount": "12.34",
+          "currency_code": "USD"
+        },
+        "category": "additional",
+        "reason": "string",
+        "credited_at": "2019-07-12T20:40:11.572Z"
+      }
+    ],
+    "shipments": {
+      "_object": "/api/refs/object",
+      "ref_type": "/shipment",
+      "link": "https://api.flexport.com/shipments/123",
+      "id": 123
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

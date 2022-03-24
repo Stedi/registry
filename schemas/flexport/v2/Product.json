@@ -1,0 +1,165 @@
+{
+  "type": "object",
+  "properties": {
+    "_object": {
+      "type": "string",
+      "description": "Type of the object",
+      "example": "/product"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The Flexport id used to refer to the product",
+      "example": 84291
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the product",
+      "example": "AC Adapter 12V"
+    },
+    "sku": {
+      "type": "string",
+      "description": "The SKU used to refer to the product",
+      "example": "WDVCDFD-RM00472"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of product",
+      "example": "The best 12V AC Adapter on the market"
+    },
+    "archived_at": {
+      "type": "string",
+      "description": "If the product has been archived, the time it was archived. If the product is still active this will be null.",
+      "example": "2019-01-18T22:08:38.599Z"
+    },
+    "product_category": {
+      "type": "string",
+      "description": "The category to group this product under",
+      "example": "Cosmetics"
+    },
+    "country_of_origin": {
+      "type": "string",
+      "description": "The country the product was manufactured in",
+      "example": "China"
+    },
+    "client_verified": {
+      "type": "boolean",
+      "description": "Indicates whether Client has verified this Product.",
+      "example": true
+    },
+    "product_properties": {
+      "type": "array",
+      "description": "A user defined set of key-value objects to describe the product",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_object": {
+            "type": "string",
+            "description": "Type of the object",
+            "example": "/product/property"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of this property",
+            "example": "color"
+          },
+          "value": {
+            "type": "string",
+            "description": "Value of this property",
+            "example": "blue"
+          }
+        }
+      }
+    },
+    "hs_codes": {
+      "type": "array",
+      "description": "DEPRECATED - HS codes can be found in the classifications array",
+      "deprecated": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "_object": {
+            "type": "string",
+            "description": "String representing the object’s type. Always `/hs_code` for this object.",
+            "example": "/hs_code"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of HS or HTS code classification.",
+            "example": "N-Butyl-2,2,6,6-tetramethylpiperidin-4-amine (CAS No. 36177-92-1) (provided for in subheading 2933.39.91)"
+          },
+          "code": {
+            "type": "string",
+            "description": "6 digit (international HS) or 10 digit (US HTS) code.",
+            "example": 9101
+          },
+          "country_code": {
+            "type": "string",
+            "example": "US"
+          }
+        }
+      }
+    },
+    "classifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_object": {
+            "type": "string",
+            "description": "Type of the object",
+            "example": "/product/classification"
+          },
+          "codes": {
+            "type": "array",
+            "description": "An array of HS codes for this product in the provided region",
+            "items": {
+              "type": "string",
+              "example": 301
+            }
+          },
+          "region": {
+            "type": "string",
+            "description": "The region for this classification. Currently only 2-character ISO codes and \"EU\" are supported",
+            "example": "US"
+          }
+        }
+      }
+    }
+  },
+  "default": {
+    "_object": "/product",
+    "id": 84291,
+    "name": "AC Adapter 12V",
+    "sku": "WDVCDFD-RM00472",
+    "description": "The best 12V AC Adapter on the market",
+    "archived_at": "2019-01-18T22:08:38.599Z",
+    "product_category": "Cosmetics",
+    "country_of_origin": "China",
+    "client_verified": true,
+    "product_properties": [
+      {
+        "_object": "/product/property",
+        "type": "color",
+        "value": "blue"
+      }
+    ],
+    "hs_codes": [
+      {
+        "_object": "/hs_code",
+        "description": "N-Butyl-2,2,6,6-tetramethylpiperidin-4-amine (CAS No. 36177-92-1) (provided for in subheading 2933.39.91)",
+        "code": 9101,
+        "country_code": "US"
+      }
+    ],
+    "classifications": [
+      {
+        "_object": "/product/classification",
+        "codes": [
+          301
+        ],
+        "region": "US"
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,1884 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier for the booking",
+      "example": 2983
+    },
+    "_object": {
+      "type": "string",
+      "description": "Type of the object",
+      "example": "/booking"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the booking",
+      "example": "PO 12345"
+    },
+    "shipment": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "example": "/api/refs/object"
+        },
+        "ref_type": {
+          "type": "string",
+          "example": "/shipment"
+        },
+        "link": {
+          "type": "string",
+          "example": "https://api.flexport.com/shipments/123"
+        },
+        "id": {
+          "type": "integer",
+          "example": 123
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "archived",
+        "draft",
+        "submitted",
+        "booked",
+        "shipment"
+      ]
+    },
+    "shipper_entity": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object",
+          "example": "/company_entity"
+        },
+        "id": {
+          "type": "integer",
+          "example": 9281
+        },
+        "name": {
+          "type": "string",
+          "example": "Zoomit"
+        },
+        "ref": {
+          "type": "string",
+          "example": "zoomit_ref"
+        },
+        "mailing_address": {
+          "type": "object",
+          "properties": {
+            "_object": {
+              "type": "string",
+              "description": "Type of the object",
+              "example": "/address"
+            },
+            "street_address": {
+              "type": "string",
+              "example": "1641 Settlers Lane"
+            },
+            "street_address2": {
+              "type": "string",
+              "example": "STE 2918"
+            },
+            "city": {
+              "type": "string",
+              "example": "Albany"
+            },
+            "state": {
+              "type": "string",
+              "example": "MN"
+            },
+            "country": {
+              "type": "string",
+              "example": "United States of America"
+            },
+            "country_code": {
+              "type": "string",
+              "example": "US"
+            },
+            "zip": {
+              "type": "string",
+              "example": "56307"
+            },
+            "timezone": {
+              "type": "string",
+              "example": "America/Los_Angeles"
+            },
+            "ref": {
+              "type": "string",
+              "example": "address_ref_x"
+            },
+            "unlocode": {
+              "type": "string",
+              "example": "US AL2"
+            }
+          }
+        },
+        "vat_numbers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "Type of the object",
+                "example": "/company_entity/vat_number"
+              },
+              "country_code": {
+                "type": "string",
+                "description": "ISO 3166 two-letter country code",
+                "example": "GB"
+              },
+              "number": {
+                "type": "string",
+                "example": "GB 123456789"
+              }
+            }
+          }
+        }
+      }
+    },
+    "consignee_entity": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object",
+          "example": "/company_entity"
+        },
+        "id": {
+          "type": "integer",
+          "example": 9281
+        },
+        "name": {
+          "type": "string",
+          "example": "Zoomit"
+        },
+        "ref": {
+          "type": "string",
+          "example": "zoomit_ref"
+        },
+        "mailing_address": {
+          "type": "object",
+          "properties": {
+            "_object": {
+              "type": "string",
+              "description": "Type of the object",
+              "example": "/address"
+            },
+            "street_address": {
+              "type": "string",
+              "example": "1641 Settlers Lane"
+            },
+            "street_address2": {
+              "type": "string",
+              "example": "STE 2918"
+            },
+            "city": {
+              "type": "string",
+              "example": "Albany"
+            },
+            "state": {
+              "type": "string",
+              "example": "MN"
+            },
+            "country": {
+              "type": "string",
+              "example": "United States of America"
+            },
+            "country_code": {
+              "type": "string",
+              "example": "US"
+            },
+            "zip": {
+              "type": "string",
+              "example": "56307"
+            },
+            "timezone": {
+              "type": "string",
+              "example": "America/Los_Angeles"
+            },
+            "ref": {
+              "type": "string",
+              "example": "address_ref_x"
+            },
+            "unlocode": {
+              "type": "string",
+              "example": "US AL2"
+            }
+          }
+        },
+        "vat_numbers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "Type of the object",
+                "example": "/company_entity/vat_number"
+              },
+              "country_code": {
+                "type": "string",
+                "description": "ISO 3166 two-letter country code",
+                "example": "GB"
+              },
+              "number": {
+                "type": "string",
+                "example": "GB 123456789"
+              }
+            }
+          }
+        }
+      }
+    },
+    "notify_party": {
+      "type": "string",
+      "default": null,
+      "example": "John Doe | john@example.com | 905-555-1234"
+    },
+    "transportation_mode": {
+      "type": "string",
+      "enum": [
+        "ocean",
+        "air",
+        "truck",
+        "rail",
+        "unknown_transportation",
+        "ocean_air",
+        "truck_intl",
+        "warehouse_storage"
+      ],
+      "example": "ocean"
+    },
+    "ocean_booking": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object",
+          "example": "/ocean/booking"
+        },
+        "is_lcl": {
+          "type": "boolean",
+          "example": true
+        },
+        "container_counts": {
+          "type": "object",
+          "properties": {
+            "_object": {
+              "type": "string",
+              "description": "String representing the object’s type. Always `/container_counts` for this object.",
+              "example": "/container_counts"
+            },
+            "twenty_ft": {
+              "type": "integer",
+              "description": "Quantity of 20 ft containers requested.",
+              "example": 1,
+              "default": 1
+            },
+            "forty_ft": {
+              "type": "integer",
+              "description": "Quantity of 40 ft containers requested.",
+              "example": 2,
+              "default": 2
+            },
+            "forty_ft_hc": {
+              "type": "integer",
+              "description": "Quantity of 40 ft HC containers requested.",
+              "example": 3,
+              "default": 3
+            },
+            "forty_five_ft_hc": {
+              "type": "integer",
+              "description": "Quantity of 45 ft HC containers requested.",
+              "example": 4,
+              "default": 4
+            }
+          }
+        },
+        "incoterm": {
+          "type": "string",
+          "enum": [
+            "EXW",
+            "FOB",
+            "FAS",
+            "FCA",
+            "CPT",
+            "CFR",
+            "CIF",
+            "CIP",
+            "DAT",
+            "DAP",
+            "DDP",
+            "DPU"
+          ],
+          "example": "FOB"
+        },
+        "wants_pickup_service": {
+          "type": "boolean",
+          "example": true
+        },
+        "wants_delivery_service": {
+          "type": "boolean",
+          "example": false
+        },
+        "origin_port": {
+          "type": "object",
+          "properties": {
+            "_object": {
+              "type": "string",
+              "description": "Type of the object",
+              "example": "/place"
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the place",
+              "example": "ORD - Chicago - IL"
+            },
+            "address": {
+              "type": "object",
+              "properties": {
+                "_object": {
+                  "type": "string",
+                  "description": "Type of the object",
+                  "example": "/address"
+                },
+                "street_address": {
+                  "type": "string",
+                  "example": "1641 Settlers Lane"
+                },
+                "street_address2": {
+                  "type": "string",
+                  "example": "STE 2918"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Albany"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "MN"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "United States of America"
+                },
+                "country_code": {
+                  "type": "string",
+                  "example": "US"
+                },
+                "zip": {
+                  "type": "string",
+                  "example": "56307"
+                },
+                "timezone": {
+                  "type": "string",
+                  "example": "America/Los_Angeles"
+                },
+                "ref": {
+                  "type": "string",
+                  "example": "address_ref_x"
+                },
+                "unlocode": {
+                  "type": "string",
+                  "example": "US AL2"
+                }
+              }
+            },
+            "details": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/air/port"
+                      },
+                      "port_code": {
+                        "type": "string",
+                        "example": "3901"
+                      },
+                      "country_code": {
+                        "type": "string",
+                        "example": "US"
+                      },
+                      "iata_code": {
+                        "type": "string",
+                        "example": "LAX"
+                      },
+                      "icao_code": {
+                        "type": "string",
+                        "example": "KLAX"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/ocean/railport"
+                      },
+                      "port_code": {
+                        "type": "string",
+                        "example": "3901"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/trucking/port"
+                      },
+                      "port_code": {
+                        "type": "string",
+                        "example": "3901"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/ocean/port"
+                      },
+                      "port_code": {
+                        "type": "string",
+                        "example": "3901"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/customs/manufacturer"
+                      },
+                      "manufacturer_code": {
+                        "type": "string",
+                        "example": "FRLAVIE243BRE"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "destination_port": {
+          "type": "object",
+          "properties": {
+            "_object": {
+              "type": "string",
+              "description": "Type of the object",
+              "example": "/place"
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the place",
+              "example": "ORD - Chicago - IL"
+            },
+            "address": {
+              "type": "object",
+              "properties": {
+                "_object": {
+                  "type": "string",
+                  "description": "Type of the object",
+                  "example": "/address"
+                },
+                "street_address": {
+                  "type": "string",
+                  "example": "1641 Settlers Lane"
+                },
+                "street_address2": {
+                  "type": "string",
+                  "example": "STE 2918"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Albany"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "MN"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "United States of America"
+                },
+                "country_code": {
+                  "type": "string",
+                  "example": "US"
+                },
+                "zip": {
+                  "type": "string",
+                  "example": "56307"
+                },
+                "timezone": {
+                  "type": "string",
+                  "example": "America/Los_Angeles"
+                },
+                "ref": {
+                  "type": "string",
+                  "example": "address_ref_x"
+                },
+                "unlocode": {
+                  "type": "string",
+                  "example": "US AL2"
+                }
+              }
+            },
+            "details": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/air/port"
+                      },
+                      "port_code": {
+                        "type": "string",
+                        "example": "3901"
+                      },
+                      "country_code": {
+                        "type": "string",
+                        "example": "US"
+                      },
+                      "iata_code": {
+                        "type": "string",
+                        "example": "LAX"
+                      },
+                      "icao_code": {
+                        "type": "string",
+                        "example": "KLAX"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/ocean/railport"
+                      },
+                      "port_code": {
+                        "type": "string",
+                        "example": "3901"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/trucking/port"
+                      },
+                      "port_code": {
+                        "type": "string",
+                        "example": "3901"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/ocean/port"
+                      },
+                      "port_code": {
+                        "type": "string",
+                        "example": "3901"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/customs/manufacturer"
+                      },
+                      "manufacturer_code": {
+                        "type": "string",
+                        "example": "FRLAVIE243BRE"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "product_descriptions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "String representing the object’s type. Always `/product_descriptions` for this object.",
+                "example": "/bookings/product_descriptions"
+              },
+              "description": {
+                "type": "string",
+                "description": "Always required. English description of product in booking.",
+                "example": "Wristwatches"
+              },
+              "description_for_export_customs": {
+                "type": "string",
+                "description": "Required if booking if origin address or origin port is in Mainland China. Chinese description of product in booking.",
+                "example": "手表"
+              },
+              "description_for_export_customs_locale": {
+                "type": "string",
+                "description": "Required if booking if origin address or origin port is in Mainland China. Code for the locale for description_for_export_customs. Currently only `zh_CN`.",
+                "example": "zh_CN"
+              },
+              "hs_code": {
+                "type": "object",
+                "properties": {
+                  "_object": {
+                    "type": "string",
+                    "description": "String representing the object’s type. Always `/hs_code` for this object.",
+                    "example": "/hs_code"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of HS or HTS code classification.",
+                    "example": "N-Butyl-2,2,6,6-tetramethylpiperidin-4-amine (CAS No. 36177-92-1) (provided for in subheading 2933.39.91)"
+                  },
+                  "code": {
+                    "type": "string",
+                    "description": "6 digit (international HS) or 10 digit (US HTS) code.",
+                    "example": 9101
+                  },
+                  "country_code": {
+                    "type": "string",
+                    "example": "US"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "air_booking": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object",
+          "example": "/air/booking"
+        },
+        "incoterm": {
+          "type": "string",
+          "enum": [
+            "EXW",
+            "FOB",
+            "FAS",
+            "FCA",
+            "CPT",
+            "CFR",
+            "CIF",
+            "CIP",
+            "DAT",
+            "DAP",
+            "DDP",
+            "DPU"
+          ],
+          "example": "FOB"
+        },
+        "wants_pickup_service": {
+          "type": "boolean",
+          "example": true
+        },
+        "wants_delivery_service": {
+          "type": "boolean",
+          "example": false
+        },
+        "origin_port": {
+          "type": "object",
+          "properties": {
+            "_object": {
+              "type": "string",
+              "description": "Type of the object",
+              "example": "/place"
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the place",
+              "example": "ORD - Chicago - IL"
+            },
+            "address": {
+              "type": "object",
+              "properties": {
+                "_object": {
+                  "type": "string",
+                  "description": "Type of the object",
+                  "example": "/address"
+                },
+                "street_address": {
+                  "type": "string",
+                  "example": "1641 Settlers Lane"
+                },
+                "street_address2": {
+                  "type": "string",
+                  "example": "STE 2918"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Albany"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "MN"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "United States of America"
+                },
+                "country_code": {
+                  "type": "string",
+                  "example": "US"
+                },
+                "zip": {
+                  "type": "string",
+                  "example": "56307"
+                },
+                "timezone": {
+                  "type": "string",
+                  "example": "America/Los_Angeles"
+                },
+                "ref": {
+                  "type": "string",
+                  "example": "address_ref_x"
+                },
+                "unlocode": {
+                  "type": "string",
+                  "example": "US AL2"
+                }
+              }
+            },
+            "details": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/air/port"
+                      },
+                      "port_code": {
+                        "type": "string",
+                        "example": "3901"
+                      },
+                      "country_code": {
+                        "type": "string",
+                        "example": "US"
+                      },
+                      "iata_code": {
+                        "type": "string",
+                        "example": "LAX"
+                      },
+                      "icao_code": {
+                        "type": "string",
+                        "example": "KLAX"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/ocean/railport"
+                      },
+                      "port_code": {
+                        "type": "string",
+                        "example": "3901"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/trucking/port"
+                      },
+                      "port_code": {
+                        "type": "string",
+                        "example": "3901"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/ocean/port"
+                      },
+                      "port_code": {
+                        "type": "string",
+                        "example": "3901"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/customs/manufacturer"
+                      },
+                      "manufacturer_code": {
+                        "type": "string",
+                        "example": "FRLAVIE243BRE"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "destination_port": {
+          "type": "object",
+          "properties": {
+            "_object": {
+              "type": "string",
+              "description": "Type of the object",
+              "example": "/place"
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the place",
+              "example": "ORD - Chicago - IL"
+            },
+            "address": {
+              "type": "object",
+              "properties": {
+                "_object": {
+                  "type": "string",
+                  "description": "Type of the object",
+                  "example": "/address"
+                },
+                "street_address": {
+                  "type": "string",
+                  "example": "1641 Settlers Lane"
+                },
+                "street_address2": {
+                  "type": "string",
+                  "example": "STE 2918"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Albany"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "MN"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "United States of America"
+                },
+                "country_code": {
+                  "type": "string",
+                  "example": "US"
+                },
+                "zip": {
+                  "type": "string",
+                  "example": "56307"
+                },
+                "timezone": {
+                  "type": "string",
+                  "example": "America/Los_Angeles"
+                },
+                "ref": {
+                  "type": "string",
+                  "example": "address_ref_x"
+                },
+                "unlocode": {
+                  "type": "string",
+                  "example": "US AL2"
+                }
+              }
+            },
+            "details": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/air/port"
+                      },
+                      "port_code": {
+                        "type": "string",
+                        "example": "3901"
+                      },
+                      "country_code": {
+                        "type": "string",
+                        "example": "US"
+                      },
+                      "iata_code": {
+                        "type": "string",
+                        "example": "LAX"
+                      },
+                      "icao_code": {
+                        "type": "string",
+                        "example": "KLAX"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/ocean/railport"
+                      },
+                      "port_code": {
+                        "type": "string",
+                        "example": "3901"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/trucking/port"
+                      },
+                      "port_code": {
+                        "type": "string",
+                        "example": "3901"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/ocean/port"
+                      },
+                      "port_code": {
+                        "type": "string",
+                        "example": "3901"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_object": {
+                        "type": "string",
+                        "description": "Type of the object",
+                        "example": "/customs/manufacturer"
+                      },
+                      "manufacturer_code": {
+                        "type": "string",
+                        "example": "FRLAVIE243BRE"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "product_descriptions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "String representing the object’s type. Always `/product_descriptions` for this object.",
+                "example": "/bookings/product_descriptions"
+              },
+              "description": {
+                "type": "string",
+                "description": "Always required. English description of product in booking.",
+                "example": "Wristwatches"
+              },
+              "description_for_export_customs": {
+                "type": "string",
+                "description": "Required if booking if origin address or origin port is in Mainland China. Chinese description of product in booking.",
+                "example": "手表"
+              },
+              "description_for_export_customs_locale": {
+                "type": "string",
+                "description": "Required if booking if origin address or origin port is in Mainland China. Code for the locale for description_for_export_customs. Currently only `zh_CN`.",
+                "example": "zh_CN"
+              },
+              "hs_code": {
+                "type": "object",
+                "properties": {
+                  "_object": {
+                    "type": "string",
+                    "description": "String representing the object’s type. Always `/hs_code` for this object.",
+                    "example": "/hs_code"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of HS or HTS code classification.",
+                    "example": "N-Butyl-2,2,6,6-tetramethylpiperidin-4-amine (CAS No. 36177-92-1) (provided for in subheading 2933.39.91)"
+                  },
+                  "code": {
+                    "type": "string",
+                    "description": "6 digit (international HS) or 10 digit (US HTS) code.",
+                    "example": 9101
+                  },
+                  "country_code": {
+                    "type": "string",
+                    "example": "US"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "trucking_booking": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object",
+          "example": "/trucking/booking"
+        },
+        "is_ftl": {
+          "type": "boolean",
+          "example": false
+        },
+        "payment_terms": {
+          "type": "string",
+          "enum": [
+            "collect",
+            "prepaid"
+          ],
+          "example": "collect"
+        },
+        "description_of_products": {
+          "type": "string",
+          "example": "Wristwatches"
+        }
+      }
+    },
+    "origin_address": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object",
+          "example": "/address"
+        },
+        "street_address": {
+          "type": "string",
+          "example": "1641 Settlers Lane"
+        },
+        "street_address2": {
+          "type": "string",
+          "example": "STE 2918"
+        },
+        "city": {
+          "type": "string",
+          "example": "Albany"
+        },
+        "state": {
+          "type": "string",
+          "example": "MN"
+        },
+        "country": {
+          "type": "string",
+          "example": "United States of America"
+        },
+        "country_code": {
+          "type": "string",
+          "example": "US"
+        },
+        "zip": {
+          "type": "string",
+          "example": "56307"
+        },
+        "timezone": {
+          "type": "string",
+          "example": "America/Los_Angeles"
+        },
+        "ref": {
+          "type": "string",
+          "example": "address_ref_x"
+        },
+        "unlocode": {
+          "type": "string",
+          "example": "US AL2"
+        }
+      }
+    },
+    "cargo_ready_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "destination_address": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object",
+          "example": "/address"
+        },
+        "street_address": {
+          "type": "string",
+          "example": "1641 Settlers Lane"
+        },
+        "street_address2": {
+          "type": "string",
+          "example": "STE 2918"
+        },
+        "city": {
+          "type": "string",
+          "example": "Albany"
+        },
+        "state": {
+          "type": "string",
+          "example": "MN"
+        },
+        "country": {
+          "type": "string",
+          "example": "United States of America"
+        },
+        "country_code": {
+          "type": "string",
+          "example": "US"
+        },
+        "zip": {
+          "type": "string",
+          "example": "56307"
+        },
+        "timezone": {
+          "type": "string",
+          "example": "America/Los_Angeles"
+        },
+        "ref": {
+          "type": "string",
+          "example": "address_ref_x"
+        },
+        "unlocode": {
+          "type": "string",
+          "example": "US AL2"
+        }
+      }
+    },
+    "delivery_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "wants_export_customs_service": {
+      "type": "boolean",
+      "description": "Determines if the booking requires Flexport to provide export customs services.",
+      "example": true
+    },
+    "wants_import_customs_service": {
+      "type": "boolean",
+      "description": "Determines if the booking requires Flexport to provide import customs services.",
+      "example": true
+    },
+    "cargo": {
+      "type": "object",
+      "description": "With cargo you have two options, detailed or simple. These are both expressed directly on the cargo object. For detailed cargo, `shipping_units` is required, and `weight` and `volume` is required in the `cargo` object or the `shipping_units` object. For simple cargo, `shipping_units` is required, but only one should be specified, and `weight` and `volume` are required in the `cargo` object.",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "String representing the object’s type. Always `/cargo` for this object.",
+          "example": "/cargo"
+        },
+        "volume": {
+          "type": "object",
+          "properties": {
+            "_object": {
+              "type": "string",
+              "description": "Type of the object",
+              "example": "/quantity/volume"
+            },
+            "value": {
+              "type": "number",
+              "description": "total volume",
+              "example": 472.62
+            },
+            "unit": {
+              "type": "string",
+              "description": "unit of measurement. \"cbm\" for cubic meters. \"cbft\" for cubic feet.",
+              "enum": [
+                "cbm",
+                "cbft"
+              ]
+            }
+          }
+        },
+        "weight": {
+          "type": "object",
+          "properties": {
+            "_object": {
+              "type": "string",
+              "description": "String representing the object’s type. Always `/quantity/weight` for this object.",
+              "example": "/quantity/weight"
+            },
+            "value": {
+              "type": "number",
+              "description": "Required. Specifies the weight as a float.",
+              "example": 2300.4
+            },
+            "unit": {
+              "type": "string",
+              "description": "Required. Unit of measurement. \"kg\" for kilograms and \"lbs\" for pounds.",
+              "enum": [
+                "kg",
+                "lbs"
+              ]
+            }
+          }
+        },
+        "marks_and_numbers": {
+          "type": "string",
+          "description": "Optional. Identifying markings and numbers that are visible on the cargo.",
+          "example": "Fragile",
+          "default": "Fragile"
+        },
+        "shipping_units": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "For detailed cargo, `shipping_units` is required. For simple cargo, `shipping_units` is required, but only one should be specified.",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "String representing the object’s type. Always `/shipping_unit` for this object.",
+                "example": "/shipping_unit"
+              },
+              "name": {
+                "type": "string",
+                "description": "Optional. Name of the unit of cargo.",
+                "example": "Cellular phones",
+                "default": "Cellular phones"
+              },
+              "volume": {
+                "type": "object",
+                "properties": {
+                  "_object": {
+                    "type": "string",
+                    "description": "Type of the object",
+                    "example": "/quantity/volume"
+                  },
+                  "value": {
+                    "type": "number",
+                    "description": "total volume",
+                    "example": 472.62
+                  },
+                  "unit": {
+                    "type": "string",
+                    "description": "unit of measurement. \"cbm\" for cubic meters. \"cbft\" for cubic feet.",
+                    "enum": [
+                      "cbm",
+                      "cbft"
+                    ]
+                  }
+                }
+              },
+              "weight": {
+                "type": "object",
+                "properties": {
+                  "_object": {
+                    "type": "string",
+                    "description": "String representing the object’s type. Always `/quantity/weight` for this object.",
+                    "example": "/quantity/weight"
+                  },
+                  "value": {
+                    "type": "number",
+                    "description": "Required. Specifies the weight as a float.",
+                    "example": 2300.4
+                  },
+                  "unit": {
+                    "type": "string",
+                    "description": "Required. Unit of measurement. \"kg\" for kilograms and \"lbs\" for pounds.",
+                    "enum": [
+                      "kg",
+                      "lbs"
+                    ]
+                  }
+                }
+              },
+              "height": {
+                "type": "object",
+                "properties": {
+                  "_object": {
+                    "type": "string",
+                    "description": "String representing the object’s type. Always `/quantity/length` for this object.",
+                    "example": "/quantity/length"
+                  },
+                  "value": {
+                    "type": "number",
+                    "description": "Required. Specifies the length as a float.",
+                    "example": 100
+                  },
+                  "unit": {
+                    "type": "string",
+                    "description": "Required. Unit of measurement. \"cm\" for centimeters. \"in\" for inches.",
+                    "example": "cm",
+                    "enum": [
+                      "cm",
+                      "in"
+                    ]
+                  }
+                }
+              },
+              "length": {
+                "type": "object",
+                "properties": {
+                  "_object": {
+                    "type": "string",
+                    "description": "String representing the object’s type. Always `/quantity/length` for this object.",
+                    "example": "/quantity/length"
+                  },
+                  "value": {
+                    "type": "number",
+                    "description": "Required. Specifies the length as a float.",
+                    "example": 100
+                  },
+                  "unit": {
+                    "type": "string",
+                    "description": "Required. Unit of measurement. \"cm\" for centimeters. \"in\" for inches.",
+                    "example": "cm",
+                    "enum": [
+                      "cm",
+                      "in"
+                    ]
+                  }
+                }
+              },
+              "width": {
+                "type": "object",
+                "properties": {
+                  "_object": {
+                    "type": "string",
+                    "description": "String representing the object’s type. Always `/quantity/length` for this object.",
+                    "example": "/quantity/length"
+                  },
+                  "value": {
+                    "type": "number",
+                    "description": "Required. Specifies the length as a float.",
+                    "example": 100
+                  },
+                  "unit": {
+                    "type": "string",
+                    "description": "Required. Unit of measurement. \"cm\" for centimeters. \"in\" for inches.",
+                    "example": "cm",
+                    "enum": [
+                      "cm",
+                      "in"
+                    ]
+                  }
+                }
+              },
+              "count": {
+                "type": "integer",
+                "description": "Required. Total number of this shipping unit.",
+                "example": 9,
+                "default": 9
+              },
+              "atomic_count": {
+                "type": "integer",
+                "description": "Required if `unit_type` = `pallet`. The number of atomic units, i.e. units that will not be unpacked and broken up during shipping, contained in each shipping unit.",
+                "example": 9,
+                "default": 9
+              },
+              "unit_type": {
+                "type": "string",
+                "description": "Required. Packing method of the shipping. This can be `bag`, `bale`, `barrel`, `carton`, `crate`, `package`, `pallet`, or `roll`.",
+                "example": "pallet",
+                "default": "pallet"
+              }
+            }
+          },
+          "default": [
+            {
+              "name": "Cellular phones",
+              "volume": {
+                "value": 10.3,
+                "unit": "cbm"
+              },
+              "weight": {
+                "value": 2300.4,
+                "unit": "kg"
+              },
+              "height": {
+                "value": 100,
+                "unit": "cm"
+              },
+              "length": {
+                "value": 100,
+                "unit": "cm"
+              },
+              "width": {
+                "value": 100,
+                "unit": "cm"
+              },
+              "count": 9,
+              "atomic_count": 9,
+              "unit_type": "pallet"
+            }
+          ]
+        },
+        "contains_hazmat": {
+          "type": "boolean",
+          "description": "Required. Whether the cargo contains hazardous materials.",
+          "example": false,
+          "default": false
+        },
+        "contains_magnets": {
+          "type": "boolean",
+          "description": "Required. Whether the cargo contains magnets.",
+          "example": false,
+          "default": false
+        },
+        "contains_other_dangerous_goods": {
+          "type": "boolean",
+          "description": "Required. Whether the cargo contains other non-hazmat, non-magnet, non-battery dangerous goods.",
+          "example": false,
+          "default": false
+        },
+        "contains_li_ion": {
+          "type": "boolean",
+          "description": "Required. Whether the cargo contains lithium-ion batteries.",
+          "example": false,
+          "default": true
+        },
+        "contains_non_li_ion_battery": {
+          "type": "boolean",
+          "description": "Required. Whether the cargo contains non-lithium-ion batteries, e.g. lithium batteries.",
+          "example": false,
+          "default": false
+        },
+        "lithium_batteries_packing_types": {
+          "type": "array",
+          "description": "Required if `contains_li_ion` is `true`. List of ways in which lithium-ion batteries will be packed for this booking. This can be a subset of `packed_loose`, `packed_with_equipment`, `contained_in_equipment`, and `contained_in_battery_powered_vehicle`.",
+          "items": {
+            "enum": [
+              "packed_loose",
+              "packed_with_equipment",
+              "contained_in_equipment",
+              "contained_in_battery_powered_vehicles"
+            ]
+          },
+          "default": [
+            "packed_loose"
+          ]
+        }
+      }
+    },
+    "special_instructions": {
+      "type": "string",
+      "example": "This message is written in invisible ink."
+    },
+    "booking_line_items": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object",
+          "example": "/api/refs/collection"
+        },
+        "ref_type": {
+          "type": "string",
+          "description": "Type of the object in this list.",
+          "example": "/purchase_orders/booking_line_item"
+        },
+        "link": {
+          "type": "string",
+          "description": "URL to fetch list of objects.",
+          "example": "https://api.flexport.com/booking_line_items?f.booking.id=123"
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Set of custom key-values specific to the object. The keys are strings and values are arrays of strings. The set of valid keys is always the consignee's list of keys, even if call was made by a different party.\n",
+      "example": {
+        "purchase_order": [
+          "12345"
+        ],
+        "sku": [
+          "abc123"
+        ]
+      }
+    }
+  },
+  "default": {
+    "id": 2983,
+    "_object": "/booking",
+    "name": "PO 12345",
+    "shipment": {
+      "_object": "/api/refs/object",
+      "ref_type": "/shipment",
+      "link": "https://api.flexport.com/shipments/123",
+      "id": 123
+    },
+    "status": "archived",
+    "shipper_entity": {
+      "_object": "/company_entity",
+      "id": 9281,
+      "name": "Zoomit",
+      "ref": "zoomit_ref",
+      "mailing_address": {
+        "_object": "/address",
+        "street_address": "1641 Settlers Lane",
+        "street_address2": "STE 2918",
+        "city": "Albany",
+        "state": "MN",
+        "country": "United States of America",
+        "country_code": "US",
+        "zip": "56307",
+        "timezone": "America/Los_Angeles",
+        "ref": "address_ref_x",
+        "unlocode": "US AL2"
+      },
+      "vat_numbers": [
+        {
+          "_object": "/company_entity/vat_number",
+          "country_code": "GB",
+          "number": "GB 123456789"
+        }
+      ]
+    },
+    "consignee_entity": {
+      "_object": "/company_entity",
+      "id": 9281,
+      "name": "Zoomit",
+      "ref": "zoomit_ref",
+      "mailing_address": {
+        "_object": "/address",
+        "street_address": "1641 Settlers Lane",
+        "street_address2": "STE 2918",
+        "city": "Albany",
+        "state": "MN",
+        "country": "United States of America",
+        "country_code": "US",
+        "zip": "56307",
+        "timezone": "America/Los_Angeles",
+        "ref": "address_ref_x",
+        "unlocode": "US AL2"
+      },
+      "vat_numbers": [
+        {
+          "_object": "/company_entity/vat_number",
+          "country_code": "GB",
+          "number": "GB 123456789"
+        }
+      ]
+    },
+    "notify_party": "John Doe | john@example.com | 905-555-1234",
+    "transportation_mode": "ocean",
+    "ocean_booking": {
+      "_object": "/ocean/booking",
+      "is_lcl": true,
+      "container_counts": {
+        "_object": "/container_counts",
+        "twenty_ft": 1,
+        "forty_ft": 2,
+        "forty_ft_hc": 3,
+        "forty_five_ft_hc": 4
+      },
+      "incoterm": "FOB",
+      "wants_pickup_service": true,
+      "wants_delivery_service": false,
+      "origin_port": {
+        "_object": "/place",
+        "name": "ORD - Chicago - IL",
+        "address": {
+          "_object": "/address",
+          "street_address": "1641 Settlers Lane",
+          "street_address2": "STE 2918",
+          "city": "Albany",
+          "state": "MN",
+          "country": "United States of America",
+          "country_code": "US",
+          "zip": "56307",
+          "timezone": "America/Los_Angeles",
+          "ref": "address_ref_x",
+          "unlocode": "US AL2"
+        },
+        "details": [
+          {
+            "_object": "/air/port",
+            "port_code": "3901",
+            "country_code": "US",
+            "iata_code": "LAX",
+            "icao_code": "KLAX"
+          }
+        ]
+      },
+      "destination_port": {
+        "_object": "/place",
+        "name": "ORD - Chicago - IL",
+        "address": {
+          "_object": "/address",
+          "street_address": "1641 Settlers Lane",
+          "street_address2": "STE 2918",
+          "city": "Albany",
+          "state": "MN",
+          "country": "United States of America",
+          "country_code": "US",
+          "zip": "56307",
+          "timezone": "America/Los_Angeles",
+          "ref": "address_ref_x",
+          "unlocode": "US AL2"
+        },
+        "details": [
+          {
+            "_object": "/air/port",
+            "port_code": "3901",
+            "country_code": "US",
+            "iata_code": "LAX",
+            "icao_code": "KLAX"
+          }
+        ]
+      },
+      "product_descriptions": [
+        {
+          "_object": "/bookings/product_descriptions",
+          "description": "Wristwatches",
+          "description_for_export_customs": "手表",
+          "description_for_export_customs_locale": "zh_CN",
+          "hs_code": {
+            "_object": "/hs_code",
+            "description": "N-Butyl-2,2,6,6-tetramethylpiperidin-4-amine (CAS No. 36177-92-1) (provided for in subheading 2933.39.91)",
+            "code": 9101,
+            "country_code": "US"
+          }
+        }
+      ]
+    },
+    "air_booking": {
+      "_object": "/air/booking",
+      "incoterm": "FOB",
+      "wants_pickup_service": true,
+      "wants_delivery_service": false,
+      "origin_port": {
+        "_object": "/place",
+        "name": "ORD - Chicago - IL",
+        "address": {
+          "_object": "/address",
+          "street_address": "1641 Settlers Lane",
+          "street_address2": "STE 2918",
+          "city": "Albany",
+          "state": "MN",
+          "country": "United States of America",
+          "country_code": "US",
+          "zip": "56307",
+          "timezone": "America/Los_Angeles",
+          "ref": "address_ref_x",
+          "unlocode": "US AL2"
+        },
+        "details": [
+          {
+            "_object": "/air/port",
+            "port_code": "3901",
+            "country_code": "US",
+            "iata_code": "LAX",
+            "icao_code": "KLAX"
+          }
+        ]
+      },
+      "destination_port": {
+        "_object": "/place",
+        "name": "ORD - Chicago - IL",
+        "address": {
+          "_object": "/address",
+          "street_address": "1641 Settlers Lane",
+          "street_address2": "STE 2918",
+          "city": "Albany",
+          "state": "MN",
+          "country": "United States of America",
+          "country_code": "US",
+          "zip": "56307",
+          "timezone": "America/Los_Angeles",
+          "ref": "address_ref_x",
+          "unlocode": "US AL2"
+        },
+        "details": [
+          {
+            "_object": "/air/port",
+            "port_code": "3901",
+            "country_code": "US",
+            "iata_code": "LAX",
+            "icao_code": "KLAX"
+          }
+        ]
+      },
+      "product_descriptions": [
+        {
+          "_object": "/bookings/product_descriptions",
+          "description": "Wristwatches",
+          "description_for_export_customs": "手表",
+          "description_for_export_customs_locale": "zh_CN",
+          "hs_code": {
+            "_object": "/hs_code",
+            "description": "N-Butyl-2,2,6,6-tetramethylpiperidin-4-amine (CAS No. 36177-92-1) (provided for in subheading 2933.39.91)",
+            "code": 9101,
+            "country_code": "US"
+          }
+        }
+      ]
+    },
+    "trucking_booking": {
+      "_object": "/trucking/booking",
+      "is_ftl": false,
+      "payment_terms": "collect",
+      "description_of_products": "Wristwatches"
+    },
+    "origin_address": {
+      "_object": "/address",
+      "street_address": "1641 Settlers Lane",
+      "street_address2": "STE 2918",
+      "city": "Albany",
+      "state": "MN",
+      "country": "United States of America",
+      "country_code": "US",
+      "zip": "56307",
+      "timezone": "America/Los_Angeles",
+      "ref": "address_ref_x",
+      "unlocode": "US AL2"
+    },
+    "cargo_ready_date": "1970-01-01",
+    "destination_address": {
+      "_object": "/address",
+      "street_address": "1641 Settlers Lane",
+      "street_address2": "STE 2918",
+      "city": "Albany",
+      "state": "MN",
+      "country": "United States of America",
+      "country_code": "US",
+      "zip": "56307",
+      "timezone": "America/Los_Angeles",
+      "ref": "address_ref_x",
+      "unlocode": "US AL2"
+    },
+    "delivery_date": "1970-01-01",
+    "wants_export_customs_service": true,
+    "wants_import_customs_service": true,
+    "cargo": {
+      "_object": "/cargo",
+      "volume": {
+        "_object": "/quantity/volume",
+        "value": 472.62,
+        "unit": "cbm"
+      },
+      "weight": {
+        "_object": "/quantity/weight",
+        "value": 2300.4,
+        "unit": "kg"
+      },
+      "marks_and_numbers": "Fragile",
+      "shipping_units": [
+        {
+          "name": "Cellular phones",
+          "volume": {
+            "value": 10.3,
+            "unit": "cbm"
+          },
+          "weight": {
+            "value": 2300.4,
+            "unit": "kg"
+          },
+          "height": {
+            "value": 100,
+            "unit": "cm"
+          },
+          "length": {
+            "value": 100,
+            "unit": "cm"
+          },
+          "width": {
+            "value": 100,
+            "unit": "cm"
+          },
+          "count": 9,
+          "atomic_count": 9,
+          "unit_type": "pallet"
+        }
+      ],
+      "contains_hazmat": false,
+      "contains_magnets": false,
+      "contains_other_dangerous_goods": false,
+      "contains_li_ion": false,
+      "contains_non_li_ion_battery": false,
+      "lithium_batteries_packing_types": [
+        "packed_loose"
+      ]
+    },
+    "special_instructions": "This message is written in invisible ink.",
+    "booking_line_items": {
+      "_object": "/api/refs/collection",
+      "ref_type": "/purchase_orders/booking_line_item",
+      "link": "https://api.flexport.com/booking_line_items?f.booking.id=123"
+    },
+    "created_at": "1970-01-01T00:00:00.000Z",
+    "metadata": {
+      "purchase_order": [
+        "12345"
+      ],
+      "sku": [
+        "abc123"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
