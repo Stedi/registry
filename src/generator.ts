@@ -161,5 +161,6 @@ function capitalizeFirstLetter(str: string) {
   await generateAll("./schemas", "stripe");
   await generateAll("./schemas", "ramp");
   await generateAll("./schemas", "flexport");
+  await generateAll("./schemas", "klaviyo");
   await generateAll("./schemas", "shopify", "./shopify/graphql/2022-01");
 })();
