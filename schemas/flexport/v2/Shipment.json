@@ -3,30 +3,19 @@
   "properties": {
     "metadata": {
       "type": "object",
-      "description": "Set of custom key-values specific to the object. The keys are strings and values are arrays of strings. The set of valid keys is always the consignee's list of keys, even if call was made by a different party.\n",
-      "example": {
-        "purchase_order": [
-          "12345"
-        ],
-        "sku": [
-          "abc123"
-        ]
-      }
+      "description": "Set of custom key-values specific to the object. The keys are strings and values are arrays of strings. The set of valid keys is always the consignee's list of keys, even if call was made by a different party.\n"
     },
     "_object": {
       "type": "string",
-      "description": "Type of the object",
-      "example": "/shipments"
+      "description": "Type of the object"
     },
     "id": {
       "type": "integer",
-      "description": "Unique identifier for the shipment",
-      "example": 2983
+      "description": "Unique identifier for the shipment"
     },
     "name": {
       "type": "string",
-      "description": "The name of the shipment",
-      "example": "ABC Shipment"
+      "description": "The name of the shipment"
     },
     "transportation_mode": {
       "type": "string",
@@ -39,8 +28,7 @@
         "ocean_air",
         "truck_intl",
         "warehouse_storage"
-      ],
-      "example": "ocean"
+      ]
     },
     "freight_type": {
       "type": "string",
@@ -49,8 +37,7 @@
         "port_to_port",
         "door_to_door",
         "door_to_port"
-      ],
-      "example": "port_to_door"
+      ]
     },
     "incoterm": {
       "type": "string",
@@ -67,21 +54,18 @@
         "DAP",
         "DDP",
         "DPU"
-      ],
-      "example": "FOB"
+      ]
     },
     "calculated_weight": {
       "type": "object",
       "properties": {
         "_object": {
           "type": "string",
-          "description": "String representing the object’s type. Always `/quantity/weight` for this object.",
-          "example": "/quantity/weight"
+          "description": "String representing the object’s type. Always `/quantity/weight` for this object."
         },
         "value": {
           "type": "number",
-          "description": "Required. Specifies the weight as a float.",
-          "example": 2300.4
+          "description": "Required. Specifies the weight as a float."
         },
         "unit": {
           "type": "string",
@@ -98,13 +82,11 @@
       "properties": {
         "_object": {
           "type": "string",
-          "description": "Type of the object",
-          "example": "/quantity/volume"
+          "description": "Type of the object"
         },
         "value": {
           "type": "number",
-          "description": "total volume",
-          "example": 472.62
+          "description": "total volume"
         },
         "unit": {
           "type": "string",
@@ -117,12 +99,10 @@
       }
     },
     "pieces": {
-      "type": "integer",
-      "example": 8372
+      "type": "integer"
     },
     "it_number": {
-      "type": "string",
-      "example": "V12345678"
+      "type": "string"
     },
     "created_date": {
       "type": "string",
@@ -138,8 +118,7 @@
         "arrival_port",
         "in_transit_to_final_destination",
         "final_destination"
-      ],
-      "example": "in_transit_to_arrival_port"
+      ]
     },
     "priority": {
       "type": "string",
@@ -147,7 +126,6 @@
         "standard",
         "high"
       ],
-      "example": "standard",
       "description": "The level of attention Flexport should give to this shipment"
     },
     "updated_at": {
@@ -176,13 +154,11 @@
     },
     "wants_freight_management_bco": {
       "type": "boolean",
-      "description": "Determines if a shipment bypasses a freight forwader and is booked directly with a steamship line.",
-      "example": true
+      "description": "Determines if a shipment bypasses a freight forwader and is booked directly with a steamship line."
     },
     "wants_flexport_freight": {
       "type": "boolean",
-      "description": "Determines if a shipment is using Flexport services for a combination of import customs clearance or final leg delivery.",
-      "example": true
+      "description": "Determines if a shipment is using Flexport services for a combination of import customs clearance or final leg delivery."
     },
     "estimated_picked_up_in_full_date": {
       "type": "string",
@@ -202,55 +178,45 @@
     },
     "wants_export_customs_service": {
       "type": "boolean",
-      "description": "Determines if the shipment requires Flexport to provide export customs services.",
-      "example": true
+      "description": "Determines if the shipment requires Flexport to provide export customs services."
     },
     "wants_import_customs_service": {
       "type": "boolean",
-      "description": "Determines if the shipment requires Flexport to provide import customs services.",
-      "example": true
+      "description": "Determines if the shipment requires Flexport to provide import customs services."
     },
     "ocean_shipment": {
       "type": "object",
       "properties": {
         "_object": {
           "type": "string",
-          "description": "Type of the object",
-          "example": "/ocean/shipment"
+          "description": "Type of the object"
         },
         "is_lcl": {
-          "type": "boolean",
-          "example": false
+          "type": "boolean"
         },
         "house_bill_number": {
-          "type": "string",
-          "example": "TUWSANR18658"
+          "type": "string"
         },
         "master_bill_number": {
-          "type": "string",
-          "example": "NEWO697216024"
+          "type": "string"
         },
         "carrier_booking_number": {
-          "type": "string",
-          "example": "697216024"
+          "type": "string"
         },
         "containers": {
           "type": "object",
           "properties": {
             "_object": {
               "type": "string",
-              "description": "Type of the object",
-              "example": "/api/refs/collection"
+              "description": "Type of the object"
             },
             "ref_type": {
               "type": "string",
-              "description": "Type of the object in this list.",
-              "example": "/ocean/shipment_container"
+              "description": "Type of the object in this list."
             },
             "link": {
               "type": "string",
-              "description": "URL to fetch list of objects.",
-              "example": "https://api.flexport.com/ocean/shipment_containers?f.shipment.id=123"
+              "description": "URL to fetch list of objects."
             }
           }
         }
@@ -261,29 +227,24 @@
       "properties": {
         "_object": {
           "type": "string",
-          "description": "Type of the object",
-          "example": "/air/shipment"
+          "description": "Type of the object"
         },
         "house_airway_bill": {
-          "type": "string",
-          "example": "HWXJKE67732"
+          "type": "string"
         },
         "master_airway_bill": {
-          "type": "string",
-          "example": "22831046871"
+          "type": "string"
         },
         "chargeable_weight": {
           "type": "object",
           "properties": {
             "_object": {
               "type": "string",
-              "description": "String representing the object’s type. Always `/quantity/weight` for this object.",
-              "example": "/quantity/weight"
+              "description": "String representing the object’s type. Always `/quantity/weight` for this object."
             },
             "value": {
               "type": "number",
-              "description": "Required. Specifies the weight as a float.",
-              "example": 2300.4
+              "description": "Required. Specifies the weight as a float."
             },
             "unit": {
               "type": "string",
@@ -300,13 +261,11 @@
           "properties": {
             "_object": {
               "type": "string",
-              "description": "Type of the object",
-              "example": "/quantity/volume"
+              "description": "Type of the object"
             },
             "value": {
               "type": "number",
-              "description": "total volume",
-              "example": 472.62
+              "description": "total volume"
             },
             "unit": {
               "type": "string",
@@ -327,68 +286,53 @@
         "properties": {
           "_object": {
             "type": "string",
-            "description": "Type of the object",
-            "example": "/company_entity"
+            "description": "Type of the object"
           },
           "id": {
-            "type": "integer",
-            "example": 9281
+            "type": "integer"
           },
           "name": {
-            "type": "string",
-            "example": "Zoomit"
+            "type": "string"
           },
           "ref": {
-            "type": "string",
-            "example": "zoomit_ref"
+            "type": "string"
           },
           "mailing_address": {
             "type": "object",
             "properties": {
               "_object": {
                 "type": "string",
-                "description": "Type of the object",
-                "example": "/address"
+                "description": "Type of the object"
               },
               "street_address": {
-                "type": "string",
-                "example": "1641 Settlers Lane"
+                "type": "string"
               },
               "street_address2": {
-                "type": "string",
-                "example": "STE 2918"
+                "type": "string"
               },
               "city": {
-                "type": "string",
-                "example": "Albany"
+                "type": "string"
               },
               "state": {
-                "type": "string",
-                "example": "MN"
+                "type": "string"
               },
               "country": {
-                "type": "string",
-                "example": "United States of America"
+                "type": "string"
               },
               "country_code": {
-                "type": "string",
-                "example": "US"
+                "type": "string"
               },
               "zip": {
-                "type": "string",
-                "example": "56307"
+                "type": "string"
               },
               "timezone": {
-                "type": "string",
-                "example": "America/Los_Angeles"
+                "type": "string"
               },
               "ref": {
-                "type": "string",
-                "example": "address_ref_x"
+                "type": "string"
               },
               "unlocode": {
-                "type": "string",
-                "example": "US AL2"
+                "type": "string"
               }
             }
           },
@@ -399,17 +343,14 @@
               "properties": {
                 "_object": {
                   "type": "string",
-                  "description": "Type of the object",
-                  "example": "/company_entity/vat_number"
+                  "description": "Type of the object"
                 },
                 "country_code": {
                   "type": "string",
-                  "description": "ISO 3166 two-letter country code",
-                  "example": "GB"
+                  "description": "ISO 3166 two-letter country code"
                 },
                 "number": {
-                  "type": "string",
-                  "example": "GB 123456789"
+                  "type": "string"
                 }
               }
             }
@@ -424,68 +365,53 @@
         "properties": {
           "_object": {
             "type": "string",
-            "description": "Type of the object",
-            "example": "/company_entity"
+            "description": "Type of the object"
           },
           "id": {
-            "type": "integer",
-            "example": 9281
+            "type": "integer"
           },
           "name": {
-            "type": "string",
-            "example": "Zoomit"
+            "type": "string"
           },
           "ref": {
-            "type": "string",
-            "example": "zoomit_ref"
+            "type": "string"
           },
           "mailing_address": {
             "type": "object",
             "properties": {
               "_object": {
                 "type": "string",
-                "description": "Type of the object",
-                "example": "/address"
+                "description": "Type of the object"
               },
               "street_address": {
-                "type": "string",
-                "example": "1641 Settlers Lane"
+                "type": "string"
               },
               "street_address2": {
-                "type": "string",
-                "example": "STE 2918"
+                "type": "string"
               },
               "city": {
-                "type": "string",
-                "example": "Albany"
+                "type": "string"
               },
               "state": {
-                "type": "string",
-                "example": "MN"
+                "type": "string"
               },
               "country": {
-                "type": "string",
-                "example": "United States of America"
+                "type": "string"
               },
               "country_code": {
-                "type": "string",
-                "example": "US"
+                "type": "string"
               },
               "zip": {
-                "type": "string",
-                "example": "56307"
+                "type": "string"
               },
               "timezone": {
-                "type": "string",
-                "example": "America/Los_Angeles"
+                "type": "string"
               },
               "ref": {
-                "type": "string",
-                "example": "address_ref_x"
+                "type": "string"
               },
               "unlocode": {
-                "type": "string",
-                "example": "US AL2"
+                "type": "string"
               }
             }
           },
@@ -496,17 +422,14 @@
               "properties": {
                 "_object": {
                   "type": "string",
-                  "description": "Type of the object",
-                  "example": "/company_entity/vat_number"
+                  "description": "Type of the object"
                 },
                 "country_code": {
                   "type": "string",
-                  "description": "ISO 3166 two-letter country code",
-                  "example": "GB"
+                  "description": "ISO 3166 two-letter country code"
                 },
                 "number": {
-                  "type": "string",
-                  "example": "GB 123456789"
+                  "type": "string"
                 }
               }
             }
@@ -521,68 +444,53 @@
         "properties": {
           "_object": {
             "type": "string",
-            "description": "Type of the object",
-            "example": "/company_entity"
+            "description": "Type of the object"
           },
           "id": {
-            "type": "integer",
-            "example": 9281
+            "type": "integer"
           },
           "name": {
-            "type": "string",
-            "example": "Zoomit"
+            "type": "string"
           },
           "ref": {
-            "type": "string",
-            "example": "zoomit_ref"
+            "type": "string"
           },
           "mailing_address": {
             "type": "object",
             "properties": {
               "_object": {
                 "type": "string",
-                "description": "Type of the object",
-                "example": "/address"
+                "description": "Type of the object"
               },
               "street_address": {
-                "type": "string",
-                "example": "1641 Settlers Lane"
+                "type": "string"
               },
               "street_address2": {
-                "type": "string",
-                "example": "STE 2918"
+                "type": "string"
               },
               "city": {
-                "type": "string",
-                "example": "Albany"
+                "type": "string"
               },
               "state": {
-                "type": "string",
-                "example": "MN"
+                "type": "string"
               },
               "country": {
-                "type": "string",
-                "example": "United States of America"
+                "type": "string"
               },
               "country_code": {
-                "type": "string",
-                "example": "US"
+                "type": "string"
               },
               "zip": {
-                "type": "string",
-                "example": "56307"
+                "type": "string"
               },
               "timezone": {
-                "type": "string",
-                "example": "America/Los_Angeles"
+                "type": "string"
               },
               "ref": {
-                "type": "string",
-                "example": "address_ref_x"
+                "type": "string"
               },
               "unlocode": {
-                "type": "string",
-                "example": "US AL2"
+                "type": "string"
               }
             }
           },
@@ -593,17 +501,14 @@
               "properties": {
                 "_object": {
                   "type": "string",
-                  "description": "Type of the object",
-                  "example": "/company_entity/vat_number"
+                  "description": "Type of the object"
                 },
                 "country_code": {
                   "type": "string",
-                  "description": "ISO 3166 two-letter country code",
-                  "example": "GB"
+                  "description": "ISO 3166 two-letter country code"
                 },
                 "number": {
-                  "type": "string",
-                  "example": "GB 123456789"
+                  "type": "string"
                 }
               }
             }
@@ -618,68 +523,53 @@
         "properties": {
           "_object": {
             "type": "string",
-            "description": "Type of the object",
-            "example": "/company_entity"
+            "description": "Type of the object"
           },
           "id": {
-            "type": "integer",
-            "example": 9281
+            "type": "integer"
           },
           "name": {
-            "type": "string",
-            "example": "Zoomit"
+            "type": "string"
           },
           "ref": {
-            "type": "string",
-            "example": "zoomit_ref"
+            "type": "string"
           },
           "mailing_address": {
             "type": "object",
             "properties": {
               "_object": {
                 "type": "string",
-                "description": "Type of the object",
-                "example": "/address"
+                "description": "Type of the object"
               },
               "street_address": {
-                "type": "string",
-                "example": "1641 Settlers Lane"
+                "type": "string"
               },
               "street_address2": {
-                "type": "string",
-                "example": "STE 2918"
+                "type": "string"
               },
               "city": {
-                "type": "string",
-                "example": "Albany"
+                "type": "string"
               },
               "state": {
-                "type": "string",
-                "example": "MN"
+                "type": "string"
               },
               "country": {
-                "type": "string",
-                "example": "United States of America"
+                "type": "string"
               },
               "country_code": {
-                "type": "string",
-                "example": "US"
+                "type": "string"
               },
               "zip": {
-                "type": "string",
-                "example": "56307"
+                "type": "string"
               },
               "timezone": {
-                "type": "string",
-                "example": "America/Los_Angeles"
+                "type": "string"
               },
               "ref": {
-                "type": "string",
-                "example": "address_ref_x"
+                "type": "string"
               },
               "unlocode": {
-                "type": "string",
-                "example": "US AL2"
+                "type": "string"
               }
             }
           },
@@ -690,17 +580,14 @@
               "properties": {
                 "_object": {
                   "type": "string",
-                  "description": "Type of the object",
-                  "example": "/company_entity/vat_number"
+                  "description": "Type of the object"
                 },
                 "country_code": {
                   "type": "string",
-                  "description": "ISO 3166 two-letter country code",
-                  "example": "GB"
+                  "description": "ISO 3166 two-letter country code"
                 },
                 "number": {
-                  "type": "string",
-                  "example": "GB 123456789"
+                  "type": "string"
                 }
               }
             }
@@ -715,68 +602,53 @@
         "properties": {
           "_object": {
             "type": "string",
-            "description": "Type of the object",
-            "example": "/company_entity"
+            "description": "Type of the object"
           },
           "id": {
-            "type": "integer",
-            "example": 9281
+            "type": "integer"
           },
           "name": {
-            "type": "string",
-            "example": "Zoomit"
+            "type": "string"
           },
           "ref": {
-            "type": "string",
-            "example": "zoomit_ref"
+            "type": "string"
           },
           "mailing_address": {
             "type": "object",
             "properties": {
               "_object": {
                 "type": "string",
-                "description": "Type of the object",
-                "example": "/address"
+                "description": "Type of the object"
               },
               "street_address": {
-                "type": "string",
-                "example": "1641 Settlers Lane"
+                "type": "string"
               },
               "street_address2": {
-                "type": "string",
-                "example": "STE 2918"
+                "type": "string"
               },
               "city": {
-                "type": "string",
-                "example": "Albany"
+                "type": "string"
               },
               "state": {
-                "type": "string",
-                "example": "MN"
+                "type": "string"
               },
               "country": {
-                "type": "string",
-                "example": "United States of America"
+                "type": "string"
               },
               "country_code": {
-                "type": "string",
-                "example": "US"
+                "type": "string"
               },
               "zip": {
-                "type": "string",
-                "example": "56307"
+                "type": "string"
               },
               "timezone": {
-                "type": "string",
-                "example": "America/Los_Angeles"
+                "type": "string"
               },
               "ref": {
-                "type": "string",
-                "example": "address_ref_x"
+                "type": "string"
               },
               "unlocode": {
-                "type": "string",
-                "example": "US AL2"
+                "type": "string"
               }
             }
           },
@@ -787,17 +659,14 @@
               "properties": {
                 "_object": {
                   "type": "string",
-                  "description": "Type of the object",
-                  "example": "/company_entity/vat_number"
+                  "description": "Type of the object"
                 },
                 "country_code": {
                   "type": "string",
-                  "description": "ISO 3166 two-letter country code",
-                  "example": "GB"
+                  "description": "ISO 3166 two-letter country code"
                 },
                 "number": {
-                  "type": "string",
-                  "example": "GB 123456789"
+                  "type": "string"
                 }
               }
             }
@@ -812,29 +681,24 @@
         "properties": {
           "_object": {
             "type": "string",
-            "description": "Type of the object",
-            "example": "/shipment_item"
+            "description": "Type of the object"
           },
           "id": {
-            "type": "integer",
-            "example": 29820
+            "type": "integer"
           },
           "total_units": {
-            "type": "integer",
-            "example": 523
+            "type": "integer"
           },
           "total_weight": {
             "type": "object",
             "properties": {
               "_object": {
                 "type": "string",
-                "description": "String representing the object’s type. Always `/quantity/weight` for this object.",
-                "example": "/quantity/weight"
+                "description": "String representing the object’s type. Always `/quantity/weight` for this object."
               },
               "value": {
                 "type": "number",
-                "description": "Required. Specifies the weight as a float.",
-                "example": 2300.4
+                "description": "Required. Specifies the weight as a float."
               },
               "unit": {
                 "type": "string",
@@ -851,13 +715,11 @@
             "properties": {
               "_object": {
                 "type": "string",
-                "description": "Type of the object",
-                "example": "/quantity/volume"
+                "description": "Type of the object"
               },
               "value": {
                 "type": "number",
-                "description": "total volume",
-                "example": 472.62
+                "description": "total volume"
               },
               "unit": {
                 "type": "string",
@@ -870,56 +732,46 @@
             }
           },
           "purchase_order_number": {
-            "type": "string",
-            "example": "PO002811"
+            "type": "string"
           },
           "product": {
             "type": "object",
             "properties": {
               "_object": {
                 "type": "string",
-                "description": "Type of the object",
-                "example": "/product"
+                "description": "Type of the object"
               },
               "id": {
                 "type": "integer",
-                "description": "The Flexport id used to refer to the product",
-                "example": 84291
+                "description": "The Flexport id used to refer to the product"
               },
               "name": {
                 "type": "string",
-                "description": "The name of the product",
-                "example": "AC Adapter 12V"
+                "description": "The name of the product"
               },
               "sku": {
                 "type": "string",
-                "description": "The SKU used to refer to the product",
-                "example": "WDVCDFD-RM00472"
+                "description": "The SKU used to refer to the product"
               },
               "description": {
                 "type": "string",
-                "description": "Description of product",
-                "example": "The best 12V AC Adapter on the market"
+                "description": "Description of product"
               },
               "archived_at": {
                 "type": "string",
-                "description": "If the product has been archived, the time it was archived. If the product is still active this will be null.",
-                "example": "2019-01-18T22:08:38.599Z"
+                "description": "If the product has been archived, the time it was archived. If the product is still active this will be null."
               },
               "product_category": {
                 "type": "string",
-                "description": "The category to group this product under",
-                "example": "Cosmetics"
+                "description": "The category to group this product under"
               },
               "country_of_origin": {
                 "type": "string",
-                "description": "The country the product was manufactured in",
-                "example": "China"
+                "description": "The country the product was manufactured in"
               },
               "client_verified": {
                 "type": "boolean",
-                "description": "Indicates whether Client has verified this Product.",
-                "example": true
+                "description": "Indicates whether Client has verified this Product."
               },
               "product_properties": {
                 "type": "array",
@@ -929,18 +781,15 @@
                   "properties": {
                     "_object": {
                       "type": "string",
-                      "description": "Type of the object",
-                      "example": "/product/property"
+                      "description": "Type of the object"
                     },
                     "type": {
                       "type": "string",
-                      "description": "Type of this property",
-                      "example": "color"
+                      "description": "Type of this property"
                     },
                     "value": {
                       "type": "string",
-                      "description": "Value of this property",
-                      "example": "blue"
+                      "description": "Value of this property"
                     }
                   }
                 }
@@ -954,22 +803,18 @@
                   "properties": {
                     "_object": {
                       "type": "string",
-                      "description": "String representing the object’s type. Always `/hs_code` for this object.",
-                      "example": "/hs_code"
+                      "description": "String representing the object’s type. Always `/hs_code` for this object."
                     },
                     "description": {
                       "type": "string",
-                      "description": "Description of HS or HTS code classification.",
-                      "example": "N-Butyl-2,2,6,6-tetramethylpiperidin-4-amine (CAS No. 36177-92-1) (provided for in subheading 2933.39.91)"
+                      "description": "Description of HS or HTS code classification."
                     },
                     "code": {
                       "type": "string",
-                      "description": "6 digit (international HS) or 10 digit (US HTS) code.",
-                      "example": 9101
+                      "description": "6 digit (international HS) or 10 digit (US HTS) code."
                     },
                     "country_code": {
-                      "type": "string",
-                      "example": "US"
+                      "type": "string"
                     }
                   }
                 }
@@ -981,62 +826,23 @@
                   "properties": {
                     "_object": {
                       "type": "string",
-                      "description": "Type of the object",
-                      "example": "/product/classification"
+                      "description": "Type of the object"
                     },
                     "codes": {
                       "type": "array",
                       "description": "An array of HS codes for this product in the provided region",
                       "items": {
-                        "type": "string",
-                        "example": 301
+                        "type": "string"
                       }
                     },
                     "region": {
                       "type": "string",
-                      "description": "The region for this classification. Currently only 2-character ISO codes and \"EU\" are supported",
-                      "example": "US"
+                      "description": "The region for this classification. Currently only 2-character ISO codes and \"EU\" are supported"
                     }
                   }
                 }
               }
-            },
-            "default": {
-              "_object": "/product",
-              "id": 84291,
-              "name": "AC Adapter 12V",
-              "sku": "WDVCDFD-RM00472",
-              "description": "The best 12V AC Adapter on the market",
-              "archived_at": "2019-01-18T22:08:38.599Z",
-              "product_category": "Cosmetics",
-              "country_of_origin": "China",
-              "client_verified": true,
-              "product_properties": [
-                {
-                  "_object": "/product/property",
-                  "type": "color",
-                  "value": "blue"
-                }
-              ],
-              "hs_codes": [
-                {
-                  "_object": "/hs_code",
-                  "description": "N-Butyl-2,2,6,6-tetramethylpiperidin-4-amine (CAS No. 36177-92-1) (provided for in subheading 2933.39.91)",
-                  "code": 9101,
-                  "country_code": "US"
-                }
-              ],
-              "classifications": [
-                {
-                  "_object": "/product/classification",
-                  "codes": [
-                    301
-                  ],
-                  "region": "US"
-                }
-              ]
-            },
-            "$schema": "https://json-schema.org/draft/2020-12/schema"
+            }
           }
         }
       }
@@ -1046,18 +852,15 @@
       "properties": {
         "_object": {
           "type": "string",
-          "description": "Type of the object",
-          "example": "/api/refs/collection"
+          "description": "Type of the object"
         },
         "ref_type": {
           "type": "string",
-          "description": "Type of the object in this list.",
-          "example": "/shipment_leg"
+          "description": "Type of the object in this list."
         },
         "link": {
           "type": "string",
-          "description": "URL to fetch list of objects.",
-          "example": "https://api.flexport.com/shipment_legs?f.shipment.id=123"
+          "description": "URL to fetch list of objects."
         }
       }
     },
@@ -1065,16 +868,13 @@
       "type": "object",
       "properties": {
         "_object": {
-          "type": "string",
-          "example": "/api/refs/collection"
+          "type": "string"
         },
         "ref_type": {
-          "type": "string",
-          "example": "/customs_entry"
+          "type": "string"
         },
         "link": {
-          "type": "string",
-          "example": "https://api.flexport.com/customs_entries?f.shipment.id=2983"
+          "type": "string"
         }
       }
     },
@@ -1082,16 +882,13 @@
       "type": "object",
       "properties": {
         "_object": {
-          "type": "string",
-          "example": "/api/refs/collection"
+          "type": "string"
         },
         "ref_type": {
-          "type": "string",
-          "example": "/commercial_invoice"
+          "type": "string"
         },
         "link": {
-          "type": "string",
-          "example": "https://api.flexport.com/commercial_invoices?f.shipment.id=2983"
+          "type": "string"
         }
       }
     },
@@ -1099,16 +896,13 @@
       "type": "object",
       "properties": {
         "_object": {
-          "type": "string",
-          "example": "/api/refs/collection"
+          "type": "string"
         },
         "ref_type": {
-          "type": "string",
-          "example": "/document"
+          "type": "string"
         },
         "link": {
-          "type": "string",
-          "example": "https://api.flexport.com/document?f.shipment.id=2983"
+          "type": "string"
         }
       }
     },
@@ -1132,295 +926,6 @@
       "format": "date-time",
       "description": "DEPRECATED date field"
     }
-  },
-  "default": {
-    "metadata": {
-      "purchase_order": [
-        "12345"
-      ],
-      "sku": [
-        "abc123"
-      ]
-    },
-    "_object": "/shipments",
-    "id": 2983,
-    "name": "ABC Shipment",
-    "transportation_mode": "ocean",
-    "freight_type": "port_to_door",
-    "incoterm": "FOB",
-    "calculated_weight": {
-      "_object": "/quantity/weight",
-      "value": 2300.4,
-      "unit": "kg"
-    },
-    "calculated_volume": {
-      "_object": "/quantity/volume",
-      "value": 472.62,
-      "unit": "cbm"
-    },
-    "pieces": 8372,
-    "it_number": "V12345678",
-    "created_date": "1970-01-01T00:00:00.000Z",
-    "status": "in_transit_to_arrival_port",
-    "priority": "standard",
-    "updated_at": "1970-01-01T00:00:00.000Z",
-    "estimated_departure_date": "1970-01-01T00:00:00.000Z",
-    "actual_departure_date": "1970-01-01T00:00:00.000Z",
-    "estimated_arrival_date": "1970-01-01T00:00:00.000Z",
-    "actual_arrival_date": "1970-01-01T00:00:00.000Z",
-    "cargo_ready_date": "1970-01-01",
-    "wants_freight_management_bco": true,
-    "wants_flexport_freight": true,
-    "estimated_picked_up_in_full_date": "1970-01-01T00:00:00.000Z",
-    "actual_picked_up_in_full_date": "1970-01-01T00:00:00.000Z",
-    "estimated_delivered_in_full_date": "1970-01-01T00:00:00.000Z",
-    "actual_delivered_in_full_date": "1970-01-01T00:00:00.000Z",
-    "wants_export_customs_service": true,
-    "wants_import_customs_service": true,
-    "ocean_shipment": {
-      "_object": "/ocean/shipment",
-      "is_lcl": false,
-      "house_bill_number": "TUWSANR18658",
-      "master_bill_number": "NEWO697216024",
-      "carrier_booking_number": "697216024",
-      "containers": {
-        "_object": "/api/refs/collection",
-        "ref_type": "/ocean/shipment_container",
-        "link": "https://api.flexport.com/ocean/shipment_containers?f.shipment.id=123"
-      }
-    },
-    "air_shipment": {
-      "_object": "/air/shipment",
-      "house_airway_bill": "HWXJKE67732",
-      "master_airway_bill": "22831046871",
-      "chargeable_weight": {
-        "_object": "/quantity/weight",
-        "value": 2300.4,
-        "unit": "kg"
-      },
-      "chargeable_volume": {
-        "_object": "/quantity/volume",
-        "value": 472.62,
-        "unit": "cbm"
-      }
-    },
-    "shippers": [
-      {
-        "_object": "/company_entity",
-        "id": 9281,
-        "name": "Zoomit",
-        "ref": "zoomit_ref",
-        "mailing_address": {
-          "_object": "/address",
-          "street_address": "1641 Settlers Lane",
-          "street_address2": "STE 2918",
-          "city": "Albany",
-          "state": "MN",
-          "country": "United States of America",
-          "country_code": "US",
-          "zip": "56307",
-          "timezone": "America/Los_Angeles",
-          "ref": "address_ref_x",
-          "unlocode": "US AL2"
-        },
-        "vat_numbers": [
-          {
-            "_object": "/company_entity/vat_number",
-            "country_code": "GB",
-            "number": "GB 123456789"
-          }
-        ]
-      }
-    ],
-    "consignees": [
-      {
-        "_object": "/company_entity",
-        "id": 9281,
-        "name": "Zoomit",
-        "ref": "zoomit_ref",
-        "mailing_address": {
-          "_object": "/address",
-          "street_address": "1641 Settlers Lane",
-          "street_address2": "STE 2918",
-          "city": "Albany",
-          "state": "MN",
-          "country": "United States of America",
-          "country_code": "US",
-          "zip": "56307",
-          "timezone": "America/Los_Angeles",
-          "ref": "address_ref_x",
-          "unlocode": "US AL2"
-        },
-        "vat_numbers": [
-          {
-            "_object": "/company_entity/vat_number",
-            "country_code": "GB",
-            "number": "GB 123456789"
-          }
-        ]
-      }
-    ],
-    "buyers": [
-      {
-        "_object": "/company_entity",
-        "id": 9281,
-        "name": "Zoomit",
-        "ref": "zoomit_ref",
-        "mailing_address": {
-          "_object": "/address",
-          "street_address": "1641 Settlers Lane",
-          "street_address2": "STE 2918",
-          "city": "Albany",
-          "state": "MN",
-          "country": "United States of America",
-          "country_code": "US",
-          "zip": "56307",
-          "timezone": "America/Los_Angeles",
-          "ref": "address_ref_x",
-          "unlocode": "US AL2"
-        },
-        "vat_numbers": [
-          {
-            "_object": "/company_entity/vat_number",
-            "country_code": "GB",
-            "number": "GB 123456789"
-          }
-        ]
-      }
-    ],
-    "sellers": [
-      {
-        "_object": "/company_entity",
-        "id": 9281,
-        "name": "Zoomit",
-        "ref": "zoomit_ref",
-        "mailing_address": {
-          "_object": "/address",
-          "street_address": "1641 Settlers Lane",
-          "street_address2": "STE 2918",
-          "city": "Albany",
-          "state": "MN",
-          "country": "United States of America",
-          "country_code": "US",
-          "zip": "56307",
-          "timezone": "America/Los_Angeles",
-          "ref": "address_ref_x",
-          "unlocode": "US AL2"
-        },
-        "vat_numbers": [
-          {
-            "_object": "/company_entity/vat_number",
-            "country_code": "GB",
-            "number": "GB 123456789"
-          }
-        ]
-      }
-    ],
-    "importers_of_record": [
-      {
-        "_object": "/company_entity",
-        "id": 9281,
-        "name": "Zoomit",
-        "ref": "zoomit_ref",
-        "mailing_address": {
-          "_object": "/address",
-          "street_address": "1641 Settlers Lane",
-          "street_address2": "STE 2918",
-          "city": "Albany",
-          "state": "MN",
-          "country": "United States of America",
-          "country_code": "US",
-          "zip": "56307",
-          "timezone": "America/Los_Angeles",
-          "ref": "address_ref_x",
-          "unlocode": "US AL2"
-        },
-        "vat_numbers": [
-          {
-            "_object": "/company_entity/vat_number",
-            "country_code": "GB",
-            "number": "GB 123456789"
-          }
-        ]
-      }
-    ],
-    "items": [
-      {
-        "_object": "/shipment_item",
-        "id": 29820,
-        "total_units": 523,
-        "total_weight": {
-          "_object": "/quantity/weight",
-          "value": 2300.4,
-          "unit": "kg"
-        },
-        "total_volume": {
-          "_object": "/quantity/volume",
-          "value": 472.62,
-          "unit": "cbm"
-        },
-        "purchase_order_number": "PO002811",
-        "product": {
-          "_object": "/product",
-          "id": 84291,
-          "name": "AC Adapter 12V",
-          "sku": "WDVCDFD-RM00472",
-          "description": "The best 12V AC Adapter on the market",
-          "archived_at": "2019-01-18T22:08:38.599Z",
-          "product_category": "Cosmetics",
-          "country_of_origin": "China",
-          "client_verified": true,
-          "product_properties": [
-            {
-              "_object": "/product/property",
-              "type": "color",
-              "value": "blue"
-            }
-          ],
-          "hs_codes": [
-            {
-              "_object": "/hs_code",
-              "description": "N-Butyl-2,2,6,6-tetramethylpiperidin-4-amine (CAS No. 36177-92-1) (provided for in subheading 2933.39.91)",
-              "code": 9101,
-              "country_code": "US"
-            }
-          ],
-          "classifications": [
-            {
-              "_object": "/product/classification",
-              "codes": [
-                301
-              ],
-              "region": "US"
-            }
-          ]
-        }
-      }
-    ],
-    "legs": {
-      "_object": "/api/refs/collection",
-      "ref_type": "/shipment_leg",
-      "link": "https://api.flexport.com/shipment_legs?f.shipment.id=123"
-    },
-    "customs_entries": {
-      "_object": "/api/refs/collection",
-      "ref_type": "/customs_entry",
-      "link": "https://api.flexport.com/customs_entries?f.shipment.id=2983"
-    },
-    "commercial_invoices": {
-      "_object": "/api/refs/collection",
-      "ref_type": "/commercial_invoice",
-      "link": "https://api.flexport.com/commercial_invoices?f.shipment.id=2983"
-    },
-    "documents": {
-      "_object": "/api/refs/collection",
-      "ref_type": "/document",
-      "link": "https://api.flexport.com/document?f.shipment.id=2983"
-    },
-    "departure_date": "1970-01-01T00:00:00.000Z",
-    "arrival_date": "1970-01-01T00:00:00.000Z",
-    "picked_up_in_full_date": "1970-01-01T00:00:00.000Z",
-    "delivered_in_full_date": "1970-01-01T00:00:00.000Z"
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema"
 }
