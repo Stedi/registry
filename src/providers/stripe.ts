@@ -24,9 +24,9 @@ export class StripeProvider implements OpenAPIProvider {
 
     return Object.entries(dereferenced.components?.schemas ?? {})
       .filter(([key]) => !bundle.entities || bundle.entities.includes(key))
-      .map(([k, v]) => ({
-        name: k,
-        schema: traverse(deepcopy(v), new Set<string>()),
+      .map(([key, value]) => ({
+        name: key,
+        schema: traverse(deepcopy(value), new Set<string>()),
       }));
   }
 

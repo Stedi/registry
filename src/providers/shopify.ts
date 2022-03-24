@@ -42,9 +42,9 @@ export class ShopifyProvider implements GraphQLProvider {
       .filter(([key]) =>
         !bundle.entities ? true : bundle.entities.includes(key)
       )
-      .map(([k, v]) => ({
-        name: k,
-        schema: v,
+      .map(([key, value]) => ({
+        name: key,
+        schema: value,
       }));
   }
 

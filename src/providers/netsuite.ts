@@ -58,39 +58,7 @@ export class NetsuiteProvider {
           Accept: "application/schema+json",
         },
       });
-      const schema = schemaRequest.data;
-
-      const cleanSchema = JSON.parse(
-        JSON.stringify(schema, (key, value) => {
-          // Unsupported in JSONSchema's strict mode
-          if (key === "x-ns-filterable" || key == "x-ns-custom-field") {
-            return undefined;
-          }
-
-          // Denormalize nsLinks
-          if (
-            key === "items" &&
-            value["$ref"] === "/services/rest/record/v1/metadata-catalog/nsLink"
-          ) {
-            return nsLinkSchema;
-          }
-
-          // Drop all other references
-          if (key === "$ref") {
-            return undefined;
-          }
-
-          // Bug in Netsuite's schema, "type": "object" is missing
-          if (key === "quantity" && entityName === "inventoryitem") {
-            return {
-              type: "object",
-              ...value,
-            };
-          }
-
-          return value;
-        })
-      );
+      const cleanSchema = sanitizeSchema(schemaRequest.data, entityName);
 
       schemas.push({
         name: entityName,
@@ -100,6 +68,42 @@ export class NetsuiteProvider {
 
     return schemas;
   }
+}
+
+function sanitizeSchema(schema: unknown, entityName: string) {
+  return JSON.parse(
+    JSON.stringify(schema, (key, value) => {
+      const isKeyUnsupported =
+        key === "x-ns-filterable" || key == "x-ns-custom-field";
+
+      if (isKeyUnsupported) {
+        return undefined;
+      }
+
+      const isNsLink =
+        key === "items" &&
+        value["$ref"] === "/services/rest/record/v1/metadata-catalog/nsLink";
+
+      if (isNsLink) {
+        return nsLinkSchema;
+      }
+
+      // Drop all other references
+      if (key === "$ref") {
+        return undefined;
+      }
+
+      // Bug in their schema, "type": "object" is
+      if (key === "quantity" && entityName === "inventoryitem") {
+        return {
+          type: "object",
+          ...value,
+        };
+      }
+
+      return value;
+    })
+  );
 }
 
 const nsLinkSchema = {
