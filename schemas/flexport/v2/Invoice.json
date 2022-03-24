@@ -1,0 +1,396 @@
+{
+  "type": "object",
+  "properties": {
+    "_object": {
+      "type": "string",
+      "description": "Type of the object. Always '/invoice' for this object."
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique ID for the invoice"
+    },
+    "name": {
+      "type": "string",
+      "description": "Unique name for the invoice"
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the invoice was issued"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Due date of the invoice"
+    },
+    "total": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object. Always /money for this object."
+        },
+        "amount": {
+          "type": "string",
+          "format": "decimal"
+        },
+        "currency_code": {
+          "type": "string"
+        }
+      },
+      "description": "Sum of charges on the invoice"
+    },
+    "balance": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object. Always /money for this object."
+        },
+        "amount": {
+          "type": "string",
+          "format": "decimal"
+        },
+        "currency_code": {
+          "type": "string"
+        }
+      },
+      "description": "Outstanding balance on the invoice"
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of the invoice",
+      "enum": [
+        "outstanding",
+        "past_due",
+        "void",
+        "paid",
+        "payment_pending"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "What the invoice is being issued for. Shipment related charges are type `Shipment` and non-shipment related charges are type `Client`",
+      "enum": [
+        "Shipment",
+        "Client"
+      ]
+    },
+    "voided_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the invoice was voided (if applicable)"
+    },
+    "last_updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time of the last adjustment to in invoice"
+    },
+    "recipient": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ref": {
+          "type": "string"
+        },
+        "mailing_address": {
+          "type": "object",
+          "properties": {
+            "_object": {
+              "type": "string",
+              "description": "Type of the object"
+            },
+            "street_address": {
+              "type": "string"
+            },
+            "street_address2": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "country_code": {
+              "type": "string"
+            },
+            "zip": {
+              "type": "string"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "ref": {
+              "type": "string"
+            },
+            "unlocode": {
+              "type": "string"
+            }
+          }
+        },
+        "vat_numbers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "Type of the object"
+              },
+              "country_code": {
+                "type": "string",
+                "description": "ISO 3166 two-letter country code"
+              },
+              "number": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "description": "Entity receiving the invoice (i.e. the customer)"
+    },
+    "issuer": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ref": {
+          "type": "string"
+        },
+        "mailing_address": {
+          "type": "object",
+          "properties": {
+            "_object": {
+              "type": "string",
+              "description": "Type of the object"
+            },
+            "street_address": {
+              "type": "string"
+            },
+            "street_address2": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "country_code": {
+              "type": "string"
+            },
+            "zip": {
+              "type": "string"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "ref": {
+              "type": "string"
+            },
+            "unlocode": {
+              "type": "string"
+            }
+          }
+        },
+        "vat_numbers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "Type of the object"
+              },
+              "country_code": {
+                "type": "string",
+                "description": "ISO 3166 two-letter country code"
+              },
+              "number": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "description": "Entity issuing the invoice (i.e. Flexport)"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_object": {
+            "type": "string",
+            "description": "Type of the object."
+          },
+          "name": {
+            "type": "string",
+            "description": "Description of charge."
+          },
+          "slug": {
+            "type": "string",
+            "description": "Code describing the charge."
+          },
+          "category": {
+            "type": "string",
+            "description": "Category of the charge.",
+            "enum": [
+              "freight",
+              "origin",
+              "destination",
+              "customs",
+              "additional",
+              "capital"
+            ]
+          },
+          "amount": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "Type of the object. Always /money for this object."
+              },
+              "amount": {
+                "type": "string",
+                "format": "decimal"
+              },
+              "currency_code": {
+                "type": "string"
+              }
+            }
+          },
+          "rate": {
+            "description": "Describes the rate per unit used to calculate the price of a line item",
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "The type of the object"
+              },
+              "value": {
+                "type": "string",
+                "format": "decimal",
+                "description": "numeric value described by qualifier"
+              },
+              "qualifier": {
+                "type": "string",
+                "description": "describes what the value represents"
+              }
+            }
+          },
+          "quantity": {
+            "description": "Describes the number of units used to calculate the price of a line item",
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "The type of the object"
+              },
+              "value": {
+                "type": "string",
+                "format": "decimal",
+                "description": "numeric value described by qualifier"
+              },
+              "qualifier": {
+                "type": "string",
+                "description": "describes what the value represents"
+              }
+            }
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "credit_memos": {
+      "type": "array",
+      "description": "List of any credits applied to this invoice.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_object": {
+            "type": "string",
+            "description": "The type of the object"
+          },
+          "amount": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "Type of the object. Always /money for this object."
+              },
+              "amount": {
+                "type": "string",
+                "format": "decimal"
+              },
+              "currency_code": {
+                "type": "string"
+              }
+            }
+          },
+          "category": {
+            "type": "string",
+            "description": "Category of the credit memo"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why the credit was applied to the invoice"
+          },
+          "credited_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "shipments": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        }
+      },
+      "description": "Expandable link to shipment(s) related to this invoice."
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

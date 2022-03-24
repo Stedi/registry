@@ -1,0 +1,69 @@
+{
+  "type": "object",
+  "properties": {
+    "_object": {
+      "type": "string",
+      "description": "Type of the object. Always /document for this object."
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the document"
+    },
+    "file_name": {
+      "type": "string"
+    },
+    "document_type": {
+      "type": "string",
+      "description": "Type of the document."
+    },
+    "memo": {
+      "type": "string",
+      "nullable": true,
+      "description": "A short message or description about the document"
+    },
+    "file_link": {
+      "type": "string",
+      "format": "uri",
+      "description": "The link that can be used to download the file."
+    },
+    "archived_at": {
+      "type": "string",
+      "description": "Date string this document was archived. Null if not archived."
+    },
+    "file_metadata": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object. Always /file_metadata for this object."
+        },
+        "size": {
+          "type": "integer",
+          "description": "Size of the file in bytes"
+        },
+        "uploaded_at": {
+          "type": "string",
+          "description": "Date this document was uploaded."
+        }
+      }
+    },
+    "shipment": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

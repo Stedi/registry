@@ -1,0 +1,111 @@
+{
+  "type": "object",
+  "properties": {
+    "_object": {
+      "type": "string",
+      "description": "Type of the object"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The Flexport id used to refer to the product"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the product"
+    },
+    "sku": {
+      "type": "string",
+      "description": "The SKU used to refer to the product"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of product"
+    },
+    "archived_at": {
+      "type": "string",
+      "description": "If the product has been archived, the time it was archived. If the product is still active this will be null."
+    },
+    "product_category": {
+      "type": "string",
+      "description": "The category to group this product under"
+    },
+    "country_of_origin": {
+      "type": "string",
+      "description": "The country the product was manufactured in"
+    },
+    "client_verified": {
+      "type": "boolean",
+      "description": "Indicates whether Client has verified this Product."
+    },
+    "product_properties": {
+      "type": "array",
+      "description": "A user defined set of key-value objects to describe the product",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_object": {
+            "type": "string",
+            "description": "Type of the object"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of this property"
+          },
+          "value": {
+            "type": "string",
+            "description": "Value of this property"
+          }
+        }
+      }
+    },
+    "hs_codes": {
+      "type": "array",
+      "description": "DEPRECATED - HS codes can be found in the classifications array",
+      "deprecated": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "_object": {
+            "type": "string",
+            "description": "String representing the object’s type. Always `/hs_code` for this object."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of HS or HTS code classification."
+          },
+          "code": {
+            "type": "string",
+            "description": "6 digit (international HS) or 10 digit (US HTS) code."
+          },
+          "country_code": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "classifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_object": {
+            "type": "string",
+            "description": "Type of the object"
+          },
+          "codes": {
+            "type": "array",
+            "description": "An array of HS codes for this product in the provided region",
+            "items": {
+              "type": "string"
+            }
+          },
+          "region": {
+            "type": "string",
+            "description": "The region for this classification. Currently only 2-character ISO codes and \"EU\" are supported"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,931 @@
+{
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Set of custom key-values specific to the object. The keys are strings and values are arrays of strings. The set of valid keys is always the consignee's list of keys, even if call was made by a different party.\n"
+    },
+    "_object": {
+      "type": "string",
+      "description": "Type of the object"
+    },
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier for the shipment"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the shipment"
+    },
+    "transportation_mode": {
+      "type": "string",
+      "enum": [
+        "ocean",
+        "air",
+        "truck",
+        "rail",
+        "unknown_transportation",
+        "ocean_air",
+        "truck_intl",
+        "warehouse_storage"
+      ]
+    },
+    "freight_type": {
+      "type": "string",
+      "enum": [
+        "port_to_door",
+        "port_to_port",
+        "door_to_door",
+        "door_to_port"
+      ]
+    },
+    "incoterm": {
+      "type": "string",
+      "enum": [
+        "EXW",
+        "FOB",
+        "FAS",
+        "FCA",
+        "CPT",
+        "CFR",
+        "CIF",
+        "CIP",
+        "DAT",
+        "DAP",
+        "DDP",
+        "DPU"
+      ]
+    },
+    "calculated_weight": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "String representing the object’s type. Always `/quantity/weight` for this object."
+        },
+        "value": {
+          "type": "number",
+          "description": "Required. Specifies the weight as a float."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Required. Unit of measurement. \"kg\" for kilograms and \"lbs\" for pounds.",
+          "enum": [
+            "kg",
+            "lbs"
+          ]
+        }
+      }
+    },
+    "calculated_volume": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object"
+        },
+        "value": {
+          "type": "number",
+          "description": "total volume"
+        },
+        "unit": {
+          "type": "string",
+          "description": "unit of measurement. \"cbm\" for cubic meters. \"cbft\" for cubic feet.",
+          "enum": [
+            "cbm",
+            "cbft"
+          ]
+        }
+      }
+    },
+    "pieces": {
+      "type": "integer"
+    },
+    "it_number": {
+      "type": "string"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "seller_location",
+        "in_transit_to_departure_port",
+        "departure_port",
+        "in_transit_to_arrival_port",
+        "arrival_port",
+        "in_transit_to_final_destination",
+        "final_destination"
+      ]
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "standard",
+        "high"
+      ],
+      "description": "The level of attention Flexport should give to this shipment"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "estimated_departure_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actual_departure_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "estimated_arrival_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actual_arrival_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "cargo_ready_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "wants_freight_management_bco": {
+      "type": "boolean",
+      "description": "Determines if a shipment bypasses a freight forwader and is booked directly with a steamship line."
+    },
+    "wants_flexport_freight": {
+      "type": "boolean",
+      "description": "Determines if a shipment is using Flexport services for a combination of import customs clearance or final leg delivery."
+    },
+    "estimated_picked_up_in_full_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actual_picked_up_in_full_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "estimated_delivered_in_full_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actual_delivered_in_full_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "wants_export_customs_service": {
+      "type": "boolean",
+      "description": "Determines if the shipment requires Flexport to provide export customs services."
+    },
+    "wants_import_customs_service": {
+      "type": "boolean",
+      "description": "Determines if the shipment requires Flexport to provide import customs services."
+    },
+    "ocean_shipment": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object"
+        },
+        "is_lcl": {
+          "type": "boolean"
+        },
+        "house_bill_number": {
+          "type": "string"
+        },
+        "master_bill_number": {
+          "type": "string"
+        },
+        "carrier_booking_number": {
+          "type": "string"
+        },
+        "containers": {
+          "type": "object",
+          "properties": {
+            "_object": {
+              "type": "string",
+              "description": "Type of the object"
+            },
+            "ref_type": {
+              "type": "string",
+              "description": "Type of the object in this list."
+            },
+            "link": {
+              "type": "string",
+              "description": "URL to fetch list of objects."
+            }
+          }
+        }
+      }
+    },
+    "air_shipment": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object"
+        },
+        "house_airway_bill": {
+          "type": "string"
+        },
+        "master_airway_bill": {
+          "type": "string"
+        },
+        "chargeable_weight": {
+          "type": "object",
+          "properties": {
+            "_object": {
+              "type": "string",
+              "description": "String representing the object’s type. Always `/quantity/weight` for this object."
+            },
+            "value": {
+              "type": "number",
+              "description": "Required. Specifies the weight as a float."
+            },
+            "unit": {
+              "type": "string",
+              "description": "Required. Unit of measurement. \"kg\" for kilograms and \"lbs\" for pounds.",
+              "enum": [
+                "kg",
+                "lbs"
+              ]
+            }
+          }
+        },
+        "chargeable_volume": {
+          "type": "object",
+          "properties": {
+            "_object": {
+              "type": "string",
+              "description": "Type of the object"
+            },
+            "value": {
+              "type": "number",
+              "description": "total volume"
+            },
+            "unit": {
+              "type": "string",
+              "description": "unit of measurement. \"cbm\" for cubic meters. \"cbft\" for cubic feet.",
+              "enum": [
+                "cbm",
+                "cbft"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "shippers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_object": {
+            "type": "string",
+            "description": "Type of the object"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "ref": {
+            "type": "string"
+          },
+          "mailing_address": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "Type of the object"
+              },
+              "street_address": {
+                "type": "string"
+              },
+              "street_address2": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "country_code": {
+                "type": "string"
+              },
+              "zip": {
+                "type": "string"
+              },
+              "timezone": {
+                "type": "string"
+              },
+              "ref": {
+                "type": "string"
+              },
+              "unlocode": {
+                "type": "string"
+              }
+            }
+          },
+          "vat_numbers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_object": {
+                  "type": "string",
+                  "description": "Type of the object"
+                },
+                "country_code": {
+                  "type": "string",
+                  "description": "ISO 3166 two-letter country code"
+                },
+                "number": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "consignees": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_object": {
+            "type": "string",
+            "description": "Type of the object"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "ref": {
+            "type": "string"
+          },
+          "mailing_address": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "Type of the object"
+              },
+              "street_address": {
+                "type": "string"
+              },
+              "street_address2": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "country_code": {
+                "type": "string"
+              },
+              "zip": {
+                "type": "string"
+              },
+              "timezone": {
+                "type": "string"
+              },
+              "ref": {
+                "type": "string"
+              },
+              "unlocode": {
+                "type": "string"
+              }
+            }
+          },
+          "vat_numbers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_object": {
+                  "type": "string",
+                  "description": "Type of the object"
+                },
+                "country_code": {
+                  "type": "string",
+                  "description": "ISO 3166 two-letter country code"
+                },
+                "number": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "buyers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_object": {
+            "type": "string",
+            "description": "Type of the object"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "ref": {
+            "type": "string"
+          },
+          "mailing_address": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "Type of the object"
+              },
+              "street_address": {
+                "type": "string"
+              },
+              "street_address2": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "country_code": {
+                "type": "string"
+              },
+              "zip": {
+                "type": "string"
+              },
+              "timezone": {
+                "type": "string"
+              },
+              "ref": {
+                "type": "string"
+              },
+              "unlocode": {
+                "type": "string"
+              }
+            }
+          },
+          "vat_numbers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_object": {
+                  "type": "string",
+                  "description": "Type of the object"
+                },
+                "country_code": {
+                  "type": "string",
+                  "description": "ISO 3166 two-letter country code"
+                },
+                "number": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "sellers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_object": {
+            "type": "string",
+            "description": "Type of the object"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "ref": {
+            "type": "string"
+          },
+          "mailing_address": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "Type of the object"
+              },
+              "street_address": {
+                "type": "string"
+              },
+              "street_address2": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "country_code": {
+                "type": "string"
+              },
+              "zip": {
+                "type": "string"
+              },
+              "timezone": {
+                "type": "string"
+              },
+              "ref": {
+                "type": "string"
+              },
+              "unlocode": {
+                "type": "string"
+              }
+            }
+          },
+          "vat_numbers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_object": {
+                  "type": "string",
+                  "description": "Type of the object"
+                },
+                "country_code": {
+                  "type": "string",
+                  "description": "ISO 3166 two-letter country code"
+                },
+                "number": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "importers_of_record": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_object": {
+            "type": "string",
+            "description": "Type of the object"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "ref": {
+            "type": "string"
+          },
+          "mailing_address": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "Type of the object"
+              },
+              "street_address": {
+                "type": "string"
+              },
+              "street_address2": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "country_code": {
+                "type": "string"
+              },
+              "zip": {
+                "type": "string"
+              },
+              "timezone": {
+                "type": "string"
+              },
+              "ref": {
+                "type": "string"
+              },
+              "unlocode": {
+                "type": "string"
+              }
+            }
+          },
+          "vat_numbers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_object": {
+                  "type": "string",
+                  "description": "Type of the object"
+                },
+                "country_code": {
+                  "type": "string",
+                  "description": "ISO 3166 two-letter country code"
+                },
+                "number": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_object": {
+            "type": "string",
+            "description": "Type of the object"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "total_units": {
+            "type": "integer"
+          },
+          "total_weight": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "String representing the object’s type. Always `/quantity/weight` for this object."
+              },
+              "value": {
+                "type": "number",
+                "description": "Required. Specifies the weight as a float."
+              },
+              "unit": {
+                "type": "string",
+                "description": "Required. Unit of measurement. \"kg\" for kilograms and \"lbs\" for pounds.",
+                "enum": [
+                  "kg",
+                  "lbs"
+                ]
+              }
+            }
+          },
+          "total_volume": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "Type of the object"
+              },
+              "value": {
+                "type": "number",
+                "description": "total volume"
+              },
+              "unit": {
+                "type": "string",
+                "description": "unit of measurement. \"cbm\" for cubic meters. \"cbft\" for cubic feet.",
+                "enum": [
+                  "cbm",
+                  "cbft"
+                ]
+              }
+            }
+          },
+          "purchase_order_number": {
+            "type": "string"
+          },
+          "product": {
+            "type": "object",
+            "properties": {
+              "_object": {
+                "type": "string",
+                "description": "Type of the object"
+              },
+              "id": {
+                "type": "integer",
+                "description": "The Flexport id used to refer to the product"
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the product"
+              },
+              "sku": {
+                "type": "string",
+                "description": "The SKU used to refer to the product"
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of product"
+              },
+              "archived_at": {
+                "type": "string",
+                "description": "If the product has been archived, the time it was archived. If the product is still active this will be null."
+              },
+              "product_category": {
+                "type": "string",
+                "description": "The category to group this product under"
+              },
+              "country_of_origin": {
+                "type": "string",
+                "description": "The country the product was manufactured in"
+              },
+              "client_verified": {
+                "type": "boolean",
+                "description": "Indicates whether Client has verified this Product."
+              },
+              "product_properties": {
+                "type": "array",
+                "description": "A user defined set of key-value objects to describe the product",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "_object": {
+                      "type": "string",
+                      "description": "Type of the object"
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of this property"
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "Value of this property"
+                    }
+                  }
+                }
+              },
+              "hs_codes": {
+                "type": "array",
+                "description": "DEPRECATED - HS codes can be found in the classifications array",
+                "deprecated": true,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "_object": {
+                      "type": "string",
+                      "description": "String representing the object’s type. Always `/hs_code` for this object."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Description of HS or HTS code classification."
+                    },
+                    "code": {
+                      "type": "string",
+                      "description": "6 digit (international HS) or 10 digit (US HTS) code."
+                    },
+                    "country_code": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "classifications": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "_object": {
+                      "type": "string",
+                      "description": "Type of the object"
+                    },
+                    "codes": {
+                      "type": "array",
+                      "description": "An array of HS codes for this product in the provided region",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "region": {
+                      "type": "string",
+                      "description": "The region for this classification. Currently only 2-character ISO codes and \"EU\" are supported"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "legs": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string",
+          "description": "Type of the object"
+        },
+        "ref_type": {
+          "type": "string",
+          "description": "Type of the object in this list."
+        },
+        "link": {
+          "type": "string",
+          "description": "URL to fetch list of objects."
+        }
+      }
+    },
+    "customs_entries": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        }
+      }
+    },
+    "commercial_invoices": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        }
+      }
+    },
+    "documents": {
+      "type": "object",
+      "properties": {
+        "_object": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        }
+      }
+    },
+    "departure_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "DEPRECATED date field"
+    },
+    "arrival_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "DEPRECATED date field"
+    },
+    "picked_up_in_full_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "DEPRECATED date field"
+    },
+    "delivered_in_full_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "DEPRECATED date field"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
