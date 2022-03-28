@@ -28,12 +28,14 @@ export type SchemaPackage = OpenAPI3Schema | GraphQLIntrospectionSchema;
 export type Provider = GraphQLProvider | OpenAPIProvider | NetsuiteProvider;
 
 export interface OpenAPIProvider {
+  isEnabled(): boolean;
   getVersions: () => Promise<string[]>;
   getSchema: (version: string) => Promise<APISchema>;
   unbundle: (bundle: OpenAPI3Schema) => Promise<EntitySchema[]>;
 }
 
 export interface GraphQLProvider {
+  isEnabled(): boolean;
   getVersions: () => Promise<string[]>;
   getSchema: (version: string) => Promise<APISchema>;
   unbundle: (bundle: GraphQLIntrospectionSchema) => Promise<EntitySchema[]>;

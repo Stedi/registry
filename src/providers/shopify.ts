@@ -10,6 +10,10 @@ import { IntrospectionQuery } from "graphql";
 import jsonSchemaRefParser from "@apidevtools/json-schema-ref-parser";
 
 export class ShopifyProvider implements GraphQLProvider {
+  isEnabled(): boolean {
+    return !!(process.env.SHOPIFY_URL && process.env.SHOPIFY_ACCESS_TOKEN);
+  }
+
   async getVersions(): Promise<string[]> {
     return ["2022-01"];
   }

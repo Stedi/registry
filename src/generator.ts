@@ -33,6 +33,11 @@ export async function generateForVersion(
     return;
   }
 
+  if (!providers[providerName].isEnabled()) {
+    console.log(`Skipping ${providerName} because it's not enabled.`);
+    return;
+  }
+
   const bundle = await providers[providerName].getSchema(version);
   const schemas = await providers[providerName].unbundle(bundle);
 
@@ -48,6 +53,7 @@ export async function generateForVersion(
     );
     (schema.schema as any)["$schema"] =
       "https://json-schema.org/draft/2020-12/schema";
+
     fs.writeFileSync(target, JSON.stringify(schema.schema, null, 2));
 
     markdownTableRows.push(

@@ -11,6 +11,17 @@ const nsApi = new NetsuiteAPI({
 });
 
 export class NetsuiteProvider {
+  isEnabled(): boolean {
+    return !!(
+      process.env.NETSUITE_CONSUMER_KEY &&
+      process.env.NETSUITE_CONSUMER_SECRET_KEY &&
+      process.env.NETSUITE_TOKEN &&
+      process.env.NETSUITE_TOKEN_SECRET &&
+      process.env.NETSUITE_REALM &&
+      process.env.NETSUITE_BASE_URL
+    );
+  }
+
   async getVersions(): Promise<string[]> {
     return ["v1"];
   }
@@ -52,13 +63,16 @@ export class NetsuiteProvider {
 
     for (let index in entities) {
       const entityName = entities[index];
-      const schemaRequest = await nsApi.request({
+      const schemaRequestResponse = await nsApi.request({
         path: `record/${versionName}/metadata-catalog/${entityName}`,
         heads: {
           Accept: "application/schema+json",
         },
       });
-      const cleanSchema = sanitizeSchema(schemaRequest.data, entityName);
+      const cleanSchema = sanitizeSchema(
+        schemaRequestResponse.data,
+        entityName
+      );
 
       schemas.push({
         name: entityName,

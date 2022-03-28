@@ -6,6 +6,10 @@ import { OpenAPI3Schema, OpenAPIProvider, EntitySchema } from "../provider";
 import openAPIParser from "@readme/openapi-parser";
 
 export class RampProvider implements OpenAPIProvider {
+  isEnabled(): boolean {
+    return true;
+  }
+
   async getVersions(): Promise<string[]> {
     return ["v1"];
   }

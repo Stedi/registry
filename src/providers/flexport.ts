@@ -1,10 +1,14 @@
-import { OpenAPI3Schema, Provider } from "../provider";
+import { EntitySchema, OpenAPI3Schema, OpenAPIProvider } from "../provider";
 import * as github from "../github";
-import { OpenAPIV3 } from "openapi-types";
 import yaml from "js-yaml";
-import _, { rest } from "lodash";
+import openAPIParser from "@readme/openapi-parser";
+import _ from "lodash";
 
-export class FlexportProvider implements Provider {
+export class FlexportProvider implements OpenAPIProvider {
+  isEnabled(): boolean {
+    return true;
+  }
+
   async getVersions(): Promise<string[]> {
     return ["v2"];
   }
@@ -32,10 +36,18 @@ export class FlexportProvider implements Provider {
     };
   }
 
-  getSchemaWithoutCircularReferences(
-    schema: OpenAPIV3.SchemaObject
-  ): OpenAPIV3.SchemaObject {
-    return sanitizeSchema(schema);
+  async unbundle(bundle: OpenAPI3Schema): Promise<EntitySchema[]> {
+    const dereferenced = await openAPIParser.dereference(bundle.value as any);
+
+    const hasComponents = "components" in dereferenced;
+    if (!hasComponents) throw new Error("Expected components");
+
+    return Object.entries(dereferenced.components?.schemas ?? {})
+      .filter(([key]) => !bundle.entities || bundle.entities.includes(key))
+      .map(([key, value]) => ({
+        name: key,
+        schema: value,
+      }));
   }
 }
 

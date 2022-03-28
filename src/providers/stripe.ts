@@ -8,6 +8,10 @@ import openAPIParser from "@readme/openapi-parser";
 const maxDepth = 3;
 
 export class StripeProvider implements OpenAPIProvider {
+  isEnabled(): boolean {
+    return true;
+  }
+
   async getVersions(): Promise<string[]> {
     const tags: string[] = [];
     for await (const tag of github.getTags("stripe", "openapi")) {

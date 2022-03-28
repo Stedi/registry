@@ -23,12 +23,11 @@ export function mock(schemalike: SchemaLike): any {
     return schema;
   }
 
-  if (schema.example !== undefined) {
+  if (schema.example) {
     return schema.example;
   }
 
-  // use default
-  if (!schema.default) {
+  if (schema.default) {
     return schema.default;
   }
 
