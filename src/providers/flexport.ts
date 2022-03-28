@@ -46,7 +46,7 @@ export class FlexportProvider implements OpenAPIProvider {
       .filter(([key]) => !bundle.entities || bundle.entities.includes(key))
       .map(([key, value]) => ({
         name: key,
-        schema: value,
+        schema: sanitizeSchema(value),
       }));
   }
 }
@@ -54,8 +54,41 @@ export class FlexportProvider implements OpenAPIProvider {
 function sanitizeSchema(schema: unknown) {
   return JSON.parse(
     JSON.stringify(schema, (key, value) => {
-      if (key === "example") {
-        return undefined;
+      if (key === "code") {
+        return {
+          ...value,
+          example: value.example.toString(),
+        };
+      }
+
+      if (key === "value" && value.format === "decimal") {
+        return {
+          ...value,
+          example: "1000.0",
+        };
+      }
+
+      if (key === "codes" && value?.items?.example) {
+        return {
+          ...value,
+          items: {
+            ...value.items,
+            example: value.items.example.toString(),
+          },
+        };
+      }
+
+      if (key === "notes") {
+        return {
+          ...value,
+          example: ["Markdown formatted note 1", "Markdown formatted note 2"],
+        };
+      }
+
+      if (value && value["oneOf"]) {
+        value["anyOf"] = value["oneOf"];
+        delete value["oneOf"];
+        return value;
       }
 
       // Skip "format": "string"

@@ -43,7 +43,7 @@ export class KlaviyoProvider implements OpenAPIProvider {
       .filter(([key]) => !bundle.entities || bundle.entities.includes(key))
       .map(([key, value]) => ({
         name: key,
-        schema: value,
+        schema: sanitizeSchema(value),
       }));
   }
 }
@@ -51,10 +51,6 @@ export class KlaviyoProvider implements OpenAPIProvider {
 function sanitizeSchema(schema: unknown) {
   return JSON.parse(
     JSON.stringify(schema, (key, value) => {
-      if (key === "example") {
-        return undefined;
-      }
-
       return value;
     })
   );
