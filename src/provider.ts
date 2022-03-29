@@ -1,8 +1,12 @@
-import http from "axios";
-import { OpenAPIV3 } from "openapi-types";
+import { NetsuiteProvider } from "./providers/netsuite";
 
-export interface OpenAPI3Schema {
-  type: "openapi-v3";
+export interface EntitySchema {
+  name: string;
+  schema: unknown;
+}
+
+export interface APISchema {
+  type: string;
   versionName: string;
   value: unknown;
   /**
@@ -11,50 +15,28 @@ export interface OpenAPI3Schema {
   entities?: string[];
 }
 
-export interface GraphQLIntrospectionSchema {
+export interface OpenAPI3Schema extends APISchema {
+  type: "openapi-v3";
+}
+
+export interface GraphQLIntrospectionSchema extends APISchema {
   type: "graphql";
-  versionName: string;
-  value: unknown;
-  /**
-   * List of GraphQL types that should be included. If not specified, all entities will be included.
-   */
-  entities?: string[];
 }
 
 export type SchemaPackage = OpenAPI3Schema | GraphQLIntrospectionSchema;
 
-export interface Provider {
+export type Provider = GraphQLProvider | OpenAPIProvider | NetsuiteProvider;
+
+export interface OpenAPIProvider {
+  isEnabled(): boolean;
   getVersions: () => Promise<string[]>;
-  getSchema: (version: string) => Promise<SchemaPackage>;
-  getSchemaWithoutCircularReferences(
-    schema: OpenAPIV3.SchemaObject
-  ): OpenAPIV3.SchemaObject;
+  getSchema: (version: string) => Promise<APISchema>;
+  unbundle: (bundle: OpenAPI3Schema) => Promise<EntitySchema[]>;
 }
 
-export function openAPIUrlProvider(
-  versions: Record<
-    string,
-    {
-      url: string;
-      transform?: (definition: unknown) => Promise<OpenAPIV3.Document>;
-    }
-  >
-): Provider {
-  return {
-    getVersions: async () => Object.entries(versions).map(([k, _]) => k),
-    getSchema: async (version) => {
-      const { url, transform } = versions[version];
-      const { data } = await http.get(url);
-      return {
-        type: "openapi-v3",
-        versionName: version,
-        value: !!transform ? await transform(data) : data,
-      };
-    },
-    getSchemaWithoutCircularReferences(
-      schema: OpenAPIV3.SchemaObject
-    ): OpenAPIV3.SchemaObject {
-      return schema;
-    },
-  };
+export interface GraphQLProvider {
+  isEnabled(): boolean;
+  getVersions: () => Promise<string[]>;
+  getSchema: (version: string) => Promise<APISchema>;
+  unbundle: (bundle: GraphQLIntrospectionSchema) => Promise<EntitySchema[]>;
 }

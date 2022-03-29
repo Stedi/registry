@@ -1,0 +1,5004 @@
+{
+  "type": "object",
+  "properties": {
+    "autoLeadTime": {
+      "title": "Auto-Calculate",
+      "type": "boolean",
+      "description": "Lead time is the average number of days between ordering this item from the vendor and receiving it. * Check the Auto-Calculate box if you want NetSuite to calculate the lead time based on the most recent order history of this item. This is calculated by taking the number of days between the order entry and receipt on the three most recent purchase orders, and dividing by three. o If there are multiple receipts for the item against the same purchase order, only the first receipt is used for the calculation. o Lead time calculation is not weighted by number of units received. o More recent purchase orders without receipts are ignored. * Clear the Auto-Calculate box to manually enter a lead time value in days. If the Auto-Calculate box is cleared and no value is entered, then the default value from the Set Up Inventory Management page is used."
+    },
+    "storeDisplayName": {
+      "title": "Store Display Name",
+      "type": "string",
+      "description": "Enter the name of this item as you want it displayed in your Web site. You can enter up to 250 characters.",
+      "nullable": true
+    },
+    "scheduleBNumber": {
+      "title": "Schedule B Number",
+      "type": "string",
+      "description": "Enter the number for the Schedule B form for this item.",
+      "nullable": true
+    },
+    "availableToPartners": {
+      "title": "Available to Adv. Partners",
+      "type": "boolean",
+      "description": "Check this box to make this item available to partners with the Advanced Partner Center role for viewing. These items are also available to partners with roles that are customized for the Advanced Partner Center and include view, create or edit access to item records."
+    },
+    "custitem_msrp_2": {
+      "title": "MSRP",
+      "type": "number",
+      "format": "double",
+      "nullable": true
+    },
+    "nexTagCategory": {
+      "title": "NexTag Category",
+      "type": "string",
+      "description": "Enter the name of the NexTag category this item should be included in. This category is included in the product feeds you can export at Setup &gt; Web Site &gt; Product Feeds.",
+      "nullable": true
+    },
+    "lastPurchasePrice": {
+      "title": "Last Purchase Price",
+      "type": "number",
+      "description": "This field displays the most recent purchase price of the item. This price is determined by the most recent transaction for the item that added positive inventory, such as a purchase receipt, inventory transfer or inventory adjustment. (This does not include item returns or assembly unbuilds.) If two transactions are entered on the same day, the one entered later takes precedence and is used to calculate the last purchase price. When you use the Multiple-Location Inventory feature, the following is true: * The last purchase price reflects the most recent transaction at any location. * The Inventory subtab of inventory item records includes a link to the last positive-inventory transaction per location. * If multiple purchases are made on the same day with different prices and locations, then the highest price paid on that day becomes the last purchase price. If you use Multiple Units of Measure, the last purchase price is calculated using purchase units.",
+      "format": "double",
+      "nullable": true
+    },
+    "overallQuantityPricingType": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "ITEM",
+            "PARENT",
+            "SCHEDULE"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "fraudRisk": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "stockDescription": {
+      "title": "Stock Description",
+      "type": "string",
+      "description": "Enter up to 21 characters to specify information about this item, such as New, Refurbished or Ships 2-3 days.",
+      "nullable": true
+    },
+    "id": {
+      "title": "Internal ID",
+      "type": "string",
+      "description": "Returns the internal ID for the item.",
+      "nullable": true
+    },
+    "demandModifier": {
+      "title": "Estimated Demand Change",
+      "type": "number",
+      "description": "Enter the default percentage of Expected Demand Change to use for calculating item demand. For example, if you know that new customers will increase sales of this item in the future, you can enter a 10% expected demand change to be added on to previous sales totals. If no expected demand change percentage is entered, then the default value from the Set Up Inventory Management page is used.",
+      "format": "double",
+      "nullable": true
+    },
+    "purchaseUnit": {
+      "title": "Primary Purchase Unit",
+      "type": "string",
+      "description": "Select the unit you use to purchase this item from the vendor.",
+      "nullable": true
+    },
+    "originalItemType": {
+      "title": "Original Item Type",
+      "type": "string",
+      "nullable": true
+    },
+    "mpn": {
+      "title": "Manufacturer Part Number",
+      "type": "string",
+      "description": "MPN (Manufacturers Part Number) - Enter the part number used by the manufacturer to identify this item.",
+      "nullable": true
+    },
+    "handlingCost": {
+      "title": "Handling Cost",
+      "type": "number",
+      "description": "As an option, you may enter a handling cost for this item in dollars. You must also create a shipping item for per-item shipping and handling costs at Lists &gt; Shipping Items &gt; New. When this item is selected on sales orders, invoices or cash sales, the appropriate shipping and handling charges are automatically calculated.",
+      "format": "double",
+      "nullable": true
+    },
+    "isLotItem": {
+      "title": "Lot Numbered",
+      "type": "boolean"
+    },
+    "originalItemSubtype": {
+      "title": "Original Item Subtype",
+      "type": "string",
+      "nullable": true
+    },
+    "featuredDescription": {
+      "title": "Featured Description",
+      "type": "string",
+      "description": "If this item is displayed on the home page of your Web site, enter a featured description for this item. This description appears below the item&apos;s store display name on the Home page of your store or site. You can enter up to 999 characters including basic HTML code. Enter and format text using the formatting options, or click the HTML Source Code link to enter HTML.",
+      "nullable": true
+    },
+    "safetyStockLevel": {
+      "title": "Safety Stock Level",
+      "type": "number",
+      "description": "Enter the amount of an item you prefer to keep in stock at all times. Safety stock can be a quantity or a number of days worth of stock. This amount is used to auto-calculate the reorder point of an item. * To define safety stock as a quantity, enter a value. * To define safety stock as a number of days, enter a value in the field next to Days. If no safety stock value is entered, then the default value from the Set Up Inventory Management page is used.",
+      "format": "float",
+      "nullable": true
+    },
+    "receiptQuantityDiff": {
+      "title": "Vendor Bill - Item Receipt Quantity Difference",
+      "type": "number",
+      "description": "Enter the difference limit for the discrepancy between the quantity on the vendor bill and item receipt.",
+      "format": "float",
+      "nullable": true
+    },
+    "nexTagProductFeed": {
+      "title": "NexTag Product Feed",
+      "type": "boolean",
+      "description": "Check this box to include this item when exporting item lists to NexTag. Clear this box to remove this item when exporting item lists to NexTag."
+    },
+    "custitem_zoom_small": {
+      "title": "Large Image",
+      "type": "string",
+      "nullable": true
+    },
+    "shopzillaProductFeed": {
+      "title": "Shopzilla Product Feed",
+      "type": "boolean",
+      "description": "Check this box to include this item when exporting item lists to Shopzilla. Clear this box to remove this item when exporting item lists to Shopzilla."
+    },
+    "leadTime": {
+      "title": "Purchase Lead Time",
+      "type": "integer",
+      "description": "Lead time is the average number of days between ordering this item from the vendor and receiving it. * Auto-Calculating – Check the Auto-Calculate box if you want NetSuite to calculate the lead time based on the most recent order history of this item. Lead time is calculated by taking the number of days between the order entry and receipt on the three most recent purchase orders, and dividing by three. If more than three purchase orders exist, all purchase orders within the period specified in the Order Analysis Interval field on the Inventory Management Preferences dialog will be used. o If there are multiple receipts for the item against the same purchase order, the calculation is made using the difference between the purchase order and the last receipt (the receipt that fully receives the order). o Lead time calculation is not weighted by number of units received. o More recent purchase orders without receipts are ignored. * Manually Calculating – Clear the Auto-Calculate box to manually enter a lead time value in days. If the Auto-Calculate box is cleared and no value is entered, then the default value from the Set Up Inventory Management page is used.",
+      "format": "int64",
+      "nullable": true
+    },
+    "shoppingDotComCategory": {
+      "title": "Shopping.com Category",
+      "type": "string",
+      "description": "Enter the name of the Shopping.com category that this item should go under. This category is included in the product feeds that you can export from Setup &gt; Web Site &gt; Product Feeds. Go to www.shopping.com for more information on the categories available. This is an optional field only available for following item records: Kit/Package, Non-inventory Item for Sale, Non-inventory Item for Resale, Assembly (lot and serialized), and Inventory (lot and serialized).",
+      "nullable": true
+    },
+    "shippingCost": {
+      "title": "Shipping Cost",
+      "type": "number",
+      "description": "As an option, you may enter a shipping cost for this item in dollars. You must also create a shipping item for per-item shipping costs at Lists &gt; Shipping Items &gt; New. When this item is selected on sales orders, invoices or cash sales, the appropriate shipping charges are automatically calculated.",
+      "format": "double",
+      "nullable": true
+    },
+    "stockUnit": {
+      "title": "Primary Stock Unit",
+      "type": "string",
+      "description": "Select the unit you use to stock this item in inventory.",
+      "nullable": true
+    },
+    "saleUnit": {
+      "title": "Primary Sale Unit",
+      "type": "string",
+      "description": "Select the unit you use to sell this item to customers on sales transactions.",
+      "nullable": true
+    },
+    "shopzillaCategoryId": {
+      "title": "Shopzilla Category ID",
+      "type": "integer",
+      "description": "Enter the name of the Shopzilla category this item should be included in. This category is included in the product feeds you export at Setup &gt; Web Site &gt; Product Feeds. Go to www.shopzilla.com for more information on the available categories. This is an optional field only displayed for the following item records: Kit/Package, Non-inventory Item for Sale, Non-inventory Item for Resale, Assembly (lot and serialized), and Inventory (lot and serialized).",
+      "format": "int64",
+      "nullable": true
+    },
+    "createdDate": {
+      "title": "Date Created",
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "isSerialItem": {
+      "title": "Serialized",
+      "type": "boolean"
+    },
+    "froogleProductFeed": {
+      "title": "Google Base Product Feed",
+      "type": "boolean",
+      "description": "Check this box to include this item when exporting item lists to Froogle. Clear this box to remove this item when exporting item lists to Froogle."
+    },
+    "onSpecial": {
+      "title": "On Special",
+      "type": "boolean",
+      "description": "If you want to put this item on special, check this box. The item then appears in the Specials category in your store or site."
+    },
+    "supplyReplenishmentMethod": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "TIME_PHASED",
+            "MPS",
+            "REORDER_POINT",
+            "MRP"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "manufacturer": {
+      "title": "Manufacturer",
+      "type": "string",
+      "description": "Enter the name of the company that manufactures this item.",
+      "nullable": true
+    },
+    "consumptionUnit": {
+      "title": "Primary Consumption Unit",
+      "type": "string",
+      "description": "If you use the Multiple Units of Measure feature, select the default unit of measure for inventory.",
+      "nullable": true
+    },
+    "useBins": {
+      "title": "Use Bins",
+      "type": "boolean",
+      "description": "Check this box to track bin locations for this item. If you choose to use bins for this item, you must associate at least one bin with the item using the Bin Numbers subtab. You can associate multiple items with one bin and multiple bins with one item. You can also designate one preferred bin per location. The preferred bin is listed by default on receipt and fulfillment transactions. To create bin records that can be selected here, go to Lists &gt; Supply Chain &gt; Bins &gt; New."
+    },
+    "enforceminqtyinternally": {
+      "title": "Enforce Minimum Internally",
+      "type": "boolean",
+      "description": "Check this box to apply the minimum quantity restriction on sales orders generated from NetSuite. When you clear this box, but enter a number in the Minimum Quantity field, the minimum quantity is only applied to web store orders."
+    },
+    "seasonalDemand": {
+      "title": "Seasonal Demand",
+      "type": "boolean",
+      "description": "Check the Seasonal Demand box to define how NetSuite analyzes customer demand for this item . Customer demand for an item is used to auto-calculate reorder points and preferred stock levels. An item’s demand rate is calculated as the average sales quantity per day. * Historical Demand – Clear the Seasonal Demand box to calculate the demand as average sales per day over a specific period. To set the number of months interval between analysis to evaluate sales orders and calculate item demand, go to Setup &gt; Accounting &gt; Set Up Inventory Management &gt; Order Analysis Interval field. * Seasonal Demand – Check the Seasonal Demand box to calculate the reorder quantity for this item based on inventory demand changes through the year. To set the number of months interval between analysis to evaluate sales orders and calculate item demand, go to Setup &gt; Accounting &gt; Set Up Inventory Management &gt; Order Analysis Interval field."
+    },
+    "custitem_mfr_wrnty_subtab_help": {
+      "title": "Mfr Wrnty Subtab Help",
+      "type": "string",
+      "nullable": true
+    },
+    "custitem16": {
+      "title": "Demo Item",
+      "type": "boolean"
+    },
+    "shipIndividually": {
+      "title": "Ships Individually",
+      "type": "boolean",
+      "description": "Check this box if this item always ships alone and with no other items in the same package. This helps determine the number of packages needed and the shipping rate on order fulfillments."
+    },
+    "customForm": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "-200",
+            "110",
+            "33",
+            "144",
+            "1",
+            "34",
+            "24",
+            "135",
+            "27",
+            "137"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "displayName": {
+      "title": "Display Name/Code",
+      "type": "string",
+      "description": "Enter an optional name of up to 250 characters for this item in addition to the Item Name. If you are integrating with a Yahoo! store, this field is imported from Yahoo!. The display name prints in the Item column of sales forms when Basic printing is used. If this item is a member of a kit, this name appears in the Item column when the Print Items box is checked. If you do not enter a display name, the item name appears on printed forms.",
+      "nullable": true
+    },
+    "custitem_specifications": {
+      "title": "Specifications",
+      "type": "string",
+      "nullable": true
+    },
+    "isDropShipItem": {
+      "title": "Drop Ship Item",
+      "type": "boolean",
+      "description": "Check the Drop Ship Item box to have this item default as a drop ship item on sales orders. When a sales transaction for a drop ship item is approved, a linked purchase order for the preferred vendor is automatically generated. The vendor ships this item to your customer directly. Note: an item can be a drop ship or a special order, but not both."
+    },
+    "safetyStockLevelDays": {
+      "title": "Safety Stock Level Days",
+      "type": "integer",
+      "description": "Enter the amount of an item you prefer to keep in stock at all times. Safety stock can be a quantity or a number of days worth of stock. This amount is used to auto-calculate the reorder point of an item. * To define safety stock as a quantity, enter a value. * To define safety stock as a number of days, enter a value in the field next to Days. If no safety stock value is entered, then the default value from the Set Up Inventory Management page is used.",
+      "format": "int64",
+      "nullable": true
+    },
+    "itemCarrier": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "ups",
+            "nonups"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "countryOfManufacture": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "PR",
+            "PS",
+            "PT",
+            "PW",
+            "PY",
+            "QA",
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AI",
+            "AL",
+            "AM",
+            "AN",
+            "AO",
+            "AQ",
+            "AR",
+            "AS",
+            "AT",
+            "RE",
+            "AU",
+            "AW",
+            "AX",
+            "AZ",
+            "RO",
+            "BA",
+            "BB",
+            "RS",
+            "BD",
+            "BE",
+            "RU",
+            "BF",
+            "BG",
+            "RW",
+            "BH",
+            "BI",
+            "BJ",
+            "BL",
+            "BM",
+            "BN",
+            "BO",
+            "SA",
+            "BQ",
+            "SB",
+            "BR",
+            "SC",
+            "BS",
+            "SD",
+            "BT",
+            "SE",
+            "BV",
+            "SG",
+            "SH",
+            "BW",
+            "SI",
+            "BY",
+            "SJ",
+            "BZ",
+            "SK",
+            "SL",
+            "SM",
+            "SN",
+            "SO",
+            "CA",
+            "SR",
+            "CC",
+            "SS",
+            "CD",
+            "ST",
+            "CF",
+            "SV",
+            "CG",
+            "CH",
+            "SX",
+            "CI",
+            "SY",
+            "SZ",
+            "CK",
+            "CL",
+            "CM",
+            "CN",
+            "CO",
+            "CR",
+            "TC",
+            "TD",
+            "CS",
+            "TF",
+            "CU",
+            "CV",
+            "TG",
+            "CW",
+            "TH",
+            "CX",
+            "CY",
+            "TJ",
+            "TK",
+            "CZ",
+            "TL",
+            "TM",
+            "TN",
+            "TO",
+            "TR",
+            "TT",
+            "DE",
+            "TV",
+            "TW",
+            "DJ",
+            "TZ",
+            "DK",
+            "DM",
+            "DO",
+            "UA",
+            "UG",
+            "DZ",
+            "UM",
+            "EA",
+            "US",
+            "EC",
+            "EE",
+            "EG",
+            "EH",
+            "UY",
+            "UZ",
+            "VA",
+            "ER",
+            "VC",
+            "ES",
+            "ET",
+            "VE",
+            "VG",
+            "VI",
+            "VN",
+            "VU",
+            "FI",
+            "FJ",
+            "FK",
+            "FM",
+            "FO",
+            "FR",
+            "WF",
+            "GA",
+            "GB",
+            "WS",
+            "GD",
+            "GE",
+            "GF",
+            "GG",
+            "GH",
+            "GI",
+            "GL",
+            "GM",
+            "GN",
+            "GP",
+            "GQ",
+            "GR",
+            "GS",
+            "GT",
+            "GU",
+            "GW",
+            "GY",
+            "XK",
+            "HK",
+            "HM",
+            "HN",
+            "HR",
+            "HT",
+            "YE",
+            "HU",
+            "IC",
+            "ID",
+            "YT",
+            "IE",
+            "IL",
+            "IM",
+            "IN",
+            "IO",
+            "ZA",
+            "IQ",
+            "IR",
+            "IS",
+            "IT",
+            "ZM",
+            "JE",
+            "ZW",
+            "JM",
+            "JO",
+            "JP",
+            "KE",
+            "KG",
+            "KH",
+            "KI",
+            "KM",
+            "KN",
+            "KP",
+            "KR",
+            "KW",
+            "KY",
+            "KZ",
+            "LA",
+            "LB",
+            "LC",
+            "LI",
+            "LK",
+            "LR",
+            "LS",
+            "LT",
+            "LU",
+            "LV",
+            "LY",
+            "MA",
+            "MC",
+            "MD",
+            "ME",
+            "MF",
+            "MG",
+            "MH",
+            "MK",
+            "ML",
+            "MM",
+            "MN",
+            "MO",
+            "MP",
+            "MQ",
+            "MR",
+            "MS",
+            "MT",
+            "MU",
+            "MV",
+            "MW",
+            "MX",
+            "MY",
+            "MZ",
+            "NA",
+            "NC",
+            "NE",
+            "NF",
+            "NG",
+            "NI",
+            "NL",
+            "NO",
+            "NP",
+            "NR",
+            "NU",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PF",
+            "PG",
+            "PH",
+            "PK",
+            "PL",
+            "PM",
+            "PN"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "shoppingProductFeed": {
+      "title": "Shopping Product Feed",
+      "type": "boolean",
+      "description": "Check this box to include this item when exporting item lists to Shopping.com. Clear this box to remove this item when exporting item lists to Shopping.com."
+    },
+    "externalId": {
+      "title": "External ID",
+      "type": "string",
+      "nullable": true
+    },
+    "residual": {
+      "title": "Residual",
+      "type": "number",
+      "format": "double",
+      "nullable": true
+    },
+    "custitem_zoom_big": {
+      "title": "Zoomed Image",
+      "type": "string",
+      "nullable": true
+    },
+    "searchKeywords": {
+      "title": "Search Keywords",
+      "type": "string",
+      "description": "Enter alternative search keywords that customers might use to find this item using your Web store’s internal search. These can include synonyms, acronyms, alternate languages or misspellings. These keywords are seen as equally important as the item name when searches are conducted.",
+      "nullable": true
+    },
+    "isOnline": {
+      "title": "Display in Web Site",
+      "type": "boolean",
+      "description": "Check this box to make this item available online in your Web site. You cannot sell this item online unless you check this box. If the item is of the Other Charge for Sale or Resale subtype, checking this box does not make it available in the web store catalog. However, it becomes available during web store checkout."
+    },
+    "purchaseOrderAmount": {
+      "title": "Vendor Bill - Purchase Order Amount Tolerance",
+      "type": "number",
+      "description": "Enter the tolerance limit for the discrepancy between the amount on the vendor bill and purchase order.",
+      "format": "float",
+      "nullable": true
+    },
+    "autoReorderPoint": {
+      "title": "Auto-Calculate",
+      "type": "boolean",
+      "description": "Reorder Point is the quantity level at which you need to reorder or build more of this item. * Auto-Calculate – Check the Auto-Calculate box to automatically calculate the reorder point based on demand for the item over time. The reorder point depends on the safety stock definition and is calculated as follows: o Without safety stock defined: Reorder point = (average lead time days * demand) o With safety stock defined in days: Reorder point = [(average lead time days + safety stock days) * demand] o With safety stock quantity defined: Reorder point = [(average lead time days * demand) + safety stock quantity) * Manually Calculate – Clear the Auto-Calculate box to manually enter the point at which to reorder or build more of this item. If you go to Home &gt; User Preferences and place a check mark in the Inventory Level Warnings box, NetSuite reminds you when you have reached the reorder point."
+    },
+    "dateConvertedToInv": {
+      "title": "Date Converted To Inv.",
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "receiptQuantity": {
+      "title": "Vendor Bill - Item Receipt Quantity Tolerance",
+      "type": "number",
+      "description": "Enter the tolerance limit for the discrepancy between the quantity on the vendor bill and item receipt.",
+      "format": "float",
+      "nullable": true
+    },
+    "maximumquantity": {
+      "title": "Maximum Order Qty",
+      "type": "integer",
+      "description": "Enter the greatest quantity of this item that customers can purchase. If customers enter an item quantity above the maximum amount, a warning message is displayed. Web store customers are unable to complete checkout unless they enter a quantity equal to or below the maximum quantity. Leave this field empty to allow customers to check out without maximum quantity restrictions. You can edit this warning at Setup &gt; Site Builder/SuiteCommerce Advanced &gt; Customize Text.",
+      "format": "int64",
+      "nullable": true
+    },
+    "minimumquantity": {
+      "title": "Minimum Order Qty",
+      "type": "integer",
+      "description": "Enter the lowest quantity that customers can purchase. Web store customers receive a warning and cannot check out if they enter an item quantity below this minimum. Leave this field empty to allow customers to check out with no minimum quantity restrictions. You can edit this warning at Setup &gt; Site Builder/SuiteCommerce Advanced &gt; Customize Text.",
+      "format": "int64",
+      "nullable": true
+    },
+    "custitem_pfc_framewidth": {
+      "title": "Frame Width",
+      "type": "number",
+      "format": "float",
+      "nullable": true
+    },
+    "custitem_popup": {
+      "title": "Popup Image",
+      "type": "string",
+      "nullable": true
+    },
+    "totalValue": {
+      "title": "Total Value",
+      "type": "number",
+      "description": "Enter or accept the total value of this item. NetSuite generates this amount by multiplying your purchase price and your quantity on hand. As you buy and sell additional inventory, NetSuite continues to calculate the total value.",
+      "format": "double",
+      "nullable": true
+    },
+    "storeDetailedDescription": {
+      "title": "Detailed Description",
+      "type": "string",
+      "description": "Enter a detailed description for this item. When your customers click an item&apos;s store display name for more information, they see this description. You can enter letters, numbers or basic HTML code. If you are using Internet Explorer, you can also clear the View Source box below to enter and format text using the formatting options above. This eliminates the need for HTML code. If you do not see the View Source box, make sure Rich Text Editing is enabled at Home &gt; Set Preferences &gt; Appearance.",
+      "nullable": true
+    },
+    "salesDescription": {
+      "title": "Sales Description",
+      "type": "string",
+      "description": "Enter a sales description for this item. You can enter letters and numbers. There is a 999 character limit. The sales description displays on transactions such as sales orders, cash sales and invoices. If you use the Web Store feature, the sales description displays immediately under the item&apos;s store display name on item list pages in your store or site, if you have not entered a store description for an item. Enter the store description on the Store subtab of the item record. The sales description also displays by default when the item is in the Web store shopping cart.",
+      "nullable": true
+    },
+    "costEstimateUnits": {
+      "title": "Est. Cost Unit",
+      "type": "string",
+      "nullable": true
+    },
+    "custitem_custom_altimage1": {
+      "title": "Alternate Image 1",
+      "type": "string",
+      "nullable": true
+    },
+    "baseUnit": {
+      "title": "Primary Base Unit",
+      "type": "string",
+      "description": "This field displays the base unit of measure for this item.",
+      "nullable": true
+    },
+    "weight": {
+      "title": "Item Weight ",
+      "type": "number",
+      "description": "Enter the weight of this item and select the units in the dropdown.",
+      "format": "float",
+      "nullable": true
+    },
+    "includeChildren": {
+      "title": "Include Children",
+      "type": "boolean",
+      "description": "Check the Include Children box to share the item with all the sub-subsidiaries associated with each subsidiary selected in the Subsidiary field. Note: When sharing items across subsidiaries, all of the options selected on the item record must be compatible across subsidiaries. For example, when entering an inventory item to be shared across subsidiaries, you should select Income and Asset accounts on the item record that are also shared across the same subsidiaries."
+    },
+    "custitem_part_lookup": {
+      "title": "Part Lookup",
+      "type": "string",
+      "nullable": true
+    },
+    "internalId": {
+      "title": "Internal ID",
+      "type": "integer",
+      "description": "Use this ID number to create smart tags for your item templates, site templates, and custom Web site that you host with NetSuite. Smart tags use the following format:",
+      "format": "int64",
+      "nullable": true
+    },
+    "outOfStockMessage": {
+      "title": "Out Of Stock Message",
+      "type": "string",
+      "description": "You can enter a custom out of stock message for this item. The message here replaces the default out of stock message.",
+      "nullable": true
+    },
+    "purchaseOrderQuantityDiff": {
+      "title": "Vendor Bill - Purchase Order Quantity Difference",
+      "type": "number",
+      "description": "Enter the difference limit for the discrepancy between the quantity on the vendor bill and purchase order.",
+      "format": "float",
+      "nullable": true
+    },
+    "storeDescription": {
+      "title": "Store Description",
+      "type": "string",
+      "description": "The store description appears under the item&apos;s store display name on item list pages in your store or site. You can enter letters, numbers, and basic HTML code. Note: To make the store description display when an item is in the Web store shopping cart, go to Setup &gt; Web Site &gt; Set Up Web Site. Click the Cart subtab, and check the box next to Store Description.",
+      "nullable": true
+    },
+    "useMarginalRates": {
+      "title": "Use Marginal Rates",
+      "type": "boolean",
+      "description": "Check this box if you want the quantity discounts in the schedule to be applied to each pricing bracket separately. For example, a schedule offers no discount for the first 100 items sold and a 5% discount if more than 100 are sold. If 150 items are sold, the first 100 are at normal price, and the other fifty items are sold at 5% discount. Leave this box clear if you want the discount to apply to all of the items sold."
+    },
+    "matchBillToReceipt": {
+      "title": "Match Bill To Receipt",
+      "type": "boolean",
+      "description": "Check the Match Bill to Receipt box if you want the Match Bill to Receipt box on transaction lines to be checked by default for this item. This enables you to generate variances based on vendor bill lines. Then, on the Post Vendor Bill Variances page, you must select Bill in the Transaction Type field to generate the variance postings. Purchase orders that include this item default to have this box checked and variances are generated based on vendor bill lines. Clear this box if you want to generate variance postings based on purchase order lines rather than vendor bill lines and do not want the Match Bill to Receipt box to be checked by default on transaction lines for this item. Then, on the Post Vendor Bill Variances page, you must select Purchase Order in the Transaction Type field to generate the variance postings. This preference defaults to be disabled. Even when enabled, this option can be changed on individual purchase order lines."
+    },
+    "vendorName": {
+      "title": "Vendor Name/Code",
+      "type": "string",
+      "description": "If your vendor uses a name for this item that is different from the name you use, you can enter up to 60 characters as the vendor&apos;s name for this item here. The vendor&apos;s name for this item prints in the Item column of purchase forms. If you do not enter a vendor name, the item name prints in the Item column of purchase forms. If you have entered a display name, it will print on purchases instead of the item name.",
+      "nullable": true
+    },
+    "isInactive": {
+      "title": "Inactive",
+      "type": "boolean",
+      "description": "When you check this box, this item will no longer appear on a list unless you check the Show All box at the bottom of the list page."
+    },
+    "purchaseDescription": {
+      "title": "Purchase Description",
+      "type": "string",
+      "description": "Enter up to 999 characters of text for a description of this item to appear on vendor orders. Include the unit of measure in this description.",
+      "nullable": true
+    },
+    "metaTagHtml": {
+      "title": "Meta Tag HTML",
+      "type": "string",
+      "description": "Enter the Meta Tag HTML you want to appear in the &lt; head &gt; section of this item page. Meta tags enable your Web site to be found by search engines.",
+      "nullable": true
+    },
+    "roundUpAsComponent": {
+      "title": "Round Up Quantity as Component",
+      "type": "boolean",
+      "description": "If you use the component yield preference, depending on your settings, the component yield calculation may result in a fractional quantity. You can use this setting so that the quantity for a component on a work order automatically rounds up to a whole number in base units. For example, you have an assembly that requires 2 units of Component A. The component yield is 99%. To build 5 of these assemblies requires 10.1 units of Component A. Since you can consume components only in whole numbers, you cannot consume 10.1 units. Therefore, you need to round up to the next highest whole number in base units. Check the Round Up Quantity as Component box to enable NetSuite to round up the quantity consumed for this item. Clear this box if you do not want NetSuite to round up the quantity consumed for this item."
+    },
+    "dontShowPrice": {
+      "title": "Don't Show Price",
+      "type": "boolean",
+      "description": "Check this box to hide the price of this item online. This is useful for items you want to advertise but don&apos;t want to sell or for items that you track inventory for and want to display but are offered in combination with other items."
+    },
+    "atpMethod": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "CUMULATIVE_ATP_WITH_LOOK_AHEAD",
+            "DISCRETE_ATP"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "description": {
+      "title": "Description",
+      "type": "string",
+      "description": "Enter a description for this item. This description will appear in the Description column of sales forms.",
+      "nullable": true
+    },
+    "weightUnit": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "itemId": {
+      "title": "Item Name/Number",
+      "type": "string",
+      "description": "Enter up to 250 characters for the name of this item. This name appears in lists on transactions. If you have the option of entering a display name and do not, the item name prints in the Item column of sales forms when Basic printing is used. If you have the option to enter a vendor name and do not, the item name prints in the Item column of purchase forms. If you have entered a display name, it will print on purchases instead of the item name when Basic printing is used.",
+      "nullable": true
+    },
+    "offerSupport": {
+      "title": "Offer Support",
+      "type": "boolean",
+      "description": "Check this box to offer support for this particular item. By offering support for items, customers can select on case records which item they are having trouble with."
+    },
+    "custitem_custom_altimageth": {
+      "title": "Alternate Image 1 (Thumb)",
+      "type": "string",
+      "nullable": true
+    },
+    "purchaseOrderQuantity": {
+      "title": "Vendor Bill - Purchase Order Quantity Tolerance",
+      "type": "number",
+      "description": "Enter the tolerance limit for the discrepancy between the quantity on the vendor bill and purchase order.",
+      "format": "float",
+      "nullable": true
+    },
+    "transferPrice": {
+      "title": "Transfer Price",
+      "type": "number",
+      "description": "Enter a transfer price on an item record to set the default value used as the transfer price on transfer orders. You can still override this default by entering a new transfer price for an item on the transfer order. The use of the value in the Transfer Price field on a transfer order depends on your setting for the Use Item Cost as Transfer Cost preference. When the Use Item Cost as Transfer Cost preference is enabled, the transfer price on a transfer order is not considered for posting cost accounting of line items. In the Transfer Price field, enter a declared value for the item to be used for shipping purposes only. When the Use Item Cost as Transfer Cost preference is disabled, the transfer price on a transfer order is considered for posting cost accounting of line items. Items that do not have a transfer price set on a transfer order use a zero value for cost accounting calculations when the item is received. Note: If the Transfer Price field is blank on the item record, a value of zero shows by default on the transfer order. Unless a transfer price value is entered on the transfer order, a value of zero is used for COGS calculations when the item is received.",
+      "format": "double",
+      "nullable": true
+    },
+    "noPriceMessage": {
+      "title": "No Price Message",
+      "type": "string",
+      "description": "If you opted to not show a price online, enter the message that should show instead of the price. For example, you might enter &quot;Call for Price.&quot;",
+      "nullable": true
+    },
+    "trackLandedCost": {
+      "title": "Track Landed Cost",
+      "type": "boolean",
+      "description": "Check this box to track landed costs associated with this item. Note: You must include an item that tracks landed costs on transactions you want to source for landed costs. For example, on the Landed Costs subtab of item receipts, a vendor bill shows in the source transaction list only if the bill includes a landed cost item."
+    },
+    "preferredStockLevelDays": {
+      "title": "Days",
+      "type": "number",
+      "description": "The preferred stock level is the optimum quantity to maintain in stock of an item. The quantity you enter here is used to determine your replenishment needs on the Order Items page. It is the quantity you want to have in stock after an order is placed. * Auto-Calculating – Check the Auto-Calculate box if you want NetSuite to calculate the preferred stock level based on demand for the item. The preferred stock level is calculated as: (daily demand * number of days supply preferred). If no preferred stock level is identified, then the default preferred stock level is used from the Set Up Inventory Management page. * Manually Calculating – Clear the Auto-Calculate box to manually enter the preferred stock quantity. The preferred stock level you set is used to calculate the quantity of items to be ordered on the Order Items page.",
+      "format": "float",
+      "nullable": true
+    },
+    "copyDescription": {
+      "title": "Copy from Sales Order",
+      "type": "boolean",
+      "description": "Check this box to copy the purchase description from the item description you enter on a sales order. Clear this box to enter a purchase description in the field above."
+    },
+    "cost": {
+      "title": "Purchase Price",
+      "type": "number",
+      "description": "Enter the price you pay for this item. If you do not enter a price, purchase orders for this item show the most recent purchase price by default. If you select a preferred vendor for this item, the price is shown in the currency selected on the vendor&apos;s record. If no preferred vendor is selected, the price is shown in your base currency.",
+      "format": "double",
+      "nullable": true
+    },
+    "excludeFromSiteMap": {
+      "title": "Exclude from Sitemap",
+      "type": "boolean",
+      "description": "Check this box to exclude a tab, category or item page from the site map."
+    },
+    "weightUnits": {
+      "title": "Weight Units",
+      "type": "string",
+      "nullable": true
+    },
+    "lastModifiedDate": {
+      "title": "Last Modified",
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "costingMethod": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "SERIAL",
+            "LOT",
+            "AVG",
+            "LIFO",
+            "GROUPAVG",
+            "FIFO",
+            "STANDARD"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "autoPreferredStockLevel": {
+      "title": "Auto-Calculate",
+      "type": "boolean",
+      "description": "The preferred stock level is the optimum quantity to maintain in stock of an item. The quantity you enter here is used to determine your replenishment needs on the Order Items page. It is the quantity you want to have in stock after an order is placed. * Auto-Calculating – Check the Auto-Calculate box if you want NetSuite to calculate the preferred stock level based on demand for the item. The preferred stock level is calculated as: (daily demand * number of days supply preferred). If no preferred stock level is identified, then the default preferred stock level is used from the Set Up Inventory Management page. * Manually Calculating – Clear the Auto-Calculate box to manually enter the preferred stock quantity. The preferred stock level you set is used to calculate the quantity of items to be ordered on the Order Items page."
+    },
+    "amortizationPeriod": {
+      "title": "Amortization Period",
+      "type": "integer",
+      "format": "int64",
+      "nullable": true
+    },
+    "yahooProductFeed": {
+      "title": "Yahoo Shopping Product Feed",
+      "type": "boolean"
+    },
+    "reorderMultiple": {
+      "title": "Reorder Multiple",
+      "type": "integer",
+      "description": "Enter the quantity you prefer to order of this item each time. Then, the Order Items page suggests ordering a quantity of this item that is always multiple of the number you enter. For example, if the vendor only accepts orders in multiples of one thousand, you would enter 1000 in this field. Then, the Order items page might suggest that you order 1000 or 2000, but not 1500. Note: If you use the Multiple Units of Measure feature, the reorder multiple always functions in base units.",
+      "format": "int64",
+      "nullable": true
+    },
+    "isGCoCompliant": {
+      "title": "Google Checkout Compliant",
+      "type": "boolean"
+    },
+    "upcCode": {
+      "title": "UPC Code",
+      "type": "string",
+      "description": "Enter a maximum of 999 characters in this field to identify an internal name or number to store the item&apos;s UPC Code. You can use the text you enter here when adding the item to transactions, searching, or viewing reports. * When you enter text in this field, the SKU/UPC field on item labels displays this UPC Code and prints in UPC bar code format. * When this field is clear, the SKU/UPC field on item labels displays the Item Name/Number and prints in Code-128 bar code format.",
+      "nullable": true
+    },
+    "receiptAmount": {
+      "title": "Vendor Bill - Item Receipt Amount Tolerance",
+      "type": "number",
+      "description": "Enter the tolerance limit for the discrepancy between the amount on the vendor bill and item receipt.",
+      "format": "float",
+      "nullable": true
+    },
+    "averageCost": {
+      "title": "Average Cost",
+      "type": "number",
+      "description": "This field displays the current average cost of the item across all locations. Using the weighted-average method, the average cost is calculated as the total units available during a period divided by the beginning inventory cost plus the cost of additions to inventory. Note: The average cost calculated per location is listed for each location on the Locations subtab. If you use Multiple Units of Measure, average cost is calculated using stock units.",
+      "format": "double",
+      "nullable": true
+    },
+    "custitem_wrnty_center_phone": {
+      "title": "Wrnty Center Phone",
+      "type": "string",
+      "nullable": true
+    },
+    "outOfStockBehavior": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "DISABLE",
+            "ENABLENMSG",
+            "REMOVE",
+            "ENABLE",
+            "DEFAULT"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "itemType": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "Group",
+            "Discount",
+            "Description",
+            "EndGroup",
+            "GiftCert",
+            "Subtotal",
+            "Service",
+            "ShipItem",
+            "InvtPart",
+            "TaxItem",
+            "Payment",
+            "Expense",
+            "NonInvtPart",
+            "TaxGroup",
+            "Kit",
+            "Markup",
+            "OthCharge",
+            "DwnLdItem",
+            "Assembly",
+            "SubscriPlan"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "siteMapPriority": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "",
+            "0.0",
+            "0.1",
+            "0.2",
+            "0.3",
+            "0.4",
+            "0.5",
+            "0.6",
+            "0.7",
+            "0.8",
+            "0.9",
+            "1.0"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "costEstimate": {
+      "title": "Item Defined Cost",
+      "type": "number",
+      "description": "Enter an Item Defined Cost amount.",
+      "format": "double",
+      "nullable": true
+    },
+    "isSpecialOrderItem": {
+      "title": "Special Order Item",
+      "type": "boolean",
+      "description": "Check this box if you want this item to default as a special order on sales transactions. When a sales transaction for a special order item is approved, a linked purchase order is automatically generated. Then, the order cannot be fulfilled until the linked purchase order is received. Special order items can be used for custom orders or &quot;just-in-time&quot; inventory. Important: You must identify a preferred vendor and a purchase price on an item record in order for that item to be selected as a special order. Note: An item can be a drop ship or a special order, but not both."
+    },
+    "pageTitle": {
+      "title": "Page Title",
+      "type": "string",
+      "description": "Enter the text you want to appear as the page&apos;s title for this item. This text appears in the browser tab. Use a descriptive title for the item page, this can help achieve better results with search engine ranking.",
+      "nullable": true
+    },
+    "transferPriceUnits": {
+      "title": "Transfer Price Units",
+      "type": "string",
+      "nullable": true
+    },
+    "urlComponent": {
+      "title": "URL Component",
+      "type": "string",
+      "description": "Enter a short, descriptive name for this item to appear as part of its URL in the Web store. Setting a name to show in the URL can result in better ranking from search engines. If you leave this field blank, NetSuite terms and numbers are used as identifiers in the URL. Note: Descriptive URL components are case sensitive. Descriptive URLs must match the case used in the URL Component field of an item record to point to the correct page.",
+      "nullable": true
+    },
+    "refName": {
+      "title": "Reference Name",
+      "type": "string"
+    },
+    "links": {
+      "title": "Links",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "rel": {
+            "title": "Relationship",
+            "type": "string",
+            "readOnly": true
+          },
+          "href": {
+            "title": "Hypertext Reference",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "siteCategory": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        },
+        "totalResults": {
+          "title": "Total Results",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hasMore": {
+          "title": "Has More Results",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "offset": {
+          "title": "Query Offset",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "links": {
+                "title": "Links",
+                "type": "array",
+                "readOnly": true,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "rel": {
+                      "title": "Relationship",
+                      "type": "string",
+                      "readOnly": true
+                    },
+                    "href": {
+                      "title": "Hypertext Reference",
+                      "type": "string",
+                      "readOnly": true
+                    }
+                  }
+                }
+              },
+              "refName": {
+                "title": "Reference Name",
+                "type": "string"
+              },
+              "webSite": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string"
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "title": "External identifier",
+                    "type": "string"
+                  },
+                  "links": {
+                    "title": "Links",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "rel": {
+                          "title": "Relationship",
+                          "type": "string",
+                          "readOnly": true
+                        },
+                        "href": {
+                          "title": "Hypertext Reference",
+                          "type": "string",
+                          "readOnly": true
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "category": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string"
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "title": "External identifier",
+                    "type": "string"
+                  },
+                  "links": {
+                    "title": "Links",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "rel": {
+                          "title": "Relationship",
+                          "type": "string",
+                          "readOnly": true
+                        },
+                        "href": {
+                          "title": "Hypertext Reference",
+                          "type": "string",
+                          "readOnly": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "price": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        },
+        "totalResults": {
+          "title": "Total Results",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hasMore": {
+          "title": "Has More Results",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "offset": {
+          "title": "Query Offset",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "items": {
+          "type": "object",
+          "properties": {
+            "links": {
+              "title": "Links",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rel": {
+                    "title": "Relationship",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "href": {
+                    "title": "Hypertext Reference",
+                    "type": "string",
+                    "readOnly": true
+                  }
+                }
+              }
+            },
+            "isInactive": {
+              "title": "Inactive",
+              "type": "boolean",
+              "description": "When you check this box, this item will no longer appear on a list unless you check the Show All box at the bottom of the list page."
+            },
+            "quantity": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "title": "Value",
+                  "type": "string"
+                }
+              }
+            },
+            "priceQty": {
+              "title": "Sequence Number",
+              "type": "integer",
+              "format": "int64",
+              "nullable": true
+            },
+            "price": {
+              "title": "Amount",
+              "type": "number",
+              "format": "double",
+              "nullable": true
+            },
+            "discountDisplay": {
+              "title": "Default Discount %",
+              "type": "number",
+              "format": "double",
+              "nullable": true
+            },
+            "priceLevelName": {
+              "title": "Price Level",
+              "type": "string",
+              "nullable": true
+            },
+            "refName": {
+              "title": "Reference Name",
+              "type": "string"
+            },
+            "priceLevel": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "title": "Internal identifier",
+                  "type": "string"
+                },
+                "refName": {
+                  "title": "Reference Name",
+                  "type": "string"
+                },
+                "externalId": {
+                  "title": "External identifier",
+                  "type": "string"
+                },
+                "links": {
+                  "title": "Links",
+                  "type": "array",
+                  "readOnly": true,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "rel": {
+                        "title": "Relationship",
+                        "type": "string",
+                        "readOnly": true
+                      },
+                      "href": {
+                        "title": "Hypertext Reference",
+                        "type": "string",
+                        "readOnly": true
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "currencyPage": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "title": "Internal identifier",
+                  "type": "string"
+                },
+                "refName": {
+                  "title": "Reference Name",
+                  "type": "string"
+                },
+                "externalId": {
+                  "title": "External identifier",
+                  "type": "string"
+                },
+                "links": {
+                  "title": "Links",
+                  "type": "array",
+                  "readOnly": true,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "rel": {
+                        "title": "Relationship",
+                        "type": "string",
+                        "readOnly": true
+                      },
+                      "href": {
+                        "title": "Hypertext Reference",
+                        "type": "string",
+                        "readOnly": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "custitem_ropetype": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        },
+        "totalResults": {
+          "title": "Total Results",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hasMore": {
+          "title": "Has More Results",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "offset": {
+          "title": "Query Offset",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "items": {
+          "type": "array",
+          "items": {}
+        }
+      }
+    },
+    "pricingGroup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "costCategory": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "storeDisplayImage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "custitem_helmetsize": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        },
+        "totalResults": {
+          "title": "Total Results",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hasMore": {
+          "title": "Has More Results",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "offset": {
+          "title": "Query Offset",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "items": {
+          "type": "array",
+          "items": {}
+        }
+      }
+    },
+    "custReturnVarianceAccount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "class": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "assetAccount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "preferredLocation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "currency": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "correlatedItems": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        },
+        "totalResults": {
+          "title": "Total Results",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hasMore": {
+          "title": "Has More Results",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "offset": {
+          "title": "Query Offset",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "links": {
+                "title": "Links",
+                "type": "array",
+                "readOnly": true,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "rel": {
+                      "title": "Relationship",
+                      "type": "string",
+                      "readOnly": true
+                    },
+                    "href": {
+                      "title": "Hypertext Reference",
+                      "type": "string",
+                      "readOnly": true
+                    }
+                  }
+                }
+              },
+              "liftFld": {
+                "title": "Lift %",
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              },
+              "itemNKeyFld": {
+                "title": "Item",
+                "type": "string",
+                "nullable": true
+              },
+              "purchaseRateFld": {
+                "title": "Overall Purchase Rate",
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              },
+              "countFld": {
+                "title": "Count",
+                "type": "integer",
+                "format": "int64",
+                "nullable": true
+              },
+              "correlationFld": {
+                "title": "Correlation %",
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              },
+              "refName": {
+                "title": "Reference Name",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "shipPackage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "quantityPricingSchedule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "purchasePriceVarianceAcct": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "dropShipExpenseAccount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "itemShipMethod": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        },
+        "totalResults": {
+          "title": "Total Results",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hasMore": {
+          "title": "Has More Results",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "offset": {
+          "title": "Query Offset",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "items": {
+          "type": "array",
+          "items": {}
+        }
+      }
+    },
+    "binNumber": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        },
+        "totalResults": {
+          "title": "Total Results",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hasMore": {
+          "title": "Has More Results",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "offset": {
+          "title": "Query Offset",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "links": {
+                "title": "Links",
+                "type": "array",
+                "readOnly": true,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "rel": {
+                      "title": "Relationship",
+                      "type": "string",
+                      "readOnly": true
+                    },
+                    "href": {
+                      "title": "Hypertext Reference",
+                      "type": "string",
+                      "readOnly": true
+                    }
+                  }
+                }
+              },
+              "onHandAvail": {
+                "title": "Available",
+                "type": "number",
+                "format": "float",
+                "nullable": true
+              },
+              "onHand": {
+                "title": "On Hand",
+                "type": "number",
+                "format": "float",
+                "nullable": true
+              },
+              "preferredBin": {
+                "title": "Preferred (per Location)",
+                "type": "boolean"
+              },
+              "locationActive": {
+                "title": "Location Active",
+                "type": "string",
+                "nullable": true
+              },
+              "refName": {
+                "title": "Reference Name",
+                "type": "string"
+              },
+              "location": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string"
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "title": "External identifier",
+                    "type": "string"
+                  },
+                  "links": {
+                    "title": "Links",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "rel": {
+                          "title": "Relationship",
+                          "type": "string",
+                          "readOnly": true
+                        },
+                        "href": {
+                          "title": "Hypertext Reference",
+                          "type": "string",
+                          "readOnly": true
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "binNumber": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string"
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "title": "External identifier",
+                    "type": "string"
+                  },
+                  "links": {
+                    "title": "Links",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "rel": {
+                          "title": "Relationship",
+                          "type": "string",
+                          "readOnly": true
+                        },
+                        "href": {
+                          "title": "Hypertext Reference",
+                          "type": "string",
+                          "readOnly": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "department": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "amortizationTemplate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "matrixoptioncustitem_helmetsize": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "incomeAccount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "createExpensePlansOn": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "matrixoptioncustitem_ropehand": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "billPriceVarianceAcct": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "defaultItemShipMethod": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "custitem14": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        },
+        "totalResults": {
+          "title": "Total Results",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hasMore": {
+          "title": "Has More Results",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "offset": {
+          "title": "Query Offset",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "items": {
+          "type": "array",
+          "items": {}
+        }
+      }
+    },
+    "custitem13": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        },
+        "totalResults": {
+          "title": "Total Results",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hasMore": {
+          "title": "Has More Results",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "offset": {
+          "title": "Query Offset",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "items": {
+          "type": "array",
+          "items": {}
+        }
+      }
+    },
+    "custitem17": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "matrixoptioncustitem_ropetype": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "subsidiary": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        },
+        "totalResults": {
+          "title": "Total Results",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hasMore": {
+          "title": "Has More Results",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "offset": {
+          "title": "Query Offset",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "items": {
+          "type": "array",
+          "items": {}
+        }
+      }
+    },
+    "billingSchedule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "alternateDemandSourceItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "custitem_ropehand": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        },
+        "totalResults": {
+          "title": "Total Results",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hasMore": {
+          "title": "Has More Results",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "offset": {
+          "title": "Query Offset",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "items": {
+          "type": "array",
+          "items": {}
+        }
+      }
+    },
+    "cogsAccount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "billQtyVarianceAcct": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "unitsType": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "parent": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "expenseAmortizationRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "billExchRateVarianceAcct": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "custitem_manufacturer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "custitem1": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "deferralAccount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "presentationItem": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        },
+        "totalResults": {
+          "title": "Total Results",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hasMore": {
+          "title": "Has More Results",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "offset": {
+          "title": "Query Offset",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "links": {
+                "title": "Links",
+                "type": "array",
+                "readOnly": true,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "rel": {
+                      "title": "Relationship",
+                      "type": "string",
+                      "readOnly": true
+                    },
+                    "href": {
+                      "title": "Hypertext Reference",
+                      "type": "string",
+                      "readOnly": true
+                    }
+                  }
+                }
+              },
+              "presitemurl": {
+                "title": "Item URL",
+                "type": "string",
+                "nullable": true
+              },
+              "basePrice": {
+                "title": "Base Price",
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              },
+              "presItemId": {
+                "title": "Internal ID",
+                "type": "integer",
+                "format": "int64",
+                "nullable": true
+              },
+              "onlinePrice": {
+                "title": "Online Price",
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              },
+              "refName": {
+                "title": "Reference Name",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "storeDisplayThumbnail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "itemVendor": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        },
+        "totalResults": {
+          "title": "Total Results",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hasMore": {
+          "title": "Has More Results",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "offset": {
+          "title": "Query Offset",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "links": {
+                "title": "Links",
+                "type": "array",
+                "readOnly": true,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "rel": {
+                      "title": "Relationship",
+                      "type": "string",
+                      "readOnly": true
+                    },
+                    "href": {
+                      "title": "Hypertext Reference",
+                      "type": "string",
+                      "readOnly": true
+                    }
+                  }
+                }
+              },
+              "preferredVendor": {
+                "title": "Preferred",
+                "type": "boolean"
+              },
+              "vendorCurrencyName": {
+                "title": "Currency",
+                "type": "string",
+                "nullable": true
+              },
+              "vendorCode": {
+                "title": "Code",
+                "type": "string",
+                "nullable": true
+              },
+              "purchasePrice": {
+                "title": "Purchase Price",
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              },
+              "refName": {
+                "title": "Reference Name",
+                "type": "string"
+              },
+              "subsidiary": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string"
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "title": "External identifier",
+                    "type": "string"
+                  },
+                  "links": {
+                    "title": "Links",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "rel": {
+                          "title": "Relationship",
+                          "type": "string",
+                          "readOnly": true
+                        },
+                        "href": {
+                          "title": "Hypertext Reference",
+                          "type": "string",
+                          "readOnly": true
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "schedule": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string"
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "title": "External identifier",
+                    "type": "string"
+                  },
+                  "links": {
+                    "title": "Links",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "rel": {
+                          "title": "Relationship",
+                          "type": "string",
+                          "readOnly": true
+                        },
+                        "href": {
+                          "title": "Hypertext Reference",
+                          "type": "string",
+                          "readOnly": true
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "vendor": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string"
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "title": "External identifier",
+                    "type": "string"
+                  },
+                  "links": {
+                    "title": "Links",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "rel": {
+                          "title": "Relationship",
+                          "type": "string",
+                          "readOnly": true
+                        },
+                        "href": {
+                          "title": "Hypertext Reference",
+                          "type": "string",
+                          "readOnly": true
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "itemVendorPrice": {
+                "type": "object",
+                "properties": {
+                  "externalId": {
+                    "title": "External ID",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  },
+                  "links": {
+                    "title": "Links",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "rel": {
+                          "title": "Relationship",
+                          "type": "string",
+                          "readOnly": true
+                        },
+                        "href": {
+                          "title": "Hypertext Reference",
+                          "type": "string",
+                          "readOnly": true
+                        }
+                      }
+                    }
+                  },
+                  "itemvendorpricelines": {
+                    "type": "object",
+                    "properties": {
+                      "links": {
+                        "title": "Links",
+                        "type": "array",
+                        "readOnly": true,
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "rel": {
+                              "title": "Relationship",
+                              "type": "string",
+                              "readOnly": true
+                            },
+                            "href": {
+                              "title": "Hypertext Reference",
+                              "type": "string",
+                              "readOnly": true
+                            }
+                          }
+                        }
+                      },
+                      "totalResults": {
+                        "title": "Total Results",
+                        "type": "integer",
+                        "format": "int64",
+                        "readOnly": true
+                      },
+                      "count": {
+                        "title": "Count",
+                        "type": "integer",
+                        "format": "int64",
+                        "readOnly": true
+                      },
+                      "hasMore": {
+                        "title": "Has More Results",
+                        "type": "boolean",
+                        "readOnly": true
+                      },
+                      "offset": {
+                        "title": "Query Offset",
+                        "type": "integer",
+                        "format": "int64",
+                        "readOnly": true
+                      },
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "links": {
+                              "title": "Links",
+                              "type": "array",
+                              "readOnly": true,
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "rel": {
+                                    "title": "Relationship",
+                                    "type": "string",
+                                    "readOnly": true
+                                  },
+                                  "href": {
+                                    "title": "Hypertext Reference",
+                                    "type": "string",
+                                    "readOnly": true
+                                  }
+                                }
+                              }
+                            },
+                            "refName": {
+                              "title": "Reference Name",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "vendReturnVarianceAccount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "matrixoptioncustitem14": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "gainLossAccount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "matrixoptioncustitem13": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "default": {
+    "autoLeadTime": true,
+    "storeDisplayName": "string",
+    "scheduleBNumber": "string",
+    "availableToPartners": true,
+    "custitem_msrp_2": 0,
+    "nexTagCategory": "string",
+    "lastPurchasePrice": 0,
+    "overallQuantityPricingType": {
+      "id": "ITEM",
+      "refName": "string"
+    },
+    "fraudRisk": {
+      "id": "LOW",
+      "refName": "string"
+    },
+    "stockDescription": "string",
+    "id": "string",
+    "demandModifier": 0,
+    "purchaseUnit": "string",
+    "originalItemType": "string",
+    "mpn": "string",
+    "handlingCost": 0,
+    "isLotItem": true,
+    "originalItemSubtype": "string",
+    "featuredDescription": "string",
+    "safetyStockLevel": 0,
+    "receiptQuantityDiff": 0,
+    "nexTagProductFeed": true,
+    "custitem_zoom_small": "string",
+    "shopzillaProductFeed": true,
+    "leadTime": 0,
+    "shoppingDotComCategory": "string",
+    "shippingCost": 0,
+    "stockUnit": "string",
+    "saleUnit": "string",
+    "shopzillaCategoryId": 0,
+    "createdDate": "1970-01-01T00:00:00.000Z",
+    "isSerialItem": true,
+    "froogleProductFeed": true,
+    "onSpecial": true,
+    "supplyReplenishmentMethod": {
+      "id": "TIME_PHASED",
+      "refName": "string"
+    },
+    "manufacturer": "string",
+    "consumptionUnit": "string",
+    "useBins": true,
+    "enforceminqtyinternally": true,
+    "seasonalDemand": true,
+    "custitem_mfr_wrnty_subtab_help": "string",
+    "custitem16": true,
+    "shipIndividually": true,
+    "customForm": {
+      "id": "-200",
+      "refName": "string"
+    },
+    "displayName": "string",
+    "custitem_specifications": "string",
+    "isDropShipItem": true,
+    "safetyStockLevelDays": 0,
+    "itemCarrier": {
+      "id": "ups",
+      "refName": "string"
+    },
+    "countryOfManufacture": {
+      "id": "PR",
+      "refName": "string"
+    },
+    "shoppingProductFeed": true,
+    "externalId": "string",
+    "residual": 0,
+    "custitem_zoom_big": "string",
+    "searchKeywords": "string",
+    "isOnline": true,
+    "purchaseOrderAmount": 0,
+    "autoReorderPoint": true,
+    "dateConvertedToInv": "1970-01-01T00:00:00.000Z",
+    "receiptQuantity": 0,
+    "maximumquantity": 0,
+    "minimumquantity": 0,
+    "custitem_pfc_framewidth": 0,
+    "custitem_popup": "string",
+    "totalValue": 0,
+    "storeDetailedDescription": "string",
+    "salesDescription": "string",
+    "costEstimateUnits": "string",
+    "custitem_custom_altimage1": "string",
+    "baseUnit": "string",
+    "weight": 0,
+    "includeChildren": true,
+    "custitem_part_lookup": "string",
+    "internalId": 0,
+    "outOfStockMessage": "string",
+    "purchaseOrderQuantityDiff": 0,
+    "storeDescription": "string",
+    "useMarginalRates": true,
+    "matchBillToReceipt": true,
+    "vendorName": "string",
+    "isInactive": true,
+    "purchaseDescription": "string",
+    "metaTagHtml": "string",
+    "roundUpAsComponent": true,
+    "dontShowPrice": true,
+    "atpMethod": {
+      "id": "CUMULATIVE_ATP_WITH_LOOK_AHEAD",
+      "refName": "string"
+    },
+    "description": "string",
+    "weightUnit": {
+      "id": "1",
+      "refName": "string"
+    },
+    "itemId": "string",
+    "offerSupport": true,
+    "custitem_custom_altimageth": "string",
+    "purchaseOrderQuantity": 0,
+    "transferPrice": 0,
+    "noPriceMessage": "string",
+    "trackLandedCost": true,
+    "preferredStockLevelDays": 0,
+    "copyDescription": true,
+    "cost": 0,
+    "excludeFromSiteMap": true,
+    "weightUnits": "string",
+    "lastModifiedDate": "1970-01-01T00:00:00.000Z",
+    "costingMethod": {
+      "id": "SERIAL",
+      "refName": "string"
+    },
+    "autoPreferredStockLevel": true,
+    "amortizationPeriod": 0,
+    "yahooProductFeed": true,
+    "reorderMultiple": 0,
+    "isGCoCompliant": true,
+    "upcCode": "string",
+    "receiptAmount": 0,
+    "averageCost": 0,
+    "custitem_wrnty_center_phone": "string",
+    "outOfStockBehavior": {
+      "id": "DISABLE",
+      "refName": "string"
+    },
+    "itemType": {
+      "id": "Group",
+      "refName": "string"
+    },
+    "siteMapPriority": {
+      "id": "",
+      "refName": "string"
+    },
+    "costEstimate": 0,
+    "isSpecialOrderItem": true,
+    "pageTitle": "string",
+    "transferPriceUnits": "string",
+    "urlComponent": "string",
+    "refName": "string",
+    "links": [
+      {
+        "rel": "string",
+        "href": "string"
+      }
+    ],
+    "siteCategory": {
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ],
+      "totalResults": 0,
+      "count": 0,
+      "hasMore": true,
+      "offset": 0,
+      "items": [
+        {
+          "links": [
+            {
+              "rel": "string",
+              "href": "string"
+            }
+          ],
+          "refName": "string",
+          "webSite": {
+            "id": "string",
+            "refName": "string",
+            "externalId": "string",
+            "links": [
+              {
+                "rel": "string",
+                "href": "string"
+              }
+            ]
+          },
+          "category": {
+            "id": "string",
+            "refName": "string",
+            "externalId": "string",
+            "links": [
+              {
+                "rel": "string",
+                "href": "string"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "location": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "price": {
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ],
+      "totalResults": 0,
+      "count": 0,
+      "hasMore": true,
+      "offset": 0,
+      "items": {
+        "links": [
+          {
+            "rel": "string",
+            "href": "string"
+          }
+        ],
+        "isInactive": true,
+        "quantity": {
+          "value": "string"
+        },
+        "priceQty": 0,
+        "price": 0,
+        "discountDisplay": 0,
+        "priceLevelName": "string",
+        "refName": "string",
+        "priceLevel": {
+          "id": "string",
+          "refName": "string",
+          "externalId": "string",
+          "links": [
+            {
+              "rel": "string",
+              "href": "string"
+            }
+          ]
+        },
+        "currencyPage": {
+          "id": "string",
+          "refName": "string",
+          "externalId": "string",
+          "links": [
+            {
+              "rel": "string",
+              "href": "string"
+            }
+          ]
+        }
+      }
+    },
+    "custitem_ropetype": {
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ],
+      "totalResults": 0,
+      "count": 0,
+      "hasMore": true,
+      "offset": 0,
+      "items": [
+        {}
+      ]
+    },
+    "pricingGroup": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "costCategory": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "storeDisplayImage": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "custitem_helmetsize": {
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ],
+      "totalResults": 0,
+      "count": 0,
+      "hasMore": true,
+      "offset": 0,
+      "items": [
+        {}
+      ]
+    },
+    "custReturnVarianceAccount": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "class": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "assetAccount": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "preferredLocation": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "currency": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "correlatedItems": {
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ],
+      "totalResults": 0,
+      "count": 0,
+      "hasMore": true,
+      "offset": 0,
+      "items": [
+        {
+          "links": [
+            {
+              "rel": "string",
+              "href": "string"
+            }
+          ],
+          "liftFld": 0,
+          "itemNKeyFld": "string",
+          "purchaseRateFld": 0,
+          "countFld": 0,
+          "correlationFld": 0,
+          "refName": "string"
+        }
+      ]
+    },
+    "shipPackage": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "quantityPricingSchedule": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "purchasePriceVarianceAcct": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "dropShipExpenseAccount": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "itemShipMethod": {
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ],
+      "totalResults": 0,
+      "count": 0,
+      "hasMore": true,
+      "offset": 0,
+      "items": [
+        {}
+      ]
+    },
+    "binNumber": {
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ],
+      "totalResults": 0,
+      "count": 0,
+      "hasMore": true,
+      "offset": 0,
+      "items": [
+        {
+          "links": [
+            {
+              "rel": "string",
+              "href": "string"
+            }
+          ],
+          "onHandAvail": 0,
+          "onHand": 0,
+          "preferredBin": true,
+          "locationActive": "string",
+          "refName": "string",
+          "location": {
+            "id": "string",
+            "refName": "string",
+            "externalId": "string",
+            "links": [
+              {
+                "rel": "string",
+                "href": "string"
+              }
+            ]
+          },
+          "binNumber": {
+            "id": "string",
+            "refName": "string",
+            "externalId": "string",
+            "links": [
+              {
+                "rel": "string",
+                "href": "string"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "department": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "amortizationTemplate": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "matrixoptioncustitem_helmetsize": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "incomeAccount": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "createExpensePlansOn": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "matrixoptioncustitem_ropehand": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "billPriceVarianceAcct": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "defaultItemShipMethod": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "custitem14": {
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ],
+      "totalResults": 0,
+      "count": 0,
+      "hasMore": true,
+      "offset": 0,
+      "items": [
+        {}
+      ]
+    },
+    "custitem13": {
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ],
+      "totalResults": 0,
+      "count": 0,
+      "hasMore": true,
+      "offset": 0,
+      "items": [
+        {}
+      ]
+    },
+    "custitem17": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "matrixoptioncustitem_ropetype": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "subsidiary": {
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ],
+      "totalResults": 0,
+      "count": 0,
+      "hasMore": true,
+      "offset": 0,
+      "items": [
+        {}
+      ]
+    },
+    "billingSchedule": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "alternateDemandSourceItem": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "custitem_ropehand": {
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ],
+      "totalResults": 0,
+      "count": 0,
+      "hasMore": true,
+      "offset": 0,
+      "items": [
+        {}
+      ]
+    },
+    "cogsAccount": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "billQtyVarianceAcct": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "unitsType": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "parent": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "expenseAmortizationRule": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "billExchRateVarianceAcct": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "custitem_manufacturer": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "custitem1": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "deferralAccount": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "presentationItem": {
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ],
+      "totalResults": 0,
+      "count": 0,
+      "hasMore": true,
+      "offset": 0,
+      "items": [
+        {
+          "links": [
+            {
+              "rel": "string",
+              "href": "string"
+            }
+          ],
+          "presitemurl": "string",
+          "basePrice": 0,
+          "presItemId": 0,
+          "onlinePrice": 0,
+          "refName": "string"
+        }
+      ]
+    },
+    "storeDisplayThumbnail": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "itemVendor": {
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ],
+      "totalResults": 0,
+      "count": 0,
+      "hasMore": true,
+      "offset": 0,
+      "items": [
+        {
+          "links": [
+            {
+              "rel": "string",
+              "href": "string"
+            }
+          ],
+          "preferredVendor": true,
+          "vendorCurrencyName": "string",
+          "vendorCode": "string",
+          "purchasePrice": 0,
+          "refName": "string",
+          "subsidiary": {
+            "id": "string",
+            "refName": "string",
+            "externalId": "string",
+            "links": [
+              {
+                "rel": "string",
+                "href": "string"
+              }
+            ]
+          },
+          "schedule": {
+            "id": "string",
+            "refName": "string",
+            "externalId": "string",
+            "links": [
+              {
+                "rel": "string",
+                "href": "string"
+              }
+            ]
+          },
+          "vendor": {
+            "id": "string",
+            "refName": "string",
+            "externalId": "string",
+            "links": [
+              {
+                "rel": "string",
+                "href": "string"
+              }
+            ]
+          },
+          "itemVendorPrice": {
+            "externalId": "string",
+            "refName": "string",
+            "links": [
+              {
+                "rel": "string",
+                "href": "string"
+              }
+            ],
+            "itemvendorpricelines": {
+              "links": [
+                {
+                  "rel": "string",
+                  "href": "string"
+                }
+              ],
+              "totalResults": 0,
+              "count": 0,
+              "hasMore": true,
+              "offset": 0,
+              "items": [
+                {
+                  "links": [
+                    {
+                      "rel": "string",
+                      "href": "string"
+                    }
+                  ],
+                  "refName": "string"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "vendReturnVarianceAccount": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "matrixoptioncustitem14": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "gainLossAccount": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "matrixoptioncustitem13": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    }
+  }
+}

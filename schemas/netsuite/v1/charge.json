@@ -1,0 +1,1082 @@
+{
+  "type": "object",
+  "properties": {
+    "transactionLine": {
+      "title": "Transaction Line",
+      "type": "string",
+      "nullable": true
+    },
+    "createdDate": {
+      "title": "Date Created",
+      "type": "string",
+      "description": "This is the date this charge was created either manually or by a charge run.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "use": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "Forecast",
+            "Actual"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "invoiceLine": {
+      "title": "Invoice Item Line",
+      "type": "string",
+      "description": "If this charge has been billed, the invoice line containing this charge is shown here.",
+      "nullable": true
+    },
+    "memo": {
+      "title": "Memo",
+      "type": "string",
+      "description": "This field is used to log information from Recurring Billing,.",
+      "nullable": true
+    },
+    "externalId": {
+      "title": "External ID",
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "title": "Description",
+      "type": "string",
+      "description": "Enter a description of this charge.",
+      "nullable": true
+    },
+    "units": {
+      "title": "Units",
+      "type": "string",
+      "description": "Units of measure.",
+      "nullable": true
+    },
+    "salesOrderLine": {
+      "title": "Sales Order Line",
+      "type": "string",
+      "description": "If this charge has been included on a sales order, the sales order line is shown here.",
+      "nullable": true
+    },
+    "billingMode": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "IN_ARREARS",
+            "IN_ADVANCE",
+            "IMMEDIATE"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "rate": {
+      "title": "Rate",
+      "type": "number",
+      "description": "The rate for this charge is shown here. The charge rates for project charges are determined by charge rules.",
+      "format": "double",
+      "nullable": true
+    },
+    "creditMemoLine": {
+      "title": "Credit Memo Item Line",
+      "type": "string",
+      "description": "If this charge is the result of a credit memo, the line number from the corresponding memo is displayed here.",
+      "nullable": true
+    },
+    "runId": {
+      "title": "Charge Run ID",
+      "type": "string",
+      "nullable": true
+    },
+    "id": {
+      "title": "Internal ID",
+      "type": "string",
+      "nullable": true
+    },
+    "serviceStartDate": {
+      "title": "Service Start Date",
+      "type": "string",
+      "description": "If this charge has a start date, enter it here.",
+      "format": "date",
+      "nullable": true
+    },
+    "amount": {
+      "title": "Amount",
+      "type": "number",
+      "description": "The charge amount is shown here. The charge amount is calculated as charge rate multiplied by charge quantity. You can manually override the charge amount.",
+      "format": "double",
+      "nullable": true
+    },
+    "quantity": {
+      "title": "Quantity",
+      "type": "number",
+      "description": "The quantity for this charge is shown here. The quantity for a project charge is set to 1.",
+      "format": "float",
+      "nullable": true
+    },
+    "lastModifiedDate": {
+      "title": "Last Modified Date",
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "chargeDate": {
+      "title": "Date",
+      "type": "string",
+      "description": "This is the date this charge was generated or created.",
+      "format": "date",
+      "nullable": true
+    },
+    "serviceEndDate": {
+      "title": "Service End Date",
+      "type": "string",
+      "description": "If this service has an end date, enter it here.",
+      "format": "date",
+      "nullable": true
+    },
+    "stage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": [
+            "NON_BILLABLE",
+            "READY_FOR_BILLING",
+            "HOLD_FOR_BILLING"
+          ]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "customForm": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
+    "billDate": {
+      "title": "Bill Date",
+      "type": "string",
+      "description": "The bill date for this charge is displayed here.",
+      "format": "date",
+      "nullable": true
+    },
+    "groupOrder": {
+      "title": "Group Order",
+      "type": "integer",
+      "description": "Choose the order in which you want this charge to appear on invoice lines.",
+      "format": "int64",
+      "nullable": true
+    },
+    "refName": {
+      "title": "Reference Name",
+      "type": "string"
+    },
+    "links": {
+      "title": "Links",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "rel": {
+            "title": "Relationship",
+            "type": "string",
+            "readOnly": true
+          },
+          "href": {
+            "title": "Hypertext Reference",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "department": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "transaction": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "currency": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "timeRecord": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "subsidiary": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "rule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "billingItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "chargeEmployee": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "billTo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "salesOrder": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "creditMemo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "class": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "billingSchedule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "chargeType": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "invoice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "projectTask": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string"
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        },
+        "externalId": {
+          "title": "External identifier",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "title": "Relationship",
+                "type": "string",
+                "readOnly": true
+              },
+              "href": {
+                "title": "Hypertext Reference",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "default": {
+    "transactionLine": "string",
+    "createdDate": "1970-01-01T00:00:00.000Z",
+    "use": {
+      "id": "Forecast",
+      "refName": "string"
+    },
+    "invoiceLine": "string",
+    "memo": "string",
+    "externalId": "string",
+    "description": "string",
+    "units": "string",
+    "salesOrderLine": "string",
+    "billingMode": {
+      "id": "IN_ARREARS",
+      "refName": "string"
+    },
+    "rate": 0,
+    "creditMemoLine": "string",
+    "runId": "string",
+    "id": "string",
+    "serviceStartDate": "1970-01-01",
+    "amount": 0,
+    "quantity": 0,
+    "lastModifiedDate": "1970-01-01T00:00:00.000Z",
+    "chargeDate": "1970-01-01",
+    "serviceEndDate": "1970-01-01",
+    "stage": {
+      "id": "NON_BILLABLE",
+      "refName": "string"
+    },
+    "customForm": {
+      "id": "string",
+      "refName": "string"
+    },
+    "billDate": "1970-01-01",
+    "groupOrder": 0,
+    "refName": "string",
+    "links": [
+      {
+        "rel": "string",
+        "href": "string"
+      }
+    ],
+    "department": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "transaction": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "currency": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "timeRecord": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "subsidiary": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "rule": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "billingItem": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "chargeEmployee": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "billTo": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "salesOrder": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "creditMemo": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "class": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "billingSchedule": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "chargeType": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "invoice": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "projectTask": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    },
+    "location": {
+      "id": "string",
+      "refName": "string",
+      "externalId": "string",
+      "links": [
+        {
+          "rel": "string",
+          "href": "string"
+        }
+      ]
+    }
+  }
+}

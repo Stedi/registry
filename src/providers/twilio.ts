@@ -1,9 +1,18 @@
-import { OpenAPI3Schema, Provider } from "../provider";
+import {
+  EntitySchema,
+  OpenAPI3Schema,
+  OpenAPIProvider,
+  Provider,
+} from "../provider";
 import * as github from "../github";
-import { OpenAPIV3 } from "openapi-types";
+import openAPIParser from "@readme/openapi-parser";
 import _ from "lodash";
 
-export class TwilioProvider implements Provider {
+export class TwilioProvider implements OpenAPIProvider {
+  isEnabled(): boolean {
+    return true;
+  }
+
   async getVersions(): Promise<string[]> {
     return [
       "twilio_messaging_v1",
@@ -44,9 +53,17 @@ export class TwilioProvider implements Provider {
     };
   }
 
-  getSchemaWithoutCircularReferences(
-    schema: OpenAPIV3.SchemaObject
-  ): OpenAPIV3.SchemaObject {
-    return schema;
+  async unbundle(bundle: OpenAPI3Schema): Promise<EntitySchema[]> {
+    const dereferenced = await openAPIParser.dereference(bundle.value as any);
+
+    const hasComponents = "components" in dereferenced;
+    if (!hasComponents) throw new Error("Expected components");
+
+    return Object.entries(dereferenced.components?.schemas ?? {})
+      .filter(([key]) => !bundle.entities || bundle.entities.includes(key))
+      .map(([key, value]) => ({
+        name: key,
+        schema: value,
+      }));
   }
 }
