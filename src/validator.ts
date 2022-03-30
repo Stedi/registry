@@ -91,13 +91,6 @@ function getAjvInstance(type: "json-schema-2020-12" = "json-schema-2020-12") {
     },
   });
 
-  instance.addFormat("date-time-rfc-2822", {
-    validate: (x: string) => {
-      const regex =
-        /^(?:(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s+)?(?:[0-9]|0[1-9]|1[0-2])\s+[A-Za-z]{3}\s+[0-9]{4}\s+[0-9]{2}:[0-9]{2}:[0-9]{2}\s+[+-][0-9]{4}$/;
-      return regex.test(x);
-    },
-  });
   instance.addFormat("string", {
     validate: () => true,
   });

@@ -63,7 +63,18 @@ export class TwilioProvider implements OpenAPIProvider {
       .filter(([key]) => !bundle.entities || bundle.entities.includes(key))
       .map(([key, value]) => ({
         name: key,
-        schema: value,
+        schema: sanitizeSchema(value),
       }));
   }
+}
+function sanitizeSchema(schema: unknown) {
+  return JSON.parse(
+    JSON.stringify(schema, (key, value) => {
+      if (value?.format === "date-time-rfc-2822") {
+        delete value.format;
+      }
+
+      return value;
+    })
+  );
 }
