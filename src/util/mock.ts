@@ -101,9 +101,6 @@ export function mock(schemalike: SchemaLike): any {
     }
 
     const minln = !_.isNil(schema.minLength) ? schema.minLength : 0;
-    if (!val) {
-      console.log(schema, val);
-    }
     const maxln = !_.isNil(schema.maxLength) ? schema.maxLength : val.length;
 
     if (val === formatExamples._default && val.length < minln) {
