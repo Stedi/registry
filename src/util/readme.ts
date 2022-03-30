@@ -18,7 +18,7 @@ function generateMapFromSchemaMarkdownButton({
   const mappingName = encodeURIComponent(
     `Mapping from ${capitalizeFirstLetter(providerName)}'s ${schemaName} schema`
   );
-  return `[![Map from this schema](/images/MapFromThisSchema.svg)](https://terminal.stedi.com/mappings/import?name=${mappingName}&source_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/${target})`;
+  return `[![Map from this schema](/images/MapFromThisSchema.svg)](https://terminal.stedi.com/mappings/import?name=${mappingName}&referrer=registry-repo&source_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/${target})`;
 }
 
 function generateMapToSchemaMarkdownButton({
@@ -29,7 +29,7 @@ function generateMapToSchemaMarkdownButton({
   const mappingName = encodeURIComponent(
     `Mapping to ${capitalizeFirstLetter(providerName)}'s ${schemaName} schema`
   );
-  return `[![Map to this schema](/images/MapToThisSchema.svg)](https://terminal.stedi.com/mappings/import?name=${mappingName}&target_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/${target})`;
+  return `[![Map to this schema](/images/MapToThisSchema.svg)](https://terminal.stedi.com/mappings/import?name=${mappingName}&referrer=registry-repo&target_json_schema=https://raw.githubusercontent.com/Stedi/registry/main/${target})`;
 }
 
 interface GenerateMarkdownTableProps {
