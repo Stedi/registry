@@ -18,21 +18,14 @@ export class FlexportProvider implements OpenAPIProvider {
       "distributeaid",
       "flexport-sdk-js",
       "saga",
-      `api-docs/${version}.yaml`
+      `api-docs/${version}.yaml`,
     );
 
     return {
       type: "openapi-v3",
       versionName: version,
       value: yaml.load(definition),
-      entities: [
-        "Container",
-        "Shipment",
-        "Booking",
-        "Invoice",
-        "Product",
-        "Document",
-      ],
+      entities: ["Container", "Shipment", "Invoice", "Product", "Document"],
     };
   }
 
@@ -98,6 +91,6 @@ function sanitizeSchema(schema: unknown) {
       }
 
       return value;
-    })
+    }),
   );
 }
