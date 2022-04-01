@@ -149,6 +149,7 @@ const formatExamples: { [format: string]: string } = {
   date: "1970-01-01",
   uuid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
   "unix-time": "1647352387",
+  "date-time-rfc-2822": "01 Jun 2016 14:31:46 -0700",
   string: "string",
   _default: "string",
 };

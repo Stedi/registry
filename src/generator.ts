@@ -86,6 +86,7 @@ export async function generateAll(
 (async () => {
   await generateAll("./schemas", "stripe");
   await generateAll("./schemas", "ramp");
+  await generateAll("./schemas", "twilio");
   await generateAll("./schemas", "netsuite");
   await generateAll("./schemas", "flexport");
   await generateAll("./schemas", "klaviyo");
