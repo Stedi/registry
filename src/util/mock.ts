@@ -86,28 +86,29 @@ export function mock(schemalike: SchemaLike): any {
   if (type === "string") {
     const { format } = schema;
     const val = format ? formatExamples[format] : formatExamples._default;
+    const minLength = !_.isNil(schema.minLength) ? schema.minLength : 0;
+    const maxLength = !_.isNil(schema.maxLength)
+      ? schema.maxLength
+      : val.length;
 
     if (schema.pattern) {
       const randexp = new RandExp(schema.pattern);
-      randexp.max = schema.maxLength ?? 10;
+      randexp.max = maxLength;
 
       let val = randexp.gen();
 
-      while (val.length < (schema.minLength ?? 0)) {
+      while (val.length < minLength || val.length > maxLength) {
         val = randexp.gen();
       }
 
-      return randexp.gen();
+      return val;
     }
 
-    const minln = !_.isNil(schema.minLength) ? schema.minLength : 0;
-    const maxln = !_.isNil(schema.maxLength) ? schema.maxLength : val.length;
-
-    if (val === formatExamples._default && val.length < minln) {
-      return _.padEnd(val, minln, val);
+    if (val === formatExamples._default && val.length < minLength) {
+      return _.padEnd(val, minLength, val);
     }
 
-    return val.substring(0, _.clamp(val.length, minln, maxln));
+    return val.substring(0, _.clamp(val.length, minLength, maxLength));
   }
 
   if (type === "number") {
