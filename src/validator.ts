@@ -9,29 +9,6 @@ import Ajv2020 from "ajv/dist/2020";
 
 type PathErrorPair = [string, Error];
 
-interface Provider {
-  name: String;
-  description: String;
-  logoUrl: String;
-}
-
-const providerJsonSchema = {
-  $schema: "https://json-schema.org/draft/2020-12/schema",
-  type: "object",
-  properties: {
-    name: {
-      type: "string",
-    },
-    description: {
-      type: "string",
-    },
-    logoUrl: {
-      type: "string",
-    },
-  },
-  required: ["name", "description", "logoUrl"],
-};
-
 function validateSchema(jsonSchema: string): SchemaObject {
   try {
     const schemaObject = JSON.parse(jsonSchema) as SchemaObject;
@@ -153,9 +130,32 @@ async function validateAllSchemas() {
   }
 }
 
+interface Provider {
+  name: String;
+  description: String;
+  logoUrl: String;
+}
+
+const providerJsonSchema = {
+  $schema: "https://json-schema.org/draft/2020-12/schema",
+  type: "object",
+  properties: {
+    name: {
+      type: "string",
+    },
+    description: {
+      type: "string",
+    },
+    logoUrl: {
+      type: "string",
+    },
+  },
+  required: ["name", "description", "logoUrl"],
+};
+
 /**
- * Compares the providers in the schemas directory against the providers in the providers.json file
- * And ensures that providers.json has a correct shape.
+ * Compares the providers in the schemas directory against the providers in the providers.json file.
+ * Moreover, ensures that providers.json has a correct shape.
  */
 async function validateProviders() {
   const schemasPath = "schemas";
@@ -165,17 +165,17 @@ async function validateProviders() {
     readFileSync(providersPath, "utf-8")
   );
 
-  const providersNamesLowercased = providers.map((provider) =>
+  const providersNamesInLowerCase = providers.map((provider) =>
     provider.name.toLowerCase()
   );
   const schemasProvidersNames = schemas.map(
     (provider) => provider.split("/")[1]
   );
-  const providersWithSchemasMissing = providersNamesLowercased.filter(
+  const providersWithSchemasMissing = providersNamesInLowerCase.filter(
     (p) => !schemasProvidersNames.includes(p)
   );
   const providersWithMetadataMissing = schemasProvidersNames.filter(
-    (p) => !providersNamesLowercased.includes(p)
+    (p) => !providersNamesInLowerCase.includes(p)
   );
 
   if (providersWithSchemasMissing.length > 0) {
