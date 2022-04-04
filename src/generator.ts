@@ -69,6 +69,7 @@ export async function generateForVersion(
     ["Source Schema"],
     ...markdownTableRows,
   ]);
+
   fs.writeFileSync(path.join(baseDir, `README.md`), readmeFileContents);
 }
 
@@ -78,6 +79,7 @@ export async function generateAll(
   customPath?: string
 ) {
   const versions = await listVersions(providerName);
+
   for (const version of versions) {
     await generateForVersion(rootPath, providerName, version, customPath);
   }
