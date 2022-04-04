@@ -1,5 +1,6 @@
 import { readFileSync } from "fs";
 import glob from "glob";
+import axios from "axios";
 import { SchemaObject, Options as AjvOptions } from "ajv";
 import AjvFormats from "ajv-formats";
 import Ajv202012Schema from "ajv/dist/refs/json-schema-2020-12/schema.json";
@@ -131,9 +132,9 @@ async function validateAllSchemas() {
 }
 
 interface Provider {
-  name: String;
-  description: String;
-  logoUrl: String;
+  name: string;
+  description: string;
+  logoUrl: string;
 }
 
 const providerJsonSchema = {
@@ -194,13 +195,19 @@ async function validateProviders() {
     );
   }
 
-  providers.forEach((provider) => {
+  providers.forEach(async (provider) => {
     const ajv = getAjvInstance();
     const validate = ajv.compile(providerJsonSchema);
     const isValid = validate(provider);
 
     if (!isValid) {
       throw new Error(`${provider.name} failed validation: ${ajv.errors}`);
+    }
+
+    try {
+      await axios.get(provider.logoUrl);
+    } catch (e) {
+      throw new Error(`Failed to get logo for provider ${provider.name}: ${e}`);
     }
   });
 }
