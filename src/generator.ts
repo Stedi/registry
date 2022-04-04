@@ -21,6 +21,11 @@ export async function generateForVersion(
   version: string,
   customPath?: string
 ) {
+  if (!providers[providerName].isEnabled()) {
+    console.log(`Skipping ${providerName} because it's not enabled.`);
+    return;
+  }
+
   const baseDir = customPath
     ? path.join(rootPath, customPath)
     : path.join(rootPath, providerName, version);
@@ -30,11 +35,6 @@ export async function generateForVersion(
 
   if (folderExists) {
     console.log(`Skipping [${providerName}, ${version}]...`);
-    return;
-  }
-
-  if (!providers[providerName].isEnabled()) {
-    console.log(`Skipping ${providerName} because it's not enabled.`);
     return;
   }
 
@@ -84,11 +84,13 @@ export async function generateAll(
 }
 
 (async () => {
-  await generateAll("./schemas", "stripe");
-  await generateAll("./schemas", "ramp");
-  await generateAll("./schemas", "twilio");
-  await generateAll("./schemas", "netsuite");
-  await generateAll("./schemas", "flexport");
-  await generateAll("./schemas", "klaviyo");
-  await generateAll("./schemas", "shopify", "./shopify/graphql/2022-01");
+  await Promise.all([
+    generateAll("./schemas", "stripe"),
+    generateAll("./schemas", "ramp"),
+    generateAll("./schemas", "twilio"),
+    generateAll("./schemas", "netsuite"),
+    generateAll("./schemas", "flexport"),
+    generateAll("./schemas", "klaviyo"),
+    generateAll("./schemas", "shopify", "./shopify/graphql/2022-01"),
+  ]);
 })();
