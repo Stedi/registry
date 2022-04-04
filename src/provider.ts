@@ -1,4 +1,5 @@
 import { NetsuiteProvider } from "./providers/netsuite";
+import { OpenAPIProvider } from "./providers/openapi";
 
 export interface EntitySchema {
   name: string;
@@ -26,13 +27,6 @@ export interface GraphQLIntrospectionSchema extends APISchema {
 export type SchemaPackage = OpenAPI3Schema | GraphQLIntrospectionSchema;
 
 export type Provider = GraphQLProvider | OpenAPIProvider | NetsuiteProvider;
-
-export interface OpenAPIProvider {
-  isEnabled(): boolean;
-  getVersions: () => Promise<string[]>;
-  getSchema: (version: string) => Promise<APISchema>;
-  unbundle: (bundle: OpenAPI3Schema) => Promise<EntitySchema[]>;
-}
 
 export interface GraphQLProvider {
   isEnabled(): boolean;

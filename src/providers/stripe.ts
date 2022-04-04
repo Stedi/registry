@@ -1,52 +1,17 @@
-import { OpenAPI3Schema, OpenAPIProvider, EntitySchema } from "../provider";
+import { OpenAPI3Schema } from "../provider";
 import * as github from "../github";
 import { OpenAPIV3 } from "openapi-types";
 import _ from "lodash";
 import deepcopy from "deepcopy";
-import openAPIParser from "@readme/openapi-parser";
+import { OpenAPIProvider } from "./openapi";
 
 const maxDepth = 3;
 
-export class StripeProvider implements OpenAPIProvider {
-  isEnabled(): boolean {
-    return true;
-  }
-
-  async getVersions(): Promise<string[]> {
-    const tags: string[] = [];
-    for await (const tag of github.getTags("stripe", "openapi")) {
-      tags.push(tag.name);
-    }
-    console.log("latest stripe schema version is: ", tags[0]);
-    return ["v112"];
-  }
-
-  async unbundle(bundle: OpenAPI3Schema): Promise<EntitySchema[]> {
-    const dereferenced = await openAPIParser.dereference(bundle.value as any);
-
-    if (!("components" in dereferenced)) throw new Error("Expected components");
-
-    return Object.entries(dereferenced.components?.schemas ?? {})
-      .filter(([key]) => !bundle.entities || bundle.entities.includes(key))
-      .map(([key, value]) => ({
-        name: key,
-        schema: traverse(deepcopy(value), new Set<string>()),
-      }));
-  }
-
-  async getSchema(version: string): Promise<OpenAPI3Schema> {
-    const definition = await github.getRaw(
-      "stripe",
-      "openapi",
-      version,
-      "openapi/spec3.json"
-    );
-
-    return {
-      type: "openapi-v3",
-      versionName: version,
-      value: definition,
-      // Arbitrarily taken subset of entities from https://stripe.com/docs/api/
+export class StripeProvider extends OpenAPIProvider {
+  constructor() {
+    super({
+      versions: ["v112"],
+      baseUrl: "unused",
       entities: [
         "account",
         "address",
@@ -86,6 +51,25 @@ export class StripeProvider implements OpenAPIProvider {
         "topup",
         "transfer",
       ],
+      sanitizeSchema: (value) =>
+        traverse(deepcopy(value) as OpenAPIV3.SchemaObject, new Set<String>()),
+    });
+  }
+
+  override async getSchema(version: string): Promise<OpenAPI3Schema> {
+    const definition = await github.getRaw(
+      "stripe",
+      "openapi",
+      version,
+      "openapi/spec3.json"
+    );
+
+    return {
+      type: "openapi-v3",
+      versionName: version,
+      value: definition,
+      // Arbitrarily taken subset of entities from https://stripe.com/docs/api/
+      entities: this.entities,
     };
   }
 }
