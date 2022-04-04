@@ -74,6 +74,10 @@ function sanitizeSchema(schema: unknown) {
         delete value.format;
       }
 
+      if (value?.nullable) {
+        delete value.nullable;
+      }
+
       return value;
     })
   );
