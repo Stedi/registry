@@ -1,0 +1,118 @@
+{
+  "properties": {
+    "account_sid": {
+      "description": "The SID of the Account that created the resource",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^AC[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "date_created": {
+      "description": "The ISO 8601 date and time in GMT when the resource was created",
+      "format": "date-time",
+      "nullable": true,
+      "type": "string"
+    },
+    "date_updated": {
+      "description": "The ISO 8601 date and time in GMT when the resource was last updated",
+      "format": "date-time",
+      "nullable": true,
+      "type": "string"
+    },
+    "default_activity_name": {
+      "description": "The name of the default activity",
+      "nullable": true,
+      "type": "string"
+    },
+    "default_activity_sid": {
+      "description": "The SID of the Activity that will be used when new Workers are created in the Workspace",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^WA[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "event_callback_url": {
+      "description": "The URL we call when an event occurs",
+      "format": "uri",
+      "nullable": true,
+      "type": "string"
+    },
+    "events_filter": {
+      "description": "The list of Workspace events for which to call event_callback_url",
+      "nullable": true,
+      "type": "string"
+    },
+    "friendly_name": {
+      "description": "The string that you assigned to describe the Workspace resource",
+      "nullable": true,
+      "type": "string"
+    },
+    "links": {
+      "description": "The URLs of related resources",
+      "nullable": true,
+      "type": "object"
+    },
+    "multi_task_enabled": {
+      "description": "Whether multi-tasking is enabled",
+      "nullable": true,
+      "type": "boolean"
+    },
+    "prioritize_queue_order": {
+      "description": "The type of TaskQueue to prioritize when Workers are receiving Tasks from both types of TaskQueues",
+      "enum": [
+        "FIFO",
+        "LIFO"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "sid": {
+      "description": "The unique string that identifies the resource",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^WS[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "timeout_activity_name": {
+      "description": "The name of the timeout activity",
+      "nullable": true,
+      "type": "string"
+    },
+    "timeout_activity_sid": {
+      "description": "The SID of the Activity that will be assigned to a Worker when a Task reservation times out without a response",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^WA[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "url": {
+      "description": "The absolute URL of the Workspace resource",
+      "format": "uri",
+      "nullable": true,
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "default": {
+    "account_sid": "ACC5fb17e2ddA0A4b3Ae484e0d3ba1D4e2",
+    "date_created": "1970-01-01T00:00:00.000Z",
+    "date_updated": "1970-01-01T00:00:00.000Z",
+    "default_activity_name": "string",
+    "default_activity_sid": "WAdDc2AFA309E4e83dF5eC3fb024dCF32B",
+    "event_callback_url": "https://example.com/path",
+    "events_filter": "string",
+    "friendly_name": "string",
+    "links": {},
+    "multi_task_enabled": true,
+    "prioritize_queue_order": "FIFO",
+    "sid": "WSec438Ee41c86E5aCa9ab7e94aDeAda9b",
+    "timeout_activity_name": "string",
+    "timeout_activity_sid": "WAACDb09aA0347A6Ce3783c92eEd70FbBF",
+    "url": "https://example.com/path"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

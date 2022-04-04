@@ -3,7 +3,8 @@
   "properties": {
     "_object": {
       "type": "string",
-      "description": "Type of the object. Always /document for this object."
+      "description": "Type of the object. Always /document for this object.",
+      "example": "/document"
     },
     "id": {
       "type": "string",
@@ -35,11 +36,13 @@
       "properties": {
         "_object": {
           "type": "string",
-          "description": "Type of the object. Always /file_metadata for this object."
+          "description": "Type of the object. Always /file_metadata for this object.",
+          "example": "/file_metadata"
         },
         "size": {
           "type": "integer",
-          "description": "Size of the file in bytes"
+          "description": "Size of the file in bytes",
+          "example": 20000
         },
         "uploaded_at": {
           "type": "string",
@@ -51,18 +54,42 @@
       "type": "object",
       "properties": {
         "_object": {
-          "type": "string"
+          "type": "string",
+          "example": "/api/refs/object"
         },
         "ref_type": {
-          "type": "string"
+          "type": "string",
+          "example": "/shipment"
         },
         "link": {
-          "type": "string"
+          "type": "string",
+          "example": "https://api.flexport.com/shipments/123"
         },
         "id": {
-          "type": "integer"
+          "type": "integer",
+          "example": 123
         }
       }
+    }
+  },
+  "default": {
+    "_object": "/document",
+    "id": "string",
+    "file_name": "string",
+    "document_type": "string",
+    "memo": "string",
+    "file_link": "https://example.com/path",
+    "archived_at": "string",
+    "file_metadata": {
+      "_object": "/file_metadata",
+      "size": 20000,
+      "uploaded_at": "string"
+    },
+    "shipment": {
+      "_object": "/api/refs/object",
+      "ref_type": "/shipment",
+      "link": "https://api.flexport.com/shipments/123",
+      "id": 123
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema"

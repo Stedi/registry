@@ -91,6 +91,9 @@ function getAjvInstance(type: "json-schema-2020-12" = "json-schema-2020-12") {
     },
   });
 
+  instance.addFormat("string", {
+    validate: () => true,
+  });
   instance.addKeyword("example");
 
   return instance;

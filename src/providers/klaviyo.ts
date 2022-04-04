@@ -1,9 +1,13 @@
-import { OpenAPI3Schema, Provider } from "../provider";
-import { OpenAPIV3 } from "openapi-types";
+import { EntitySchema, OpenAPI3Schema, OpenAPIProvider } from "../provider";
 import _ from "lodash";
 import axios from "axios";
+import openAPIParser from "@readme/openapi-parser";
 
-export class KlaviyoProvider implements Provider {
+export class KlaviyoProvider implements OpenAPIProvider {
+  isEnabled(): boolean {
+    return true;
+  }
+
   async getVersions(): Promise<string[]> {
     return ["2021.11.26"];
   }
@@ -29,20 +33,24 @@ export class KlaviyoProvider implements Provider {
     };
   }
 
-  getSchemaWithoutCircularReferences(
-    schema: OpenAPIV3.SchemaObject
-  ): OpenAPIV3.SchemaObject {
-    return sanitizeSchema(schema);
+  async unbundle(bundle: OpenAPI3Schema): Promise<EntitySchema[]> {
+    const dereferenced = await openAPIParser.dereference(bundle.value as any);
+
+    const hasComponents = "components" in dereferenced;
+    if (!hasComponents) throw new Error("Expected components");
+
+    return Object.entries(dereferenced.components?.schemas ?? {})
+      .filter(([key]) => !bundle.entities || bundle.entities.includes(key))
+      .map(([key, value]) => ({
+        name: key,
+        schema: sanitizeSchema(value),
+      }));
   }
 }
 
 function sanitizeSchema(schema: unknown) {
   return JSON.parse(
     JSON.stringify(schema, (key, value) => {
-      if (key === "example") {
-        return undefined;
-      }
-
       return value;
     })
   );

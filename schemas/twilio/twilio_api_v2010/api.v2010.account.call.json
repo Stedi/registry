@@ -1,0 +1,199 @@
+{
+  "properties": {
+    "account_sid": {
+      "description": "The SID of the Account that created this resource",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^AC[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "annotation": {
+      "description": "The annotation provided for the call",
+      "nullable": true,
+      "type": "string"
+    },
+    "answered_by": {
+      "description": "Either `human` or `machine` if this call was initiated with answering machine detection. Empty otherwise.",
+      "nullable": true,
+      "type": "string"
+    },
+    "api_version": {
+      "description": "The API Version used to create the call",
+      "nullable": true,
+      "type": "string"
+    },
+    "caller_name": {
+      "description": "The caller's name if this call was an incoming call to a phone number with caller ID Lookup enabled. Otherwise, empty.",
+      "nullable": true,
+      "type": "string"
+    },
+    "date_created": {
+      "description": "The RFC 2822 date and time in GMT that this resource was created",
+      "nullable": true,
+      "type": "string"
+    },
+    "date_updated": {
+      "description": "The RFC 2822 date and time in GMT that this resource was last updated",
+      "nullable": true,
+      "type": "string"
+    },
+    "direction": {
+      "description": "A string describing the direction of the call. `inbound` for inbound calls, `outbound-api` for calls initiated via the REST API or `outbound-dial` for calls initiated by a `Dial` verb.",
+      "nullable": true,
+      "type": "string"
+    },
+    "duration": {
+      "description": "The length of the call in seconds.",
+      "nullable": true,
+      "type": "string"
+    },
+    "end_time": {
+      "description": "The end time of the call. Null if the call did not complete successfully.",
+      "nullable": true,
+      "type": "string"
+    },
+    "forwarded_from": {
+      "description": "The forwarding phone number if this call was an incoming call forwarded from another number (depends on carrier supporting forwarding). Otherwise, empty.",
+      "nullable": true,
+      "type": "string"
+    },
+    "from": {
+      "description": "The phone number, SIP address or Client identifier that made this call. Phone numbers are in E.164 format (e.g., +16175551212). SIP addresses are formatted as `name@company.com`. Client identifiers are formatted `client:name`.",
+      "nullable": true,
+      "type": "string"
+    },
+    "from_formatted": {
+      "description": "The calling phone number, SIP address, or Client identifier formatted for display.",
+      "nullable": true,
+      "type": "string"
+    },
+    "group_sid": {
+      "description": "The Group SID associated with this call. If no Group is associated with the call, the field is empty.",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^GP[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "parent_call_sid": {
+      "description": "The SID that identifies the call that created this leg.",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^CA[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "phone_number_sid": {
+      "description": "If the call was inbound, this is the SID of the IncomingPhoneNumber resource that received the call. If the call was outbound, it is the SID of the OutgoingCallerId resource from which the call was placed.",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^PN[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "price": {
+      "description": "The charge for this call, in the currency associated with the account. Populated after the call is completed. May not be immediately available.",
+      "nullable": true,
+      "type": "string"
+    },
+    "price_unit": {
+      "description": "The currency in which `Price` is measured.",
+      "nullable": true,
+      "type": "string"
+    },
+    "queue_time": {
+      "description": "The wait time in milliseconds before the call is placed.",
+      "nullable": true,
+      "type": "string"
+    },
+    "sid": {
+      "description": "The unique string that identifies this resource",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^CA[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "start_time": {
+      "description": "The start time of the call. Null if the call has not yet been dialed.",
+      "nullable": true,
+      "type": "string"
+    },
+    "status": {
+      "description": "The status of this call.",
+      "enum": [
+        "queued",
+        "ringing",
+        "in-progress",
+        "completed",
+        "busy",
+        "failed",
+        "no-answer",
+        "canceled"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "subresource_uris": {
+      "description": "A list of related subresources identified by their relative URIs",
+      "nullable": true,
+      "type": "object"
+    },
+    "to": {
+      "description": "The phone number, SIP address or Client identifier that received this call. Phone numbers are in E.164 format (e.g., +16175551212). SIP addresses are formatted as `name@company.com`. Client identifiers are formatted `client:name`.",
+      "nullable": true,
+      "type": "string"
+    },
+    "to_formatted": {
+      "description": "The phone number, SIP address or Client identifier that received this call. Formatted for display.",
+      "nullable": true,
+      "type": "string"
+    },
+    "trunk_sid": {
+      "description": "The (optional) unique identifier of the trunk resource that was used for this call.",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^TK[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "uri": {
+      "description": "The URI of this resource, relative to `https://api.twilio.com`",
+      "format": "uri",
+      "nullable": true,
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "default": {
+    "account_sid": "ACDdEe7dEfaC6BcF5EaE19c4acFdeCa585",
+    "annotation": "string",
+    "answered_by": "string",
+    "api_version": "string",
+    "caller_name": "string",
+    "date_created": "string",
+    "date_updated": "string",
+    "direction": "string",
+    "duration": "string",
+    "end_time": "string",
+    "forwarded_from": "string",
+    "from": "string",
+    "from_formatted": "string",
+    "group_sid": "GPFfAeACe744e5a338c3DBF1a5BcaAebe0",
+    "parent_call_sid": "CA294c56D561A495e9B7ea9506d3d1fcdD",
+    "phone_number_sid": "PNd2bec2A396e1c697CFdACfE897FACd18",
+    "price": "string",
+    "price_unit": "string",
+    "queue_time": "string",
+    "sid": "CAb1577DeD5AB54465dfD6fCfC6FFc6Af7",
+    "start_time": "string",
+    "status": "queued",
+    "subresource_uris": {},
+    "to": "string",
+    "to_formatted": "string",
+    "trunk_sid": "TK0bDB0E84B1c2BB4DBdDD3D925D6144eb",
+    "uri": "https://example.com/path"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

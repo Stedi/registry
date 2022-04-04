@@ -1,0 +1,158 @@
+{
+  "properties": {
+    "account_sid": {
+      "description": "The SID of the Account that created the resource",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^AC[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "api_version": {
+      "description": "The API version used to process the message",
+      "nullable": true,
+      "type": "string"
+    },
+    "body": {
+      "description": "The message text",
+      "nullable": true,
+      "type": "string"
+    },
+    "date_created": {
+      "description": "The RFC 2822 date and time in GMT that the resource was created",
+      "nullable": true,
+      "type": "string"
+    },
+    "date_sent": {
+      "description": "The RFC 2822 date and time in GMT when the message was sent",
+      "nullable": true,
+      "type": "string"
+    },
+    "date_updated": {
+      "description": "The RFC 2822 date and time in GMT that the resource was last updated",
+      "nullable": true,
+      "type": "string"
+    },
+    "direction": {
+      "description": "The direction of the message",
+      "enum": [
+        "inbound",
+        "outbound-api",
+        "outbound-call",
+        "outbound-reply"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "error_code": {
+      "description": "The error code associated with the message",
+      "nullable": true,
+      "type": "integer"
+    },
+    "error_message": {
+      "description": "The description of the error_code",
+      "nullable": true,
+      "type": "string"
+    },
+    "from": {
+      "description": "The phone number that initiated the message",
+      "nullable": true,
+      "type": "string"
+    },
+    "messaging_service_sid": {
+      "description": "The SID of the Messaging Service used with the message.",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^MG[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "num_media": {
+      "description": "The number of media files associated with the message",
+      "nullable": true,
+      "type": "string"
+    },
+    "num_segments": {
+      "description": "The number of messages used to deliver the message body",
+      "nullable": true,
+      "type": "string"
+    },
+    "price": {
+      "description": "The amount billed for the message",
+      "nullable": true,
+      "type": "string"
+    },
+    "price_unit": {
+      "description": "The currency in which price is measured",
+      "nullable": true,
+      "type": "string"
+    },
+    "sid": {
+      "description": "The unique string that identifies the resource",
+      "maxLength": 34,
+      "minLength": 34,
+      "nullable": true,
+      "pattern": "^(SM|MM)[0-9a-fA-F]{32}$",
+      "type": "string"
+    },
+    "status": {
+      "description": "The status of the message",
+      "enum": [
+        "queued",
+        "sending",
+        "sent",
+        "failed",
+        "delivered",
+        "undelivered",
+        "receiving",
+        "received",
+        "accepted",
+        "scheduled",
+        "read",
+        "partially_delivered",
+        "canceled"
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "subresource_uris": {
+      "description": "A list of related resources identified by their relative URIs",
+      "nullable": true,
+      "type": "object"
+    },
+    "to": {
+      "description": "The phone number that received the message",
+      "nullable": true,
+      "type": "string"
+    },
+    "uri": {
+      "description": "The URI of the resource, relative to `https://api.twilio.com`",
+      "nullable": true,
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "default": {
+    "account_sid": "AC1Dc4bfd5CdEFd0F59DbFF3F9e5e6475b",
+    "api_version": "string",
+    "body": "string",
+    "date_created": "string",
+    "date_sent": "string",
+    "date_updated": "string",
+    "direction": "inbound",
+    "error_code": 0,
+    "error_message": "string",
+    "from": "string",
+    "messaging_service_sid": "MG5d5A1A82edcbfe2Cbaf0FcE26FD300dE",
+    "num_media": "string",
+    "num_segments": "string",
+    "price": "string",
+    "price_unit": "string",
+    "sid": "MM7d71d66F6a1B5fE6f1cfF99aFb864a11",
+    "status": "queued",
+    "subresource_uris": {},
+    "to": "string",
+    "uri": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
