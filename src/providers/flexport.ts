@@ -18,7 +18,7 @@ export class FlexportProvider implements OpenAPIProvider {
       "distributeaid",
       "flexport-sdk-js",
       "saga",
-      `api-docs/${version}.yaml`,
+      `api-docs/${version}.yaml`
     );
 
     return {
@@ -47,6 +47,10 @@ export class FlexportProvider implements OpenAPIProvider {
 function sanitizeSchema(schema: unknown) {
   return JSON.parse(
     JSON.stringify(schema, (key, value) => {
+      if (value?.nullable) {
+        delete value.nullable;
+      }
+
       if (key === "code") {
         return {
           ...value,
@@ -91,6 +95,6 @@ function sanitizeSchema(schema: unknown) {
       }
 
       return value;
-    }),
+    })
   );
 }

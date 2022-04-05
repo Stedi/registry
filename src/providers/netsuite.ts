@@ -87,6 +87,10 @@ export class NetsuiteProvider {
 function sanitizeSchema(schema: unknown, entityName: string) {
   return JSON.parse(
     JSON.stringify(schema, (key, value) => {
+      if (value?.nullable) {
+        delete value.nullable;
+      }
+
       const isKeyUnsupported =
         key === "x-ns-filterable" || key == "x-ns-custom-field";
 
