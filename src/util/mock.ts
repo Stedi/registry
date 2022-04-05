@@ -91,6 +91,10 @@ export function mock(schemalike: SchemaLike): any {
       ? schema.maxLength
       : val.length;
 
+    if (schema.enum) {
+      return schema.enum[0];
+    }
+
     if (schema.pattern) {
       const randexp = new RandExp(schema.pattern);
       randexp.max = maxLength;

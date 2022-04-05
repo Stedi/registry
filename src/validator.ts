@@ -135,6 +135,7 @@ interface Provider {
   name: string;
   description: string;
   logoUrl: string;
+  directory?: string;
 }
 
 const providerJsonSchema = {
@@ -166,8 +167,8 @@ async function validateProviders() {
     readFileSync(providersPath, "utf-8")
   );
 
-  const providersNamesInLowerCase = providers.map((provider) =>
-    provider.name.toLowerCase()
+  const providersNamesInLowerCase = providers.map(
+    (provider) => provider.directory ?? provider.name.toLowerCase()
   );
   const schemasProvidersNames = schemas.map(
     (provider) => provider.split("/")[1]

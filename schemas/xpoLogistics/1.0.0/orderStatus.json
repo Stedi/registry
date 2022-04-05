@@ -1,0 +1,40 @@
+{
+  "description": "Order Status Details.",
+  "type": "object",
+  "properties": {
+    "partnerIdentifierCode": {
+      "type": "string",
+      "description": "Unique identifier for the Partners in XPO."
+    },
+    "eventTime": {
+      "format": "date-time",
+      "type": "string",
+      "description": "date time when the event was reported."
+    },
+    "estimatedTimeOfArrival": {
+      "format": "date-time",
+      "type": "string",
+      "description": "Shipment Estimated time of arrival."
+    },
+    "lateReasonCode": {
+      "type": "string",
+      "description": "If the shipment is arrived late, this field hold the value of late reason code."
+    },
+    "eventCategory": {
+      "enum": [
+        "Order",
+        "Shipment"
+      ],
+      "type": "string",
+      "description": "This enum value which represents, this is a Shipment event or Order event."
+    }
+  },
+  "default": {
+    "partnerIdentifierCode": "string",
+    "eventTime": "1970-01-01T00:00:00.000Z",
+    "estimatedTimeOfArrival": "1970-01-01T00:00:00.000Z",
+    "lateReasonCode": "string",
+    "eventCategory": "Order"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

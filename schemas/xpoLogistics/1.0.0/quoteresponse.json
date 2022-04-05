@@ -1,0 +1,1418 @@
+{
+  "type": "object",
+  "properties": {
+    "errorDetails": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Error message."
+      },
+      "description": "Error details while generating quotes."
+    },
+    "masterQuoteId": {
+      "type": "integer",
+      "description": "Unique Identifier for tracking Quote Request."
+    },
+    "statusCode": {
+      "type": "integer",
+      "description": "Success http response code 200."
+    },
+    "message": {
+      "type": "string",
+      "description": "Success message for generated Quote."
+    },
+    "priceSearchResponse": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "description": "This  is to identify, specific price search response is for which transportation mode."
+          },
+          "lowestPrice": {
+            "type": "number",
+            "description": "The lowest price amount of quote for this specific mode."
+          },
+          "quoteDetails": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "quoteId": {
+                  "type": "integer",
+                  "description": "Unique Identifier for Quote."
+                },
+                "carrierCode": {
+                  "type": "string",
+                  "description": "Code used to uniquely identify the carrier."
+                },
+                "carrierName": {
+                  "type": "string",
+                  "description": "Name of the carrier."
+                },
+                "serviceLevel": {
+                  "type": "string",
+                  "description": "Service level.",
+                  "enum": [
+                    "Single",
+                    "Team",
+                    "LTL"
+                  ]
+                },
+                "movementType": {
+                  "type": "string",
+                  "description": "Type of Movement."
+                },
+                "estimatedTransitTime": {
+                  "type": "integer",
+                  "description": "Estimated transit time in days."
+                },
+                "accessorials": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "accessorialCode": {
+                        "type": "string",
+                        "description": "Accessorial Code."
+                      },
+                      "accessorialName": {
+                        "type": "string",
+                        "description": "Accessorial Name."
+                      },
+                      "accessorialCost": {
+                        "type": "number",
+                        "description": "Accessorial Cost ."
+                      }
+                    }
+                  },
+                  "description": "This is an array which contains the additional services and charges."
+                },
+                "rateList": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "isOptional": {
+                        "type": "boolean",
+                        "description": "Is optional."
+                      },
+                      "currencyCode": {
+                        "type": "string",
+                        "description": "Currency Code for this Rate."
+                      },
+                      "typeCode": {
+                        "type": "string",
+                        "description": "Type Code for this Rate."
+                      },
+                      "cost": {
+                        "type": "string",
+                        "description": "Cost."
+                      }
+                    }
+                  },
+                  "description": "This is an array which contains the rate split-up."
+                },
+                "legs": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "stops": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "addressInformations ": {
+                              "type": "object",
+                              "properties": {
+                                "locationId": {
+                                  "type": "string",
+                                  "description": "Id of location."
+                                },
+                                "locationName": {
+                                  "type": "string",
+                                  "description": "Name of location."
+                                },
+                                "addressLine1": {
+                                  "type": "string",
+                                  "description": "Address line 1 of stop location."
+                                },
+                                "addressLine2": {
+                                  "type": "string",
+                                  "description": "Address line 2 of stop location."
+                                },
+                                "cityName": {
+                                  "type": "string",
+                                  "description": "City name belongs to stop location."
+                                },
+                                "stateCode": {
+                                  "type": "string",
+                                  "description": "State code of the stop location."
+                                },
+                                "country": {
+                                  "type": "string",
+                                  "description": "Country belongs to stop location."
+                                },
+                                "zipCode": {
+                                  "type": "string",
+                                  "description": "Postal Code."
+                                }
+                              },
+                              "required": [
+                                "cityName",
+                                "country",
+                                "stateCode",
+                                "zipCode"
+                              ]
+                            },
+                            "type": {
+                              "type": "string",
+                              "description": "Type of stop.",
+                              "enum": [
+                                "PICKUP",
+                                "INTERMEDIATE",
+                                "DELIVERY"
+                              ]
+                            },
+                            "scheduledTimeFrom": {
+                              "type": "string",
+                              "description": "The earliest time by which the service provider can reach the stop. ISO8601 UTC date-time format required"
+                            },
+                            "scheduledTimeTo": {
+                              "type": "string",
+                              "description": "The Latest time by which the service provider can reach the stop. ISO8601 UTC date-time format required"
+                            },
+                            "stopContactInformations": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "firstName": {
+                                    "type": "string",
+                                    "description": "First name of contact person."
+                                  },
+                                  "lastName": {
+                                    "type": "string",
+                                    "description": "Last name of contact person."
+                                  },
+                                  "email": {
+                                    "type": "string",
+                                    "description": "Email for communication."
+                                  },
+                                  "phoneNumbers": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "Type": {
+                                          "type": "string",
+                                          "description": "Phone number types.",
+                                          "enum": [
+                                            "MOBILE",
+                                            "WORK",
+                                            "HOME"
+                                          ]
+                                        },
+                                        "number": {
+                                          "type": "string",
+                                          "description": "Contact number."
+                                        },
+                                        "isPrimary": {
+                                          "type": "boolean",
+                                          "description": "Is contact primary information."
+                                        }
+                                      }
+                                    },
+                                    "description": "Primary and alternate numbers for communication."
+                                  },
+                                  "title": {
+                                    "type": "string",
+                                    "description": "Title of contact person."
+                                  },
+                                  "isPrimary": {
+                                    "type": "boolean",
+                                    "description": "Is it the primary contact information?."
+                                  }
+                                }
+                              },
+                              "description": "Contact Information for each stop."
+                            },
+                            "specialRequirement": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "type": {
+                                    "description": "Special requirement type."
+                                  },
+                                  "value": {
+                                    "type": "string",
+                                    "description": "Special requirements value."
+                                  }
+                                }
+                              },
+                              "description": "The array of special requirements for this stop."
+                            },
+                            "stopReferenceNumbers": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "typeCode": {
+                                    "type": "string",
+                                    "description": "Stop Reference Type code."
+                                  },
+                                  "value": {
+                                    "type": "string",
+                                    "description": "Actual value of stop reference code."
+                                  }
+                                }
+                              },
+                              "description": "The collection of reference numbers associated with this stop, its type is same as order reference object."
+                            },
+                            "note": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "type": {
+                                    "type": "string",
+                                    "description": "Note's type."
+                                  },
+                                  "value": {
+                                    "type": "string",
+                                    "description": "Note's value."
+                                  }
+                                }
+                              }
+                            },
+                            "sequenceNo": {
+                              "type": "integer",
+                              "description": "Stop sequence number, required Required only if multi stop quote request."
+                            }
+                          }
+                        },
+                        "description": "Stops information for this Quote including origin and destination."
+                      }
+                    }
+                  },
+                  "description": "This is an array which holds the specific route information of this applicable quote price. "
+                },
+                "accessorialsTotalCost": {
+                  "type": "number",
+                  "description": "Accessorial's Total Cost."
+                },
+                "subTotal": {
+                  "type": "number",
+                  "description": "Sub Total."
+                },
+                "totalCost": {
+                  "type": "number",
+                  "description": "Total Cost."
+                },
+                "isNmfcCarrier": {
+                  "type": "boolean",
+                  "description": "Boolean flag to represent its an NMFC carrier."
+                },
+                "isContractRate": {
+                  "type": "boolean",
+                  "description": "Boolean flag to represent this quote is contract rate."
+                },
+                "currencyCode": {
+                  "type": "string",
+                  "description": "Currency Code."
+                },
+                "expiresOn": {
+                  "type": "string",
+                  "description": "Quote expiry date."
+                },
+                "createdOn": {
+                  "type": "string",
+                  "description": "Quote created date."
+                }
+              }
+            },
+            "description": "This is an array of object which holds the list of quote details."
+          },
+          "lowestPriceQuote": {
+            "type": "object",
+            "properties": {
+              "quoteId": {
+                "type": "integer",
+                "description": "Unique Identifier for Quote."
+              },
+              "carrierCode": {
+                "type": "string",
+                "description": "Carrier Code."
+              },
+              "carrierName": {
+                "type": "string",
+                "description": "Carrier Name."
+              },
+              "estimatedTransitTime": {
+                "type": "integer",
+                "description": "Estimated transit time in days."
+              },
+              "lineHaul": {
+                "type": "number",
+                "description": "Line Haul."
+              },
+              "fsc": {
+                "type": "number",
+                "description": "FSC."
+              },
+              "legs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "stops": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "addressInformations ": {
+                            "type": "object",
+                            "properties": {
+                              "locationId": {
+                                "type": "string",
+                                "description": "Id of location."
+                              },
+                              "locationName": {
+                                "type": "string",
+                                "description": "Name of location."
+                              },
+                              "addressLine1": {
+                                "type": "string",
+                                "description": "Address line 1 of stop location."
+                              },
+                              "addressLine2": {
+                                "type": "string",
+                                "description": "Address line 2 of stop location."
+                              },
+                              "cityName": {
+                                "type": "string",
+                                "description": "City name belongs to stop location."
+                              },
+                              "stateCode": {
+                                "type": "string",
+                                "description": "State code of the stop location."
+                              },
+                              "country": {
+                                "type": "string",
+                                "description": "Country belongs to stop location."
+                              },
+                              "zipCode": {
+                                "type": "string",
+                                "description": "Postal Code."
+                              }
+                            },
+                            "required": [
+                              "cityName",
+                              "country",
+                              "stateCode",
+                              "zipCode"
+                            ]
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "Type of stop.",
+                            "enum": [
+                              "PICKUP",
+                              "INTERMEDIATE",
+                              "DELIVERY"
+                            ]
+                          },
+                          "scheduledTimeFrom": {
+                            "type": "string",
+                            "description": "The earliest time by which the service provider can reach the stop. ISO8601 UTC date-time format required"
+                          },
+                          "scheduledTimeTo": {
+                            "type": "string",
+                            "description": "The Latest time by which the service provider can reach the stop. ISO8601 UTC date-time format required"
+                          },
+                          "stopContactInformations": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "firstName": {
+                                  "type": "string",
+                                  "description": "First name of contact person."
+                                },
+                                "lastName": {
+                                  "type": "string",
+                                  "description": "Last name of contact person."
+                                },
+                                "email": {
+                                  "type": "string",
+                                  "description": "Email for communication."
+                                },
+                                "phoneNumbers": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "Type": {
+                                        "type": "string",
+                                        "description": "Phone number types.",
+                                        "enum": [
+                                          "MOBILE",
+                                          "WORK",
+                                          "HOME"
+                                        ]
+                                      },
+                                      "number": {
+                                        "type": "string",
+                                        "description": "Contact number."
+                                      },
+                                      "isPrimary": {
+                                        "type": "boolean",
+                                        "description": "Is contact primary information."
+                                      }
+                                    }
+                                  },
+                                  "description": "Primary and alternate numbers for communication."
+                                },
+                                "title": {
+                                  "type": "string",
+                                  "description": "Title of contact person."
+                                },
+                                "isPrimary": {
+                                  "type": "boolean",
+                                  "description": "Is it the primary contact information?."
+                                }
+                              }
+                            },
+                            "description": "Contact Information for each stop."
+                          },
+                          "specialRequirement": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "description": "Special requirement type."
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "description": "Special requirements value."
+                                }
+                              }
+                            },
+                            "description": "The array of special requirements for this stop."
+                          },
+                          "stopReferenceNumbers": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "typeCode": {
+                                  "type": "string",
+                                  "description": "Stop Reference Type code."
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "description": "Actual value of stop reference code."
+                                }
+                              }
+                            },
+                            "description": "The collection of reference numbers associated with this stop, its type is same as order reference object."
+                          },
+                          "note": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "description": "Note's type."
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "description": "Note's value."
+                                }
+                              }
+                            }
+                          },
+                          "sequenceNo": {
+                            "type": "integer",
+                            "description": "Stop sequence number, required Required only if multi stop quote request."
+                          }
+                        }
+                      },
+                      "description": "Stops information for this Quote including origin and destination."
+                    }
+                  }
+                },
+                "description": "This is an array which holds the specific route information of this applicable quote price. "
+              },
+              "accessorials": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Accessorial Name."
+                    },
+                    "cost": {
+                      "type": "number",
+                      "description": "Accessorial Cost ."
+                    }
+                  }
+                },
+                "description": "This is an array which contains the additional services and charges."
+              },
+              "accessorialsTotalCost": {
+                "type": "number",
+                "description": "Accessorial's Total Cost."
+              },
+              "subTotal": {
+                "type": "number",
+                "description": "Sub Total."
+              },
+              "totalCost": {
+                "type": "number",
+                "description": "Total Cost."
+              },
+              "isNmfcCarrier": {
+                "type": "boolean",
+                "description": "Boolean flag to represent its an NMFC carrier."
+              }
+            }
+          },
+          "lowestGuaranteedQuotePrice": {
+            "type": "object",
+            "properties": {
+              "quoteId": {
+                "type": "integer",
+                "description": "Unique Identifier for Quote."
+              },
+              "carrierCode": {
+                "type": "string",
+                "description": "Carrier Code."
+              },
+              "carrierName": {
+                "type": "string",
+                "description": "Carrier Name."
+              },
+              "estimatedTransitTime": {
+                "type": "integer",
+                "description": "Estimated transit time in days."
+              },
+              "lineHaul": {
+                "type": "number",
+                "description": "Line Haul."
+              },
+              "fsc": {
+                "type": "number",
+                "description": "FSC."
+              },
+              "legs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "stops": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "addressInformations ": {
+                            "type": "object",
+                            "properties": {
+                              "locationId": {
+                                "type": "string",
+                                "description": "Id of location."
+                              },
+                              "locationName": {
+                                "type": "string",
+                                "description": "Name of location."
+                              },
+                              "addressLine1": {
+                                "type": "string",
+                                "description": "Address line 1 of stop location."
+                              },
+                              "addressLine2": {
+                                "type": "string",
+                                "description": "Address line 2 of stop location."
+                              },
+                              "cityName": {
+                                "type": "string",
+                                "description": "City name belongs to stop location."
+                              },
+                              "stateCode": {
+                                "type": "string",
+                                "description": "State code of the stop location."
+                              },
+                              "country": {
+                                "type": "string",
+                                "description": "Country belongs to stop location."
+                              },
+                              "zipCode": {
+                                "type": "string",
+                                "description": "Postal Code."
+                              }
+                            },
+                            "required": [
+                              "cityName",
+                              "country",
+                              "stateCode",
+                              "zipCode"
+                            ]
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "Type of stop.",
+                            "enum": [
+                              "PICKUP",
+                              "INTERMEDIATE",
+                              "DELIVERY"
+                            ]
+                          },
+                          "scheduledTimeFrom": {
+                            "type": "string",
+                            "description": "The earliest time by which the service provider can reach the stop. ISO8601 UTC date-time format required"
+                          },
+                          "scheduledTimeTo": {
+                            "type": "string",
+                            "description": "The Latest time by which the service provider can reach the stop. ISO8601 UTC date-time format required"
+                          },
+                          "stopContactInformations": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "firstName": {
+                                  "type": "string",
+                                  "description": "First name of contact person."
+                                },
+                                "lastName": {
+                                  "type": "string",
+                                  "description": "Last name of contact person."
+                                },
+                                "email": {
+                                  "type": "string",
+                                  "description": "Email for communication."
+                                },
+                                "phoneNumbers": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "Type": {
+                                        "type": "string",
+                                        "description": "Phone number types.",
+                                        "enum": [
+                                          "MOBILE",
+                                          "WORK",
+                                          "HOME"
+                                        ]
+                                      },
+                                      "number": {
+                                        "type": "string",
+                                        "description": "Contact number."
+                                      },
+                                      "isPrimary": {
+                                        "type": "boolean",
+                                        "description": "Is contact primary information."
+                                      }
+                                    }
+                                  },
+                                  "description": "Primary and alternate numbers for communication."
+                                },
+                                "title": {
+                                  "type": "string",
+                                  "description": "Title of contact person."
+                                },
+                                "isPrimary": {
+                                  "type": "boolean",
+                                  "description": "Is it the primary contact information?."
+                                }
+                              }
+                            },
+                            "description": "Contact Information for each stop."
+                          },
+                          "specialRequirement": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "description": "Special requirement type."
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "description": "Special requirements value."
+                                }
+                              }
+                            },
+                            "description": "The array of special requirements for this stop."
+                          },
+                          "stopReferenceNumbers": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "typeCode": {
+                                  "type": "string",
+                                  "description": "Stop Reference Type code."
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "description": "Actual value of stop reference code."
+                                }
+                              }
+                            },
+                            "description": "The collection of reference numbers associated with this stop, its type is same as order reference object."
+                          },
+                          "note": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "description": "Note's type."
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "description": "Note's value."
+                                }
+                              }
+                            }
+                          },
+                          "sequenceNo": {
+                            "type": "integer",
+                            "description": "Stop sequence number, required Required only if multi stop quote request."
+                          }
+                        }
+                      },
+                      "description": "Stops information for this Quote including origin and destination."
+                    }
+                  }
+                },
+                "description": "This is an array which holds the specific route information of this applicable quote price. "
+              },
+              "accessorials": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Accessorial Name."
+                    },
+                    "cost": {
+                      "type": "number",
+                      "description": "Accessorial Cost ."
+                    }
+                  }
+                },
+                "description": "This is an array which contains the additional services and charges."
+              },
+              "accessorialsTotalCost": {
+                "type": "number",
+                "description": "Accessorial's Total Cost."
+              },
+              "subTotal": {
+                "type": "number",
+                "description": "Sub Total."
+              },
+              "totalCost": {
+                "type": "number",
+                "description": "Total Cost."
+              },
+              "isNmfcCarrier": {
+                "type": "boolean",
+                "description": "Boolean flag to represent its an NMFC carrier."
+              }
+            }
+          },
+          "bestDealQuotePrice": {
+            "type": "object",
+            "properties": {
+              "quoteId": {
+                "type": "integer",
+                "description": "Unique Identifier for Quote."
+              },
+              "carrierCode": {
+                "type": "string",
+                "description": "Carrier Code."
+              },
+              "carrierName": {
+                "type": "string",
+                "description": "Carrier Name."
+              },
+              "estimatedTransitTime": {
+                "type": "integer",
+                "description": "Estimated transit time in days."
+              },
+              "lineHaul": {
+                "type": "number",
+                "description": "Line Haul."
+              },
+              "fsc": {
+                "type": "number",
+                "description": "FSC."
+              },
+              "legs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "stops": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "addressInformations ": {
+                            "type": "object",
+                            "properties": {
+                              "locationId": {
+                                "type": "string",
+                                "description": "Id of location."
+                              },
+                              "locationName": {
+                                "type": "string",
+                                "description": "Name of location."
+                              },
+                              "addressLine1": {
+                                "type": "string",
+                                "description": "Address line 1 of stop location."
+                              },
+                              "addressLine2": {
+                                "type": "string",
+                                "description": "Address line 2 of stop location."
+                              },
+                              "cityName": {
+                                "type": "string",
+                                "description": "City name belongs to stop location."
+                              },
+                              "stateCode": {
+                                "type": "string",
+                                "description": "State code of the stop location."
+                              },
+                              "country": {
+                                "type": "string",
+                                "description": "Country belongs to stop location."
+                              },
+                              "zipCode": {
+                                "type": "string",
+                                "description": "Postal Code."
+                              }
+                            },
+                            "required": [
+                              "cityName",
+                              "country",
+                              "stateCode",
+                              "zipCode"
+                            ]
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "Type of stop.",
+                            "enum": [
+                              "PICKUP",
+                              "INTERMEDIATE",
+                              "DELIVERY"
+                            ]
+                          },
+                          "scheduledTimeFrom": {
+                            "type": "string",
+                            "description": "The earliest time by which the service provider can reach the stop. ISO8601 UTC date-time format required"
+                          },
+                          "scheduledTimeTo": {
+                            "type": "string",
+                            "description": "The Latest time by which the service provider can reach the stop. ISO8601 UTC date-time format required"
+                          },
+                          "stopContactInformations": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "firstName": {
+                                  "type": "string",
+                                  "description": "First name of contact person."
+                                },
+                                "lastName": {
+                                  "type": "string",
+                                  "description": "Last name of contact person."
+                                },
+                                "email": {
+                                  "type": "string",
+                                  "description": "Email for communication."
+                                },
+                                "phoneNumbers": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "Type": {
+                                        "type": "string",
+                                        "description": "Phone number types.",
+                                        "enum": [
+                                          "MOBILE",
+                                          "WORK",
+                                          "HOME"
+                                        ]
+                                      },
+                                      "number": {
+                                        "type": "string",
+                                        "description": "Contact number."
+                                      },
+                                      "isPrimary": {
+                                        "type": "boolean",
+                                        "description": "Is contact primary information."
+                                      }
+                                    }
+                                  },
+                                  "description": "Primary and alternate numbers for communication."
+                                },
+                                "title": {
+                                  "type": "string",
+                                  "description": "Title of contact person."
+                                },
+                                "isPrimary": {
+                                  "type": "boolean",
+                                  "description": "Is it the primary contact information?."
+                                }
+                              }
+                            },
+                            "description": "Contact Information for each stop."
+                          },
+                          "specialRequirement": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "description": "Special requirement type."
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "description": "Special requirements value."
+                                }
+                              }
+                            },
+                            "description": "The array of special requirements for this stop."
+                          },
+                          "stopReferenceNumbers": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "typeCode": {
+                                  "type": "string",
+                                  "description": "Stop Reference Type code."
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "description": "Actual value of stop reference code."
+                                }
+                              }
+                            },
+                            "description": "The collection of reference numbers associated with this stop, its type is same as order reference object."
+                          },
+                          "note": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "description": "Note's type."
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "description": "Note's value."
+                                }
+                              }
+                            }
+                          },
+                          "sequenceNo": {
+                            "type": "integer",
+                            "description": "Stop sequence number, required Required only if multi stop quote request."
+                          }
+                        }
+                      },
+                      "description": "Stops information for this Quote including origin and destination."
+                    }
+                  }
+                },
+                "description": "This is an array which holds the specific route information of this applicable quote price. "
+              },
+              "accessorials": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "Code": {
+                      "type": "string",
+                      "description": "Accessorial Code."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Accessorial Name."
+                    },
+                    "cost": {
+                      "type": "number",
+                      "description": "Accessorial Cost ."
+                    }
+                  }
+                },
+                "description": "This is an array which contains the additional services and charges."
+              },
+              "accessorialsTotalCost": {
+                "type": "number",
+                "description": "Accessorial's Total Cost."
+              },
+              "subTotal": {
+                "type": "number",
+                "description": "Sub Total."
+              },
+              "totalCost": {
+                "type": "number",
+                "description": "Total Cost."
+              },
+              "isNmfcCarrier": {
+                "type": "boolean",
+                "description": "Boolean flag to represent its an NMFC carrier."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "default": {
+    "errorDetails": [
+      "string"
+    ],
+    "masterQuoteId": 0,
+    "statusCode": 0,
+    "message": "string",
+    "priceSearchResponse": [
+      {
+        "mode": "string",
+        "lowestPrice": 0,
+        "quoteDetails": [
+          {
+            "quoteId": 0,
+            "carrierCode": "string",
+            "carrierName": "string",
+            "serviceLevel": "Single",
+            "movementType": "string",
+            "estimatedTransitTime": 0,
+            "accessorials": [
+              {
+                "accessorialCode": "string",
+                "accessorialName": "string",
+                "accessorialCost": 0
+              }
+            ],
+            "rateList": [
+              {
+                "isOptional": true,
+                "currencyCode": "string",
+                "typeCode": "string",
+                "cost": "string"
+              }
+            ],
+            "legs": [
+              {
+                "stops": [
+                  {
+                    "addressInformations ": {
+                      "locationId": "string",
+                      "locationName": "string",
+                      "addressLine1": "string",
+                      "addressLine2": "string",
+                      "cityName": "string",
+                      "stateCode": "string",
+                      "country": "string",
+                      "zipCode": "string"
+                    },
+                    "type": "PICKUP",
+                    "scheduledTimeFrom": "string",
+                    "scheduledTimeTo": "string",
+                    "stopContactInformations": [
+                      {
+                        "firstName": "string",
+                        "lastName": "string",
+                        "email": "string",
+                        "phoneNumbers": [
+                          {
+                            "Type": "MOBILE",
+                            "number": "string",
+                            "isPrimary": true
+                          }
+                        ],
+                        "title": "string",
+                        "isPrimary": true
+                      }
+                    ],
+                    "specialRequirement": [
+                      {
+                        "type": {},
+                        "value": "string"
+                      }
+                    ],
+                    "stopReferenceNumbers": [
+                      {
+                        "typeCode": "string",
+                        "value": "string"
+                      }
+                    ],
+                    "note": [
+                      {
+                        "type": "string",
+                        "value": "string"
+                      }
+                    ],
+                    "sequenceNo": 0
+                  }
+                ]
+              }
+            ],
+            "accessorialsTotalCost": 0,
+            "subTotal": 0,
+            "totalCost": 0,
+            "isNmfcCarrier": true,
+            "isContractRate": true,
+            "currencyCode": "string",
+            "expiresOn": "string",
+            "createdOn": "string"
+          }
+        ],
+        "lowestPriceQuote": {
+          "quoteId": 0,
+          "carrierCode": "string",
+          "carrierName": "string",
+          "estimatedTransitTime": 0,
+          "lineHaul": 0,
+          "fsc": 0,
+          "legs": [
+            {
+              "stops": [
+                {
+                  "addressInformations ": {
+                    "locationId": "string",
+                    "locationName": "string",
+                    "addressLine1": "string",
+                    "addressLine2": "string",
+                    "cityName": "string",
+                    "stateCode": "string",
+                    "country": "string",
+                    "zipCode": "string"
+                  },
+                  "type": "PICKUP",
+                  "scheduledTimeFrom": "string",
+                  "scheduledTimeTo": "string",
+                  "stopContactInformations": [
+                    {
+                      "firstName": "string",
+                      "lastName": "string",
+                      "email": "string",
+                      "phoneNumbers": [
+                        {
+                          "Type": "MOBILE",
+                          "number": "string",
+                          "isPrimary": true
+                        }
+                      ],
+                      "title": "string",
+                      "isPrimary": true
+                    }
+                  ],
+                  "specialRequirement": [
+                    {
+                      "type": {},
+                      "value": "string"
+                    }
+                  ],
+                  "stopReferenceNumbers": [
+                    {
+                      "typeCode": "string",
+                      "value": "string"
+                    }
+                  ],
+                  "note": [
+                    {
+                      "type": "string",
+                      "value": "string"
+                    }
+                  ],
+                  "sequenceNo": 0
+                }
+              ]
+            }
+          ],
+          "accessorials": [
+            {
+              "name": "string",
+              "cost": 0
+            }
+          ],
+          "accessorialsTotalCost": 0,
+          "subTotal": 0,
+          "totalCost": 0,
+          "isNmfcCarrier": true
+        },
+        "lowestGuaranteedQuotePrice": {
+          "quoteId": 0,
+          "carrierCode": "string",
+          "carrierName": "string",
+          "estimatedTransitTime": 0,
+          "lineHaul": 0,
+          "fsc": 0,
+          "legs": [
+            {
+              "stops": [
+                {
+                  "addressInformations ": {
+                    "locationId": "string",
+                    "locationName": "string",
+                    "addressLine1": "string",
+                    "addressLine2": "string",
+                    "cityName": "string",
+                    "stateCode": "string",
+                    "country": "string",
+                    "zipCode": "string"
+                  },
+                  "type": "PICKUP",
+                  "scheduledTimeFrom": "string",
+                  "scheduledTimeTo": "string",
+                  "stopContactInformations": [
+                    {
+                      "firstName": "string",
+                      "lastName": "string",
+                      "email": "string",
+                      "phoneNumbers": [
+                        {
+                          "Type": "MOBILE",
+                          "number": "string",
+                          "isPrimary": true
+                        }
+                      ],
+                      "title": "string",
+                      "isPrimary": true
+                    }
+                  ],
+                  "specialRequirement": [
+                    {
+                      "type": {},
+                      "value": "string"
+                    }
+                  ],
+                  "stopReferenceNumbers": [
+                    {
+                      "typeCode": "string",
+                      "value": "string"
+                    }
+                  ],
+                  "note": [
+                    {
+                      "type": "string",
+                      "value": "string"
+                    }
+                  ],
+                  "sequenceNo": 0
+                }
+              ]
+            }
+          ],
+          "accessorials": [
+            {
+              "name": "string",
+              "cost": 0
+            }
+          ],
+          "accessorialsTotalCost": 0,
+          "subTotal": 0,
+          "totalCost": 0,
+          "isNmfcCarrier": true
+        },
+        "bestDealQuotePrice": {
+          "quoteId": 0,
+          "carrierCode": "string",
+          "carrierName": "string",
+          "estimatedTransitTime": 0,
+          "lineHaul": 0,
+          "fsc": 0,
+          "legs": [
+            {
+              "stops": [
+                {
+                  "addressInformations ": {
+                    "locationId": "string",
+                    "locationName": "string",
+                    "addressLine1": "string",
+                    "addressLine2": "string",
+                    "cityName": "string",
+                    "stateCode": "string",
+                    "country": "string",
+                    "zipCode": "string"
+                  },
+                  "type": "PICKUP",
+                  "scheduledTimeFrom": "string",
+                  "scheduledTimeTo": "string",
+                  "stopContactInformations": [
+                    {
+                      "firstName": "string",
+                      "lastName": "string",
+                      "email": "string",
+                      "phoneNumbers": [
+                        {
+                          "Type": "MOBILE",
+                          "number": "string",
+                          "isPrimary": true
+                        }
+                      ],
+                      "title": "string",
+                      "isPrimary": true
+                    }
+                  ],
+                  "specialRequirement": [
+                    {
+                      "type": {},
+                      "value": "string"
+                    }
+                  ],
+                  "stopReferenceNumbers": [
+                    {
+                      "typeCode": "string",
+                      "value": "string"
+                    }
+                  ],
+                  "note": [
+                    {
+                      "type": "string",
+                      "value": "string"
+                    }
+                  ],
+                  "sequenceNo": 0
+                }
+              ]
+            }
+          ],
+          "accessorials": [
+            {
+              "Code": "string",
+              "name": "string",
+              "cost": 0
+            }
+          ],
+          "accessorialsTotalCost": 0,
+          "subTotal": 0,
+          "totalCost": 0,
+          "isNmfcCarrier": true
+        }
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
