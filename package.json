@@ -6,8 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postman2openapi": "node -r esbuild-register ./src/postman-2-openapi.ts",
-    "generate": "node -r esbuild-register ./src/generator.ts",
-    "validate": "node -r esbuild-register ./src/validator.ts"
+    "generate": "node -r esbuild-register ./src/generator.ts && npm run fix-style",
+    "validate": "node -r esbuild-register ./src/validator.ts",
+    "fix-style": "prettier -w .",
+    "style": "prettier -c ."
   },
   "keywords": [],
   "author": "",
@@ -45,6 +47,7 @@
     "esbuild-register": "^3.3.2",
     "graphql": "^16.3.0",
     "graphql-2-json-schema": "^0.9.0",
+    "prettier": "^2.6.2",
     "rimraf": "^3.0.2"
   }
 }

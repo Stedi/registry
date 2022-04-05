@@ -23,20 +23,14 @@
     "image": {
       "description": "The URL of an image for this SKU, meant to be displayable to the customer.",
       "maxLength": 2048,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "inventory": {
       "description": "",
       "properties": {
         "quantity": {
           "description": "The count of inventory available. Will be present if and only if `type` is `finite`.",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "type": {
           "description": "Inventory type. Possible values are `finite`, `bucket` (not quantified), and `infinite`.",
@@ -46,15 +40,10 @@
         "value": {
           "description": "An indicator of the inventory available. Possible values are `in_stock`, `limited`, and `out_of_stock`. Will be present if and only if `type` is `bucket`.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "title": "SKUInventory",
       "type": "object"
     },
@@ -65,9 +54,7 @@
     "metadata": {},
     "object": {
       "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "sku"
-      ],
+      "enum": ["sku"],
       "type": "string"
     },
     "package_dimensions": {
@@ -90,12 +77,7 @@
           "type": "number"
         }
       },
-      "required": [
-        "height",
-        "length",
-        "weight",
-        "width"
-      ],
+      "required": ["height", "length", "weight", "width"],
       "title": "PackageDimensions",
       "type": "object"
     },

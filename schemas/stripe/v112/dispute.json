@@ -31,17 +31,11 @@
           "description": {
             "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
             "maxLength": 5000,
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           },
           "exchange_rate": {
             "description": "The exchange rate used, if applicable, for this transaction. Specifically, if money was converted from currency A to currency B, then the `amount` in currency A, times `exchange_rate`, would be the `amount` in currency B. For example, suppose you charged a customer 10.00 EUR. Then the PaymentIntent's `amount` would be `1000` and `currency` would be `eur`. Suppose this was converted into 12.34 USD in your Stripe account. Then the BalanceTransaction's `amount` would be `1234`, `currency` would be `usd`, and `exchange_rate` would be `1.234`.",
-            "type": [
-              "number",
-              "null"
-            ]
+            "type": ["number", "null"]
           },
           "fee": {
             "description": "Fees (in %s) paid for this transaction.",
@@ -59,10 +53,7 @@
                 "application": {
                   "description": "ID of the Connect application that earned the fee.",
                   "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": ["string", "null"]
                 },
                 "currency": {
                   "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
@@ -71,10 +62,7 @@
                 "description": {
                   "description": "An arbitrary string attached to the object. Often useful for displaying to users.",
                   "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": ["string", "null"]
                 },
                 "type": {
                   "description": "Type of the fee, one of: `application_fee`, `stripe_fee` or `tax`.",
@@ -82,11 +70,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "amount",
-                "currency",
-                "type"
-              ],
+              "required": ["amount", "currency", "type"],
               "title": "Fee",
               "type": "object"
             },
@@ -103,9 +87,7 @@
           },
           "object": {
             "description": "String representing the object's type. Objects of the same type share the same value.",
-            "enum": [
-              "balance_transaction"
-            ],
+            "enum": ["balance_transaction"],
             "type": "string"
           },
           "reporting_category": {
@@ -201,18 +183,12 @@
         "access_activity_log": {
           "description": "Any server or activity logs showing proof that the customer accessed or downloaded the purchased digital product. This information should include IP addresses, corresponding timestamps, and any detailed recorded activity.",
           "maxLength": 150000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "billing_address": {
           "description": "The billing address provided by the customer.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "cancellation_policy": {
           "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your subscription cancellation policy, as shown to the customer.",
@@ -222,18 +198,12 @@
         "cancellation_policy_disclosure": {
           "description": "An explanation of how and when the customer was shown your refund policy prior to purchase.",
           "maxLength": 150000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "cancellation_rebuttal": {
           "description": "A justification for why the customer's subscription was not canceled.",
           "maxLength": 150000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "customer_communication": {
           "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any communication with the customer that you feel is relevant to your case. Examples include emails proving that the customer received the product or service, or demonstrating their use of or satisfaction with the product or service.",
@@ -243,26 +213,17 @@
         "customer_email_address": {
           "description": "The email address of the customer.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "customer_name": {
           "description": "The name of the customer.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "customer_purchase_ip": {
           "description": "The IP address that the customer used when making the purchase.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "customer_signature": {
           "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A relevant document or contract showing the customer's signature.",
@@ -277,26 +238,17 @@
         "duplicate_charge_explanation": {
           "description": "An explanation of the difference between the disputed charge versus the prior charge that appears to be a duplicate.",
           "maxLength": 150000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "duplicate_charge_id": {
           "description": "The Stripe ID for the prior charge which appears to be a duplicate of the disputed charge.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "product_description": {
           "description": "A description of the product or service that was sold.",
           "maxLength": 150000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "receipt": {
           "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any receipt or message sent to the customer notifying them of the charge.",
@@ -311,26 +263,17 @@
         "refund_policy_disclosure": {
           "description": "Documentation demonstrating that the customer was shown your refund policy prior to purchase.",
           "maxLength": 150000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "refund_refusal_explanation": {
           "description": "A justification for why the customer is not entitled to a refund.",
           "maxLength": 150000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "service_date": {
           "description": "The date on which the customer received or began receiving the purchased service, in a clear human-readable format.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "service_documentation": {
           "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing proof that a service was provided to the customer. This could include a copy of a signed contract, work order, or other form of written agreement.",
@@ -340,26 +283,17 @@
         "shipping_address": {
           "description": "The address to which a physical product was shipped. You should try to include as complete address information as possible.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "shipping_carrier": {
           "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. If multiple carriers were used for this purchase, please separate them with commas.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "shipping_date": {
           "description": "The date on which a physical product began its route to the shipping address, in a clear human-readable format.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "shipping_documentation": {
           "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing proof that a product was shipped to the customer at the same address the customer provided to you. This could include a copy of the shipment receipt, shipping label, etc. It should show the customer's full shipping address, if possible.",
@@ -369,10 +303,7 @@
         "shipping_tracking_number": {
           "description": "The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "uncategorized_file": {
           "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any additional evidence or statements.",
@@ -382,10 +313,7 @@
         "uncategorized_text": {
           "description": "Any additional evidence or statements.",
           "maxLength": 150000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
       "title": "DisputeEvidence",
@@ -397,10 +325,7 @@
         "due_by": {
           "description": "Date by which evidence must be submitted in order to successfully challenge dispute. Will be null if the customer's bank or credit card company doesn't allow a response for this particular dispute.",
           "format": "unix-time",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "has_evidence": {
           "description": "Whether evidence has been staged for this dispute.",
@@ -415,11 +340,7 @@
           "type": "integer"
         }
       },
-      "required": [
-        "has_evidence",
-        "past_due",
-        "submission_count"
-      ],
+      "required": ["has_evidence", "past_due", "submission_count"],
       "title": "DisputeEvidenceDetails",
       "type": "object"
     },
@@ -439,9 +360,7 @@
     "metadata": {},
     "object": {
       "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "dispute"
-      ],
+      "enum": ["dispute"],
       "type": "string"
     },
     "payment_intent": {

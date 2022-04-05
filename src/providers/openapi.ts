@@ -29,12 +29,7 @@ export class OpenAPIProvider {
    */
   private readonly sanitizeSchemaFunction?: (schema: unknown) => unknown;
 
-  constructor({
-    versions,
-    baseUrl,
-    entities,
-    sanitizeSchema,
-  }: OpenAPIProviderProps) {
+  constructor({ versions, baseUrl, entities, sanitizeSchema }: OpenAPIProviderProps) {
     this.versions = versions;
     this.baseUrl = baseUrl;
     this.entities = entities;
@@ -63,9 +58,7 @@ export class OpenAPIProvider {
    */
   async getSchema(version: string): Promise<OpenAPI3Schema> {
     if (!this.baseUrl) {
-      throw new Error(
-        'Neither "baseUrl" wasn\'t provided, nor method "getSchema" was overriden'
-      );
+      throw new Error('Neither "baseUrl" wasn\'t provided, nor method "getSchema" was overriden');
     }
 
     const definition = await axios.get(this.baseUrl);
@@ -87,17 +80,13 @@ export class OpenAPIProvider {
     const hasComponents = "components" in dereferenced;
     if (!hasComponents) throw new Error("Expected components");
 
-    const components =
-      (dereferenced.components as any).models ??
-      dereferenced.components?.schemas;
+    const components = (dereferenced.components as any).models ?? dereferenced.components?.schemas;
 
     return Object.entries(components ?? {})
       .filter(([key]) => !bundle.entities || bundle.entities.includes(key))
       .map(([key, value]) => ({
         name: key,
-        schema: this.sanitizeSchemaFunction
-          ? this.sanitizeSchemaFunction(value)
-          : sanitizeSchema(value),
+        schema: this.sanitizeSchemaFunction ? this.sanitizeSchemaFunction(value) : sanitizeSchema(value),
       }));
   }
 }
@@ -106,6 +95,6 @@ function sanitizeSchema(schema: unknown) {
   return JSON.parse(
     JSON.stringify(schema, (_, value) => {
       return value;
-    })
+    }),
   );
 }

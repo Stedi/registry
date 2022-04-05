@@ -24,36 +24,22 @@
     "role": {
       "type": "string",
       "minLength": 1,
-      "enum": [
-        "BUSINESS_ADMIN",
-        "BUSINESS_USER",
-        "BUSINESS_OWNER",
-        "BUSINESS_BOOKKEEPER"
-      ]
+      "enum": ["BUSINESS_ADMIN", "BUSINESS_USER", "BUSINESS_OWNER", "BUSINESS_BOOKKEEPER"]
     },
     "phone": {
       "type": "string",
       "minLength": 1
     },
     "location_id": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "format": "uuid"
     },
     "department_id": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "format": "uuid"
     },
     "manager_id": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "format": "uuid"
     },
     "business_id": {
@@ -61,32 +47,16 @@
       "format": "uuid"
     },
     "is_manager": {
-      "type": [
-        "boolean"
-      ]
+      "type": ["boolean"]
     },
     "status": {
       "description": "Summary of user status. If the user has not accepted their invite, the status will be one of INVITE_PENDING, INVITE_DELETED, or INVITE_EXPIRED. Once the user has accepted the invite, status will be USER_ONBOARDING; after onboarding, USER_ACTIVE; finally, if they are suspended, it will be USER_SUSPENDED.",
       "type": "string",
       "minLength": 1,
-      "enum": [
-        "INVITE_PENDING",
-        "INVITE_DELETED",
-        "INVITE_EXPIRED",
-        "USER_ONBOARDING",
-        "USER_ACTIVE",
-        "USER_SUSPENDED"
-      ]
+      "enum": ["INVITE_PENDING", "INVITE_DELETED", "INVITE_EXPIRED", "USER_ONBOARDING", "USER_ACTIVE", "USER_SUSPENDED"]
     }
   },
-  "required": [
-    "id",
-    "email",
-    "first_name",
-    "last_name",
-    "role",
-    "phone"
-  ],
+  "required": ["id", "email", "first_name", "last_name", "role", "phone"],
   "default": {
     "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
     "email": "user@example.com",

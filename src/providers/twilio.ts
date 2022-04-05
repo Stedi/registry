@@ -6,12 +6,7 @@ import { OpenAPIProvider } from "./openapi";
 export class TwilioProvider extends OpenAPIProvider {
   constructor() {
     super({
-      versions: [
-        "twilio_messaging_v1",
-        "twilio_api_v2010",
-        "twilio_events_v1",
-        "twilio_taskrouter_v1",
-      ],
+      versions: ["twilio_messaging_v1", "twilio_api_v2010", "twilio_events_v1", "twilio_taskrouter_v1"],
       baseUrl: "overwritten in getSchema function",
       entities: [
         "person",
@@ -27,12 +22,7 @@ export class TwilioProvider extends OpenAPIProvider {
   }
 
   override async getSchema(version: string): Promise<OpenAPI3Schema> {
-    const definition = await github.getRaw(
-      "twilio",
-      "twilio-oai",
-      "main",
-      `spec/json/${version}.json`
-    );
+    const definition = await github.getRaw("twilio", "twilio-oai", "main", `spec/json/${version}.json`);
     return {
       type: "openapi-v3",
       versionName: version,
@@ -69,6 +59,6 @@ function sanitizeSchema(schema: unknown) {
       }
 
       return value;
-    })
+    }),
   );
 }
