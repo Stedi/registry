@@ -5,6 +5,24 @@ export class BatonProvider extends OpenAPIProvider {
     super({
       versions: ["1.0"],
       baseUrl: "https://courier.baton.io/api/v1/swagger.json",
+      entities: [
+        "Contact",
+        "NavTracVehicle",
+        "StopAction",
+        "Dropzone",
+        "OrderCancelRequest",
+        "Facility",
+        "StopResponse",
+        "NavTracGateEvent",
+        "OrderResponse",
+        "Trailer",
+        "NavTracSmartGateEventRequest",
+        "OrderStatusRequest",
+        "TrailerUpdateRequest",
+        "NavTracSmartGateEventResponse",
+        "UpdateTrailersResponse",
+        "NavTracTrailer",
+      ],
     });
   }
 }
