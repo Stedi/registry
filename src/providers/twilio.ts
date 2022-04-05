@@ -1,28 +1,32 @@
-import {
-  EntitySchema,
-  OpenAPI3Schema,
-  OpenAPIProvider,
-  Provider,
-} from "../provider";
+import { OpenAPI3Schema } from "../provider";
 import * as github from "../github";
-import openAPIParser from "@readme/openapi-parser";
 import _ from "lodash";
+import { OpenAPIProvider } from "./openapi";
 
-export class TwilioProvider implements OpenAPIProvider {
-  isEnabled(): boolean {
-    return true;
+export class TwilioProvider extends OpenAPIProvider {
+  constructor() {
+    super({
+      versions: [
+        "twilio_messaging_v1",
+        "twilio_api_v2010",
+        "twilio_events_v1",
+        "twilio_taskrouter_v1",
+      ],
+      baseUrl: "overwritten in getSchema function",
+      entities: [
+        "person",
+        "metric",
+        "template",
+        "campaign",
+        "identify_payload",
+        "check_membership_request",
+        "check_membership_response",
+      ],
+      sanitizeSchema,
+    });
   }
 
-  async getVersions(): Promise<string[]> {
-    return [
-      "twilio_messaging_v1",
-      "twilio_api_v2010",
-      "twilio_events_v1",
-      "twilio_taskrouter_v1",
-    ];
-  }
-
-  async getSchema(version: string): Promise<OpenAPI3Schema> {
+  override async getSchema(version: string): Promise<OpenAPI3Schema> {
     const definition = await github.getRaw(
       "twilio",
       "twilio-oai",
@@ -51,20 +55,6 @@ export class TwilioProvider implements OpenAPIProvider {
         "taskrouter.v1.workspace.workflow",
       ],
     };
-  }
-
-  async unbundle(bundle: OpenAPI3Schema): Promise<EntitySchema[]> {
-    const dereferenced = await openAPIParser.dereference(bundle.value as any);
-
-    const hasComponents = "components" in dereferenced;
-    if (!hasComponents) throw new Error("Expected components");
-
-    return Object.entries(dereferenced.components?.schemas ?? {})
-      .filter(([key]) => !bundle.entities || bundle.entities.includes(key))
-      .map(([key, value]) => ({
-        name: key,
-        schema: sanitizeSchema(value),
-      }));
   }
 }
 function sanitizeSchema(schema: unknown) {

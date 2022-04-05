@@ -1,19 +1,28 @@
-import { EntitySchema, OpenAPI3Schema, OpenAPIProvider } from "../provider";
+import { OpenAPI3Schema } from "../provider";
 import * as github from "../github";
 import yaml from "js-yaml";
-import openAPIParser from "@readme/openapi-parser";
 import _ from "lodash";
 
-export class FlexportProvider implements OpenAPIProvider {
-  isEnabled(): boolean {
-    return true;
+import { OpenAPIProvider } from "./openapi";
+export class FlexportProvider extends OpenAPIProvider {
+  constructor() {
+    super({
+      versions: ["v2"],
+      baseUrl: "https://klaviyo-openapi.s3.amazonaws.com/spec.json",
+      entities: [
+        "person",
+        "metric",
+        "template",
+        "campaign",
+        "identify_payload",
+        "check_membership_request",
+        "check_membership_response",
+      ],
+      sanitizeSchema,
+    });
   }
 
-  async getVersions(): Promise<string[]> {
-    return ["v2"];
-  }
-
-  async getSchema(version: string): Promise<OpenAPI3Schema> {
+  override async getSchema(version: string): Promise<OpenAPI3Schema> {
     const definition = await github.getRaw(
       "distributeaid",
       "flexport-sdk-js",
@@ -27,20 +36,6 @@ export class FlexportProvider implements OpenAPIProvider {
       value: yaml.load(definition),
       entities: ["Container", "Shipment", "Invoice", "Product", "Document"],
     };
-  }
-
-  async unbundle(bundle: OpenAPI3Schema): Promise<EntitySchema[]> {
-    const dereferenced = await openAPIParser.dereference(bundle.value as any);
-
-    const hasComponents = "components" in dereferenced;
-    if (!hasComponents) throw new Error("Expected components");
-
-    return Object.entries(dereferenced.components?.schemas ?? {})
-      .filter(([key]) => !bundle.entities || bundle.entities.includes(key))
-      .map(([key, value]) => ({
-        name: key,
-        schema: sanitizeSchema(value),
-      }));
   }
 }
 
