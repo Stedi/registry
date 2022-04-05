@@ -7,6 +7,10 @@ import { OpenAPIProvider } from "./openapi";
 export class FlexportProvider extends OpenAPIProvider {
   constructor() {
     super({
+      name: "Flexport",
+      description:
+        "Flexport is a full-service global freight forwarder and logistics platform using modern software to fix the user experience in global trade.",
+      logoUrl: "https://logo.clearbit.com/flexport.com",
       versions: ["v2"],
       baseUrl: "https://klaviyo-openapi.s3.amazonaws.com/spec.json",
       entities: [

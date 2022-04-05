@@ -8,59 +8,45 @@ import { mock } from "./util";
 import { markdownTable } from "markdown-table";
 import { promisify } from "util";
 import { generateMarkdownTableRow } from "./util/readme";
+import { EntitySchema, Provider } from "./provider";
 
+const rootSchemasPath = "./schemas";
 const asyncRimraf = promisify(rimraf);
 
-async function listVersions(providerName: keyof typeof providers) {
-  return await providers[providerName].getVersions();
-}
-
-export async function generateForVersion(
-  rootPath: string,
-  providerName: keyof typeof providers,
-  version: string,
-  customPath?: string
-) {
-  if (!providers[providerName].isEnabled()) {
-    console.log(`Skipping ${providerName} because it's not enabled.`);
+async function generateForVersion(provider: Provider, version: string) {
+  if (!provider.isEnabled()) {
+    console.log(`Skipping ${provider.name} because it's not enabled.`);
     return;
   }
 
-  const baseDir = customPath
-    ? path.join(rootPath, customPath)
-    : path.join(rootPath, providerName, version);
+  const baseDir = provider?.customPath
+    ? path.join(rootSchemasPath, provider.customPath)
+    : path.join(rootSchemasPath, provider.name.toLowerCase(), version);
+
   await asyncRimraf(baseDir);
 
   const folderExists = !fs.mkdirSync(baseDir, { recursive: true });
 
   if (folderExists) {
-    console.log(`Skipping [${providerName}, ${version}]...`);
+    console.log(`Skipping [${provider.name}, ${version}]...`);
     return;
   }
 
-  const bundle = await providers[providerName].getSchema(version);
-  const schemas = await providers[providerName].unbundle(bundle);
+  console.log(`Generating [${provider.name}, ${version}]...`);
+
+  const bundle = await provider.getSchema(version);
+  const schemas = await provider.unbundle(bundle);
 
   const markdownTableRows: string[][] = [];
 
-  console.log(`Generating [${providerName}, ${version}]...`);
-
   for (const schema of schemas) {
-    const target = path.join(baseDir, `${schema.name}.json`);
-
-    (schema.schema as any)["default"] = mock(
-      schema.schema as OpenAPIV3.SchemaObject
-    );
-    (schema.schema as any)["$schema"] =
-      "https://json-schema.org/draft/2020-12/schema";
-
-    fs.writeFileSync(target, JSON.stringify(schema.schema, null, 2));
+    const target = generateEntitySchema(schema, baseDir);
 
     markdownTableRows.push(
       generateMarkdownTableRow({
         schemaName: schema.name,
         target,
-        providerName,
+        providerName: provider.name.toLowerCase(),
       })
     );
   }
@@ -73,26 +59,50 @@ export async function generateForVersion(
   fs.writeFileSync(path.join(baseDir, `README.md`), readmeFileContents);
 }
 
-export async function generateAll(
-  rootPath: string,
-  providerName: keyof typeof providers,
-  customPath?: string
-) {
-  const versions = await listVersions(providerName);
+async function generateAll(provider: Provider) {
+  const versions = await provider.getVersions();
 
   for (const version of versions) {
-    await generateForVersion(rootPath, providerName, version, customPath);
+    await generateForVersion(provider, version);
   }
 }
 
+function generateEntitySchema(schema: EntitySchema, baseDir: string) {
+  const target = path.join(baseDir, `${schema.name}.json`);
+
+  (schema.schema as any)["default"] = mock(
+    schema.schema as OpenAPIV3.SchemaObject
+  );
+  (schema.schema as any)["$schema"] =
+    "https://json-schema.org/draft/2020-12/schema";
+
+  fs.writeFileSync(target, JSON.stringify(schema.schema, null, 2));
+
+  return target;
+}
+
+function generateProvidersJson() {
+  console.log("Writing providers.json...");
+
+  const providersJson = Object.keys(providers).map((name) => {
+    const provider: Provider = providers[name as keyof typeof providers];
+
+    return {
+      name: provider.name,
+      logoUrl: provider.logoUrl,
+      description: provider.description,
+    };
+  });
+
+  fs.writeFileSync("providers.json", JSON.stringify(providersJson, null, 2));
+}
+
 (async () => {
-  await Promise.all([
-    generateAll("./schemas", "stripe"),
-    generateAll("./schemas", "ramp"),
-    generateAll("./schemas", "twilio"),
-    generateAll("./schemas", "netsuite"),
-    generateAll("./schemas", "flexport"),
-    generateAll("./schemas", "klaviyo"),
-    generateAll("./schemas", "shopify", "./shopify/graphql/2022-01"),
-  ]);
+  await Promise.all(
+    Object.keys(providers).map((providerName) =>
+      generateAll(providers[providerName as keyof typeof providers])
+    )
+  );
+
+  generateProvidersJson();
 })();

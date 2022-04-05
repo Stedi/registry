@@ -1,16 +1,23 @@
-import { EntitySchema, OpenAPI3Schema } from "../provider";
+import { BaseProvider, EntitySchema, OpenAPI3Schema } from "../provider";
 import _ from "lodash";
 import axios from "axios";
 import openAPIParser from "@readme/openapi-parser";
 
 export interface OpenAPIProviderProps {
+  name: string;
+  description: string;
+  logoUrl: string;
   versions: string[];
   baseUrl?: string;
   entities?: string[];
   sanitizeSchema?: (schema: unknown) => unknown;
 }
 
-export class OpenAPIProvider {
+export class OpenAPIProvider implements BaseProvider {
+  public readonly name: string;
+  public readonly description: string;
+  public readonly logoUrl: string;
+  public readonly customPath: string | undefined;
   /**
    * Versions of the provider's API that are fetched
    */
@@ -34,7 +41,13 @@ export class OpenAPIProvider {
     baseUrl,
     entities,
     sanitizeSchema,
+    name,
+    logoUrl,
+    description,
   }: OpenAPIProviderProps) {
+    this.name = name;
+    this.description = description;
+    this.logoUrl = logoUrl;
     this.versions = versions;
     this.baseUrl = baseUrl;
     this.entities = entities;

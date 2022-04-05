@@ -10,6 +10,11 @@ import { IntrospectionQuery } from "graphql";
 import jsonSchemaRefParser from "@apidevtools/json-schema-ref-parser";
 
 export class ShopifyProvider implements GraphQLProvider {
+  name: string = "Shopify";
+  description: string =
+    "Shopify is a leading global commerce company, providing trusted tools to start, grow, market, and manage a retail business of any size.";
+  logoUrl: string = "https://logo.clearbit.com/shopify.com";
+
   isEnabled(): boolean {
     return !!(process.env.SHOPIFY_URL && process.env.SHOPIFY_ACCESS_TOKEN);
   }

@@ -6,6 +6,10 @@ import { OpenAPIProvider } from "./openapi";
 export class TwilioProvider extends OpenAPIProvider {
   constructor() {
     super({
+      name: "Twilio",
+      description:
+        "Twilio is the developer platform for communications is reinventing telecom by merging the worlds of cloud computing, web services, and telecommunications.",
+      logoUrl: "https://logo.clearbit.com/twilio.com",
       versions: [
         "twilio_messaging_v1",
         "twilio_api_v2010",

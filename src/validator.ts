@@ -131,79 +131,23 @@ async function validateAllSchemas() {
   }
 }
 
-interface Provider {
+interface ProviderEntry {
   name: string;
   description: string;
   logoUrl: string;
 }
 
-const providerJsonSchema = {
-  $schema: "https://json-schema.org/draft/2020-12/schema",
-  type: "object",
-  properties: {
-    name: {
-      type: "string",
-    },
-    description: {
-      type: "string",
-    },
-    logoUrl: {
-      type: "string",
-    },
-  },
-  required: ["name", "description", "logoUrl"],
-};
-
 /**
- * Compares the providers in the schemas directory against the providers in the providers.json file.
- * Moreover, ensures that providers.json has a correct shape.
+ * Ensures that logos in providers.json are valid
  */
 async function validateProviders() {
-  const schemasPath = "schemas";
   const providersPath = "providers.json";
-  const schemas = glob.sync(`${schemasPath}/*`);
-  const providers: Provider[] = JSON.parse(
+
+  const providers: ProviderEntry[] = JSON.parse(
     readFileSync(providersPath, "utf-8")
   );
 
-  const providersNamesInLowerCase = providers.map((provider) =>
-    provider.name.toLowerCase()
-  );
-  const schemasProvidersNames = schemas.map(
-    (provider) => provider.split("/")[1]
-  );
-  const providersWithSchemasMissing = providersNamesInLowerCase.filter(
-    (p) => !schemasProvidersNames.includes(p)
-  );
-  const providersWithMetadataMissing = schemasProvidersNames.filter(
-    (p) => !providersNamesInLowerCase.includes(p)
-  );
-
-  if (providersWithSchemasMissing.length > 0) {
-    throw new Error(
-      `Providers with schemas missing: ${providersWithSchemasMissing.join(
-        ", "
-      )}`
-    );
-  }
-
-  if (providersWithMetadataMissing.length > 0) {
-    throw new Error(
-      `Providers with metadata missing: ${providersWithMetadataMissing.join(
-        ", "
-      )}`
-    );
-  }
-
   providers.forEach(async (provider) => {
-    const ajv = getAjvInstance();
-    const validate = ajv.compile(providerJsonSchema);
-    const isValid = validate(provider);
-
-    if (!isValid) {
-      throw new Error(`${provider.name} failed validation: ${ajv.errors}`);
-    }
-
     try {
       await axios.get(provider.logoUrl);
     } catch (e) {

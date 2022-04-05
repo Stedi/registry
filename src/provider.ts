@@ -26,11 +26,18 @@ export interface GraphQLIntrospectionSchema extends APISchema {
 
 export type SchemaPackage = OpenAPI3Schema | GraphQLIntrospectionSchema;
 
-export type Provider = GraphQLProvider | OpenAPIProvider | NetsuiteProvider;
-
-export interface GraphQLProvider {
+export type BaseProvider = {
   isEnabled(): boolean;
   getVersions: () => Promise<string[]>;
+  name: string;
+  description: string;
+  logoUrl: string;
+  customPath?: string;
+};
+
+export type Provider = GraphQLProvider | OpenAPIProvider | NetsuiteProvider;
+
+export interface GraphQLProvider extends BaseProvider {
   getSchema: (version: string) => Promise<APISchema>;
   unbundle: (bundle: GraphQLIntrospectionSchema) => Promise<EntitySchema[]>;
 }
