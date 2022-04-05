@@ -23,6 +23,8 @@ export class FlexportProvider extends OpenAPIProvider {
         "check_membership_response",
       ],
       sanitizeSchema,
+      docsLink: (schemaName: string) =>
+        `https://apidocs.flexport.com/v2/reference/${schemaName}`,
     });
   }
 

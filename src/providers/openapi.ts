@@ -11,12 +11,14 @@ export interface OpenAPIProviderProps {
   baseUrl?: string;
   entities?: string[];
   sanitizeSchema?: (schema: unknown) => unknown;
+  docsLink: string | ((schemaName: string) => string);
 }
 
 export class OpenAPIProvider implements BaseProvider {
   public readonly name: string;
   public readonly description: string;
   public readonly logoUrl: string;
+  public readonly docsLink: string | ((schemaName: string) => string);
   public readonly customPath: string | undefined;
   /**
    * Versions of the provider's API that are fetched
@@ -44,6 +46,7 @@ export class OpenAPIProvider implements BaseProvider {
     name,
     logoUrl,
     description,
+    docsLink,
   }: OpenAPIProviderProps) {
     this.name = name;
     this.description = description;
@@ -52,6 +55,7 @@ export class OpenAPIProvider implements BaseProvider {
     this.baseUrl = baseUrl;
     this.entities = entities;
     this.sanitizeSchemaFunction = sanitizeSchema;
+    this.docsLink = docsLink;
   }
 
   /**

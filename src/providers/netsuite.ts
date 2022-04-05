@@ -16,6 +16,8 @@ export class NetsuiteProvider implements BaseProvider {
     "NetSuite provides a suite of cloud-based financials / Enterprise Resource Planning (ERP), HR and omnichannel commerce software";
   logoUrl: string = "https://logo.clearbit.com/netsuite.com";
   customPath?: string | undefined;
+  docsLink: string =
+    "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/chapter_1540391670.html";
 
   isEnabled(): boolean {
     return !!(

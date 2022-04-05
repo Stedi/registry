@@ -11,6 +11,8 @@ export class RampProvider extends OpenAPIProvider {
       versions: ["v1"],
       baseUrl: "https://docs.ramp.com/openapi/v1/ramp-developer.json",
       sanitizeSchema,
+      docsLink: (schemaName: string) =>
+        `https://docs.ramp.com/reference/models/${schemaName}`,
     });
   }
 }

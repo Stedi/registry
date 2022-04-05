@@ -18,6 +18,7 @@ export class KlaviyoProvider extends OpenAPIProvider {
         "check_membership_request",
         "check_membership_response",
       ],
+      docsLink: "https://developers.klaviyo.com/en/reference/api-overview",
     });
   }
 }

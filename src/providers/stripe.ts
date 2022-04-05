@@ -57,6 +57,7 @@ export class StripeProvider extends OpenAPIProvider {
       ],
       sanitizeSchema: (value) =>
         traverse(deepcopy(value) as OpenAPIV3.SchemaObject, new Set<String>()),
+      docsLink: (schemaName) => `https://stripe.com/docs/api/${schemaName}s`, // naive plural form
     });
   }
 

@@ -14,6 +14,8 @@ export class ShopifyProvider implements GraphQLProvider {
   description: string =
     "Shopify is a leading global commerce company, providing trusted tools to start, grow, market, and manage a retail business of any size.";
   logoUrl: string = "https://logo.clearbit.com/shopify.com";
+  docsLink = (schemaName: string) =>
+    `https://shopify.dev/api/admin-graphql/2022-04/queries/${schemaName}`;
 
   isEnabled(): boolean {
     return !!(process.env.SHOPIFY_URL && process.env.SHOPIFY_ACCESS_TOKEN);

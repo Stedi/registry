@@ -47,6 +47,10 @@ async function generateForVersion(provider: Provider, version: string) {
         schemaName: schema.name,
         target,
         providerName: provider.name.toLowerCase(),
+        docsLink:
+          typeof provider.docsLink === "function"
+            ? provider.docsLink(schema.name)
+            : provider.docsLink,
       })
     );
   }

@@ -29,6 +29,10 @@ export type SchemaPackage = OpenAPI3Schema | GraphQLIntrospectionSchema;
 export type BaseProvider = {
   isEnabled(): boolean;
   getVersions: () => Promise<string[]>;
+  /**
+   * Either link to a general documentation or a function pointing to a specific entity documentation if possible.
+   */
+  docsLink: string | ((schemaName: string) => string);
   name: string;
   description: string;
   logoUrl: string;
