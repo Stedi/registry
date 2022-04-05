@@ -1,0 +1,52 @@
+{
+  "required": [
+    "city",
+    "customer_facility_id",
+    "state",
+    "street_address",
+    "zipcode"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the facility.",
+      "example": "Baton HQ"
+    },
+    "street_address": {
+      "type": "string",
+      "description": "An address in the form 123 Main Street.",
+      "example": "123 Main Street"
+    },
+    "zipcode": {
+      "type": "string",
+      "description": "A zip code in the form 94111.",
+      "example": "94111",
+      "pattern": "([0-9]{5})?$"
+    },
+    "city": {
+      "type": "string",
+      "description": "A city, like San Francisco.",
+      "example": "San Francisco"
+    },
+    "state": {
+      "type": "string",
+      "description": "The two-letter abbreviation for the state, like CA.",
+      "example": "CA"
+    },
+    "customer_facility_id": {
+      "type": "string",
+      "description": "The unique identifier for this stop's facility.",
+      "example": "TMS_123456"
+    }
+  },
+  "type": "object",
+  "default": {
+    "name": "Baton HQ",
+    "street_address": "123 Main Street",
+    "zipcode": "94111",
+    "city": "San Francisco",
+    "state": "CA",
+    "customer_facility_id": "TMS_123456"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

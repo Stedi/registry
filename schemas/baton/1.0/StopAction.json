@@ -1,0 +1,29 @@
+{
+  "required": [
+    "action"
+  ],
+  "properties": {
+    "action": {
+      "type": "integer",
+      "description": "\n            A value describing what action should be performed at this stop:\n            HOOK = 1\n            DROP = 2\n            LOAD = 3\n            UNLOAD = 4\n            ",
+      "example": 1
+    },
+    "trailer": {
+      "type": "string",
+      "description": "The trailer for the action at this stop.",
+      "example": "T123456"
+    },
+    "trailer_type": {
+      "type": "integer",
+      "description": "A value describing the type of trailer. NONE = 0 REEFER = 1 DRY_VAN = 2 FLATBED = 3 OTHER = 4",
+      "example": 2
+    }
+  },
+  "type": "object",
+  "default": {
+    "action": 1,
+    "trailer": "T123456",
+    "trailer_type": 2
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
