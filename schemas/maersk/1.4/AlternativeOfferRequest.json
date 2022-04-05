@@ -1,0 +1,146 @@
+{
+  "title": "AlternativeOfferRequest",
+  "required": [
+    "alternativeRoutes",
+    "commodities",
+    "container",
+    "destinationServiceMode",
+    "fromDate",
+    "fromLocation",
+    "originServiceMode",
+    "toDate",
+    "toLocation"
+  ],
+  "type": "object",
+  "properties": {
+    "alternativeRoutes": {
+      "type": "array",
+      "items": {
+        "title": "AlternativeRouteRequest",
+        "required": [
+          "destinationRkstCode",
+          "originRkstCode"
+        ],
+        "type": "object",
+        "properties": {
+          "destinationRkstCode": {
+            "type": "string"
+          },
+          "originRkstCode": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "commodities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "container": {
+      "type": "string"
+    },
+    "destinationServiceMode": {
+      "type": "string",
+      "enum": [
+        "BB",
+        "CC",
+        "CFS",
+        "CY",
+        "SD"
+      ]
+    },
+    "fromDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "fromLocation": {
+      "title": "Location",
+      "type": "object",
+      "properties": {
+        "countryCode": {
+          "type": "string"
+        },
+        "maerskGeoId": {
+          "type": "string"
+        },
+        "maerskRkstCode": {
+          "type": "string"
+        },
+        "maerskServiceMode": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "originServiceMode": {
+      "type": "string",
+      "enum": [
+        "BB",
+        "CC",
+        "CFS",
+        "CY",
+        "SD"
+      ]
+    },
+    "toDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "toLocation": {
+      "title": "Location",
+      "type": "object",
+      "properties": {
+        "countryCode": {
+          "type": "string"
+        },
+        "maerskGeoId": {
+          "type": "string"
+        },
+        "maerskRkstCode": {
+          "type": "string"
+        },
+        "maerskServiceMode": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "default": {
+    "alternativeRoutes": [
+      {
+        "destinationRkstCode": "string",
+        "originRkstCode": "string"
+      }
+    ],
+    "commodities": [
+      "string"
+    ],
+    "container": "string",
+    "destinationServiceMode": "BB",
+    "fromDate": "1970-01-01",
+    "fromLocation": {
+      "countryCode": "string",
+      "maerskGeoId": "string",
+      "maerskRkstCode": "string",
+      "maerskServiceMode": "string",
+      "name": "string"
+    },
+    "originServiceMode": "BB",
+    "toDate": "1970-01-01",
+    "toLocation": {
+      "countryCode": "string",
+      "maerskGeoId": "string",
+      "maerskRkstCode": "string",
+      "maerskServiceMode": "string",
+      "name": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,1020 @@
+{
+  "title": "RouteScheduleWithPrice",
+  "type": "object",
+  "properties": {
+    "importDnDConditions": {
+      "type": "array",
+      "items": {
+        "title": "DnDConditions",
+        "type": "object",
+        "properties": {
+          "brandScac": {
+            "type": "string"
+          },
+          "chargePerDiemAfterFreetime": {
+            "type": "array",
+            "items": {
+              "title": "DnDChargePerDiem",
+              "type": "object",
+              "properties": {
+                "chargePerDiem": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "currencyOfCharge": {
+                  "type": "string"
+                },
+                "endDayOfCharge": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "startDayOfCharge": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "chargeType": {
+            "type": "string",
+            "enum": [
+              "Demurrage",
+              "Detention",
+              "Storage"
+            ]
+          },
+          "commodity": {
+            "type": "string"
+          },
+          "containerSizeType": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "Import"
+            ]
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "freetimeGrantInDays": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "freetimeStartEvent": {
+            "type": "string"
+          },
+          "rkstCode": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "offerId": {
+      "type": "string"
+    },
+    "penaltyFees": {
+      "type": "array",
+      "items": {
+        "title": "PenaltyFees",
+        "type": "object",
+        "properties": {
+          "charges": {
+            "type": "array",
+            "items": {
+              "title": "PenaltyCharge",
+              "type": "object",
+              "properties": {
+                "chargeFee": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "displayName": {
+                  "type": "string"
+                },
+                "penaltyType": {
+                  "type": "string",
+                  "enum": [
+                    "AmendmentFee",
+                    "CancellationFee",
+                    "CompensationFee",
+                    "NoShowFee"
+                  ]
+                }
+              }
+            }
+          },
+          "containerSizeType": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "price": {
+      "title": "PennyPriceDTO",
+      "type": "object",
+      "properties": {
+        "prices_per_container": {
+          "type": "array",
+          "items": {
+            "title": "PennyPerCntrPriceDTO",
+            "type": "object",
+            "properties": {
+              "bas": {
+                "title": "PennyRateDTO",
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "amountusd": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "chargecode": {
+                    "type": "string"
+                  },
+                  "chargedescription": {
+                    "type": "string"
+                  },
+                  "currency": {
+                    "type": "string"
+                  },
+                  "qty": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "rate": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "ratebasis": {
+                    "type": "string"
+                  },
+                  "ratetype": {
+                    "type": "string"
+                  },
+                  "ratetypecode": {
+                    "type": "string"
+                  },
+                  "rateusd": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                }
+              },
+              "containersizetype": {
+                "type": "string"
+              },
+              "priceValidFromDate": {
+                "type": "string"
+              },
+              "priceid": {
+                "type": "string"
+              },
+              "surcharges_per_container": {
+                "type": "array",
+                "items": {
+                  "title": "PennyRateDTO",
+                  "type": "object",
+                  "properties": {
+                    "amount": {
+                      "type": "number",
+                      "format": "double"
+                    },
+                    "amountusd": {
+                      "type": "number",
+                      "format": "double"
+                    },
+                    "chargecode": {
+                      "type": "string"
+                    },
+                    "chargedescription": {
+                      "type": "string"
+                    },
+                    "currency": {
+                      "type": "string"
+                    },
+                    "qty": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "rate": {
+                      "type": "number",
+                      "format": "double"
+                    },
+                    "ratebasis": {
+                      "type": "string"
+                    },
+                    "ratetype": {
+                      "type": "string"
+                    },
+                    "ratetypecode": {
+                      "type": "string"
+                    },
+                    "rateusd": {
+                      "type": "number",
+                      "format": "double"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "surcharges_per_doc": {
+          "type": "array",
+          "items": {
+            "title": "PennyRateDTO",
+            "type": "object",
+            "properties": {
+              "amount": {
+                "type": "number",
+                "format": "double"
+              },
+              "amountusd": {
+                "type": "number",
+                "format": "double"
+              },
+              "chargecode": {
+                "type": "string"
+              },
+              "chargedescription": {
+                "type": "string"
+              },
+              "currency": {
+                "type": "string"
+              },
+              "qty": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "rate": {
+                "type": "number",
+                "format": "double"
+              },
+              "ratebasis": {
+                "type": "string"
+              },
+              "ratetype": {
+                "type": "string"
+              },
+              "ratetypecode": {
+                "type": "string"
+              },
+              "rateusd": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalbas": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "rollableOptionEnabled": {
+      "type": "boolean"
+    },
+    "routeScheduleFull": {
+      "title": "RouteScheduleFull",
+      "type": "object",
+      "properties": {
+        "brandScac": {
+          "type": "string"
+        },
+        "direction": {
+          "type": "string"
+        },
+        "earliestAllowedLoadDate": {
+          "type": "string"
+        },
+        "earliestAllowedLoadTime": {
+          "type": "string"
+        },
+        "firstLoadPort": {
+          "title": "Location0",
+          "type": "object",
+          "properties": {
+            "cityGeoId": {
+              "type": "string"
+            },
+            "cityName": {
+              "type": "string"
+            },
+            "countryCode": {
+              "type": "string"
+            },
+            "countryName": {
+              "type": "string"
+            },
+            "date": {
+              "type": "string"
+            },
+            "datetime": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "regionName": {
+              "type": "string"
+            },
+            "rkstCode": {
+              "type": "string"
+            },
+            "siteGeoId": {
+              "type": "string"
+            },
+            "siteName": {
+              "type": "string"
+            },
+            "time": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "unLocCode": {
+              "type": "string"
+            }
+          }
+        },
+        "fmcRegulationApplies": {
+          "type": "boolean"
+        },
+        "fromLocation": {
+          "title": "Location0",
+          "type": "object",
+          "properties": {
+            "cityGeoId": {
+              "type": "string"
+            },
+            "cityName": {
+              "type": "string"
+            },
+            "countryCode": {
+              "type": "string"
+            },
+            "countryName": {
+              "type": "string"
+            },
+            "date": {
+              "type": "string"
+            },
+            "datetime": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "regionName": {
+              "type": "string"
+            },
+            "rkstCode": {
+              "type": "string"
+            },
+            "siteGeoId": {
+              "type": "string"
+            },
+            "siteName": {
+              "type": "string"
+            },
+            "time": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "unLocCode": {
+              "type": "string"
+            }
+          }
+        },
+        "hasInlandExport": {
+          "type": "boolean"
+        },
+        "hasInlandImport": {
+          "type": "boolean"
+        },
+        "lastDischargePort": {
+          "title": "Location0",
+          "type": "object",
+          "properties": {
+            "cityGeoId": {
+              "type": "string"
+            },
+            "cityName": {
+              "type": "string"
+            },
+            "countryCode": {
+              "type": "string"
+            },
+            "countryName": {
+              "type": "string"
+            },
+            "date": {
+              "type": "string"
+            },
+            "datetime": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "regionName": {
+              "type": "string"
+            },
+            "rkstCode": {
+              "type": "string"
+            },
+            "siteGeoId": {
+              "type": "string"
+            },
+            "siteName": {
+              "type": "string"
+            },
+            "time": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "unLocCode": {
+              "type": "string"
+            }
+          }
+        },
+        "latestAllowedLoadDate": {
+          "type": "string"
+        },
+        "latestAllowedLoadTime": {
+          "type": "string"
+        },
+        "loadDayWeekend": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "FRIDAY",
+              "MONDAY",
+              "SATURDAY",
+              "SUNDAY",
+              "THURSDAY",
+              "TUESDAY",
+              "WEDNESDAY"
+            ]
+          }
+        },
+        "namedAccountRoute": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "productRouteType": {
+          "type": "string"
+        },
+        "productSequence": {
+          "type": "string"
+        },
+        "routeCode": {
+          "type": "string"
+        },
+        "scheduleDetails": {
+          "type": "array",
+          "items": {
+            "title": "ScheduleDetails",
+            "type": "object",
+            "properties": {
+              "carrierCode": {
+                "type": "string"
+              },
+              "deadlines": {
+                "type": "array",
+                "items": {
+                  "title": "Deadline",
+                  "type": "object",
+                  "properties": {
+                    "deadline": {
+                      "type": "string"
+                    },
+                    "deadlineKey": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "fromLocation": {
+                "title": "Location0",
+                "type": "object",
+                "properties": {
+                  "cityGeoId": {
+                    "type": "string"
+                  },
+                  "cityName": {
+                    "type": "string"
+                  },
+                  "countryCode": {
+                    "type": "string"
+                  },
+                  "countryName": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string"
+                  },
+                  "datetime": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "regionName": {
+                    "type": "string"
+                  },
+                  "rkstCode": {
+                    "type": "string"
+                  },
+                  "siteGeoId": {
+                    "type": "string"
+                  },
+                  "siteName": {
+                    "type": "string"
+                  },
+                  "time": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "unLocCode": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routingType": {
+                "type": "string"
+              },
+              "serviceCode": {
+                "type": "string"
+              },
+              "serviceName": {
+                "type": "string"
+              },
+              "toLocation": {
+                "title": "Location0",
+                "type": "object",
+                "properties": {
+                  "cityGeoId": {
+                    "type": "string"
+                  },
+                  "cityName": {
+                    "type": "string"
+                  },
+                  "countryCode": {
+                    "type": "string"
+                  },
+                  "countryName": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string"
+                  },
+                  "datetime": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "regionName": {
+                    "type": "string"
+                  },
+                  "rkstCode": {
+                    "type": "string"
+                  },
+                  "siteGeoId": {
+                    "type": "string"
+                  },
+                  "siteName": {
+                    "type": "string"
+                  },
+                  "time": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "unLocCode": {
+                    "type": "string"
+                  }
+                }
+              },
+              "transport": {
+                "title": "Transport",
+                "type": "object",
+                "properties": {
+                  "tradeLane": {
+                    "type": "string"
+                  },
+                  "transportMode": {
+                    "type": "string"
+                  },
+                  "vessel": {
+                    "title": "Vessel",
+                    "type": "object",
+                    "properties": {
+                      "buildYear": {
+                        "type": "string"
+                      },
+                      "callSign": {
+                        "type": "string"
+                      },
+                      "capacityTEU": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "code": {
+                        "type": "string"
+                      },
+                      "flagCode": {
+                        "type": "string"
+                      },
+                      "flagName": {
+                        "type": "string"
+                      },
+                      "imoNumber": {
+                        "type": "string"
+                      },
+                      "longName": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "vesselClass": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "voyageNumber": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "toLocation": {
+          "title": "Location0",
+          "type": "object",
+          "properties": {
+            "cityGeoId": {
+              "type": "string"
+            },
+            "cityName": {
+              "type": "string"
+            },
+            "countryCode": {
+              "type": "string"
+            },
+            "countryName": {
+              "type": "string"
+            },
+            "date": {
+              "type": "string"
+            },
+            "datetime": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "regionName": {
+              "type": "string"
+            },
+            "rkstCode": {
+              "type": "string"
+            },
+            "siteGeoId": {
+              "type": "string"
+            },
+            "siteName": {
+              "type": "string"
+            },
+            "time": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "unLocCode": {
+              "type": "string"
+            }
+          }
+        },
+        "transitTime": {
+          "type": "string"
+        },
+        "vessel": {
+          "title": "Vessel",
+          "type": "object",
+          "properties": {
+            "buildYear": {
+              "type": "string"
+            },
+            "callSign": {
+              "type": "string"
+            },
+            "capacityTEU": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "code": {
+              "type": "string"
+            },
+            "flagCode": {
+              "type": "string"
+            },
+            "flagName": {
+              "type": "string"
+            },
+            "imoNumber": {
+              "type": "string"
+            },
+            "longName": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "vesselClass": {
+              "type": "string"
+            }
+          }
+        },
+        "voyageNumber": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "default": {
+    "importDnDConditions": [
+      {
+        "brandScac": "string",
+        "chargePerDiemAfterFreetime": [
+          {
+            "chargePerDiem": 0,
+            "currencyOfCharge": "string",
+            "endDayOfCharge": 0,
+            "startDayOfCharge": 0
+          }
+        ],
+        "chargeType": "Demurrage",
+        "commodity": "string",
+        "containerSizeType": "string",
+        "country": "string",
+        "direction": "Import",
+        "displayName": "string",
+        "freetimeGrantInDays": 0,
+        "freetimeStartEvent": "string",
+        "rkstCode": "string"
+      }
+    ],
+    "offerId": "string",
+    "penaltyFees": [
+      {
+        "charges": [
+          {
+            "chargeFee": 0,
+            "displayName": "string",
+            "penaltyType": "AmendmentFee"
+          }
+        ],
+        "containerSizeType": "string",
+        "currency": "string"
+      }
+    ],
+    "price": {
+      "prices_per_container": [
+        {
+          "bas": {
+            "amount": 0,
+            "amountusd": 0,
+            "chargecode": "string",
+            "chargedescription": "string",
+            "currency": "string",
+            "qty": 0,
+            "rate": 0,
+            "ratebasis": "string",
+            "ratetype": "string",
+            "ratetypecode": "string",
+            "rateusd": 0
+          },
+          "containersizetype": "string",
+          "priceValidFromDate": "string",
+          "priceid": "string",
+          "surcharges_per_container": [
+            {
+              "amount": 0,
+              "amountusd": 0,
+              "chargecode": "string",
+              "chargedescription": "string",
+              "currency": "string",
+              "qty": 0,
+              "rate": 0,
+              "ratebasis": "string",
+              "ratetype": "string",
+              "ratetypecode": "string",
+              "rateusd": 0
+            }
+          ]
+        }
+      ],
+      "surcharges_per_doc": [
+        {
+          "amount": 0,
+          "amountusd": 0,
+          "chargecode": "string",
+          "chargedescription": "string",
+          "currency": "string",
+          "qty": 0,
+          "rate": 0,
+          "ratebasis": "string",
+          "ratetype": "string",
+          "ratetypecode": "string",
+          "rateusd": 0
+        }
+      ],
+      "total": 0,
+      "totalbas": 0
+    },
+    "rollableOptionEnabled": true,
+    "routeScheduleFull": {
+      "brandScac": "string",
+      "direction": "string",
+      "earliestAllowedLoadDate": "string",
+      "earliestAllowedLoadTime": "string",
+      "firstLoadPort": {
+        "cityGeoId": "string",
+        "cityName": "string",
+        "countryCode": "string",
+        "countryName": "string",
+        "date": "string",
+        "datetime": "1970-01-01T00:00:00.000Z",
+        "regionName": "string",
+        "rkstCode": "string",
+        "siteGeoId": "string",
+        "siteName": "string",
+        "time": "string",
+        "type": "string",
+        "unLocCode": "string"
+      },
+      "fmcRegulationApplies": true,
+      "fromLocation": {
+        "cityGeoId": "string",
+        "cityName": "string",
+        "countryCode": "string",
+        "countryName": "string",
+        "date": "string",
+        "datetime": "1970-01-01T00:00:00.000Z",
+        "regionName": "string",
+        "rkstCode": "string",
+        "siteGeoId": "string",
+        "siteName": "string",
+        "time": "string",
+        "type": "string",
+        "unLocCode": "string"
+      },
+      "hasInlandExport": true,
+      "hasInlandImport": true,
+      "lastDischargePort": {
+        "cityGeoId": "string",
+        "cityName": "string",
+        "countryCode": "string",
+        "countryName": "string",
+        "date": "string",
+        "datetime": "1970-01-01T00:00:00.000Z",
+        "regionName": "string",
+        "rkstCode": "string",
+        "siteGeoId": "string",
+        "siteName": "string",
+        "time": "string",
+        "type": "string",
+        "unLocCode": "string"
+      },
+      "latestAllowedLoadDate": "string",
+      "latestAllowedLoadTime": "string",
+      "loadDayWeekend": [
+        "FRIDAY"
+      ],
+      "namedAccountRoute": "string",
+      "productId": "string",
+      "productRouteType": "string",
+      "productSequence": "string",
+      "routeCode": "string",
+      "scheduleDetails": [
+        {
+          "carrierCode": "string",
+          "deadlines": [
+            {
+              "deadline": "string",
+              "deadlineKey": "string",
+              "name": "string",
+              "type": "string"
+            }
+          ],
+          "fromLocation": {
+            "cityGeoId": "string",
+            "cityName": "string",
+            "countryCode": "string",
+            "countryName": "string",
+            "date": "string",
+            "datetime": "1970-01-01T00:00:00.000Z",
+            "regionName": "string",
+            "rkstCode": "string",
+            "siteGeoId": "string",
+            "siteName": "string",
+            "time": "string",
+            "type": "string",
+            "unLocCode": "string"
+          },
+          "routingType": "string",
+          "serviceCode": "string",
+          "serviceName": "string",
+          "toLocation": {
+            "cityGeoId": "string",
+            "cityName": "string",
+            "countryCode": "string",
+            "countryName": "string",
+            "date": "string",
+            "datetime": "1970-01-01T00:00:00.000Z",
+            "regionName": "string",
+            "rkstCode": "string",
+            "siteGeoId": "string",
+            "siteName": "string",
+            "time": "string",
+            "type": "string",
+            "unLocCode": "string"
+          },
+          "transport": {
+            "tradeLane": "string",
+            "transportMode": "string",
+            "vessel": {
+              "buildYear": "string",
+              "callSign": "string",
+              "capacityTEU": 0,
+              "code": "string",
+              "flagCode": "string",
+              "flagName": "string",
+              "imoNumber": "string",
+              "longName": "string",
+              "name": "string",
+              "vesselClass": "string"
+            },
+            "voyageNumber": "string"
+          }
+        }
+      ],
+      "toLocation": {
+        "cityGeoId": "string",
+        "cityName": "string",
+        "countryCode": "string",
+        "countryName": "string",
+        "date": "string",
+        "datetime": "1970-01-01T00:00:00.000Z",
+        "regionName": "string",
+        "rkstCode": "string",
+        "siteGeoId": "string",
+        "siteName": "string",
+        "time": "string",
+        "type": "string",
+        "unLocCode": "string"
+      },
+      "transitTime": "string",
+      "vessel": {
+        "buildYear": "string",
+        "callSign": "string",
+        "capacityTEU": 0,
+        "code": "string",
+        "flagCode": "string",
+        "flagName": "string",
+        "imoNumber": "string",
+        "longName": "string",
+        "name": "string",
+        "vesselClass": "string"
+      },
+      "voyageNumber": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

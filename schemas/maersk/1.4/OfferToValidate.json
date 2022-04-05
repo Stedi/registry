@@ -1,0 +1,393 @@
+{
+  "title": "OfferToValidate",
+  "required": [
+    "brandScac",
+    "destinationServiceMode",
+    "offerReceivedTimestamp",
+    "originServiceMode",
+    "rollableSelected"
+  ],
+  "type": "object",
+  "properties": {
+    "bookingClass": {
+      "type": "string",
+      "enum": [
+        "priority",
+        "standard"
+      ]
+    },
+    "brandScac": {
+      "type": "string"
+    },
+    "containersAndCargo": {
+      "type": "array",
+      "items": {
+        "title": "ContainerAndCargo",
+        "required": [
+          "cargoType"
+        ],
+        "type": "object",
+        "properties": {
+          "cargoType": {
+            "pattern": "DRY|REEF",
+            "type": "string"
+          },
+          "containerSizeType": {
+            "type": "string"
+          },
+          "dangerousCargo": {
+            "type": "boolean"
+          },
+          "isoContainerCode": {
+            "type": "string"
+          },
+          "kgsPerContainer": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lineitemBasCharge": {
+            "type": "string"
+          },
+          "maerskCommodityCode": {
+            "type": "string"
+          },
+          "mtonPerContainer": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "destinationServiceMode": {
+      "pattern": "CY|SD",
+      "type": "string"
+    },
+    "gcssProductId": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "hasPennyPrice": {
+      "type": "boolean"
+    },
+    "namedAccount": {
+      "type": "string"
+    },
+    "nonSpotOffer": {
+      "type": "boolean"
+    },
+    "offerReceivedTimestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "originServiceMode": {
+      "pattern": "CY|SD",
+      "type": "string"
+    },
+    "priceId": {
+      "title": "PriceId",
+      "type": "object",
+      "properties": {
+        "originalPricereference": {
+          "type": "string"
+        },
+        "priceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "quoteIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "priceIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "priceOwnerCode": {
+      "type": "string"
+    },
+    "productCode": {
+      "type": "string"
+    },
+    "productVersion": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "rollableSelected": {
+      "type": "boolean"
+    },
+    "routeSchedule": {
+      "title": "RouteScheduleInRequest",
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string"
+        },
+        "fromLocation": {
+          "title": "LocationInRequest",
+          "type": "object",
+          "properties": {
+            "cityGeoId": {
+              "type": "string"
+            },
+            "date": {
+              "type": "string"
+            },
+            "rkstCode": {
+              "type": "string"
+            },
+            "siteGeoId": {
+              "type": "string"
+            },
+            "time": {
+              "type": "string"
+            }
+          }
+        },
+        "namedAccountRoute": {
+          "type": "string"
+        },
+        "productRouteType": {
+          "type": "string"
+        },
+        "routeCode": {
+          "type": "string"
+        },
+        "scheduleDetails": {
+          "type": "array",
+          "items": {
+            "title": "ScheduleDetailsInRequest",
+            "type": "object",
+            "properties": {
+              "fromLocation": {
+                "title": "LocationInRequest",
+                "type": "object",
+                "properties": {
+                  "cityGeoId": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string"
+                  },
+                  "rkstCode": {
+                    "type": "string"
+                  },
+                  "siteGeoId": {
+                    "type": "string"
+                  },
+                  "time": {
+                    "type": "string"
+                  }
+                }
+              },
+              "serviceCode": {
+                "type": "string"
+              },
+              "toLocation": {
+                "title": "LocationInRequest",
+                "type": "object",
+                "properties": {
+                  "cityGeoId": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string"
+                  },
+                  "rkstCode": {
+                    "type": "string"
+                  },
+                  "siteGeoId": {
+                    "type": "string"
+                  },
+                  "time": {
+                    "type": "string"
+                  }
+                }
+              },
+              "transport": {
+                "title": "TransportInRequest",
+                "type": "object",
+                "properties": {
+                  "transportMode": {
+                    "type": "string"
+                  },
+                  "vessel": {
+                    "title": "VesselInRequest",
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "vesselCode": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "voyageNumber": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "toLocation": {
+          "title": "LocationInRequest",
+          "type": "object",
+          "properties": {
+            "cityGeoId": {
+              "type": "string"
+            },
+            "date": {
+              "type": "string"
+            },
+            "rkstCode": {
+              "type": "string"
+            },
+            "siteGeoId": {
+              "type": "string"
+            },
+            "time": {
+              "type": "string"
+            }
+          }
+        },
+        "transitTime": {
+          "type": "string"
+        },
+        "vessel": {
+          "title": "VesselInRequest",
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "vesselCode": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "shipperOwnedContainers": {
+      "type": "boolean"
+    }
+  },
+  "default": {
+    "bookingClass": "priority",
+    "brandScac": "string",
+    "containersAndCargo": [
+      {
+        "cargoType": "REEF",
+        "containerSizeType": "string",
+        "dangerousCargo": true,
+        "isoContainerCode": "string",
+        "kgsPerContainer": 0,
+        "lineitemBasCharge": "string",
+        "maerskCommodityCode": "string",
+        "mtonPerContainer": 0,
+        "quantity": 0
+      }
+    ],
+    "destinationServiceMode": "SD",
+    "gcssProductId": 0,
+    "hasPennyPrice": true,
+    "namedAccount": "string",
+    "nonSpotOffer": true,
+    "offerReceivedTimestamp": "1970-01-01T00:00:00.000Z",
+    "originServiceMode": "CY",
+    "priceId": {
+      "originalPricereference": "string",
+      "priceIds": [
+        "string"
+      ],
+      "quoteIds": [
+        "string"
+      ],
+      "timestamp": "1970-01-01T00:00:00.000Z"
+    },
+    "priceIds": [
+      "string"
+    ],
+    "priceOwnerCode": "string",
+    "productCode": "string",
+    "productVersion": 0,
+    "rollableSelected": true,
+    "routeSchedule": {
+      "direction": "string",
+      "fromLocation": {
+        "cityGeoId": "string",
+        "date": "string",
+        "rkstCode": "string",
+        "siteGeoId": "string",
+        "time": "string"
+      },
+      "namedAccountRoute": "string",
+      "productRouteType": "string",
+      "routeCode": "string",
+      "scheduleDetails": [
+        {
+          "fromLocation": {
+            "cityGeoId": "string",
+            "date": "string",
+            "rkstCode": "string",
+            "siteGeoId": "string",
+            "time": "string"
+          },
+          "serviceCode": "string",
+          "toLocation": {
+            "cityGeoId": "string",
+            "date": "string",
+            "rkstCode": "string",
+            "siteGeoId": "string",
+            "time": "string"
+          },
+          "transport": {
+            "transportMode": "string",
+            "vessel": {
+              "code": "string",
+              "name": "string",
+              "vesselCode": "string"
+            },
+            "voyageNumber": "string"
+          }
+        }
+      ],
+      "toLocation": {
+        "cityGeoId": "string",
+        "date": "string",
+        "rkstCode": "string",
+        "siteGeoId": "string",
+        "time": "string"
+      },
+      "transitTime": "string",
+      "vessel": {
+        "code": "string",
+        "name": "string",
+        "vesselCode": "string"
+      }
+    },
+    "shipperOwnedContainers": true
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
