@@ -59,6 +59,10 @@ function sanitizeSchema(schema: unknown) {
         delete value.nullable;
       }
 
+      if (value.pattern) {
+        delete value.pattern;
+      }
+
       return value;
     }),
   );

@@ -97,7 +97,8 @@ export function mock(schemalike: SchemaLike): any {
       randexp.max = maxLength;
 
       let val = randexp.gen();
-      val = _.padEnd(val, minLength, val);
+
+      val = _.padEnd(val, minLength, randexp.gen());
       if (val.length > maxLength) {
         val = val.substring(0, maxLength);
       }
