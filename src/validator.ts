@@ -162,7 +162,7 @@ async function validateProviders() {
 
   const providers: Provider[] = JSON.parse(readFileSync(providersPath, "utf-8"));
 
-  const providersNamesInLowerCase = providers.map((provider) => provider.name.toLowerCase());
+  const providersNamesInLowerCase = providers.map((provider) => provider.directory ?? provider.name.toLowerCase());
   const schemasProvidersNames = schemas.map((provider) => provider.split("/")[1]);
   const providersWithSchemasMissing = providersNamesInLowerCase.filter((p) => !schemasProvidersNames.includes(p));
   const providersWithMetadataMissing = schemasProvidersNames.filter((p) => !providersNamesInLowerCase.includes(p));
