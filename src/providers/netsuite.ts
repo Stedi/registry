@@ -1,4 +1,4 @@
-import { APISchema, EntitySchema } from "../provider";
+import { APISchema, BaseProvider, EntitySchema } from "../provider";
 import NetsuiteAPI from "netsuite-rest";
 
 const nsApi = new NetsuiteAPI({
@@ -10,7 +10,13 @@ const nsApi = new NetsuiteAPI({
   base_url: process.env.NETSUITE_BASE_URL,
 });
 
-export class NetsuiteProvider {
+export class NetsuiteProvider implements BaseProvider {
+  name: string = "Netsuite";
+  description: string =
+    "NetSuite provides a suite of cloud-based financials / Enterprise Resource Planning (ERP), HR and omnichannel commerce software";
+  logoUrl: string = "https://logo.clearbit.com/netsuite.com";
+  customPath?: string | undefined;
+
   isEnabled(): boolean {
     return !!(
       process.env.NETSUITE_CONSUMER_KEY &&

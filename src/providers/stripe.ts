@@ -10,6 +10,10 @@ const maxDepth = 3;
 export class StripeProvider extends OpenAPIProvider {
   constructor() {
     super({
+      name: "Stripe",
+      logoUrl: "https://logo.clearbit.com/stripe.com",
+      description:
+        "Online payment processing for internet businesses. Stripe is a suite of payment APIs that powers commerce for online businesses of all sizes.",
       versions: ["v112"],
       baseUrl: "unused",
       entities: [
