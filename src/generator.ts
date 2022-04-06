@@ -81,6 +81,7 @@ export async function generateAll(rootPath: string, providerName: keyof typeof p
     generateAll("./schemas", "netsuite"),
     generateAll("./schemas", "flexport"),
     generateAll("./schemas", "klaviyo"),
+    generateAll("./schemas", "baton"),
     generateAll("./schemas", "shopify", "./shopify/graphql/2022-01"),
   ]);
 })();

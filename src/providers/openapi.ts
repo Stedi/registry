@@ -77,10 +77,12 @@ export class OpenAPIProvider {
   async unbundle(bundle: OpenAPI3Schema): Promise<EntitySchema[]> {
     const dereferenced = await openAPIParser.dereference(bundle.value as any);
 
-    const hasComponents = "components" in dereferenced;
-    if (!hasComponents) throw new Error("Expected components");
+    const components =
+      (dereferenced as any).definitions ??
+      (dereferenced as any).components?.models ??
+      (dereferenced as any).components?.schemas;
 
-    const components = (dereferenced.components as any).models ?? dereferenced.components?.schemas;
+    if (!components) throw new Error("Expected components or models");
 
     return Object.entries(components ?? {})
       .filter(([key]) => !bundle.entities || bundle.entities.includes(key))
