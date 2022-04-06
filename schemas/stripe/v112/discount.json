@@ -4,20 +4,14 @@
     "checkout_session": {
       "description": "The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "coupon": {
       "description": "A coupon contains information about a percent-off or amount-off discount you\nmight want to apply to a customer. Coupons may be applied to [invoices](https://stripe.com/docs/api#invoices) or\n[orders](https://stripe.com/docs/api#create_order_legacy-coupon). Coupons do not work with conventional one-off [charges](https://stripe.com/docs/api#create_charge).",
       "properties": {
         "amount_off": {
           "description": "Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for this customer.",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "applies_to": {
           "description": "",
@@ -31,9 +25,7 @@
               "type": "array"
             }
           },
-          "required": [
-            "products"
-          ],
+          "required": ["products"],
           "title": "CouponAppliesTo",
           "type": "object"
         },
@@ -44,26 +36,16 @@
         },
         "currency": {
           "description": "If `amount_off` has been set, the three-letter [ISO code for the currency](https://stripe.com/docs/currencies) of the amount to take off.",
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "duration": {
           "description": "One of `forever`, `once`, and `repeating`. Describes how long a customer who applies this coupon will get the discount.",
-          "enum": [
-            "forever",
-            "once",
-            "repeating"
-          ],
+          "enum": ["forever", "once", "repeating"],
           "type": "string"
         },
         "duration_in_months": {
           "description": "If `duration` is `repeating`, the number of months the coupon applies. Null if coupon `duration` is `forever` or `once`.",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "id": {
           "description": "Unique identifier for the object.",
@@ -76,41 +58,27 @@
         },
         "max_redemptions": {
           "description": "Maximum number of times this coupon can be redeemed, in total, across all customers, before it is no longer valid.",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "metadata": {},
         "name": {
           "description": "Name of the coupon displayed to customers on for instance invoices or receipts.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "object": {
           "description": "String representing the object's type. Objects of the same type share the same value.",
-          "enum": [
-            "coupon"
-          ],
+          "enum": ["coupon"],
           "type": "string"
         },
         "percent_off": {
           "description": "Percent that will be taken off the subtotal of any invoices for this customer for the duration of the coupon. For example, a coupon with percent_off of 50 will make a %s100 invoice %s50 instead.",
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "redeem_by": {
           "description": "Date after which the coupon can no longer be redeemed.",
           "format": "unix-time",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "times_redeemed": {
           "description": "Number of times this coupon has been applied to a customer.",
@@ -121,15 +89,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "created",
-        "duration",
-        "id",
-        "livemode",
-        "object",
-        "times_redeemed",
-        "valid"
-      ],
+      "required": ["created", "duration", "id", "livemode", "object", "times_redeemed", "valid"],
       "title": "Coupon",
       "type": "object"
     },
@@ -141,10 +101,7 @@
     "end": {
       "description": "If the coupon has a duration of `repeating`, the date that this discount will end. If the coupon has a duration of `once` or `forever`, this attribute will be null.",
       "format": "unix-time",
-      "type": [
-        "integer",
-        "null"
-      ]
+      "type": ["integer", "null"]
     },
     "id": {
       "description": "The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.",
@@ -154,24 +111,16 @@
     "invoice": {
       "description": "The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "invoice_item": {
       "description": "The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's coupon was applied to, if it was applied directly to a particular invoice item or invoice line item.",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "object": {
       "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "discount"
-      ],
+      "enum": ["discount"],
       "type": "string"
     },
     "promotion_code": {
@@ -187,18 +136,10 @@
     "subscription": {
       "description": "The subscription that this coupon is applied to, if it is applied to a particular subscription.",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     }
   },
-  "required": [
-    "coupon",
-    "id",
-    "object",
-    "start"
-  ],
+  "required": ["coupon", "id", "object", "start"],
   "title": "Discount",
   "type": "object",
   "default": {
@@ -206,9 +147,7 @@
     "coupon": {
       "amount_off": 0,
       "applies_to": {
-        "products": [
-          "string"
-        ]
+        "products": ["string"]
       },
       "created": 1647352387,
       "currency": "string",

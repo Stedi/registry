@@ -47,18 +47,12 @@ async function generateForVersion(provider: Provider, version: string) {
         schemaName: schema.name,
         target,
         providerName: provider.name.toLowerCase(),
-        docsLink:
-          typeof provider.docsLink === "function"
-            ? provider.docsLink(schema.name)
-            : provider.docsLink,
-      })
+        docsLink: typeof provider.docsLink === "function" ? provider.docsLink(schema.name) : provider.docsLink,
+      }),
     );
   }
 
-  const readmeFileContents = markdownTable([
-    ["Source Schema"],
-    ...markdownTableRows,
-  ]);
+  const readmeFileContents = markdownTable([["Source Schema"], ...markdownTableRows]);
 
   fs.writeFileSync(path.join(baseDir, `README.md`), readmeFileContents);
 }
@@ -74,11 +68,8 @@ async function generateAll(provider: Provider) {
 function generateEntitySchema(schema: EntitySchema, baseDir: string) {
   const target = path.join(baseDir, `${schema.name}.json`);
 
-  (schema.schema as any)["default"] = mock(
-    schema.schema as OpenAPIV3.SchemaObject
-  );
-  (schema.schema as any)["$schema"] =
-    "https://json-schema.org/draft/2020-12/schema";
+  (schema.schema as any)["default"] = mock(schema.schema as OpenAPIV3.SchemaObject);
+  (schema.schema as any)["$schema"] = "https://json-schema.org/draft/2020-12/schema";
 
   fs.writeFileSync(target, JSON.stringify(schema.schema, null, 2));
 
@@ -103,9 +94,7 @@ function generateProvidersJson() {
 
 (async () => {
   await Promise.all(
-    Object.keys(providers).map((providerName) =>
-      generateAll(providers[providerName as keyof typeof providers])
-    )
+    Object.keys(providers).map((providerName) => generateAll(providers[providerName as keyof typeof providers])),
   );
 
   generateProvidersJson();

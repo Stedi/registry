@@ -17,11 +17,7 @@ function validateSchema(jsonSchema: string): SchemaObject {
 
     if (!isSchemaVersionSupported(schemaObject)) {
       throw new Error(
-        `the "${
-          schemaObject.$schema
-        }" is not allowed. Use one of [${supportedSchemaVersions.join(
-          ","
-        )}] instead`
+        `the "${schemaObject.$schema}" is not allowed. Use one of [${supportedSchemaVersions.join(",")}] instead`,
       );
     }
 
@@ -142,10 +138,7 @@ interface ProviderEntry {
  */
 async function validateProviders() {
   const providersPath = "providers.json";
-
-  const providers: ProviderEntry[] = JSON.parse(
-    readFileSync(providersPath, "utf-8")
-  );
+  const providers: ProviderEntry[] = JSON.parse(readFileSync(providersPath, "utf-8"));
 
   providers.forEach(async (provider) => {
     try {

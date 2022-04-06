@@ -1,0 +1,120 @@
+{
+  "title": "OfferToValidateWithOfferID",
+  "required": ["brandScac", "offerReceivedTimestamp"],
+  "type": "object",
+  "properties": {
+    "bookingNumber": {
+      "type": "string"
+    },
+    "brandScac": {
+      "type": "string"
+    },
+    "containersAndCargo": {
+      "type": "array",
+      "items": {
+        "title": "ContainerAndCargo",
+        "required": ["cargoType"],
+        "type": "object",
+        "properties": {
+          "cargoType": {
+            "pattern": "DRY|REEF",
+            "type": "string"
+          },
+          "containerSizeType": {
+            "type": "string"
+          },
+          "dangerousCargo": {
+            "type": "boolean"
+          },
+          "isoContainerCode": {
+            "type": "string"
+          },
+          "kgsPerContainer": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lineitemBasCharge": {
+            "type": "string"
+          },
+          "maerskCommodityCode": {
+            "type": "string"
+          },
+          "mtonPerContainer": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "departureDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "destinationGeoId": {
+      "type": "string"
+    },
+    "destinationRkstCode": {
+      "type": "string"
+    },
+    "destinationUnLocCode": {
+      "type": "string"
+    },
+    "nonSpotOffer": {
+      "type": "boolean"
+    },
+    "offerReceivedTimestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "originGeoId": {
+      "type": "string"
+    },
+    "originRkstCode": {
+      "type": "string"
+    },
+    "originUnLocCode": {
+      "type": "string"
+    },
+    "priceIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "priceOwnerCode": {
+      "type": "string"
+    }
+  },
+  "default": {
+    "bookingNumber": "string",
+    "brandScac": "string",
+    "containersAndCargo": [
+      {
+        "cargoType": "REEF",
+        "containerSizeType": "string",
+        "dangerousCargo": true,
+        "isoContainerCode": "string",
+        "kgsPerContainer": 0,
+        "lineitemBasCharge": "string",
+        "maerskCommodityCode": "string",
+        "mtonPerContainer": 0,
+        "quantity": 0
+      }
+    ],
+    "departureDate": "1970-01-01",
+    "destinationGeoId": "string",
+    "destinationRkstCode": "string",
+    "destinationUnLocCode": "string",
+    "nonSpotOffer": true,
+    "offerReceivedTimestamp": "1970-01-01T00:00:00.000Z",
+    "originGeoId": "string",
+    "originRkstCode": "string",
+    "originUnLocCode": "string",
+    "priceIds": ["string"],
+    "priceOwnerCode": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

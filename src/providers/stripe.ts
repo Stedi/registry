@@ -55,19 +55,13 @@ export class StripeProvider extends OpenAPIProvider {
         "topup",
         "transfer",
       ],
-      sanitizeSchema: (value) =>
-        traverse(deepcopy(value) as OpenAPIV3.SchemaObject, new Set<String>()),
       docsLink: (schemaName) => `https://stripe.com/docs/api/${schemaName}s`, // naive plural form
+      sanitizeSchema: (value) => traverse(deepcopy(value) as OpenAPIV3.SchemaObject, new Set<String>()),
     });
   }
 
   override async getSchema(version: string): Promise<OpenAPI3Schema> {
-    const definition = await github.getRaw(
-      "stripe",
-      "openapi",
-      version,
-      "openapi/spec3.json"
-    );
+    const definition = await github.getRaw("stripe", "openapi", version, "openapi/spec3.json");
 
     return {
       type: "openapi-v3",
@@ -113,9 +107,7 @@ function traverse(schema: OpenAPIV3.SchemaObject, parents: Set<String>): any {
   const type = _.isArray(schema.type) ? _.first(schema.type) : schema.type;
 
   if (type === "object") {
-    const isTraveralDepthExceeded =
-      (schema.title != undefined && parents.has(schema.title)) ||
-      parents.size > maxDepth;
+    const isTraveralDepthExceeded = (schema.title != undefined && parents.has(schema.title)) || parents.size > maxDepth;
 
     if (isTraveralDepthExceeded) {
       return { type };
