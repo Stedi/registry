@@ -14,10 +14,7 @@
             "custom_message": {
               "description": "The custom message that is displayed to the customer after the purchase is complete.",
               "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             }
           },
           "title": "PaymentLinksResourceCompletionBehaviorConfirmationPage",
@@ -32,24 +29,17 @@
               "type": "string"
             }
           },
-          "required": [
-            "url"
-          ],
+          "required": ["url"],
           "title": "PaymentLinksResourceCompletionBehaviorRedirect",
           "type": "object"
         },
         "type": {
           "description": "The specified behavior after the purchase is complete.",
-          "enum": [
-            "hosted_confirmation",
-            "redirect"
-          ],
+          "enum": ["hosted_confirmation", "redirect"],
           "type": "string"
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "title": "PaymentLinksResourceAfterCompletion",
       "type": "object"
     },
@@ -59,17 +49,11 @@
     },
     "application_fee_amount": {
       "description": "The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account.",
-      "type": [
-        "integer",
-        "null"
-      ]
+      "type": ["integer", "null"]
     },
     "application_fee_percent": {
       "description": "This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account.",
-      "type": [
-        "number",
-        "null"
-      ]
+      "type": ["number", "null"]
     },
     "automatic_tax": {
       "description": "",
@@ -79,18 +63,13 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "enabled"
-      ],
+      "required": ["enabled"],
       "title": "PaymentLinksResourceAutomaticTax",
       "type": "object"
     },
     "billing_address_collection": {
       "description": "Configuration for collecting the customer's billing address.",
-      "enum": [
-        "auto",
-        "required"
-      ],
+      "enum": ["auto", "required"],
       "type": "string"
     },
     "id": {
@@ -136,10 +115,7 @@
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "amount",
-                    "discount"
-                  ],
+                  "required": ["amount", "discount"],
                   "title": "LineItemsDiscountAmount",
                   "type": "object"
                 },
@@ -152,9 +128,7 @@
               },
               "object": {
                 "description": "String representing the object's type. Objects of the same type share the same value.",
-                "enum": [
-                  "item"
-                ],
+                "enum": ["item"],
                 "type": "string"
               },
               "price": {
@@ -166,10 +140,7 @@
                   },
                   "billing_scheme": {
                     "description": "Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.",
-                    "enum": [
-                      "per_unit",
-                      "tiered"
-                    ],
+                    "enum": ["per_unit", "tiered"],
                     "type": "string"
                   },
                   "created": {
@@ -193,10 +164,7 @@
                   "lookup_key": {
                     "description": "A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.",
                     "maxLength": 5000,
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "type": ["string", "null"]
                   },
                   "metadata": {
                     "type": "object"
@@ -204,16 +172,11 @@
                   "nickname": {
                     "description": "A brief description of the price, hidden from customers.",
                     "maxLength": 5000,
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "type": ["string", "null"]
                   },
                   "object": {
                     "description": "String representing the object's type. Objects of the same type share the same value.",
-                    "enum": [
-                      "price"
-                    ],
+                    "enum": ["price"],
                     "type": "string"
                   },
                   "product": {
@@ -227,16 +190,8 @@
                   },
                   "tax_behavior": {
                     "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.",
-                    "enum": [
-                      "exclusive",
-                      "inclusive",
-                      "unspecified",
-                      null
-                    ],
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "enum": ["exclusive", "inclusive", "unspecified", null],
+                    "type": ["string", "null"]
                   },
                   "tiers": {
                     "description": "Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.",
@@ -247,15 +202,8 @@
                   },
                   "tiers_mode": {
                     "description": "Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.",
-                    "enum": [
-                      "graduated",
-                      "volume",
-                      null
-                    ],
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "enum": ["graduated", "volume", null],
+                    "type": ["string", "null"]
                   },
                   "transform_quantity": {
                     "description": "Apply a transformation to the reported usage or set quantity before computing the amount billed. Cannot be combined with `tiers`.",
@@ -263,26 +211,17 @@
                   },
                   "type": {
                     "description": "One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.",
-                    "enum": [
-                      "one_time",
-                      "recurring"
-                    ],
+                    "enum": ["one_time", "recurring"],
                     "type": "string"
                   },
                   "unit_amount": {
                     "description": "The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.",
-                    "type": [
-                      "integer",
-                      "null"
-                    ]
+                    "type": ["integer", "null"]
                   },
                   "unit_amount_decimal": {
                     "description": "The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.",
                     "format": "decimal",
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "type": ["string", "null"]
                   }
                 },
                 "required": [
@@ -302,10 +241,7 @@
               },
               "quantity": {
                 "description": "The quantity of products being purchased.",
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "type": ["integer", "null"]
               },
               "taxes": {
                 "description": "The taxes applied to the line item.",
@@ -320,24 +256,14 @@
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "amount",
-                    "rate"
-                  ],
+                  "required": ["amount", "rate"],
                   "title": "LineItemsTaxAmount",
                   "type": "object"
                 },
                 "type": "array"
               }
             },
-            "required": [
-              "amount_subtotal",
-              "amount_total",
-              "currency",
-              "description",
-              "id",
-              "object"
-            ],
+            "required": ["amount_subtotal", "amount_total", "currency", "description", "id", "object"],
             "title": "LineItem",
             "type": "object"
           },
@@ -349,9 +275,7 @@
         },
         "object": {
           "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
-          "enum": [
-            "list"
-          ],
+          "enum": ["list"],
           "type": "string"
         },
         "url": {
@@ -360,12 +284,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "data",
-        "has_more",
-        "object",
-        "url"
-      ],
+      "required": ["data", "has_more", "object", "url"],
       "title": "PaymentLinksResourceListLineItems",
       "type": "object"
     },
@@ -376,9 +295,7 @@
     "metadata": {},
     "object": {
       "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "payment_link"
-      ],
+      "enum": ["payment_link"],
       "type": "string"
     },
     "on_behalf_of": {
@@ -389,15 +306,10 @@
     "payment_method_types": {
       "description": "The list of payment method types that customers can use. When `null`, Stripe will dynamically show relevant payment methods you've enabled in your [payment method settings](https://dashboard.stripe.com/settings/payment_methods).",
       "items": {
-        "enum": [
-          "card"
-        ],
+        "enum": ["card"],
         "type": "string"
       },
-      "type": [
-        "array",
-        "null"
-      ]
+      "type": ["array", "null"]
     },
     "phone_number_collection": {
       "description": "",
@@ -407,9 +319,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "enabled"
-      ],
+      "required": ["enabled"],
       "title": "PaymentLinksResourcePhoneNumberCollection",
       "type": "object"
     },
@@ -663,9 +573,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "allowed_countries"
-      ],
+      "required": ["allowed_countries"],
       "title": "PaymentLinksResourceShippingAddressCollection",
       "type": "object"
     },
@@ -674,10 +582,7 @@
       "properties": {
         "trial_period_days": {
           "description": "Integer representing the number of trial period days before the customer is charged for the first time.",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         }
       },
       "title": "PaymentLinksResourceSubscriptionData",
@@ -688,10 +593,7 @@
       "properties": {
         "amount": {
           "description": "The amount in %s that will be transferred to the destination account. By default, the entire amount is transferred to the destination.",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "destination": {
           "description": "The connected account receiving the transfer.",
@@ -699,9 +601,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "destination"
-      ],
+      "required": ["destination"],
       "title": "PaymentLinksResourceTransferData",
       "type": "object"
     },
@@ -774,9 +674,7 @@
             "product": "string",
             "recurring": {},
             "tax_behavior": "exclusive",
-            "tiers": [
-              {}
-            ],
+            "tiers": [{}],
             "tiers_mode": "graduated",
             "transform_quantity": {},
             "type": "one_time",
@@ -800,16 +698,12 @@
     "metadata": {},
     "object": "payment_link",
     "on_behalf_of": "string",
-    "payment_method_types": [
-      "card"
-    ],
+    "payment_method_types": ["card"],
     "phone_number_collection": {
       "enabled": true
     },
     "shipping_address_collection": {
-      "allowed_countries": [
-        "AC"
-      ]
+      "allowed_countries": ["AC"]
     },
     "subscription_data": {
       "trial_period_days": 0

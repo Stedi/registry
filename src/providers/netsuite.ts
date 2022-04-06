@@ -58,13 +58,7 @@ export class NetsuiteProvider implements BaseProvider {
     };
   }
 
-  async unbundle({
-    entities,
-    versionName,
-  }: {
-    entities: string[];
-    versionName: string;
-  }): Promise<EntitySchema[]> {
+  async unbundle({ entities, versionName }: { entities: string[]; versionName: string }): Promise<EntitySchema[]> {
     const schemas: EntitySchema[] = [];
 
     for (let index in entities) {
@@ -75,10 +69,7 @@ export class NetsuiteProvider implements BaseProvider {
           Accept: "application/schema+json",
         },
       });
-      const cleanSchema = sanitizeSchema(
-        schemaRequestResponse.data,
-        entityName
-      );
+      const cleanSchema = sanitizeSchema(schemaRequestResponse.data, entityName);
 
       schemas.push({
         name: entityName,
@@ -97,16 +88,13 @@ function sanitizeSchema(schema: unknown, entityName: string) {
         delete value.nullable;
       }
 
-      const isKeyUnsupported =
-        key === "x-ns-filterable" || key == "x-ns-custom-field";
+      const isKeyUnsupported = key === "x-ns-filterable" || key == "x-ns-custom-field";
 
       if (isKeyUnsupported) {
         return undefined;
       }
 
-      const isNsLink =
-        key === "items" &&
-        value["$ref"] === "/services/rest/record/v1/metadata-catalog/nsLink";
+      const isNsLink = key === "items" && value["$ref"] === "/services/rest/record/v1/metadata-catalog/nsLink";
 
       if (isNsLink) {
         return nsLinkSchema;
@@ -126,7 +114,7 @@ function sanitizeSchema(schema: unknown, entityName: string) {
       }
 
       return value;
-    })
+    }),
   );
 }
 

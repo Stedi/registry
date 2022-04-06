@@ -10,12 +10,7 @@ export class TwilioProvider extends OpenAPIProvider {
       description:
         "Twilio is the developer platform for communications is reinventing telecom by merging the worlds of cloud computing, web services, and telecommunications.",
       logoUrl: "https://logo.clearbit.com/twilio.com",
-      versions: [
-        "twilio_messaging_v1",
-        "twilio_api_v2010",
-        "twilio_events_v1",
-        "twilio_taskrouter_v1",
-      ],
+      versions: ["twilio_messaging_v1", "twilio_api_v2010", "twilio_events_v1", "twilio_taskrouter_v1"],
       baseUrl: "overwritten in getSchema function",
       entities: [
         "person",
@@ -31,12 +26,7 @@ export class TwilioProvider extends OpenAPIProvider {
   }
 
   override async getSchema(version: string): Promise<OpenAPI3Schema> {
-    const definition = await github.getRaw(
-      "twilio",
-      "twilio-oai",
-      "main",
-      `spec/json/${version}.json`
-    );
+    const definition = await github.getRaw("twilio", "twilio-oai", "main", `spec/json/${version}.json`);
     return {
       type: "openapi-v3",
       versionName: version,
@@ -61,6 +51,7 @@ export class TwilioProvider extends OpenAPIProvider {
     };
   }
 }
+
 function sanitizeSchema(schema: unknown) {
   return JSON.parse(
     JSON.stringify(schema, (key, value) => {
@@ -72,7 +63,11 @@ function sanitizeSchema(schema: unknown) {
         delete value.nullable;
       }
 
+      if (value.pattern) {
+        delete value.pattern;
+      }
+
       return value;
-    })
+    }),
   );
 }

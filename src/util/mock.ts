@@ -2,6 +2,9 @@ import _ from "lodash";
 import { OpenAPIV3 } from "openapi-types";
 import RandExp from "randexp";
 
+// Use fixed randomness, always generate same random values to prevent from excessive diffs causing conflicts
+RandExp.prototype.randInt = () => 1;
+
 export type SchemaLike = OpenAPIV3.SchemaObject;
 
 function resolveAllOf(schema: SchemaLike): SchemaLike {
@@ -9,7 +12,7 @@ function resolveAllOf(schema: SchemaLike): SchemaLike {
     schema = _.reduce(
       schema.allOf as SchemaLike,
       (combined, subschema: SchemaLike) => _.merge({}, resolveAllOf(subschema)),
-      schema
+      schema,
     );
   }
   return schema;
@@ -87,9 +90,7 @@ export function mock(schemalike: SchemaLike): any {
     const { format } = schema;
     const val = format ? formatExamples[format] : formatExamples._default;
     const minLength = !_.isNil(schema.minLength) ? schema.minLength : 0;
-    const maxLength = !_.isNil(schema.maxLength)
-      ? schema.maxLength
-      : val.length;
+    const maxLength = !_.isNil(schema.maxLength) ? schema.maxLength : val.length;
 
     if (schema.pattern) {
       const randexp = new RandExp(schema.pattern);
@@ -97,8 +98,9 @@ export function mock(schemalike: SchemaLike): any {
 
       let val = randexp.gen();
 
-      while (val.length < minLength || val.length > maxLength) {
-        val = randexp.gen();
+      val = _.padEnd(val, minLength, randexp.gen());
+      if (val.length > maxLength) {
+        val = val.substring(0, maxLength);
       }
 
       return val;

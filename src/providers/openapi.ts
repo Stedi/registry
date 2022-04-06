@@ -36,15 +36,7 @@ export class OpenAPIProvider implements BaseProvider {
    */
   private readonly sanitizeSchemaFunction?: (schema: unknown) => unknown;
 
-  constructor({
-    versions,
-    baseUrl,
-    entities,
-    sanitizeSchema,
-    name,
-    logoUrl,
-    description,
-  }: OpenAPIProviderProps) {
+  constructor({ versions, baseUrl, entities, sanitizeSchema, name, logoUrl, description }: OpenAPIProviderProps) {
     this.name = name;
     this.description = description;
     this.logoUrl = logoUrl;
@@ -76,9 +68,7 @@ export class OpenAPIProvider implements BaseProvider {
    */
   async getSchema(version: string): Promise<OpenAPI3Schema> {
     if (!this.baseUrl) {
-      throw new Error(
-        'Neither "baseUrl" wasn\'t provided, nor method "getSchema" was overriden'
-      );
+      throw new Error('Neither "baseUrl" wasn\'t provided, nor method "getSchema" was overriden');
     }
 
     const definition = await axios.get(this.baseUrl);
@@ -97,20 +87,18 @@ export class OpenAPIProvider implements BaseProvider {
   async unbundle(bundle: OpenAPI3Schema): Promise<EntitySchema[]> {
     const dereferenced = await openAPIParser.dereference(bundle.value as any);
 
-    const hasComponents = "components" in dereferenced;
-    if (!hasComponents) throw new Error("Expected components");
-
     const components =
-      (dereferenced.components as any).models ??
-      dereferenced.components?.schemas;
+      (dereferenced as any).definitions ??
+      (dereferenced as any).components?.models ??
+      (dereferenced as any).components?.schemas;
+
+    if (!components) throw new Error("Expected components or models");
 
     return Object.entries(components ?? {})
       .filter(([key]) => !bundle.entities || bundle.entities.includes(key))
       .map(([key, value]) => ({
         name: key,
-        schema: this.sanitizeSchemaFunction
-          ? this.sanitizeSchemaFunction(value)
-          : sanitizeSchema(value),
+        schema: this.sanitizeSchemaFunction ? this.sanitizeSchemaFunction(value) : sanitizeSchema(value),
       }));
   }
 }
@@ -119,6 +107,6 @@ function sanitizeSchema(schema: unknown) {
   return JSON.parse(
     JSON.stringify(schema, (_, value) => {
       return value;
-    })
+    }),
   );
 }

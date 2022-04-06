@@ -20,7 +20,7 @@ export class MyCompanyNewProvider extends OpenAPIProvider {
       logoUrl: "https://logo.clearbit.com/my-company.com",
       description: "My Company is a company...",
       versions: ["v1"],
-      baseUrl: "https://docs.my-company.com/meta/v1/openapi.json"
+      baseUrl: "https://docs.my-company.com/meta/v1/openapi.json",
     });
   }
 }

@@ -1,0 +1,84 @@
+{
+  "title": "DnDConditions",
+  "type": "object",
+  "properties": {
+    "brandScac": {
+      "type": "string"
+    },
+    "chargePerDiemAfterFreetime": {
+      "type": "array",
+      "items": {
+        "title": "DnDChargePerDiem",
+        "type": "object",
+        "properties": {
+          "chargePerDiem": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currencyOfCharge": {
+            "type": "string"
+          },
+          "endDayOfCharge": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startDayOfCharge": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "chargeType": {
+      "type": "string",
+      "enum": ["Demurrage", "Detention", "Storage"]
+    },
+    "commodity": {
+      "type": "string"
+    },
+    "containerSizeType": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "direction": {
+      "type": "string",
+      "enum": ["Import"]
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "freetimeGrantInDays": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "freetimeStartEvent": {
+      "type": "string"
+    },
+    "rkstCode": {
+      "type": "string"
+    }
+  },
+  "default": {
+    "brandScac": "string",
+    "chargePerDiemAfterFreetime": [
+      {
+        "chargePerDiem": 0,
+        "currencyOfCharge": "string",
+        "endDayOfCharge": 0,
+        "startDayOfCharge": 0
+      }
+    ],
+    "chargeType": "Demurrage",
+    "commodity": "string",
+    "containerSizeType": "string",
+    "country": "string",
+    "direction": "Import",
+    "displayName": "string",
+    "freetimeGrantInDays": 0,
+    "freetimeStartEvent": "string",
+    "rkstCode": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
