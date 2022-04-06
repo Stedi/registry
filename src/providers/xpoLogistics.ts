@@ -6,16 +6,8 @@ export class XPOLogisticsProvider extends OpenAPIProvider {
   constructor() {
     super({
       versions: ["1.0.0"],
-      baseUrl:
-        "https://xpodotcom.azureedge.net/xpo/apidocs_files/s41/api-explorer-02182022.json",
-      entities: [
-        "shipmentEvent",
-        "quoterequest",
-        "quoteresponse",
-        "orderStatus",
-        "orderEvent",
-        "document",
-      ],
+      baseUrl: "https://xpodotcom.azureedge.net/xpo/apidocs_files/s41/api-explorer-02182022.json",
+      entities: ["shipmentEvent", "quoterequest", "quoteresponse", "orderStatus", "orderEvent", "document"],
       sanitizeSchema,
     });
   }
@@ -23,22 +15,15 @@ export class XPOLogisticsProvider extends OpenAPIProvider {
 
 function sanitizeSchema(schema: unknown) {
   // Fix schema.properties.additionalServices in Order.json
-  const additionalServices = (schema as OpenAPIV3.SchemaObject).properties
-    ?.additionalServices as SchemaObject;
+  const additionalServices = (schema as OpenAPIV3.SchemaObject).properties?.additionalServices as SchemaObject;
 
   if (additionalServices?.items.required) {
-    additionalServices.items.required = additionalServices.items.required.map(
-      (s: string) => s.toLowerCase()
-    );
+    additionalServices.items.required = additionalServices.items.required.map((s: string) => s.toLowerCase());
   }
 
   return JSON.parse(
     JSON.stringify(schema, (key, value) => {
-      const isKeyUnsupported =
-        key === "example" ||
-        key === "Description" ||
-        key === "discriminator" ||
-        key === "code";
+      const isKeyUnsupported = key === "example" || key === "Description" || key === "discriminator" || key === "code";
 
       if (isKeyUnsupported) {
         return undefined;
@@ -53,6 +38,6 @@ function sanitizeSchema(schema: unknown) {
       }
 
       return value;
-    })
+    }),
   );
 }

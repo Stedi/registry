@@ -9,10 +9,7 @@
     "api_version": {
       "description": "The Stripe API version used to render `data`. *Note: This property is populated only for events on or after October 31, 2014*.",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "created": {
       "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -25,9 +22,7 @@
         "object": {},
         "previous_attributes": {}
       },
-      "required": [
-        "object"
-      ],
+      "required": ["object"],
       "title": "NotificationEventData",
       "type": "object"
     },
@@ -42,9 +37,7 @@
     },
     "object": {
       "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "event"
-      ],
+      "enum": ["event"],
       "type": "string"
     },
     "pending_webhooks": {
@@ -57,18 +50,12 @@
         "id": {
           "description": "ID of the API request that caused the event. If null, the event was automatic (e.g., Stripe's automatic subscription handling). Request logs are available in the [dashboard](https://dashboard.stripe.com/logs), but currently not in the API.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "idempotency_key": {
           "description": "The idempotency key transmitted during the request, if any. *Note: This property is populated only for events on or after May 23, 2017*.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
       "title": "NotificationEventRequest",
@@ -80,15 +67,7 @@
       "type": "string"
     }
   },
-  "required": [
-    "created",
-    "data",
-    "id",
-    "livemode",
-    "object",
-    "pending_webhooks",
-    "type"
-  ],
+  "required": ["created", "data", "id", "livemode", "object", "pending_webhooks", "type"],
   "title": "NotificationEvent",
   "type": "object",
   "default": {

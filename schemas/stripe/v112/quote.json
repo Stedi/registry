@@ -11,17 +11,11 @@
     },
     "application_fee_amount": {
       "description": "The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. Only applicable if there are no line items with recurring prices on the quote.",
-      "type": [
-        "integer",
-        "null"
-      ]
+      "type": ["integer", "null"]
     },
     "application_fee_percent": {
       "description": "A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account. Only applicable if there are line items with recurring prices on the quote.",
-      "type": [
-        "number",
-        "null"
-      ]
+      "type": ["number", "null"]
     },
     "automatic_tax": {
       "description": "",
@@ -32,30 +26,17 @@
         },
         "status": {
           "description": "The status of the most recent automated tax calculation for this quote.",
-          "enum": [
-            "complete",
-            "failed",
-            "requires_location_inputs",
-            null
-          ],
-          "type": [
-            "string",
-            "null"
-          ]
+          "enum": ["complete", "failed", "requires_location_inputs", null],
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "enabled"
-      ],
+      "required": ["enabled"],
       "title": "QuotesResourceAutomaticTax",
       "type": "object"
     },
     "collection_method": {
       "description": "Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or on finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions. Defaults to `charge_automatically`.",
-      "enum": [
-        "charge_automatically",
-        "send_invoice"
-      ],
+      "enum": ["charge_automatically", "send_invoice"],
       "type": "string"
     },
     "computed": {
@@ -74,12 +55,7 @@
             },
             "interval": {
               "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
-              "enum": [
-                "day",
-                "month",
-                "week",
-                "year"
-              ],
+              "enum": ["day", "month", "week", "year"],
               "type": "string"
             },
             "interval_count": {
@@ -95,10 +71,7 @@
                 },
                 "amount_shipping": {
                   "description": "This is the sum of all the line item shipping amounts.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
+                  "type": ["integer", "null"]
                 },
                 "amount_tax": {
                   "description": "This is the sum of all the line item tax amounts.",
@@ -106,21 +79,12 @@
                 },
                 "breakdown": {}
               },
-              "required": [
-                "amount_discount",
-                "amount_tax"
-              ],
+              "required": ["amount_discount", "amount_tax"],
               "title": "QuotesResourceTotalDetails",
               "type": "object"
             }
           },
-          "required": [
-            "amount_subtotal",
-            "amount_total",
-            "interval",
-            "interval_count",
-            "total_details"
-          ],
+          "required": ["amount_subtotal", "amount_total", "interval", "interval_count", "total_details"],
           "title": "QuotesResourceRecurring",
           "type": "object"
         },
@@ -151,9 +115,7 @@
                 },
                 "object": {
                   "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
-                  "enum": [
-                    "list"
-                  ],
+                  "enum": ["list"],
                   "type": "string"
                 },
                 "url": {
@@ -162,12 +124,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "data",
-                "has_more",
-                "object",
-                "url"
-              ],
+              "required": ["data", "has_more", "object", "url"],
               "title": "QuotesResourceListLineItems",
               "type": "object"
             },
@@ -180,10 +137,7 @@
                 },
                 "amount_shipping": {
                   "description": "This is the sum of all the line item shipping amounts.",
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
+                  "type": ["integer", "null"]
                 },
                 "amount_tax": {
                   "description": "This is the sum of all the line item tax amounts.",
@@ -191,26 +145,17 @@
                 },
                 "breakdown": {}
               },
-              "required": [
-                "amount_discount",
-                "amount_tax"
-              ],
+              "required": ["amount_discount", "amount_tax"],
               "title": "QuotesResourceTotalDetails",
               "type": "object"
             }
           },
-          "required": [
-            "amount_subtotal",
-            "amount_total",
-            "total_details"
-          ],
+          "required": ["amount_subtotal", "amount_total", "total_details"],
           "title": "QuotesResourceUpfront",
           "type": "object"
         }
       },
-      "required": [
-        "upfront"
-      ],
+      "required": ["upfront"],
       "title": "QuotesResourceComputed",
       "type": "object"
     },
@@ -222,10 +167,7 @@
     "currency": {
       "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "customer": {
       "description": "The customer which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.",
@@ -243,10 +185,7 @@
     "description": {
       "description": "A description that will be displayed on the quote PDF.",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "discounts": {
       "description": "The discounts applied to this quote.",
@@ -264,10 +203,7 @@
     "footer": {
       "description": "A footer that will be displayed on the quote PDF.",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "from_quote": {
       "description": "",
@@ -282,20 +218,14 @@
           "type": "string"
         }
       },
-      "required": [
-        "is_revision",
-        "quote"
-      ],
+      "required": ["is_revision", "quote"],
       "title": "QuotesResourceFromQuote",
       "type": "object"
     },
     "header": {
       "description": "A header that will be displayed on the quote PDF.",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "id": {
       "description": "Unique identifier for the object.",
@@ -312,10 +242,7 @@
       "properties": {
         "days_until_due": {
           "description": "Number of days within which a customer must pay invoices generated by this quote. This value will be `null` for quotes where `collection_method=charge_automatically`.",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         }
       },
       "title": "InvoiceSettingQuoteSetting",
@@ -359,10 +286,7 @@
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "amount",
-                    "discount"
-                  ],
+                  "required": ["amount", "discount"],
                   "title": "LineItemsDiscountAmount",
                   "type": "object"
                 },
@@ -375,9 +299,7 @@
               },
               "object": {
                 "description": "String representing the object's type. Objects of the same type share the same value.",
-                "enum": [
-                  "item"
-                ],
+                "enum": ["item"],
                 "type": "string"
               },
               "price": {
@@ -389,10 +311,7 @@
                   },
                   "billing_scheme": {
                     "description": "Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.",
-                    "enum": [
-                      "per_unit",
-                      "tiered"
-                    ],
+                    "enum": ["per_unit", "tiered"],
                     "type": "string"
                   },
                   "created": {
@@ -416,10 +335,7 @@
                   "lookup_key": {
                     "description": "A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.",
                     "maxLength": 5000,
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "type": ["string", "null"]
                   },
                   "metadata": {
                     "type": "object"
@@ -427,16 +343,11 @@
                   "nickname": {
                     "description": "A brief description of the price, hidden from customers.",
                     "maxLength": 5000,
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "type": ["string", "null"]
                   },
                   "object": {
                     "description": "String representing the object's type. Objects of the same type share the same value.",
-                    "enum": [
-                      "price"
-                    ],
+                    "enum": ["price"],
                     "type": "string"
                   },
                   "product": {
@@ -450,16 +361,8 @@
                   },
                   "tax_behavior": {
                     "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.",
-                    "enum": [
-                      "exclusive",
-                      "inclusive",
-                      "unspecified",
-                      null
-                    ],
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "enum": ["exclusive", "inclusive", "unspecified", null],
+                    "type": ["string", "null"]
                   },
                   "tiers": {
                     "description": "Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.",
@@ -470,15 +373,8 @@
                   },
                   "tiers_mode": {
                     "description": "Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.",
-                    "enum": [
-                      "graduated",
-                      "volume",
-                      null
-                    ],
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "enum": ["graduated", "volume", null],
+                    "type": ["string", "null"]
                   },
                   "transform_quantity": {
                     "description": "Apply a transformation to the reported usage or set quantity before computing the amount billed. Cannot be combined with `tiers`.",
@@ -486,26 +382,17 @@
                   },
                   "type": {
                     "description": "One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.",
-                    "enum": [
-                      "one_time",
-                      "recurring"
-                    ],
+                    "enum": ["one_time", "recurring"],
                     "type": "string"
                   },
                   "unit_amount": {
                     "description": "The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.",
-                    "type": [
-                      "integer",
-                      "null"
-                    ]
+                    "type": ["integer", "null"]
                   },
                   "unit_amount_decimal": {
                     "description": "The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.",
                     "format": "decimal",
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "type": ["string", "null"]
                   }
                 },
                 "required": [
@@ -525,10 +412,7 @@
               },
               "quantity": {
                 "description": "The quantity of products being purchased.",
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "type": ["integer", "null"]
               },
               "taxes": {
                 "description": "The taxes applied to the line item.",
@@ -543,24 +427,14 @@
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "amount",
-                    "rate"
-                  ],
+                  "required": ["amount", "rate"],
                   "title": "LineItemsTaxAmount",
                   "type": "object"
                 },
                 "type": "array"
               }
             },
-            "required": [
-              "amount_subtotal",
-              "amount_total",
-              "currency",
-              "description",
-              "id",
-              "object"
-            ],
+            "required": ["amount_subtotal", "amount_total", "currency", "description", "id", "object"],
             "title": "LineItem",
             "type": "object"
           },
@@ -572,9 +446,7 @@
         },
         "object": {
           "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
-          "enum": [
-            "list"
-          ],
+          "enum": ["list"],
           "type": "string"
         },
         "url": {
@@ -583,12 +455,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "data",
-        "has_more",
-        "object",
-        "url"
-      ],
+      "required": ["data", "has_more", "object", "url"],
       "title": "QuotesResourceListLineItems",
       "type": "object"
     },
@@ -600,16 +467,11 @@
     "number": {
       "description": "A unique number that identifies this particular quote. This number is assigned once the quote is [finalized](https://stripe.com/docs/quotes/overview#finalize).",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "object": {
       "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "quote"
-      ],
+      "enum": ["quote"],
       "type": "string"
     },
     "on_behalf_of": {
@@ -619,12 +481,7 @@
     },
     "status": {
       "description": "The status of the quote.",
-      "enum": [
-        "accepted",
-        "canceled",
-        "draft",
-        "open"
-      ],
+      "enum": ["accepted", "canceled", "draft", "open"],
       "type": "string"
     },
     "status_transitions": {
@@ -633,26 +490,17 @@
         "accepted_at": {
           "description": "The time that the quote was accepted. Measured in seconds since Unix epoch.",
           "format": "unix-time",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "canceled_at": {
           "description": "The time that the quote was canceled. Measured in seconds since Unix epoch.",
           "format": "unix-time",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "finalized_at": {
           "description": "The time that the quote was finalized. Measured in seconds since Unix epoch.",
           "format": "unix-time",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         }
       },
       "title": "QuotesResourceStatusTransitions",
@@ -669,17 +517,11 @@
         "effective_date": {
           "description": "When creating a new subscription, the date of which the subscription schedule will start after the quote is accepted. This date is ignored if it is in the past when the quote is accepted. Measured in seconds since the Unix epoch.",
           "format": "unix-time",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "trial_period_days": {
           "description": "Integer representing the number of trial period days before the customer is charged for the first time.",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         }
       },
       "title": "QuotesResourceSubscriptionData",
@@ -699,10 +541,7 @@
         },
         "amount_shipping": {
           "description": "This is the sum of all the line item shipping amounts.",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "amount_tax": {
           "description": "This is the sum of all the line item tax amounts.",
@@ -710,10 +549,7 @@
         },
         "breakdown": {}
       },
-      "required": [
-        "amount_discount",
-        "amount_tax"
-      ],
+      "required": ["amount_discount", "amount_tax"],
       "title": "QuotesResourceTotalDetails",
       "type": "object"
     },
@@ -722,17 +558,11 @@
       "properties": {
         "amount": {
           "description": "The amount in %s that will be transferred to the destination account when the invoice is paid. By default, the entire amount is transferred to the destination.",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "amount_percent": {
           "description": "A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the destination account. By default, the entire amount will be transferred to the destination.",
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "destination": {
           "description": "The account where funds from the payment will be transferred to upon payment success.",
@@ -740,9 +570,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "destination"
-      ],
+      "required": ["destination"],
       "title": "QuotesResourceTransferData",
       "type": "object"
     }
@@ -794,9 +622,7 @@
         "amount_subtotal": 0,
         "amount_total": 0,
         "line_items": {
-          "data": [
-            {}
-          ],
+          "data": [{}],
           "has_more": true,
           "object": "list",
           "url": "string"
@@ -812,13 +638,9 @@
     "created": 1647352387,
     "currency": "string",
     "customer": "string",
-    "default_tax_rates": [
-      "string"
-    ],
+    "default_tax_rates": ["string"],
     "description": "string",
-    "discounts": [
-      "string"
-    ],
+    "discounts": ["string"],
     "expires_at": 1647352387,
     "footer": "string",
     "from_quote": {
@@ -860,9 +682,7 @@
             "product": "string",
             "recurring": {},
             "tax_behavior": "exclusive",
-            "tiers": [
-              {}
-            ],
+            "tiers": [{}],
             "tiers_mode": "graduated",
             "transform_quantity": {},
             "type": "one_time",

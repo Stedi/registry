@@ -17,11 +17,7 @@ function validateSchema(jsonSchema: string): SchemaObject {
 
     if (!isSchemaVersionSupported(schemaObject)) {
       throw new Error(
-        `the "${
-          schemaObject.$schema
-        }" is not allowed. Use one of [${supportedSchemaVersions.join(
-          ","
-        )}] instead`
+        `the "${schemaObject.$schema}" is not allowed. Use one of [${supportedSchemaVersions.join(",")}] instead`,
       );
     }
 
@@ -163,37 +159,20 @@ async function validateProviders() {
   const schemasPath = "schemas";
   const providersPath = "providers.json";
   const schemas = glob.sync(`${schemasPath}/*`);
-  const providers: Provider[] = JSON.parse(
-    readFileSync(providersPath, "utf-8")
-  );
 
-  const providersNamesInLowerCase = providers.map(
-    (provider) => provider.directory ?? provider.name.toLowerCase()
-  );
-  const schemasProvidersNames = schemas.map(
-    (provider) => provider.split("/")[1]
-  );
-  const providersWithSchemasMissing = providersNamesInLowerCase.filter(
-    (p) => !schemasProvidersNames.includes(p)
-  );
-  const providersWithMetadataMissing = schemasProvidersNames.filter(
-    (p) => !providersNamesInLowerCase.includes(p)
-  );
+  const providers: Provider[] = JSON.parse(readFileSync(providersPath, "utf-8"));
+
+  const providersNamesInLowerCase = providers.map((provider) => provider.name.toLowerCase());
+  const schemasProvidersNames = schemas.map((provider) => provider.split("/")[1]);
+  const providersWithSchemasMissing = providersNamesInLowerCase.filter((p) => !schemasProvidersNames.includes(p));
+  const providersWithMetadataMissing = schemasProvidersNames.filter((p) => !providersNamesInLowerCase.includes(p));
 
   if (providersWithSchemasMissing.length > 0) {
-    throw new Error(
-      `Providers with schemas missing: ${providersWithSchemasMissing.join(
-        ", "
-      )}`
-    );
+    throw new Error(`Providers with schemas missing: ${providersWithSchemasMissing.join(", ")}`);
   }
 
   if (providersWithMetadataMissing.length > 0) {
-    throw new Error(
-      `Providers with metadata missing: ${providersWithMetadataMissing.join(
-        ", "
-      )}`
-    );
+    throw new Error(`Providers with metadata missing: ${providersWithMetadataMissing.join(", ")}`);
   }
 
   providers.forEach(async (provider) => {

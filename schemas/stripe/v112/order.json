@@ -7,25 +7,16 @@
     },
     "amount_returned": {
       "description": "The total amount that was returned to the customer.",
-      "type": [
-        "integer",
-        "null"
-      ]
+      "type": ["integer", "null"]
     },
     "application": {
       "description": "ID of the Connect Application that created the order.",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "application_fee": {
       "description": "A fee in cents that will be applied to the order and transferred to the application owner’s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees documentation.",
-      "type": [
-        "integer",
-        "null"
-      ]
+      "type": ["integer", "null"]
     },
     "charge": {
       "description": "The ID of the payment used to pay for the order. Present if the order status is `paid`, `fulfilled`, or `refunded`.",
@@ -49,10 +40,7 @@
     "email": {
       "description": "The email address of the customer placing the order.",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "external_coupon_code": {
       "description": "External coupon code to load for this order.",
@@ -84,9 +72,7 @@
           },
           "object": {
             "description": "String representing the object's type. Objects of the same type share the same value.",
-            "enum": [
-              "order_item"
-            ],
+            "enum": ["order_item"],
             "type": "string"
           },
           "parent": {
@@ -96,10 +82,7 @@
           },
           "quantity": {
             "description": "A positive integer representing the number of instances of `parent` that are included in this order item. Applicable/present only if `type` is `sku`.",
-            "type": [
-              "integer",
-              "null"
-            ]
+            "type": ["integer", "null"]
           },
           "type": {
             "description": "The type of line item. One of `sku`, `tax`, `shipping`, or `discount`.",
@@ -107,13 +90,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "amount",
-          "currency",
-          "description",
-          "object",
-          "type"
-        ],
+        "required": ["amount", "currency", "description", "object", "type"],
         "title": "OrderItem",
         "type": "object"
       },
@@ -126,9 +103,7 @@
     "metadata": {},
     "object": {
       "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "order"
-      ],
+      "enum": ["order"],
       "type": "string"
     },
     "returns": {
@@ -177,9 +152,7 @@
                     },
                     "object": {
                       "description": "String representing the object's type. Objects of the same type share the same value.",
-                      "enum": [
-                        "order_item"
-                      ],
+                      "enum": ["order_item"],
                       "type": "string"
                     },
                     "parent": {
@@ -189,10 +162,7 @@
                     },
                     "quantity": {
                       "description": "A positive integer representing the number of instances of `parent` that are included in this order item. Applicable/present only if `type` is `sku`.",
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
+                      "type": ["integer", "null"]
                     },
                     "type": {
                       "description": "The type of line item. One of `sku`, `tax`, `shipping`, or `discount`.",
@@ -200,13 +170,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "amount",
-                    "currency",
-                    "description",
-                    "object",
-                    "type"
-                  ],
+                  "required": ["amount", "currency", "description", "object", "type"],
                   "title": "OrderItem",
                   "type": "object"
                 },
@@ -218,9 +182,7 @@
               },
               "object": {
                 "description": "String representing the object's type. Objects of the same type share the same value.",
-                "enum": [
-                  "order_return"
-                ],
+                "enum": ["order_return"],
                 "type": "string"
               },
               "order": {
@@ -234,15 +196,7 @@
                 "type": "string"
               }
             },
-            "required": [
-              "amount",
-              "created",
-              "currency",
-              "id",
-              "items",
-              "livemode",
-              "object"
-            ],
+            "required": ["amount", "created", "currency", "id", "items", "livemode", "object"],
             "title": "OrderReturn",
             "type": "object"
           },
@@ -254,9 +208,7 @@
         },
         "object": {
           "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
-          "enum": [
-            "list"
-          ],
+          "enum": ["list"],
           "type": "string"
         },
         "url": {
@@ -265,25 +217,14 @@
           "type": "string"
         }
       },
-      "required": [
-        "data",
-        "has_more",
-        "object",
-        "url"
-      ],
+      "required": ["data", "has_more", "object", "url"],
       "title": "OrdersResourceOrderReturnList",
-      "type": [
-        "object",
-        "null"
-      ]
+      "type": ["object", "null"]
     },
     "selected_shipping_method": {
       "description": "The shipping method that is currently selected for this order, if any. If present, it is equal to one of the `id`s of shipping methods in the `shipping_methods` array. At order creation time, if there are multiple shipping methods, Stripe will automatically selected the first method.",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "shipping": {
       "description": "",
@@ -294,50 +235,32 @@
             "city": {
               "description": "City, district, suburb, town, or village.",
               "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             },
             "country": {
               "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
               "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             },
             "line1": {
               "description": "Address line 1 (e.g., street, PO Box, or company name).",
               "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             },
             "line2": {
               "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
               "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             },
             "postal_code": {
               "description": "ZIP or postal code.",
               "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             },
             "state": {
               "description": "State, county, province, or region.",
               "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             }
           },
           "title": "Address",
@@ -346,34 +269,22 @@
         "carrier": {
           "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "name": {
           "description": "Recipient name.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "phone": {
           "description": "Recipient phone (including extension).",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "tracking_number": {
           "description": "The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
       "title": "Shipping",
@@ -416,9 +327,7 @@
                 "type": "string"
               }
             },
-            "required": [
-              "type"
-            ],
+            "required": ["type"],
             "title": "DeliveryEstimate",
             "type": "object"
           },
@@ -433,19 +342,11 @@
             "type": "string"
           }
         },
-        "required": [
-          "amount",
-          "currency",
-          "description",
-          "id"
-        ],
+        "required": ["amount", "currency", "description", "id"],
         "title": "ShippingMethod",
         "type": "object"
       },
-      "type": [
-        "array",
-        "null"
-      ]
+      "type": ["array", "null"]
     },
     "status": {
       "description": "Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More details in the [Orders Guide](https://stripe.com/docs/orders/guide#understanding-order-statuses).",
@@ -458,34 +359,22 @@
         "canceled": {
           "description": "The time that the order was canceled.",
           "format": "unix-time",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "fulfiled": {
           "description": "The time that the order was fulfilled.",
           "format": "unix-time",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "paid": {
           "description": "The time that the order was paid.",
           "format": "unix-time",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "returned": {
           "description": "The time that the order was returned.",
           "format": "unix-time",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         }
       },
       "title": "StatusTransitions",
@@ -494,10 +383,7 @@
     "updated": {
       "description": "Time at which the object was last updated. Measured in seconds since the Unix epoch.",
       "format": "unix-time",
-      "type": [
-        "integer",
-        "null"
-      ]
+      "type": ["integer", "null"]
     },
     "upstream_id": {
       "description": "The user's order ID if it is different from the Stripe order ID.",
@@ -505,16 +391,7 @@
       "type": "string"
     }
   },
-  "required": [
-    "amount",
-    "created",
-    "currency",
-    "id",
-    "items",
-    "livemode",
-    "object",
-    "status"
-  ],
+  "required": ["amount", "created", "currency", "id", "items", "livemode", "object", "status"],
   "title": "Order",
   "type": "object",
   "default": {

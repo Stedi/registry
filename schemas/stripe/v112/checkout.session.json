@@ -18,24 +18,15 @@
             "expires_at": {
               "description": "The timestamp at which the recovery URL will expire.",
               "format": "unix-time",
-              "type": [
-                "integer",
-                "null"
-              ]
+              "type": ["integer", "null"]
             },
             "url": {
               "description": "URL that creates a new Checkout Session when clicked that is a copy of this expired Checkout Session",
               "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             }
           },
-          "required": [
-            "allow_promotion_codes",
-            "enabled"
-          ],
+          "required": ["allow_promotion_codes", "enabled"],
           "title": "PaymentPagesCheckoutSessionAfterExpirationRecovery",
           "type": "object"
         }
@@ -45,24 +36,15 @@
     },
     "allow_promotion_codes": {
       "description": "Enables user redeemable promotion codes.",
-      "type": [
-        "boolean",
-        "null"
-      ]
+      "type": ["boolean", "null"]
     },
     "amount_subtotal": {
       "description": "Total of all items before discounts or taxes are applied.",
-      "type": [
-        "integer",
-        "null"
-      ]
+      "type": ["integer", "null"]
     },
     "amount_total": {
       "description": "Total of all items after discounts and taxes are applied.",
-      "type": [
-        "integer",
-        "null"
-      ]
+      "type": ["integer", "null"]
     },
     "automatic_tax": {
       "description": "",
@@ -73,35 +55,18 @@
         },
         "status": {
           "description": "The status of the most recent automated tax calculation for this session.",
-          "enum": [
-            "complete",
-            "failed",
-            "requires_location_inputs",
-            null
-          ],
-          "type": [
-            "string",
-            "null"
-          ]
+          "enum": ["complete", "failed", "requires_location_inputs", null],
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "enabled"
-      ],
+      "required": ["enabled"],
       "title": "PaymentPagesCheckoutSessionAutomaticTax",
       "type": "object"
     },
     "billing_address_collection": {
       "description": "Describes whether Checkout should collect the customer's billing address.",
-      "enum": [
-        "auto",
-        "required",
-        null
-      ],
-      "type": [
-        "string",
-        "null"
-      ]
+      "enum": ["auto", "required", null],
+      "type": ["string", "null"]
     },
     "cancel_url": {
       "description": "The URL the customer will be directed to if they decide to cancel payment and return to your website.",
@@ -111,25 +76,15 @@
     "client_reference_id": {
       "description": "A unique string to reference the Checkout Session. This can be a\ncustomer ID, a cart ID, or similar, and can be used to reconcile the\nSession with your internal systems.",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "consent": {
       "description": "",
       "properties": {
         "promotions": {
           "description": "If `opt_in`, the customer consents to receiving promotional communications\nfrom the merchant about this Checkout Session.",
-          "enum": [
-            "opt_in",
-            "opt_out",
-            null
-          ],
-          "type": [
-            "string",
-            "null"
-          ]
+          "enum": ["opt_in", "opt_out", null],
+          "type": ["string", "null"]
         }
       },
       "title": "PaymentPagesCheckoutSessionConsent",
@@ -140,14 +95,8 @@
       "properties": {
         "promotions": {
           "description": "If set to `auto`, enables the collection of customer consent for promotional communications. The Checkout\nSession will determine whether to display an option to opt into promotional communication\nfrom the merchant depending on the customer's locale. Only available to US merchants.",
-          "enum": [
-            "auto",
-            null
-          ],
-          "type": [
-            "string",
-            "null"
-          ]
+          "enum": ["auto", null],
+          "type": ["string", "null"]
         }
       },
       "title": "PaymentPagesCheckoutSessionConsentCollection",
@@ -155,10 +104,7 @@
     },
     "currency": {
       "description": "Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).",
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "customer": {
       "description": "The ID of the customer for this Session.\nFor Checkout Sessions in `payment` or `subscription` mode, Checkout\nwill create a new customer object based on information provided\nduring the payment flow unless an existing customer was provided when\nthe Session was created.",
@@ -167,15 +113,8 @@
     },
     "customer_creation": {
       "description": "Configure whether a Checkout Session creates a Customer when the Checkout Session completes.",
-      "enum": [
-        "always",
-        "if_required",
-        null
-      ],
-      "type": [
-        "string",
-        "null"
-      ]
+      "enum": ["always", "if_required", null],
+      "type": ["string", "null"]
     },
     "customer_details": {
       "description": "",
@@ -183,31 +122,17 @@
         "email": {
           "description": "The email associated with the Customer, if one exists, on the Checkout Session at the time of checkout or at time of session expiry.\nOtherwise, if the customer has consented to promotional content, this value is the most recent valid email provided by the customer on the Checkout form.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "phone": {
           "description": "The customer's phone number at the time of checkout",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "tax_exempt": {
           "description": "The customer’s tax exempt status at time of checkout.",
-          "enum": [
-            "exempt",
-            "none",
-            "reverse",
-            null
-          ],
-          "type": [
-            "string",
-            "null"
-          ]
+          "enum": ["exempt", "none", "reverse", null],
+          "type": ["string", "null"]
         },
         "tax_ids": {
           "description": "The customer’s tax IDs at time of checkout.",
@@ -266,22 +191,14 @@
               "value": {
                 "description": "The value of the tax ID.",
                 "maxLength": 5000,
-                "type": [
-                  "string",
-                  "null"
-                ]
+                "type": ["string", "null"]
               }
             },
-            "required": [
-              "type"
-            ],
+            "required": ["type"],
             "title": "PaymentPagesCheckoutSessionTaxID",
             "type": "object"
           },
-          "type": [
-            "array",
-            "null"
-          ]
+          "type": ["array", "null"]
         }
       },
       "title": "PaymentPagesCheckoutSessionCustomerDetails",
@@ -290,10 +207,7 @@
     "customer_email": {
       "description": "If provided, this value will be used when the Customer object is created.\nIf not provided, customers will be asked to enter their email address.\nUse this parameter to prefill customer data if you already have an email\non file. To access information about the customer once the payment flow is\ncomplete, use the `customer` attribute.",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "expires_at": {
       "description": "The timestamp at which the Checkout Session will expire.",
@@ -343,10 +257,7 @@
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "amount",
-                    "discount"
-                  ],
+                  "required": ["amount", "discount"],
                   "title": "LineItemsDiscountAmount",
                   "type": "object"
                 },
@@ -359,9 +270,7 @@
               },
               "object": {
                 "description": "String representing the object's type. Objects of the same type share the same value.",
-                "enum": [
-                  "item"
-                ],
+                "enum": ["item"],
                 "type": "string"
               },
               "price": {
@@ -373,10 +282,7 @@
                   },
                   "billing_scheme": {
                     "description": "Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.",
-                    "enum": [
-                      "per_unit",
-                      "tiered"
-                    ],
+                    "enum": ["per_unit", "tiered"],
                     "type": "string"
                   },
                   "created": {
@@ -400,10 +306,7 @@
                   "lookup_key": {
                     "description": "A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.",
                     "maxLength": 5000,
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "type": ["string", "null"]
                   },
                   "metadata": {
                     "type": "object"
@@ -411,16 +314,11 @@
                   "nickname": {
                     "description": "A brief description of the price, hidden from customers.",
                     "maxLength": 5000,
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "type": ["string", "null"]
                   },
                   "object": {
                     "description": "String representing the object's type. Objects of the same type share the same value.",
-                    "enum": [
-                      "price"
-                    ],
+                    "enum": ["price"],
                     "type": "string"
                   },
                   "product": {
@@ -434,16 +332,8 @@
                   },
                   "tax_behavior": {
                     "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.",
-                    "enum": [
-                      "exclusive",
-                      "inclusive",
-                      "unspecified",
-                      null
-                    ],
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "enum": ["exclusive", "inclusive", "unspecified", null],
+                    "type": ["string", "null"]
                   },
                   "tiers": {
                     "description": "Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.",
@@ -454,15 +344,8 @@
                   },
                   "tiers_mode": {
                     "description": "Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.",
-                    "enum": [
-                      "graduated",
-                      "volume",
-                      null
-                    ],
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "enum": ["graduated", "volume", null],
+                    "type": ["string", "null"]
                   },
                   "transform_quantity": {
                     "description": "Apply a transformation to the reported usage or set quantity before computing the amount billed. Cannot be combined with `tiers`.",
@@ -470,26 +353,17 @@
                   },
                   "type": {
                     "description": "One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.",
-                    "enum": [
-                      "one_time",
-                      "recurring"
-                    ],
+                    "enum": ["one_time", "recurring"],
                     "type": "string"
                   },
                   "unit_amount": {
                     "description": "The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.",
-                    "type": [
-                      "integer",
-                      "null"
-                    ]
+                    "type": ["integer", "null"]
                   },
                   "unit_amount_decimal": {
                     "description": "The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.",
                     "format": "decimal",
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "type": ["string", "null"]
                   }
                 },
                 "required": [
@@ -509,10 +383,7 @@
               },
               "quantity": {
                 "description": "The quantity of products being purchased.",
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "type": ["integer", "null"]
               },
               "taxes": {
                 "description": "The taxes applied to the line item.",
@@ -527,24 +398,14 @@
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "amount",
-                    "rate"
-                  ],
+                  "required": ["amount", "rate"],
                   "title": "LineItemsTaxAmount",
                   "type": "object"
                 },
                 "type": "array"
               }
             },
-            "required": [
-              "amount_subtotal",
-              "amount_total",
-              "currency",
-              "description",
-              "id",
-              "object"
-            ],
+            "required": ["amount_subtotal", "amount_total", "currency", "description", "id", "object"],
             "title": "LineItem",
             "type": "object"
           },
@@ -556,9 +417,7 @@
         },
         "object": {
           "description": "String representing the object's type. Objects of the same type share the same value. Always has the value `list`.",
-          "enum": [
-            "list"
-          ],
+          "enum": ["list"],
           "type": "string"
         },
         "url": {
@@ -567,12 +426,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "data",
-        "has_more",
-        "object",
-        "url"
-      ],
+      "required": ["data", "has_more", "object", "url"],
       "title": "PaymentPagesCheckoutSessionListLineItems",
       "type": "object"
     },
@@ -626,26 +480,17 @@
         "zh-TW",
         null
       ],
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "metadata": {},
     "mode": {
       "description": "The mode of the Checkout Session.",
-      "enum": [
-        "payment",
-        "setup",
-        "subscription"
-      ],
+      "enum": ["payment", "setup", "subscription"],
       "type": "string"
     },
     "object": {
       "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "checkout.session"
-      ],
+      "enum": ["checkout.session"],
       "type": "string"
     },
     "payment_intent": {
@@ -666,10 +511,7 @@
           "properties": {
             "currency": {
               "description": "Currency supported by the bank account. Returned when the Session is in `setup` mode.",
-              "enum": [
-                "cad",
-                "usd"
-              ],
+              "enum": ["cad", "usd"],
               "type": "string"
             },
             "mandate_options": {
@@ -683,10 +525,7 @@
                 "default_for": {
                   "description": "List of Stripe products where this mandate can be selected automatically. Returned when the Session is in `setup` mode.",
                   "items": {
-                    "enum": [
-                      "invoice",
-                      "subscription"
-                    ],
+                    "enum": ["invoice", "subscription"],
                     "type": "string"
                   },
                   "type": "array"
@@ -694,35 +533,17 @@
                 "interval_description": {
                   "description": "Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.",
                   "maxLength": 5000,
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": ["string", "null"]
                 },
                 "payment_schedule": {
                   "description": "Payment schedule for the mandate.",
-                  "enum": [
-                    "combined",
-                    "interval",
-                    "sporadic",
-                    null
-                  ],
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "enum": ["combined", "interval", "sporadic", null],
+                  "type": ["string", "null"]
                 },
                 "transaction_type": {
                   "description": "Transaction type of the mandate.",
-                  "enum": [
-                    "business",
-                    "personal",
-                    null
-                  ],
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "enum": ["business", "personal", null],
+                  "type": ["string", "null"]
                 }
               },
               "title": "CheckoutAcssDebitMandateOptions",
@@ -730,11 +551,7 @@
             },
             "verification_method": {
               "description": "Bank account verification method.",
-              "enum": [
-                "automatic",
-                "instant",
-                "microdeposits"
-              ],
+              "enum": ["automatic", "instant", "microdeposits"],
               "type": "string"
             }
           },
@@ -749,9 +566,7 @@
               "type": "integer"
             }
           },
-          "required": [
-            "expires_after_days"
-          ],
+          "required": ["expires_after_days"],
           "title": "CheckoutBoletoPaymentMethodOptions",
           "type": "object"
         },
@@ -760,10 +575,7 @@
           "properties": {
             "expires_after_days": {
               "description": "The number of calendar days (between 1 and 60) after which Konbini payment instructions will expire. For example, if a PaymentIntent is confirmed with Konbini and `expires_after_days` set to 2 on Monday JST, the instructions will expire on Wednesday 23:59:59 JST.",
-              "type": [
-                "integer",
-                "null"
-              ]
+              "type": ["integer", "null"]
             }
           },
           "title": "CheckoutKonbiniPaymentMethodOptions",
@@ -777,9 +589,7 @@
               "type": "integer"
             }
           },
-          "required": [
-            "expires_after_days"
-          ],
+          "required": ["expires_after_days"],
           "title": "CheckoutOxxoPaymentMethodOptions",
           "type": "object"
         }
@@ -797,11 +607,7 @@
     },
     "payment_status": {
       "description": "The payment status of the Checkout Session, one of `paid`, `unpaid`, or `no_payment_required`.\nYou can use this value to decide when to fulfill your customer's order.",
-      "enum": [
-        "no_payment_required",
-        "paid",
-        "unpaid"
-      ],
+      "enum": ["no_payment_required", "paid", "unpaid"],
       "type": "string"
     },
     "phone_number_collection": {
@@ -812,19 +618,14 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "enabled"
-      ],
+      "required": ["enabled"],
       "title": "PaymentPagesCheckoutSessionPhoneNumberCollection",
       "type": "object"
     },
     "recovered_from": {
       "description": "The ID of the original expired Checkout Session that triggered the recovery flow.",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "setup_intent": {
       "description": "The ID of the SetupIntent for Checkout Sessions in `setup` mode.",
@@ -840,50 +641,32 @@
             "city": {
               "description": "City, district, suburb, town, or village.",
               "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             },
             "country": {
               "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
               "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             },
             "line1": {
               "description": "Address line 1 (e.g., street, PO Box, or company name).",
               "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             },
             "line2": {
               "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
               "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             },
             "postal_code": {
               "description": "ZIP or postal code.",
               "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             },
             "state": {
               "description": "State, county, province, or region.",
               "maxLength": 5000,
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             }
           },
           "title": "Address",
@@ -892,34 +675,22 @@
         "carrier": {
           "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "name": {
           "description": "Recipient name.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "phone": {
           "description": "Recipient phone (including extension).",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "tracking_number": {
           "description": "The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
       "title": "Shipping",
@@ -1175,9 +946,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "allowed_countries"
-      ],
+      "required": ["allowed_countries"],
       "title": "PaymentPagesCheckoutSessionShippingAddressCollection",
       "type": "object"
     },
@@ -1196,10 +965,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "shipping_amount",
-          "shipping_rate"
-        ],
+        "required": ["shipping_amount", "shipping_rate"],
         "title": "PaymentPagesCheckoutSessionShippingOption",
         "type": "object"
       },
@@ -1212,30 +978,13 @@
     },
     "status": {
       "description": "The status of the Checkout Session, one of `open`, `complete`, or `expired`.",
-      "enum": [
-        "complete",
-        "expired",
-        "open",
-        null
-      ],
-      "type": [
-        "string",
-        "null"
-      ]
+      "enum": ["complete", "expired", "open", null],
+      "type": ["string", "null"]
     },
     "submit_type": {
       "description": "Describes the type of transaction being performed by Checkout in order to customize\nrelevant text on the page, such as the submit button. `submit_type` can only be\nspecified on Checkout Sessions in `payment` mode, but not Checkout Sessions\nin `subscription` or `setup` mode.",
-      "enum": [
-        "auto",
-        "book",
-        "donate",
-        "pay",
-        null
-      ],
-      "type": [
-        "string",
-        "null"
-      ]
+      "enum": ["auto", "book", "donate", "pay", null],
+      "type": ["string", "null"]
     },
     "subscription": {
       "description": "The ID of the subscription for Checkout Sessions in `subscription` mode.",
@@ -1255,9 +1004,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "enabled"
-      ],
+      "required": ["enabled"],
       "title": "PaymentPagesCheckoutSessionTaxIDCollection",
       "type": "object"
     },
@@ -1270,10 +1017,7 @@
         },
         "amount_shipping": {
           "description": "This is the sum of all the line item shipping amounts.",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "amount_tax": {
           "description": "This is the sum of all the line item tax amounts.",
@@ -1295,10 +1039,7 @@
                     "type": "object"
                   }
                 },
-                "required": [
-                  "amount",
-                  "discount"
-                ],
+                "required": ["amount", "discount"],
                 "title": "LineItemsDiscountAmount",
                 "type": "object"
               },
@@ -1317,38 +1058,26 @@
                     "type": "object"
                   }
                 },
-                "required": [
-                  "amount",
-                  "rate"
-                ],
+                "required": ["amount", "rate"],
                 "title": "LineItemsTaxAmount",
                 "type": "object"
               },
               "type": "array"
             }
           },
-          "required": [
-            "discounts",
-            "taxes"
-          ],
+          "required": ["discounts", "taxes"],
           "title": "PaymentPagesCheckoutSessionTotalDetailsResourceBreakdown",
           "type": "object"
         }
       },
-      "required": [
-        "amount_discount",
-        "amount_tax"
-      ],
+      "required": ["amount_discount", "amount_tax"],
       "title": "PaymentPagesCheckoutSessionTotalDetails",
       "type": "object"
     },
     "url": {
       "description": "The URL to the Checkout Session.",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     }
   },
   "required": [
@@ -1437,9 +1166,7 @@
             "product": "string",
             "recurring": {},
             "tax_behavior": "exclusive",
-            "tiers": [
-              {}
-            ],
+            "tiers": [{}],
             "tiers_mode": "graduated",
             "transform_quantity": {},
             "type": "one_time",
@@ -1471,9 +1198,7 @@
         "currency": "cad",
         "mandate_options": {
           "custom_mandate_url": "string",
-          "default_for": [
-            "invoice"
-          ],
+          "default_for": ["invoice"],
           "interval_description": "string",
           "payment_schedule": "combined",
           "transaction_type": "business"
@@ -1490,9 +1215,7 @@
         "expires_after_days": 0
       }
     },
-    "payment_method_types": [
-      "string"
-    ],
+    "payment_method_types": ["string"],
     "payment_status": "no_payment_required",
     "phone_number_collection": {
       "enabled": true
@@ -1514,9 +1237,7 @@
       "tracking_number": "string"
     },
     "shipping_address_collection": {
-      "allowed_countries": [
-        "AC"
-      ]
+      "allowed_countries": ["AC"]
     },
     "shipping_options": [
       {

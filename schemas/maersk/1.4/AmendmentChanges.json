@@ -1,0 +1,94 @@
+{
+  "title": "AmendmentChanges",
+  "type": "object",
+  "properties": {
+    "containerCountChanges": {
+      "type": "array",
+      "items": {
+        "title": "ContainerQuantityChange",
+        "type": "object",
+        "properties": {
+          "changeType": {
+            "type": "string",
+            "enum": ["CONTAINER_COUNT_DECREASE", "CONTAINER_COUNT_INCREASE", "CONTAINER_COUNT_NO_CHANGE"]
+          },
+          "containerName": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "containerFFEChange": {
+      "type": "number"
+    },
+    "containerFFETotal": {
+      "type": "number"
+    },
+    "maerskAccelerateSelection": {
+      "type": "string",
+      "enum": ["MA_ADDED", "MA_KEPT", "NO_CHANGE"]
+    },
+    "priceOwnerAdded": {
+      "type": "boolean"
+    },
+    "priceOwnerChanged": {
+      "type": "boolean"
+    },
+    "priceOwnerOnlyChange": {
+      "type": "boolean"
+    },
+    "productSelection": {
+      "type": "string",
+      "enum": ["NO_CHANGE", "PRODUCT_CHANGED"]
+    },
+    "rollableSelection": {
+      "type": "string",
+      "enum": ["NO_CHANGE", "ROLLABLE_ADDED", "ROLLABLE_REMOVED"]
+    },
+    "routeChanges": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "DESTINATION_CHANGED",
+          "DESTINATION_SERVICEMODE_CHANGED",
+          "FIRST_LOAD_PORT_CHANGED",
+          "FIRST_VESSEL_CHANGED",
+          "LAST_DISCHARGE_PORT_CHANGED",
+          "ORIGIN_CHANGED",
+          "ORIGIN_SERVICEMODE_CHANGED",
+          "PENDING_VESSEL_ADDED",
+          "ROUTE_SCHEDULE_DROPPED",
+          "ROUTE_SCHEDULE_READDED"
+        ]
+      }
+    },
+    "serviceContractChanged": {
+      "type": "boolean"
+    }
+  },
+  "default": {
+    "containerCountChanges": [
+      {
+        "changeType": "CONTAINER_COUNT_DECREASE",
+        "containerName": "string",
+        "quantity": 0
+      }
+    ],
+    "containerFFEChange": 0,
+    "containerFFETotal": 0,
+    "maerskAccelerateSelection": "MA_ADDED",
+    "priceOwnerAdded": true,
+    "priceOwnerChanged": true,
+    "priceOwnerOnlyChange": true,
+    "productSelection": "NO_CHANGE",
+    "rollableSelection": "NO_CHANGE",
+    "routeChanges": ["DESTINATION_CHANGED"],
+    "serviceContractChanged": true
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
