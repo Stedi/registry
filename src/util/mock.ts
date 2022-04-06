@@ -2,7 +2,8 @@ import _ from "lodash";
 import { OpenAPIV3 } from "openapi-types";
 import RandExp from "randexp";
 
-RandExp.prototype.randInt(1, 1);
+// Use fixed randomness, always generate same random values to prevent from excessive diffs causing conflicts
+RandExp.prototype.randInt = () => 1;
 
 export type SchemaLike = OpenAPIV3.SchemaObject;
 
@@ -96,9 +97,9 @@ export function mock(schemalike: SchemaLike): any {
       randexp.max = maxLength;
 
       let val = randexp.gen();
-
-      while (val.length < minLength || val.length > maxLength) {
-        val = randexp.gen();
+      val = _.padEnd(val, minLength, val);
+      if (val.length > maxLength) {
+        val = val.substring(0, maxLength);
       }
 
       return val;
