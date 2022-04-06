@@ -2,6 +2,8 @@ import _ from "lodash";
 import { OpenAPIV3 } from "openapi-types";
 import RandExp from "randexp";
 
+RandExp.prototype.randInt(1, 1);
+
 export type SchemaLike = OpenAPIV3.SchemaObject;
 
 function resolveAllOf(schema: SchemaLike): SchemaLike {

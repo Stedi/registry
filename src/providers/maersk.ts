@@ -4,8 +4,7 @@ export class MaerskProvider extends OpenAPIProvider {
   constructor() {
     super({
       versions: ["1.4"],
-      baseUrl:
-        "https://api.productmanagement.maersk.com/offers/docs/v3/api-docs",
+      baseUrl: "https://api.productmanagement.maersk.com/offers/docs/v3/api-docs",
       sanitizeSchema,
     });
   }
@@ -19,6 +18,6 @@ function sanitizeSchema(schema: unknown) {
       }
 
       return value;
-    })
+    }),
   );
 }
