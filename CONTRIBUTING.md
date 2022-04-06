@@ -6,7 +6,7 @@ In this guide you will get an overview of the contribution workflow from creatin
 
 ### Adding a provider
 
-To add a new provider, please create a new file in the `src/providers` repository. The file name should be the provider name + `.ts` suffic, and the file should contain the logic to fetch the provider data.
+To add a new provider, please create a new file in the `src/providers` repository. The file name should be the provider name + `.ts` suffix, and the file should contain the logic to fetch the provider data.
 
 If your provider exposing their API using OpenAPI or Swagger, you can use following template to automate this process:
 
