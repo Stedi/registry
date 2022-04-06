@@ -7,10 +7,7 @@
     },
     "billing_scheme": {
       "description": "Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.",
-      "enum": [
-        "per_unit",
-        "tiered"
-      ],
+      "enum": ["per_unit", "tiered"],
       "type": "string"
     },
     "created": {
@@ -34,25 +31,17 @@
     "lookup_key": {
       "description": "A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "metadata": {},
     "nickname": {
       "description": "A brief description of the price, hidden from customers.",
       "maxLength": 5000,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "object": {
       "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "price"
-      ],
+      "enum": ["price"],
       "type": "string"
     },
     "product": {
@@ -65,26 +54,12 @@
       "properties": {
         "aggregate_usage": {
           "description": "Specifies a usage aggregation strategy for prices of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.",
-          "enum": [
-            "last_during_period",
-            "last_ever",
-            "max",
-            "sum",
-            null
-          ],
-          "type": [
-            "string",
-            "null"
-          ]
+          "enum": ["last_during_period", "last_ever", "max", "sum", null],
+          "type": ["string", "null"]
         },
         "interval": {
           "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
-          "enum": [
-            "day",
-            "month",
-            "week",
-            "year"
-          ],
+          "enum": ["day", "month", "week", "year"],
           "type": "string"
         },
         "interval_count": {
@@ -93,33 +68,18 @@
         },
         "usage_type": {
           "description": "Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.",
-          "enum": [
-            "licensed",
-            "metered"
-          ],
+          "enum": ["licensed", "metered"],
           "type": "string"
         }
       },
-      "required": [
-        "interval",
-        "interval_count",
-        "usage_type"
-      ],
+      "required": ["interval", "interval_count", "usage_type"],
       "title": "Recurring",
       "type": "object"
     },
     "tax_behavior": {
       "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.",
-      "enum": [
-        "exclusive",
-        "inclusive",
-        "unspecified",
-        null
-      ],
-      "type": [
-        "string",
-        "null"
-      ]
+      "enum": ["exclusive", "inclusive", "unspecified", null],
+      "type": ["string", "null"]
     },
     "tiers": {
       "description": "Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.",
@@ -128,40 +88,25 @@
         "properties": {
           "flat_amount": {
             "description": "Price for the entire tier.",
-            "type": [
-              "integer",
-              "null"
-            ]
+            "type": ["integer", "null"]
           },
           "flat_amount_decimal": {
             "description": "Same as `flat_amount`, but contains a decimal value with at most 12 decimal places.",
             "format": "decimal",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           },
           "unit_amount": {
             "description": "Per unit price for units relevant to the tier.",
-            "type": [
-              "integer",
-              "null"
-            ]
+            "type": ["integer", "null"]
           },
           "unit_amount_decimal": {
             "description": "Same as `unit_amount`, but contains a decimal value with at most 12 decimal places.",
             "format": "decimal",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           },
           "up_to": {
             "description": "Up to and including to this quantity will be contained in the tier.",
-            "type": [
-              "integer",
-              "null"
-            ]
+            "type": ["integer", "null"]
           }
         },
         "title": "PriceTier",
@@ -171,15 +116,8 @@
     },
     "tiers_mode": {
       "description": "Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.",
-      "enum": [
-        "graduated",
-        "volume",
-        null
-      ],
-      "type": [
-        "string",
-        "null"
-      ]
+      "enum": ["graduated", "volume", null],
+      "type": ["string", "null"]
     },
     "transform_quantity": {
       "description": "",
@@ -190,42 +128,27 @@
         },
         "round": {
           "description": "After division, either round the result `up` or `down`.",
-          "enum": [
-            "down",
-            "up"
-          ],
+          "enum": ["down", "up"],
           "type": "string"
         }
       },
-      "required": [
-        "divide_by",
-        "round"
-      ],
+      "required": ["divide_by", "round"],
       "title": "TransformQuantity",
       "type": "object"
     },
     "type": {
       "description": "One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.",
-      "enum": [
-        "one_time",
-        "recurring"
-      ],
+      "enum": ["one_time", "recurring"],
       "type": "string"
     },
     "unit_amount": {
       "description": "The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.",
-      "type": [
-        "integer",
-        "null"
-      ]
+      "type": ["integer", "null"]
     },
     "unit_amount_decimal": {
       "description": "The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.",
       "format": "decimal",
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     }
   },
   "required": [

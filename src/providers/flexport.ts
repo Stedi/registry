@@ -23,12 +23,7 @@ export class FlexportProvider extends OpenAPIProvider {
   }
 
   override async getSchema(version: string): Promise<OpenAPI3Schema> {
-    const definition = await github.getRaw(
-      "distributeaid",
-      "flexport-sdk-js",
-      "saga",
-      `api-docs/${version}.yaml`
-    );
+    const definition = await github.getRaw("distributeaid", "flexport-sdk-js", "saga", `api-docs/${version}.yaml`);
 
     return {
       type: "openapi-v3",
@@ -90,6 +85,6 @@ function sanitizeSchema(schema: unknown) {
       }
 
       return value;
-    })
+    }),
   );
 }

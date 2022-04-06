@@ -9,10 +9,7 @@ const asyncRimraf = promisify(rimraf);
 
 const { POSTMAN_API_KEY } = process.env;
 
-async function fetchCollection(
-  collectionId: string,
-  postmanApiKey: string
-): Promise<any> {
+async function fetchCollection(collectionId: string, postmanApiKey: string): Promise<any> {
   const url = `https://api.getpostman.com/collections/${collectionId}`;
   return (
     await axios.get(url, {
@@ -23,11 +20,7 @@ async function fetchCollection(
   ).data;
 }
 
-export async function generate(
-  collectionId: string,
-  provider: string,
-  postmanApiKey: string
-) {
+export async function generate(collectionId: string, provider: string, postmanApiKey: string) {
   const collection: any = await fetchCollection(collectionId, postmanApiKey);
   const yamlSchema: string = await postmanToOpenApi(JSON.stringify(collection));
   // Turn the yaml into json, because the generators need json
@@ -45,9 +38,5 @@ export async function generate(
     throw Error(`Environment variable POSTMAN_API_KEY is missing.`);
   }
 
-  await generate(
-    "20203465-a1bfe895-e3b1-4549-aa89-345ff26285a7",
-    "quickbooks",
-    POSTMAN_API_KEY
-  );
+  await generate("20203465-a1bfe895-e3b1-4549-aa89-345ff26285a7", "quickbooks", POSTMAN_API_KEY);
 })();

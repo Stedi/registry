@@ -9,7 +9,7 @@ function resolveAllOf(schema: SchemaLike): SchemaLike {
     schema = _.reduce(
       schema.allOf as SchemaLike,
       (combined, subschema: SchemaLike) => _.merge({}, resolveAllOf(subschema)),
-      schema
+      schema,
     );
   }
   return schema;
@@ -87,9 +87,7 @@ export function mock(schemalike: SchemaLike): any {
     const { format } = schema;
     const val = format ? formatExamples[format] : formatExamples._default;
     const minLength = !_.isNil(schema.minLength) ? schema.minLength : 0;
-    const maxLength = !_.isNil(schema.maxLength)
-      ? schema.maxLength
-      : val.length;
+    const maxLength = !_.isNil(schema.maxLength) ? schema.maxLength : val.length;
 
     if (schema.pattern) {
       const randexp = new RandExp(schema.pattern);

@@ -19,16 +19,14 @@ export async function generateForVersion(
   rootPath: string,
   providerName: keyof typeof providers,
   version: string,
-  customPath?: string
+  customPath?: string,
 ) {
   if (!providers[providerName].isEnabled()) {
     console.log(`Skipping ${providerName} because it's not enabled.`);
     return;
   }
 
-  const baseDir = customPath
-    ? path.join(rootPath, customPath)
-    : path.join(rootPath, providerName, version);
+  const baseDir = customPath ? path.join(rootPath, customPath) : path.join(rootPath, providerName, version);
   await asyncRimraf(baseDir);
 
   const folderExists = !fs.mkdirSync(baseDir, { recursive: true });
@@ -48,11 +46,8 @@ export async function generateForVersion(
   for (const schema of schemas) {
     const target = path.join(baseDir, `${schema.name}.json`);
 
-    (schema.schema as any)["default"] = mock(
-      schema.schema as OpenAPIV3.SchemaObject
-    );
-    (schema.schema as any)["$schema"] =
-      "https://json-schema.org/draft/2020-12/schema";
+    (schema.schema as any)["default"] = mock(schema.schema as OpenAPIV3.SchemaObject);
+    (schema.schema as any)["$schema"] = "https://json-schema.org/draft/2020-12/schema";
 
     fs.writeFileSync(target, JSON.stringify(schema.schema, null, 2));
 
@@ -61,23 +56,16 @@ export async function generateForVersion(
         schemaName: schema.name,
         target,
         providerName,
-      })
+      }),
     );
   }
 
-  const readmeFileContents = markdownTable([
-    ["Source Schema"],
-    ...markdownTableRows,
-  ]);
+  const readmeFileContents = markdownTable([["Source Schema"], ...markdownTableRows]);
 
   fs.writeFileSync(path.join(baseDir, `README.md`), readmeFileContents);
 }
 
-export async function generateAll(
-  rootPath: string,
-  providerName: keyof typeof providers,
-  customPath?: string
-) {
+export async function generateAll(rootPath: string, providerName: keyof typeof providers, customPath?: string) {
   const versions = await listVersions(providerName);
 
   for (const version of versions) {
@@ -94,6 +82,7 @@ export async function generateAll(
     generateAll("./schemas", "flexport"),
     generateAll("./schemas", "klaviyo"),
     generateAll("./schemas", "maersk"),
+    generateAll("./schemas", "baton"),
     generateAll("./schemas", "shopify", "./shopify/graphql/2022-01"),
   ]);
 })();

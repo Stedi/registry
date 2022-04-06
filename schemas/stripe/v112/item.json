@@ -33,20 +33,14 @@
               "checkout_session": {
                 "description": "The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.",
                 "maxLength": 5000,
-                "type": [
-                  "string",
-                  "null"
-                ]
+                "type": ["string", "null"]
               },
               "coupon": {
                 "description": "A coupon contains information about a percent-off or amount-off discount you\nmight want to apply to a customer. Coupons may be applied to [invoices](https://stripe.com/docs/api#invoices) or\n[orders](https://stripe.com/docs/api#create_order_legacy-coupon). Coupons do not work with conventional one-off [charges](https://stripe.com/docs/api#create_charge).",
                 "properties": {
                   "amount_off": {
                     "description": "Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for this customer.",
-                    "type": [
-                      "integer",
-                      "null"
-                    ]
+                    "type": ["integer", "null"]
                   },
                   "applies_to": {
                     "type": "object"
@@ -58,26 +52,16 @@
                   },
                   "currency": {
                     "description": "If `amount_off` has been set, the three-letter [ISO code for the currency](https://stripe.com/docs/currencies) of the amount to take off.",
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "type": ["string", "null"]
                   },
                   "duration": {
                     "description": "One of `forever`, `once`, and `repeating`. Describes how long a customer who applies this coupon will get the discount.",
-                    "enum": [
-                      "forever",
-                      "once",
-                      "repeating"
-                    ],
+                    "enum": ["forever", "once", "repeating"],
                     "type": "string"
                   },
                   "duration_in_months": {
                     "description": "If `duration` is `repeating`, the number of months the coupon applies. Null if coupon `duration` is `forever` or `once`.",
-                    "type": [
-                      "integer",
-                      "null"
-                    ]
+                    "type": ["integer", "null"]
                   },
                   "id": {
                     "description": "Unique identifier for the object.",
@@ -90,10 +74,7 @@
                   },
                   "max_redemptions": {
                     "description": "Maximum number of times this coupon can be redeemed, in total, across all customers, before it is no longer valid.",
-                    "type": [
-                      "integer",
-                      "null"
-                    ]
+                    "type": ["integer", "null"]
                   },
                   "metadata": {
                     "type": "object"
@@ -101,32 +82,21 @@
                   "name": {
                     "description": "Name of the coupon displayed to customers on for instance invoices or receipts.",
                     "maxLength": 5000,
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "type": ["string", "null"]
                   },
                   "object": {
                     "description": "String representing the object's type. Objects of the same type share the same value.",
-                    "enum": [
-                      "coupon"
-                    ],
+                    "enum": ["coupon"],
                     "type": "string"
                   },
                   "percent_off": {
                     "description": "Percent that will be taken off the subtotal of any invoices for this customer for the duration of the coupon. For example, a coupon with percent_off of 50 will make a %s100 invoice %s50 instead.",
-                    "type": [
-                      "number",
-                      "null"
-                    ]
+                    "type": ["number", "null"]
                   },
                   "redeem_by": {
                     "description": "Date after which the coupon can no longer be redeemed.",
                     "format": "unix-time",
-                    "type": [
-                      "integer",
-                      "null"
-                    ]
+                    "type": ["integer", "null"]
                   },
                   "times_redeemed": {
                     "description": "Number of times this coupon has been applied to a customer.",
@@ -137,15 +107,7 @@
                     "type": "boolean"
                   }
                 },
-                "required": [
-                  "created",
-                  "duration",
-                  "id",
-                  "livemode",
-                  "object",
-                  "times_redeemed",
-                  "valid"
-                ],
+                "required": ["created", "duration", "id", "livemode", "object", "times_redeemed", "valid"],
                 "title": "Coupon",
                 "type": "object"
               },
@@ -157,10 +119,7 @@
               "end": {
                 "description": "If the coupon has a duration of `repeating`, the date that this discount will end. If the coupon has a duration of `once` or `forever`, this attribute will be null.",
                 "format": "unix-time",
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "type": ["integer", "null"]
               },
               "id": {
                 "description": "The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.",
@@ -170,24 +129,16 @@
               "invoice": {
                 "description": "The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.",
                 "maxLength": 5000,
-                "type": [
-                  "string",
-                  "null"
-                ]
+                "type": ["string", "null"]
               },
               "invoice_item": {
                 "description": "The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's coupon was applied to, if it was applied directly to a particular invoice item or invoice line item.",
                 "maxLength": 5000,
-                "type": [
-                  "string",
-                  "null"
-                ]
+                "type": ["string", "null"]
               },
               "object": {
                 "description": "String representing the object's type. Objects of the same type share the same value.",
-                "enum": [
-                  "discount"
-                ],
+                "enum": ["discount"],
                 "type": "string"
               },
               "promotion_code": {
@@ -203,26 +154,15 @@
               "subscription": {
                 "description": "The subscription that this coupon is applied to, if it is applied to a particular subscription.",
                 "maxLength": 5000,
-                "type": [
-                  "string",
-                  "null"
-                ]
+                "type": ["string", "null"]
               }
             },
-            "required": [
-              "coupon",
-              "id",
-              "object",
-              "start"
-            ],
+            "required": ["coupon", "id", "object", "start"],
             "title": "Discount",
             "type": "object"
           }
         },
-        "required": [
-          "amount",
-          "discount"
-        ],
+        "required": ["amount", "discount"],
         "title": "LineItemsDiscountAmount",
         "type": "object"
       },
@@ -235,9 +175,7 @@
     },
     "object": {
       "description": "String representing the object's type. Objects of the same type share the same value.",
-      "enum": [
-        "item"
-      ],
+      "enum": ["item"],
       "type": "string"
     },
     "price": {
@@ -249,10 +187,7 @@
         },
         "billing_scheme": {
           "description": "Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.",
-          "enum": [
-            "per_unit",
-            "tiered"
-          ],
+          "enum": ["per_unit", "tiered"],
           "type": "string"
         },
         "created": {
@@ -276,25 +211,17 @@
         "lookup_key": {
           "description": "A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "metadata": {},
         "nickname": {
           "description": "A brief description of the price, hidden from customers.",
           "maxLength": 5000,
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "object": {
           "description": "String representing the object's type. Objects of the same type share the same value.",
-          "enum": [
-            "price"
-          ],
+          "enum": ["price"],
           "type": "string"
         },
         "product": {
@@ -307,26 +234,12 @@
           "properties": {
             "aggregate_usage": {
               "description": "Specifies a usage aggregation strategy for prices of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.",
-              "enum": [
-                "last_during_period",
-                "last_ever",
-                "max",
-                "sum",
-                null
-              ],
-              "type": [
-                "string",
-                "null"
-              ]
+              "enum": ["last_during_period", "last_ever", "max", "sum", null],
+              "type": ["string", "null"]
             },
             "interval": {
               "description": "The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.",
-              "enum": [
-                "day",
-                "month",
-                "week",
-                "year"
-              ],
+              "enum": ["day", "month", "week", "year"],
               "type": "string"
             },
             "interval_count": {
@@ -335,33 +248,18 @@
             },
             "usage_type": {
               "description": "Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.",
-              "enum": [
-                "licensed",
-                "metered"
-              ],
+              "enum": ["licensed", "metered"],
               "type": "string"
             }
           },
-          "required": [
-            "interval",
-            "interval_count",
-            "usage_type"
-          ],
+          "required": ["interval", "interval_count", "usage_type"],
           "title": "Recurring",
           "type": "object"
         },
         "tax_behavior": {
           "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.",
-          "enum": [
-            "exclusive",
-            "inclusive",
-            "unspecified",
-            null
-          ],
-          "type": [
-            "string",
-            "null"
-          ]
+          "enum": ["exclusive", "inclusive", "unspecified", null],
+          "type": ["string", "null"]
         },
         "tiers": {
           "description": "Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.",
@@ -370,40 +268,25 @@
             "properties": {
               "flat_amount": {
                 "description": "Price for the entire tier.",
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "type": ["integer", "null"]
               },
               "flat_amount_decimal": {
                 "description": "Same as `flat_amount`, but contains a decimal value with at most 12 decimal places.",
                 "format": "decimal",
-                "type": [
-                  "string",
-                  "null"
-                ]
+                "type": ["string", "null"]
               },
               "unit_amount": {
                 "description": "Per unit price for units relevant to the tier.",
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "type": ["integer", "null"]
               },
               "unit_amount_decimal": {
                 "description": "Same as `unit_amount`, but contains a decimal value with at most 12 decimal places.",
                 "format": "decimal",
-                "type": [
-                  "string",
-                  "null"
-                ]
+                "type": ["string", "null"]
               },
               "up_to": {
                 "description": "Up to and including to this quantity will be contained in the tier.",
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "type": ["integer", "null"]
               }
             },
             "title": "PriceTier",
@@ -413,15 +296,8 @@
         },
         "tiers_mode": {
           "description": "Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.",
-          "enum": [
-            "graduated",
-            "volume",
-            null
-          ],
-          "type": [
-            "string",
-            "null"
-          ]
+          "enum": ["graduated", "volume", null],
+          "type": ["string", "null"]
         },
         "transform_quantity": {
           "description": "",
@@ -432,42 +308,27 @@
             },
             "round": {
               "description": "After division, either round the result `up` or `down`.",
-              "enum": [
-                "down",
-                "up"
-              ],
+              "enum": ["down", "up"],
               "type": "string"
             }
           },
-          "required": [
-            "divide_by",
-            "round"
-          ],
+          "required": ["divide_by", "round"],
           "title": "TransformQuantity",
           "type": "object"
         },
         "type": {
           "description": "One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.",
-          "enum": [
-            "one_time",
-            "recurring"
-          ],
+          "enum": ["one_time", "recurring"],
           "type": "string"
         },
         "unit_amount": {
           "description": "The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": ["integer", "null"]
         },
         "unit_amount_decimal": {
           "description": "The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.",
           "format": "decimal",
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
       "required": [
@@ -487,10 +348,7 @@
     },
     "quantity": {
       "description": "The quantity of products being purchased.",
-      "type": [
-        "integer",
-        "null"
-      ]
+      "type": ["integer", "null"]
     },
     "taxes": {
       "description": "The taxes applied to the line item.",
@@ -511,10 +369,7 @@
               "country": {
                 "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
                 "maxLength": 5000,
-                "type": [
-                  "string",
-                  "null"
-                ]
+                "type": ["string", "null"]
               },
               "created": {
                 "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
@@ -524,10 +379,7 @@
               "description": {
                 "description": "An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.",
                 "maxLength": 5000,
-                "type": [
-                  "string",
-                  "null"
-                ]
+                "type": ["string", "null"]
               },
               "display_name": {
                 "description": "The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.",
@@ -546,10 +398,7 @@
               "jurisdiction": {
                 "description": "The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.",
                 "maxLength": 5000,
-                "type": [
-                  "string",
-                  "null"
-                ]
+                "type": ["string", "null"]
               },
               "livemode": {
                 "description": "Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.",
@@ -558,9 +407,7 @@
               "metadata": {},
               "object": {
                 "description": "String representing the object's type. Objects of the same type share the same value.",
-                "enum": [
-                  "tax_rate"
-                ],
+                "enum": ["tax_rate"],
                 "type": "string"
               },
               "percentage": {
@@ -570,62 +417,27 @@
               "state": {
                 "description": "[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.",
                 "maxLength": 5000,
-                "type": [
-                  "string",
-                  "null"
-                ]
+                "type": ["string", "null"]
               },
               "tax_type": {
                 "description": "The high-level tax type, such as `vat` or `sales_tax`.",
-                "enum": [
-                  "gst",
-                  "hst",
-                  "jct",
-                  "pst",
-                  "qst",
-                  "rst",
-                  "sales_tax",
-                  "vat",
-                  null
-                ],
-                "type": [
-                  "string",
-                  "null"
-                ]
+                "enum": ["gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat", null],
+                "type": ["string", "null"]
               }
             },
-            "required": [
-              "active",
-              "created",
-              "display_name",
-              "id",
-              "inclusive",
-              "livemode",
-              "object",
-              "percentage"
-            ],
+            "required": ["active", "created", "display_name", "id", "inclusive", "livemode", "object", "percentage"],
             "title": "TaxRate",
             "type": "object"
           }
         },
-        "required": [
-          "amount",
-          "rate"
-        ],
+        "required": ["amount", "rate"],
         "title": "LineItemsTaxAmount",
         "type": "object"
       },
       "type": "array"
     }
   },
-  "required": [
-    "amount_subtotal",
-    "amount_total",
-    "currency",
-    "description",
-    "id",
-    "object"
-  ],
+  "required": ["amount_subtotal", "amount_total", "currency", "description", "id", "object"],
   "title": "LineItem",
   "type": "object",
   "default": {
