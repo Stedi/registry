@@ -2,7 +2,7 @@
 
 Thank you for investing your time in contributing to our project! Any contribution you make will be reflected on [stedi.com/registry/json-schemas](https://www.stedi.com/registry/json-schemas) :sparkles:.
 
-In this guide you will get an overview of the contribution workflow from creating a provider, creating a PR, reviewing, and merging the PR.
+In this guide you will get an overview on how to contribute schemas to the Stedi's Registry.
 
 There are two ways to contribute schemas to the registry:
 
