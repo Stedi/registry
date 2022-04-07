@@ -8,6 +8,7 @@ import { FlexportProvider } from "./flexport";
 import { XPOLogisticsProvider } from "./xpoLogistics";
 import { MaerskProvider } from "./maersk";
 import { BatonProvider } from "./baton";
+import { SquareProvider } from "./square";
 
 export default {
   stripe: new StripeProvider(),
@@ -20,4 +21,5 @@ export default {
   xpoLogistics: new XPOLogisticsProvider(),
   maersk: new MaerskProvider(),
   baton: new BatonProvider(),
+  square: new SquareProvider(),
 };

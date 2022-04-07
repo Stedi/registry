@@ -27,6 +27,20 @@ export class BatonProvider extends OpenAPIProvider {
         "UpdateTrailersResponse",
         "NavTracTrailer",
       ],
+      sanitizeSchema,
     });
   }
+}
+
+function sanitizeSchema(schema: unknown) {
+  return JSON.parse(
+    JSON.stringify(schema, (key, value) => {
+      // In Baton's case, allOfs have only one element, so we can just remove the array and flatten it
+      if (value.allOf) {
+        return value.allOf[0];
+      }
+
+      return value;
+    }),
+  );
 }

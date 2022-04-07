@@ -68,6 +68,10 @@ function sanitizeSchema(schema: unknown) {
         delete value.pattern;
       }
 
+      if (value.format) {
+        delete value.format;
+      }
+
       return value;
     }),
   );

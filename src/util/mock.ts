@@ -88,7 +88,7 @@ export function mock(schemalike: SchemaLike): any {
 
   if (type === "string") {
     const { format } = schema;
-    const val = format ? formatExamples[format] : formatExamples._default;
+    const val = format && formatExamples[format] ? formatExamples[format] : formatExamples._default;
     const minLength = !_.isNil(schema.minLength) ? schema.minLength : 0;
     const maxLength = !_.isNil(schema.maxLength) ? schema.maxLength : val.length;
 

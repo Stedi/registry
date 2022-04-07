@@ -61,7 +61,15 @@ async function generateAll(provider: Provider) {
   const versions = await provider.getVersions();
 
   for (const version of versions) {
-    await generateForVersion(provider, version);
+    try {
+      await generateForVersion(provider, version);
+    } catch (error) {
+      console.error("Failed to generate schemas", {
+        provider: provider.name,
+        version,
+        error,
+      });
+    }
   }
 }
 

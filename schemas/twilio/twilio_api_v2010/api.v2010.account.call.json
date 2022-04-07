@@ -6,10 +6,6 @@
       "minLength": 34,
       "type": "string"
     },
-    "annotation": {
-      "description": "The annotation provided for the call",
-      "type": "string"
-    },
     "answered_by": {
       "description": "Either `human` or `machine` if this call was initiated with answering machine detection. Empty otherwise.",
       "type": "string"
@@ -78,6 +74,7 @@
     },
     "price_unit": {
       "description": "The currency in which `Price` is measured.",
+      "format": "currency",
       "type": "string"
     },
     "queue_time": {
@@ -101,6 +98,7 @@
     },
     "subresource_uris": {
       "description": "A list of related subresources identified by their relative URIs",
+      "format": "object",
       "type": "object"
     },
     "to": {
@@ -119,14 +117,12 @@
     },
     "uri": {
       "description": "The URI of this resource, relative to `https://api.twilio.com`",
-      "format": "uri",
       "type": "string"
     }
   },
   "type": "object",
   "default": {
     "account_sid": "stringstringstringstringstringstri",
-    "annotation": "string",
     "answered_by": "string",
     "api_version": "string",
     "caller_name": "string",
@@ -151,7 +147,7 @@
     "to": "string",
     "to_formatted": "string",
     "trunk_sid": "stringstringstringstringstringstri",
-    "uri": "https://example.com/path"
+    "uri": "string"
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

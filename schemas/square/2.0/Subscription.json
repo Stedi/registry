@@ -1,0 +1,151 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "maxLength": 255,
+      "type": "string",
+      "description": "The Square-assigned ID of the subscription."
+    },
+    "location_id": {
+      "type": "string",
+      "description": "The ID of the location associated with the subscription."
+    },
+    "plan_id": {
+      "type": "string",
+      "description": "The ID of the subscribed-to [subscription plan](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogSubscriptionPlan)."
+    },
+    "customer_id": {
+      "type": "string",
+      "description": "The ID of the subscribing [customer](https://developer.squareup.com/reference/square_2022-03-16/objects/Customer) profile."
+    },
+    "start_date": {
+      "type": "string",
+      "description": "The `YYYY-MM-DD`-formatted date (for example, 2013-01-15) to start the subscription."
+    },
+    "canceled_date": {
+      "type": "string",
+      "description": "The `YYYY-MM-DD`-formatted date (for example, 2013-01-15) to cancel the subscription, \nwhen the subscription status changes to `CANCELED` and the subscription billing stops.\n\nIf this field is not set, the subscription ends according its subscription plan.\n\nThis field cannot be updated, other than being cleared."
+    },
+    "charged_through_date": {
+      "type": "string",
+      "description": "The `YYYY-MM-DD`-formatted date up to when the subscriber is invoiced for the\nsubscription.\n\nAfter the invoice is sent for a given billing period,\nthis date will be the last day of the billing period.\nFor example,\nsuppose for the month of May a subscriber gets an invoice\n(or charged the card) on May 1. For the monthly billing scenario,\nthis date is then set to May 31."
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the subscription."
+    },
+    "tax_percentage": {
+      "type": "string",
+      "description": "The tax amount applied when billing the subscription. The\npercentage is expressed in decimal form, using a `'.'` as the decimal\nseparator and without a `'%'` sign. For example, a value of `7.5`\ncorresponds to 7.5%."
+    },
+    "invoice_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The IDs of the [invoices](https://developer.squareup.com/reference/square_2022-03-16/objects/Invoice) created for the\nsubscription, listed in order when the invoices were created\n(oldest invoices appear first)."
+    },
+    "price_override_money": {
+      "description": "A custom price to apply for the subscription. If specified,\nit overrides the price configured by the subscription plan.",
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of money, in the smallest denomination of the currency\nindicated by `currency`. For example, when `currency` is `USD`, `amount` is\nin cents. Monetary amounts can be positive or negative. See the specific\nfield description to determine the meaning of the sign in a particular case."
+        },
+        "currency": {
+          "type": "string",
+          "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+        }
+      }
+    },
+    "version": {
+      "type": "integer",
+      "format": "int64",
+      "description": "The version of the object. When updating an object, the version\nsupplied must match the version in the database, otherwise the write will\nbe rejected as conflicting."
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The timestamp when the subscription was created, in RFC 3339 format."
+    },
+    "card_id": {
+      "type": "string",
+      "description": "The ID of the [subscriber's](https://developer.squareup.com/reference/square_2022-03-16/objects/Customer) [card](https://developer.squareup.com/reference/square_2022-03-16/objects/Card)\nused to charge for the subscription."
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Timezone that will be used in date calculations for the subscription.\nDefaults to the timezone of the location based on `location_id`.\nFormat: the IANA Timezone Database identifier for the location timezone (for example, `America/Los_Angeles`)."
+    },
+    "source": {
+      "description": "The origination details of the subscription.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "maxLength": 255,
+          "type": "string",
+          "description": "The name used to identify the place (physical or digital) that\na subscription originates. If unset, the name defaults to the name\nof the application that created the subscription."
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of an action scoped to a subscription."
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the action."
+          },
+          "effective_date": {
+            "type": "string",
+            "description": "The `YYYY-MM-DD`-formatted date when the action occurs on the subscription."
+          },
+          "new_plan_id": {
+            "type": "string",
+            "description": "The target subscription plan a subscription switches to, for a `SWAP_PLAN` action."
+          }
+        },
+        "description": "Represents an action as a pending change to a subscription."
+      },
+      "description": "The list of scheduled actions on this subscription. It is set only in the response from  \n[RetrieveSubscription](https://developer.squareup.com/reference/square_2022-03-16/subscriptions-api/retrieve-subscription) with the query parameter\nof `include=actions` or from \n[SearchSubscriptions](https://developer.squareup.com/reference/square_2022-03-16/subscriptions-api/search-subscriptions) with the input parameter \nof `include:[\"actions\"]`."
+    }
+  },
+  "description": "Represents a subscription to a subscription plan by a subscriber.\n\nFor an overview of the `Subscription` type, see\n[Subscription object](https://developer.squareup.com/docs/subscriptions-api/overview#subscription-object-overview).",
+  "default": {
+    "id": "string",
+    "location_id": "string",
+    "plan_id": "string",
+    "customer_id": "string",
+    "start_date": "string",
+    "canceled_date": "string",
+    "charged_through_date": "string",
+    "status": "string",
+    "tax_percentage": "string",
+    "invoice_ids": ["string"],
+    "price_override_money": {
+      "amount": 0,
+      "currency": "string"
+    },
+    "version": 0,
+    "created_at": "string",
+    "card_id": "string",
+    "timezone": "string",
+    "source": {
+      "name": "string"
+    },
+    "actions": [
+      {
+        "id": "string",
+        "type": "string",
+        "effective_date": "string",
+        "new_plan_id": "string"
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
