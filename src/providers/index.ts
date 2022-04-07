@@ -7,6 +7,7 @@ import { TwilioProvider } from "./twilio";
 import { FlexportProvider } from "./flexport";
 import { MaerskProvider } from "./maersk";
 import { BatonProvider } from "./baton";
+import { SquareProvider } from "./square";
 
 export default {
   stripe: new StripeProvider(),
@@ -18,4 +19,5 @@ export default {
   klaviyo: new KlaviyoProvider(),
   maersk: new MaerskProvider(),
   baton: new BatonProvider(),
+  square: new SquareProvider(),
 };
