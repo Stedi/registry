@@ -10,6 +10,7 @@ export interface OpenAPIProviderProps {
   versions: string[];
   baseUrl?: string;
   entities?: string[];
+  customPath?: string;
   sanitizeSchema?: (schema: unknown) => unknown;
   docsLink: string | ((schemaName: string) => string);
 }
@@ -47,6 +48,7 @@ export class OpenAPIProvider implements BaseProvider {
     logoUrl,
     description,
     docsLink,
+    customPath,
   }: OpenAPIProviderProps) {
     this.name = name;
     this.description = description;
@@ -56,6 +58,7 @@ export class OpenAPIProvider implements BaseProvider {
     this.entities = entities;
     this.sanitizeSchemaFunction = sanitizeSchema;
     this.docsLink = docsLink;
+    this.customPath = customPath;
   }
 
   /**

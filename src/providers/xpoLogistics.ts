@@ -5,6 +5,11 @@ import { SchemaObject } from "ajv";
 export class XPOLogisticsProvider extends OpenAPIProvider {
   constructor() {
     super({
+      name: "XPO Logistics",
+      description: "XPO Logistics is a provider of logistics services.",
+      customPath: "xpoLogistics/1.0.0",
+      logoUrl: "https://logo.clearbit.com/xpo.com",
+      docsLink: "https://apisolutions.xpo.com/",
       versions: ["1.0.0"],
       baseUrl: "https://xpodotcom.azureedge.net/xpo/apidocs_files/s41/api-explorer-02182022.json",
       entities: ["shipmentEvent", "quoterequest", "quoteresponse", "orderStatus", "orderEvent", "document"],

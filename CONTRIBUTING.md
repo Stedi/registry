@@ -10,7 +10,6 @@ To add a new provider, please create a new file in the `src/providers` repositor
 
 If your provider is exposing their API using OpenAPI or Swagger, you can use the following template to automate this process:
 
-
 ```ts
 import { OpenAPIProvider } from "./openapi";
 
@@ -32,4 +31,3 @@ Please also add your provider to the `src/providers/index.ts` file.
 After doing so, you can run commands `npm run generate && npm run validate` to ensure that your provider's schemas are generating correctly and are valid.
 
 You can also skip this step and check the validation results by observing Github Actions check after submitting a PR.
-
