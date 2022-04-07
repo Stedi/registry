@@ -5,6 +5,7 @@ import { RampProvider } from "./ramp";
 import { KlaviyoProvider } from "./klaviyo";
 import { TwilioProvider } from "./twilio";
 import { FlexportProvider } from "./flexport";
+import { XPOLogisticsProvider } from "./xpoLogistics";
 import { MaerskProvider } from "./maersk";
 import { BatonProvider } from "./baton";
 import { SquareProvider } from "./square";
@@ -17,6 +18,7 @@ export default {
   ramp: new RampProvider(),
   flexport: new FlexportProvider(),
   klaviyo: new KlaviyoProvider(),
+  xpoLogistics: new XPOLogisticsProvider(),
   maersk: new MaerskProvider(),
   baton: new BatonProvider(),
   square: new SquareProvider(),

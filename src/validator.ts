@@ -131,6 +131,7 @@ interface ProviderEntry {
   name: string;
   description: string;
   logoUrl: string;
+  directory?: string;
 }
 
 /**
