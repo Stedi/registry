@@ -39,6 +39,8 @@ function sanitizeSchema(schema: unknown) {
       if (value.allOf) {
         return value.allOf[0];
       }
+
+      return value;
     }),
   );
 }
