@@ -9,6 +9,7 @@ export class BatonProvider extends OpenAPIProvider {
       logoUrl: "https://logo.clearbit.com/baton.io",
       versions: ["1.0"],
       baseUrl: "https://courier.baton.io/api/v1/swagger.json",
+      docsLink: "https://courier.baton.io/api/v1/documentation",
       entities: [
         "Contact",
         "NavTracVehicle",
@@ -26,6 +27,7 @@ export class BatonProvider extends OpenAPIProvider {
         "NavTracSmartGateEventResponse",
         "UpdateTrailersResponse",
         "NavTracTrailer",
+        "OrderTenderRequest",
       ],
       sanitizeSchema,
     });
@@ -38,6 +40,11 @@ function sanitizeSchema(schema: unknown) {
       // In Baton's case, allOfs have only one element, so we can just remove the array and flatten it
       if (value.allOf) {
         return value.allOf[0];
+      }
+
+      // Description is a string inside array instead of just a string
+      if (key === "description" && Array.isArray(value)) {
+        return value[0];
       }
 
       return value;
