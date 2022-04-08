@@ -1,0 +1,383 @@
+{
+  "type": "object",
+  "required": ["Response", "ShipmentResults"],
+  "properties": {
+    "Response": {
+      "type": "object",
+      "required": ["ResponseStatus"],
+      "properties": {
+        "ResponseStatus": {
+          "type": "object",
+          "required": ["Description", "Code"],
+          "properties": {
+            "Code": {
+              "description": "Identifies the success or failure of the transaction. \n1 = Successful",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Describes Response Status Code.Returns text of \"Success\".",
+              "type": "string"
+            }
+          },
+          "description": "Response Status Container."
+        },
+        "Alert": {
+          "type": "object",
+          "required": ["Description", "Code"],
+          "properties": {
+            "Code": {
+              "description": "Warning code returned by the system.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Warning messages returned by the system.",
+              "type": "string"
+            }
+          },
+          "description": "Alert Container. There can be zero to many alert containers with code and description."
+        },
+        "TransactionReference": {
+          "type": "object",
+          "properties": {
+            "CustomerContext": {
+              "description": "The CustomerContext Information which will be echoed during response.",
+              "type": "string"
+            }
+          },
+          "description": "Transaction Reference Container."
+        }
+      },
+      "description": "Response Container."
+    },
+    "ShipmentResults": {
+      "type": "object",
+      "properties": {
+        "PickupRequestConfirmationNumber": {
+          "description": "Shipment pickup number.",
+          "type": "string"
+        },
+        "DeliveryDate": {
+          "description": "Estimated date that the shipment will be delivered.  \nFormat: YYYYMMDD.",
+          "type": "string"
+        },
+        "ShipmentNumber": {
+          "description": "The shipment Number assigned to the shipment.",
+          "type": "string"
+        },
+        "BOLID": {
+          "description": "The retrieval key for the stored BOL.",
+          "type": "string"
+        },
+        "GuaranteedIndicator": {
+          "description": "This indicator indicates that the rate returned is guaranteed. Can only be returned if the billing option is prepaid.",
+          "type": "string"
+        },
+        "MinimumChargeAppliedIndicator": {
+          "description": "This is an empty tag. The presence of the tag indicates the rate returned has a minimum charge applied to it. Can only be returned if the billing option is prepaid.",
+          "type": "string"
+        },
+        "Rate": {
+          "type": "object",
+          "required": ["Type", "Factor"],
+          "properties": {
+            "Type": {
+              "type": "object",
+              "required": ["Description", "Code"],
+              "properties": {
+                "Code": {
+                  "description": "Code representing the form type",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description of the form type code.",
+                  "type": "string"
+                }
+              },
+              "description": "Rate Type Container."
+            },
+            "Factor": {
+              "type": "object",
+              "required": ["Value"],
+              "properties": {
+                "Value": {
+                  "description": "Contains value pertaining to rate type code. For e.g. if discount rate is 25% then rate type code will have code type as DISCOUNT_RATE\" and rate factor value will have 25\"",
+                  "type": "string"
+                },
+                "UnitOfMeasurement": {
+                  "type": "object",
+                  "required": ["Code"],
+                  "properties": {
+                    "Code": {
+                      "description": "The code associated with the unit of measure for the billable weight of a shipment.",
+                      "type": "string"
+                    },
+                    "Description": {
+                      "description": "The description for the billable weight associated with the shipment.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Unit of measurement container for factors related to Rate Types."
+                }
+              },
+              "description": "Factor Container."
+            }
+          },
+          "description": "Rate Container. Returned only if the billing option is prepaid."
+        },
+        "FreightDensityRate": {
+          "type": "object",
+          "properties": {
+            "Density": {
+              "description": "Density is returned if the Shipper is eligible for Density based rate.",
+              "type": "string"
+            },
+            "TotalCubicFeet": {
+              "description": "TotalCubic feet is returned if the Shipper is eligible for Density based rate.",
+              "type": "string"
+            }
+          },
+          "description": "FreightDensityRate container for Density based rating."
+        },
+        "TotalShipmentCharge": {
+          "type": "object",
+          "required": ["CurrencyCode", "MonetaryValue"],
+          "properties": {
+            "CurrencyCode": {
+              "description": "Total shipment Charge currency code type.",
+              "type": "string"
+            },
+            "MonetaryValue": {
+              "description": "Total shipment charge.",
+              "type": "string"
+            }
+          },
+          "description": "TotalShipmentCharge Container. Can only be returned if the billing option is prepaid."
+        },
+        "BillableShipmentWeight": {
+          "type": "object",
+          "required": ["UnitOfMeasurement", "Value"],
+          "properties": {
+            "UnitOfMeasurement": {
+              "type": "object",
+              "required": ["Code"],
+              "properties": {
+                "Code": {
+                  "description": "The code associated with the unit of measure for the billable weight of a shipment.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "The description for the billable weight associated with the shipment.",
+                  "type": "string"
+                }
+              },
+              "description": "UnitOfMeasurement Container."
+            },
+            "Value": {
+              "description": "The value for the billable weight associated with the shipment.",
+              "type": "string"
+            }
+          },
+          "description": "BillableShipmentWeight Container. Can only be returned if the billing option is prepaid."
+        },
+        "Service": {
+          "type": "object",
+          "required": ["Code"],
+          "properties": {
+            "Code": {
+              "description": "The code for the UPS Service associated with the shipment.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "A text description of the UPS Service associated with the shipment.",
+              "type": "string"
+            }
+          },
+          "description": "Service Container."
+        },
+        "Documents": {
+          "type": "object",
+          "properties": {
+            "Image": {
+              "type": "object",
+              "required": ["Type", "GraphicImage", "Format"],
+              "properties": {
+                "Type": {
+                  "type": "object",
+                  "required": ["Description", "Code"],
+                  "properties": {
+                    "Code": {
+                      "description": "Code representing the form type",
+                      "type": "string"
+                    },
+                    "Description": {
+                      "description": "Description of the form type code.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Image Type Container."
+                },
+                "GraphicImage": {
+                  "description": "Base 64 encoded graphic image.",
+                  "type": "string"
+                },
+                "Format": {
+                  "type": "object",
+                  "required": ["Description", "Code"],
+                  "properties": {
+                    "Code": {
+                      "description": "Code representing the format of the form. Currently only pdf is supported.",
+                      "type": "string"
+                    },
+                    "Description": {
+                      "description": "Description of the format code of the form.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "ImageFormat Container."
+                }
+              },
+              "description": "Image Container."
+            },
+            "Forms": {
+              "type": "object",
+              "required": ["Type", "GraphicImage", "Format"],
+              "properties": {
+                "Type": {
+                  "type": "object",
+                  "required": ["Description", "Code"],
+                  "properties": {
+                    "Code": {
+                      "description": "Code representing the form type",
+                      "type": "string"
+                    },
+                    "Description": {
+                      "description": "Description of the form type code.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Forms Type Container."
+                },
+                "GraphicImage": {
+                  "description": "Base 64 encoded graphic image.",
+                  "type": "string"
+                },
+                "Format": {
+                  "type": "object",
+                  "required": ["Description", "Code"],
+                  "properties": {
+                    "Code": {
+                      "description": "Code representing the format of the form. Currently only pdf is supported.",
+                      "type": "string"
+                    },
+                    "Description": {
+                      "description": "Description of the format code of the form.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Forms Format Container."
+                }
+              },
+              "description": "Forms Container."
+            }
+          },
+          "description": "Documents Container."
+        },
+        "TimeInTransit": {
+          "type": "object",
+          "properties": {
+            "DaysInTransit": {
+              "description": "Number of days in transit.",
+              "type": "string"
+            }
+          },
+          "description": "Time In transit information."
+        }
+      },
+      "description": "ShipmentResults Container."
+    }
+  },
+  "description": "Freight Ship Response Container.",
+  "default": {
+    "Response": {
+      "ResponseStatus": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "Alert": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "TransactionReference": {
+        "CustomerContext": "string"
+      }
+    },
+    "ShipmentResults": {
+      "PickupRequestConfirmationNumber": "string",
+      "DeliveryDate": "string",
+      "ShipmentNumber": "string",
+      "BOLID": "string",
+      "GuaranteedIndicator": "string",
+      "MinimumChargeAppliedIndicator": "string",
+      "Rate": {
+        "Type": {
+          "Code": "string",
+          "Description": "string"
+        },
+        "Factor": {
+          "Value": "string",
+          "UnitOfMeasurement": {
+            "Code": "string",
+            "Description": "string"
+          }
+        }
+      },
+      "FreightDensityRate": {
+        "Density": "string",
+        "TotalCubicFeet": "string"
+      },
+      "TotalShipmentCharge": {
+        "CurrencyCode": "string",
+        "MonetaryValue": "string"
+      },
+      "BillableShipmentWeight": {
+        "UnitOfMeasurement": {
+          "Code": "string",
+          "Description": "string"
+        },
+        "Value": "string"
+      },
+      "Service": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "Documents": {
+        "Image": {
+          "Type": {
+            "Code": "string",
+            "Description": "string"
+          },
+          "GraphicImage": "string",
+          "Format": {
+            "Code": "string",
+            "Description": "string"
+          }
+        },
+        "Forms": {
+          "Type": {
+            "Code": "string",
+            "Description": "string"
+          },
+          "GraphicImage": "string",
+          "Format": {
+            "Code": "string",
+            "Description": "string"
+          }
+        }
+      },
+      "TimeInTransit": {
+        "DaysInTransit": "string"
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
