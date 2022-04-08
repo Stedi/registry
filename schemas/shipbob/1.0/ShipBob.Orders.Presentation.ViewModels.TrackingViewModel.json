@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "properties": {
+    "carrier": {
+      "type": "string",
+      "description": "Carrier of the shipment",
+      "example": "USPS"
+    },
+    "tracking_number": {
+      "type": "string",
+      "description": "Tracking number of the shipment",
+      "example": "860C8CDC8F0B4FC7AB69AC86C20539EC"
+    },
+    "carrier_service": {
+      "type": "string",
+      "description": "The carrier's service which was used for this shipment",
+      "example": "Priority"
+    },
+    "tracking_url": {
+      "type": "string",
+      "description": "URL to the website where a shipment can be tracked",
+      "example": "https://www.example.com/tracking?id=860C8CDC8F0B4FC7AB69AC86C20539EC"
+    },
+    "bol": {
+      "type": "string",
+      "description": "Bill of lading (BOL) number. Document acknowledging receipt of cargo for shipment."
+    },
+    "shipping_date": {
+      "type": "string",
+      "description": "Date freight was shipped on",
+      "format": "date-time",
+      "nullable": true
+    },
+    "pro_number": {
+      "type": "string",
+      "description": "Tracking number used for freight carriers"
+    },
+    "scac": {
+      "type": "string",
+      "description": "Standard Carrier Alpha Code (SCAC). Unique 2-4 letter code used to identify transportation companies."
+    }
+  },
+  "additionalProperties": false,
+  "description": "Tracking information for a shipment",
+  "default": {
+    "carrier": "USPS",
+    "tracking_number": "860C8CDC8F0B4FC7AB69AC86C20539EC",
+    "carrier_service": "Priority",
+    "tracking_url": "https://www.example.com/tracking?id=860C8CDC8F0B4FC7AB69AC86C20539EC",
+    "bol": "string",
+    "shipping_date": "1970-01-01T00:00:00.000Z",
+    "pro_number": "string",
+    "scac": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

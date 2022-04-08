@@ -1,0 +1,178 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "ID assigned to this carton",
+      "format": "int32"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of this carton container",
+      "example": "Box or pallet"
+    },
+    "barcode": {
+      "type": "string",
+      "description": "Barcode assigned to this carton"
+    },
+    "measurements": {
+      "type": "object",
+      "properties": {
+        "total_weight_oz": {
+          "type": "number",
+          "description": "Total weight in ounces",
+          "format": "double"
+        },
+        "length_in": {
+          "type": "number",
+          "description": "Total length in inches",
+          "format": "double"
+        },
+        "width_in": {
+          "type": "number",
+          "description": "Total width in inches",
+          "format": "double"
+        },
+        "depth_in": {
+          "type": "number",
+          "description": "Total depth in inches",
+          "format": "double"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Measurements of a carton"
+    },
+    "carton_details": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "products": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "description": "Unique id of the product",
+                  "format": "int32"
+                },
+                "reference_id": {
+                  "type": "string",
+                  "description": "Unique reference id of the product",
+                  "example": "TShirtBlueM"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Name of the product",
+                  "example": "Medium Blue T-Shirt"
+                },
+                "sku": {
+                  "type": "string",
+                  "description": "Stock keeping unit for the product",
+                  "example": "TShirtBlueM"
+                },
+                "inventory_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "description": "Unique id of the inventory",
+                        "format": "int32"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Name of the inventory item",
+                        "example": "Medium Blue T-Shirt"
+                      },
+                      "quantity": {
+                        "type": "integer",
+                        "description": "Quantity of the inventory item to be included in the fulfillment",
+                        "format": "int32"
+                      },
+                      "quantity_committed": {
+                        "type": "integer",
+                        "description": "The quantity of the inventory item allocated from the assigned fulfillment center and committed to the order. If quantity committed is less than order quantity, then the inventory item is out of stock at the assigned fulfillment center.",
+                        "format": "int32"
+                      },
+                      "lot": {
+                        "type": "string",
+                        "description": "Lot number of the inventory",
+                        "example": "22222"
+                      },
+                      "expiration_date": {
+                        "type": "string",
+                        "description": "Expiration date of the inventory",
+                        "format": "date-time",
+                        "nullable": true
+                      },
+                      "serial_numbers": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Serial number of the inventory"
+                      },
+                      "is_dangerous_goods": {
+                        "type": "boolean",
+                        "description": "Is inventory Dangerous Good",
+                        "example": true
+                      }
+                    },
+                    "additionalProperties": false,
+                    "description": "Information about inventory belonging to a store product"
+                  },
+                  "description": "Information about fulfillable inventory items belonging to this product"
+                }
+              },
+              "additionalProperties": false,
+              "description": "Information about a store product belonging to a shipment"
+            },
+            "description": "List of what is packed in this carton"
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Details about the contents of this carton"
+    }
+  },
+  "additionalProperties": false,
+  "default": {
+    "id": 1,
+    "type": "Box or pallet",
+    "barcode": "string",
+    "measurements": {
+      "total_weight_oz": 0,
+      "length_in": 0,
+      "width_in": 0,
+      "depth_in": 0
+    },
+    "carton_details": [
+      {
+        "products": [
+          {
+            "id": 1,
+            "reference_id": "TShirtBlueM",
+            "name": "Medium Blue T-Shirt",
+            "sku": "TShirtBlueM",
+            "inventory_items": [
+              {
+                "id": 1,
+                "name": "Medium Blue T-Shirt",
+                "quantity": 1,
+                "quantity_committed": 1,
+                "lot": "22222",
+                "expiration_date": "1970-01-01T00:00:00.000Z",
+                "serial_numbers": ["string"],
+                "is_dangerous_goods": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

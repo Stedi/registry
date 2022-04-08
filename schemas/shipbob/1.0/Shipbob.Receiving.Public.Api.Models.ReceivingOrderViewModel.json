@@ -1,0 +1,243 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique id of the warehouse receiving order",
+      "format": "int32"
+    },
+    "status": {
+      "enum": ["Awaiting", "Processing", "Completed", "Cancelled", "Incomplete", "Arrived", "PartiallyArrived"],
+      "type": "string"
+    },
+    "package_type": {
+      "enum": ["Package", "Pallet", "FloorLoadedContainer"],
+      "type": "string"
+    },
+    "box_packaging_type": {
+      "enum": ["EverythingInOneBox", "OneSkuPerBox", "MultipleSkuPerBox"],
+      "type": "string"
+    },
+    "expected_arrival_date": {
+      "type": "string",
+      "description": "Expected date that all packages will have arrived",
+      "format": "date-time"
+    },
+    "insert_date": {
+      "type": "string",
+      "description": "Insert date of the receiving order",
+      "format": "date-time"
+    },
+    "last_updated_date": {
+      "type": "string",
+      "description": "Last date the receiving order was updated",
+      "format": "date-time"
+    },
+    "box_labels_uri": {
+      "type": "string",
+      "description": "URL to the packing slip to be included in each box shipment for this receiving order",
+      "nullable": true,
+      "example": "https://api.shipbob.com/1.0/receiving/1/labels"
+    },
+    "fulfillment_center": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique identifier of the fulfillment center",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the fulfillment center",
+          "nullable": true,
+          "example": "Cicero (IL)"
+        },
+        "timezone": {
+          "type": "string",
+          "description": "Timezone the fulfillment center is located in",
+          "nullable": true,
+          "example": "Central Standard Time"
+        },
+        "address1": {
+          "type": "string",
+          "description": "Address line one of the fulfillment center",
+          "nullable": true,
+          "example": "5900 W Ogden Ave"
+        },
+        "address2": {
+          "type": "string",
+          "description": "Address line two of the fulfillment center",
+          "nullable": true,
+          "example": "Suite 100"
+        },
+        "city": {
+          "type": "string",
+          "description": "City the fulfillment center is located in",
+          "nullable": true,
+          "example": "Cicero"
+        },
+        "state": {
+          "type": "string",
+          "description": "State the fulfillment center is located in",
+          "nullable": true,
+          "example": "IL"
+        },
+        "country": {
+          "type": "string",
+          "description": "Country the fulfillment center is located in",
+          "nullable": true,
+          "example": "USA"
+        },
+        "zip_code": {
+          "type": "string",
+          "description": "Postal code of the fulfillment center",
+          "nullable": true,
+          "example": "60804"
+        },
+        "phone_number": {
+          "type": "string",
+          "description": "Phone number contact for the fulfillment center",
+          "nullable": true,
+          "example": "555-555-5555"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email contact for the fulfillment center",
+          "nullable": true,
+          "example": "example@example.com"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Information about a fulfillment center"
+    },
+    "boxes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "box_number": {
+            "type": "integer",
+            "description": "The number of the box in the receiving order",
+            "format": "int32"
+          },
+          "box_status": {
+            "enum": ["Awaiting", "Arrived", "Completed", "Counting", "Stowing", "Cancelled"],
+            "type": "string"
+          },
+          "arrived_date": {
+            "type": "string",
+            "description": "Date the box arrived",
+            "format": "date-time",
+            "nullable": true
+          },
+          "received_date": {
+            "type": "string",
+            "description": "Date the box was received",
+            "format": "date-time",
+            "nullable": true
+          },
+          "counting_started_date": {
+            "type": "string",
+            "description": "Date counting of the box's inventory items started",
+            "format": "date-time",
+            "nullable": true
+          },
+          "tracking_number": {
+            "type": "string",
+            "description": "Tracking number of the box shipment",
+            "nullable": true,
+            "example": "860C8CDC8F0B4FC7AB69AC86C20539EC"
+          },
+          "box_items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "description": "Quantity of the item included",
+                  "format": "int32"
+                },
+                "received_quantity": {
+                  "type": "integer",
+                  "description": "Quantity of the item that was received after processing the receiving order",
+                  "format": "int32"
+                },
+                "inventory_id": {
+                  "type": "integer",
+                  "description": "Unique identifier of the inventory item",
+                  "format": "int32"
+                },
+                "lot_number": {
+                  "type": "string",
+                  "description": "Lot number the item belongs to",
+                  "nullable": true
+                },
+                "lot_date": {
+                  "type": "string",
+                  "description": "Expiration date of the item's lot",
+                  "format": "date-time",
+                  "nullable": true
+                }
+              },
+              "additionalProperties": false,
+              "description": "Information about an item contained inside a box as part of a receiving order"
+            },
+            "description": "Information about the items included in the box",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information about a box shipment included in a receiving order"
+      },
+      "description": "Information about the boxes being shipped in this receiving order",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false,
+  "description": "Information about a receiving order",
+  "default": {
+    "id": 1,
+    "status": "Awaiting",
+    "package_type": "Package",
+    "box_packaging_type": "EverythingInOneBox",
+    "expected_arrival_date": "1970-01-01T00:00:00.000Z",
+    "insert_date": "1970-01-01T00:00:00.000Z",
+    "last_updated_date": "1970-01-01T00:00:00.000Z",
+    "box_labels_uri": "https://api.shipbob.com/1.0/receiving/1/labels",
+    "fulfillment_center": {
+      "id": 1,
+      "name": "Cicero (IL)",
+      "timezone": "Central Standard Time",
+      "address1": "5900 W Ogden Ave",
+      "address2": "Suite 100",
+      "city": "Cicero",
+      "state": "IL",
+      "country": "USA",
+      "zip_code": "60804",
+      "phone_number": "555-555-5555",
+      "email": "example@example.com"
+    },
+    "boxes": [
+      {
+        "box_number": 1,
+        "box_status": "Awaiting",
+        "arrived_date": "1970-01-01T00:00:00.000Z",
+        "received_date": "1970-01-01T00:00:00.000Z",
+        "counting_started_date": "1970-01-01T00:00:00.000Z",
+        "tracking_number": "860C8CDC8F0B4FC7AB69AC86C20539EC",
+        "box_items": [
+          {
+            "quantity": 1,
+            "received_quantity": 1,
+            "inventory_id": 1,
+            "lot_number": "string",
+            "lot_date": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

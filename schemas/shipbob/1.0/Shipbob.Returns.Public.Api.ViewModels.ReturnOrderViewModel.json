@@ -1,0 +1,240 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique id of the Return Order",
+      "format": "int32"
+    },
+    "channel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique id of the channel",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the channel",
+          "nullable": true,
+          "example": "ShipBobs-Shopify-Store"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Created by channel metadata"
+    },
+    "insert_date": {
+      "type": "string",
+      "description": "Date this return order was created",
+      "format": "date-time"
+    },
+    "status": {
+      "enum": ["AwaitingArrival", "Arrived", "Processing", "Completed", "Cancelled"],
+      "type": "string"
+    },
+    "invoice_amount": {
+      "type": "number",
+      "description": "Invoiced amount of return order (sum of transaction amounts)",
+      "format": "double",
+      "nullable": true
+    },
+    "transactions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "Transaction amount in dollars",
+            "format": "double",
+            "example": 2.5
+          },
+          "transaction_type": {
+            "enum": ["ReturnLabelInvoice", "ReturnProcessingFee", "ReturnToSenderFee"],
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Array of transactions affiliated with the return order",
+      "nullable": true
+    },
+    "fulfillment_center": {
+      "required": ["id"],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique identifier of the fulfillment center",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the fulfillment center",
+          "nullable": true,
+          "example": "Cicero (IL)"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Information about a fulfillment center"
+    },
+    "reference_id": {
+      "type": "string",
+      "description": "Client-defined external unique id of the return order",
+      "nullable": true
+    },
+    "tracking_number": {
+      "type": "string",
+      "description": "Tracking number of the return shipment",
+      "nullable": true,
+      "example": "860C8CDC8F0B4FC7AB69AC86C20539EC"
+    },
+    "inventory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique id of the inventory item",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the inventory item",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Quantity expected to be processed with the return",
+            "format": "int32"
+          },
+          "action_requested": {
+            "type": "object",
+            "properties": {
+              "action": {
+                "enum": ["Default", "Restock", "Quarantine", "Dispose"],
+                "type": "string"
+              },
+              "action_type": {
+                "enum": ["InventoryDefault", "Override"],
+                "type": "string"
+              },
+              "instructions": {
+                "type": "string",
+                "description": "Specific instructions to be taken for the inventory when processing the return",
+                "nullable": true
+              }
+            },
+            "additionalProperties": false
+          },
+          "action_taken": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "enum": ["Default", "Restock", "Quarantine", "Dispose"],
+                  "type": "string"
+                },
+                "action_reason": {
+                  "type": "string",
+                  "description": "Reason the given action was taken",
+                  "nullable": true
+                },
+                "quantity_processed": {
+                  "maximum": 2147483647,
+                  "minimum": 1,
+                  "type": "integer",
+                  "description": "Quantity of inventory processed with the taken action",
+                  "format": "int32"
+                }
+              },
+              "additionalProperties": false
+            },
+            "description": "Action(s) taken when processing the return",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "List of inventory included in the return order",
+      "nullable": true
+    },
+    "original_shipment_id": {
+      "type": "integer",
+      "description": "Id of the corresponding shipment that is the souce of the return",
+      "format": "int32",
+      "nullable": true
+    },
+    "return_type": {
+      "enum": ["Regular", "ReturnToSender"],
+      "type": "string"
+    },
+    "completed_date": {
+      "type": "string",
+      "description": "Completed date for a return order.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "store_order_id": {
+      "type": "string",
+      "description": "Store order for the related shipment.",
+      "nullable": true
+    },
+    "customer_name": {
+      "type": "string",
+      "description": "Customer name from the related shipment.",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false,
+  "default": {
+    "id": 1,
+    "channel": {
+      "id": 1,
+      "name": "ShipBobs-Shopify-Store"
+    },
+    "insert_date": "1970-01-01T00:00:00.000Z",
+    "status": "AwaitingArrival",
+    "invoice_amount": 0,
+    "transactions": [
+      {
+        "amount": 2.5,
+        "transaction_type": "ReturnLabelInvoice"
+      }
+    ],
+    "fulfillment_center": {
+      "id": 1,
+      "name": "Cicero (IL)"
+    },
+    "reference_id": "string",
+    "tracking_number": "860C8CDC8F0B4FC7AB69AC86C20539EC",
+    "inventory": [
+      {
+        "id": 1,
+        "name": "string",
+        "quantity": 1,
+        "action_requested": {
+          "action": "Default",
+          "action_type": "InventoryDefault",
+          "instructions": "string"
+        },
+        "action_taken": [
+          {
+            "action": "Default",
+            "action_reason": "string",
+            "quantity_processed": 1
+          }
+        ]
+      }
+    ],
+    "original_shipment_id": 1,
+    "return_type": "Regular",
+    "completed_date": "1970-01-01T00:00:00.000Z",
+    "store_order_id": "string",
+    "customer_name": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

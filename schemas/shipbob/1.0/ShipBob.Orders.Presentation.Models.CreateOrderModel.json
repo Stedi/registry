@@ -1,0 +1,333 @@
+{
+  "required": ["products", "recipient", "reference_id", "shipping_method"],
+  "type": "object",
+  "properties": {
+    "shipping_method": {
+      "type": "string",
+      "description": "Client-defined shipping method matching what the user has listed as the shipping method on the Ship Option Mapping setup page in the ShipBob Merchant Portal. If they don’t match, we will create a new one and default it to Standard",
+      "example": "Free 2-day Shipping"
+    },
+    "recipient": {
+      "required": ["address", "name"],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the recipient",
+          "example": "John Doe"
+        },
+        "address": {
+          "required": ["address1", "city", "country", "type"],
+          "type": "object",
+          "properties": {
+            "type": {
+              "enum": ["MarkFor", "ShipFrom"],
+              "type": "string",
+              "description": "Specifies the type of address:\r\nShipFrom\r\nMarkFor"
+            },
+            "address1": {
+              "type": "string",
+              "description": "First line of the address",
+              "example": "100 Nowhere Blvd"
+            },
+            "address2": {
+              "type": "string",
+              "description": "Second line of the address",
+              "example": "Suite 100"
+            },
+            "company_name": {
+              "type": "string",
+              "description": "Name of the company receiving the shipment",
+              "example": "Wayne Enterprises"
+            },
+            "city": {
+              "type": "string",
+              "description": "The city",
+              "example": "Gotham City"
+            },
+            "state": {
+              "type": "string",
+              "description": "The state or province",
+              "example": "NJ"
+            },
+            "country": {
+              "type": "string",
+              "description": "The country (Must be ISO Alpha-2 for estimates)",
+              "example": "US"
+            },
+            "zip_code": {
+              "type": "string",
+              "description": "The zip code or postal code",
+              "example": "07093"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Address to used when creating a B2B/DropShip order."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the recipient",
+          "example": "john@example.com"
+        },
+        "phone_number": {
+          "maxLength": 50,
+          "type": "string",
+          "description": "Phone number of the recipient",
+          "example": "555-555-5555"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Information about the recipient of an order"
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "required": ["id", "quantity"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique id of the product",
+            "format": "int32"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "The quantity of this product ordered",
+            "format": "int32"
+          },
+          "quantity_unit_of_measure_code": {
+            "type": "string",
+            "description": "Defined standard for measure for an item (each, inner pack, case, pallet).  Values: EA, INP, CS and PL"
+          },
+          "external_line_id": {
+            "type": "integer",
+            "description": "Numeric assignment per item. Used as a reference number for multiple purposes such as split orders, split containers, etc.",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Products included in the order. Products identified by reference_id must also include the product name if there is no matching ShipBob product."
+    },
+    "reference_id": {
+      "maxLength": 300,
+      "type": "string",
+      "description": "Unique and immutable order identifier from your upstream system"
+    },
+    "order_number": {
+      "maxLength": 400,
+      "type": "string",
+      "description": "User friendly orderId or store order number that will be shown on the Orders Page. If not provided, referenceId will be used"
+    },
+    "type": {
+      "enum": ["DTC", "DropShip", "B2B"],
+      "type": "string",
+      "description": "Defaults to Direct to Consumer (DTC) if not provided. Note: B2B is not supported at this time"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "required": ["name", "value"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "The key of the tag",
+            "example": "Handling instructions"
+          },
+          "value": {
+            "maxLength": 500,
+            "type": "string",
+            "description": "The value of the tag",
+            "example": "Fragile"
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Key value pair array to store extra information at the order level for API purposes. ShipBob won't display the info in the ShipBob Merchant Portal or react based on this data."
+    },
+    "purchase_date": {
+      "type": "string",
+      "description": "Date this order was purchase by the end user",
+      "format": "date-time",
+      "nullable": true
+    },
+    "location_id": {
+      "type": "integer",
+      "description": "Desired Fulfillment Center Location ID. If not specified, ShipBob will determine the location that fulfills this order.",
+      "format": "int32",
+      "nullable": true
+    },
+    "shipping_terms": {
+      "type": "object",
+      "properties": {
+        "carrier_type": {
+          "enum": ["Parcel", "Freight"],
+          "type": "string",
+          "description": "Identifies whether to ship parcel or freight.\r\n\r\nParcel: Smaller, light weight boxes.\r\n\r\nFreight: Larger boxes, usually transported by truckload.",
+          "nullable": true
+        },
+        "payment_term": {
+          "enum": ["Collect", "ThirdParty", "Prepaid"],
+          "type": "string",
+          "description": "Identifies the party responsible for shipping charges.\r\n\r\nCollect: The person/entity receiving the product pays the shipping charges [freight only].\r\n\r\nThirdParty: Another party pays for the shipping charges (not Shipbob) [parcel only].\r\n\r\nPrepaid: The shipper pays the shipping charges (Shipbob or merchant).",
+          "nullable": true
+        }
+      },
+      "additionalProperties": false,
+      "description": "Contains shipping properties that need to be used for fulfilling an order."
+    },
+    "retailer_program_data": {
+      "required": ["purchase_order_number", "retailer_program_type"],
+      "type": "object",
+      "properties": {
+        "purchase_order_number": {
+          "type": "string",
+          "description": "First initial documentation sent from buyer to seller with item(s) and quantities."
+        },
+        "retailer_program_type": {
+          "type": "string",
+          "description": "Identifies retailer-merchant combination \r\n<example>\r\nTGTDS\r\n</example>"
+        },
+        "mark_for_store": {
+          "type": "string",
+          "description": "Store Number\r\n<example>\r\nTGT105\r\n</example>"
+        },
+        "delivery_date": {
+          "type": "string",
+          "description": "Expected delivery date",
+          "format": "date-time",
+          "nullable": true
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "required": ["address1", "city", "country", "type"],
+            "type": "object",
+            "properties": {
+              "type": {
+                "enum": ["MarkFor", "ShipFrom"],
+                "type": "string",
+                "description": "Specifies the type of address:\r\nShipFrom\r\nMarkFor"
+              },
+              "address1": {
+                "type": "string",
+                "description": "First line of the address",
+                "example": "100 Nowhere Blvd"
+              },
+              "address2": {
+                "type": "string",
+                "description": "Second line of the address",
+                "example": "Suite 100"
+              },
+              "company_name": {
+                "type": "string",
+                "description": "Name of the company receiving the shipment",
+                "example": "Wayne Enterprises"
+              },
+              "city": {
+                "type": "string",
+                "description": "The city",
+                "example": "Gotham City"
+              },
+              "state": {
+                "type": "string",
+                "description": "The state or province",
+                "example": "NJ"
+              },
+              "country": {
+                "type": "string",
+                "description": "The country (Must be ISO Alpha-2 for estimates)",
+                "example": "US"
+              },
+              "zip_code": {
+                "type": "string",
+                "description": "The zip code or postal code",
+                "example": "07093"
+              }
+            },
+            "additionalProperties": false,
+            "description": "Address to used when creating a B2B/DropShip order."
+          },
+          "description": "Ship From - Certain retailers want to display the ship from address as their return facility, not Shipbob’s warehouse address        /// \r\nMark For Address - Final destination address\r\n<example>\r\nMerchant will ship to Retailer Hub.Then Retailer will ship to final destination. \r\nMark for address: Retailer Store #101 \r\nAtlanta, GA\r\n</example>"
+        },
+        "customer_ticket_number": {
+          "type": "string",
+          "description": "Customer Ticket Number\r\n<example>\r\nco_12345\r\n</example>"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Contains properties that needs to be used for fulfilling B2B/Dropship orders."
+    },
+    "gift_message": {
+      "maxLength": 500,
+      "type": "string",
+      "description": "Gift message associated with the order"
+    }
+  },
+  "additionalProperties": false,
+  "default": {
+    "shipping_method": "Free 2-day Shipping",
+    "recipient": {
+      "name": "John Doe",
+      "address": {
+        "type": "MarkFor",
+        "address1": "100 Nowhere Blvd",
+        "address2": "Suite 100",
+        "company_name": "Wayne Enterprises",
+        "city": "Gotham City",
+        "state": "NJ",
+        "country": "US",
+        "zip_code": "07093"
+      },
+      "email": "john@example.com",
+      "phone_number": "555-555-5555"
+    },
+    "products": [
+      {
+        "id": 1,
+        "quantity": 1,
+        "quantity_unit_of_measure_code": "string",
+        "external_line_id": 1
+      }
+    ],
+    "reference_id": "string",
+    "order_number": "string",
+    "type": "DTC",
+    "tags": [
+      {
+        "name": "Handling instructions",
+        "value": "Fragile"
+      }
+    ],
+    "purchase_date": "1970-01-01T00:00:00.000Z",
+    "location_id": 1,
+    "shipping_terms": {
+      "carrier_type": "Parcel",
+      "payment_term": "Collect"
+    },
+    "retailer_program_data": {
+      "purchase_order_number": "string",
+      "retailer_program_type": "string",
+      "mark_for_store": "string",
+      "delivery_date": "1970-01-01T00:00:00.000Z",
+      "addresses": [
+        {
+          "type": "MarkFor",
+          "address1": "100 Nowhere Blvd",
+          "address2": "Suite 100",
+          "company_name": "Wayne Enterprises",
+          "city": "Gotham City",
+          "state": "NJ",
+          "country": "US",
+          "zip_code": "07093"
+        }
+      ],
+      "customer_ticket_number": "string"
+    },
+    "gift_message": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
