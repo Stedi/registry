@@ -11,6 +11,7 @@ import { BatonProvider } from "./baton";
 import { SquareProvider } from "./square";
 import { UPSFreightShipProvider } from "./ups/freightShip";
 import { UPSShipmentProvider } from "./ups/shipment";
+import { UPSTrackProvider } from "./ups/track";
 
 export default {
   stripe: new StripeProvider(),
@@ -26,4 +27,5 @@ export default {
   square: new SquareProvider(),
   upsFreightShip: new UPSFreightShipProvider(),
   upsShipment: new UPSShipmentProvider(),
+  upsTrack: new UPSTrackProvider(),
 };

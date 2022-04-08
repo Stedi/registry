@@ -1,0 +1,53 @@
+{
+  "type": "object",
+  "required": ["Status"],
+  "properties": {
+    "Status": {
+      "type": "object",
+      "required": ["Code"],
+      "properties": {
+        "Code": {
+          "description": "The status code.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "The descriptions for Corresponding code.",
+          "type": "string"
+        }
+      },
+      "description": "Container returning the quantum view notification status information."
+    },
+    "FailureDetail": {
+      "type": "object",
+      "required": ["Description", "Code"],
+      "properties": {
+        "Code": {
+          "description": "Distinct code for the error returned.   \nPossible error codes and descriptions are: \n- QVN1001 The provided failure email address is not in the proper format. \n- QVN1002 The failure email address exceeds the maximum character limit.\n- QVN1005 The language code must be two-character long\n- QVN1007 The language dialect must be two-character long  \n- QVN1003 The provided Recipient Email Address is not in the proper format.\n- QVN1004 The Recipient Email Address exceeds the maximum character limit.\n- QVN1005 The language code must be two-character long. \n- QVN1007 The language dialect must be two-character long.  \n- QVN1008 The language code and language dialect pair is invalid. \n- QVN1009 The package is delivered QVN1010 Unknown Error",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the error, see above.",
+          "type": "string"
+        },
+        "TrackingNumber": {
+          "description": "The tracking number of the package to which this failure detail applies to.",
+          "type": "string"
+        }
+      },
+      "description": "Details of the errors occurred while requesting QV notification."
+    }
+  },
+  "description": "Container returned when quantum view notification is requested.",
+  "default": {
+    "Status": {
+      "Code": "string",
+      "Description": "string"
+    },
+    "FailureDetail": {
+      "Code": "string",
+      "Description": "string",
+      "TrackingNumber": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
