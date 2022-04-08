@@ -43,13 +43,13 @@ export class MyCompanyNewProvider extends OpenAPIProvider {
 
 If the entities generated as a result of `unbundle` logic contain non-standard fields or formats not recognized by JSONSchema, you can supply a custom `sanitizeSchema(schema: unknown) => unknown` function to remove unwanted properties from the generated JSONSchemas.
 
-Sometimes the unbundled schema exports too many entities. Many of them may be not important from the registry's perspective. If that's the case, supply an optional `entities: string[]` array argument with the list of entity names that should be exclusively generated.
+Sometimes the unbundled schema exports too many entities. Many of them may not be necessary from the registry's perspective. If that's the case, supply an optional `entities: string[]` array argument with the list of entity names that should be exclusively generated.
 
 After writing your provider, please also add it to the `src/providers/index.ts` file.
 
 Lastly, run `npm run generate` to generate the schemas and update the `providers.json` file. You can also run `npm run validate` to ensure that generated schemas are valid and will be accepted by [Mappings](https://www.stedi.com/products/mappings).
 
-If the _validate_ task succeeds, you can commit your changes to a branch or fork, and then create a pull request. We will review your pull request and if it's accepted, we will add your provider to the registry.
+If the _validate_ task succeeds, you can commit your changes to branch or fork and create a pull request. We will review your pull request and if it's accepted, we will add your provider to the registry.
 
 
 
