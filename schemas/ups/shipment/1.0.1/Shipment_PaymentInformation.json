@@ -1,0 +1,264 @@
+{
+  "type": "object",
+  "required": ["ShipmentCharge"],
+  "properties": {
+    "ShipmentCharge": {
+      "type": "object",
+      "required": ["Type"],
+      "properties": {
+        "Type": {
+          "description": "Valid values: \n01 = Transportation\n02 = Duties and Taxes                                                                03 = Broker of Choice  A shipment charge type of 01 = Transportation is required. \n\nA shipment charge type of 02 = Duties and Taxes is not required; however, this charge type is invalid for Qualified Domestic Shipments. \n\nA Qualified Domestic Shipment is any shipment in which one of the following applies: \n\n1) The origin and destination country or territory is the same.\n\n2) US to PR shipment.\n\n3) PR to US shipment.\n\n4) The origin and destination country or territory are both European Union countries or territories and the GoodsNotInFreeCirculation indicator is not present.\n\n5) The origin and destination IATA code is the same.                                                                                                                                                                                                                                                                                                                                                                                                                                                      03 = Broker of Choice",
+          "type": "string"
+        },
+        "BillShipper": {
+          "type": "object",
+          "properties": {
+            "AccountNumber": {
+              "description": "UPS account number.  Must be the same UPS account number as the one provided in Shipper/ShipperNumber. \n\nEither this element or one of the sibling elements CreditCard or AlternatePaymentMethod must be provided, but all of them may not be provided.",
+              "type": "string"
+            },
+            "CreditCard": {
+              "type": "object",
+              "required": ["Type", "Number", "ExpirationDate", "SecurityCode"],
+              "properties": {
+                "Type": {
+                  "description": "Valid values:\n01 = American Express\n03 = Discover\n04 = MasterCard\n05 = Optima\n06 = VISA\n07 = Bravo\n08 = Diners Club\n13=Dankort\n14=Hipercard\n15=JCB\n17=Postepay\n18=UnionPay/ExpressPay\n19=Visa Electron\n20=VPAY\n21=Carte Bleue",
+                  "type": "string"
+                },
+                "Number": {
+                  "description": "Credit Card number.",
+                  "type": "string"
+                },
+                "ExpirationDate": {
+                  "description": "Format is MMYYYY where MM is the 2 digit month and YYYY is the 4 digit year.  Valid month values are 01-12 and valid year values are Present Year  (Present Year + 10 years)",
+                  "type": "string"
+                },
+                "SecurityCode": {
+                  "description": "Three or four digits that can be found either on top of credit card number or on the back of credit card. Number of digits varies for different type of credit card.  Valid values are 3 or 4 digits. It is required to provide the security code if credit card information is provided and when the ShipFrom countries or territories are other than the below mentioned countries or territories. Argentina, Bahamas, Costa Rica, Dominican Republic, Guatemala, Panama, Puerto Rico and Russia.",
+                  "type": "string"
+                },
+                "Address": {
+                  "type": "object",
+                  "required": ["AddressLine", "City", "CountryCode"],
+                  "properties": {
+                    "AddressLine": {
+                      "description": "SoldTo locations street address.  Applies to NAFTA CO.",
+                      "type": "string"
+                    },
+                    "City": {
+                      "description": "SoldTo locations city.",
+                      "type": "string"
+                    },
+                    "StateProvinceCode": {
+                      "description": "SoldTo locations state or province code.  Required for certain countries or territories.",
+                      "type": "string"
+                    },
+                    "PostalCode": {
+                      "description": "SoldTo locations postal code.",
+                      "type": "string"
+                    },
+                    "CountryCode": {
+                      "description": "SoldTo locations country or territory code.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Container to hold the Credit card Billing Address.  It is required to provide billing address if credit card information is provided and when the ShipFrom country or territory is the US, PR, and CA."
+                }
+              },
+              "description": "Credit card information container.  Required if neither of the following is present: \n\n/ShipmentRequest/Shipment/PaymentInformation/ShipmentCharge/BillShipper/AccountNumber \nor \n/ShipmentRequest/Shipment/PaymentInformation/ShipmentCharge/BillShipper/AlternatePaymentMethod. \n\nCredit card payment is valid for shipments without return service only."
+            },
+            "AlternatePaymentMethod": {
+              "description": "Alternate Payment Method.\n\nValid value: 01= PayPal\n\nOnly valid for forward shipments. It is not valid for Return or Import Control shipments. \n\nThis element or one of the sibling elements CreditCard or AccountNumber must be provided, but all of them may not be provided.   PayPal 01: Is only valid for forward shipments. It is not valid for Return or Import Control shipments. \n\nThis element or one of the sibling elements CreditCard or AccountNumber must be provided, but all of them may not be provided.",
+              "type": "string"
+            },
+            "PreAuthorizedPaymentInformation": {
+              "type": "object",
+              "required": ["PaymentMediaType", "PaymentGUID"],
+              "properties": {
+                "PaymentMediaType": {
+                  "description": "Pre-authorized Payment Type.   Valid values:\n02 - Credit Card\n12 - PayPal",
+                  "type": "string"
+                },
+                "PaymentGUID": {
+                  "description": "Authorization code.",
+                  "type": "string"
+                }
+              },
+              "description": "Pre-authorized Payment information container."
+            },
+            "VatTaxID": {
+              "description": "Tax ID provided by a customer.  Conditionally required for Italy",
+              "type": "string"
+            },
+            "TaxIDType": {
+              "description": "Tax ID Type. Applicable only for bill to address in Spain or Italy. If TaxIDType is not provided or is invalid, Vat Tax ID will be used.",
+              "type": "string"
+            },
+            "CertifiedElectronicMail": {
+              "description": "Posta Elettronica Certificata (PEC) which is the recipient code for the customers certified electronic mail value.",
+              "type": "string"
+            },
+            "InterchangeSystemCode": {
+              "description": "Sistema Di Interscambio(SDI) which is the recipient code for the customer's interchange value or Interchange System Code",
+              "type": "string"
+            }
+          },
+          "description": "Container for the BillShipper billing option. The three payment methods that are available for the Bill Shipper billing option are alternate payment method, account number or credit card.  This element or its sibling element, BillReceiver, BillThirdParty or ConsigneeBilledIndicator, must be present but no more than one can be present."
+        },
+        "BillReceiver": {
+          "type": "object",
+          "required": ["AccountNumber"],
+          "properties": {
+            "AccountNumber": {
+              "description": "The UPS account number.  The account must be a valid UPS account number that is active. \n\nFor US, PR and CA accounts, the account must be a daily pickup account, an occasional account, a customer B.I.N account, or a dropper shipper account. \n\nAll other accounts must be either a daily pickup account, an occasional account, a drop shipper account, or a non-shipping account.",
+              "type": "string"
+            },
+            "Address": {
+              "type": "object",
+              "properties": {
+                "PostalCode": {
+                  "description": "SoldTo locations postal code.",
+                  "type": "string"
+                }
+              },
+              "description": "Container for additional information for the bill receivers UPS accounts address."
+            }
+          },
+          "description": "Container for the BillReceiver billing option.  This element or its sibling element, BillShipper, BillThirdParty or Consignee Billed, must be present but no more than one can be present. For a return shipment, Bill Receiver is invalid for Transportation charges."
+        },
+        "BillThirdParty": {
+          "type": "object",
+          "properties": {
+            "AccountNumber": {
+              "description": "The UPS account number of the third party shipper.  The account must be a valid UPS account number that is active. \n\nFor US, PR and CA accounts, the account must be either a daily pickup account, an occasional account, or a customer B.I.N account, or a drop shipper account. \n\nAll other accounts must be either a daily pickup account, an occasional account, a drop shipper account, or a non-shipping account.",
+              "type": "string"
+            },
+            "Name": {
+              "description": "Bill Third Partys company name.",
+              "type": "string"
+            },
+            "AttentionName": {
+              "description": "Attention Name.",
+              "type": "string"
+            },
+            "VatTaxID": {
+              "description": "Tax ID provided by a customer.",
+              "type": "string"
+            },
+            "TaxIDType": {
+              "description": "Tax ID Type. Applicable only for bill to address in Spain or Italy. If TaxIDType is not provided or is invalid, Vat Tax ID will be used.",
+              "type": "string"
+            },
+            "CertifiedElectronicMail": {
+              "description": "Posta Elettronica Certificata (PEC) which is the recipient code for the customers certified electronic mail value.",
+              "type": "string"
+            },
+            "InterchangeSystemCode": {
+              "description": "Sistema Di Interscambio(SDI) which is the recipient code for the customer's interchange value or Interchange System Code",
+              "type": "string"
+            },
+            "SuppressPrintInvoiceIndicator": {
+              "description": "Presence/Absence Indicator. Any value inside is ignored. SuppressPrintInvoiceIndicator is optional and only applicable to Label-less Returns Shipments. \n\nPresence of the indicator means a \"Do Not Pay Invoice\" will not be printed. \n\nAbsence of the indicator means \"Do Not Pay Invoice\" will be printed.",
+              "type": "string"
+            },
+            "Address": {
+              "type": "object",
+              "required": ["AddressLine", "City", "CountryCode"],
+              "properties": {
+                "AddressLine": {
+                  "description": "SoldTo locations street address.  Applies to NAFTA CO.",
+                  "type": "string"
+                },
+                "City": {
+                  "description": "SoldTo locations city.",
+                  "type": "string"
+                },
+                "StateProvinceCode": {
+                  "description": "SoldTo locations state or province code.  Required for certain countries or territories.",
+                  "type": "string"
+                },
+                "PostalCode": {
+                  "description": "SoldTo locations postal code.",
+                  "type": "string"
+                },
+                "CountryCode": {
+                  "description": "SoldTo locations country or territory code.",
+                  "type": "string"
+                }
+              },
+              "description": "Container for additional information for the third party UPS accounts address."
+            }
+          },
+          "required": ["Address"],
+          "description": "Container for the third party billing option.  This element or its sibling element, BillShipper, BillReceiver or Consignee Billed, must be present but no more than one can be present."
+        },
+        "ConsigneeBilledIndicator": {
+          "description": "Consignee Billing payment option indicator. The presence indicates consignee billing option is selected. The absence indicates one of the other payment options is selected.  This is an empty tag, any value inside is ignored. This element or its sibling element, BillShipper, BillReceiver or BillThirdParty, must be present but no more than one can be present. This billing option is valid for a shipment charge type of Transportation only. Only applies to US/PR and PR/US shipment origins and destination.\n\nThis payment method allows you to bill the charges for a specified shipment to a consignee who has agreed to pay the charges. All shipping charges are billed to the consignees UPS account number including the following accessorials: Additional Handling, Delivery Area Surcharges, Delivery Change Requests, Early AM Premium, Early AM Out of Territory, Fuel Surcharge, Hazardous Material Surcharges, Large Package Surcharge, Over Max Limits, and Saturday Delivery.\n\nDeclared Value, Delivery Confirmation, On Call Pickup, Remote Area Surcharge, Saturday Pickup of Delivery fees are not passed to the consignee. These charges are billed to the shippers UPS account number.",
+          "type": "string"
+        }
+      },
+      "description": "Shipment charge container.  If Duty and Tax charges are applicable to a shipment and a payer is not specified, the default payer of Duty and Tax charges is Bill to Receiver."
+    },
+    "SplitDutyVATIndicator": {
+      "description": "Split Duty VAT Indicator. The presence indicates the payer specified for Transportation Charges will pay transportation charges and any duties that apply to the shipment. The payer specified for Duties and Taxes will pay the VAT (Value-Added Tax) only.  This is an empty tag, any value inside is ignored. The payment method for Transportation charges must be UPS account. The UPS account must be a daily pickup account or an occasional account.",
+      "type": "string"
+    }
+  },
+  "description": "Payment information container for detailed shipment charges. The two shipment charges that are available for specification are Transportation charges and Duties and Taxes.  It is required for non-Ground Freight Pricing shipments only.",
+  "default": {
+    "ShipmentCharge": {
+      "Type": "string",
+      "BillShipper": {
+        "AccountNumber": "string",
+        "CreditCard": {
+          "Type": "string",
+          "Number": "string",
+          "ExpirationDate": "string",
+          "SecurityCode": "string",
+          "Address": {
+            "AddressLine": "string",
+            "City": "string",
+            "StateProvinceCode": "string",
+            "PostalCode": "string",
+            "CountryCode": "string"
+          }
+        },
+        "AlternatePaymentMethod": "string",
+        "PreAuthorizedPaymentInformation": {
+          "PaymentMediaType": "string",
+          "PaymentGUID": "string"
+        },
+        "VatTaxID": "string",
+        "TaxIDType": "string",
+        "CertifiedElectronicMail": "string",
+        "InterchangeSystemCode": "string"
+      },
+      "BillReceiver": {
+        "AccountNumber": "string",
+        "Address": {
+          "PostalCode": "string"
+        }
+      },
+      "BillThirdParty": {
+        "AccountNumber": "string",
+        "Name": "string",
+        "AttentionName": "string",
+        "VatTaxID": "string",
+        "TaxIDType": "string",
+        "CertifiedElectronicMail": "string",
+        "InterchangeSystemCode": "string",
+        "SuppressPrintInvoiceIndicator": "string",
+        "Address": {
+          "AddressLine": "string",
+          "City": "string",
+          "StateProvinceCode": "string",
+          "PostalCode": "string",
+          "CountryCode": "string"
+        }
+      },
+      "ConsigneeBilledIndicator": "string"
+    },
+    "SplitDutyVATIndicator": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

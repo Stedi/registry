@@ -1,0 +1,136 @@
+{
+  "type": "object",
+  "required": ["Address", "Name"],
+  "properties": {
+    "Name": {
+      "description": "The ship from locations name or company name. \n35 characters are accepted, but for return Shipment only 30 characters will be printed on the label.  Required if ShipFrom tag is in the XML.",
+      "type": "string"
+    },
+    "AttentionName": {
+      "description": "The ship from Attention name. \n35 characters are accepted, but for return Shipment only 30 characters will be printed on the label.  Required if ShipFrom tag is in the XML and Invoice or CO International forms is requested. If not present, will default to the Shipper Attention Name.",
+      "type": "string"
+    },
+    "CompanyDisplayableName": {
+      "description": "Not applicable for ShipFrom.",
+      "type": "string"
+    },
+    "TaxIdentificationNumber": {
+      "description": "Companys Tax Identification Number at the pick up location.  Conditionally required if EEI form (International forms) is requested. \nApplies to EEI Form only.",
+      "type": "string"
+    },
+    "TaxIDType": {
+      "type": "object",
+      "required": ["Code"],
+      "properties": {
+        "Code": {
+          "description": "Company's tax Identification type.  Valid values: EIN, DNS, and FGN. \nApplies to EEI form only.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of TaxID submitted.  Applies to EEI form only.",
+          "type": "string"
+        }
+      },
+      "description": "Tax Identification Container.  Applies to EEI form only."
+    },
+    "Phone": {
+      "type": "object",
+      "required": ["Number"],
+      "properties": {
+        "Number": {
+          "description": "Sold To contacts phone number.",
+          "type": "string"
+        },
+        "Extension": {
+          "description": "Sold To contacts phone extension.",
+          "type": "string"
+        }
+      },
+      "description": "Container for Phone Number.  If ShipFrom country or territory is US, PR, CA, and VI, the layout is:\narea code, 7 digit phone number or \narea code, 7 digit phone number, 4 digit extension number.\n\nFor other countries or territories, the layout is:\ncountry or territory code, area code, 7 digit number. \n\n If ShipFrom tag is in the XML and International forms is requested."
+    },
+    "ShipFromAccountNumber": {
+      "description": "Ship From UPS Account.",
+      "type": "string"
+    },
+    "FaxNumber": {
+      "description": "The Ship from fax number.  If Ship from country or territory is US 10 digits allowed, otherwise 1-15 digits allowed.",
+      "type": "string"
+    },
+    "Address": {
+      "type": "object",
+      "required": ["AddressLine", "City", "CountryCode"],
+      "properties": {
+        "AddressLine": {
+          "description": "SoldTo locations street address.  Applies to NAFTA CO.",
+          "type": "string"
+        },
+        "City": {
+          "description": "SoldTo locations city.",
+          "type": "string"
+        },
+        "StateProvinceCode": {
+          "description": "SoldTo locations state or province code.  Required for certain countries or territories.",
+          "type": "string"
+        },
+        "PostalCode": {
+          "description": "SoldTo locations postal code.",
+          "type": "string"
+        },
+        "CountryCode": {
+          "description": "SoldTo locations country or territory code.",
+          "type": "string"
+        }
+      },
+      "description": "Ship from Address Container.  The package will be originating from or being shipped from this address. The shipment will be rated from this origin address to the destination ship to address."
+    },
+    "VendorInfo": {
+      "type": "object",
+      "required": ["VendorCollectIDTypeCode", "VendorCollectIDNumber"],
+      "properties": {
+        "VendorCollectIDTypeCode": {
+          "description": "Code that identifies the type of Vendor Collect ID Number                                                                   Valid Values                                                                   0356 = IOSS                                                 0357 = VOEC                                                 0358 = HMRC                                                    Vendor Collect ID Number type code will be printed on commercial invoice if present.",
+          "type": "string"
+        },
+        "VendorCollectIDNumber": {
+          "description": "Shippers VAT Tax collection registration number to be entered by Shipper at time of shipment creation.   Presence of this number as part of the shipment information implies the shipper has collected/paid the required VAT tax (outside of UPS/UPS systems).  Vendor Colect ID Number will be printed on commercial invoice if present.                                   Sample Values:   IMDEU1234567 (IOSS #),  VOEC1234567 (VOEC #),  GB1234567 (HMRC #)     Required if the shipment is subject to Vendor Collect ID collection",
+          "type": "string"
+        },
+        "ConsigneeType": {
+          "description": "Consignee Type.                                             01 = Business                                                 02 = Consumer                                                           NA = Not Applicable",
+          "type": "string"
+        }
+      },
+      "description": "Vendor Information Container"
+    }
+  },
+  "description": "Ship From Container.  Required for return shipment. \n\nRequired if pickup location is different from the shippers address.",
+  "default": {
+    "Name": "string",
+    "AttentionName": "string",
+    "CompanyDisplayableName": "string",
+    "TaxIdentificationNumber": "string",
+    "TaxIDType": {
+      "Code": "string",
+      "Description": "string"
+    },
+    "Phone": {
+      "Number": "string",
+      "Extension": "string"
+    },
+    "ShipFromAccountNumber": "string",
+    "FaxNumber": "string",
+    "Address": {
+      "AddressLine": "string",
+      "City": "string",
+      "StateProvinceCode": "string",
+      "PostalCode": "string",
+      "CountryCode": "string"
+    },
+    "VendorInfo": {
+      "VendorCollectIDTypeCode": "string",
+      "VendorCollectIDNumber": "string",
+      "ConsigneeType": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

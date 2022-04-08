@@ -1,0 +1,750 @@
+{
+  "type": "object",
+  "properties": {
+    "Description": {
+      "description": "Merchandise description of package.  Required for shipment with return service.",
+      "type": "string"
+    },
+    "PalletDescription": {
+      "description": "Description of articles & special marks. Applicable for Air Freight only",
+      "type": "string"
+    },
+    "NumOfPieces": {
+      "description": "Number of Pieces. Applicable for Air Freight only",
+      "type": "string"
+    },
+    "UnitPrice": {
+      "description": "Unit price of the commodity. Applicable for Air Freight only  Limit to 2 digit after the decimal. The maximum length of the field is 12 including . and can hold up to 2 decimal place. (e.g. 999999999.99)",
+      "type": "string"
+    },
+    "Packaging": {
+      "type": "object",
+      "required": ["Code"],
+      "properties": {
+        "Code": {
+          "description": "Package types. Values are: \n01 = UPS Letter \n02 = Customer Supplied Package \n03 = Tube \n04 = PAK \n21 = UPS Express Box \n24 = UPS 25KG Box \n25 = UPS 10KG Box \n30 = Pallet \n2a = Small Express Box \n2b = Medium Express Box \n2c = Large Express Box \n56 = Flats \n57 = Parcels \n58 = BPM \n59 = First Class \n60 = Priority \n61 = Machineables \n62 = Irregulars \n63 = Parcel Post \n64 = BPM Parcel\n 65 = Media Mail \n66 = BPM Flat \n67 = Standard Flat.  \nNote: Only packaging type code 02 is applicable to Ground Freight Pricing.\n  Package type 24, or 25 is only allowed for shipment without return service. Packaging type must be valid for all the following: ShipTo country or territory, ShipFrom country or territory, a shipment going from ShipTo country or territory to ShipFrom country or territory, all Accessorials at both the shipment and package level, and the shipment service type. UPS will not accept raw wood pallets and please refer the UPS packaging guidelines for pallets on UPS.com.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of packaging type. Examples are letter, customer supplied, express box.",
+          "type": "string"
+        }
+      },
+      "description": "Packaging container.  Container for Packaging Type."
+    },
+    "Dimensions": {
+      "type": "object",
+      "required": ["UnitOfMeasurement", "Length", "Height", "Width"],
+      "properties": {
+        "UnitOfMeasurement": {
+          "type": "object",
+          "required": ["Code"],
+          "properties": {
+            "Code": {
+              "description": "Code of the billing weight measurement units. Values are: KGS or LBS.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of the billing weight measurement units.",
+              "type": "string"
+            }
+          },
+          "description": "UnitOfMeasurement container."
+        },
+        "Length": {
+          "description": "The length of the line item used to determine dimensional weight.",
+          "type": "string"
+        },
+        "Width": {
+          "description": "The width of the line item used to determine dimensional weight.",
+          "type": "string"
+        },
+        "Height": {
+          "description": "The height of the line item used to determine dimensional weight.",
+          "type": "string"
+        }
+      },
+      "description": "Dimensions information container. Note: Currently dimensions are not applicable to Ground Freight Pricing.  Length + 2*(Width + Height) must be less than or equal to 165 IN or 330 CM.Required for Heavy Goods service. Package Dimension will be ignored for Simple Rate"
+    },
+    "DimWeight": {
+      "type": "object",
+      "properties": {
+        "UnitOfMeasurement": {
+          "type": "object",
+          "required": ["Code"],
+          "properties": {
+            "Code": {
+              "description": "Code of the billing weight measurement units. Values are: KGS or LBS.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of the billing weight measurement units.",
+              "type": "string"
+            }
+          },
+          "description": "UnitOfMeasurement Container.  N/A"
+        },
+        "Weight": {
+          "description": "Actual package weight.  Weight accepted for letters/envelopes.",
+          "type": "string"
+        }
+      },
+      "description": "Dimensional weight of shipment. Please visit ups.com for rules on calculating. There is one implied decimal place (e.g. 115 = 11.5).  If dimensions are provided, dimensional weight is ignored. For US/PR/CA shipments, dimensional weight is ignored"
+    },
+    "PackageWeight": {
+      "type": "object",
+      "required": ["UnitOfMeasurement", "Weight"],
+      "properties": {
+        "UnitOfMeasurement": {
+          "type": "object",
+          "required": ["Code"],
+          "properties": {
+            "Code": {
+              "description": "Code of the billing weight measurement units. Values are: KGS or LBS.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of the billing weight measurement units.",
+              "type": "string"
+            }
+          },
+          "description": "Container to hold UnitOfMeasurement information for package weight."
+        },
+        "Weight": {
+          "description": "Packages weight. Weight accepted for letters/envelopes.  Only average package weight is required for Ground Freight Pricing Shipment.",
+          "type": "string"
+        }
+      },
+      "description": "Container to hold package weight information.  Package weight is a required for Ground Freight Pricing shipments and Heavy Goods service. Package Weight will be ignored for Simple Rate."
+    },
+    "LargePackageIndicator": {
+      "description": "Presence of the indicator mentions that the package is Large Package.\n\nThis is an empty tag, any value inside is ignored.",
+      "type": "string"
+    },
+    "ReferenceNumber": {
+      "type": "object",
+      "properties": {
+        "BarCodeIndicator": {
+          "description": "If the indicator is present then the reference numbers value will be bar coded on the label.\n\nThis is an empty tag, any value inside is ignored.\n  Only one shipment-level or package-level reference number can be bar coded per shipment. \n\nIn order to barcode a reference number, its value must be no longer than 14 alphanumeric characters or 24 numeric characters and cannot contain spaces.",
+          "type": "string"
+        },
+        "Code": {
+          "description": "Reference number type code, for the entire shipment. The code specifies the Reference name. \n\nRefer to the Reference Number Code table.  Valid if the origin/destination pair is US/US or PR/PR and character should be alpha-numeric.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Customer supplied reference number.  Valid if the origin/destination pair is US/US or PR/PR.",
+          "type": "string"
+        }
+      },
+      "required": ["Value"],
+      "description": "Package reference number information container.  For Mail Innovation shipments, up to 3 reference numbers are supported. If 5 reference numbers are specified (CostCenter, PackageID, and 3 ReferenceNumbers) the 3 desigated by the ReferenceNumber container will not be visible on 4x6 label supported by the API. These additional reference numbers are only be visible on the 4x8 label..\n\nFor non-Mail Innovation shipments only the first 2 reference numbers will be visible on labels."
+    },
+    "AdditionalHandlingIndicator": {
+      "description": "Additional Handling Required. The presence indicates additional handling is required, the absence indicates no additional handling is required. Additional Handling indicator indicates its a non-corrugated package.",
+      "type": "string"
+    },
+    "SimpleRate": {
+      "type": "object",
+      "required": ["Code"],
+      "properties": {
+        "Code": {
+          "description": "Simple Rate Code\nXS =  Extra Small\nS =  Small\nM = Medium\nL= Large\nXL = Extra Large",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Simple Rate description of the code above.  Currently ignored if provided in the Request. Length is not validated.",
+          "type": "string"
+        }
+      },
+      "description": "SimpleRate Container  N/A"
+    },
+    "UPSPremier": {
+      "type": "object",
+      "required": ["SensorID", "Category", "HandlingInstructions"],
+      "properties": {
+        "Category": {
+          "description": "UPS Premier Category.  Valid values are 01,02,03                             UPS Premier Silver -01\nUPS Premier Gold - 02\nUPS Premier Platinum - 03",
+          "type": "string"
+        },
+        "SensorID": {
+          "description": "SensorID is RFID for UPS Premier Silver. SensorID is MeshID for UPS Premier Gold or UPS Premier Platinum Package.",
+          "type": "string"
+        },
+        "HandlingInstructions": {
+          "type": "object",
+          "required": ["Instruction"],
+          "properties": {
+            "Instruction": {
+              "description": "Handling Instruction for UPS Premier package.  Please refer Apendix UPS Premier Handling Instructions.",
+              "type": "string"
+            }
+          },
+          "description": "Handling Instruction Container."
+        }
+      },
+      "description": "UPS Premier Container."
+    },
+    "PackageServiceOptions": {
+      "type": "object",
+      "properties": {
+        "DeliveryConfirmation": {
+          "type": "object",
+          "required": ["DCISType"],
+          "properties": {
+            "DCISType": {
+              "description": "Type of delivery confirmation.  Valid values: \n1 - Delivery Confirmation\n2 - Delivery Confirmation Signature Required\n3 - Delivery Confirmation Adult Signature Required",
+              "type": "string"
+            },
+            "DCISNumber": {
+              "description": "Delivery Confirmation Control number associated with the delivery confirmation for the package.  Valid for forward shipments only.",
+              "type": "string"
+            }
+          },
+          "description": "Delivery Confirmation container. \nRefer to Delivery Confirmation Origin-\nDestination Pairs in the Appendix for a list of valid values.  Valid only for forward shipment only."
+        },
+        "DeclaredValue": {
+          "type": "object",
+          "properties": {
+            "Type": {
+              "type": "object",
+              "required": ["Code"],
+              "properties": {
+                "Code": {
+                  "description": "The code associated with Handling Unit Type.  Valid values:\nSKD = Skid\nCBY = Carboy \nPLT = Pallet\nTOT = Totes \nLOO = Loose\nOTH = Other",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "A description of the code for the Handling Unit type.",
+                  "type": "string"
+                }
+              },
+              "description": "Container for Declared Value Type."
+            },
+            "CurrencyCode": {
+              "description": "Declared value amount currency type. Defaults to the non-Euro currency used in the shippers country or territory.  Code must represent a currency that is a valid for Shipper country or territory.",
+              "type": "string"
+            },
+            "MonetaryValue": {
+              "description": "Declared value amount.",
+              "type": "string"
+            }
+          },
+          "required": ["CurrencyCode", "MonetaryValue"],
+          "description": "Container for Declared Value."
+        },
+        "COD": {
+          "type": "object",
+          "required": ["CODFundsCode", "CODAmount"],
+          "properties": {
+            "CODFundsCode": {
+              "description": "For valid values refer to:Rating and Shipping COD Supported Countries or Territories in the Appendix.",
+              "type": "string"
+            },
+            "CODAmount": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue"],
+              "properties": {
+                "CurrencyCode": {
+                  "description": "COD amount currency code type.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "COD Amount.  Valid values: 0.01 USD to 50000.00 USD",
+                  "type": "string"
+                }
+              },
+              "description": "COD Amount container."
+            }
+          },
+          "description": "Container for COD.  Indicates COD is requested. Package level COD is available for shipment without return service from US/PR to US/PR, CA to CA, and CA to US. CA to US COD is not allowed for package Letter/ Envelope. COD is not valid for return service movements."
+        },
+        "AccessPointCOD": {
+          "type": "object",
+          "required": ["CurrencyCode", "MonetaryValue"],
+          "properties": {
+            "CurrencyCode": {
+              "description": "Access Point COD Currency Code.",
+              "type": "string"
+            },
+            "MonetaryValue": {
+              "description": "Access Point COD Monetary Value.",
+              "type": "string"
+            }
+          },
+          "description": "Access Point COD indicates Package COD is requested for a shipment.  Valid only for \"01 - Hold For Pickup At UPS Access Point\" Shipment Indication type. Package Access Point COD is valid only for shipment without return service from US/PR to US/PR and CA to CA. Not valid with COD at package level."
+        },
+        "ShipperReleaseIndicator": {
+          "description": "The presence indicates that the package may be released by driver without a signature from the consignee.  Empty Tag. Only available for US50/PR to US50/PR packages without return service.",
+          "type": "string"
+        },
+        "Notification": {
+          "type": "object",
+          "required": ["NotificationCode", "EMail"],
+          "properties": {
+            "NotificationCode": {
+              "description": "Notification Code.  Valid values:\n3 - Receiver Return Notification\n6 - QV Email Notification\n7 - QV Exception Notification\n8 - QV Delivery Notification \nFor Mail Innovations forward shipments, QV Email Notifications are allowed for First Class, Priority Mail, and Expedited Mail Innovation services.",
+              "type": "string"
+            },
+            "EMail": {
+              "type": "object",
+              "required": ["EMailAddress"],
+              "properties": {
+                "EMailAddress": {
+                  "description": "The destination email address of the receiver returns notification email.",
+                  "type": "string"
+                },
+                "UndeliverableEMailAddress": {
+                  "description": "The e-mail address where an undeliverable email message is sent if the Receiver Return Notification email is undeliverable.  Defaults to FromEMailAddress. Only allowed at the first package.",
+                  "type": "string"
+                },
+                "FromEMailAddress": {
+                  "description": "The email address listed in the Reply To field of the message header, includes name and e-mail address of sender. The \"From\" field of the message header contains pkginfo@ups.com.  Only allowed at the first package.",
+                  "type": "string"
+                },
+                "FromName": {
+                  "description": "The name the receiver return notification will appear to be from.  Defaults to the Shipper Name. Only allowed at the first package.",
+                  "type": "string"
+                },
+                "Memo": {
+                  "description": "User defined text that will be included in the email.  Only allowed at the first package.",
+                  "type": "string"
+                },
+                "Subject": {
+                  "description": "The eMails subject. Defaults to the UPS Receiver Return Notification plus the shipment ID.  Only allowed at the first package.",
+                  "type": "string"
+                },
+                "SubjectCode": {
+                  "description": "Specifies a reference code and reference number to display in the subject of the Receiver Return Notification. \n\nWhen the subject code is provided, the subject will contain the following: UPS Receiver Return Notification. \n\nThe reference code (the reference code will be mapped to the corresponding ANSI value) Plus the reference number.\n\nThe valid subject codes are:\n01 - Shipment Reference Number 1, \n02 - Shipment Reference Number 2,  \n03 - package Reference Number 1, \n04 - package Reference Number 2,\n05 - package Reference Number 3,\n06 - package Reference Number 4,\n07 - package Reference Number 5,\n08 - Subject Text (Return Notification only).  If the subject code tag is not provided and the subject text is provided, the subject of the notification will be the subject text. \n\nIf the subject text is provided, and subject code tag exists, then the subject code value must be 08. \n\nIf the subject code is 08, the subject text must exist. If a subject code is provided that refers to a nonexistent reference number, the subject will default to the tracking number. Only allowed at the first package.",
+                  "type": "string"
+                }
+              },
+              "description": "Container for the e-mail message."
+            }
+          },
+          "description": "Receiver Return Notification.  Applicable for Shipment with returned service."
+        },
+        "HazMat": {
+          "type": "object",
+          "properties": {
+            "PackagingTypeQuantity": {
+              "description": "The number of pieces of the specific commodity. Required if CommodityRegulatedLevelCode = LQ or FR.  Valid values are 1 to 999.",
+              "type": "string"
+            },
+            "RecordIdentifier1": {
+              "description": "Reserved for future use.",
+              "type": "string"
+            },
+            "RecordIdentifier2": {
+              "description": "Reserved for future use.",
+              "type": "string"
+            },
+            "RecordIdentifier3": {
+              "description": "Reserved for future use.",
+              "type": "string"
+            },
+            "SubRiskClass": {
+              "description": "Recommended if CommodityRegulatedLevelCode = LQ or FR and if the field applies to the material by regulation. \n\nSecondary hazardous characteristics of a package. (There can be more than one  separate each with a comma).",
+              "type": "string"
+            },
+            "aDRItemNumber": {
+              "description": "The type of regulated good for an ADR package where ADR is for Europe to Europe ground movement.",
+              "type": "string"
+            },
+            "aDRPackingGroupLetter": {
+              "description": "Required if the field applies to the material by regulation. Field input is Arabic numerals, output is Roman numerals. Will be shown in Roman Numerals.  Valid values: \n1 = I, \n2 = II, \n3 = III,\n and blank.",
+              "type": "string"
+            },
+            "TechnicalName": {
+              "description": "The technical name (when required) for the specified commodity. Recommended if CommodityRegulatedLevelCode = LQ or FR and if the field applies to the material by regulation.",
+              "type": "string"
+            },
+            "HazardLabelRequired": {
+              "description": "Defines the type of label that is required on the package for the commodity. \n\nNot applicable if CommodityRegulatedLevelCode = LR or EQ.",
+              "type": "string"
+            },
+            "ClassDivisionNumber": {
+              "description": "This is the hazard class associated to the specified commodity. \n\nRequired if CommodityRegulatedLevelCode is 'EQ', LQ or FR",
+              "type": "string"
+            },
+            "ReferenceNumber": {
+              "description": "Optional reference number. It will be displayed only on label.",
+              "type": "string"
+            },
+            "Quantity": {
+              "description": "Required if CommodityRegulatedLevelCode = EQ, LQ or FR. The numerical value of the mass capacity of the regulated good.  Should be more than 0.0. Valid characters are 0-9 and \".\" (Decimal point). Limit to 1 digit after the decimal. The maximum length of the field is 5 including \".\" (Decimal point) and can hold up to 1 decimal place.",
+              "type": "string"
+            },
+            "UOM": {
+              "description": "Required if CommodityRegulatedLevelCode = LQ, EQ or FR. The unit of measure used for the mass capacity of the regulated good. \n\nFor Example: ml, L, g, mg, kg, cylinder, pound, pint, quart, gallon, ounce etc.",
+              "type": "string"
+            },
+            "PackagingType": {
+              "description": "The type of package used to contain the regulated good. (Ex: Fiberboard Box). Required if CommodityRegulatedLevelCode = LQ or FR.   Ex. FIBERBOARD BOX, WOOD(EN) BOX, PLASTIC JERRICAN, METAL BOX, STEEL DRUM, OTHER, PLASTIC BOX, PLASTIC DRUM, STYROFOAM BOX, CYLINDERS, ENVIROTAINER, PLYWOOD BOX, ALUMINUM DRUM, ALUMINUM CYLINDERS, PLASTIC PAIL, PLYWOOD DRUM, FIBER DRUM, STEEL JERRICAN, ALUMINUM JERRICAN, STEEL BOX, CARTON, ALUMINUM BOX",
+              "type": "string"
+            },
+            "IDNumber": {
+              "description": "This is the ID number (UN/NA/ID) for the specified commodity. \nRequired if CommodityRegulatedLevelCode = LR, LQ or FR and if the field applies to the material by regulation. \nUN/NA/ID Identification Number assigned to the specified regulated good. (Include the UN/NA/ID as part of the entry).",
+              "type": "string"
+            },
+            "ProperShippingName": {
+              "description": "The Proper Shipping Name assigned by ADR, CFR or IATA. Required if CommodityRegulatedLevelCode = LR, LQ or FR.",
+              "type": "string"
+            },
+            "AdditionalDescription": {
+              "description": "Additional remarks or special provision information. Recommended if CommodityRegulatedLevelCode = LQ or FR and if the field applies to the material by regulation. \nAdditional information that may be required by regulation about a hazardous material, such as, Limited Quantity, DOT-SP numbers, EX numbers.",
+              "type": "string"
+            },
+            "PackagingGroupType": {
+              "description": "This is the packing group category associated to the specified commodity. Recommended if CommodityRegulatedLevelCode = LQ or FR and if the field applies to the material by regulation. Must be shown in Roman Numerals.\n  Valid values:\nI\nII\nIII\nblank",
+              "type": "string"
+            },
+            "PackagingInstructionCode": {
+              "description": "The packing instructions related to the chemical record. Required if CommodityRegulatedLevelCode = LQ or FR and if the field applies to the material by regulation.",
+              "type": "string"
+            },
+            "EmergencyPhone": {
+              "description": "24 Hour Emergency Phone Number of the shipper. Valid values for this field are (0) through (9) with trailing blanks. For numbers within the U.S., the layout is 1, area code, 7-digit number. For all other countries or territories the layout is country or territory code, area code, number.                        The following are restricted in the phone number  \nperiod ., dash -, plus sign + and conventional parentheses ( and ), EXT\" or \"OPT",
+              "type": "string"
+            },
+            "EmergencyContact": {
+              "description": "The emergency information, contact name and/or contract number, required to be communicated when a call is placed to the EmergencyPhoneNumber. The information is required if there is a value in the EmergencyPhoneNumber field above and the shipment is with a US50 or PR origin and/or destination and the RegulationSet is IATA.",
+              "type": "string"
+            },
+            "ReportableQuantity": {
+              "description": "Recommended if CommodityRegulatedLevelCode = LQ or FR and if the field applies to the material by regulation. If reportable quantity is met, 'RQ' should be entered.",
+              "type": "string"
+            },
+            "RegulationSet": {
+              "description": "The Regulatory set associated with every regulated shipment. It must be same across the shipment. \nValid values: \nADR = Europe to Europe Ground Movement \nCFR = HazMat regulated by US Dept. of Transportation within the U.S. or ground shipments to Canada \nIATA= Worldwide Air movement \nTDG= Canada to Canada ground movement or Canada to U.S. standard movement.  Valid values are ADR, CFR, IATA and TDG.\nFor multiple Chemical Records per package or multiple packages containing different RegulationSet, RegulationSet of first Chemical Record would be considered for validating and rating the entire shipment.",
+              "type": "string"
+            },
+            "TransportationMode": {
+              "description": "Not applicable for ADR regulation set. Required for any other regulation set. Declares that a package was prepared according to ground passenger aircraft or cargo aircraft only. \nValid values: \nHighway=Highway \nGround=Ground \nPAX=Passenger Aircraft \nPassenger Aircraft=Passenger Aircraft \nCAO=Cargo Aircraft Only \nCargo Aircraft Only=Cargo Aircraft Only  Valid entries include: Highway, Ground, PAX, Passenger Aircraft, CAO and Cargo Aircraft Only.",
+              "type": "string"
+            },
+            "CommodityRegulatedLevelCode": {
+              "description": "Indicates the type of commodity - Fully Regulated (FR), Limited Quantity (LQ), Excepted Quantity (EQ) or Lightly Regulated (LR).  Valid values are LR, FR, LQ and EQ.\nRequired for subversion 1701 or greater. LR and EQ are validated if subversion is 1701 or greater. FR, LQ will be validated if subversion is 1807 or greater",
+              "type": "string"
+            },
+            "TransportCategory": {
+              "description": "Transport Category.  Valid values are 0 to 4.",
+              "type": "string"
+            },
+            "TunnelRestrictionCode": {
+              "description": "Defines what is restricted to pass through a tunnel.",
+              "type": "string"
+            },
+            "ChemicalRecordIdentifier": {
+              "description": "Identifies the Chemical Record.  Required if SubVersion is greater than or equal to 1701.",
+              "type": "string"
+            },
+            "LocalTechnicalName": {
+              "description": "Technical name in local language.",
+              "type": "string"
+            },
+            "LocalProperShippingName": {
+              "description": "Proper shipping name in local langauge.",
+              "type": "string"
+            }
+          },
+          "required": ["ProperShippingName", "TransportationMode", "RegulationSet"],
+          "description": "Container to hold HazMat Chemical Records."
+        },
+        "DryIce": {
+          "type": "object",
+          "required": ["DryIceWeight", "RegulationSet"],
+          "properties": {
+            "RegulationSet": {
+              "description": "Regulation set for dryIce Shipment. Valid values: CFR = HazMat regulated by US Dept. of Transportation within the U.S. or ground shipments to Canada, IATA= Worldwide Air movement.  The following values are valid: IATA, CFR.",
+              "type": "string"
+            },
+            "DryIceWeight": {
+              "type": "object",
+              "required": ["UnitOfMeasurement", "Weight"],
+              "properties": {
+                "UnitOfMeasurement": {
+                  "type": "object",
+                  "required": ["Code"],
+                  "properties": {
+                    "Code": {
+                      "description": "Code of the billing weight measurement units. Values are: KGS or LBS.",
+                      "type": "string"
+                    },
+                    "Description": {
+                      "description": "Description of the billing weight measurement units.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Container for Unit of measurement for Dry Ice Weight."
+                },
+                "Weight": {
+                  "description": "Dry Ice Weight.  Cannot be more than package weight. Should be more than 0.0. Valid characters are 0-9 and \".\" (Decimal point). Limit to 1 digit after the decimal. The maximum length of the field is 5 including \".\" and can hold up to 1 decimal place.",
+                  "type": "string"
+                }
+              },
+              "description": "Container for Dry Ice weight."
+            },
+            "MedicalUseIndicator": {
+              "description": "Presence/Absence Indicator. Any value inside is ignored. Relevant only in CFR regulation set. If present it is used to designate the dry Ice is for any medical use and rates are adjusted for DryIce weight more than 2.5 Kgs or 5.7 Lbs.",
+              "type": "string"
+            }
+          },
+          "description": "Container for Dry Ice.  Maximum 1 Dry Ice is allowed. Lane check will happen based on postal code/ city."
+        },
+        "CTFAmount": {
+          "description": "A fee charged/invoiced directly to the UPS Account Number by the Bill My Account eligible Retail Location. \nThere will be contract rate established between UPS and the Retail Chain.",
+          "type": "string"
+        },
+        "PackedByStoreIndicator": {
+          "description": "This is an empty tag, any value inside is ignored. \nIndicator that the packages was packed by the store.",
+          "type": "string"
+        },
+        "NonMachineableIndicator": {
+          "description": "Allow the UPS SurePost customer to designate the shipment as non-machineable and include a non-machineable indication as part of the shipment information.",
+          "type": "string"
+        },
+        "UPSPremiumCareIndicator": {
+          "description": "An UPSPremiumCareIndicator indicates special handling is required for shipment having controlled substances.  Empty Tag means indicator is present. \n\nThe UPSPremiumCareIndicator cannot be requested for package with Delivery Confirmation - Adult Signature Required and Delivery Confirmation- Signature Required. \n\nUPSPremiumCareIndicator is valid for following Return services: \nReturns Exchange (available with a contract)\nPrint Return Label\nPrint and Mail\nElectronic Return Label \nReturn Service Three Attempt\n\nThe UPSPremiumCareIndicator can be requested with following UPS services: \nUPS Express Early\nUPS Express\nUPS Express Saver \nUPS Standard\nValid only for Canada to Canada movements.",
+          "type": "string"
+        },
+        "ProactiveIndicator": {
+          "description": "Presence/Absence Indicator. Any value is ignored. If present, the package is rated for UPS Proactive Response and proactive package tracking. Contractual accessorial for health care companies to allow package monitoring throughout the UPS system.  Shippers account needs to have valid contract for UPS Proactive Reponse.",
+          "type": "string"
+        },
+        "PackageIdentifier": {
+          "description": "Identifies the package containing Dangerous Goods.  Required for Hazmat shipment if SubVersion is greater than or equal to 1701.",
+          "type": "string"
+        },
+        "ClinicalTrialsID": {
+          "description": "Unique identifier for clinical trials",
+          "type": "string"
+        },
+        "RefrigerationIndicator": {
+          "description": "Presence/Absence Indicator. Any value is ignored. If present, indicates that the package contains an item that needs refrigeration.  Shippers account needs to have a valid contract for Refrigeration.",
+          "type": "string"
+        }
+      },
+      "description": "Package Service Options container."
+    },
+    "Commodity": {
+      "type": "object",
+      "required": ["FreightClass"],
+      "properties": {
+        "FreightClass": {
+          "description": "Freight Classification. Freight class partially determines the freight rate for the article.  Required for Ground Freight Pricing Shipments only.",
+          "type": "string"
+        },
+        "NMFC": {
+          "type": "object",
+          "required": ["PrimeCode"],
+          "properties": {
+            "PrimeCode": {
+              "description": "Specifies the Commoditys NMFC prime code.  Required if NMFC Container is present.",
+              "type": "string"
+            },
+            "SubCode": {
+              "description": "Specifies the Commoditys NMFC sub code.  Needs to be provided when the SubCode associated with the PrimeCode is other than 00. UPS defaults the sub value to 00 if not provided. If provided the Sub Code should be associated with the PrimeCode of the NMFC.",
+              "type": "string"
+            }
+          },
+          "description": "Container to hold the NMFC codes."
+        }
+      },
+      "description": "Container to hold the Commodity information.  It is required if the Ground Freight Pricing Shipment indicator is present in the request."
+    },
+    "HazMatPackageInformation": {
+      "type": "object",
+      "properties": {
+        "AllPackedInOneIndicator": {
+          "description": "Presence/Absence Indicator. Any value is ignored. Presence indicates if multiple, different hazmat/chemicals are contained within one box in a package  When number of Hazmat containers in a package is more than one, either AllPackedInOneIndicator or OverPackedIndicator is needed",
+          "type": "string"
+        },
+        "OverPackedIndicator": {
+          "description": "Presence/Absence Indicator. Any value is ignored. Presence indicates that one or more hazmat/chemicals are in separate boxes in a package.  When number of Hazmat containers in a package is more than one, either AllPackedInOneIndicator or OverPackedIndicator is needed",
+          "type": "string"
+        },
+        "QValue": {
+          "description": "When a HazMat shipment specifies AllPackedInOneIndicator and the regulation set for that shipment is IATA, Ship API must require the shipment to specify a Q-Value with exactly one of the following values: 0.1; 0.2; 0.3; 0.4; 0.5; 0.6; 0.7; 0.8; 0.9; 1.0",
+          "type": "string"
+        },
+        "OuterPackagingType": {
+          "description": "This field is used for the Outer Hazmat packaging type.  Ex. FIBERBOARD BOX, WOOD(EN) BOX, PLASTIC JERRICAN, METAL BOX, STEEL DRUM, OTHER, PLASTIC BOX, PLASTIC DRUM, STYROFOAM BOX, CYLINDERS, ENVIROTAINER, PLYWOOD BOX, ALUMINUM DRUM, ALUMINUM CYLINDERS, PLASTIC PAIL, PLYWOOD DRUM, FIBER DRUM, STEEL JERRICAN, ALUMINUM JERRICAN, STEEL BOX, CARTON, ALUMINUM BOX",
+          "type": "string"
+        }
+      },
+      "description": "Required when number of hazmat containers in a package is greater than 1. It indicates whether all the hazmat materials are kept in a single box or multiple boxes.  Required when number of hazmat container in a package is greater than 1."
+    },
+    "IneligibleHoldIndicator": {
+      "description": "Presence/Absence Indicator. Any value is ignored. Presence indicates the package is ineligible for UPS Synchronized Delivery Internal hold",
+      "type": "string"
+    },
+    "CustomerEstimatedDeliveryDate": {
+      "description": "This is customers estimated delivery date. UPS determine when a package is eligible to be held from this date",
+      "type": "string"
+    },
+    "ReturnSlipInformation": {
+      "description": "Return Slip Information. This element contains Return Slip information such as Description, Quantity of Item, Instruction for returns, etc. in JSON string format.",
+      "type": "string"
+    }
+  },
+  "required": ["Packaging"],
+  "description": "Package Information container.  For Return Shipments up to and including 20 packages are allowed. US/PR origin return movements are limited to only one package. For Mail Innovations and Simple Rate shipments only one package is allowed.",
+  "default": {
+    "Description": "string",
+    "PalletDescription": "string",
+    "NumOfPieces": "string",
+    "UnitPrice": "string",
+    "Packaging": {
+      "Code": "string",
+      "Description": "string"
+    },
+    "Dimensions": {
+      "UnitOfMeasurement": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "Length": "string",
+      "Width": "string",
+      "Height": "string"
+    },
+    "DimWeight": {
+      "UnitOfMeasurement": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "Weight": "string"
+    },
+    "PackageWeight": {
+      "UnitOfMeasurement": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "Weight": "string"
+    },
+    "LargePackageIndicator": "string",
+    "ReferenceNumber": {
+      "BarCodeIndicator": "string",
+      "Code": "string",
+      "Value": "string"
+    },
+    "AdditionalHandlingIndicator": "string",
+    "SimpleRate": {
+      "Code": "string",
+      "Description": "string"
+    },
+    "UPSPremier": {
+      "Category": "string",
+      "SensorID": "string",
+      "HandlingInstructions": {
+        "Instruction": "string"
+      }
+    },
+    "PackageServiceOptions": {
+      "DeliveryConfirmation": {
+        "DCISType": "string",
+        "DCISNumber": "string"
+      },
+      "DeclaredValue": {
+        "Type": {
+          "Code": "string",
+          "Description": "string"
+        },
+        "CurrencyCode": "string",
+        "MonetaryValue": "string"
+      },
+      "COD": {
+        "CODFundsCode": "string",
+        "CODAmount": {
+          "CurrencyCode": "string",
+          "MonetaryValue": "string"
+        }
+      },
+      "AccessPointCOD": {
+        "CurrencyCode": "string",
+        "MonetaryValue": "string"
+      },
+      "ShipperReleaseIndicator": "string",
+      "Notification": {
+        "NotificationCode": "string",
+        "EMail": {
+          "EMailAddress": "string",
+          "UndeliverableEMailAddress": "string",
+          "FromEMailAddress": "string",
+          "FromName": "string",
+          "Memo": "string",
+          "Subject": "string",
+          "SubjectCode": "string"
+        }
+      },
+      "HazMat": {
+        "PackagingTypeQuantity": "string",
+        "RecordIdentifier1": "string",
+        "RecordIdentifier2": "string",
+        "RecordIdentifier3": "string",
+        "SubRiskClass": "string",
+        "aDRItemNumber": "string",
+        "aDRPackingGroupLetter": "string",
+        "TechnicalName": "string",
+        "HazardLabelRequired": "string",
+        "ClassDivisionNumber": "string",
+        "ReferenceNumber": "string",
+        "Quantity": "string",
+        "UOM": "string",
+        "PackagingType": "string",
+        "IDNumber": "string",
+        "ProperShippingName": "string",
+        "AdditionalDescription": "string",
+        "PackagingGroupType": "string",
+        "PackagingInstructionCode": "string",
+        "EmergencyPhone": "string",
+        "EmergencyContact": "string",
+        "ReportableQuantity": "string",
+        "RegulationSet": "string",
+        "TransportationMode": "string",
+        "CommodityRegulatedLevelCode": "string",
+        "TransportCategory": "string",
+        "TunnelRestrictionCode": "string",
+        "ChemicalRecordIdentifier": "string",
+        "LocalTechnicalName": "string",
+        "LocalProperShippingName": "string"
+      },
+      "DryIce": {
+        "RegulationSet": "string",
+        "DryIceWeight": {
+          "UnitOfMeasurement": {
+            "Code": "string",
+            "Description": "string"
+          },
+          "Weight": "string"
+        },
+        "MedicalUseIndicator": "string"
+      },
+      "CTFAmount": "string",
+      "PackedByStoreIndicator": "string",
+      "NonMachineableIndicator": "string",
+      "UPSPremiumCareIndicator": "string",
+      "ProactiveIndicator": "string",
+      "PackageIdentifier": "string",
+      "ClinicalTrialsID": "string",
+      "RefrigerationIndicator": "string"
+    },
+    "Commodity": {
+      "FreightClass": "string",
+      "NMFC": {
+        "PrimeCode": "string",
+        "SubCode": "string"
+      }
+    },
+    "HazMatPackageInformation": {
+      "AllPackedInOneIndicator": "string",
+      "OverPackedIndicator": "string",
+      "QValue": "string",
+      "OuterPackagingType": "string"
+    },
+    "IneligibleHoldIndicator": "string",
+    "CustomerEstimatedDeliveryDate": "string",
+    "ReturnSlipInformation": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
