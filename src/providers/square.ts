@@ -6,14 +6,15 @@ import axios from "axios";
 export class SquareProvider extends OpenAPIProvider {
   constructor() {
     super({
-      name: "Square",
-      description:
-        "Square  is a merchant services aggregator and mobile payment company that aims to simplify commerce through technology.",
-      logoUrl: "https://logo.clearbit.com/squareup.com",
-      versions: ["2.0"],
       baseUrl: "https://raw.githubusercontent.com/square/connect-api-specification/master/api.json",
+      description:
+        "Square is a merchant services aggregator and mobile payment company that aims to simplify commerce through technology.",
+      docsLink: "https://developer.squareup.com/docs",
       entities: ["Order", "Payment", "Customer", "Subscription", "Checkout"],
+      logoUrl: "https://logo.clearbit.com/squareup.com",
+      name: "Square",
       sanitizeSchema,
+      versions: ["2.0"],
     });
   }
 
