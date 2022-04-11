@@ -6,10 +6,10 @@ In this guide you will get an overview on how to contribute schemas to the Stedi
 
 There are two ways to contribute schemas to the registry:
 
-- By adding a _Provider_ which is a Typescript program that can generate schemas in an automated, repeatable and consistent way by sourcing and unbunding them from some other source
+- By adding a _Provider_ which is a Typescript program that can generate schemas in an automated, repeatable and consistent fashion by sourcing and unbunding them from some other source like a hosted OpenAPI specification or a Postman collection.
 - By adding schemas manually, if schemas cannot be extracted in an automated way (e.g. when the service is not exposing API definition in a machine-readable way)
 
-### Adding a provider
+### Adding a Provider
 
 To add a new provider, please create a new file in the `src/providers` repository. The file name should be the provider name + `.ts` suffix. The file should contain a class implementing `BaseProvider` (or inheriting an other class that already implements `BaseProvider`).
 
@@ -41,12 +41,13 @@ export class MyCompanyNewProvider extends OpenAPIProvider {
 }
 ```
 
-If the entities generated as a result of `unbundle` logic contain non-standard fields or formats not recognized by JSONSchema, you can supply a custom `sanitizeSchema(schema: unknown) => unknown` function to remove unwanted properties from the generated JSONSchemas.
 
-Sometimes the unbundled schema exports too many entities. Many of them may not be necessary from the registry's perspective. If that's the case, supply an optional `entities: string[]` array argument with the list of entity names that should be exclusively generated.
+If the entities generated as a result of `npm run generate` command contain non-standard fields or formats not recognized by JSONSchema, you can supply a custom `sanitizeSchema(schema: unknown) => unknown` function to remove unwanted properties from the generated JSONSchemas.
+
+Sometimes the unbundled schema exports too many entities. Many of them may not be necessary from the registry's perspective - they can be virtual, meaningless or not providing any value. If that's the case, supply an optional `entities: string[]` array argument with the list of entity names that should be exclusively generated.
 
 After writing your provider, please also add it to the `src/providers/index.ts` file.
 
-Lastly, run `npm run generate` to generate the schemas and update the `providers.json` file. You can also run `npm run validate` to ensure that generated schemas are valid and will be accepted by [Mappings](https://www.stedi.com/products/mappings).
+Lastly, run `npm run generate` to generate the schemas. You can also run `npm run validate` to ensure that generated schemas are valid and will be accepted by [Mappings](https://www.stedi.com/products/mappings).
 
 If the _validate_ task succeeds, you can commit your changes to branch or fork and create a pull request. We will review your pull request and if it's accepted, we will add your provider to the registry.
