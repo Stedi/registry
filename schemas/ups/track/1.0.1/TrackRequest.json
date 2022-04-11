@@ -1,0 +1,253 @@
+{
+  "type": "object",
+  "required": ["ShipFrom", "Request", "ShipperNumber", "ShipTo", "PickupDateRange"],
+  "properties": {
+    "Request": {
+      "type": "object",
+      "properties": {
+        "RequestOption": {
+          "description": "For optional processing.",
+          "type": "string"
+        },
+        "SubVersion": {
+          "description": "When UPS introduces new elements in the response that are not associated with new request elements, Subversion is used. This ensures backward compatibility.\n\nTo get such elements you need to have the right Subversion. The value of the subversion is explained in the Response element Description.\n\n\nExample: Itemized Charges are returned only when the Subversion element is present and greater than or equal to '1601'. \n\nFormat: YYMM = Year and month of the release.\nExample: 1601 = 2016 January",
+          "type": "string"
+        },
+        "TransactionReference": {
+          "type": "object",
+          "required": ["CustomerContext"],
+          "properties": {
+            "CustomerContext": {
+              "description": "The CustomerContext Information which will be echoed during response.",
+              "type": "string"
+            },
+            "TransactionIdentifier": {
+              "description": "The Unique TransactionIdentifier Information for that transaction. This will be present only if requested in the request.",
+              "type": "string"
+            }
+          },
+          "description": "TransactionReference identifies transactions between client and server."
+        }
+      },
+      "required": ["TransactionReference", "SubVersion"],
+      "description": "Common Request element should be provided by users"
+    },
+    "InquiryNumber": {
+      "description": "Inquiry Number. \n\nPackage:\nFor package, the number will be treated as Shipment Identification Number or Package Tracking Number based on the value of the element TrackingOption. \n\nTracking options: \n01, the inquiry number will be treated as shipment identification number.\n02, the inquiry number will be treated as package Tracking number. \n\nFreight:\nFor freight, the number will be always treated as the tracking number of the shipment regardless of the value of the TrackingOption.  \n\nMail Innovations:\nFor mail innovations this number will be the tracking number. When tracking for mail innovations by tracking number the TrackingOption also needs to be set to03.\n\nFor mail innovations different types of tracking numbers apply like - Sequence number (Mail Manifest ID / MMS), Postal service Tracking ID.",
+      "type": "string"
+    },
+    "IncludeMailInnovationIndicator": {
+      "description": "The presence of this indicator means supports Mail Innovation tracking without tracking option",
+      "type": "string"
+    },
+    "TrackingOption": {
+      "description": "TrackingOption applies to Package and Mail Innovations only.\n\nPackage:\n01 - Single trackable entity with more trackable entities inside it\n02 - Single trackable entity with no more trackable entities inside it\n\nIf value or element is not found, then Inquiry number will be treated as Shipment Identification Number.\n\nIf the TrackingOption is not present then it will return all packages information if it is a Multi-package shipment (Which means Tracking number will be treated as Shipment Identification number). \nFreight:\n\nFreight:\nFor Freight, This element will be ignored and the Inquiry number will always be treated as Shipment Identification Number. \n\nFor Freight Inquiry Number this field will not be used so all the information about that freight shipment will be returned. \n\nMail Innovations:\nFor Mail Innovations track by number, this is a mandatory field which has to be set to 03. \nFor Mail Innovations a single shipment has single package.",
+      "type": "string"
+    },
+    "CandidateBookmark": {
+      "description": "During InquiryNumber and Reference Number searches, it is possible that duplicate shipments will be found. If duplicate shipments are found, then a Candidate Summary with a corresponding CandidateBookmark for each of the Shipments will be returned in the track response. \n\nThis Base64 encoded CandidateBookmark can be passed back to the Tracking service in a separate request to retrieve tracking information about the particular shipment of interest. It does not apply to package tracking or Mail Innovations.",
+      "type": "string"
+    },
+    "ReferenceNumber": {
+      "type": "object",
+      "required": ["Value"],
+      "properties": {
+        "Value": {
+          "description": "Customer supplied reference number.",
+          "type": "string"
+        }
+      },
+      "description": "The reference number container. Required if an inquiry number or candidate bookmark is not present. \nThe reference number for Mail Innovations needs to be set here along with appropriate code in ShipmentType."
+    },
+    "PickupDateRange": {
+      "type": "object",
+      "required": ["EndDate", "BeginDate"],
+      "properties": {
+        "BeginDate": {
+          "description": "The beginning pickup date used to narrow a reference number search. \nFormat: YYYYMMDD.",
+          "type": "string"
+        },
+        "EndDate": {
+          "description": "The end pickup date used to narrow a reference number search. \nFormat: YYYYMMDD. MM ranges from 01 to 12.",
+          "type": "string"
+        }
+      },
+      "description": "The additional information of pickup date range to support and narrow a reference number search. \nFor Mail Innovations this is optional field for tracking by reference number."
+    },
+    "ShipperNumber": {
+      "description": "The UPS account number used to narrow a reference number search.",
+      "type": "string"
+    },
+    "ShipFrom": {
+      "type": "object",
+      "required": ["Address"],
+      "properties": {
+        "Address": {
+          "type": "object",
+          "required": ["PostalCode", "CountryCode"],
+          "properties": {
+            "PostalCode": {
+              "description": "Activity locations postal code.",
+              "type": "string"
+            },
+            "CountryCode": {
+              "description": "Activity locations country or territory code.",
+              "type": "string"
+            }
+          },
+          "description": "Container for the origin country or territory code and origin postal code used to narrow a reference number search."
+        }
+      },
+      "description": "Container for ship from address used to narrow a reference number search."
+    },
+    "ShipTo": {
+      "type": "object",
+      "required": ["Address"],
+      "properties": {
+        "Address": {
+          "type": "object",
+          "required": ["PostalCode", "CountryCode"],
+          "properties": {
+            "PostalCode": {
+              "description": "Activity locations postal code.",
+              "type": "string"
+            },
+            "CountryCode": {
+              "description": "Activity locations country or territory code.",
+              "type": "string"
+            }
+          },
+          "description": "Container for the destination postal code and destination country or territory Code"
+        }
+      },
+      "description": "Container for the Destination Address to narrow the reference number search."
+    },
+    "ShipmentType": {
+      "type": "object",
+      "required": ["Code"],
+      "properties": {
+        "Code": {
+          "description": "This element will be used to indicate the type of the shipment being tracked, either Package, Mail Innovations or Freight.\n01 - Package\n02 - Freight\n03 - Mail Innovations",
+          "type": "string"
+        }
+      },
+      "description": "Container for the type of Shipment when doing a Reference Number search. This element is required if the Reference Number element is specified."
+    },
+    "ShipperAccountInfo": {
+      "type": "object",
+      "required": ["PostalCode", "CountryCode"],
+      "properties": {
+        "PostalCode": {
+          "description": "Postal Code of the Shipper Account used to place the shipment. \n\nThis data will be used in verifying the rights of the customer to view signature results.",
+          "type": "string"
+        },
+        "CountryCode": {
+          "description": "Country or Territory Code of the Shipper Account used to place the shipment. \n\nThis data will be used in verifying the rights of the customer to view signature results.",
+          "type": "string"
+        }
+      },
+      "description": "Container for Shippers account details.\n\nUsed to verify the customers signature tracking privileges for package tracking if shipper selects one of the RequestOption including signature track."
+    },
+    "QuantumViewNotification": {
+      "type": "object",
+      "required": ["FailureEmailAddress", "Language", "RecipientEmailAddress"],
+      "properties": {
+        "RecipientEmailAddress": {
+          "description": "The recipient email address for sending notification email.",
+          "type": "string"
+        },
+        "FailureEmailAddress": {
+          "description": "The email address used when recipient email address is not reachable.",
+          "type": "string"
+        },
+        "Language": {
+          "type": "object",
+          "required": ["Dialect", "Code"],
+          "properties": {
+            "Code": {
+              "description": "The two-character long language code in lower case such as en.\nFor a list of valid language dialect pairs supported for Quantum View Notification, please refer to the Language-Dialect combination table in the Appendix.",
+              "type": "string"
+            },
+            "Dialect": {
+              "description": "The two-character long dialect code in upper case such as US.",
+              "type": "string"
+            }
+          },
+          "description": "Container for supplying the language information for quantum view notification"
+        },
+        "ExceptionNotificationIndicator": {
+          "description": "If an exception notification is requested, this indicator must be set.\nBoth exception notification indicator and delivery notification indicator can be set if needed. At least 1 indicator must be set.",
+          "type": "string"
+        },
+        "DeliveryNotificationIndicator": {
+          "description": "If a delivery notification is requested, this indicator must be set.",
+          "type": "string"
+        }
+      },
+      "description": "Container for supplying quantum view notification.\nThis container applies only when the track request is by inquiry number."
+    },
+    "PreauthorizedReturnIndicator": {
+      "description": "Indicator to request Pre-authorized For Return (PFR) eligibility information, URL to submit pre-authorized return request and other PFR related data. For small package and Mail Innovation packages.\nValid value is:\nY - PFR information is required.",
+      "type": "string"
+    },
+    "Locale": {
+      "description": "Locale will be used to provide translated text in Activity Status Description and Current Status Description.\nDefault Value is:\nen_US",
+      "type": "string"
+    }
+  },
+  "description": "Container for the root Track Request. Package, Mail Innovations and freight shipment can be tracked by invoking this request. \n\nUsers have three ways to track, by inquiry number, by reference number, or by candidate bookmark. Candidate bookmark applies to Freight tracking only.",
+  "default": {
+    "Request": {
+      "RequestOption": "string",
+      "SubVersion": "string",
+      "TransactionReference": {
+        "CustomerContext": "string",
+        "TransactionIdentifier": "string"
+      }
+    },
+    "InquiryNumber": "string",
+    "IncludeMailInnovationIndicator": "string",
+    "TrackingOption": "string",
+    "CandidateBookmark": "string",
+    "ReferenceNumber": {
+      "Value": "string"
+    },
+    "PickupDateRange": {
+      "BeginDate": "string",
+      "EndDate": "string"
+    },
+    "ShipperNumber": "string",
+    "ShipFrom": {
+      "Address": {
+        "PostalCode": "string",
+        "CountryCode": "string"
+      }
+    },
+    "ShipTo": {
+      "Address": {
+        "PostalCode": "string",
+        "CountryCode": "string"
+      }
+    },
+    "ShipmentType": {
+      "Code": "string"
+    },
+    "ShipperAccountInfo": {
+      "PostalCode": "string",
+      "CountryCode": "string"
+    },
+    "QuantumViewNotification": {
+      "RecipientEmailAddress": "string",
+      "FailureEmailAddress": "string",
+      "Language": {
+        "Code": "string",
+        "Dialect": "string"
+      },
+      "ExceptionNotificationIndicator": "string",
+      "DeliveryNotificationIndicator": "string"
+    },
+    "PreauthorizedReturnIndicator": "string",
+    "Locale": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

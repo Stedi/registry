@@ -1,0 +1,135 @@
+{
+  "type": "object",
+  "properties": {
+    "AdditionalComments": {
+      "description": "Additional pickup comments or instructions",
+      "type": "string"
+    },
+    "Requester": {
+      "type": "object",
+      "properties": {
+        "ThirdPartyIndicator": {
+          "description": "Indicates whether the requester is Consignee, Third Party, Shipper, other.",
+          "type": "string"
+        },
+        "AttentionName": {
+          "description": "Requesters name.",
+          "type": "string"
+        },
+        "EMailAddress": {
+          "description": "Requesters email address.",
+          "type": "string"
+        },
+        "Name": {
+          "description": "Requesters company name.",
+          "type": "string"
+        },
+        "Phone": {
+          "type": "object",
+          "required": ["Number"],
+          "properties": {
+            "Number": {
+              "description": "Requesters phone number.",
+              "type": "string"
+            },
+            "Extension": {
+              "description": "Requesters phone extension.",
+              "type": "string"
+            }
+          },
+          "description": "Phone Container"
+        }
+      },
+      "required": ["AttentionName", "Phone", "EMailAddress", "Name"],
+      "description": "Requester Container. Also referred to as caller.\nRequired for ground shipments if PickupRequest container is present."
+    },
+    "PickupDate": {
+      "description": "Date of the Pickup. \nFormat: YYYYMMDD.\nGround pickup may be scheduled up to 42 days in the future.\nNote: This element will act as PickupDate or DropOffDate based on the presence of PickupTimeReady or DropOffTimeReady element.",
+      "type": "string"
+    },
+    "EarliestTimeReady": {
+      "description": "The earliest time a shipment is ready to be picked up.\nThe time is on a 24 hour clock. \nFormat: HHMM\nHH = Hour values 00 to 23\nMM = Minute values 00 to 59",
+      "type": "string"
+    },
+    "LatestTimeReady": {
+      "description": "The latest time a shipment can be picked up. Can be also referred as the Closing Time for a pickup time window.\nThe time is on a 24 hour clock. \nFormat: HHMM\nHH = Hour values 00 to 23\nMM = Minute values 00 to 59\nOptional if the account type is House.",
+      "type": "string"
+    },
+    "POM": {
+      "type": "object",
+      "required": ["POMNumber", "POMNumberType", "PickupNotifications"],
+      "properties": {
+        "POMNumber": {
+          "description": "An identifier associated to the pickup request (may or may not be created by the user)",
+          "type": "string"
+        },
+        "POMNumberType": {
+          "description": "Identifies the kind of number used to identify the POM shipment.\nFor valid values, see POMNumberType Values in the Appendix.",
+          "type": "string"
+        },
+        "PickupNotifications": {
+          "type": "object",
+          "properties": {
+            "CompanyName": {
+              "description": "Name of company",
+              "type": "string"
+            },
+            "EMailNotification": {
+              "type": "object",
+              "required": ["EventType", "EMailAddress"],
+              "properties": {
+                "EMailAddress": {
+                  "description": "Email address which should receive pre-pickup notification",
+                  "type": "string"
+                },
+                "EventType": {
+                  "description": "Type of event for POM Notification. Add up to four events.\n01 = PICKUP_REQUEST_CONFIRM\n02 = DRIVER_EN_ROUTE\n03 = PICKUP_SECURED\n04 = PICKUP_EXCEPTION",
+                  "type": "string"
+                }
+              },
+              "description": "Container for email notifications"
+            },
+            "FailedEMail": {
+              "description": "Alternate email address to receive failure notifications",
+              "type": "string"
+            }
+          },
+          "required": ["EMailNotification", "FailedEMail"],
+          "description": "Container for pre-pickup notifications events"
+        }
+      },
+      "description": "Pickup Order Management (POM) container."
+    }
+  },
+  "required": ["LatestTimeReady", "PickupDate"],
+  "description": "PickupRequest Container.",
+  "default": {
+    "AdditionalComments": "string",
+    "Requester": {
+      "ThirdPartyIndicator": "string",
+      "AttentionName": "string",
+      "EMailAddress": "string",
+      "Name": "string",
+      "Phone": {
+        "Number": "string",
+        "Extension": "string"
+      }
+    },
+    "PickupDate": "string",
+    "EarliestTimeReady": "string",
+    "LatestTimeReady": "string",
+    "POM": {
+      "POMNumber": "string",
+      "POMNumberType": "string",
+      "PickupNotifications": {
+        "CompanyName": "string",
+        "EMailNotification": {
+          "EMailAddress": "string",
+          "EventType": "string"
+        },
+        "FailedEMail": "string"
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

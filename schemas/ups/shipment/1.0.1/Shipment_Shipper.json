@@ -1,0 +1,103 @@
+{
+  "type": "object",
+  "required": ["Address", "ShipperNumber", "Name"],
+  "properties": {
+    "Name": {
+      "description": "Shippers company name. \n\nFor forward Shipment 35 characters are accepted, but only 30 characters will be printed on the label.",
+      "type": "string"
+    },
+    "AttentionName": {
+      "description": "Shippers Attention Name. \n\nFor forward Shipment 35 characters are accepted, but only 30 characters will be printed on the label.  Required if destination is international. Required if Invoice and CO International forms are requested and the ShipFrom address is not present.",
+      "type": "string"
+    },
+    "CompanyDisplayableName": {
+      "description": "Shipper's CompanyDisplayableName.\n\nThe CompanyDisplayableName will be displayed in tracking results and notification messages in place of the name associated with the shipper account. \nThe original shipper account name will be displayed for all Return Services and Import Control Shipments.  This is available for Shipper accounts enabled by UPS and applies to Forward Shipments.",
+      "type": "string"
+    },
+    "TaxIdentificationNumber": {
+      "description": "Shippers Tax Identification Number.  Conditionally required if EEI form (International forms) is requested and ship From is not mentioned.",
+      "type": "string"
+    },
+    "Phone": {
+      "type": "object",
+      "required": ["Number"],
+      "properties": {
+        "Number": {
+          "description": "Sold To contacts phone number.",
+          "type": "string"
+        },
+        "Extension": {
+          "description": "Sold To contacts phone extension.",
+          "type": "string"
+        }
+      },
+      "description": "Container tag for Phone Number."
+    },
+    "ShipperNumber": {
+      "description": "Shippers six digit alphanumeric account number.\n\nMust be associated with the UserId specified in the AccessRequest XML. \n\nThe account must be a valid UPS account number that is active. \n\nFor US, PR and CA accounts, the account must be either a daily pickup account, an occasional account, or a customer B.I.N account. \n\nDrop Shipper accounts are valid for return service shipments only if the account is Trade Direct (TD) enabled. \n\nAll other accounts must be either a daily pickup account or an occasional account.",
+      "type": "string"
+    },
+    "TaccountIndicator": {
+      "description": "Presence/Absence Indicator.\nPresence of the indicator means account number present in ShipperNumber field is temporary account  This is an empty tag, any value inside is ignored.",
+      "type": "string"
+    },
+    "FaxNumber": {
+      "description": "Shippers Fax Number.",
+      "type": "string"
+    },
+    "EMailAddress": {
+      "description": "Shippers email address.  Must be associated with the UserId specified in the AccessRequest XML.",
+      "type": "string"
+    },
+    "Address": {
+      "type": "object",
+      "required": ["AddressLine", "City", "CountryCode"],
+      "properties": {
+        "AddressLine": {
+          "description": "SoldTo locations street address.  Applies to NAFTA CO.",
+          "type": "string"
+        },
+        "City": {
+          "description": "SoldTo locations city.",
+          "type": "string"
+        },
+        "StateProvinceCode": {
+          "description": "SoldTo locations state or province code.  Required for certain countries or territories.",
+          "type": "string"
+        },
+        "PostalCode": {
+          "description": "SoldTo locations postal code.",
+          "type": "string"
+        },
+        "CountryCode": {
+          "description": "SoldTo locations country or territory code.",
+          "type": "string"
+        }
+      },
+      "description": "Address tag Container.  The package should be returned to this address if the package is undeliverable. \n\nThis address appears on the upper left hand corner of the label.\n\nNote: If the ShipFrom container is not present then this address will be used as the ShipFrom address. \nIf this address is used as the ShipFrom the shipment will be rated from this origin address."
+    }
+  },
+  "description": "Container for the Shippers information.",
+  "default": {
+    "Name": "string",
+    "AttentionName": "string",
+    "CompanyDisplayableName": "string",
+    "TaxIdentificationNumber": "string",
+    "Phone": {
+      "Number": "string",
+      "Extension": "string"
+    },
+    "ShipperNumber": "string",
+    "TaccountIndicator": "string",
+    "FaxNumber": "string",
+    "EMailAddress": "string",
+    "Address": {
+      "AddressLine": "string",
+      "City": "string",
+      "StateProvinceCode": "string",
+      "PostalCode": "string",
+      "CountryCode": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

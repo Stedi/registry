@@ -1,0 +1,1417 @@
+{
+  "type": "object",
+  "required": ["Response", "ShipmentResults"],
+  "properties": {
+    "Response": {
+      "type": "object",
+      "required": ["ResponseStatus"],
+      "properties": {
+        "ResponseStatus": {
+          "type": "object",
+          "required": ["Description", "Code"],
+          "properties": {
+            "Code": {
+              "description": "Identifies the success or failure of the transaction. 1 = Successful",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Describes Response Status Code. Returns text of Success.",
+              "type": "string"
+            }
+          },
+          "description": "Response status container."
+        },
+        "Alert": {
+          "type": "object",
+          "required": ["Description", "Code"],
+          "properties": {
+            "Code": {
+              "description": "Warning code returned by the system.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Warning messages returned by the system.",
+              "type": "string"
+            }
+          },
+          "description": "Alert Container. There can be zero to many alert containers with code and description."
+        },
+        "TransactionReference": {
+          "type": "object",
+          "properties": {
+            "CustomerContext": {
+              "description": "The CustomerContext Information which will be echoed during response.",
+              "type": "string"
+            }
+          },
+          "description": "Transaction Reference Container."
+        }
+      },
+      "description": "Response container for Shipment response."
+    },
+    "ShipmentResults": {
+      "type": "object",
+      "properties": {
+        "Disclaimer": {
+          "type": "object",
+          "required": ["Description", "Code"],
+          "properties": {
+            "Code": {
+              "description": "Code representing type of Disclaimer.   Refer to Disclaimer Codes and Messages in the Appendix for various disclaimers that would be possible for a given shipment.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Disclaimer description.   This field would be returned only if TaxInformationIndicator is present in a request.\n\nRefer to Disclaimer Codes and Messages in the Appendix for various disclaimers that would be possible for a given shipment.",
+              "type": "string"
+            }
+          },
+          "description": "Disclaimer would be used to provide more information to shipper regarding the processed shipment. This would be used to notify shipper about possible taxes and duties that might have been added or might apply to the shipment.  This field would be returned only if TaxInformationIndicator is present in a request."
+        },
+        "InvoiceNumber": {
+          "description": "Invoice number for the shipment based on the temporary payment account country or territory.",
+          "type": "string"
+        },
+        "ShipmentCharges": {
+          "type": "object",
+          "properties": {
+            "RateChart": {
+              "description": "Rate Type with which Shipment is rated. Possible RateChart values for different regions will be: \nUS 48 origin: \n1  Daily Rates \n3  Standard List Rates \n4  Retail Rates. \nAlaska/Hawaii origin: \n1  Daily Rates \n3  Standard List Rates \n4  Retail Rates.  \nAll Other origins: \n1  Rates \n5 - Regional Rates \n6 - General List Rates. \n3 and 4 do not apply.",
+              "type": "string"
+            },
+            "BaseServiceCharge": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue"],
+              "properties": {
+                "CurrencyCode": {
+                  "description": "BaseServiceCharge currency code type. The currency code used in the Shipment request is returned.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Base Service Charge value amount.  Valid values are from 0 to 99999999999999.99",
+                  "type": "string"
+                }
+              },
+              "description": "Base Service Charge container.\nTransportation charge = BaseServiceCharge + Fuel charge  Returned only if Subversion >=1701."
+            },
+            "TransportationCharges": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue"],
+              "properties": {
+                "CurrencyCode": {
+                  "description": "Transportation charges currency code type. The currency code used in the Shipment request is returned.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Transportation and surcharges value amount.  Valid values are from 0 to 99999999999999.99",
+                  "type": "string"
+                }
+              },
+              "description": "Transportation Charges container."
+            },
+            "AccessorialCharges": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue", "Code"],
+              "properties": {
+                "Code": {
+                  "description": "Code of Accessorial that had been charged.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description of Accessorial that had been charged.",
+                  "type": "string"
+                },
+                "CurrencyCode": {
+                  "description": "Accessorial charges currency code type. The currency code used in the Shipment request is returned.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Accessorial Charges value amount.  Valid values are from 0 to 99999999999999.99",
+                  "type": "string"
+                },
+                "SubType": {
+                  "description": "The sub-type of Accessorial type.",
+                  "type": "string"
+                }
+              },
+              "description": "Accessorial Charges are returned only when ItemizedChargesRequestedIndicator is present in request for UPS Worldwide Express Freight Shipment.  These charges would be returned only for UPS Worldwide Express Freight Shipment."
+            },
+            "SurCharges": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue", "Code"],
+              "properties": {
+                "Code": {
+                  "description": "Code of SurCharge that had been charged.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description of SurCharge that had been charged.",
+                  "type": "string"
+                },
+                "CurrencyCode": {
+                  "description": "SurCharges currency code type. The currency code used in the Shipment request is returned.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "SurCharges value amount.  Valid values are from 0 to 99999999999999.99",
+                  "type": "string"
+                },
+                "SubType": {
+                  "description": "The sub-type of SurCharge type.",
+                  "type": "string"
+                }
+              },
+              "description": "SurCharges are returned only when ItemizedChargesRequestedIndicator is present in request for UPS Worldwide Express Freight Shipment.  These charges would be returned only for UPS Worldwide Express Freight Shipment."
+            },
+            "ItemizedCharges": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue", "Code"],
+              "properties": {
+                "Code": {
+                  "description": "Identification code for itemized charge.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description of Itemized Charge that had been charged.",
+                  "type": "string"
+                },
+                "CurrencyCode": {
+                  "description": "The IATA currency code associated with the Itemized Charge costs for the shipment.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Itemized Charges value amount.",
+                  "type": "string"
+                },
+                "SubType": {
+                  "description": "The sub-type of ItemizedCharges type.",
+                  "type": "string"
+                }
+              },
+              "description": "Itemized Charges are returned only when the Subversion element is present and greater than or equal to 1601."
+            },
+            "ServiceOptionsCharges": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue"],
+              "properties": {
+                "CurrencyCode": {
+                  "description": "Package accessorial charges currency code type. The currency code used in the Shipment request is returned.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Package accessorial charges value amount.   Applicable only for ShipmentResponse and ShipAcceptResponse.\nValid values are from 0 to 99999999999999.99",
+                  "type": "string"
+                }
+              },
+              "description": "Service Option Charges container."
+            },
+            "TaxCharges": {
+              "type": "object",
+              "required": ["Type", "MonetaryValue"],
+              "properties": {
+                "Type": {
+                  "description": "Tax Type code. The code represents the type of Tax applied to a shipment.   Refer to Tax Type Values/Abbreviations in the Appendix for valid values.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Tax Monetary Value represent the Tax amount.  Valid values are from 0 to 99999999999999.99",
+                  "type": "string"
+                }
+              },
+              "description": "TaxCharges container are returned only when TaxInformationIndicator is present in request and when Negotiated Rates are not applicable. TaxCharges container contains Tax information for a given shipment."
+            },
+            "TotalCharges": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue"],
+              "properties": {
+                "CurrencyCode": {
+                  "description": "Total charges currency code type. The currency code used in the Shipment request is returned.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Total charges value amount.  Valid values are from 0 to 99999999999999.99.",
+                  "type": "string"
+                }
+              },
+              "description": "Total charges container."
+            },
+            "TotalChargesWithTaxes": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue"],
+              "properties": {
+                "CurrencyCode": {
+                  "description": "TotalChargesWithTaxes currency code type. The currency code used in the Shipment request is returned.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "TotalChargesWithTaxes monetary value amount.  Valid values are from 0 to 9999999999999999.99",
+                  "type": "string"
+                }
+              },
+              "description": "TotalChargesWithTaxes container would be returned only if TaxInformationIndicator is present in request and when Negotiated Rates are not applicable. TotalChargesWithTaxes contains total charges including total taxes applied to a shipment."
+            }
+          },
+          "required": ["TotalCharges", "ServiceOptionsCharges", "TransportationCharges"],
+          "description": "Shipment charges Container. Shipment charges info."
+        },
+        "NegotiatedRateCharges": {
+          "type": "object",
+          "properties": {
+            "AccessorialCharges": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue", "Code"],
+              "properties": {
+                "Code": {
+                  "description": "Code of Accessorial that had been charged.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description of Accessorial that had been charged.",
+                  "type": "string"
+                },
+                "CurrencyCode": {
+                  "description": "Accessorial charges currency code type. The currency code used in the Shipment request is returned.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Accessorial Charges value amount.  Valid values are from 0 to 99999999999999.99",
+                  "type": "string"
+                },
+                "SubType": {
+                  "description": "The sub-type of Accessorial type.",
+                  "type": "string"
+                }
+              },
+              "description": "Accessorial Charges are returned only when ItemizedChargesRequestedIndicator is present in request for UPS Worldwide Express Freight Shipment.  These charges would be returned only for UPS Worldwide Express Freight Shipment."
+            },
+            "SurCharges": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue", "Code"],
+              "properties": {
+                "Code": {
+                  "description": "Code of SurCharge that had been charged.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description of SurCharge that had been charged.",
+                  "type": "string"
+                },
+                "CurrencyCode": {
+                  "description": "SurCharges currency code type. The currency code used in the Shipment request is returned.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "SurCharges value amount.  Valid values are from 0 to 99999999999999.99",
+                  "type": "string"
+                },
+                "SubType": {
+                  "description": "The sub-type of SurCharge type.",
+                  "type": "string"
+                }
+              },
+              "description": "SurCharges are returned only when ItemizedChargesRequestedIndicator is present in request for UPS Worldwide Express Freight Shipment.  These charges would be returned only for UPS Worldwide Express Freight Shipment."
+            },
+            "ItemizedCharges": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue", "Code"],
+              "properties": {
+                "Code": {
+                  "description": "Identification code for itemized charge.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description of Itemized Charge that had been charged.",
+                  "type": "string"
+                },
+                "CurrencyCode": {
+                  "description": "The IATA currency code associated with the Itemized Charge costs for the shipment.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Itemized Charges value amount.",
+                  "type": "string"
+                },
+                "SubType": {
+                  "description": "The sub-type of ItemizedCharges type.",
+                  "type": "string"
+                }
+              },
+              "description": "Itemized Charges are returned only when the Subversion element is present and greater than or equal to 1601.\n\nNegotiated itemized charges are only returned for certain contract-only shipments as well as Worldwide Express Freight, Ground Freight Pricing, and Hazmat movements."
+            },
+            "TransportationCharges": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue"],
+              "properties": {
+                "CurrencyCode": {
+                  "description": "Transportation charges currency code type. The currency code used in the Shipment request is returned.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Transportation and surcharges value amount.  Valid values are from 0 to 99999999999999.99",
+                  "type": "string"
+                }
+              },
+              "description": "Transport Charges container for negotiated rates would be returned only when ItemizedChargesRequestedIndicator is present.  Valid only for UPS Worldwide Express Freight service."
+            },
+            "TaxCharges": {
+              "type": "object",
+              "required": ["Type", "MonetaryValue"],
+              "properties": {
+                "Type": {
+                  "description": "Tax Type code. The code represents the type of Tax applied to a shipment.   Refer to Tax Type Values/Abbreviations in the Appendix for valid values.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Tax Monetary Value represent the Tax amount.  Valid values are from 0 to 99999999999999.99",
+                  "type": "string"
+                }
+              },
+              "description": "TaxCharges container are returned only when TaxInformationIndicator is present in request. TaxCharges container contains Tax information for a given shipment."
+            },
+            "TotalCharge": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue"],
+              "properties": {
+                "CurrencyCode": {
+                  "description": "Total charges currency code.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Total charges monetary value.  Valid values are from 0 to 9999999999999999.99",
+                  "type": "string"
+                }
+              },
+              "description": "Total charges container. Account Based Rates info. Total charges are only returned for ABR eligible shipper account/UserId combinations when the user includes the NegotiatedRatesIndicator in the request."
+            },
+            "TotalChargesWithTaxes": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue"],
+              "properties": {
+                "CurrencyCode": {
+                  "description": "TotalChargesWithTaxes currency code type. The currency code used in the Shipment request is returned.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "TotalChargesWithTaxes monetary value amount.  Valid values are from 0 to 9999999999999999.99",
+                  "type": "string"
+                }
+              },
+              "description": "TotalChargesWithTaxes container would be returned only if TaxInformationIndicator is present in request. TotalChargesWithTaxes contains total charges including total taxes applied to a shipment."
+            }
+          },
+          "description": "Negotiated Rates Charge Container.  For tiered rates and promotional discounts, if a particular shipment based on zone, origin, destination or even shipment size doesn't qualify for the existing discount then no negotiated rates container will be returned. Published rates will be the applicable rate."
+        },
+        "FRSShipmentData": {
+          "type": "object",
+          "required": ["TransportationCharges"],
+          "properties": {
+            "TransportationCharges": {
+              "type": "object",
+              "required": ["DiscountPercentage", "GrossCharge", "DiscountAmount", "NetCharge"],
+              "properties": {
+                "GrossCharge": {
+                  "type": "object",
+                  "required": ["CurrencyCode", "MonetaryValue"],
+                  "properties": {
+                    "CurrencyCode": {
+                      "description": "Gross charges currency code.",
+                      "type": "string"
+                    },
+                    "MonetaryValue": {
+                      "description": "Gross charges monetary value.  Valid values are from 0 to 9999999999999999.99",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Gross Charges container. It indicates the shipment level gross Ground Freight Pricing transportation charges."
+                },
+                "DiscountAmount": {
+                  "type": "object",
+                  "required": ["CurrencyCode", "MonetaryValue"],
+                  "properties": {
+                    "CurrencyCode": {
+                      "description": "Discount Amount currency code.",
+                      "type": "string"
+                    },
+                    "MonetaryValue": {
+                      "description": "Discount amount monetary value.  Valid values are from 0 to 9999999999999999.99",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Discount Amount container. It indicates the shipment level Ground Freight Pricing discount amount for transportation charges"
+                },
+                "DiscountPercentage": {
+                  "description": "It indicates the shipment level discount percentage for transportation charges.",
+                  "type": "string"
+                },
+                "NetCharge": {
+                  "type": "object",
+                  "required": ["CurrencyCode", "MonetaryValue"],
+                  "properties": {
+                    "CurrencyCode": {
+                      "description": "Net Charge currency code.",
+                      "type": "string"
+                    },
+                    "MonetaryValue": {
+                      "description": "Net charges monetary value.  Valid values are from 0 to 9999999999999999.99",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Net Charges container. It indicates the shipment level net Ground Freight Pricing transportation charges."
+                }
+              },
+              "description": "Transportation charges container. Ground Freight Pricing transportation charges. These are only returned for Ground Freight Pricing enabled shipper account number when the user includes the FRSShipmentIndicator in the request."
+            },
+            "FreightDensityRate": {
+              "type": "object",
+              "required": ["TotalCubicFeet", "Density"],
+              "properties": {
+                "Density": {
+                  "description": "Density is returned if the Shipper is eligible for Density based rate.   Valid values are 0 to 999.9",
+                  "type": "string"
+                },
+                "TotalCubicFeet": {
+                  "description": "Total Cubic feet is returned if the Shipper is eligible for Density based rate.   Valid values are 0 to 99999.999",
+                  "type": "string"
+                }
+              },
+              "description": "FreightDensityRate container for Density based rating."
+            },
+            "HandlingUnits": {
+              "type": "object",
+              "required": ["Type", "Quantity", "Dimensions"],
+              "properties": {
+                "Quantity": {
+                  "description": "Handling Unit Quantity for Density based rating.",
+                  "type": "string"
+                },
+                "Type": {
+                  "type": "object",
+                  "required": ["Code"],
+                  "properties": {
+                    "Code": {
+                      "description": "The code associated with Handling Unit Type.  Valid values:\nSKD = Skid\nCBY = Carboy \nPLT = Pallet\nTOT = Totes \nLOO = Loose\nOTH = Other",
+                      "type": "string"
+                    },
+                    "Description": {
+                      "description": "A description of the code for the Handling Unit type.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Handling Unit Type for Density based rating."
+                },
+                "Dimensions": {
+                  "type": "object",
+                  "required": ["UnitOfMeasurement", "Length", "Height", "Width"],
+                  "properties": {
+                    "UnitOfMeasurement": {
+                      "type": "object",
+                      "required": ["Code"],
+                      "properties": {
+                        "Code": {
+                          "description": "Code of the billing weight measurement units. Values are: KGS or LBS.",
+                          "type": "string"
+                        },
+                        "Description": {
+                          "description": "Description of the billing weight measurement units.",
+                          "type": "string"
+                        }
+                      },
+                      "description": "UnitOfMeasurement container."
+                    },
+                    "Length": {
+                      "description": "The length of the line item used to determine dimensional weight.",
+                      "type": "string"
+                    },
+                    "Width": {
+                      "description": "The width of the line item used to determine dimensional weight.",
+                      "type": "string"
+                    },
+                    "Height": {
+                      "description": "The height of the line item used to determine dimensional weight.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Dimension of the HandlingUnit container for density based pricing."
+                },
+                "AdjustedHeight": {
+                  "type": "object",
+                  "required": ["UnitOfMeasurement", "Value"],
+                  "properties": {
+                    "Value": {
+                      "description": "Adjusted Height value for the handling unit.  Height Adjustment is done only when Handling unit type is SKD = Skid or PLT = Pallet.",
+                      "type": "string"
+                    },
+                    "UnitOfMeasurement": {
+                      "type": "object",
+                      "required": ["Code"],
+                      "properties": {
+                        "Code": {
+                          "description": "Code of the billing weight measurement units. Values are: KGS or LBS.",
+                          "type": "string"
+                        },
+                        "Description": {
+                          "description": "Description of the billing weight measurement units.",
+                          "type": "string"
+                        }
+                      },
+                      "description": "Unit of Measurement container for the Adjusted height."
+                    }
+                  },
+                  "description": "Container to hold Adjusted Height information."
+                }
+              },
+              "description": "Handling Unit for Density based rating container."
+            }
+          },
+          "description": "Ground Freight Pricing Shipment data container. Ground Freight Pricing shipment data is only guaranteed to be returned for Ground Freight Pricing shipments only."
+        },
+        "RatingMethod": {
+          "description": "RatingMethod is to indicate whether the Shipment was rated as shipment level or package level. This information will be returned only if RatingMethodRequestedIndicator is present in the request.  Valid values:\n01 = Shipment level\n02 = Package level",
+          "type": "string"
+        },
+        "BillableWeightCalculationMethod": {
+          "description": "BillableWeightCalculationMethod is to indicate whether the billable weight calculation method utilized was - the package level or shipment level. This information will be returned only if RatingMethodRequestedIndicator is present in the request.  Valid values:\n01 = Shipment Billable Weight\n02 = Package Billable Weight",
+          "type": "string"
+        },
+        "BillingWeight": {
+          "type": "object",
+          "required": ["UnitOfMeasurement", "Weight"],
+          "properties": {
+            "UnitOfMeasurement": {
+              "type": "object",
+              "required": ["Code"],
+              "properties": {
+                "Code": {
+                  "description": "Code of the billing weight measurement units. Values are: KGS or LBS.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description of the billing weight measurement units.",
+                  "type": "string"
+                }
+              },
+              "description": "Billing weight unit of measurement code. The unit of measurement used in Shipment request is returned."
+            },
+            "Weight": {
+              "description": "Billing weight. Higher of the actual shipment weight versus the shipment dimensional weight.  When using a negotiated divisor different from the published UPS divisor (139 for inches and 5,000 for cm), the weight returned is based on the published divisor. Rates, however, are based on the negotiated divisor.",
+              "type": "string"
+            }
+          },
+          "description": "Billing Weight container."
+        },
+        "ShipmentIdentificationNumber": {
+          "description": "Returned UPS shipment ID number.1Z Number of the first package in the shipment.",
+          "type": "string"
+        },
+        "MIDualReturnShipmentKey": {
+          "description": "MIDualReturnShipmentKey is unique key required to process Mail Innovations Dual Return Shipment. \n\nThe unique identifier (key) would be returned in response of first phase of Mail Innovations Dual Return Shipments. \n\nThis unique identifier (key) would be part of request for second phase of Mail Innovations Dual Return Shipments and would be played back in response for second phase of Mail Innovations Dual Return Shipment.  If the shipment is a Package return shipment, the package tracking number will be concatenated with the system time (in the format YYYY-MM-DDHH.MM.SS.NNN) and followed by service code. \n\nIf the shipment is an MI Returns shipment, the Mail Manifest ID (MMI) will be concatenated with the system time.",
+          "type": "string"
+        },
+        "PickupRequestNumber": {
+          "description": "",
+          "type": "string"
+        },
+        "PackageResults": {
+          "type": "object",
+          "required": ["SensorID", "TrackingNumber"],
+          "properties": {
+            "TrackingNumber": {
+              "description": "Package 1Z number.  \nFor Mail Innovations shipments, please use the USPSPICNumber when tracking packages (a non-1Z number Mail Manifest Id is returned).  Applicable only for ShipmentResponse and ShipAcceptResponse.",
+              "type": "string"
+            },
+            "BaseServiceCharge": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue"],
+              "properties": {
+                "CurrencyCode": {
+                  "description": "BaseServiceCharge currency code type. The currency code used in the Shipment request is returned.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Base Service Charge value amount.  Valid values are from 0 to 99999999999999.99",
+                  "type": "string"
+                }
+              },
+              "description": "Base Service Charge container.\nTransportation charge = BaseServiceCharge + Fuel charge  Returned only if Subversion >=1701."
+            },
+            "ServiceOptionsCharges": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue"],
+              "properties": {
+                "CurrencyCode": {
+                  "description": "Package accessorial charges currency code type. The currency code used in the Shipment request is returned.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Package accessorial charges value amount.   Applicable only for ShipmentResponse and ShipAcceptResponse.\nValid values are from 0 to 99999999999999.99",
+                  "type": "string"
+                }
+              },
+              "description": "Shipment charges info. Shipment charges are only guaranteed to be returned for shipments whose origin country or territory is US or Puerto Rico.   Applicable only for ShipmentResponse and ShipAcceptResponse."
+            },
+            "NonMachineableCharges": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue"],
+              "properties": {
+                "CurrencyCode": {
+                  "description": "Accessorial charges currency code type. The currency code used in the Shipment request is returned.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Accessorial charges value amount.  Valid values are from 0 to 99999999999999.99",
+                  "type": "string"
+                }
+              },
+              "description": "Non-Machineable Charges container."
+            },
+            "NonDDUCharges": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue"],
+              "properties": {
+                "CurrencyCode": {
+                  "description": "Accessorial charges currency code type. The currency code used in the Shipment request is returned.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Accessorial charges value amount.   Valid values are from 0 to 99999999999999.99",
+                  "type": "string"
+                }
+              },
+              "description": "Non DDU Charges container."
+            },
+            "SurePostDasCharges": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue"],
+              "properties": {
+                "CurrencyCode": {
+                  "description": "Accessorial charges currency code type. The currency code used in the Shipment request is returned.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Accessorial charges value amount.  Valid values are from 0 to 99999999999999.99",
+                  "type": "string"
+                }
+              },
+              "description": "UPS SurePost DAS Charges container."
+            },
+            "ShippingLabel": {
+              "type": "object",
+              "required": ["GraphicImage", "GraphicImagePart", "ImageFormat"],
+              "properties": {
+                "ImageFormat": {
+                  "type": "object",
+                  "required": ["Code"],
+                  "properties": {
+                    "Code": {
+                      "description": "Code representing the format in which the High Value Report is generated.   Valid values: PDF = pdf",
+                      "type": "string"
+                    },
+                    "Description": {
+                      "description": "Description of the image format.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "The container image format.   Applicable only for ShipmentResponse and ShipAcceptResponse."
+                },
+                "GraphicImage": {
+                  "description": "Base 64 encoded graphic image.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                  "type": "string"
+                },
+                "GraphicImagePart": {
+                  "description": "Base 64 encoded graphic image.  Applicable only for ShipmentResponse and ShipAcceptResponse for Mail Innovations CN22 Combination Forward Label with more than 3 commodities.",
+                  "type": "string"
+                },
+                "InternationalSignatureGraphicImage": {
+                  "description": "Base 64 encoded graphic image of the Warsaw text and signature box. EPL2, ZPL and SPL labels. The image will be returned for non-US based shipments. One image will be given per shipment and it will be in the first PackageResults container.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                  "type": "string"
+                },
+                "HTMLImage": {
+                  "description": "Base 64 encoded html browser image rendering software. This is only returned for gif and png image formats.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                  "type": "string"
+                },
+                "PDF417": {
+                  "description": "PDF-417 is a two-dimensional barcode, which can store up to about 1,800 printable ASCII characters or 1,100 binary characters per symbol. The symbol is rectangular. The image is Base 64 encoded and returned if the LabelImageFormat code is GIF. Shipment with PRL return service only.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                  "type": "string"
+                }
+              },
+              "description": "The container for UPS shipping label. Returned for following shipments -\nForward shipments,\nShipments with PRL returns service, \nElectronic Return Label or Electronic Import Control Label shipments with SubVersion greater than or equal to 1707.    Applicable only for ShipmentResponse and ShipAcceptResponse."
+            },
+            "ShippingReturnSlip": {
+              "type": "object",
+              "required": ["Image"],
+              "properties": {
+                "Image": {
+                  "type": "object",
+                  "required": ["GraphicImage", "ImageFormat"],
+                  "properties": {
+                    "ImageFormat": {
+                      "type": "object",
+                      "required": ["Code"],
+                      "properties": {
+                        "Code": {
+                          "description": "Code representing the format in which the High Value Report is generated.   Valid values: PDF = pdf",
+                          "type": "string"
+                        },
+                        "Description": {
+                          "description": "Description of the image format.",
+                          "type": "string"
+                        }
+                      },
+                      "description": "Container for the High Value Report image format information for Import Control Shipments."
+                    },
+                    "GraphicImage": {
+                      "description": "Base 64 Encoded PDF Image.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Container for Return Slip Image.  Applicable only for ShipmentResponse and ShipAcceptResponse."
+                }
+              },
+              "description": "Container for the Return Slip of a shipment. Returned only when Return Slip is requested.\n  Applicable only for ShipmentResponse and ShipAcceptResponse."
+            },
+            "ShippingReceipt": {
+              "type": "object",
+              "required": ["GraphicImage", "ImageFormat"],
+              "properties": {
+                "ImageFormat": {
+                  "type": "object",
+                  "required": ["Code"],
+                  "properties": {
+                    "Code": {
+                      "description": "Code representing the format in which the High Value Report is generated.   Valid values: PDF = pdf",
+                      "type": "string"
+                    },
+                    "Description": {
+                      "description": "Description of the image format.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Container for a Image Format.   Applicable only for ShipmentResponse and ShipAcceptResponse."
+                },
+                "GraphicImage": {
+                  "description": "Base 64 encoded receipt in HTML format. \n  Applicable only for ShipmentResponse and ShipAcceptResponse.\n\nThe receipt image is only returned for the first 5 packages.",
+                  "type": "string"
+                }
+              },
+              "description": "Supported for following shipments -\nPRL shipments,\nElectronic Return Label or Electronic Import Control Label shipments with SubVersion greater than or equal to 1707.  Applicable only for ShipmentResponse and ShipAcceptResponse."
+            },
+            "USPSPICNumber": {
+              "description": "USPSPICNumber is USPS Package Identification; it should be used for tracking Mail Innovations shipments.",
+              "type": "string"
+            },
+            "CN22Number": {
+              "description": "USPS defined CN22 ID number format varies based on destination country or territory. \nNot applicable as of Jan 2015. \nMail Innovations shipments US to VI, PR, and GU are not considered international.",
+              "type": "string"
+            },
+            "Accessorial": {
+              "type": "object",
+              "required": ["Code"],
+              "properties": {
+                "Code": {
+                  "description": "Code for Accessorial Indicator.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description for Accessorial Indicator.",
+                  "type": "string"
+                }
+              },
+              "description": "The container for Accessorial indicators. This information would be returned only for UPS Worldwide Express Freight and UPS Worldwide Express Freight Mid-day service request with Dry Ice or Oversize Pallet and SubVersion greater than or equal to 1707.  This is valid only for UPS Worldwide Express Freight and UPS Worldwide Express Freight Mid-day service."
+            },
+            "SimpleRate": {
+              "type": "object",
+              "required": ["Code"],
+              "properties": {
+                "Code": {
+                  "description": "Simple Rate Code\nXS =  Extra Small\nS =  Small\nM = Medium\nL= Large\nXL = Extra Large",
+                  "type": "string"
+                }
+              },
+              "description": "SimpleRate will be returned if Simple Rate  present in request"
+            },
+            "SensorID": {
+              "description": "Sensor ID will be return for UPS Premier Silver.",
+              "type": "string"
+            },
+            "Form": {
+              "type": "object",
+              "required": ["Description", "Code"],
+              "properties": {
+                "Code": {
+                  "description": "Code that indicates the type of form.   Applicable only for ShipmentResponse and ShipAcceptResponse.\n\nValid values: 01 - All Requested International Forms.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description that indicates the type of form. Possible Values. All Requested International Forms. \n   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                  "type": "string"
+                },
+                "Image": {
+                  "type": "object",
+                  "required": ["GraphicImage", "ImageFormat"],
+                  "properties": {
+                    "ImageFormat": {
+                      "type": "object",
+                      "required": ["Code"],
+                      "properties": {
+                        "Code": {
+                          "description": "Code representing the format in which the High Value Report is generated.   Valid values: PDF = pdf",
+                          "type": "string"
+                        },
+                        "Description": {
+                          "description": "Description of the image format.",
+                          "type": "string"
+                        }
+                      },
+                      "description": "Container for the High Value Report image format information for Import Control Shipments."
+                    },
+                    "GraphicImage": {
+                      "description": "Base 64 Encoded PDF Image.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Container tag for the International forms image. \n   Applicable only for ShipmentResponse and ShipAcceptResponse."
+                },
+                "FormGroupId": {
+                  "description": "Unique Id for later retrieval of saved version of the completed international forms. Always returned when code = 01. 01 represents international forms. \n   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                  "type": "string"
+                },
+                "FormGroupIdName": {
+                  "description": "Contains description text which identifies the group of International forms. This element is part of both request and response. This element does not appear on the forms.    Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                  "type": "string"
+                }
+              },
+              "description": "Container tag for the International forms image.  Currently this container would be returned for UPS Premium Care shipments. Form is returned for following shipments -\nForward shipments,\nShipments with PRL ReturnService,\nElectronic Return Label or Electronic Import Control Label shipments with SubVersion greater than or equal to 1707. CN22 data for Worlwide economy services will be returned within the PDF417 barcode of the label."
+            },
+            "ItemizedCharges": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue", "Code"],
+              "properties": {
+                "Code": {
+                  "description": "Identification code for itemized charge.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description of Itemized Charge that had been charged.",
+                  "type": "string"
+                },
+                "CurrencyCode": {
+                  "description": "The IATA currency code associated with the Itemized Charge costs for the shipment.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Itemized Charges value amount.",
+                  "type": "string"
+                },
+                "SubType": {
+                  "description": "The sub-type of ItemizedCharges type.",
+                  "type": "string"
+                }
+              },
+              "description": "Itemized Charges are returned only when the subversion element is present and greater than or equal to 1607.  Package level itemized charges are only returned for US domestic movements"
+            },
+            "NegotiatedCharges": {
+              "type": "object",
+              "properties": {
+                "ItemizedCharges": {
+                  "type": "object",
+                  "required": ["CurrencyCode", "MonetaryValue", "Code"],
+                  "properties": {
+                    "Code": {
+                      "description": "Identification code for itemized charge.",
+                      "type": "string"
+                    },
+                    "Description": {
+                      "description": "Description of Itemized Charge that had been charged.",
+                      "type": "string"
+                    },
+                    "CurrencyCode": {
+                      "description": "The IATA currency code associated with the Itemized Charge costs for the shipment.",
+                      "type": "string"
+                    },
+                    "MonetaryValue": {
+                      "description": "Itemized Charges value amount.",
+                      "type": "string"
+                    },
+                    "SubType": {
+                      "description": "The sub-type of ItemizedCharges type.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Negotiated Itemized Accessorial and SurCharges.\n\nNegotiated itemized charges are only returned for certain contract-only shipments as well as Worldwide Express Freight, Ground Freight Pricing, and Hazmat movements.  Negotiated Itemized Accessorial and Sur Charges are returned only when the subversion element is present and greater than or equal to 1607.\n\nPackage level itemized charges are only returned for US domestic movements"
+                }
+              },
+              "description": "Negotiated Rates Charge Container.  These charges are returned when:\n1) Subversion is greater than or equal to 1607\n2) If negotiated rates were requested for GFP shipments and account number is eligible to receive negotiated rates."
+            }
+          },
+          "description": "Returned Package Information.   Applicable only for ShipmentResponse and ShipAcceptResponse."
+        },
+        "ControlLogReceipt": {
+          "type": "object",
+          "required": ["GraphicImage", "ImageFormat"],
+          "properties": {
+            "ImageFormat": {
+              "type": "object",
+              "required": ["Code"],
+              "properties": {
+                "Code": {
+                  "description": "Code representing the format in which the High Value Report is generated.   Valid values: PDF = pdf",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description of the image format.",
+                  "type": "string"
+                }
+              },
+              "description": "Container for the High Value report format required if parent exist.    Applicable only for ShipmentResponse and ShipAcceptResponse."
+            },
+            "GraphicImage": {
+              "description": "Base 64 encoded html, EPL2, ZPL or SPL image. \n   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+              "type": "string"
+            }
+          },
+          "description": "Container for the High Value reports when forward shipments have declared value between $999 and $50,000 USD. \nTwo copies of high value report needs to be pointed out.    Applicable only for ShipmentResponse and ShipAcceptResponse."
+        },
+        "Form": {
+          "type": "object",
+          "required": ["Description", "Code"],
+          "properties": {
+            "Code": {
+              "description": "Code that indicates the type of form.   Applicable only for ShipmentResponse and ShipAcceptResponse.\n\nValid values: 01 - All Requested International Forms.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description that indicates the type of form. Possible Values. All Requested International Forms. \n   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+              "type": "string"
+            },
+            "Image": {
+              "type": "object",
+              "required": ["GraphicImage", "ImageFormat"],
+              "properties": {
+                "ImageFormat": {
+                  "type": "object",
+                  "required": ["Code"],
+                  "properties": {
+                    "Code": {
+                      "description": "Code representing the format in which the High Value Report is generated.   Valid values: PDF = pdf",
+                      "type": "string"
+                    },
+                    "Description": {
+                      "description": "Description of the image format.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Container for the High Value Report image format information for Import Control Shipments."
+                },
+                "GraphicImage": {
+                  "description": "Base 64 Encoded PDF Image.",
+                  "type": "string"
+                }
+              },
+              "description": "Container tag for the International forms image. \n   Applicable only for ShipmentResponse and ShipAcceptResponse."
+            },
+            "FormGroupId": {
+              "description": "Unique Id for later retrieval of saved version of the completed international forms. Always returned when code = 01. 01 represents international forms. \n   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+              "type": "string"
+            },
+            "FormGroupIdName": {
+              "description": "Contains description text which identifies the group of International forms. This element is part of both request and response. This element does not appear on the forms.    Applicable only for ShipmentResponse and ShipAcceptResponse.",
+              "type": "string"
+            }
+          },
+          "description": "Container tag for the International forms image.   Form is returned for following shipments -\nForward shipments,\nShipments with PRL ReturnService,\nElectronic Return Label or Electronic Import Control Label shipments with SubVersion greater than or equal to 1707."
+        },
+        "CODTurnInPage": {
+          "type": "object",
+          "required": ["Image"],
+          "properties": {
+            "Image": {
+              "type": "object",
+              "required": ["GraphicImage", "ImageFormat"],
+              "properties": {
+                "ImageFormat": {
+                  "type": "object",
+                  "required": ["Code"],
+                  "properties": {
+                    "Code": {
+                      "description": "Code representing the format in which the High Value Report is generated.   Valid values: PDF = pdf",
+                      "type": "string"
+                    },
+                    "Description": {
+                      "description": "Description of the image format.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Container for the High Value Report image format information for Import Control Shipments."
+                },
+                "GraphicImage": {
+                  "description": "Base 64 Encoded PDF Image.",
+                  "type": "string"
+                }
+              },
+              "description": "The container of the image for COD Turn In Page.    Applicable only for ShipmentResponse and ShipAcceptResponse."
+            }
+          },
+          "description": "The container of the COD Turn In Page.    Applicable only for ShipmentResponse and ShipAcceptResponse."
+        },
+        "HighValueReport": {
+          "type": "object",
+          "required": ["Image"],
+          "properties": {
+            "Image": {
+              "type": "object",
+              "required": ["GraphicImage", "ImageFormat"],
+              "properties": {
+                "ImageFormat": {
+                  "type": "object",
+                  "required": ["Code"],
+                  "properties": {
+                    "Code": {
+                      "description": "Code representing the format in which the High Value Report is generated.   Valid values: PDF = pdf",
+                      "type": "string"
+                    },
+                    "Description": {
+                      "description": "Description of the image format.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Container for the High Value Report image format information for Import Control Shipments."
+                },
+                "GraphicImage": {
+                  "description": "Base 64 Encoded PDF Image.",
+                  "type": "string"
+                }
+              },
+              "description": "Container for the High Value Report image for Import Control Shipments."
+            }
+          },
+          "description": "Container for the High Value Report generated for ImportControl or Return shipments with high package declared value.  Applicable for one pass ShipmentResponse and two-pass ShipAcceptResponse"
+        },
+        "LabelURL": {
+          "description": "URL will point to a page wherein label, receipt and other documents, if applicable, such as HighValueReport, CustomsInvoice and ImportControl instructions can be requested. LabelURL is returned only if the LabelLinksIndicator is requested for following shipments:\nPrint/Electronic ImportControl shipment\nPrint/Electronic Return shipment. \nForward shipment except for Mail Innovations Forward.",
+          "type": "string"
+        },
+        "LocalLanguageLabelURL": {
+          "description": "URL will point to a page wherein label, receipt and other documents, if applicable, such as HighValueReport, CustomsInvoice and ImportControl instructions can be requested. LocalLanguageLabelURL is returned only if the LabelLinksIndicator is requested for following shipments:\nPrint/Electronic ImportControl shipment\nPrint/Electronic Return shipment. \nForward shipment except for Mail Innovations Forward.  Not returned if LabelLinksIndicator is requested with Locale element.",
+          "type": "string"
+        },
+        "ReceiptURL": {
+          "description": "URL will point to a page wherein label, receipt and other documents, if applicable, such as HighValueReport, CustomsInvoice and ImportControl instructions can be requested. ReceiptURL is returned only if the LabelLinksIndicator is requested for following shipments:\nPrint/Electronic ImportControl shipment\nPrint/Electronic Return shipment.",
+          "type": "string"
+        },
+        "LocalLanguageReceiptURL": {
+          "description": "URL will point to a page wherein label, receipt and other documents, if applicable, such as HighValueReport, CustomsInvoice and ImportControl instructions can be requested. LocalLanguageReceiptURL is returned only if the LabelLinksIndicator is requested for following shipments:\nPrint/Electronic ImportControl shipment\nPrint/Electronic Return shipment.   Not returned if LabelLinksIndicator is requested with Locale element.",
+          "type": "string"
+        },
+        "DGPaperImage": {
+          "description": "Dangrous Good Paper Image in pdf format. One multipage PDF document will be returned that will contain all required Dangrous Goods shipping paper copies for all Dangerous Goods packages.  Only returned when DGSignatoryInfo is present.",
+          "type": "string"
+        },
+        "MasterCartonID": {
+          "description": "Master Carton ID. MasterCartonID will be return if MasterCartonIndicator is present in request.",
+          "type": "string"
+        }
+      },
+      "required": ["BillingWeight"],
+      "description": "Shipment Results container."
+    }
+  },
+  "description": "Shipment Response.",
+  "default": {
+    "Response": {
+      "ResponseStatus": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "Alert": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "TransactionReference": {
+        "CustomerContext": "string"
+      }
+    },
+    "ShipmentResults": {
+      "Disclaimer": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "InvoiceNumber": "string",
+      "ShipmentCharges": {
+        "RateChart": "string",
+        "BaseServiceCharge": {
+          "CurrencyCode": "string",
+          "MonetaryValue": "string"
+        },
+        "TransportationCharges": {
+          "CurrencyCode": "string",
+          "MonetaryValue": "string"
+        },
+        "AccessorialCharges": {
+          "Code": "string",
+          "Description": "string",
+          "CurrencyCode": "string",
+          "MonetaryValue": "string",
+          "SubType": "string"
+        },
+        "SurCharges": {
+          "Code": "string",
+          "Description": "string",
+          "CurrencyCode": "string",
+          "MonetaryValue": "string",
+          "SubType": "string"
+        },
+        "ItemizedCharges": {
+          "Code": "string",
+          "Description": "string",
+          "CurrencyCode": "string",
+          "MonetaryValue": "string",
+          "SubType": "string"
+        },
+        "ServiceOptionsCharges": {
+          "CurrencyCode": "string",
+          "MonetaryValue": "string"
+        },
+        "TaxCharges": {
+          "Type": "string",
+          "MonetaryValue": "string"
+        },
+        "TotalCharges": {
+          "CurrencyCode": "string",
+          "MonetaryValue": "string"
+        },
+        "TotalChargesWithTaxes": {
+          "CurrencyCode": "string",
+          "MonetaryValue": "string"
+        }
+      },
+      "NegotiatedRateCharges": {
+        "AccessorialCharges": {
+          "Code": "string",
+          "Description": "string",
+          "CurrencyCode": "string",
+          "MonetaryValue": "string",
+          "SubType": "string"
+        },
+        "SurCharges": {
+          "Code": "string",
+          "Description": "string",
+          "CurrencyCode": "string",
+          "MonetaryValue": "string",
+          "SubType": "string"
+        },
+        "ItemizedCharges": {
+          "Code": "string",
+          "Description": "string",
+          "CurrencyCode": "string",
+          "MonetaryValue": "string",
+          "SubType": "string"
+        },
+        "TransportationCharges": {
+          "CurrencyCode": "string",
+          "MonetaryValue": "string"
+        },
+        "TaxCharges": {
+          "Type": "string",
+          "MonetaryValue": "string"
+        },
+        "TotalCharge": {
+          "CurrencyCode": "string",
+          "MonetaryValue": "string"
+        },
+        "TotalChargesWithTaxes": {
+          "CurrencyCode": "string",
+          "MonetaryValue": "string"
+        }
+      },
+      "FRSShipmentData": {
+        "TransportationCharges": {
+          "GrossCharge": {
+            "CurrencyCode": "string",
+            "MonetaryValue": "string"
+          },
+          "DiscountAmount": {
+            "CurrencyCode": "string",
+            "MonetaryValue": "string"
+          },
+          "DiscountPercentage": "string",
+          "NetCharge": {
+            "CurrencyCode": "string",
+            "MonetaryValue": "string"
+          }
+        },
+        "FreightDensityRate": {
+          "Density": "string",
+          "TotalCubicFeet": "string"
+        },
+        "HandlingUnits": {
+          "Quantity": "string",
+          "Type": {
+            "Code": "string",
+            "Description": "string"
+          },
+          "Dimensions": {
+            "UnitOfMeasurement": {
+              "Code": "string",
+              "Description": "string"
+            },
+            "Length": "string",
+            "Width": "string",
+            "Height": "string"
+          },
+          "AdjustedHeight": {
+            "Value": "string",
+            "UnitOfMeasurement": {
+              "Code": "string",
+              "Description": "string"
+            }
+          }
+        }
+      },
+      "RatingMethod": "string",
+      "BillableWeightCalculationMethod": "string",
+      "BillingWeight": {
+        "UnitOfMeasurement": {
+          "Code": "string",
+          "Description": "string"
+        },
+        "Weight": "string"
+      },
+      "ShipmentIdentificationNumber": "string",
+      "MIDualReturnShipmentKey": "string",
+      "PickupRequestNumber": "string",
+      "PackageResults": {
+        "TrackingNumber": "string",
+        "BaseServiceCharge": {
+          "CurrencyCode": "string",
+          "MonetaryValue": "string"
+        },
+        "ServiceOptionsCharges": {
+          "CurrencyCode": "string",
+          "MonetaryValue": "string"
+        },
+        "NonMachineableCharges": {
+          "CurrencyCode": "string",
+          "MonetaryValue": "string"
+        },
+        "NonDDUCharges": {
+          "CurrencyCode": "string",
+          "MonetaryValue": "string"
+        },
+        "SurePostDasCharges": {
+          "CurrencyCode": "string",
+          "MonetaryValue": "string"
+        },
+        "ShippingLabel": {
+          "ImageFormat": {
+            "Code": "string",
+            "Description": "string"
+          },
+          "GraphicImage": "string",
+          "GraphicImagePart": "string",
+          "InternationalSignatureGraphicImage": "string",
+          "HTMLImage": "string",
+          "PDF417": "string"
+        },
+        "ShippingReturnSlip": {
+          "Image": {
+            "ImageFormat": {
+              "Code": "string",
+              "Description": "string"
+            },
+            "GraphicImage": "string"
+          }
+        },
+        "ShippingReceipt": {
+          "ImageFormat": {
+            "Code": "string",
+            "Description": "string"
+          },
+          "GraphicImage": "string"
+        },
+        "USPSPICNumber": "string",
+        "CN22Number": "string",
+        "Accessorial": {
+          "Code": "string",
+          "Description": "string"
+        },
+        "SimpleRate": {
+          "Code": "string"
+        },
+        "SensorID": "string",
+        "Form": {
+          "Code": "string",
+          "Description": "string",
+          "Image": {
+            "ImageFormat": {
+              "Code": "string",
+              "Description": "string"
+            },
+            "GraphicImage": "string"
+          },
+          "FormGroupId": "string",
+          "FormGroupIdName": "string"
+        },
+        "ItemizedCharges": {
+          "Code": "string",
+          "Description": "string",
+          "CurrencyCode": "string",
+          "MonetaryValue": "string",
+          "SubType": "string"
+        },
+        "NegotiatedCharges": {
+          "ItemizedCharges": {
+            "Code": "string",
+            "Description": "string",
+            "CurrencyCode": "string",
+            "MonetaryValue": "string",
+            "SubType": "string"
+          }
+        }
+      },
+      "ControlLogReceipt": {
+        "ImageFormat": {
+          "Code": "string",
+          "Description": "string"
+        },
+        "GraphicImage": "string"
+      },
+      "Form": {
+        "Code": "string",
+        "Description": "string",
+        "Image": {
+          "ImageFormat": {
+            "Code": "string",
+            "Description": "string"
+          },
+          "GraphicImage": "string"
+        },
+        "FormGroupId": "string",
+        "FormGroupIdName": "string"
+      },
+      "CODTurnInPage": {
+        "Image": {
+          "ImageFormat": {
+            "Code": "string",
+            "Description": "string"
+          },
+          "GraphicImage": "string"
+        }
+      },
+      "HighValueReport": {
+        "Image": {
+          "ImageFormat": {
+            "Code": "string",
+            "Description": "string"
+          },
+          "GraphicImage": "string"
+        }
+      },
+      "LabelURL": "string",
+      "LocalLanguageLabelURL": "string",
+      "ReceiptURL": "string",
+      "LocalLanguageReceiptURL": "string",
+      "DGPaperImage": "string",
+      "MasterCartonID": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

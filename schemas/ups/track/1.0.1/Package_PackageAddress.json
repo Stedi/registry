@@ -1,0 +1,63 @@
+{
+  "type": "object",
+  "required": ["Type", "Address"],
+  "properties": {
+    "Type": {
+      "type": "object",
+      "required": ["Description", "Code"],
+      "properties": {
+        "Code": {
+          "description": "Code of Document Type.\n04 - POD Letter\n05 - Electronic Delivery Letter\n**Returned if customer has authorized release of the package with the signature.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the code above.",
+          "type": "string"
+        }
+      },
+      "description": "Type of the package address"
+    },
+    "Address": {
+      "type": "object",
+      "required": ["AddressLine", "StateProvinceCode", "PostalCode", "City", "CountryCode"],
+      "properties": {
+        "AddressLine": {
+          "description": "Activity locations street address including name and number (when applicable) and/or building floor, room, suite, and PO Box number. Up to three AddressLine can be returned.",
+          "type": "string"
+        },
+        "City": {
+          "description": "City name. This is optional for Mail Innovations",
+          "type": "string"
+        },
+        "StateProvinceCode": {
+          "description": "Activity locations state or province code. This is optional for Mail Innovations.",
+          "type": "string"
+        },
+        "PostalCode": {
+          "description": "Activity locations postal code.",
+          "type": "string"
+        },
+        "CountryCode": {
+          "description": "Activity locations country or territory code.",
+          "type": "string"
+        }
+      },
+      "description": "Address Container."
+    }
+  },
+  "description": "Package address container.",
+  "default": {
+    "Type": {
+      "Code": "string",
+      "Description": "string"
+    },
+    "Address": {
+      "AddressLine": "string",
+      "City": "string",
+      "StateProvinceCode": "string",
+      "PostalCode": "string",
+      "CountryCode": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

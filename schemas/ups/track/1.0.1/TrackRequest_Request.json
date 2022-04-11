@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "properties": {
+    "RequestOption": {
+      "description": "For optional processing.",
+      "type": "string"
+    },
+    "SubVersion": {
+      "description": "When UPS introduces new elements in the response that are not associated with new request elements, Subversion is used. This ensures backward compatibility.\n\nTo get such elements you need to have the right Subversion. The value of the subversion is explained in the Response element Description.\n\n\nExample: Itemized Charges are returned only when the Subversion element is present and greater than or equal to '1601'. \n\nFormat: YYMM = Year and month of the release.\nExample: 1601 = 2016 January",
+      "type": "string"
+    },
+    "TransactionReference": {
+      "type": "object",
+      "required": ["CustomerContext"],
+      "properties": {
+        "CustomerContext": {
+          "description": "The CustomerContext Information which will be echoed during response.",
+          "type": "string"
+        },
+        "TransactionIdentifier": {
+          "description": "The Unique TransactionIdentifier Information for that transaction. This will be present only if requested in the request.",
+          "type": "string"
+        }
+      },
+      "description": "TransactionReference identifies transactions between client and server."
+    }
+  },
+  "required": ["TransactionReference", "SubVersion"],
+  "description": "Common Request element should be provided by users",
+  "default": {
+    "RequestOption": "string",
+    "SubVersion": "string",
+    "TransactionReference": {
+      "CustomerContext": "string",
+      "TransactionIdentifier": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

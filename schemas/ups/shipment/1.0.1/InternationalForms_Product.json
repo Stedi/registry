@@ -1,0 +1,358 @@
+{
+  "type": "object",
+  "required": ["Description"],
+  "properties": {
+    "Description": {
+      "description": "Description of the product.  Applies to all International Forms. Optional for Partial Invoice. Must be present at least once and can occur for a maximum of 3 times.",
+      "type": "string"
+    },
+    "Unit": {
+      "type": "object",
+      "required": ["Number", "UnitOfMeasurement", "Value"],
+      "properties": {
+        "Number": {
+          "description": "Total quantity of each commodity to be shipped, measured in the units specified in the Unit of Measure field.  Required for Invoice forms and optional for Partial Invoice. Must be numeric. Valid characters are 0-9.",
+          "type": "string"
+        },
+        "UnitOfMeasurement": {
+          "type": "object",
+          "required": ["Code"],
+          "properties": {
+            "Code": {
+              "description": "Code of the billing weight measurement units. Values are: KGS or LBS.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of the billing weight measurement units.",
+              "type": "string"
+            }
+          },
+          "description": "Container tag for the Unit of measurement for the commodity.  Required for Invoice forms and optional for Partial Invoice."
+        },
+        "Value": {
+          "description": "Monetary amount used to specify the worth or price of the commodity. Amount should be greater than zero.  Applies to Invoice and Partial Invoice form. Required for Invoice forms and optional for Partial Invoice. Amount should be greater than zero.  Valid characters are 0-9 and. (Decimal point). Limit to 6 digits after the decimal. The maximum length of the field is 19 including '.' and can hold up to 6 decimal places.(#####.######, ######.#####, #######.####, ########.###, #########.##,##########.#,############). The value of this product  and the other products should be such that the invoice line total which is the sum of ( number*values) of all products should not exceed 9999999999999999.99",
+          "type": "string"
+        }
+      },
+      "description": "Container tag for the Unit information of each product. (also called as commodity)  Required for Invoice forms and optional for Partial Invoice."
+    },
+    "CommodityCode": {
+      "description": "6-to-15-alphanumeric commodity code. Customs uses this code to determine what duties should be assessed on the commodity.  Applies to Invoice, Partial Invoice and NAFTA CO. Required for NAFTA CO and optional for Partial Invoice. Should be at least 6 alphanumeric. For NAFTA CO: For each good described in Description of Goods field, identify the H.S. tariff classification to six digits. If the good is subject to a specific rule of origin in Annex 401 that requires eight digits, identify to eight digits, using the H.S. tariff classification of the country or territory into whose territory the good is imported.",
+      "type": "string"
+    },
+    "PartNumber": {
+      "description": "The part number or reference number for the product contained in the invoice line, as indicated on the customs invoice.  Applies to Invoice and Partial Invoice. Required for Invoice forms and optional for Partial Invoice.",
+      "type": "string"
+    },
+    "OriginCountryCode": {
+      "description": "The country or territory in which the good was manufactured, produced or grown. For detailed information on country or territory of origin, certificate of origin, rules of origin, and any related matters, please refer to the U.S. Customs and Border Protection Web site at www.customs.gov or contact your country or territory's Customs authority.",
+      "type": "string"
+    },
+    "JointProductionIndicator": {
+      "description": "If present, JNT will be used as the origin of country or territory code on the NAFTA form and the Product/Origincountry or territoryCode tag will be ignored.  Applies to NAFTA CO only.",
+      "type": "string"
+    },
+    "NetCostCode": {
+      "description": "For each good described in the Description of Goods field, where the good is subject to a regional value content (RVC) requirement, indicate NC if the RVC is calculated according to the net cost method; otherwise, indicate NO. If the RVC is calculated over a period of time then indicate NC with begin/end date by passing code ND  Applies to NAFTA CO only. Required for NAFTA CO.  Valid values: NC, ND and NO.",
+      "type": "string"
+    },
+    "NetCostDateRange": {
+      "type": "object",
+      "required": ["EndDate", "BeginDate"],
+      "properties": {
+        "BeginDate": {
+          "description": "If the RVC is calculated over a period of time, it should be identified by the begin date (yyyyMMdd) of that period. (Reference: Articles 402.1, 402.5).  Applies to NAFTA CO only. Format is yyyyMMdd.",
+          "type": "string"
+        },
+        "EndDate": {
+          "description": "If the RVC is calculated over a period of time, it should be identified by the End date (yyyyMMdd) of that period. (Reference: Articles 402.1, 402.5).  Applies to NAFTA CO only. Format is yyyyMMdd.",
+          "type": "string"
+        }
+      },
+      "description": "Date Range for regional value content (RVC).  Applies to NAFTA CO only."
+    },
+    "PreferenceCriteria": {
+      "description": "Indicates the criterion (A through F) for each good described in the Description of Goods field if applicable. \n\nThe rules of origin are contained in Chapter Four and Annex 401. \n\nAdditional rules are described in Annex 703.2 (certain agricultural goods), Annex 300-B, Appendix 6 (certain textile goods) and Annex 308.1 (certain automatic data processing goods and their parts).  Applies to NAFTA CO only.",
+      "type": "string"
+    },
+    "ProducerInfo": {
+      "description": "Indicate the following:  Yes - If shipper is the producer of the good. If not, state 02, 03, and 04 depending on whether this certificate was based upon:  \nNo [1] - Knowledge of whether the good qualifies as an originating good. \nNo [2] - Reliance on the producers written representation (other than a Certificate of Origin) that the good qualifies as an originating good. \nNo [3] - A completed and signed Certificate for the good voluntarily provided to the exporter by the producer.  Applicable for NAFTA CO and is required. Valid values: Yes, No [1], No [2], and No [3].",
+      "type": "string"
+    },
+    "MarksAndNumbers": {
+      "description": "Any special marks, codes, and numbers that may appear on package.  Applies to CO Only.",
+      "type": "string"
+    },
+    "NumberOfPackagesPerCommodity": {
+      "description": "The total number of packages, cartons, or containers for the commodity.  Applicable for CO and is required. Should be numeric. Valid characters are 0 -9.",
+      "type": "string"
+    },
+    "ProductWeight": {
+      "type": "object",
+      "required": ["UnitOfMeasurement", "Weight"],
+      "properties": {
+        "UnitOfMeasurement": {
+          "type": "object",
+          "required": ["Code"],
+          "properties": {
+            "Code": {
+              "description": "Code of the billing weight measurement units. Values are: KGS or LBS.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of the billing weight measurement units.",
+              "type": "string"
+            }
+          },
+          "description": "Container tag for the Unit of Measurement of weight.  Applies to CO and EEI forms only."
+        },
+        "Weight": {
+          "description": "Weight of Product.  Applies to CO and EEI forms only. Valid characters are 0-9 and .  (Decimal point). Limit to 1 digit after the decimal. The maximum length of the field is 5 including . and can hold up to 1 decimal place.",
+          "type": "string"
+        }
+      },
+      "description": "The shipping weight, including containers, for each commodity with a separate Harmonized Tariff Code / Schedule B Number. This weight does not include carrier equipment.  Applies to CO and EEI forms only. Required for CO and EEI forms."
+    },
+    "VehicleID": {
+      "description": "Includes the following information for used self-propelled vehicles as defined in Customs regulations 19 CFR 192.1: The unique Vehicle Identification Number (VIN) in the proper format. Or The Product Identification Number (PIN) for those used self-propelled vehicles for which there are no VINs.  Or the Vehicle Title Number.  Applies to EEI forms only.",
+      "type": "string"
+    },
+    "ScheduleB": {
+      "type": "object",
+      "required": ["Number", "UnitOfMeasurement"],
+      "properties": {
+        "Number": {
+          "description": "A unique 10-digit commodity classification code for the item being exported. (To classify a commodity access the following Web page: http://www.census.gov/foreign-trade/schedules/b/#search).  Applies to EEI forms only. Has to be 10 characters.",
+          "type": "string"
+        },
+        "Quantity": {
+          "description": "The count of how many Schedule B units of the current good are in the shipment (EEI only). For example, if the Schedule B unit of measure is dozens and eight dozen, is being shipped, indicate 8 in this field.  Applies to EEI forms only. Conditionally required for EEI forms if ScheduleB UnitOfMeasurement is not X. Should be Numeric. Valid characters are 0 -9.",
+          "type": "string"
+        },
+        "UnitOfMeasurement": {
+          "type": "object",
+          "required": ["Code"],
+          "properties": {
+            "Code": {
+              "description": "Code of the billing weight measurement units. Values are: KGS or LBS.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of the billing weight measurement units.",
+              "type": "string"
+            }
+          },
+          "description": "The unit of measure indicated on the Export License.  Applies to EEI forms only."
+        }
+      },
+      "description": "Container tag for the schedule B information of a commodity.  Applies to EEI forms only. Required for EEI form"
+    },
+    "ExportType": {
+      "description": "Code indicating Domestic: Exports that have been produced, manufactured, or grown in the United States or Puerto Rico. This includes imported merchandise which has been enhanced in value or changed from the form in which imported by further manufacture or processing in the United States or Puerto Rico. Foreign: Merchandise that has entered the United States and is being exported again in the same condition as when imported.   Applies to EEI forms only. Required for EEI form.  Valid values:  D: Domestic; F: Foreign.",
+      "type": "string"
+    },
+    "SEDTotalValue": {
+      "description": "This amount will always be USD.  Applies to EEI forms only. Required for EEI form. Valid characters are 0-9 and . (Decimal point). Limit to 2 digit after the decimal. The maximum length of the field is 15 including . and can hold up to 2 decimal places.  Note: This value is calculated based on the Product/Unit/Value and /Product/Unit/Number (Number of Units * Price per Unit). If the total value is incorrect it will be replaced by the actual calculated total value.",
+      "type": "string"
+    },
+    "ExcludeFromForm": {
+      "type": "object",
+      "required": ["FormType"],
+      "properties": {
+        "FormType": {
+          "description": "Indicates the name of the International form requested to NOT have product information.  Possible Values are 04  NAFTA CO.  Please note that if this is used and you DO NOT have the corresponding form type requested this will be IGNORED.",
+          "type": "string"
+        }
+      },
+      "description": "Container tag for determining whether or not to exclude product information from a particular form.  If this container is not present we assume that the DEFAULT is selected which is \"none\" and all products will appear on all forms."
+    },
+    "ProductCurrencyCode": {
+      "description": "Not Used.   Not Applicable.",
+      "type": "string"
+    },
+    "PackingListInfo": {
+      "type": "object",
+      "required": ["PackageAssociated"],
+      "properties": {
+        "PackageAssociated": {
+          "type": "object",
+          "required": ["PackageNumber", "ProductAmount"],
+          "properties": {
+            "PackageNumber": {
+              "description": "Package number the product should be allocated to ont he packing list.  Required for packaging list and Air Freight Packing list.",
+              "type": "string"
+            },
+            "ProductAmount": {
+              "description": "Amount of Product associated with a package.  Required for packaging list and Air Freight Packing list.",
+              "type": "string"
+            },
+            "ProductNote": {
+              "description": "Product Note.",
+              "type": "string"
+            }
+          },
+          "description": "Data Container holding package/product related information that will break up the product into each package on the packing list.  Total product amount must equal the product unit value above. Required for packaging list and Air Freight Packing list.                                                      Packaging list max allowed : 20\nAir Freight Packaging list max allowed: 200"
+        }
+      },
+      "description": "Data Container holding package related information.  Required for packaging list and Air Freight Packing list."
+    },
+    "EEIInformation": {
+      "type": "object",
+      "properties": {
+        "ExportInformation": {
+          "description": "Required for EEI form id it is a SDL product. Valid values: LC, LV, SS,MS, GS, DP, HR, UG, IC, SC, DD, HH, SR, TE,TL, IS, CR, GP, RJ, TP, IP, IR, DB, CH, RS, OS  Applies to EEI form only. Required if EEIFilingOption code 3 specified for EEI form.",
+          "type": "string"
+        },
+        "License": {
+          "type": "object",
+          "properties": {
+            "Number": {
+              "description": "Not Used.",
+              "type": "string"
+            },
+            "Code": {
+              "description": "The standard license code published by US government. \nRefer to EEI License Codes in the Appendix for valid values.  Applies to EEI form only. It is required for EEIFilingOption code 3. It is optionally required for all other filing types; however, it is used to categorize each product as SDL or non-SDL.  It is also used to identify which piece of information is applicable.",
+              "type": "string"
+            },
+            "LicenseLineValue": {
+              "description": "The export monetary amount allowed per license. Required for a licensable product when the EEI form is selected.\nFormat: Whole numbers only.  Applies to EEI form only. Required if EEIFilingOption code 1A (only for SDL shipments) or 3.",
+              "type": "string"
+            },
+            "ECCNNumber": {
+              "description": "Product ECCN Number issued by BIS (Bureau of Industry and Security). If the license number is a commerce license, ECCN must be provided. The format is #A### or EAR99  Applies to EEI forms only. It is required for EEIFilingOption code 3. ECCN is required one of the following License Exception Codes is entered: CIV, CTP, ENC, GBS, KMI, LVS, TSR",
+              "type": "string"
+            }
+          },
+          "description": "Licence information for SDL commodity.  Applies to EEI form only."
+        },
+        "DDTCInformation": {
+          "type": "object",
+          "properties": {
+            "ITARExemptionNumber": {
+              "description": "The specific citation (exemption number) under the International Traffic in Arms Regulations (ITAR) from the Code of Federal Register (see 22 CFR 120-130) that exempts the shipment from the requirements for a license or other written authorization from the Directorate of Trade Controls (DDTC). \nRefer to EEI License Codes in the Appendix for valid values.  Applies to EEI Form only. This field is applicable for EEIFiling option 1A and 3.",
+              "type": "string"
+            },
+            "USMLCategoryCode": {
+              "description": "Digit numeric code (e.g. 01-18, 20 or 21). Indicates the U.S. Munitions List (USML) category article, service or related technical data as it applies to the article reported.  Applies to EEI form only. It is required for EEIFilingOption code 3.",
+              "type": "string"
+            },
+            "EligiblePartyIndicator": {
+              "description": "Presence/Absent indicator. Certification by the U.S. exporter that the exporter is an eligible party to participate in the defense trade.",
+              "type": "string"
+            },
+            "RegistrationNumber": {
+              "description": "It is a unique registration code assigned to the registrant. The DDTC registration code consist of a letter prefix, M (assigned to a manufacturer and/or exporter) or K (assigned to a broker), followed by four or five digits (e.g. K-1234 or M12345).  It is required for EEIFilingOption code 3.",
+              "type": "string"
+            },
+            "Quantity": {
+              "description": "Export Quantity.  Applies to EEI form only. It is required for EEIFilingOption code 3. Only positive integer value is valid.",
+              "type": "string"
+            },
+            "UnitOfMeasurement": {
+              "type": "object",
+              "required": ["Code"],
+              "properties": {
+                "Code": {
+                  "description": "Code of the billing weight measurement units. Values are: KGS or LBS.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description of the billing weight measurement units.",
+                  "type": "string"
+                }
+              },
+              "description": "Container for unit of measurement.  Applies to EEI form only. It is required for EEIFilingOption code 3."
+            },
+            "SignificantMilitaryEquipmentIndicator": {
+              "description": "Presence/ Absence Indicator.  Applies to EEI form only.",
+              "type": "string"
+            },
+            "ACMNumber": {
+              "description": "Approved Community Member Number (ACM). It is required to be provided along with ITARExemptionNumber for some License code (SGB and SAU). The ACM# for the United Kingdom (License code SGB) must begin with UK followed by 9 numbers.  The ACM# for Australia (License Code SAU) must begin with DTT followed by 8 numbers.  Applies to EEI form only.  It is required for EEIFilingOption code 1A and 3.",
+              "type": "string"
+            }
+          },
+          "description": "Department of State/ Directorate of Defense Trade Control Information. This element is a container for additional information that is applicable to SDL products. It will only be evaluated if the provided license code is an SDL code.  Applies to EEI Form only."
+        }
+      },
+      "description": "Required for EEI form.  Applies to EEI form only."
+    }
+  },
+  "description": "Contains the commodity/product information.  Applies to EEI, Invoice, Partial Invoice, CO and NAFTA CO. When any International form is requested, at least one Product must be present. \n\nMaximum number of products allowed for different forms are:\n\n50: Package Packing List\n\n100: Commercial Invoice, NAFTA, CO, EEI\n\n1000: Air Freight packing list\n\nNote: For Partial Invoice this container is optional.",
+  "default": {
+    "Description": "string",
+    "Unit": {
+      "Number": "string",
+      "UnitOfMeasurement": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "Value": "string"
+    },
+    "CommodityCode": "string",
+    "PartNumber": "string",
+    "OriginCountryCode": "string",
+    "JointProductionIndicator": "string",
+    "NetCostCode": "string",
+    "NetCostDateRange": {
+      "BeginDate": "string",
+      "EndDate": "string"
+    },
+    "PreferenceCriteria": "string",
+    "ProducerInfo": "string",
+    "MarksAndNumbers": "string",
+    "NumberOfPackagesPerCommodity": "string",
+    "ProductWeight": {
+      "UnitOfMeasurement": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "Weight": "string"
+    },
+    "VehicleID": "string",
+    "ScheduleB": {
+      "Number": "string",
+      "Quantity": "string",
+      "UnitOfMeasurement": {
+        "Code": "string",
+        "Description": "string"
+      }
+    },
+    "ExportType": "string",
+    "SEDTotalValue": "string",
+    "ExcludeFromForm": {
+      "FormType": "string"
+    },
+    "ProductCurrencyCode": "string",
+    "PackingListInfo": {
+      "PackageAssociated": {
+        "PackageNumber": "string",
+        "ProductAmount": "string",
+        "ProductNote": "string"
+      }
+    },
+    "EEIInformation": {
+      "ExportInformation": "string",
+      "License": {
+        "Number": "string",
+        "Code": "string",
+        "LicenseLineValue": "string",
+        "ECCNNumber": "string"
+      },
+      "DDTCInformation": {
+        "ITARExemptionNumber": "string",
+        "USMLCategoryCode": "string",
+        "EligiblePartyIndicator": "string",
+        "RegistrationNumber": "string",
+        "Quantity": "string",
+        "UnitOfMeasurement": {
+          "Code": "string",
+          "Description": "string"
+        },
+        "SignificantMilitaryEquipmentIndicator": "string",
+        "ACMNumber": "string"
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

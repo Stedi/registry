@@ -1,0 +1,368 @@
+{
+  "type": "object",
+  "properties": {
+    "Image": {
+      "type": "object",
+      "required": ["Type", "GraphicImage", "Format"],
+      "properties": {
+        "Type": {
+          "type": "object",
+          "required": ["Description", "Code"],
+          "properties": {
+            "Code": {
+              "description": "Code representing the form type",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of the form type code.",
+              "type": "string"
+            }
+          },
+          "description": "Image Type Container."
+        },
+        "GraphicImage": {
+          "description": "Base 64 encoded graphic image.",
+          "type": "string"
+        },
+        "Format": {
+          "type": "object",
+          "required": ["Description", "Code"],
+          "properties": {
+            "Code": {
+              "description": "Code representing the format of the form. Currently only pdf is supported.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of the format code of the form.",
+              "type": "string"
+            }
+          },
+          "description": "ImageFormat Container."
+        }
+      },
+      "description": "Image Container."
+    },
+    "PackingList": {
+      "type": "object",
+      "properties": {
+        "ShipFrom": {
+          "type": "object",
+          "required": ["Name"],
+          "properties": {
+            "Name": {
+              "description": "The shippers name or company name.",
+              "type": "string"
+            },
+            "AttentionName": {
+              "description": "Contact name at the ship from location.",
+              "type": "string"
+            },
+            "Address": {
+              "type": "object",
+              "required": ["AddressLine", "City", "CountryCode"],
+              "properties": {
+                "AddressLine": {
+                  "description": "The consignees street address.",
+                  "type": "string"
+                },
+                "City": {
+                  "description": "The consignees city.",
+                  "type": "string"
+                },
+                "StateProvinceCode": {
+                  "description": "The consignees state or province code.",
+                  "type": "string"
+                },
+                "Town": {
+                  "description": "The consignees town code.",
+                  "type": "string"
+                },
+                "PostalCode": {
+                  "description": "The consignees postal code.",
+                  "type": "string"
+                },
+                "CountryCode": {
+                  "description": "The consignees country or territory code.",
+                  "type": "string"
+                }
+              },
+              "description": "Shippers Address Container."
+            },
+            "PhoneNumber": {
+              "description": "The shippers phone number.  ",
+              "type": "string"
+            },
+            "EMailAddress": {
+              "description": "Shippers email address.",
+              "type": "string"
+            },
+            "PhoneExtension": {
+              "description": "The shippers phone extension.",
+              "type": "string"
+            }
+          },
+          "description": "PackingList ShipFrom Container."
+        },
+        "ShipTo": {
+          "type": "object",
+          "required": ["Name"],
+          "properties": {
+            "Name": {
+              "description": "The Consignees name or company name.",
+              "type": "string"
+            },
+            "AttentionName": {
+              "description": "Contact name at the ship to location.",
+              "type": "string"
+            },
+            "Address": {
+              "type": "object",
+              "required": ["AddressLine", "City", "CountryCode"],
+              "properties": {
+                "AddressLine": {
+                  "description": "The consignees street address.",
+                  "type": "string"
+                },
+                "City": {
+                  "description": "The consignees city.",
+                  "type": "string"
+                },
+                "StateProvinceCode": {
+                  "description": "The consignees state or province code.",
+                  "type": "string"
+                },
+                "Town": {
+                  "description": "The consignees town code.",
+                  "type": "string"
+                },
+                "PostalCode": {
+                  "description": "The consignees postal code.",
+                  "type": "string"
+                },
+                "CountryCode": {
+                  "description": "The consignees country or territory code.",
+                  "type": "string"
+                }
+              },
+              "description": "Consignees Address Container."
+            },
+            "PhoneNumber": {
+              "description": "The consignees phone number.",
+              "type": "string"
+            },
+            "EMailAddress": {
+              "description": "Consignees email address.",
+              "type": "string"
+            },
+            "PhoneExtension": {
+              "description": "The consignees phone extension.",
+              "type": "string"
+            }
+          },
+          "description": "PackingList ShipTo Container."
+        },
+        "Reference": {
+          "type": "object",
+          "properties": {
+            "Label": {
+              "description": "Reference Label.",
+              "type": "string"
+            },
+            "Value": {
+              "description": "Reference Value.",
+              "type": "string"
+            }
+          },
+          "required": ["Value"],
+          "description": "Reference Container. Only two references are allowed. If more than 2 references are provided, then only the first two will be used and the subsequent reference containers will be ignored."
+        },
+        "HandlingUnit": {
+          "type": "object",
+          "properties": {
+            "Commodity": {
+              "type": "object",
+              "properties": {
+                "NumberOfPieces": {
+                  "description": "Number of Pieces.",
+                  "type": "string"
+                },
+                "PackagingType": {
+                  "type": "object",
+                  "required": ["Code"],
+                  "properties": {
+                    "Code": {
+                      "description": "Code associated with the Packaging Type.\nRefer to Packaging Types in the Appendix for valid values.",
+                      "type": "string"
+                    },
+                    "Description": {
+                      "description": "Description for the code associated with the Packaging Type.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "PackagingType Container."
+                },
+                "DangerousGoodsIndicator": {
+                  "description": "Hazmat Indicator.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description of articles, special marks, freight codes.",
+                  "type": "string"
+                },
+                "NMFCCommodityCode": {
+                  "description": "NMFC.",
+                  "type": "string"
+                },
+                "FreightClass": {
+                  "description": "Class.",
+                  "type": "string"
+                },
+                "Dimensions": {
+                  "type": "object",
+                  "required": ["Length", "Height", "Width"],
+                  "properties": {
+                    "Length": {
+                      "description": "The length of the line item used to determine density rate rating.",
+                      "type": "string"
+                    },
+                    "Width": {
+                      "description": "The width of the line item used to determine the density based rating.",
+                      "type": "string"
+                    },
+                    "Height": {
+                      "description": "The height of the line item used to determine density based rating.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Dimensions Container."
+                },
+                "Weight": {
+                  "description": "Weight of the package.",
+                  "type": "string"
+                },
+                "CommodityValue": {
+                  "description": "Unit price of the commodity.",
+                  "type": "string"
+                }
+              },
+              "required": ["FreightClass"],
+              "description": "Commodity Container."
+            },
+            "SpecialInstructions": {
+              "description": "Special instructions or special memo.",
+              "type": "string"
+            },
+            "TotalNumberOfPieces": {
+              "description": "Total number of pieces.",
+              "type": "string"
+            },
+            "TotalWeight": {
+              "description": "Total weight of all the commodities.",
+              "type": "string"
+            },
+            "UnitOfMeasurement": {
+              "type": "object",
+              "required": ["Code"],
+              "properties": {
+                "Code": {
+                  "description": "The code associated with the unit of measure for the billable weight of a shipment.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "The description for the billable weight associated with the shipment.",
+                  "type": "string"
+                }
+              },
+              "description": "UnitOfMeasurement Container."
+            },
+            "CurrencyCode": {
+              "description": "Currency code. This value applies to the unit price of all the commodities.",
+              "type": "string"
+            }
+          },
+          "description": "HandlingUnit Container."
+        }
+      },
+      "description": "PackingList Container."
+    }
+  },
+  "description": "Documents Container.",
+  "default": {
+    "Image": {
+      "Type": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "GraphicImage": "string",
+      "Format": {
+        "Code": "string",
+        "Description": "string"
+      }
+    },
+    "PackingList": {
+      "ShipFrom": {
+        "Name": "string",
+        "AttentionName": "string",
+        "Address": {
+          "AddressLine": "string",
+          "City": "string",
+          "StateProvinceCode": "string",
+          "Town": "string",
+          "PostalCode": "string",
+          "CountryCode": "string"
+        },
+        "PhoneNumber": "string",
+        "EMailAddress": "string",
+        "PhoneExtension": "string"
+      },
+      "ShipTo": {
+        "Name": "string",
+        "AttentionName": "string",
+        "Address": {
+          "AddressLine": "string",
+          "City": "string",
+          "StateProvinceCode": "string",
+          "Town": "string",
+          "PostalCode": "string",
+          "CountryCode": "string"
+        },
+        "PhoneNumber": "string",
+        "EMailAddress": "string",
+        "PhoneExtension": "string"
+      },
+      "Reference": {
+        "Label": "string",
+        "Value": "string"
+      },
+      "HandlingUnit": {
+        "Commodity": {
+          "NumberOfPieces": "string",
+          "PackagingType": {
+            "Code": "string",
+            "Description": "string"
+          },
+          "DangerousGoodsIndicator": "string",
+          "Description": "string",
+          "NMFCCommodityCode": "string",
+          "FreightClass": "string",
+          "Dimensions": {
+            "Length": "string",
+            "Width": "string",
+            "Height": "string"
+          },
+          "Weight": "string",
+          "CommodityValue": "string"
+        },
+        "SpecialInstructions": "string",
+        "TotalNumberOfPieces": "string",
+        "TotalWeight": "string",
+        "UnitOfMeasurement": {
+          "Code": "string",
+          "Description": "string"
+        },
+        "CurrencyCode": "string"
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
