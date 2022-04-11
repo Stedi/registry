@@ -1,0 +1,53 @@
+{
+  "type": "object",
+  "required": ["Type", "Format", "Content"],
+  "properties": {
+    "Type": {
+      "type": "object",
+      "required": ["Description", "Code"],
+      "properties": {
+        "Code": {
+          "description": "Code of Document Type.\n04 - POD Letter\n05 - Electronic Delivery Letter\n**Returned if customer has authorized release of the package with the signature.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the code above.",
+          "type": "string"
+        }
+      },
+      "description": "Type of Document."
+    },
+    "Content": {
+      "description": "Base64 Encoded PODLetter in html format or the customer's name for Electronic Delivery Notice.",
+      "type": "string"
+    },
+    "Format": {
+      "type": "object",
+      "properties": {
+        "Code": {
+          "description": "Format code of the content.\n03 - HTML\n04 - Plain text",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of Format code above. \nPlain text format will only apply if the code above is 04.",
+          "type": "string"
+        }
+      },
+      "required": ["Description"],
+      "description": "Container for document format."
+    }
+  },
+  "description": "Container for the various documents returned to the customer.\n\nReturned if Signature Tracking is enabled and authorized.\nReturned if any of the documents i.e., Signature, Free Astrays, Delivery Receipt or POD is requested using the request option. \nNot returned for documents like SCS Freight, UPS Freight TL/LTL.\n\nRefer to the Request Option Matrix in the Appendix.",
+  "default": {
+    "Type": {
+      "Code": "string",
+      "Description": "string"
+    },
+    "Content": "string",
+    "Format": {
+      "Code": "string",
+      "Description": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

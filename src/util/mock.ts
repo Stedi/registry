@@ -126,7 +126,7 @@ export function mock(schemalike: SchemaLike): any {
       return 1647352387;
     }
 
-    return 0;
+    return 1;
   }
 
   if (type === "null") {

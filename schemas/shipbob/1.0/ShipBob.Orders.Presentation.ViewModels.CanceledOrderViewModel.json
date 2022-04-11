@@ -1,0 +1,1180 @@
+{
+  "type": "object",
+  "properties": {
+    "order_id": {
+      "type": "integer",
+      "description": "The ID of the canceled order",
+      "format": "int32"
+    },
+    "order": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique id of the order",
+          "format": "int32"
+        },
+        "created_date": {
+          "type": "string",
+          "description": "Date this order was created",
+          "format": "date-time"
+        },
+        "purchase_date": {
+          "type": "string",
+          "description": "Date this order was purchase by the end user",
+          "format": "date-time",
+          "nullable": true
+        },
+        "reference_id": {
+          "type": "string",
+          "description": "Client-defined external unique id of the order"
+        },
+        "order_number": {
+          "type": "string",
+          "description": "User friendly orderId or store order number that will be shown on the Orders Page. If not provided, referenceId will be used"
+        },
+        "status": {
+          "enum": ["Processing", "Exception", "PartiallyFulfilled", "Fulfilled", "Cancelled", "ImportReview"],
+          "type": "string",
+          "description": "The order status"
+        },
+        "type": {
+          "enum": ["DTC", "DropShip", "B2B"],
+          "type": "string",
+          "description": "Shipment type of the order",
+          "example": "DTC"
+        },
+        "channel": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "Unique id of the channel",
+              "format": "int32"
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the channel",
+              "example": "ShipBobs-Shopify-Store"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Created by channel metadata"
+        },
+        "shipping_method": {
+          "type": "string",
+          "description": "Client-defined shipping method",
+          "example": "Free 2-day Shipping"
+        },
+        "recipient": {
+          "required": ["address", "name"],
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the recipient",
+              "example": "John Doe"
+            },
+            "address": {
+              "required": ["address1", "city", "country", "type"],
+              "type": "object",
+              "properties": {
+                "type": {
+                  "enum": ["MarkFor", "ShipFrom"],
+                  "type": "string",
+                  "description": "Specifies the type of address:\r\nShipFrom\r\nMarkFor"
+                },
+                "address1": {
+                  "type": "string",
+                  "description": "First line of the address",
+                  "example": "100 Nowhere Blvd"
+                },
+                "address2": {
+                  "type": "string",
+                  "description": "Second line of the address",
+                  "example": "Suite 100"
+                },
+                "company_name": {
+                  "type": "string",
+                  "description": "Name of the company receiving the shipment",
+                  "example": "Wayne Enterprises"
+                },
+                "city": {
+                  "type": "string",
+                  "description": "The city",
+                  "example": "Gotham City"
+                },
+                "state": {
+                  "type": "string",
+                  "description": "The state or province",
+                  "example": "NJ"
+                },
+                "country": {
+                  "type": "string",
+                  "description": "The country (Must be ISO Alpha-2 for estimates)",
+                  "example": "US"
+                },
+                "zip_code": {
+                  "type": "string",
+                  "description": "The zip code or postal code",
+                  "example": "07093"
+                }
+              },
+              "additionalProperties": false,
+              "description": "Address to used when creating a B2B/DropShip order."
+            },
+            "email": {
+              "type": "string",
+              "description": "Email address of the recipient",
+              "example": "john@example.com"
+            },
+            "phone_number": {
+              "maxLength": 50,
+              "type": "string",
+              "description": "Phone number of the recipient",
+              "example": "555-555-5555"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Information about the recipient of an order"
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Unique id of the product",
+                "format": "int32",
+                "nullable": true
+              },
+              "reference_id": {
+                "type": "string",
+                "description": "Unique reference id of the product",
+                "example": "TShirtBlueM"
+              },
+              "quantity": {
+                "type": "integer",
+                "description": "The quantity of this product ordered",
+                "format": "int32"
+              },
+              "quantity_unit_of_measure_code": {
+                "type": "string",
+                "description": "Defined standard for measure for an item (each, inner pack, case, pallet).  Values: EA, INP, CS and PL"
+              },
+              "sku": {
+                "type": "string",
+                "description": "Stock keeping unit for the product",
+                "example": "TShirtBlueM"
+              },
+              "gtin": {
+                "type": "string",
+                "description": "Global Trade Item Number - unique and internationally recognized identifier assigned to item by company GS1"
+              },
+              "upc": {
+                "type": "string",
+                "description": "Universal Product Code - Unique external identifier"
+              },
+              "unit_price": {
+                "type": "number",
+                "description": "Price for one item",
+                "format": "double",
+                "nullable": true
+              },
+              "external_line_id": {
+                "type": "integer",
+                "description": "Numeric assignment per item. Used as a reference number for multiple purposes such as split orders, split containers, etc.",
+                "format": "int32",
+                "nullable": true
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "List of products included in the order"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "required": ["name", "value"],
+            "type": "object",
+            "properties": {
+              "name": {
+                "maxLength": 50,
+                "type": "string",
+                "description": "The key of the tag",
+                "example": "Handling instructions"
+              },
+              "value": {
+                "maxLength": 500,
+                "type": "string",
+                "description": "The value of the tag",
+                "example": "Fragile"
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "Client-defined order tags"
+        },
+        "shipments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "store_order_id": {
+                "type": "string",
+                "description": "Unique store order id of the shipment"
+              },
+              "id": {
+                "type": "integer",
+                "description": "Unique id of the shipment",
+                "format": "int32"
+              },
+              "order_id": {
+                "type": "integer",
+                "description": "Id of the order this shipment belongs to",
+                "format": "int32"
+              },
+              "reference_id": {
+                "type": "string",
+                "description": "Client-defined external unique id of the order this shipment belongs to"
+              },
+              "recipient": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the recipient",
+                    "example": "John Doe"
+                  },
+                  "address": {
+                    "required": ["address1", "city", "country", "type"],
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "enum": ["MarkFor", "ShipFrom"],
+                        "type": "string",
+                        "description": "Specifies the type of address:\r\nShipFrom\r\nMarkFor"
+                      },
+                      "address1": {
+                        "type": "string",
+                        "description": "First line of the address",
+                        "example": "100 Nowhere Blvd"
+                      },
+                      "address2": {
+                        "type": "string",
+                        "description": "Second line of the address",
+                        "example": "Suite 100"
+                      },
+                      "company_name": {
+                        "type": "string",
+                        "description": "Name of the company receiving the shipment",
+                        "example": "Wayne Enterprises"
+                      },
+                      "city": {
+                        "type": "string",
+                        "description": "The city",
+                        "example": "Gotham City"
+                      },
+                      "state": {
+                        "type": "string",
+                        "description": "The state or province",
+                        "example": "NJ"
+                      },
+                      "country": {
+                        "type": "string",
+                        "description": "The country (Must be ISO Alpha-2 for estimates)",
+                        "example": "US"
+                      },
+                      "zip_code": {
+                        "type": "string",
+                        "description": "The zip code or postal code",
+                        "example": "07093"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "description": "Address to used when creating a B2B/DropShip order."
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "Email address of the recipient",
+                    "example": "john@example.com"
+                  },
+                  "phone_number": {
+                    "type": "string",
+                    "description": "Phone number of the recipient",
+                    "example": "555-555-5555"
+                  }
+                },
+                "additionalProperties": false,
+                "description": "Information about the recipient of a shipment"
+              },
+              "created_date": {
+                "type": "string",
+                "description": "Date this shipment was created",
+                "format": "date-time"
+              },
+              "last_update_at": {
+                "type": "string",
+                "description": "Date this shipment was last updated",
+                "format": "date-time",
+                "nullable": true
+              },
+              "status": {
+                "enum": [
+                  "None",
+                  "Processing",
+                  "Pending",
+                  "Completed",
+                  "Exception",
+                  "OnHold",
+                  "Cancelled",
+                  "CleanSweeped",
+                  "LabeledCreated",
+                  "ImportReview"
+                ],
+                "type": "string",
+                "description": "The shipment status"
+              },
+              "status_details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Short name of the status detail"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Describes what the status detail means"
+                    },
+                    "id": {
+                      "type": "integer",
+                      "description": "The id of the status detail",
+                      "format": "int32"
+                    },
+                    "inventory_id": {
+                      "type": "integer",
+                      "description": "Inventory Id the detail applies to (if applicable)",
+                      "format": "int32",
+                      "nullable": true
+                    },
+                    "exception_fulfillment_center_id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "nullable": true
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "description": "Additional details about the shipment status"
+              },
+              "location": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Id of the fulfillment center",
+                    "format": "int32"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the fulfillment center",
+                    "example": "Cicero (IL)"
+                  }
+                },
+                "additionalProperties": false,
+                "description": "Information about a fulfillment center that a shipment can belong to"
+              },
+              "invoice_amount": {
+                "type": "number",
+                "description": "Monetary amount that was invoiced for this shipment",
+                "format": "double",
+                "nullable": true
+              },
+              "insurance_value": {
+                "type": "number",
+                "description": "Monetary amount that this shipment was insured for",
+                "format": "double",
+                "nullable": true
+              },
+              "ship_option": {
+                "type": "string",
+                "description": "Name of the shipping option used for this shipment",
+                "example": "Standard"
+              },
+              "package_material_type": {
+                "enum": [
+                  "Unknown",
+                  "Box",
+                  "BubbleMailer",
+                  "PolyMailer",
+                  "FragileBox",
+                  "PosterTube",
+                  "Custom",
+                  "Bookfold",
+                  "OwnContainer",
+                  "Undefined"
+                ],
+                "type": "string",
+                "description": "Container type for the shipment",
+                "example": "Box"
+              },
+              "tracking": {
+                "type": "object",
+                "properties": {
+                  "carrier": {
+                    "type": "string",
+                    "description": "Carrier of the shipment",
+                    "example": "USPS"
+                  },
+                  "tracking_number": {
+                    "type": "string",
+                    "description": "Tracking number of the shipment",
+                    "example": "860C8CDC8F0B4FC7AB69AC86C20539EC"
+                  },
+                  "carrier_service": {
+                    "type": "string",
+                    "description": "The carrier's service which was used for this shipment",
+                    "example": "Priority"
+                  },
+                  "tracking_url": {
+                    "type": "string",
+                    "description": "URL to the website where a shipment can be tracked",
+                    "example": "https://www.example.com/tracking?id=860C8CDC8F0B4FC7AB69AC86C20539EC"
+                  },
+                  "bol": {
+                    "type": "string",
+                    "description": "Bill of lading (BOL) number. Document acknowledging receipt of cargo for shipment."
+                  },
+                  "shipping_date": {
+                    "type": "string",
+                    "description": "Date freight was shipped on",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "pro_number": {
+                    "type": "string",
+                    "description": "Tracking number used for freight carriers"
+                  },
+                  "scac": {
+                    "type": "string",
+                    "description": "Standard Carrier Alpha Code (SCAC). Unique 2-4 letter code used to identify transportation companies."
+                  }
+                },
+                "additionalProperties": false,
+                "description": "Tracking information for a shipment"
+              },
+              "products": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "Unique id of the product",
+                      "format": "int32"
+                    },
+                    "reference_id": {
+                      "type": "string",
+                      "description": "Unique reference id of the product",
+                      "example": "TShirtBlueM"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the product",
+                      "example": "Medium Blue T-Shirt"
+                    },
+                    "sku": {
+                      "type": "string",
+                      "description": "Stock keeping unit for the product",
+                      "example": "TShirtBlueM"
+                    },
+                    "inventory_items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "Unique id of the inventory",
+                            "format": "int32"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Name of the inventory item",
+                            "example": "Medium Blue T-Shirt"
+                          },
+                          "quantity": {
+                            "type": "integer",
+                            "description": "Quantity of the inventory item to be included in the fulfillment",
+                            "format": "int32"
+                          },
+                          "quantity_committed": {
+                            "type": "integer",
+                            "description": "The quantity of the inventory item allocated from the assigned fulfillment center and committed to the order. If quantity committed is less than order quantity, then the inventory item is out of stock at the assigned fulfillment center.",
+                            "format": "int32"
+                          },
+                          "lot": {
+                            "type": "string",
+                            "description": "Lot number of the inventory",
+                            "example": "22222"
+                          },
+                          "expiration_date": {
+                            "type": "string",
+                            "description": "Expiration date of the inventory",
+                            "format": "date-time",
+                            "nullable": true
+                          },
+                          "serial_numbers": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "Serial number of the inventory"
+                          },
+                          "is_dangerous_goods": {
+                            "type": "boolean",
+                            "description": "Is inventory Dangerous Good",
+                            "example": true
+                          }
+                        },
+                        "additionalProperties": false,
+                        "description": "Information about inventory belonging to a store product"
+                      },
+                      "description": "Information about fulfillable inventory items belonging to this product"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "Information about a store product belonging to a shipment"
+                },
+                "description": "Information about the products contained in this shipment"
+              },
+              "parent_cartons": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "Type of this carton container",
+                      "example": "Box or pallet"
+                    },
+                    "barcode": {
+                      "type": "string",
+                      "description": "Barcode assigned to this carton"
+                    },
+                    "measurements": {
+                      "type": "object",
+                      "properties": {
+                        "total_weight_oz": {
+                          "type": "number",
+                          "description": "Total weight in ounces",
+                          "format": "double"
+                        },
+                        "length_in": {
+                          "type": "number",
+                          "description": "Total length in inches",
+                          "format": "double"
+                        },
+                        "width_in": {
+                          "type": "number",
+                          "description": "Total width in inches",
+                          "format": "double"
+                        },
+                        "depth_in": {
+                          "type": "number",
+                          "description": "Total depth in inches",
+                          "format": "double"
+                        }
+                      },
+                      "additionalProperties": false,
+                      "description": "Measurements of a carton"
+                    },
+                    "cartons": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "ID assigned to this carton",
+                            "format": "int32"
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "Type of this carton container",
+                            "example": "Box or pallet"
+                          },
+                          "barcode": {
+                            "type": "string",
+                            "description": "Barcode assigned to this carton"
+                          },
+                          "measurements": {
+                            "type": "object",
+                            "properties": {
+                              "total_weight_oz": {
+                                "type": "number",
+                                "description": "Total weight in ounces",
+                                "format": "double"
+                              },
+                              "length_in": {
+                                "type": "number",
+                                "description": "Total length in inches",
+                                "format": "double"
+                              },
+                              "width_in": {
+                                "type": "number",
+                                "description": "Total width in inches",
+                                "format": "double"
+                              },
+                              "depth_in": {
+                                "type": "number",
+                                "description": "Total depth in inches",
+                                "format": "double"
+                              }
+                            },
+                            "additionalProperties": false,
+                            "description": "Measurements of a carton"
+                          },
+                          "carton_details": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "products": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "integer",
+                                        "description": "Unique id of the product",
+                                        "format": "int32"
+                                      },
+                                      "reference_id": {
+                                        "type": "string",
+                                        "description": "Unique reference id of the product",
+                                        "example": "TShirtBlueM"
+                                      },
+                                      "name": {
+                                        "type": "string",
+                                        "description": "Name of the product",
+                                        "example": "Medium Blue T-Shirt"
+                                      },
+                                      "sku": {
+                                        "type": "string",
+                                        "description": "Stock keeping unit for the product",
+                                        "example": "TShirtBlueM"
+                                      },
+                                      "inventory_items": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "integer",
+                                              "description": "Unique id of the inventory",
+                                              "format": "int32"
+                                            },
+                                            "name": {
+                                              "type": "string",
+                                              "description": "Name of the inventory item",
+                                              "example": "Medium Blue T-Shirt"
+                                            },
+                                            "quantity": {
+                                              "type": "integer",
+                                              "description": "Quantity of the inventory item to be included in the fulfillment",
+                                              "format": "int32"
+                                            },
+                                            "quantity_committed": {
+                                              "type": "integer",
+                                              "description": "The quantity of the inventory item allocated from the assigned fulfillment center and committed to the order. If quantity committed is less than order quantity, then the inventory item is out of stock at the assigned fulfillment center.",
+                                              "format": "int32"
+                                            },
+                                            "lot": {
+                                              "type": "string",
+                                              "description": "Lot number of the inventory",
+                                              "example": "22222"
+                                            },
+                                            "expiration_date": {
+                                              "type": "string",
+                                              "description": "Expiration date of the inventory",
+                                              "format": "date-time",
+                                              "nullable": true
+                                            },
+                                            "serial_numbers": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "description": "Serial number of the inventory"
+                                            },
+                                            "is_dangerous_goods": {
+                                              "type": "boolean",
+                                              "description": "Is inventory Dangerous Good",
+                                              "example": true
+                                            }
+                                          },
+                                          "additionalProperties": false,
+                                          "description": "Information about inventory belonging to a store product"
+                                        },
+                                        "description": "Information about fulfillable inventory items belonging to this product"
+                                      }
+                                    },
+                                    "additionalProperties": false,
+                                    "description": "Information about a store product belonging to a shipment"
+                                  },
+                                  "description": "List of what is packed in this carton"
+                                }
+                              },
+                              "additionalProperties": false
+                            },
+                            "description": "Details about the contents of this carton"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "description": "Cartons packed inside this parent container"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "description": "Carton information for this shipment"
+              },
+              "measurements": {
+                "type": "object",
+                "properties": {
+                  "total_weight_oz": {
+                    "type": "integer",
+                    "description": "Total weight in ounces",
+                    "format": "int32"
+                  },
+                  "length_in": {
+                    "type": "integer",
+                    "description": "Total length in inches",
+                    "format": "int32"
+                  },
+                  "width_in": {
+                    "type": "integer",
+                    "description": "Total width in inches",
+                    "format": "int32"
+                  },
+                  "depth_in": {
+                    "type": "integer",
+                    "description": "Total depth in inches",
+                    "format": "int32"
+                  }
+                },
+                "additionalProperties": false,
+                "description": "Measurements of a shipment"
+              },
+              "require_signature": {
+                "type": "boolean",
+                "description": "If a shipment requires signature"
+              },
+              "estimated_fulfillment_date": {
+                "type": "string",
+                "description": "The datetime of ShipBob’s commitment for completing \r\nthe shipment and handing to the carrier for delivery.",
+                "format": "date-time",
+                "nullable": true
+              },
+              "actual_fulfillment_date": {
+                "type": "string",
+                "description": "The datetime of ShipBob’s completion of the fulfillment operation as promised. \r\nCurrently, this means the shipment has been picked, packed, and label has been printed.",
+                "format": "date-time",
+                "nullable": true
+              },
+              "estimated_fulfillment_date_status": {
+                "enum": [
+                  "AwaitingInventoryAllocation",
+                  "AwaitingReset",
+                  "Unavailable",
+                  "PendingOnTime",
+                  "FulfilledOnTime",
+                  "PendingLate",
+                  "FulfilledLate"
+                ],
+                "type": "string",
+                "description": "Status of ShipBob’s completion of the fulfillment operation."
+              },
+              "is_tracking_uploaded": {
+                "type": "boolean",
+                "description": "Indicates whether the Shipment was marked with tracking information\r\nuploaded to a third-party system where the order originated."
+              },
+              "gift_message": {
+                "maxLength": 500,
+                "type": "string",
+                "description": "Gift message associated with the shipment"
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "Shipments affiliated with the order"
+        },
+        "gift_message": {
+          "type": "string",
+          "description": "Gift message associated with the order"
+        },
+        "shipping_terms": {
+          "type": "object",
+          "properties": {
+            "carrier_type": {
+              "enum": ["Parcel", "Freight"],
+              "type": "string",
+              "description": "Identifies whether to ship parcel or freight.\r\n\r\nParcel: Smaller, light weight boxes.\r\n\r\nFreight: Larger boxes, usually transported by truckload.",
+              "nullable": true
+            },
+            "payment_term": {
+              "enum": ["Collect", "ThirdParty", "Prepaid"],
+              "type": "string",
+              "description": "Identifies the party responsible for shipping charges.\r\n\r\nCollect: The person/entity receiving the product pays the shipping charges [freight only].\r\n\r\nThirdParty: Another party pays for the shipping charges (not Shipbob) [parcel only].\r\n\r\nPrepaid: The shipper pays the shipping charges (Shipbob or merchant).",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false,
+          "description": "Contains shipping properties that need to be used for fulfilling an order."
+        },
+        "retailer_program_data": {
+          "required": ["purchase_order_number", "retailer_program_type"],
+          "type": "object",
+          "properties": {
+            "purchase_order_number": {
+              "type": "string",
+              "description": "First initial documentation sent from buyer to seller with item(s) and quantities."
+            },
+            "retailer_program_type": {
+              "type": "string",
+              "description": "Identifies retailer-merchant combination \r\n<example>\r\nTGTDS\r\n</example>"
+            },
+            "mark_for_store": {
+              "type": "string",
+              "description": "Store Number\r\n<example>\r\nTGT105\r\n</example>"
+            },
+            "delivery_date": {
+              "type": "string",
+              "description": "Expected delivery date",
+              "format": "date-time",
+              "nullable": true
+            },
+            "addresses": {
+              "type": "array",
+              "items": {
+                "required": ["address1", "city", "country", "type"],
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "enum": ["MarkFor", "ShipFrom"],
+                    "type": "string",
+                    "description": "Specifies the type of address:\r\nShipFrom\r\nMarkFor"
+                  },
+                  "address1": {
+                    "type": "string",
+                    "description": "First line of the address",
+                    "example": "100 Nowhere Blvd"
+                  },
+                  "address2": {
+                    "type": "string",
+                    "description": "Second line of the address",
+                    "example": "Suite 100"
+                  },
+                  "company_name": {
+                    "type": "string",
+                    "description": "Name of the company receiving the shipment",
+                    "example": "Wayne Enterprises"
+                  },
+                  "city": {
+                    "type": "string",
+                    "description": "The city",
+                    "example": "Gotham City"
+                  },
+                  "state": {
+                    "type": "string",
+                    "description": "The state or province",
+                    "example": "NJ"
+                  },
+                  "country": {
+                    "type": "string",
+                    "description": "The country (Must be ISO Alpha-2 for estimates)",
+                    "example": "US"
+                  },
+                  "zip_code": {
+                    "type": "string",
+                    "description": "The zip code or postal code",
+                    "example": "07093"
+                  }
+                },
+                "additionalProperties": false,
+                "description": "Address to used when creating a B2B/DropShip order."
+              },
+              "description": "Ship From - Certain retailers want to display the ship from address as their return facility, not Shipbob’s warehouse address        /// \r\nMark For Address - Final destination address\r\n<example>\r\nMerchant will ship to Retailer Hub.Then Retailer will ship to final destination. \r\nMark for address: Retailer Store #101 \r\nAtlanta, GA\r\n</example>"
+            },
+            "customer_ticket_number": {
+              "type": "string",
+              "description": "Customer Ticket Number\r\n<example>\r\nco_12345\r\n</example>"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Contains properties that needs to be used for fulfilling B2B/Dropship orders."
+        }
+      },
+      "additionalProperties": false
+    },
+    "status": {
+      "enum": ["Success", "Failure", "PartialSuccess"],
+      "type": "string",
+      "description": "The overall result of canceling the shipments associated with the order"
+    },
+    "canceled_shipment_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "enum": ["Cancel"],
+            "type": "string",
+            "description": ""
+          },
+          "shipment_id": {
+            "type": "integer",
+            "description": "The ID of the shipment",
+            "format": "int64"
+          },
+          "is_success": {
+            "type": "boolean",
+            "description": "If the cancel action was successful"
+          },
+          "reason": {
+            "type": "string",
+            "description": "The reason the cancellation result"
+          }
+        },
+        "additionalProperties": false,
+        "description": ""
+      },
+      "description": "Results of canceling the shipments associated with the order"
+    }
+  },
+  "additionalProperties": false,
+  "description": "",
+  "default": {
+    "order_id": 1,
+    "order": {
+      "id": 1,
+      "created_date": "1970-01-01T00:00:00.000Z",
+      "purchase_date": "1970-01-01T00:00:00.000Z",
+      "reference_id": "string",
+      "order_number": "string",
+      "status": "Processing",
+      "type": "DTC",
+      "channel": {
+        "id": 1,
+        "name": "ShipBobs-Shopify-Store"
+      },
+      "shipping_method": "Free 2-day Shipping",
+      "recipient": {
+        "name": "John Doe",
+        "address": {
+          "type": "MarkFor",
+          "address1": "100 Nowhere Blvd",
+          "address2": "Suite 100",
+          "company_name": "Wayne Enterprises",
+          "city": "Gotham City",
+          "state": "NJ",
+          "country": "US",
+          "zip_code": "07093"
+        },
+        "email": "john@example.com",
+        "phone_number": "555-555-5555"
+      },
+      "products": [
+        {
+          "id": 1,
+          "reference_id": "TShirtBlueM",
+          "quantity": 1,
+          "quantity_unit_of_measure_code": "string",
+          "sku": "TShirtBlueM",
+          "gtin": "string",
+          "upc": "string",
+          "unit_price": 0,
+          "external_line_id": 1
+        }
+      ],
+      "tags": [
+        {
+          "name": "Handling instructions",
+          "value": "Fragile"
+        }
+      ],
+      "shipments": [
+        {
+          "store_order_id": "string",
+          "id": 1,
+          "order_id": 1,
+          "reference_id": "string",
+          "recipient": {
+            "name": "John Doe",
+            "address": {
+              "type": "MarkFor",
+              "address1": "100 Nowhere Blvd",
+              "address2": "Suite 100",
+              "company_name": "Wayne Enterprises",
+              "city": "Gotham City",
+              "state": "NJ",
+              "country": "US",
+              "zip_code": "07093"
+            },
+            "email": "john@example.com",
+            "phone_number": "555-555-5555"
+          },
+          "created_date": "1970-01-01T00:00:00.000Z",
+          "last_update_at": "1970-01-01T00:00:00.000Z",
+          "status": "None",
+          "status_details": [
+            {
+              "name": "string",
+              "description": "string",
+              "id": 1,
+              "inventory_id": 1,
+              "exception_fulfillment_center_id": 1
+            }
+          ],
+          "location": {
+            "id": 1,
+            "name": "Cicero (IL)"
+          },
+          "invoice_amount": 0,
+          "insurance_value": 0,
+          "ship_option": "Standard",
+          "package_material_type": "Box",
+          "tracking": {
+            "carrier": "USPS",
+            "tracking_number": "860C8CDC8F0B4FC7AB69AC86C20539EC",
+            "carrier_service": "Priority",
+            "tracking_url": "https://www.example.com/tracking?id=860C8CDC8F0B4FC7AB69AC86C20539EC",
+            "bol": "string",
+            "shipping_date": "1970-01-01T00:00:00.000Z",
+            "pro_number": "string",
+            "scac": "string"
+          },
+          "products": [
+            {
+              "id": 1,
+              "reference_id": "TShirtBlueM",
+              "name": "Medium Blue T-Shirt",
+              "sku": "TShirtBlueM",
+              "inventory_items": [
+                {
+                  "id": 1,
+                  "name": "Medium Blue T-Shirt",
+                  "quantity": 1,
+                  "quantity_committed": 1,
+                  "lot": "22222",
+                  "expiration_date": "1970-01-01T00:00:00.000Z",
+                  "serial_numbers": ["string"],
+                  "is_dangerous_goods": true
+                }
+              ]
+            }
+          ],
+          "parent_cartons": [
+            {
+              "type": "Box or pallet",
+              "barcode": "string",
+              "measurements": {
+                "total_weight_oz": 0,
+                "length_in": 0,
+                "width_in": 0,
+                "depth_in": 0
+              },
+              "cartons": [
+                {
+                  "id": 1,
+                  "type": "Box or pallet",
+                  "barcode": "string",
+                  "measurements": {
+                    "total_weight_oz": 0,
+                    "length_in": 0,
+                    "width_in": 0,
+                    "depth_in": 0
+                  },
+                  "carton_details": [
+                    {
+                      "products": [
+                        {
+                          "id": 1,
+                          "reference_id": "TShirtBlueM",
+                          "name": "Medium Blue T-Shirt",
+                          "sku": "TShirtBlueM",
+                          "inventory_items": [
+                            {
+                              "id": 1,
+                              "name": "Medium Blue T-Shirt",
+                              "quantity": 1,
+                              "quantity_committed": 1,
+                              "lot": "22222",
+                              "expiration_date": "1970-01-01T00:00:00.000Z",
+                              "serial_numbers": ["string"],
+                              "is_dangerous_goods": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "measurements": {
+            "total_weight_oz": 1,
+            "length_in": 1,
+            "width_in": 1,
+            "depth_in": 1
+          },
+          "require_signature": true,
+          "estimated_fulfillment_date": "1970-01-01T00:00:00.000Z",
+          "actual_fulfillment_date": "1970-01-01T00:00:00.000Z",
+          "estimated_fulfillment_date_status": "AwaitingInventoryAllocation",
+          "is_tracking_uploaded": true,
+          "gift_message": "string"
+        }
+      ],
+      "gift_message": "string",
+      "shipping_terms": {
+        "carrier_type": "Parcel",
+        "payment_term": "Collect"
+      },
+      "retailer_program_data": {
+        "purchase_order_number": "string",
+        "retailer_program_type": "string",
+        "mark_for_store": "string",
+        "delivery_date": "1970-01-01T00:00:00.000Z",
+        "addresses": [
+          {
+            "type": "MarkFor",
+            "address1": "100 Nowhere Blvd",
+            "address2": "Suite 100",
+            "company_name": "Wayne Enterprises",
+            "city": "Gotham City",
+            "state": "NJ",
+            "country": "US",
+            "zip_code": "07093"
+          }
+        ],
+        "customer_ticket_number": "string"
+      }
+    },
+    "status": "Success",
+    "canceled_shipment_results": [
+      {
+        "action": "Cancel",
+        "shipment_id": 1,
+        "is_success": true,
+        "reason": "string"
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

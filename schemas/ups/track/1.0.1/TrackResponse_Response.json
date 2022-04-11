@@ -1,0 +1,67 @@
+{
+  "type": "object",
+  "required": ["ResponseStatus"],
+  "properties": {
+    "ResponseStatus": {
+      "type": "object",
+      "required": ["Description", "Code"],
+      "properties": {
+        "Code": {
+          "description": "Identifies the success or failure of the transaction. \n1 = Successful\n0 = Failure",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Describes Response Status Code. Returns text of Success.",
+          "type": "string"
+        }
+      },
+      "description": "Response Status Container."
+    },
+    "Alert": {
+      "type": "object",
+      "required": ["Description", "Code"],
+      "properties": {
+        "Code": {
+          "description": "Warning code returned by the system.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Warning messages returned by the system",
+          "type": "string"
+        }
+      },
+      "description": "Alert Container. There can be zero to many alert containers with code and description."
+    },
+    "TransactionReference": {
+      "type": "object",
+      "required": ["CustomerContext"],
+      "properties": {
+        "CustomerContext": {
+          "description": "The CustomerContext Information which will be echoed during response.",
+          "type": "string"
+        },
+        "TransactionIdentifier": {
+          "description": "The Unique TransactionIdentifier Information for that transaction. This will be present only if requested in the request.",
+          "type": "string"
+        }
+      },
+      "description": "Transaction Reference Container."
+    }
+  },
+  "description": "Container for common Response element.",
+  "default": {
+    "ResponseStatus": {
+      "Code": "string",
+      "Description": "string"
+    },
+    "Alert": {
+      "Code": "string",
+      "Description": "string"
+    },
+    "TransactionReference": {
+      "CustomerContext": "string",
+      "TransactionIdentifier": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

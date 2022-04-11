@@ -1,0 +1,231 @@
+{
+  "type": "object",
+  "properties": {
+    "RateChart": {
+      "description": "Rate Type with which Shipment is rated. Possible RateChart values for different regions will be: \nUS 48 origin: \n1  Daily Rates \n3  Standard List Rates \n4  Retail Rates. \nAlaska/Hawaii origin: \n1  Daily Rates \n3  Standard List Rates \n4  Retail Rates.  \nAll Other origins: \n1  Rates \n5 - Regional Rates \n6 - General List Rates. \n3 and 4 do not apply.",
+      "type": "string"
+    },
+    "BaseServiceCharge": {
+      "type": "object",
+      "required": ["CurrencyCode", "MonetaryValue"],
+      "properties": {
+        "CurrencyCode": {
+          "description": "BaseServiceCharge currency code type. The currency code used in the Shipment request is returned.",
+          "type": "string"
+        },
+        "MonetaryValue": {
+          "description": "Base Service Charge value amount.  Valid values are from 0 to 99999999999999.99",
+          "type": "string"
+        }
+      },
+      "description": "Base Service Charge container.\nTransportation charge = BaseServiceCharge + Fuel charge  Returned only if Subversion >=1701."
+    },
+    "TransportationCharges": {
+      "type": "object",
+      "required": ["CurrencyCode", "MonetaryValue"],
+      "properties": {
+        "CurrencyCode": {
+          "description": "Transportation charges currency code type. The currency code used in the Shipment request is returned.",
+          "type": "string"
+        },
+        "MonetaryValue": {
+          "description": "Transportation and surcharges value amount.  Valid values are from 0 to 99999999999999.99",
+          "type": "string"
+        }
+      },
+      "description": "Transportation Charges container."
+    },
+    "AccessorialCharges": {
+      "type": "object",
+      "required": ["CurrencyCode", "MonetaryValue", "Code"],
+      "properties": {
+        "Code": {
+          "description": "Code of Accessorial that had been charged.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of Accessorial that had been charged.",
+          "type": "string"
+        },
+        "CurrencyCode": {
+          "description": "Accessorial charges currency code type. The currency code used in the Shipment request is returned.",
+          "type": "string"
+        },
+        "MonetaryValue": {
+          "description": "Accessorial Charges value amount.  Valid values are from 0 to 99999999999999.99",
+          "type": "string"
+        },
+        "SubType": {
+          "description": "The sub-type of Accessorial type.",
+          "type": "string"
+        }
+      },
+      "description": "Accessorial Charges are returned only when ItemizedChargesRequestedIndicator is present in request for UPS Worldwide Express Freight Shipment.  These charges would be returned only for UPS Worldwide Express Freight Shipment."
+    },
+    "SurCharges": {
+      "type": "object",
+      "required": ["CurrencyCode", "MonetaryValue", "Code"],
+      "properties": {
+        "Code": {
+          "description": "Code of SurCharge that had been charged.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of SurCharge that had been charged.",
+          "type": "string"
+        },
+        "CurrencyCode": {
+          "description": "SurCharges currency code type. The currency code used in the Shipment request is returned.",
+          "type": "string"
+        },
+        "MonetaryValue": {
+          "description": "SurCharges value amount.  Valid values are from 0 to 99999999999999.99",
+          "type": "string"
+        },
+        "SubType": {
+          "description": "The sub-type of SurCharge type.",
+          "type": "string"
+        }
+      },
+      "description": "SurCharges are returned only when ItemizedChargesRequestedIndicator is present in request for UPS Worldwide Express Freight Shipment.  These charges would be returned only for UPS Worldwide Express Freight Shipment."
+    },
+    "ItemizedCharges": {
+      "type": "object",
+      "required": ["CurrencyCode", "MonetaryValue", "Code"],
+      "properties": {
+        "Code": {
+          "description": "Identification code for itemized charge.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of Itemized Charge that had been charged.",
+          "type": "string"
+        },
+        "CurrencyCode": {
+          "description": "The IATA currency code associated with the Itemized Charge costs for the shipment.",
+          "type": "string"
+        },
+        "MonetaryValue": {
+          "description": "Itemized Charges value amount.",
+          "type": "string"
+        },
+        "SubType": {
+          "description": "The sub-type of ItemizedCharges type.",
+          "type": "string"
+        }
+      },
+      "description": "Itemized Charges are returned only when the Subversion element is present and greater than or equal to 1601."
+    },
+    "ServiceOptionsCharges": {
+      "type": "object",
+      "required": ["CurrencyCode", "MonetaryValue"],
+      "properties": {
+        "CurrencyCode": {
+          "description": "Package accessorial charges currency code type. The currency code used in the Shipment request is returned.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+          "type": "string"
+        },
+        "MonetaryValue": {
+          "description": "Package accessorial charges value amount.   Applicable only for ShipmentResponse and ShipAcceptResponse.\nValid values are from 0 to 99999999999999.99",
+          "type": "string"
+        }
+      },
+      "description": "Service Option Charges container."
+    },
+    "TaxCharges": {
+      "type": "object",
+      "required": ["Type", "MonetaryValue"],
+      "properties": {
+        "Type": {
+          "description": "Tax Type code. The code represents the type of Tax applied to a shipment.   Refer to Tax Type Values/Abbreviations in the Appendix for valid values.",
+          "type": "string"
+        },
+        "MonetaryValue": {
+          "description": "Tax Monetary Value represent the Tax amount.  Valid values are from 0 to 99999999999999.99",
+          "type": "string"
+        }
+      },
+      "description": "TaxCharges container are returned only when TaxInformationIndicator is present in request and when Negotiated Rates are not applicable. TaxCharges container contains Tax information for a given shipment."
+    },
+    "TotalCharges": {
+      "type": "object",
+      "required": ["CurrencyCode", "MonetaryValue"],
+      "properties": {
+        "CurrencyCode": {
+          "description": "Total charges currency code type. The currency code used in the Shipment request is returned.",
+          "type": "string"
+        },
+        "MonetaryValue": {
+          "description": "Total charges value amount.  Valid values are from 0 to 99999999999999.99.",
+          "type": "string"
+        }
+      },
+      "description": "Total charges container."
+    },
+    "TotalChargesWithTaxes": {
+      "type": "object",
+      "required": ["CurrencyCode", "MonetaryValue"],
+      "properties": {
+        "CurrencyCode": {
+          "description": "TotalChargesWithTaxes currency code type. The currency code used in the Shipment request is returned.",
+          "type": "string"
+        },
+        "MonetaryValue": {
+          "description": "TotalChargesWithTaxes monetary value amount.  Valid values are from 0 to 9999999999999999.99",
+          "type": "string"
+        }
+      },
+      "description": "TotalChargesWithTaxes container would be returned only if TaxInformationIndicator is present in request and when Negotiated Rates are not applicable. TotalChargesWithTaxes contains total charges including total taxes applied to a shipment."
+    }
+  },
+  "required": ["TotalCharges", "ServiceOptionsCharges", "TransportationCharges"],
+  "description": "Shipment charges Container. Shipment charges info.",
+  "default": {
+    "RateChart": "string",
+    "BaseServiceCharge": {
+      "CurrencyCode": "string",
+      "MonetaryValue": "string"
+    },
+    "TransportationCharges": {
+      "CurrencyCode": "string",
+      "MonetaryValue": "string"
+    },
+    "AccessorialCharges": {
+      "Code": "string",
+      "Description": "string",
+      "CurrencyCode": "string",
+      "MonetaryValue": "string",
+      "SubType": "string"
+    },
+    "SurCharges": {
+      "Code": "string",
+      "Description": "string",
+      "CurrencyCode": "string",
+      "MonetaryValue": "string",
+      "SubType": "string"
+    },
+    "ItemizedCharges": {
+      "Code": "string",
+      "Description": "string",
+      "CurrencyCode": "string",
+      "MonetaryValue": "string",
+      "SubType": "string"
+    },
+    "ServiceOptionsCharges": {
+      "CurrencyCode": "string",
+      "MonetaryValue": "string"
+    },
+    "TaxCharges": {
+      "Type": "string",
+      "MonetaryValue": "string"
+    },
+    "TotalCharges": {
+      "CurrencyCode": "string",
+      "MonetaryValue": "string"
+    },
+    "TotalChargesWithTaxes": {
+      "CurrencyCode": "string",
+      "MonetaryValue": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

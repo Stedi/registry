@@ -1,0 +1,121 @@
+{
+  "type": "object",
+  "required": ["Payer", "ShipmentBillingOption"],
+  "properties": {
+    "Payer": {
+      "type": "object",
+      "required": ["Address", "Name"],
+      "properties": {
+        "Name": {
+          "description": "Payers company name",
+          "type": "string"
+        },
+        "Address": {
+          "type": "object",
+          "required": ["AddressLine", "City", "CountryCode"],
+          "properties": {
+            "AddressLine": {
+              "description": "The consignees street address.",
+              "type": "string"
+            },
+            "City": {
+              "description": "The consignees city.",
+              "type": "string"
+            },
+            "StateProvinceCode": {
+              "description": "The consignees state or province code.",
+              "type": "string"
+            },
+            "Town": {
+              "description": "The consignees town code.",
+              "type": "string"
+            },
+            "PostalCode": {
+              "description": "The consignees postal code.",
+              "type": "string"
+            },
+            "CountryCode": {
+              "description": "The consignees country or territory code.",
+              "type": "string"
+            }
+          },
+          "description": "Address Container."
+        },
+        "ShipperNumber": {
+          "description": "Payers account number.\nUsers 6 digit UPS account number or 9 digit SCS account number.",
+          "type": "string"
+        },
+        "AttentionName": {
+          "description": "Contact name at the payers location.",
+          "type": "string"
+        },
+        "Phone": {
+          "type": "object",
+          "required": ["Number"],
+          "properties": {
+            "Number": {
+              "description": "Requesters phone number.",
+              "type": "string"
+            },
+            "Extension": {
+              "description": "Requesters phone extension.",
+              "type": "string"
+            }
+          },
+          "description": "Phone Container."
+        },
+        "FaxNumber": {
+          "description": "Payers fax number.",
+          "type": "string"
+        },
+        "EMailAddress": {
+          "description": "Payers email address.",
+          "type": "string"
+        }
+      },
+      "description": "Payer Container."
+    },
+    "ShipmentBillingOption": {
+      "type": "object",
+      "required": ["Code"],
+      "properties": {
+        "Code": {
+          "description": "Billing Option Code.\nValid values:\n10 - Prepaid\n30 - Bill to Third Party\n40 - Freight Collect",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Billing Option Description.",
+          "type": "string"
+        }
+      },
+      "description": "ShipmentBillingOption Container."
+    }
+  },
+  "description": "Payment Information Container.",
+  "default": {
+    "Payer": {
+      "Name": "string",
+      "Address": {
+        "AddressLine": "string",
+        "City": "string",
+        "StateProvinceCode": "string",
+        "Town": "string",
+        "PostalCode": "string",
+        "CountryCode": "string"
+      },
+      "ShipperNumber": "string",
+      "AttentionName": "string",
+      "Phone": {
+        "Number": "string",
+        "Extension": "string"
+      },
+      "FaxNumber": "string",
+      "EMailAddress": "string"
+    },
+    "ShipmentBillingOption": {
+      "Code": "string",
+      "Description": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,82 @@
+{
+  "type": "object",
+  "properties": {
+    "service_type": {
+      "enum": ["Receiving", "Returns"],
+      "type": "string"
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Indicates if the user is authorized to access this service at the location"
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name to use in the address of the location for this service",
+          "nullable": true
+        },
+        "address1": {
+          "type": "string",
+          "description": "First part of the address of the location for this service",
+          "nullable": true
+        },
+        "address2": {
+          "type": "string",
+          "description": "Second part of the address of the location for this service",
+          "nullable": true
+        },
+        "city": {
+          "type": "string",
+          "description": "City of the location",
+          "nullable": true
+        },
+        "state": {
+          "type": "string",
+          "description": "State of the location",
+          "nullable": true
+        },
+        "country": {
+          "type": "string",
+          "description": "Country of the location",
+          "nullable": true
+        },
+        "zip_code": {
+          "type": "string",
+          "description": "Zip code of the location",
+          "nullable": true
+        },
+        "phone_number": {
+          "type": "string",
+          "description": "Phone Number of the location for this service",
+          "nullable": true
+        },
+        "email": {
+          "type": "string",
+          "description": "Email of the location for this service",
+          "nullable": true
+        }
+      },
+      "additionalProperties": false,
+      "description": "The service-specific address of the location. Each object contains address type, address1, address2, city, state, country, zip code, phone number, and email"
+    }
+  },
+  "additionalProperties": false,
+  "default": {
+    "service_type": "Receiving",
+    "enabled": true,
+    "address": {
+      "name": "string",
+      "address1": "string",
+      "address2": "string",
+      "city": "string",
+      "state": "string",
+      "country": "string",
+      "zip_code": "string",
+      "phone_number": "string",
+      "email": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

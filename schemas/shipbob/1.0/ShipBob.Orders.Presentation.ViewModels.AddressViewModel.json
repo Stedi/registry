@@ -1,0 +1,59 @@
+{
+  "required": ["address1", "city", "country", "type"],
+  "type": "object",
+  "properties": {
+    "type": {
+      "enum": ["MarkFor", "ShipFrom"],
+      "type": "string",
+      "description": "Specifies the type of address:\r\nShipFrom\r\nMarkFor"
+    },
+    "address1": {
+      "type": "string",
+      "description": "First line of the address",
+      "example": "100 Nowhere Blvd"
+    },
+    "address2": {
+      "type": "string",
+      "description": "Second line of the address",
+      "example": "Suite 100"
+    },
+    "company_name": {
+      "type": "string",
+      "description": "Name of the company receiving the shipment",
+      "example": "Wayne Enterprises"
+    },
+    "city": {
+      "type": "string",
+      "description": "The city",
+      "example": "Gotham City"
+    },
+    "state": {
+      "type": "string",
+      "description": "The state or province",
+      "example": "NJ"
+    },
+    "country": {
+      "type": "string",
+      "description": "The country (Must be ISO Alpha-2 for estimates)",
+      "example": "US"
+    },
+    "zip_code": {
+      "type": "string",
+      "description": "The zip code or postal code",
+      "example": "07093"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Address to used when creating a B2B/DropShip order.",
+  "default": {
+    "type": "MarkFor",
+    "address1": "100 Nowhere Blvd",
+    "address2": "Suite 100",
+    "company_name": "Wayne Enterprises",
+    "city": "Gotham City",
+    "state": "NJ",
+    "country": "US",
+    "zip_code": "07093"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

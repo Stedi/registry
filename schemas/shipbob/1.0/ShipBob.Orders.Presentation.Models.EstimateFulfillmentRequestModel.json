@@ -1,0 +1,105 @@
+{
+  "required": ["address", "products"],
+  "type": "object",
+  "properties": {
+    "shipping_methods": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Array of strings specifying shipping methods for which to fetch estimates.\r\n\r\nIf this field is omitted we will return estimates for all shipping methods defined in ShipBob"
+    },
+    "address": {
+      "required": ["country"],
+      "type": "object",
+      "properties": {
+        "address1": {
+          "type": "string",
+          "description": "First line of the address",
+          "example": "100 Nowhere Blvd"
+        },
+        "address2": {
+          "type": "string",
+          "description": "Second line of the address",
+          "example": "Suite 100"
+        },
+        "company_name": {
+          "type": "string",
+          "description": "Name of the company receiving the shipment",
+          "example": "Wayne Enterprises"
+        },
+        "city": {
+          "type": "string",
+          "description": "The city",
+          "example": "Gotham City"
+        },
+        "state": {
+          "type": "string",
+          "description": "The state or province",
+          "example": "NJ"
+        },
+        "country": {
+          "type": "string",
+          "description": "The country (Must be ISO Alpha-2 for estimates)",
+          "example": "US"
+        },
+        "zip_code": {
+          "type": "string",
+          "description": "The zip code or postal code",
+          "example": "07093"
+        }
+      },
+      "additionalProperties": false
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "required": ["quantity"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique id of the product (Must be provided if reference_id is unknown)",
+            "format": "int32",
+            "nullable": true
+          },
+          "reference_id": {
+            "type": "string",
+            "description": "Unique reference id of the product (Must be provided if ID is unknown)",
+            "example": "TShirtBlueM"
+          },
+          "quantity": {
+            "maximum": 199,
+            "minimum": 1,
+            "type": "integer",
+            "description": "The quantity of this product ordered",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Products to be included in the order. Each product must include one of reference_id or id"
+    }
+  },
+  "additionalProperties": false,
+  "default": {
+    "shipping_methods": ["string"],
+    "address": {
+      "address1": "100 Nowhere Blvd",
+      "address2": "Suite 100",
+      "company_name": "Wayne Enterprises",
+      "city": "Gotham City",
+      "state": "NJ",
+      "country": "US",
+      "zip_code": "07093"
+    },
+    "products": [
+      {
+        "id": 1,
+        "reference_id": "TShirtBlueM",
+        "quantity": 1
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,107 @@
+{
+  "type": "object",
+  "properties": {
+    "ActivityLocation": {
+      "type": "object",
+      "required": ["Description", "Address", "Code"],
+      "properties": {
+        "Address": {
+          "type": "object",
+          "required": ["AddressLine", "StateProvinceCode", "PostalCode", "City", "CountryCode"],
+          "properties": {
+            "AddressLine": {
+              "description": "Activity locations street address including name and number (when applicable) and/or building floor, room, suite, and PO Box number. Up to three AddressLine can be returned.",
+              "type": "string"
+            },
+            "City": {
+              "description": "City name. This is optional for Mail Innovations",
+              "type": "string"
+            },
+            "StateProvinceCode": {
+              "description": "Activity locations state or province code. This is optional for Mail Innovations.",
+              "type": "string"
+            },
+            "PostalCode": {
+              "description": "Activity locations postal code.",
+              "type": "string"
+            },
+            "CountryCode": {
+              "description": "Activity locations country or territory code.",
+              "type": "string"
+            }
+          },
+          "description": "Address of Activity location."
+        },
+        "TransportFacility": {
+          "type": "object",
+          "required": ["Type", "Code"],
+          "properties": {
+            "Type": {
+              "description": "Type of facility for Mail Innovations shipment.",
+              "type": "string"
+            },
+            "Code": {
+              "description": "This code is associated with the Mail Innovations facility.",
+              "type": "string"
+            }
+          },
+          "description": "This container is for storing the type and code of the transport facility associated with the Mail Innovations activity."
+        },
+        "Code": {
+          "description": "Activity location code.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Activity location description.",
+          "type": "string"
+        },
+        "SignedForByName": {
+          "description": "Name of the person who signed.",
+          "type": "string"
+        }
+      },
+      "description": "Activity location container."
+    },
+    "Description": {
+      "description": "Description of the Activity.",
+      "type": "string"
+    },
+    "Date": {
+      "description": "Date of activity. \nMilitary format: YYYYMMDD",
+      "type": "string"
+    },
+    "Time": {
+      "description": "Time of activity. \nMilitary format: HHMMSS or HHMM",
+      "type": "string"
+    },
+    "Trailer": {
+      "description": "Trailer Code for the shipment",
+      "type": "string"
+    }
+  },
+  "required": ["Description", "Time", "Date", "Trailer"],
+  "description": "Container for shipment activity.",
+  "default": {
+    "ActivityLocation": {
+      "Address": {
+        "AddressLine": "string",
+        "City": "string",
+        "StateProvinceCode": "string",
+        "PostalCode": "string",
+        "CountryCode": "string"
+      },
+      "TransportFacility": {
+        "Type": "string",
+        "Code": "string"
+      },
+      "Code": "string",
+      "Description": "string",
+      "SignedForByName": "string"
+    },
+    "Description": "string",
+    "Date": "string",
+    "Time": "string",
+    "Trailer": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,1530 @@
+{
+  "type": "object",
+  "required": ["CarrierActivityInformation", "ShipmentAddress", "InquiryNumber", "Document", "FileNumber"],
+  "properties": {
+    "InquiryNumber": {
+      "type": "object",
+      "required": ["Description", "Value", "Code"],
+      "properties": {
+        "Code": {
+          "description": "Code to indicate the type of Inquiry Number. \n\nPackage:\nFor package this element returns: \n01 -Shipment Identification Number\n\nMail Innovations: \n03- Mail Innovation tracking number\n\nFreight:\nHAWB - House Airway Bill\nHBL - House Bill of Lading\nPRO  PRO Number\nSUBPRO  Sub-PRO Number\nDO  Delivery Order",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the Inquiry Number as indicated by code as above.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "The actual value of the Inquiry Number.",
+          "type": "string"
+        }
+      },
+      "description": "Shipment Inquiry Number Container"
+    },
+    "ShipmentType": {
+      "type": "object",
+      "required": ["Description", "Code"],
+      "properties": {
+        "Code": {
+          "description": "This element will be used to indicate the type of the shipment being tracked, either Package, Mail Innovations or Freight.\n01 - Package\n02 - Freight\n03 - Mail Innovations",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the code above.",
+          "type": "string"
+        }
+      },
+      "description": "Container for the type of Shipment."
+    },
+    "CandidateBookmark": {
+      "description": "During Tracking and Reference Number searches, it is possible that duplicate shipments will be found. \n\nIf duplicate shipments are found, then a Candidate Summary with a corresponding Base64 encodedCandidate Bookmark for each of the Shipments will be returned in the response. \n\nThe Candidate Bookmark can be passed back to the tracking web service in a separate track transaction to retrieve tracking information about the particular shipment of interest.",
+      "type": "string"
+    },
+    "ShipperNumber": {
+      "description": "The shippers UPS account number that placed this shipment",
+      "type": "string"
+    },
+    "ShipmentAddress": {
+      "type": "object",
+      "required": ["Type", "Address"],
+      "properties": {
+        "Type": {
+          "type": "object",
+          "required": ["Description", "Code"],
+          "properties": {
+            "Code": {
+              "description": "Code of Document Type.\n04 - POD Letter\n05 - Electronic Delivery Letter\n**Returned if customer has authorized release of the package with the signature.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of the code above.",
+              "type": "string"
+            }
+          },
+          "description": "Type of address."
+        },
+        "Address": {
+          "type": "object",
+          "required": ["AddressLine", "StateProvinceCode", "PostalCode", "City", "CountryCode"],
+          "properties": {
+            "AddressLine": {
+              "description": "Activity locations street address including name and number (when applicable) and/or building floor, room, suite, and PO Box number. Up to three AddressLine can be returned.",
+              "type": "string"
+            },
+            "City": {
+              "description": "City name. This is optional for Mail Innovations",
+              "type": "string"
+            },
+            "StateProvinceCode": {
+              "description": "Activity locations state or province code. This is optional for Mail Innovations.",
+              "type": "string"
+            },
+            "PostalCode": {
+              "description": "Activity locations postal code.",
+              "type": "string"
+            },
+            "CountryCode": {
+              "description": "Activity locations country or territory code.",
+              "type": "string"
+            }
+          },
+          "description": "Address detail."
+        }
+      },
+      "description": "An array of addresses associated with this shipment."
+    },
+    "ShipmentWeight": {
+      "type": "object",
+      "required": ["UnitOfMeasurement", "Weight"],
+      "properties": {
+        "UnitOfMeasurement": {
+          "type": "object",
+          "required": ["Code"],
+          "properties": {
+            "Code": {
+              "description": "Package weight unit of measurement code.",
+              "type": "string"
+            }
+          },
+          "description": "Shipment weight unit of measurement container."
+        },
+        "Weight": {
+          "description": "Shipments total weight. Set to 0 for shipment with package type of letter.",
+          "type": "string"
+        }
+      },
+      "description": "Shipment weight container."
+    },
+    "Service": {
+      "type": "object",
+      "required": ["Description", "Code"],
+      "properties": {
+        "Code": {
+          "description": "Service Code. For valid values, see Service Codes in the Appendix.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the service.",
+          "type": "string"
+        }
+      },
+      "description": "Container for UPS service associated with the shipment"
+    },
+    "ReferenceNumber": {
+      "type": "object",
+      "required": ["Description", "Value", "Code"],
+      "properties": {
+        "Code": {
+          "description": "Package Reference number type code. The code specifies the Reference name.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the code above.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Customer supplied reference number.",
+          "type": "string"
+        }
+      },
+      "description": "Shipment reference number container"
+    },
+    "CurrentStatus": {
+      "type": "object",
+      "required": ["Description", "Code"],
+      "properties": {
+        "Code": {
+          "description": "Code for the current status of the shipment.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the current status of the shipment.",
+          "type": "string"
+        }
+      },
+      "description": "Container for the current status of the shipment."
+    },
+    "PickupDate": {
+      "description": "Date the shipment was picked-up. Format: YYYYMMDD",
+      "type": "string"
+    },
+    "ServiceCenter": {
+      "type": "object",
+      "required": ["Type", "Address"],
+      "properties": {
+        "Type": {
+          "type": "object",
+          "required": ["Description", "Code"],
+          "properties": {
+            "Code": {
+              "description": "Code of Document Type.\n04 - POD Letter\n05 - Electronic Delivery Letter\n**Returned if customer has authorized release of the package with the signature.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of the code above.",
+              "type": "string"
+            }
+          },
+          "description": "The type of service center for freight shipment."
+        },
+        "Address": {
+          "type": "object",
+          "required": ["StateProvinceCode", "City"],
+          "properties": {
+            "City": {
+              "description": "City name. This is optional for Mail Innovations",
+              "type": "string"
+            },
+            "StateProvinceCode": {
+              "description": "Activity locations state or province code. This is optional for Mail Innovations.",
+              "type": "string"
+            }
+          },
+          "description": "Service center address."
+        }
+      },
+      "description": "Service center container."
+    },
+    "DeliveryDateUnavailable": {
+      "type": "object",
+      "required": ["Type", "Description"],
+      "properties": {
+        "Type": {
+          "description": "Type is Scheduled Delivery.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "A description is return to indicate the scheduled delivery date is unavailable",
+          "type": "string"
+        }
+      },
+      "description": "DeliveryDate Unavailable container.\nNote: This container is return if SubVersion is 0114 and above."
+    },
+    "DeliveryDetail": {
+      "type": "object",
+      "required": ["Type", "Time", "Date"],
+      "properties": {
+        "Type": {
+          "type": "object",
+          "required": ["Description", "Code"],
+          "properties": {
+            "Code": {
+              "description": "Code of Document Type.\n04 - POD Letter\n05 - Electronic Delivery Letter\n**Returned if customer has authorized release of the package with the signature.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of the code above.",
+              "type": "string"
+            }
+          },
+          "description": "Type of delivery detail."
+        },
+        "Date": {
+          "description": "The delivery date. Format: YYYYMMDD (military format)",
+          "type": "string"
+        },
+        "Time": {
+          "description": "Format: HHMMSS or HHMM (military format)",
+          "type": "string"
+        }
+      },
+      "description": "Delivery detail information."
+    },
+    "Volume": {
+      "type": "object",
+      "required": ["UnitOfMeasurement", "Value"],
+      "properties": {
+        "UnitOfMeasurement": {
+          "type": "object",
+          "required": ["Description", "Code"],
+          "properties": {
+            "Code": {
+              "description": "Package weight unit of measurement code.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of the package weight measurement units.",
+              "type": "string"
+            }
+          },
+          "description": "Unit of measurement container."
+        },
+        "Value": {
+          "description": "Value of the total volume of the shipment.",
+          "type": "string"
+        }
+      },
+      "description": "Container for the volume of freight Shipment."
+    },
+    "BillToName": {
+      "description": "Name of the person to whom the shipment is billed to.",
+      "type": "string"
+    },
+    "NumberOfPackagingUnit": {
+      "type": "object",
+      "required": ["Type", "Value"],
+      "properties": {
+        "Type": {
+          "type": "object",
+          "required": ["Description", "Code"],
+          "properties": {
+            "Code": {
+              "description": "Code of Document Type.\n04 - POD Letter\n05 - Electronic Delivery Letter\n**Returned if customer has authorized release of the package with the signature.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of the code above.",
+              "type": "string"
+            }
+          },
+          "description": "Type of packaging"
+        },
+        "Value": {
+          "description": "The actual number of unit.",
+          "type": "string"
+        }
+      },
+      "description": "Number of packaging unit."
+    },
+    "COD": {
+      "type": "object",
+      "required": ["Amount"],
+      "properties": {
+        "Amount": {
+          "type": "object",
+          "required": ["CurrencyCode", "MonetaryValue"],
+          "properties": {
+            "CurrencyCode": {
+              "description": "Currency code of COD amount.",
+              "type": "string"
+            },
+            "MonetaryValue": {
+              "description": "Cash On Delivery (COD) Amount that is due.",
+              "type": "string"
+            }
+          },
+          "description": "Container for COD amount information."
+        }
+      },
+      "description": "Container for COD for the shipment."
+    },
+    "SignedForByName": {
+      "description": "Person that received the shipment. May be the addressee, or another person that signed for the shipment",
+      "type": "string"
+    },
+    "Activity": {
+      "type": "object",
+      "properties": {
+        "ActivityLocation": {
+          "type": "object",
+          "required": ["Description", "Address", "Code"],
+          "properties": {
+            "Address": {
+              "type": "object",
+              "required": ["AddressLine", "StateProvinceCode", "PostalCode", "City", "CountryCode"],
+              "properties": {
+                "AddressLine": {
+                  "description": "Activity locations street address including name and number (when applicable) and/or building floor, room, suite, and PO Box number. Up to three AddressLine can be returned.",
+                  "type": "string"
+                },
+                "City": {
+                  "description": "City name. This is optional for Mail Innovations",
+                  "type": "string"
+                },
+                "StateProvinceCode": {
+                  "description": "Activity locations state or province code. This is optional for Mail Innovations.",
+                  "type": "string"
+                },
+                "PostalCode": {
+                  "description": "Activity locations postal code.",
+                  "type": "string"
+                },
+                "CountryCode": {
+                  "description": "Activity locations country or territory code.",
+                  "type": "string"
+                }
+              },
+              "description": "Address of Activity location."
+            },
+            "TransportFacility": {
+              "type": "object",
+              "required": ["Type", "Code"],
+              "properties": {
+                "Type": {
+                  "description": "Type of facility for Mail Innovations shipment.",
+                  "type": "string"
+                },
+                "Code": {
+                  "description": "This code is associated with the Mail Innovations facility.",
+                  "type": "string"
+                }
+              },
+              "description": "This container is for storing the type and code of the transport facility associated with the Mail Innovations activity."
+            },
+            "Code": {
+              "description": "Activity location code.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Activity location description.",
+              "type": "string"
+            },
+            "SignedForByName": {
+              "description": "Name of the person who signed.",
+              "type": "string"
+            }
+          },
+          "description": "Activity location container."
+        },
+        "Description": {
+          "description": "Description of the Activity.",
+          "type": "string"
+        },
+        "Date": {
+          "description": "Date of activity. \nMilitary format: YYYYMMDD",
+          "type": "string"
+        },
+        "Time": {
+          "description": "Time of activity. \nMilitary format: HHMMSS or HHMM",
+          "type": "string"
+        },
+        "Trailer": {
+          "description": "Trailer Code for the shipment",
+          "type": "string"
+        }
+      },
+      "required": ["Description", "Time", "Date", "Trailer"],
+      "description": "Container for shipment activity."
+    },
+    "OriginPortDetail": {
+      "type": "object",
+      "required": ["OriginPort", "EstimatedDeparture"],
+      "properties": {
+        "OriginPort": {
+          "description": "Origin Port of the shipment.",
+          "type": "string"
+        },
+        "EstimatedDeparture": {
+          "type": "object",
+          "required": ["Time", "Date"],
+          "properties": {
+            "Date": {
+              "description": "Date of the Estimated Departure Time Stamp at the origin port. Format: YYYYMMDD",
+              "type": "string"
+            },
+            "Time": {
+              "description": "Time of the Estimated Departure Time Stamp at the origin port. Format: HHMMSS",
+              "type": "string"
+            }
+          },
+          "description": "Container for Estimated Departure Time Stamp at the origin port."
+        }
+      },
+      "description": "Details of origin port of the shipment."
+    },
+    "DestinationPortDetail": {
+      "type": "object",
+      "required": ["EstimatedArrival", "DestinationPort"],
+      "properties": {
+        "DestinationPort": {
+          "description": "Destination port of the shipment.",
+          "type": "string"
+        },
+        "EstimatedArrival": {
+          "type": "object",
+          "required": ["Time", "Date"],
+          "properties": {
+            "Date": {
+              "description": "Container for Estimated Arrival Time Stamp at the Destination Port. Format: YYYYMMDD",
+              "type": "string"
+            },
+            "Time": {
+              "description": "Time of the Estimated Arrival Time Stamp at the Destination Port. Format: HHMMSS",
+              "type": "string"
+            }
+          },
+          "description": "Container for Estimated Arrival Time Stamp at the Destination Port"
+        }
+      },
+      "description": "Container for the destination port of the shipment."
+    },
+    "DescriptionOfGoods": {
+      "description": "Description of Goods in the shipment.",
+      "type": "string"
+    },
+    "CargoReady": {
+      "type": "object",
+      "required": ["Time", "Date"],
+      "properties": {
+        "Date": {
+          "description": "Cargo Ready date for the shipment. Format: YYYYMMDD",
+          "type": "string"
+        },
+        "Time": {
+          "description": "Cargo Ready time for the shipment. Format: HHMMSS",
+          "type": "string"
+        }
+      },
+      "description": "Container for cargo ready date and time."
+    },
+    "Manifest": {
+      "type": "object",
+      "required": ["Time", "Date"],
+      "properties": {
+        "Date": {
+          "description": "Manifest date for the shipment. Format: YYYYMMDD",
+          "type": "string"
+        },
+        "Time": {
+          "description": "Manifest time for the shipment. Format: HHMMSS",
+          "type": "string"
+        }
+      },
+      "description": "Container for Manifest date and time."
+    },
+    "CarrierActivityInformation": {
+      "type": "object",
+      "required": ["Status", "CarrierId", "Description", "Departure", "OriginPort", "Arrival", "DestinationPort"],
+      "properties": {
+        "CarrierId": {
+          "description": "Id number of the carrier",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the carrier e.g: Flight or Vessel.",
+          "type": "string"
+        },
+        "Status": {
+          "description": "Status of the carrier",
+          "type": "string"
+        },
+        "Arrival": {
+          "type": "object",
+          "required": ["Time", "Date"],
+          "properties": {
+            "Date": {
+              "description": "Date of the arrival time stamp. Format: YYYYMMDD",
+              "type": "string"
+            },
+            "Time": {
+              "description": "Time of the arrival time stamp. Format: HHMMSS",
+              "type": "string"
+            }
+          },
+          "description": "Container for arrival time stamp information of the carrier"
+        },
+        "Departure": {
+          "type": "object",
+          "required": ["Time", "Date"],
+          "properties": {
+            "Date": {
+              "description": "Date of the arrival time stamp. Format: YYYYMMDD",
+              "type": "string"
+            },
+            "Time": {
+              "description": "Time of the arrival time stamp. Format: HHMMSS",
+              "type": "string"
+            }
+          },
+          "description": "Container for Departure time stamp information of the carrier"
+        },
+        "OriginPort": {
+          "description": "Origin Port of the Carriers leg of the journey",
+          "type": "string"
+        },
+        "DestinationPort": {
+          "description": "Destination Port of the Carriers leg of the journey",
+          "type": "string"
+        }
+      },
+      "description": "Container for carrier activity information for the shipment."
+    },
+    "Document": {
+      "type": "object",
+      "required": ["Type", "Format", "Content"],
+      "properties": {
+        "Type": {
+          "type": "object",
+          "required": ["Description", "Code"],
+          "properties": {
+            "Code": {
+              "description": "Code of Document Type.\n04 - POD Letter\n05 - Electronic Delivery Letter\n**Returned if customer has authorized release of the package with the signature.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of the code above.",
+              "type": "string"
+            }
+          },
+          "description": "Type of Document."
+        },
+        "Content": {
+          "description": "Base64 Encoded PODLetter in html format or the customer's name for Electronic Delivery Notice.",
+          "type": "string"
+        },
+        "Format": {
+          "type": "object",
+          "properties": {
+            "Code": {
+              "description": "Format code of the content.\n03 - HTML\n04 - Plain text",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of Format code above. \nPlain text format will only apply if the code above is 04.",
+              "type": "string"
+            }
+          },
+          "required": ["Description"],
+          "description": "Container for document format."
+        }
+      },
+      "description": "Container for the various documents returned to the customer.\n\nReturned if Signature Tracking is enabled and authorized.\nReturned if any of the documents i.e., Signature, Free Astrays, Delivery Receipt or POD is requested using the request option. \nNot returned for documents like SCS Freight, UPS Freight TL/LTL.\n\nRefer to the Request Option Matrix in the Appendix."
+    },
+    "FileNumber": {
+      "description": "File Number of the shipment.",
+      "type": "string"
+    },
+    "Appointment": {
+      "type": "object",
+      "required": ["Requested", "Made", "EndTime", "BeginTime"],
+      "properties": {
+        "Made": {
+          "type": "object",
+          "required": ["Time", "Date"],
+          "properties": {
+            "Date": {
+              "description": "Appointment Made Date. Format: YYYYMMDD",
+              "type": "string"
+            },
+            "Time": {
+              "description": "Appointment Made Time. Format: HHMMSS",
+              "type": "string"
+            }
+          },
+          "description": "Container for Appointment Made Date and Time."
+        },
+        "Requested": {
+          "type": "object",
+          "required": ["Time", "Date"],
+          "properties": {
+            "Date": {
+              "description": "Appointment Requested Date. Format: YYYYMMDD",
+              "type": "string"
+            },
+            "Time": {
+              "description": "Appointment Requested Time. Format: HHMMSS",
+              "type": "string"
+            }
+          },
+          "description": "Container for Appointment Requested Date and Time"
+        },
+        "BeginTime": {
+          "description": "Appointment Begin Time. Format: HHMMSS",
+          "type": "string"
+        },
+        "EndTime": {
+          "description": "Appointment End Time. Format: HHMMSS",
+          "type": "string"
+        }
+      },
+      "description": "Appointment Details."
+    },
+    "Package": {
+      "type": "object",
+      "required": ["TrackingNumber", "DeliveryIndicator", "DeliveryDate", "Redirect", "DeliveryDetail"],
+      "properties": {
+        "TrackingNumber": {
+          "description": "TrackingNumber of the package.",
+          "type": "string"
+        },
+        "DeliveryIndicator": {
+          "description": "Returns \"Y\" if packagehas been delivered, and \"N\" if it has not.",
+          "type": "string"
+        },
+        "DeliveryDate": {
+          "description": "The delivery date of the package. Will be returned if delivery date indicator is Y .The format is: YYYYMMDD",
+          "type": "string"
+        },
+        "EstimatedDeliveryWindow": {
+          "type": "object",
+          "required": ["EndTime", "StartTime", "Date"],
+          "properties": {
+            "Date": {
+              "description": "Estimated delivery date of the package\nFormat: YYYY-MM-DD",
+              "type": "string"
+            },
+            "StartTime": {
+              "description": "Estimated delivery Start Time.\nFormat: hh:mm:ss",
+              "type": "string"
+            },
+            "EndTime": {
+              "description": "Estimated delivery End Time.\nFormat: hh:mm:ss",
+              "type": "string"
+            }
+          },
+          "description": "Container for Estimated Delivery Window. Will be available only for authorized users.\nNote: This container is returned if SubVersion is 1907 and above."
+        },
+        "SRSizeCode": {
+          "description": "Simple Rate package size.\nValid Values:\nXS\nS\nM\nL\nXL \nNote: This container is return if SubVersion is 1909 or above",
+          "type": "string"
+        },
+        "Redirect": {
+          "type": "object",
+          "required": ["CompanyName", "LocationID", "PickupDate"],
+          "properties": {
+            "CompanyName": {
+              "description": "UPS Access Point Business Name.",
+              "type": "string"
+            },
+            "LocationID": {
+              "description": "UPS Access Point Location ID.",
+              "type": "string"
+            },
+            "PickupDate": {
+              "description": "The last date the package is held for pickup at a UPS Access Point. Date of the arrival time stamp. \nFormat: YYYYMMDD",
+              "type": "string"
+            }
+          },
+          "description": "Container tag for Redirect package to UPS Access Point\nNote: This container is return if SubVersion is 0114 or above"
+        },
+        "DeliveryDetail": {
+          "type": "object",
+          "required": ["Type", "Time", "Date"],
+          "properties": {
+            "Type": {
+              "type": "object",
+              "required": ["Description", "Code"],
+              "properties": {
+                "Code": {
+                  "description": "Code of Document Type.\n04 - POD Letter\n05 - Electronic Delivery Letter\n**Returned if customer has authorized release of the package with the signature.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description of the code above.",
+                  "type": "string"
+                }
+              },
+              "description": "Type of delivery detail."
+            },
+            "Date": {
+              "description": "The delivery date. Format: YYYYMMDD (military format)",
+              "type": "string"
+            },
+            "Time": {
+              "description": "Format: HHMMSS or HHMM (military format)",
+              "type": "string"
+            }
+          },
+          "description": "Delivery Detail container."
+        },
+        "PackageAddress": {
+          "type": "object",
+          "required": ["Type", "Address"],
+          "properties": {
+            "Type": {
+              "type": "object",
+              "required": ["Description", "Code"],
+              "properties": {
+                "Code": {
+                  "description": "Code of Document Type.\n04 - POD Letter\n05 - Electronic Delivery Letter\n**Returned if customer has authorized release of the package with the signature.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description of the code above.",
+                  "type": "string"
+                }
+              },
+              "description": "Type of the package address"
+            },
+            "Address": {
+              "type": "object",
+              "required": ["AddressLine", "StateProvinceCode", "PostalCode", "City", "CountryCode"],
+              "properties": {
+                "AddressLine": {
+                  "description": "Activity locations street address including name and number (when applicable) and/or building floor, room, suite, and PO Box number. Up to three AddressLine can be returned.",
+                  "type": "string"
+                },
+                "City": {
+                  "description": "City name. This is optional for Mail Innovations",
+                  "type": "string"
+                },
+                "StateProvinceCode": {
+                  "description": "Activity locations state or province code. This is optional for Mail Innovations.",
+                  "type": "string"
+                },
+                "PostalCode": {
+                  "description": "Activity locations postal code.",
+                  "type": "string"
+                },
+                "CountryCode": {
+                  "description": "Activity locations country or territory code.",
+                  "type": "string"
+                }
+              },
+              "description": "Address Container."
+            }
+          },
+          "description": "Package address container."
+        },
+        "PackageServiceOption": {
+          "type": "object",
+          "required": ["Type", "Value"],
+          "properties": {
+            "Type": {
+              "type": "object",
+              "required": ["Description", "Code"],
+              "properties": {
+                "Code": {
+                  "description": "Code of Document Type.\n04 - POD Letter\n05 - Electronic Delivery Letter\n**Returned if customer has authorized release of the package with the signature.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description of the code above.",
+                  "type": "string"
+                }
+              },
+              "description": "Type of package service option"
+            },
+            "Value": {
+              "description": "PackageServiceOption Type Code values:\n04 = R - Commercial Invoice Removal Requested or S - Commercial Invoice Removal Success. \n06 = USPS Package Identification number that is returned for UPS Returns Flexible Access Shipments.\n07 = The specific product description. \n09 = R  Return Exchange Requested or S - Exchange Completed.",
+              "type": "string"
+            }
+          },
+          "description": "Container for package service option."
+        },
+        "COD": {
+          "type": "object",
+          "required": ["Status", "Amount", "ControlNumber"],
+          "properties": {
+            "Amount": {
+              "type": "object",
+              "required": ["CurrencyCode", "MonetaryValue"],
+              "properties": {
+                "CurrencyCode": {
+                  "description": "Currency code of COD amount.",
+                  "type": "string"
+                },
+                "MonetaryValue": {
+                  "description": "Cash On Delivery (COD) Amount that is due.",
+                  "type": "string"
+                }
+              },
+              "description": "Container for COD amount information."
+            },
+            "Status": {
+              "type": "object",
+              "required": ["Code"],
+              "properties": {
+                "Code": {
+                  "description": "The status code.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "The descriptions for Corresponding code.",
+                  "type": "string"
+                }
+              },
+              "description": "Container for COD status."
+            },
+            "ControlNumber": {
+              "description": "Barcode COD Control Number or UPS imprinted Control Number.",
+              "type": "string"
+            }
+          },
+          "description": "COD container at package level. \nRefer to the Request Option Matrix in the Appendix."
+        },
+        "Activity": {
+          "type": "object",
+          "required": ["Time", "AlternateTrackingInfo", "Date"],
+          "properties": {
+            "AlternateTrackingInfo": {
+              "type": "object",
+              "required": ["Type", "Value"],
+              "properties": {
+                "Type": {
+                  "description": "Package Alternate Tracking info type.",
+                  "type": "string"
+                },
+                "Value": {
+                  "description": "This contains value of the alternate tracking number.",
+                  "type": "string"
+                }
+              },
+              "description": "Alternate tracking number."
+            },
+            "ActivityLocation": {
+              "type": "object",
+              "required": ["Description", "Address", "Code"],
+              "properties": {
+                "Address": {
+                  "type": "object",
+                  "required": ["AddressLine", "StateProvinceCode", "PostalCode", "City", "CountryCode"],
+                  "properties": {
+                    "AddressLine": {
+                      "description": "Activity locations street address including name and number (when applicable) and/or building floor, room, suite, and PO Box number. Up to three AddressLine can be returned.",
+                      "type": "string"
+                    },
+                    "City": {
+                      "description": "City name. This is optional for Mail Innovations",
+                      "type": "string"
+                    },
+                    "StateProvinceCode": {
+                      "description": "Activity locations state or province code. This is optional for Mail Innovations.",
+                      "type": "string"
+                    },
+                    "PostalCode": {
+                      "description": "Activity locations postal code.",
+                      "type": "string"
+                    },
+                    "CountryCode": {
+                      "description": "Activity locations country or territory code.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Address of Activity location."
+                },
+                "TransportFacility": {
+                  "type": "object",
+                  "required": ["Type", "Code"],
+                  "properties": {
+                    "Type": {
+                      "description": "Type of facility for Mail Innovations shipment.",
+                      "type": "string"
+                    },
+                    "Code": {
+                      "description": "This code is associated with the Mail Innovations facility.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "This container is for storing the type and code of the transport facility associated with the Mail Innovations activity."
+                },
+                "Code": {
+                  "description": "Activity location code.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Activity location description.",
+                  "type": "string"
+                },
+                "SignedForByName": {
+                  "description": "Name of the person who signed.",
+                  "type": "string"
+                }
+              },
+              "description": "Activity location container."
+            },
+            "Status": {
+              "type": "object",
+              "required": ["Type", "Code"],
+              "properties": {
+                "Type": {
+                  "description": "Type of activity status:\nI = In Transit\nD = Delivered\nX = Exception\nP = Pickup\nM = Manifest Pickup.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "The descriptions for Corresponding code.",
+                  "type": "string"
+                },
+                "Code": {
+                  "description": "The status code.",
+                  "type": "string"
+                }
+              },
+              "description": "Container for activity status."
+            },
+            "Date": {
+              "description": "Date of activity. \nMilitary format: YYYYMMDD",
+              "type": "string"
+            },
+            "Time": {
+              "description": "Time of activity. \nMilitary format: HHMMSS or HHMM",
+              "type": "string"
+            },
+            "DeliveryDateFromManifestIndicator": {
+              "description": "The presence of this indicator means manifest information is available and used to calculate the expected delivery date. \nThis will be available when Track sub version >=1507",
+              "type": "string"
+            },
+            "NextScheduleActivity": {
+              "type": "object",
+              "required": ["Time", "Date"],
+              "properties": {
+                "Date": {
+                  "description": "Date of activity. \nMilitary format: YYYYMMDD",
+                  "type": "string"
+                },
+                "Time": {
+                  "description": "Time of activity.\nMilitary format: HHMMSS or HHMM",
+                  "type": "string"
+                }
+              },
+              "description": "Container tag to describe when the next schedule activity will occur.\nNote: This container is return if SubVersion is 0114 and above"
+            },
+            "GMTDate": {
+              "description": "Date of activity. Format: YYYY-MM-DD\nNote: This container is return if SubVersion is 1907 and above.",
+              "type": "string"
+            },
+            "GMTTime": {
+              "description": "Time of activity. Format: hh:mm:ss or hh:mm\nNote: This container is return if SubVersion is 1907 and above.",
+              "type": "string"
+            },
+            "GMTOffset": {
+              "description": "GMT Offset of activity for the time zone. Format: (+/-)hh:mm\nNote: This container is return if SubVersion is 1907 and above.",
+              "type": "string"
+            },
+            "Document": {
+              "type": "object",
+              "required": ["Type", "Format", "Content"],
+              "properties": {
+                "Type": {
+                  "type": "object",
+                  "required": ["Description", "Code"],
+                  "properties": {
+                    "Code": {
+                      "description": "Code of Document Type.\n04 - POD Letter\n05 - Electronic Delivery Letter\n**Returned if customer has authorized release of the package with the signature.",
+                      "type": "string"
+                    },
+                    "Description": {
+                      "description": "Description of the code above.",
+                      "type": "string"
+                    }
+                  },
+                  "description": "Type of Document."
+                },
+                "Content": {
+                  "description": "Base64 Encoded PODLetter in html format or the customer's name for Electronic Delivery Notice.",
+                  "type": "string"
+                },
+                "Format": {
+                  "type": "object",
+                  "properties": {
+                    "Code": {
+                      "description": "Format code of the content.\n03 - HTML\n04 - Plain text",
+                      "type": "string"
+                    },
+                    "Description": {
+                      "description": "Description of Format code above. \nPlain text format will only apply if the code above is 04.",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["Description"],
+                  "description": "Container for document format."
+                }
+              },
+              "description": "Documents at package activity level.\nExample: PODLetter\n\nRefer to the Request Option Matrix in the Appendix."
+            },
+            "AdditionalAttribute": {
+              "type": "object",
+              "required": ["Description", "Value", "Code"],
+              "properties": {
+                "Code": {
+                  "description": "",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "",
+                  "type": "string"
+                },
+                "Value": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "description": ""
+            }
+          },
+          "description": "Package activity container"
+        },
+        "Message": {
+          "type": "object",
+          "required": ["Description", "Code"],
+          "properties": {
+            "Code": {
+              "description": "Code describing what type of message the customer can receive.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description for the code above.",
+              "type": "string"
+            }
+          },
+          "description": "Container for additional delivery information."
+        },
+        "PackageWeight": {
+          "type": "object",
+          "required": ["UnitOfMeasurement", "Weight"],
+          "properties": {
+            "UnitOfMeasurement": {
+              "type": "object",
+              "required": ["Description", "Code"],
+              "properties": {
+                "Code": {
+                  "description": "Package weight unit of measurement code.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description of the package weight measurement units.",
+                  "type": "string"
+                }
+              },
+              "description": "Container for package weight unit of measurement."
+            },
+            "Weight": {
+              "description": "Packages weight. Set to 0 for package type of letters.",
+              "type": "string"
+            }
+          },
+          "description": "Container for package weight."
+        },
+        "ReferenceNumber": {
+          "type": "object",
+          "required": ["Value", "Code"],
+          "properties": {
+            "Code": {
+              "description": "Package Reference number type code. The code specifies the Reference name.",
+              "type": "string"
+            },
+            "Value": {
+              "description": "Customer supplied reference number.",
+              "type": "string"
+            }
+          },
+          "description": "Container for package reference number. Up to 20 reference numbers can be returned."
+        },
+        "AlternateTrackingNumber": {
+          "description": "Alternate tracking number returned for this package.",
+          "type": "string"
+        },
+        "AlternateTrackingInfo": {
+          "type": "object",
+          "required": ["Type", "Value"],
+          "properties": {
+            "Type": {
+              "description": "Package Alternate Tracking info type.",
+              "type": "string"
+            },
+            "Value": {
+              "description": "This contains value of the alternate tracking number.",
+              "type": "string"
+            }
+          },
+          "description": "Alternate tracking number returned for this package."
+        },
+        "DimensionalWeightScanIndicator": {
+          "description": "Present if Dimensional Weight Scan is used to recalculate schedule delivery date.\nNote: This Indicator is return if SubVersion is 1407 and above.",
+          "type": "string"
+        },
+        "PreauthorizedReturnInformation": {
+          "type": "object",
+          "properties": {
+            "ReturnEligibilityIndicator": {
+              "description": "Contains Eligibility of the original package to initiate the return process via the given url.\nValid values are :\nY - Eligible\nN - Not Eligible",
+              "type": "string"
+            },
+            "ReturnExpirationDate": {
+              "description": "Contains the last date at which the original package can request a return process via the given url.",
+              "type": "string"
+            },
+            "ReturnRequestURL": {
+              "description": "Contains the url that can be used to initiate the return process.",
+              "type": "string"
+            },
+            "OriginalTrackingNumber": {
+              "description": "Contains the tracking number of the original package.",
+              "type": "string"
+            },
+            "ReturnTrackingNumber": {
+              "description": "Contains the tracking number of the return package.",
+              "type": "string"
+            }
+          },
+          "description": "Container for the Pre-authorized For Return Information. If this information is requested and available, then this container will be populated for small packages and Mail Innovation packages."
+        }
+      },
+      "description": "Container for package information."
+    },
+    "QuantumViewNotification": {
+      "type": "object",
+      "required": ["Status"],
+      "properties": {
+        "Status": {
+          "type": "object",
+          "required": ["Code"],
+          "properties": {
+            "Code": {
+              "description": "The status code.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "The descriptions for Corresponding code.",
+              "type": "string"
+            }
+          },
+          "description": "Container returning the quantum view notification status information."
+        },
+        "FailureDetail": {
+          "type": "object",
+          "required": ["Description", "Code"],
+          "properties": {
+            "Code": {
+              "description": "Distinct code for the error returned.   \nPossible error codes and descriptions are: \n- QVN1001 The provided failure email address is not in the proper format. \n- QVN1002 The failure email address exceeds the maximum character limit.\n- QVN1005 The language code must be two-character long\n- QVN1007 The language dialect must be two-character long  \n- QVN1003 The provided Recipient Email Address is not in the proper format.\n- QVN1004 The Recipient Email Address exceeds the maximum character limit.\n- QVN1005 The language code must be two-character long. \n- QVN1007 The language dialect must be two-character long.  \n- QVN1008 The language code and language dialect pair is invalid. \n- QVN1009 The package is delivered QVN1010 Unknown Error",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of the error, see above.",
+              "type": "string"
+            },
+            "TrackingNumber": {
+              "description": "The tracking number of the package to which this failure detail applies to.",
+              "type": "string"
+            }
+          },
+          "description": "Details of the errors occurred while requesting QV notification."
+        }
+      },
+      "description": "Container returned when quantum view notification is requested."
+    }
+  },
+  "description": "Shipment Container",
+  "default": {
+    "InquiryNumber": {
+      "Code": "string",
+      "Description": "string",
+      "Value": "string"
+    },
+    "ShipmentType": {
+      "Code": "string",
+      "Description": "string"
+    },
+    "CandidateBookmark": "string",
+    "ShipperNumber": "string",
+    "ShipmentAddress": {
+      "Type": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "Address": {
+        "AddressLine": "string",
+        "City": "string",
+        "StateProvinceCode": "string",
+        "PostalCode": "string",
+        "CountryCode": "string"
+      }
+    },
+    "ShipmentWeight": {
+      "UnitOfMeasurement": {
+        "Code": "string"
+      },
+      "Weight": "string"
+    },
+    "Service": {
+      "Code": "string",
+      "Description": "string"
+    },
+    "ReferenceNumber": {
+      "Code": "string",
+      "Description": "string",
+      "Value": "string"
+    },
+    "CurrentStatus": {
+      "Code": "string",
+      "Description": "string"
+    },
+    "PickupDate": "string",
+    "ServiceCenter": {
+      "Type": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "Address": {
+        "City": "string",
+        "StateProvinceCode": "string"
+      }
+    },
+    "DeliveryDateUnavailable": {
+      "Type": "string",
+      "Description": "string"
+    },
+    "DeliveryDetail": {
+      "Type": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "Date": "string",
+      "Time": "string"
+    },
+    "Volume": {
+      "UnitOfMeasurement": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "Value": "string"
+    },
+    "BillToName": "string",
+    "NumberOfPackagingUnit": {
+      "Type": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "Value": "string"
+    },
+    "COD": {
+      "Amount": {
+        "CurrencyCode": "string",
+        "MonetaryValue": "string"
+      }
+    },
+    "SignedForByName": "string",
+    "Activity": {
+      "ActivityLocation": {
+        "Address": {
+          "AddressLine": "string",
+          "City": "string",
+          "StateProvinceCode": "string",
+          "PostalCode": "string",
+          "CountryCode": "string"
+        },
+        "TransportFacility": {
+          "Type": "string",
+          "Code": "string"
+        },
+        "Code": "string",
+        "Description": "string",
+        "SignedForByName": "string"
+      },
+      "Description": "string",
+      "Date": "string",
+      "Time": "string",
+      "Trailer": "string"
+    },
+    "OriginPortDetail": {
+      "OriginPort": "string",
+      "EstimatedDeparture": {
+        "Date": "string",
+        "Time": "string"
+      }
+    },
+    "DestinationPortDetail": {
+      "DestinationPort": "string",
+      "EstimatedArrival": {
+        "Date": "string",
+        "Time": "string"
+      }
+    },
+    "DescriptionOfGoods": "string",
+    "CargoReady": {
+      "Date": "string",
+      "Time": "string"
+    },
+    "Manifest": {
+      "Date": "string",
+      "Time": "string"
+    },
+    "CarrierActivityInformation": {
+      "CarrierId": "string",
+      "Description": "string",
+      "Status": "string",
+      "Arrival": {
+        "Date": "string",
+        "Time": "string"
+      },
+      "Departure": {
+        "Date": "string",
+        "Time": "string"
+      },
+      "OriginPort": "string",
+      "DestinationPort": "string"
+    },
+    "Document": {
+      "Type": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "Content": "string",
+      "Format": {
+        "Code": "string",
+        "Description": "string"
+      }
+    },
+    "FileNumber": "string",
+    "Appointment": {
+      "Made": {
+        "Date": "string",
+        "Time": "string"
+      },
+      "Requested": {
+        "Date": "string",
+        "Time": "string"
+      },
+      "BeginTime": "string",
+      "EndTime": "string"
+    },
+    "Package": {
+      "TrackingNumber": "string",
+      "DeliveryIndicator": "string",
+      "DeliveryDate": "string",
+      "EstimatedDeliveryWindow": {
+        "Date": "string",
+        "StartTime": "string",
+        "EndTime": "string"
+      },
+      "SRSizeCode": "string",
+      "Redirect": {
+        "CompanyName": "string",
+        "LocationID": "string",
+        "PickupDate": "string"
+      },
+      "DeliveryDetail": {
+        "Type": {
+          "Code": "string",
+          "Description": "string"
+        },
+        "Date": "string",
+        "Time": "string"
+      },
+      "PackageAddress": {
+        "Type": {
+          "Code": "string",
+          "Description": "string"
+        },
+        "Address": {
+          "AddressLine": "string",
+          "City": "string",
+          "StateProvinceCode": "string",
+          "PostalCode": "string",
+          "CountryCode": "string"
+        }
+      },
+      "PackageServiceOption": {
+        "Type": {
+          "Code": "string",
+          "Description": "string"
+        },
+        "Value": "string"
+      },
+      "COD": {
+        "Amount": {
+          "CurrencyCode": "string",
+          "MonetaryValue": "string"
+        },
+        "Status": {
+          "Code": "string",
+          "Description": "string"
+        },
+        "ControlNumber": "string"
+      },
+      "Activity": {
+        "AlternateTrackingInfo": {
+          "Type": "string",
+          "Value": "string"
+        },
+        "ActivityLocation": {
+          "Address": {
+            "AddressLine": "string",
+            "City": "string",
+            "StateProvinceCode": "string",
+            "PostalCode": "string",
+            "CountryCode": "string"
+          },
+          "TransportFacility": {
+            "Type": "string",
+            "Code": "string"
+          },
+          "Code": "string",
+          "Description": "string",
+          "SignedForByName": "string"
+        },
+        "Status": {
+          "Type": "string",
+          "Description": "string",
+          "Code": "string"
+        },
+        "Date": "string",
+        "Time": "string",
+        "DeliveryDateFromManifestIndicator": "string",
+        "NextScheduleActivity": {
+          "Date": "string",
+          "Time": "string"
+        },
+        "GMTDate": "string",
+        "GMTTime": "string",
+        "GMTOffset": "string",
+        "Document": {
+          "Type": {
+            "Code": "string",
+            "Description": "string"
+          },
+          "Content": "string",
+          "Format": {
+            "Code": "string",
+            "Description": "string"
+          }
+        },
+        "AdditionalAttribute": {
+          "Code": "string",
+          "Description": "string",
+          "Value": "string"
+        }
+      },
+      "Message": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "PackageWeight": {
+        "UnitOfMeasurement": {
+          "Code": "string",
+          "Description": "string"
+        },
+        "Weight": "string"
+      },
+      "ReferenceNumber": {
+        "Code": "string",
+        "Value": "string"
+      },
+      "AlternateTrackingNumber": "string",
+      "AlternateTrackingInfo": {
+        "Type": "string",
+        "Value": "string"
+      },
+      "DimensionalWeightScanIndicator": "string",
+      "PreauthorizedReturnInformation": {
+        "ReturnEligibilityIndicator": "string",
+        "ReturnExpirationDate": "string",
+        "ReturnRequestURL": "string",
+        "OriginalTrackingNumber": "string",
+        "ReturnTrackingNumber": "string"
+      }
+    },
+    "QuantumViewNotification": {
+      "Status": {
+        "Code": "string",
+        "Description": "string"
+      },
+      "FailureDetail": {
+        "Code": "string",
+        "Description": "string",
+        "TrackingNumber": "string"
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

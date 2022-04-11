@@ -1,0 +1,67 @@
+{
+  "required": ["name", "reference_id"],
+  "type": "object",
+  "properties": {
+    "reference_id": {
+      "maxLength": 400,
+      "type": "string",
+      "description": "Unique reference identifier for the product. Any linked or generated inventory will also be uniquely identified by this value",
+      "nullable": true,
+      "example": "TShirtBlueM"
+    },
+    "sku": {
+      "maxLength": 400,
+      "type": "string",
+      "description": "Stock keeping unit for the product",
+      "nullable": true,
+      "example": "TShirtBlueM"
+    },
+    "name": {
+      "maxLength": 2000,
+      "type": "string",
+      "description": "The name of the product",
+      "nullable": true,
+      "example": "Medium Blue T-Shirt"
+    },
+    "barcode": {
+      "maxLength": 150,
+      "type": "string",
+      "description": "Barcode for the product",
+      "nullable": true,
+      "example": "123456789012"
+    },
+    "gtin": {
+      "maxLength": 50,
+      "type": "string",
+      "description": "Global Trade Item Number - unique and internationally recognized identifier assigned to item by company GS1.",
+      "nullable": true,
+      "example": "012345678905"
+    },
+    "upc": {
+      "maxLength": 50,
+      "type": "string",
+      "description": "Universal Product Code - Unique external identifier",
+      "nullable": true,
+      "example": "012345678912"
+    },
+    "unit_price": {
+      "type": "number",
+      "description": "The price of one unit",
+      "format": "double",
+      "nullable": true,
+      "example": 20.32
+    }
+  },
+  "additionalProperties": false,
+  "description": "The product to create",
+  "default": {
+    "reference_id": "TShirtBlueM",
+    "sku": "TShirtBlueM",
+    "name": "Medium Blue T-Shirt",
+    "barcode": "123456789012",
+    "gtin": "012345678905",
+    "upc": "012345678912",
+    "unit_price": 20.32
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

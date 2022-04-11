@@ -1,0 +1,93 @@
+{
+  "type": "object",
+  "required": ["Phone", "Name"],
+  "properties": {
+    "Name": {
+      "description": "The shippers name or company name.",
+      "type": "string"
+    },
+    "TaxIdentificationNumber": {
+      "description": "Companys Tax Identification Number at the pickup location.\nRequired if SED form (International forms) is requested",
+      "type": "string"
+    },
+    "Address": {
+      "type": "object",
+      "required": ["AddressLine", "City", "CountryCode"],
+      "properties": {
+        "AddressLine": {
+          "description": "The consignees street address.",
+          "type": "string"
+        },
+        "City": {
+          "description": "The consignees city.",
+          "type": "string"
+        },
+        "StateProvinceCode": {
+          "description": "The consignees state or province code.",
+          "type": "string"
+        },
+        "Town": {
+          "description": "The consignees town code.",
+          "type": "string"
+        },
+        "PostalCode": {
+          "description": "The consignees postal code.",
+          "type": "string"
+        },
+        "CountryCode": {
+          "description": "The consignees country or territory code.",
+          "type": "string"
+        }
+      },
+      "description": "Shippers Address Container."
+    },
+    "AttentionName": {
+      "description": "Contact name at the ship from location.",
+      "type": "string"
+    },
+    "Phone": {
+      "type": "object",
+      "required": ["Number"],
+      "properties": {
+        "Number": {
+          "description": "Requesters phone number.",
+          "type": "string"
+        },
+        "Extension": {
+          "description": "Requesters phone extension.",
+          "type": "string"
+        }
+      },
+      "description": "Phone Container"
+    },
+    "FaxNumber": {
+      "description": "The ship from locations Fax Number.",
+      "type": "string"
+    },
+    "EMailAddress": {
+      "description": "Shippers email address.",
+      "type": "string"
+    }
+  },
+  "description": "ShipFrom Container.",
+  "default": {
+    "Name": "string",
+    "TaxIdentificationNumber": "string",
+    "Address": {
+      "AddressLine": "string",
+      "City": "string",
+      "StateProvinceCode": "string",
+      "Town": "string",
+      "PostalCode": "string",
+      "CountryCode": "string"
+    },
+    "AttentionName": "string",
+    "Phone": {
+      "Number": "string",
+      "Extension": "string"
+    },
+    "FaxNumber": "string",
+    "EMailAddress": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
