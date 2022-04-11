@@ -19,6 +19,19 @@ export class KlaviyoProvider extends OpenAPIProvider {
         "check_membership_response",
       ],
       docsLink: "https://developers.klaviyo.com/en/reference/api-overview",
+      sanitizeSchema,
     });
   }
+}
+
+function sanitizeSchema(schema: unknown) {
+  return JSON.parse(
+    JSON.stringify(schema, (key, value) => {
+      if (value.YOUR_CUSTOM_FIELD) {
+        delete value.YOUR_CUSTOM_FIELD;
+      }
+
+      return value;
+    }),
+  );
 }

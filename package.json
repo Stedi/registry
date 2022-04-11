@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "postman2openapi": "node -r esbuild-register ./src/postman-2-openapi.ts",
     "generate": "node -r esbuild-register ./src/generator.ts && npm run fix-style",
-    "validate": "node -r esbuild-register ./src/validator.ts",
+    "validate": "node -r esbuild-register ./src/lib/validation/index.ts",
     "fix-style": "prettier -w .",
     "style": "prettier -c ."
   },
@@ -36,6 +36,7 @@
     "typescript": "^4.5.5"
   },
   "devDependencies": {
+    "@stedi/prettier-plugin-jsonata": "^1.8.2",
     "@types/faker": "^6.6.9",
     "@types/glob": "^7.2.0",
     "@types/js-yaml": "^4.0.5",

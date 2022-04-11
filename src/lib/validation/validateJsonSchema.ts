@@ -1,16 +1,10 @@
-import { readFileSync } from "fs";
-import glob from "glob";
 import axios from "axios";
 import { SchemaObject, Options as AjvOptions } from "ajv";
 import AjvFormats from "ajv-formats";
 import Ajv202012Schema from "ajv/dist/refs/json-schema-2020-12/schema.json";
-
-// The 2020 JSONSchema is not backward compatible, thus we cannot use the default export from 'ajv'
 import Ajv2020 from "ajv/dist/2020";
 
-type PathErrorPair = [string, Error];
-
-function validateSchema(jsonSchema: string): SchemaObject {
+export function validateSchema(jsonSchema: string): SchemaObject {
   try {
     const schemaObject = JSON.parse(jsonSchema) as SchemaObject;
     const ajv = getAjvInstance();
@@ -44,7 +38,7 @@ function validateSchema(jsonSchema: string): SchemaObject {
   }
 }
 
-function validateSchemasDefault(schemaObject: SchemaObject): void {
+export function validateSchemasDefault(schemaObject: SchemaObject): void {
   if (!schemaObject.default) {
     return;
   }
@@ -104,53 +98,3 @@ const defaultInstanceOptions: AjvOptions = {
 };
 
 const supportedSchemaVersions = [Ajv202012Schema.$schema];
-
-async function validateAllSchemas() {
-  const errors: PathErrorPair[] = [];
-  const paths = glob.sync("schemas/**/*.json");
-
-  paths.forEach((path: string) => {
-    try {
-      const schema = validateSchema(readFileSync(path, "utf-8"));
-      validateSchemasDefault(schema);
-    } catch (e) {
-      errors.push([path, e as Error]);
-
-      console.error(`${path} failed validation: `);
-      console.error(e);
-    }
-  });
-
-  if (errors.length > 0) {
-    console.error(`${errors.length} errors found.`);
-    process.exit(1);
-  }
-}
-
-interface ProviderEntry {
-  name: string;
-  description: string;
-  logoUrl: string;
-  directory?: string;
-}
-
-/**
- * Ensures that logos in providers.json are valid
- */
-async function validateProviders() {
-  const providersPath = "providers.json";
-  const providers: ProviderEntry[] = JSON.parse(readFileSync(providersPath, "utf-8"));
-
-  providers.forEach(async (provider) => {
-    try {
-      await axios.get(provider.logoUrl);
-    } catch (e) {
-      throw new Error(`Failed to get logo for provider ${provider.name}: ${e}`);
-    }
-  });
-}
-
-(async () => {
-  await validateAllSchemas();
-  await validateProviders();
-})();
