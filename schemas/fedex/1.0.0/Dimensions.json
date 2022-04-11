@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "properties": {
+    "length": {
+      "type": "integer",
+      "description": "Indicate the length of the package. No implied decimal places. Maximum value: 999 <br> Example: 20",
+      "format": "int32",
+      "example": 3
+    },
+    "width": {
+      "type": "integer",
+      "description": "Indicate the width of the package. No implied decimal places. Maximum value: 999 <br> Example: 10",
+      "format": "int32",
+      "example": 2
+    },
+    "height": {
+      "type": "integer",
+      "description": "Indicate the height of the package. No implied decimal places. Maximum value: 999 <br> Example: 10",
+      "format": "int32",
+      "example": 1
+    },
+    "units": {
+      "type": "string",
+      "description": "Indicate the Unit of measure for the provided dimensions.<br>Valid Values are:<li>IN - inches</li><li>CM - centimeters</li>Note: Any value other than CM including blank/null will default to IN.",
+      "example": "CM",
+      "enum": ["CM", "IN"]
+    }
+  },
+  "description": "Indicate the dimensions of the package.<br> Following conditions will apply: <ul><li>Dimensions are optional but when added, then all three dimensions must be indicated.</li><li>Dimensions are required with YOUR_PACKAGING package type.</li></ul>Note: The maximum/minimum dimension values varies based on the services and the packaging types. Refer <a href=\"https://www.fedex.com/en-us/service-guide.html\" target=\"_blank\">FedEx Service Guide</a> for service details related to DIM Weighting for FedEx Express and oversize conditions for FedEx Express and FedEx Ground.",
+  "example": {
+    "length": 100,
+    "width": 50,
+    "height": 30,
+    "units": "CM"
+  },
+  "default": {
+    "length": 100,
+    "width": 50,
+    "height": 30,
+    "units": "CM"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,217 @@
+{
+  "type": "object",
+  "properties": {
+    "specialServiceTypes": {
+      "type": "array",
+      "description": "Indicate the types of special services requested for the shipment.<br><a onclick='loadDocReference(\"packagelevelspecialservicetypes\")'>click here to see Package Special Service Types</a>",
+      "example": ["ALCOHOL", "NON_STANDARD_CONTAINER"],
+      "items": {
+        "type": "string"
+      }
+    },
+    "signatureOptionType": {
+      "type": "string",
+      "description": "Indicate the Signature Type. <br>Valid Values: <ul><li>ADULT - Adult signature required, at recipient address.</li><li>DIRECT - Signature required, at recipient address.</li><li>INDIRECT - Signature required, alternate address is accepted.This option is available for residential deliveries only</li><li>NO_SIGNATURE_REQUIRED - Signature is not required.</li><li>SERVICE_DEFAULT - Signature handled as per current Service Guide.</li></ul>",
+      "enum": ["SERVICE_DEFAULT", "NO_SIGNATURE_REQUIRED", "INDIRECT", "DIRECT", "ADULT"]
+    },
+    "priorityAlertDetail": {
+      "type": "object",
+      "properties": {
+        "enhancementTypes": {
+          "type": "array",
+          "description": "The types of all enhancement for the Priority Alert.<br>Example: PRIORITY_ALERT_PLUS",
+          "example": ["PRIORITY_ALERT_PLUS"],
+          "items": {
+            "type": "string"
+          }
+        },
+        "content": {
+          "type": "array",
+          "description": "Specifies Content for the Priority Alert Detail.",
+          "example": ["string"],
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Specifies the Priority Alert Detail."
+    },
+    "signatureOptionDetail": {
+      "type": "object",
+      "properties": {
+        "signatureReleaseNumber": {
+          "type": "string",
+          "description": "This is release number.<br>Example: 23456",
+          "example": "23456"
+        }
+      },
+      "description": "This element specifies Signature option details."
+    },
+    "alcoholDetail": {
+      "type": "object",
+      "properties": {
+        "alcoholRecipientType": {
+          "type": "string",
+          "description": "Specify the Alcohol Recipient Type of the shipment. <br> Example: <br> <ul><li>LICENSEE- FedEx approved alchol shipper having appropriate licenses. </li><li> CONSUMER- Individual consumer to whom the alchol is shipped.</li></ul>"
+        },
+        "shipperAgreementType": {
+          "type": "string",
+          "description": "Specify the type of entity, the shipper for alcohol shipment is registered such as fulfillment house, retailer or a winery.",
+          "example": "Retailer"
+        }
+      },
+      "description": "These are detcontentails for the package containing alcohol. This is required for alcohol special service. The alcoholRecipientType is required."
+    },
+    "dangerousGoodsDetail": {
+      "required": ["accessibility"],
+      "type": "object",
+      "properties": {
+        "accessibility": {
+          "type": "string",
+          "description": "Specify Dangerous Goods Accessibility Type. <ul><li>Inaccessible &ndash; it does not have to be accessable on the aircraft.</li><li>Accessible &ndash; it must be fully accessible on the aircraft, and is more strictly controlled.</li></ul>",
+          "example": "INACCESSIBLE",
+          "enum": ["ACCESSIBLE", "INACCESSIBLE"]
+        },
+        "options": {
+          "type": "array",
+          "description": "Indicate type of DG being reported.",
+          "example": ["LIMITED_QUANTITIES_COMMODITIES", "ORM_D"],
+          "items": {
+            "type": "string",
+            "xml": {
+              "name": "options"
+            },
+            "enum": [
+              "HAZARDOUS_MATERIALS",
+              "BATTERY",
+              "ORM_D",
+              "REPORTABLE_QUANTITIES",
+              "SMALL_QUANTITY_EXCEPTION",
+              "LIMITED_QUANTITIES_COMMODITIES"
+            ]
+          }
+        }
+      },
+      "description": "Provide dangerous goods shipment details."
+    },
+    "packageCODDetail": {
+      "type": "object",
+      "properties": {
+        "codCollectionAmount": {
+          "description": "Indicate the COD collection amount.",
+          "allOf": [
+            {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "type": "number",
+                  "description": "This is the amount. Maximum limit is 5 digits before decimal.<br>Example: 12.45",
+                  "format": "double",
+                  "example": 12.45
+                },
+                "currency": {
+                  "type": "string",
+                  "description": "This is the currency code for the amount.<br>Example: USD<br><a onclick='loadDocReference(\"currencycodes\")'>Click here to see Currency codes</a>",
+                  "example": "USD"
+                }
+              },
+              "description": "Specifies taxes or miscellaneous charge."
+            }
+          ]
+        }
+      },
+      "description": "These are COD package details. For use with FedEx Ground services only; COD must be present in shipments special services."
+    },
+    "pieceCountVerificationBoxCount": {
+      "type": "integer",
+      "description": "Specify the count.",
+      "format": "int32"
+    },
+    "batteryDetails": {
+      "type": "array",
+      "description": "Provide details about the batteries or cells that are contained within this specific package.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "batteryPackingType": {
+            "type": "string",
+            "description": "Describe the packing arrangement of the battery or cell with respect to other items within the same package.",
+            "enum": ["CONTAINED_IN_EQUIPMENT", "PACKED_WITH_EQUIPMENT"]
+          },
+          "batteryRegulatoryType": {
+            "type": "string",
+            "description": "This is a regulation specific classification for the battery or the cell.",
+            "enum": ["IATA_SECTION_II"]
+          },
+          "batteryMaterialType": {
+            "type": "string",
+            "description": "Indicate the material composition of the battery or cell.",
+            "enum": ["LITHIUM_METAL", "LITHIUM_ION"]
+          }
+        }
+      }
+    },
+    "dryIceWeight": {
+      "required": ["units", "value"],
+      "type": "object",
+      "properties": {
+        "units": {
+          "type": "string",
+          "description": "Indicate the weight unit type. The package and commodity weight unit should be the same else the request will result in an error.",
+          "example": "KG",
+          "enum": ["KG"]
+        },
+        "value": {
+          "type": "number",
+          "description": "This is the weight. Maximum length is 99999.<br>Example: 68.25",
+          "format": "double",
+          "example": 68.25
+        }
+      },
+      "description": "These are the package weight details.<br>Note: Weight is not required for One rate shipments",
+      "example": {
+        "units": "KG",
+        "value": 68
+      }
+    }
+  },
+  "description": "These are special services that are available at the package level for some or all service types.",
+  "default": {
+    "specialServiceTypes": ["ALCOHOL", "NON_STANDARD_CONTAINER"],
+    "signatureOptionType": "SERVICE_DEFAULT",
+    "priorityAlertDetail": {
+      "enhancementTypes": ["PRIORITY_ALERT_PLUS"],
+      "content": ["string"]
+    },
+    "signatureOptionDetail": {
+      "signatureReleaseNumber": "23456"
+    },
+    "alcoholDetail": {
+      "alcoholRecipientType": "string",
+      "shipperAgreementType": "Retailer"
+    },
+    "dangerousGoodsDetail": {
+      "accessibility": "INACCESSIBLE",
+      "options": ["LIMITED_QUANTITIES_COMMODITIES", "ORM_D"]
+    },
+    "packageCODDetail": {
+      "codCollectionAmount": {
+        "amount": 12.45,
+        "currency": "USD"
+      }
+    },
+    "pieceCountVerificationBoxCount": 1,
+    "batteryDetails": [
+      {
+        "batteryPackingType": "CONTAINED_IN_EQUIPMENT",
+        "batteryRegulatoryType": "IATA_SECTION_II",
+        "batteryMaterialType": "LITHIUM_METAL"
+      }
+    ],
+    "dryIceWeight": {
+      "units": "KG",
+      "value": 68
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

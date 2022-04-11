@@ -1,0 +1,126 @@
+{
+  "type": "object",
+  "properties": {
+    "contact": {
+      "type": "object",
+      "properties": {
+        "personName": {
+          "type": "string",
+          "description": "Specify contact person name.<br>Recommended length is 70. <br>Note: There's no specific validation for the person name.<br> Example: John Taylor",
+          "example": "John Taylor"
+        },
+        "emailAddress": {
+          "type": "string",
+          "description": "Specify contact email address. Maximum length is 80. <br> Example: sample@company.com",
+          "example": "sample@company.com"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Specify contact phone number. <br>Minimum length is 10 and supports maximum of 15 for certain countries using longer phone numbers. <br>Note: Recommended Maximum length is 15 and there's no specific validation will be done for the phone number. <br> Example: 918xxxxx890",
+          "example": "1234567890"
+        },
+        "phoneExtension": {
+          "type": "string",
+          "description": "Specify contact phone extension. <br>Note: Recommended length is 6. There's no specific validation for the phone extension. <br> Example: 1234",
+          "example": "91"
+        },
+        "faxNumber": {
+          "type": "string",
+          "description": "Specify contact fax number.<br>Note: Recommended length is 15. There's no specific validation for the fax number.<br> Example: 1234567890",
+          "example": "956123"
+        },
+        "companyName": {
+          "type": "string",
+          "description": "Specify contact company name.<br>Recommended length is 35.<br>Note: There's no specific validation for the company name.",
+          "example": "Fedex"
+        }
+      },
+      "description": "Indicate the contact details of the shipper.",
+      "example": {
+        "personName": "John Taylor",
+        "emailAddress": "sample@company.com",
+        "phoneNumber": "1234567890",
+        "phoneExtension": 1234,
+        "faxNumber": "1234567890",
+        "companyName": "Fedex"
+      }
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "streetLines": {
+          "type": "array",
+          "description": "This is the combination of number, street name, etc. <br>Note: At least one line is required and streetlines more than 3 will be ignored. Empty lines should not be included. Maximum length per line is 35.<br>Example: [10 FedEx Parkway, Suite 302, .etc.]",
+          "example": ["Bldg. 10", "10 FedEx Parkway"],
+          "items": {
+            "type": "string"
+          }
+        },
+        "city": {
+          "type": "string",
+          "description": "This is a placeholder for City Name.<br>Note: This is conditional and not required in all the requests.<br>Note: It is recommended for Express shipments for the most accurate ODA and OPA surcharges.<br>Example: Beverly Hills",
+          "example": "Beverly Hills"
+        },
+        "stateOrProvinceCode": {
+          "type": "string",
+          "description": "This is a placeholder for State or Province code.<br>Example: CA<br><a onclick='loadDocReference(\"canadaprovincecodes\")'>click here to see State or Province Code</a>",
+          "example": "CA"
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Indicate the Postal code. This is Optional for non postal-aware countries. Maximum length is 10.<br> Example: 65247<br><a onclick='loadDocReference(\"postalawarecountries\")'>click here to see Postal aware countries</a>",
+          "example": "38127"
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "This is the two-letter country code.<br>Maximum length is 2.<br>Example: US<br><a onclick='loadDocReference(\"countrycodes\")'>click here to see Country codes</a>",
+          "example": "US"
+        },
+        "residential": {
+          "type": "boolean",
+          "description": "Indicate whether this address is residential (as opposed to commercial).",
+          "example": false
+        }
+      },
+      "description": "This is detailed information on physical location. May be used as an actual physical address (place to which one could go), or as a container of address parts which should be handled as a unit (such as a city-state-ZIP combination within the U.S.)."
+    }
+  },
+  "description": "Specifies the contact and address details of a location.",
+  "example": {
+    "address": {
+      "streetLines": ["10 FedEx Parkway", "Suite 302"],
+      "city": "Beverly Hills",
+      "stateOrProvinceCode": "CA",
+      "postalCode": "38127",
+      "countryCode": "US",
+      "residential": false
+    },
+    "contact": {
+      "personName": "person name",
+      "emailAddress": "email address",
+      "phoneNumber": "phone number",
+      "phoneExtension": "phone extension",
+      "companyName": "company name",
+      "faxNumber": "fax number"
+    }
+  },
+  "default": {
+    "address": {
+      "streetLines": ["10 FedEx Parkway", "Suite 302"],
+      "city": "Beverly Hills",
+      "stateOrProvinceCode": "CA",
+      "postalCode": "38127",
+      "countryCode": "US",
+      "residential": false
+    },
+    "contact": {
+      "personName": "person name",
+      "emailAddress": "email address",
+      "phoneNumber": "phone number",
+      "phoneExtension": "phone extension",
+      "companyName": "company name",
+      "faxNumber": "fax number"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

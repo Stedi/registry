@@ -1,0 +1,207 @@
+{
+  "type": "object",
+  "properties": {
+    "address": {
+      "type": "object",
+      "properties": {
+        "streetLines": {
+          "type": "array",
+          "description": "This is the combination of number, street name, etc. Maximum length per line is 35.<br>Example: 10 FedEx Parkway, Suite 302.<p><i>Note:<ul><li>At least one line is required.</li><li>Streetlines more than 3 will be ignored.</li><li>Empty lines should not be included</li><li>For SmartPost Shipments, only 30 characters from the individual street lines will be printed on the labels.</li></ul></i></p>",
+          "example": ["1550 Union Blvd", "Suite 302"],
+          "items": {
+            "type": "string"
+          }
+        },
+        "city": {
+          "type": "string",
+          "description": "This is a placeholder for City Name. <br>Example: Beverly Hills",
+          "example": "Beverly Hills"
+        },
+        "stateOrProvinceCode": {
+          "type": "string",
+          "description": "This is a placeholder for State or Province code.<br>Example: CA.<br><a onclick='loadDocReference(\"canadaprovincecodes\")'>click here to see State or Province Code</a>",
+          "example": "CA"
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "This is the Postal code.<br>This is Optional for non postal-aware countries.<br>Maximum length is 10.<br>Example: 65247<br><a onclick='loadDocReference(\"postalawarecountries\")'>click here to see Postal aware countries</a>",
+          "example": "90210"
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "This is the two-letter country code.<br>Maximum length is 2.<br>Example: US<br><a onclick='loadDocReference(\"countrycodes\")'>click here to see Country codes</a>",
+          "example": "US"
+        },
+        "residential": {
+          "type": "boolean",
+          "description": "Indicate whether this address is residential (as opposed to commercial).",
+          "example": false
+        },
+        "geographicCoordinates": {
+          "type": "string",
+          "description": "Indicates the geographic coordinates. <br> example: geographicCoordinates",
+          "example": "geographicCoordinates"
+        }
+      },
+      "description": "This is detailed information on physical location. May be used as an actual physical address (place to which one could go), or as a container of address parts which should be handled as a unit (such as a city-state-ZIP combination within the US).",
+      "example": {
+        "streetLines": ["10 FedEx Parkway", "Suite 302"],
+        "city": "Beverly Hills",
+        "stateOrProvinceCode": "CA",
+        "postalCode": "90210",
+        "countryCode": "US",
+        "residential": false
+      }
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "personName": {
+          "type": "string",
+          "description": "Specify contact name. Maximum length is 70. <br> Example: John Taylor",
+          "example": "John Taylor"
+        },
+        "emailAddress": {
+          "type": "string",
+          "description": "Specify contact email address. Maximum length is 80. <br> Example: sample@company.com",
+          "example": "sample@company.com"
+        },
+        "phoneExtension": {
+          "type": "string",
+          "description": "Specify contact phone extension. Maximum length is 6. <br> Example: 1234",
+          "example": "91"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Specify contact phone number. <br>Minimum length is 10 and supports Maximum as 15 for certain countries using longer phone numbers. <br>Note: Recommended Maximum length is 15 and there's no specific validation will be done for the phone number. <br> Example: 918xxxxx890",
+          "example": "1234567890"
+        },
+        "companyName": {
+          "type": "string",
+          "description": "Specify contact company name.<br>Recommended length is 35.<br>Note: There's no specific validation of the company name.",
+          "example": "Fedex"
+        },
+        "faxNumber": {
+          "type": "string",
+          "description": "Specify contact person's fax number. Maximum length is 15."
+        }
+      },
+      "description": "Indicate the contact details for this shipment.",
+      "example": {
+        "personName": "John Taylor",
+        "emailAddress": "sample@company.com",
+        "phoneExtension": "91",
+        "phoneNumber": "1234567890",
+        "companyName": "Fedex"
+      }
+    },
+    "tins": {
+      "type": "array",
+      "description": "This is the tax identification number details.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "string",
+            "description": "Specify tax ID number. Maximum length is 18. <br>Example: 123567",
+            "example": "123567"
+          },
+          "tinType": {
+            "type": "string",
+            "description": "Indicate the type of tax identification number.",
+            "example": "FEDERAL",
+            "enum": [
+              "PERSONAL_NATIONAL",
+              "PERSONAL_STATE",
+              "FEDERAL",
+              "BUSINESS_NATIONAL",
+              "BUSINESS_STATE",
+              "BUSINESS_UNION"
+            ]
+          },
+          "usage": {
+            "type": "string",
+            "description": "Specify the reason for using the tax identification number in shipment processing.",
+            "example": "usage"
+          },
+          "effectiveDate": {
+            "type": "string",
+            "description": "Specify the tax ID effective date.<br>Example: 2000-01-23T04:56:07.000+00:00",
+            "example": "2000-01-23T04:56:07.000+00:00"
+          },
+          "expirationDate": {
+            "type": "string",
+            "description": "Specify the tax ID expiration date.<br>Example: 2000-01-23T04:56:07.000+00:00",
+            "example": "2000-01-23T04:56:07.000+00:00"
+          }
+        },
+        "example": {
+          "number": "123567",
+          "tinType": "FEDERAL",
+          "usage": "usage",
+          "effectiveDate": "2000-01-23T04:56:07.000+00:00",
+          "expirationDate": "2000-01-23T04:56:07.000+00:00"
+        }
+      }
+    }
+  },
+  "example": {
+    "address": {
+      "streetLines": ["10 FedEx Parkway", "Suite 302"],
+      "city": "Beverly Hills",
+      "stateOrProvinceCode": "CA",
+      "postalCode": "90210",
+      "countryCode": "US",
+      "residential": false
+    },
+    "contact": {
+      "personName": "John Taylor",
+      "emailAddress": "sample@company.com",
+      "phoneExtension": "000",
+      "phoneNumber": "XXXX345671",
+      "companyName": "Fedex"
+    },
+    "accountNumber": {
+      "value": "Your account number"
+    },
+    "tins": [
+      {
+        "number": "123567",
+        "tinType": "FEDERAL",
+        "usage": "usage",
+        "effectiveDate": "2000-01-23T04:56:07.000+00:00",
+        "expirationDate": "2000-01-23T04:56:07.000+00:00"
+      }
+    ]
+  },
+  "default": {
+    "address": {
+      "streetLines": ["10 FedEx Parkway", "Suite 302"],
+      "city": "Beverly Hills",
+      "stateOrProvinceCode": "CA",
+      "postalCode": "90210",
+      "countryCode": "US",
+      "residential": false
+    },
+    "contact": {
+      "personName": "John Taylor",
+      "emailAddress": "sample@company.com",
+      "phoneExtension": "000",
+      "phoneNumber": "XXXX345671",
+      "companyName": "Fedex"
+    },
+    "accountNumber": {
+      "value": "Your account number"
+    },
+    "tins": [
+      {
+        "number": "123567",
+        "tinType": "FEDERAL",
+        "usage": "usage",
+        "effectiveDate": "2000-01-23T04:56:07.000+00:00",
+        "expirationDate": "2000-01-23T04:56:07.000+00:00"
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,447 @@
+{
+  "required": ["imageType", "labelStockType"],
+  "type": "object",
+  "properties": {
+    "labelFormatType": {
+      "type": "string",
+      "description": "Specify the label Format Type.<br><a onclick='loadDocReference(\"labelstocktypes\")'>click here to see label format types</a>",
+      "example": "COMMON2D",
+      "enum": ["COMMON2D", "LABEL_DATA_ONLY"]
+    },
+    "labelOrder": {
+      "type": "string",
+      "description": "This is the order of the Shipping label/documents to be generated.",
+      "example": "SHIPPING_LABEL_FIRST",
+      "enum": ["SHIPPING_LABEL_FIRST", "SHIPPING_LABEL_LAST"]
+    },
+    "customerSpecifiedDetail": {
+      "type": "object",
+      "properties": {
+        "maskedData": {
+          "type": "array",
+          "description": "Specify which data/sections on the label to be masked.<br>Note: <ul><li>SECONDARY_BARCODE &ndash; This is used for Smartpost shipment labels.</li><li>SHIPPER_INFORMATION &ndash; This is used for Third Party Consignee, Intra-UK shipments.</li><li>TOTAL_WEIGHT &ndash; This replaces the Total weight with Actual Weight in Master label and AWB copies.</li></ul>",
+          "example": ["CUSTOMS_VALUE", "TOTAL_WEIGHT"],
+          "items": {
+            "type": "string",
+            "default": "SHIPPER_INFORMATION",
+            "enum": [
+              "CUSTOMS_VALUE",
+              "DIMENSIONS",
+              "DUTIES_AND_TAXES_PAYOR_ACCOUNT_NUMBER",
+              "INSURED_VALUE",
+              "SECONDARY_BARCODE",
+              "SHIPPER_INFORMATION",
+              "TERMS_AND_CONDITIONS",
+              "TOTAL_WEIGHT",
+              "TRANSPORTATION_CHARGES_PAYOR_ACCOUNT_NUMBER"
+            ]
+          }
+        },
+        "regulatoryLabels": {
+          "type": "array",
+          "description": "Specify how the regulatory details to be provided on the labels.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "generationOptions": {
+                "type": "string",
+                "description": "Specify the regulatory content preference to be displayed on the label.",
+                "example": "CONTENT_ON_SHIPPING_LABEL_ONLY",
+                "enum": [
+                  "CONTENT_ON_SHIPPING_LABEL_PREFERRED",
+                  "CONTENT_ON_SUPPLEMENTAL_LABEL_ONLY",
+                  "CONTENT_ON_SHIPPING_LABEL_ONLY"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "description": "Specify the type of regulatory content to be added on the label.",
+                "example": "ALCOHOL_SHIPMENT_LABEL",
+                "enum": ["ALCOHOL_SHIPMENT_LABEL"]
+              }
+            }
+          }
+        },
+        "additionalLabels": {
+          "type": "array",
+          "description": "Specify how the additional details to be provided on the labels.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Specify the type of additional  details to be added on the label.",
+                "example": "CONSIGNEE",
+                "enum": [
+                  "BROKER",
+                  "CONSIGNEE",
+                  "CUSTOMS",
+                  "DESTINATION",
+                  "DESTINATION_CONTROL_STATEMENT",
+                  "FREIGHT_REFERENCE",
+                  "MANIFEST",
+                  "ORIGIN",
+                  "RECIPIENT",
+                  "SECOND_ADDRESS",
+                  "SHIPPER"
+                ]
+              },
+              "count": {
+                "type": "integer",
+                "description": "Specifies the count of label to return.",
+                "example": 1
+              }
+            }
+          }
+        },
+        "docTabContent": {
+          "type": "object",
+          "properties": {
+            "docTabContentType": {
+              "type": "string",
+              "description": "Indicates the content type of the doc tab.",
+              "example": "BARCODED",
+              "enum": ["BARCODED", "CUSTOM", "MINIMUM", "STANDARD", "ZONE001"]
+            },
+            "zone001": {
+              "type": "object",
+              "properties": {
+                "docTabZoneSpecifications": {
+                  "type": "array",
+                  "description": "Indicate the doc tab specifications for the individual doc tab zone on the label.",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "zoneNumber": {
+                        "type": "integer",
+                        "description": "It is a non-negative integer that represents the portion of doc-tab in a label.<br>Example: 1",
+                        "format": "int32"
+                      },
+                      "header": {
+                        "type": "string",
+                        "description": "Indicates the parameter name in the header for the doc tab zone.<br>Example:  WHT"
+                      },
+                      "dataField": {
+                        "type": "string",
+                        "description": "Indicate the path request/reply element to be printed on doc tab.<br>Example:<ul><li>REQUEST/SHIPMENT/ShipTimestamp</li><li>REQUEST/PACKAGE/weight/Value</li><li>REQUEST/PACKAGE/InsuredValue/Amount</li><li>REQUEST/SHIPMENT/SpecialServicesRequested/CodDetail/CodCollectionAmount/Amount</li><li>REQUEST/SHIPMENT/Shipper/Address/StreetLines[1]</li><li>CLIENT/MeterNumber</li><li>TRANSACTION/CustomerTransactionId</li><li>REQUEST/SHIPMENT/TotalWeight/Value</li><li>REQUEST/SHIPMENT/ShipTimestamp</li><li>REQUEST/SHIPMENT/Recipient/Contact/PersonName</li><li>REPLY/SHIPMENT/OperationalDetail/DeliveryDate</li><li>REPLY/PACKAGE/RATE/ACTUAL/BaseCharge/Amount</li><li>REPLY/PACKAGE/RATE/ACTUAL/TotalFreightDiscounts/Amount</li><li>REPLY/PACKAGE/RATE/ACTUAL/TotalSurcharges/Amount</li><li>REPLY/PACKAGE/RATE/ACTUAL/NetCharge/AmountREPLY</li><li>/SHIPMENT/RATES/PAYOR_ACCOUNT/TotalSurcharges/Amount</li></ul>"
+                      },
+                      "literalValue": {
+                        "type": "string",
+                        "description": "Indicates the actual data to be printed in the label<br>"
+                      },
+                      "justification": {
+                        "type": "string",
+                        "description": "Indicates the justification format for the string.",
+                        "example": "RIGHT",
+                        "enum": ["LEFT", "RIGHT"]
+                      }
+                    },
+                    "description": "Indicates the doc tab zone specification."
+                  }
+                }
+              },
+              "description": "Indicate the doc tab specification for different zones on the label. The specification includes zone number, header and data field to be displayed on the label."
+            },
+            "barcoded": {
+              "type": "object",
+              "properties": {
+                "symbology": {
+                  "type": "string",
+                  "description": "Indicates the type of barcode symbology used on FedEx documents and labels.",
+                  "example": "UCC128",
+                  "enum": [
+                    "CODABAR",
+                    "CODE128",
+                    "CODE128_WIDEBAR",
+                    "CODE128B",
+                    "CODE128C",
+                    "CODE39",
+                    "CODE93",
+                    "I2OF5",
+                    "MANUAL",
+                    "PDF417",
+                    "POSTNET",
+                    "QR_CODE",
+                    "UCC128"
+                  ]
+                },
+                "specification": {
+                  "type": "object",
+                  "properties": {
+                    "zoneNumber": {
+                      "type": "integer",
+                      "description": "It is a non-negative integer that represents the portion of doc-tab in a label.<br>Example: 1",
+                      "format": "int32"
+                    },
+                    "header": {
+                      "type": "string",
+                      "description": "Indicates the parameter name in the header for the doc tab zone.<br>Example:  WHT"
+                    },
+                    "dataField": {
+                      "type": "string",
+                      "description": "Indicate the path request/reply element to be printed on doc tab.<br>Example:<ul><li>REQUEST/SHIPMENT/ShipTimestamp</li><li>REQUEST/PACKAGE/weight/Value</li><li>REQUEST/PACKAGE/InsuredValue/Amount</li><li>REQUEST/SHIPMENT/SpecialServicesRequested/CodDetail/CodCollectionAmount/Amount</li><li>REQUEST/SHIPMENT/Shipper/Address/StreetLines[1]</li><li>CLIENT/MeterNumber</li><li>TRANSACTION/CustomerTransactionId</li><li>REQUEST/SHIPMENT/TotalWeight/Value</li><li>REQUEST/SHIPMENT/ShipTimestamp</li><li>REQUEST/SHIPMENT/Recipient/Contact/PersonName</li><li>REPLY/SHIPMENT/OperationalDetail/DeliveryDate</li><li>REPLY/PACKAGE/RATE/ACTUAL/BaseCharge/Amount</li><li>REPLY/PACKAGE/RATE/ACTUAL/TotalFreightDiscounts/Amount</li><li>REPLY/PACKAGE/RATE/ACTUAL/TotalSurcharges/Amount</li><li>REPLY/PACKAGE/RATE/ACTUAL/NetCharge/AmountREPLY</li><li>/SHIPMENT/RATES/PAYOR_ACCOUNT/TotalSurcharges/Amount</li></ul>"
+                    },
+                    "literalValue": {
+                      "type": "string",
+                      "description": "Indicates the actual data to be printed in the label<br>"
+                    },
+                    "justification": {
+                      "type": "string",
+                      "description": "Indicates the justification format for the string.",
+                      "example": "RIGHT",
+                      "enum": ["LEFT", "RIGHT"]
+                    }
+                  },
+                  "description": "Indicates the doc tab zone specification."
+                }
+              },
+              "description": "It is a doc tab content type which is in barcoded format."
+            }
+          },
+          "description": "Specifies details of doc tab content."
+        }
+      },
+      "description": "This object allows the control of label content for customization."
+    },
+    "printedLabelOrigin": {
+      "type": "object",
+      "properties": {
+        "contact": {
+          "type": "object",
+          "properties": {
+            "personName": {
+              "type": "string",
+              "description": "Specify contact person name.<br>Recommended length is 70. <br>Note: There's no specific validation for the person name.<br> Example: John Taylor",
+              "example": "John Taylor"
+            },
+            "emailAddress": {
+              "type": "string",
+              "description": "Specify contact email address. Maximum length is 80. <br> Example: sample@company.com",
+              "example": "sample@company.com"
+            },
+            "phoneNumber": {
+              "type": "string",
+              "description": "Specify contact phone number. <br>Minimum length is 10 and supports maximum of 15 for certain countries using longer phone numbers. <br>Note: Recommended Maximum length is 15 and there's no specific validation will be done for the phone number. <br> Example: 918xxxxx890",
+              "example": "1234567890"
+            },
+            "phoneExtension": {
+              "type": "string",
+              "description": "Specify contact phone extension. <br>Note: Recommended length is 6. There's no specific validation for the phone extension. <br> Example: 1234",
+              "example": "91"
+            },
+            "faxNumber": {
+              "type": "string",
+              "description": "Specify contact fax number.<br>Note: Recommended length is 15. There's no specific validation for the fax number.<br> Example: 1234567890",
+              "example": "956123"
+            },
+            "companyName": {
+              "type": "string",
+              "description": "Specify contact company name.<br>Recommended length is 35.<br>Note: There's no specific validation for the company name.",
+              "example": "Fedex"
+            }
+          },
+          "description": "Indicate the contact details of the shipper.",
+          "example": {
+            "personName": "John Taylor",
+            "emailAddress": "sample@company.com",
+            "parsedPersonName": {
+              "firstName": "firstName",
+              "lastName": "lastName",
+              "middleName": "middleName",
+              "suffix": "suffix"
+            },
+            "phoneNumber": "1234567890",
+            "phoneExtension": 1234,
+            "faxNumber": "1234567890",
+            "companyName": "Fedex"
+          }
+        },
+        "address": {
+          "type": "object",
+          "properties": {
+            "streetLines": {
+              "type": "array",
+              "description": "This is the combination of number, street name, etc. <br>Note: At least one line is required and streetlines more than 3 will be ignored. Empty lines should not be included. Maximum length per line is 35.<br>Example: [10 FedEx Parkway, Suite 302, .etc.]",
+              "example": ["Bldg. 10", "10 FedEx Parkway"],
+              "items": {
+                "type": "string"
+              }
+            },
+            "city": {
+              "type": "string",
+              "description": "This is a placeholder for City Name.<br>Note: This is conditional and not required in all the requests.<br>Note: It is recommended for Express shipments for the most accurate ODA and OPA surcharges.<br>Example: Beverly Hills",
+              "example": "Beverly Hills"
+            },
+            "stateOrProvinceCode": {
+              "type": "string",
+              "description": "This is a placeholder for State or Province code.<br>Example: CA<br><a onclick='loadDocReference(\"canadaprovincecodes\")'>click here to see State or Province Code</a>",
+              "example": "CA"
+            },
+            "postalCode": {
+              "type": "string",
+              "description": "Indicate the Postal code. This is Optional for non postal-aware countries. Maximum length is 10.<br> Example: 65247<br><a onclick='loadDocReference(\"postalawarecountries\")'>click here to see Postal aware countries</a>",
+              "example": "38127"
+            },
+            "countryCode": {
+              "type": "string",
+              "description": "This is the two-letter country code.<br>Maximum length is 2.<br>Example: US<br><a onclick='loadDocReference(\"countrycodes\")'>click here to see Country codes</a>",
+              "example": "US"
+            },
+            "residential": {
+              "type": "boolean",
+              "description": "Indicate whether this address is residential (as opposed to commercial).",
+              "example": false
+            }
+          },
+          "description": "This is detailed information on physical location. May be used as an actual physical address (place to which one could go), or as a container of address parts which should be handled as a unit (such as a city-state-ZIP combination within the U.S.)."
+        }
+      },
+      "description": "Specifies the contact and address details of a location.",
+      "example": {
+        "address": {
+          "streetLines": ["10 FedEx Parkway", "Suite 302"],
+          "city": "Beverly Hills",
+          "stateOrProvinceCode": "CA",
+          "postalCode": "38127",
+          "countryCode": "US",
+          "residential": false
+        },
+        "contact": {
+          "personName": "person name",
+          "emailAddress": "email address",
+          "parsedPersonName": {
+            "firstName": "first name",
+            "lastName": "last name",
+            "middleName": "middle name",
+            "suffix": "suffix"
+          },
+          "phoneNumber": "phone number",
+          "phoneExtension": "phone extension",
+          "companyName": "company name",
+          "faxNumber": "fax number"
+        }
+      }
+    },
+    "labelStockType": {
+      "type": "string",
+      "description": "Indicate the label stock type used. <br><a onclick='loadDocReference(\"labelstocktypes\")'>click here to see label format types</a>",
+      "example": "PAPER_85X11_TOP_HALF_LABEL",
+      "enum": [
+        "PAPER_4X6",
+        "PAPER_4X675",
+        "PAPER_4X8",
+        "PAPER_4X9",
+        "PAPER_7X475",
+        "PAPER_85X11_BOTTOM_HALF_LABEL",
+        "PAPER_85X11_TOP_HALF_LABEL",
+        "PAPER_LETTER",
+        "STOCK_4X675_LEADING_DOC_TAB",
+        "STOCK_4X8",
+        "STOCK_4X9_LEADING_DOC_TAB",
+        "STOCK_4X6",
+        "STOCK_4X675_TRAILING_DOC_TAB",
+        "STOCK_4X9_TRAILING_DOC_TAB",
+        "STOCK_4X675",
+        "STOCK_4X9"
+      ]
+    },
+    "labelRotation": {
+      "type": "string",
+      "description": "This is applicable only to documents produced on thermal printers with roll stock.",
+      "example": "UPSIDE_DOWN",
+      "enum": ["LEFT", "RIGHT", "UPSIDE_DOWN", "NONE"]
+    },
+    "imageType": {
+      "type": "string",
+      "description": "Specify the image format used for a shipping document.<br><a onclick='loadDocReference(\"labelstocktypes\")'>click here to see label format types</a>",
+      "example": "PDF",
+      "enum": ["ZPLII", "EPL2", "PDF", "PNG"]
+    },
+    "labelPrintingOrientation": {
+      "type": "string",
+      "description": "This is applicable only to documents produced on thermal printers with roll stock.",
+      "example": "TOP_EDGE_OF_TEXT_FIRST",
+      "enum": ["BOTTOM_EDGE_OF_TEXT_FIRST", "TOP_EDGE_OF_TEXT_FIRST"]
+    },
+    "returnedDispositionDetail": {
+      "type": "boolean",
+      "description": "Specify whether or not the return deposition is needed.",
+      "example": true,
+      "enum": [true, false]
+    }
+  },
+  "description": "These are label specification details includes the image type, printer format, and label stock for label. Can also specify specific details such as doc-tab content, regulatory labels, and masking data on the label.",
+  "default": {
+    "labelFormatType": "COMMON2D",
+    "labelOrder": "SHIPPING_LABEL_FIRST",
+    "customerSpecifiedDetail": {
+      "maskedData": ["CUSTOMS_VALUE", "TOTAL_WEIGHT"],
+      "regulatoryLabels": [
+        {
+          "generationOptions": "CONTENT_ON_SHIPPING_LABEL_ONLY",
+          "type": "ALCOHOL_SHIPMENT_LABEL"
+        }
+      ],
+      "additionalLabels": [
+        {
+          "type": "CONSIGNEE",
+          "count": 1
+        }
+      ],
+      "docTabContent": {
+        "docTabContentType": "BARCODED",
+        "zone001": {
+          "docTabZoneSpecifications": [
+            {
+              "zoneNumber": 1,
+              "header": "string",
+              "dataField": "string",
+              "literalValue": "string",
+              "justification": "RIGHT"
+            }
+          ]
+        },
+        "barcoded": {
+          "symbology": "UCC128",
+          "specification": {
+            "zoneNumber": 1,
+            "header": "string",
+            "dataField": "string",
+            "literalValue": "string",
+            "justification": "RIGHT"
+          }
+        }
+      }
+    },
+    "printedLabelOrigin": {
+      "address": {
+        "streetLines": ["10 FedEx Parkway", "Suite 302"],
+        "city": "Beverly Hills",
+        "stateOrProvinceCode": "CA",
+        "postalCode": "38127",
+        "countryCode": "US",
+        "residential": false
+      },
+      "contact": {
+        "personName": "person name",
+        "emailAddress": "email address",
+        "parsedPersonName": {
+          "firstName": "first name",
+          "lastName": "last name",
+          "middleName": "middle name",
+          "suffix": "suffix"
+        },
+        "phoneNumber": "phone number",
+        "phoneExtension": "phone extension",
+        "companyName": "company name",
+        "faxNumber": "fax number"
+      }
+    },
+    "labelStockType": "PAPER_85X11_TOP_HALF_LABEL",
+    "labelRotation": "UPSIDE_DOWN",
+    "imageType": "PDF",
+    "labelPrintingOrientation": "TOP_EDGE_OF_TEXT_FIRST",
+    "returnedDispositionDetail": true
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

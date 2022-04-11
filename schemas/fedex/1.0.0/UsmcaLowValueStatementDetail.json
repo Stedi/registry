@@ -1,0 +1,23 @@
+{
+  "required": ["customsRole"],
+  "type": "object",
+  "properties": {
+    "countryOfOriginLowValueDocumentRequested": {
+      "type": "boolean",
+      "description": "Specify the country Of Origin of Low Value Document for Customs declaration.",
+      "example": true
+    },
+    "customsRole": {
+      "type": "string",
+      "description": "Specify the shipper role for Customs declaration.",
+      "example": "EXPORTER",
+      "enum": ["EXPORTER", "IMPORTER"]
+    }
+  },
+  "description": "Specify the low Value statement necessary for printing the USMCA for Customs documentation.",
+  "default": {
+    "countryOfOriginLowValueDocumentRequested": true,
+    "customsRole": "EXPORTER"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

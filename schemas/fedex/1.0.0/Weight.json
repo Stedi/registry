@@ -1,0 +1,28 @@
+{
+  "required": ["units", "value"],
+  "type": "object",
+  "properties": {
+    "units": {
+      "type": "string",
+      "description": "Indicate the weight unit type. The package and commodity weight unit should be the same else the request will result in an error.",
+      "example": "KG",
+      "enum": ["KG"]
+    },
+    "value": {
+      "type": "number",
+      "description": "This is the weight. Maximum length is 99999.<br>Example: 68.25",
+      "format": "double",
+      "example": 68.25
+    }
+  },
+  "description": "These are the package weight details.<br>Note: Weight is not required for One rate shipments",
+  "example": {
+    "units": "KG",
+    "value": 68
+  },
+  "default": {
+    "units": "KG",
+    "value": 68
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

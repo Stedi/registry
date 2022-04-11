@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "properties": {
+    "zoneNumber": {
+      "type": "integer",
+      "description": "It is a non-negative integer that represents the portion of doc-tab in a label.<br>Example: 1",
+      "format": "int32"
+    },
+    "header": {
+      "type": "string",
+      "description": "Indicates the parameter name in the header for the doc tab zone.<br>Example:  WHT"
+    },
+    "dataField": {
+      "type": "string",
+      "description": "Indicate the path request/reply element to be printed on doc tab.<br>Example:<ul><li>REQUEST/SHIPMENT/ShipTimestamp</li><li>REQUEST/PACKAGE/weight/Value</li><li>REQUEST/PACKAGE/InsuredValue/Amount</li><li>REQUEST/SHIPMENT/SpecialServicesRequested/CodDetail/CodCollectionAmount/Amount</li><li>REQUEST/SHIPMENT/Shipper/Address/StreetLines[1]</li><li>CLIENT/MeterNumber</li><li>TRANSACTION/CustomerTransactionId</li><li>REQUEST/SHIPMENT/TotalWeight/Value</li><li>REQUEST/SHIPMENT/ShipTimestamp</li><li>REQUEST/SHIPMENT/Recipient/Contact/PersonName</li><li>REPLY/SHIPMENT/OperationalDetail/DeliveryDate</li><li>REPLY/PACKAGE/RATE/ACTUAL/BaseCharge/Amount</li><li>REPLY/PACKAGE/RATE/ACTUAL/TotalFreightDiscounts/Amount</li><li>REPLY/PACKAGE/RATE/ACTUAL/TotalSurcharges/Amount</li><li>REPLY/PACKAGE/RATE/ACTUAL/NetCharge/AmountREPLY</li><li>/SHIPMENT/RATES/PAYOR_ACCOUNT/TotalSurcharges/Amount</li></ul>"
+    },
+    "literalValue": {
+      "type": "string",
+      "description": "Indicates the actual data to be printed in the label<br>"
+    },
+    "justification": {
+      "type": "string",
+      "description": "Indicates the justification format for the string.",
+      "example": "RIGHT",
+      "enum": ["LEFT", "RIGHT"]
+    }
+  },
+  "description": "Indicates the doc tab zone specification.",
+  "default": {
+    "zoneNumber": 1,
+    "header": "string",
+    "dataField": "string",
+    "literalValue": "string",
+    "justification": "RIGHT"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

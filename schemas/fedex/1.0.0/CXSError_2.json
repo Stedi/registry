@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "Indicates the error code.<br>Example: SHIPMENT.USER.UNAUTHORIZED"
+    },
+    "parameterList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Identifies the error option to be applied."
+          },
+          "key": {
+            "type": "string",
+            "description": "Indicates the value associated with the key."
+          }
+        },
+        "description": "List of parameters which indicates the properties of the alert message."
+      }
+    },
+    "message": {
+      "type": "string",
+      "description": "Indicates the description of API error alert message.<br>Example: Requested user is not authorized to perform the operation."
+    }
+  },
+  "description": "Indicates error alert when suspicious files, potential exploits and viruses found while scanning files , directories and user accounts. This includes code, message and parameter",
+  "default": {
+    "code": "string",
+    "parameterList": [
+      {
+        "value": "string",
+        "key": "string"
+      }
+    ],
+    "message": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

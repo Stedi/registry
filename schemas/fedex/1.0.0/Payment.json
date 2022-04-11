@@ -1,0 +1,240 @@
+{
+  "required": ["paymentType"],
+  "type": "object",
+  "properties": {
+    "paymentType": {
+      "type": "string",
+      "description": "Specifies the payment Type. <br>Note: This is required for Express, Ground and SmartPost shipments.<br> The payment type COLLECT is applicable only for Ground shipments.",
+      "enum": ["SENDER", "RECIPIENT", "THIRD_PARTY", "COLLECT"]
+    },
+    "payor": {
+      "required": ["responsibleParty"],
+      "type": "object",
+      "properties": {
+        "responsibleParty": {
+          "required": ["accountNumber"],
+          "type": "object",
+          "properties": {
+            "address": {
+              "required": ["city", "countryCode", "stateOrProvinceCode", "streetLines"],
+              "type": "object",
+              "properties": {
+                "streetLines": {
+                  "type": "array",
+                  "description": "This is the combination of number, street name, etc. Maximum length per line is 35.<br>Example: 10 FedEx Parkway, Suite 302.<p><i>Note:<ul><li>At least one line is required.</li><li>Streetlines more than 3 will be ignored.</li><li>Empty lines should not be included</li><li>For SmartPost Shipments, only 30 characters from the individual street lines will be printed on the labels.</li></ul></i></p>",
+                  "example": ["1550 Union Blvd", "Suite 302"],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "city": {
+                  "type": "string",
+                  "description": "This is a placeholder for City Name. <br>Note: This is conditional and not required in all the requests.<br>Note: It is recommended for Express shipments for the most accurate ODA and OPA surcharges.<br>Example: Beverly Hills",
+                  "example": "Beverly Hills"
+                },
+                "stateOrProvinceCode": {
+                  "type": "string",
+                  "description": "This is a placeholder for state or province code.<br>Example: CA.<br><a onclick='loadDocReference(\"canadaprovincecodes\")'>click here to see State or Province Code</a>",
+                  "example": "CA"
+                },
+                "postalCode": {
+                  "type": "string",
+                  "description": "This is the postal code.<br>Note: This is Optional for non postal-aware countries. Maximum length is 10.<br>Example: 65247<br><a onclick='loadDocReference(\"postalawarecountries\")'>click here to see Postal aware countries</a>",
+                  "example": "90210"
+                },
+                "countryCode": {
+                  "type": "string",
+                  "description": "This is the two-letter country code.<br>Maximum length is 2.<br>Example: US<br><a onclick='loadDocReference(\"countrycodes\")'>click here to see Country codes</a>",
+                  "example": "US"
+                },
+                "residential": {
+                  "type": "boolean",
+                  "description": "Indicate whether this address is residential (as opposed to commercial).",
+                  "example": false
+                }
+              },
+              "description": "This is detailed information on physical location. May be used as an actual physical address (place to which one could go), or as a container of address parts which should be handled as a unit (such as a city-state-ZIP combination within the US).",
+              "example": {
+                "streetLines": ["10 FedEx Parkway", "Suite 302"],
+                "city": "Beverly Hills",
+                "stateOrProvinceCode": "CA",
+                "postalCode": "90210",
+                "countryCode": "US",
+                "residential": false
+              }
+            },
+            "contact": {
+              "required": ["phoneNumber"],
+              "type": "object",
+              "properties": {
+                "personName": {
+                  "type": "string",
+                  "description": "Specify contact name. Maximum length is 70. <br>Note: Either the companyName or personName is mandatory.<br> Example: John Taylor",
+                  "example": "John Taylor"
+                },
+                "emailAddress": {
+                  "type": "string",
+                  "description": "Specify contact email address. Maximum length is 80. <br> Example: sample@company.com",
+                  "example": "sample@company.com"
+                },
+                "phoneExtension": {
+                  "type": "string",
+                  "description": "Specify contact phone extension. Maximum length is 6. <br> Example: 1234",
+                  "example": "91"
+                },
+                "phoneNumber": {
+                  "type": "string",
+                  "description": "Specify contact phone number. <br>Minimum length is 10 and supports Maximum as 15 for certain countries using longer phone numbers. <br>Note: Recommended Maximum length is 15 and there's no specific validation will be done for the phone number. <br> Example: 918xxxxx890",
+                  "example": "1234567890"
+                },
+                "companyName": {
+                  "type": "string",
+                  "description": "Specify contact company name. Maximum length is 35. <br>Note: Either the companyName or personName is mandatory.",
+                  "example": "Fedex"
+                }
+              },
+              "description": "Indicate the contact details for this shipment.",
+              "example": {
+                "personName": "John Taylor",
+                "emailAddress": "sample@company.com",
+                "phoneExtension": "91",
+                "phoneNumber": "1234567890",
+                "companyName": "Fedex"
+              }
+            },
+            "accountNumber": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "description": "This is the account number. Maximum length is 9. <br>Example: Your account number"
+                }
+              },
+              "description": "This is FedEx Account number details.",
+              "example": {
+                "value": "Your account number"
+              }
+            }
+          },
+          "description": "Indicate the payer Information responsible for paying for the shipment. <br>Note: ResponsibleParty accountNumber is required for ACCOUNT based services.",
+          "example": {
+            "address": {
+              "streetLines": ["10 FedEx Parkway", "Suite 302"],
+              "city": "Beverly Hills",
+              "stateOrProvinceCode": "CA",
+              "postalCode": "90210",
+              "countryCode": "US",
+              "residential": false
+            },
+            "contact": {
+              "personName": "John Taylor",
+              "emailAddress": "sample@company.com",
+              "phoneExtension": "000",
+              "phoneNumber": "XXXX345671",
+              "companyName": "FedEx"
+            },
+            "accountNumber": {
+              "value": "Your account number"
+            }
+          }
+        }
+      },
+      "description": "Indicate the payer Information responsible for paying for the shipment. <br>Note: credit card payment is not applicable.<br>Optional when paymentType is SENDER.",
+      "example": {
+        "responsibleParty": {
+          "address": {
+            "streetLines": ["10 FedEx Parkway", "Suite 302"],
+            "city": "Beverly Hills",
+            "stateOrProvinceCode": "CA",
+            "postalCode": "90210",
+            "countryCode": "US",
+            "residential": false
+          },
+          "contact": {
+            "personName": "John Taylor",
+            "emailAddress": "sample@company.com",
+            "parsedPersonName": {
+              "firstName": "John",
+              "lastName": "Redmond",
+              "middleName": "Taylor",
+              "suffix": "Jr"
+            },
+            "phoneNumber": "XXXX567890",
+            "phoneExtension": "phone extension",
+            "companyName": "Fedex",
+            "faxNumber": "fax number"
+          },
+          "accountNumber": {
+            "value": "Your account number"
+          }
+        }
+      }
+    }
+  },
+  "description": "Specifies the payment details specifying the method and means of payment to FedEx for providing shipping services.",
+  "example": {
+    "paymentType": "SENDER",
+    "payor": {
+      "responsibleParty": {
+        "address": {
+          "streetLines": ["10 FedEx Parkway", "Suite 302"],
+          "city": "Beverly Hills",
+          "stateOrProvinceCode": "CA",
+          "postalCode": "90210",
+          "countryCode": "US",
+          "residential": false
+        },
+        "contact": {
+          "personName": "John Taylor",
+          "emailAddress": "sample@company.com",
+          "parsedPersonName": {
+            "firstName": "first name",
+            "lastName": "last name",
+            "middleName": "middle name",
+            "suffix": "suffix"
+          },
+          "phoneNumber": "XXXX567890",
+          "phoneExtension": "phone extension",
+          "companyName": "Fedex",
+          "faxNumber": "fax number"
+        },
+        "accountNumber": {
+          "value": "Your account number"
+        }
+      }
+    }
+  },
+  "default": {
+    "paymentType": "SENDER",
+    "payor": {
+      "responsibleParty": {
+        "address": {
+          "streetLines": ["10 FedEx Parkway", "Suite 302"],
+          "city": "Beverly Hills",
+          "stateOrProvinceCode": "CA",
+          "postalCode": "90210",
+          "countryCode": "US",
+          "residential": false
+        },
+        "contact": {
+          "personName": "John Taylor",
+          "emailAddress": "sample@company.com",
+          "parsedPersonName": {
+            "firstName": "first name",
+            "lastName": "last name",
+            "middleName": "middle name",
+            "suffix": "suffix"
+          },
+          "phoneNumber": "XXXX567890",
+          "phoneExtension": "phone extension",
+          "companyName": "Fedex",
+          "faxNumber": "fax number"
+        },
+        "accountNumber": {
+          "value": "Your account number"
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

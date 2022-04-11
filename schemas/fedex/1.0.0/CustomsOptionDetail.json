@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "Specify additional description about customs options. This is a required field when the Type is OTHER.",
+      "example": "Description"
+    },
+    "type": {
+      "type": "string",
+      "description": "Specify the reason for a global return, as recognized by Customs. Valid values:<ul><li>COURTESY_RETURN_LABEL: For the outbound courtesy return label.</li><li>EXHIBITION_TRADE_SHOW: For exhibition or trade-show, outbound and inbound.</li><li>FAULTY_ITEM: For faulty item being returned, inbound only.</li><li>FOLLOWING_REPAIR: For repaired or processed item being sent, outbound only.</li><li>FOR_REPAIR: For repair or processing, outbound and inbound.</li><li>ITEM_FOR_LOAN: For loan item, outbound and inbound.</li><li>OTHER: Other reason, outbound and inbound. This type requires a description.</li><li>REJECTED: For rejected merchandise being returned, inbound.</li><li>REPLACEMENT: For replacement being sent, outbound only.</li><li>TRIAL: For use in a trial, outbound and inbound.</li></ul>",
+      "example": "COURTESY_RETURN_LABEL",
+      "enum": [
+        "COURTESY_RETURN_LABEL",
+        "EXHIBITION_TRADE_SHOW",
+        "FAULTY_ITEM",
+        "FOLLOWING_REPAIR",
+        "FOR_REPAIR",
+        "ITEM_FOR_LOAN",
+        "OTHER",
+        "REJECTED",
+        "REPLACEMENT",
+        "TRIAL"
+      ]
+    }
+  },
+  "description": "These are customs Option Detail, type must be indicated for each occurrence.",
+  "example": {
+    "description": "Description",
+    "type": "COURTESY_RETURN_LABEL"
+  },
+  "default": {
+    "description": "Description",
+    "type": "COURTESY_RETURN_LABEL"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

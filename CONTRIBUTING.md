@@ -31,11 +31,12 @@ import { OpenAPIProvider } from "./openapi";
 export class MyCompanyNewProvider extends OpenAPIProvider {
   constructor() {
     super({
-      name: "MyCompany",
-      logoUrl: "https://logo.clearbit.com/my-company.com",
-      description: "My Company is a company...",
-      versions: ["v1"],
       baseUrl: "https://docs.my-company.com/meta/v1/openapi.json",
+      description: "My Company is a company...",
+      docsLink: "https://docs.my-company.com/meta/v1/docs",
+      logoUrl: "https://logo.clearbit.com/my-company.com",
+      name: "MyCompany",
+      versions: ["v1"],
     });
   }
 }

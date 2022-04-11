@@ -1,0 +1,37 @@
+{
+  "required": ["accessibility"],
+  "type": "object",
+  "properties": {
+    "accessibility": {
+      "type": "string",
+      "description": "Specify Dangerous Goods Accessibility Type. <ul><li>Inaccessible &ndash; it does not have to be accessable on the aircraft.</li><li>Accessible &ndash; it must be fully accessible on the aircraft, and is more strictly controlled.</li></ul>",
+      "example": "INACCESSIBLE",
+      "enum": ["ACCESSIBLE", "INACCESSIBLE"]
+    },
+    "options": {
+      "type": "array",
+      "description": "Indicate type of DG being reported.",
+      "example": ["LIMITED_QUANTITIES_COMMODITIES", "ORM_D"],
+      "items": {
+        "type": "string",
+        "xml": {
+          "name": "options"
+        },
+        "enum": [
+          "HAZARDOUS_MATERIALS",
+          "BATTERY",
+          "ORM_D",
+          "REPORTABLE_QUANTITIES",
+          "SMALL_QUANTITY_EXCEPTION",
+          "LIMITED_QUANTITIES_COMMODITIES"
+        ]
+      }
+    }
+  },
+  "description": "Provide dangerous goods shipment details.",
+  "default": {
+    "accessibility": "INACCESSIBLE",
+    "options": ["LIMITED_QUANTITIES_COMMODITIES", "ORM_D"]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

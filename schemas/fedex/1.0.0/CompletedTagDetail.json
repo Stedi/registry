@@ -1,0 +1,32 @@
+{
+  "description": "Specifies the pickup confirmation and location details for the return tag shipment.",
+  "allOf": [
+    {
+      "required": ["confirmationNumber", "dispatchDate", "location"],
+      "type": "object",
+      "properties": {
+        "confirmationNumber": {
+          "type": "string",
+          "description": "Confirmation Number.<br>Example: 275",
+          "example": "275"
+        },
+        "location": {
+          "type": "string",
+          "description": "Applicable for FedEx Express services.<br>Example: NQAA",
+          "example": "NQAA"
+        },
+        "dispatchDate": {
+          "type": "string",
+          "description": "The dispatch date for the FedEx Tag to be cancelled.<br>Example: 2019-08-03",
+          "example": "2019-08-03"
+        }
+      }
+    }
+  ],
+  "default": {
+    "confirmationNumber": "275",
+    "location": "NQAA",
+    "dispatchDate": "2019-08-03"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,146 @@
+{
+  "type": "object",
+  "properties": {
+    "customText": {
+      "type": "string",
+      "description": "Specify additional information (text) to be inserted into the return document.<br>Example: This is additional text printed on Return Label",
+      "example": "This is additional text printed on Return instr"
+    },
+    "documentFormat": {
+      "type": "object",
+      "properties": {
+        "provideInstructions": {
+          "type": "boolean",
+          "description": "Use this element to indicate whether or not to provide the instructions.",
+          "example": true
+        },
+        "optionsRequested": {
+          "type": "object",
+          "properties": {
+            "options": {
+              "type": "array",
+              "description": "Indicates the format options. SUPPRESS_ADDITIONAL_LANGUAGES value will suppress English language if another language is specified in the language code field.",
+              "example": ["SUPPRESS_ADDITIONAL_LANGUAGES", "SHIPPING_LABEL_LAST"],
+              "items": {
+                "type": "string",
+                "enum": ["SHIPPING_LABEL_FIRST", "SHIPPING_LABEL_LAST", "SUPPRESS_ADDITIONAL_LANGUAGES"]
+              }
+            }
+          },
+          "description": "Indicate the requested options for document format."
+        },
+        "stockType": {
+          "type": "string",
+          "description": "Specify the label stock type.<br><a onclick='loadDocReference(\"labelstocktypes\")'>click here to see label format types</a>",
+          "example": "PAPER_LETTER",
+          "enum": ["PAPER_LETTER"]
+        },
+        "dispositions": {
+          "type": "array",
+          "description": "Details on creating, organizing, and returning the document.\n\n",
+          "items": {
+            "type": "object",
+            "properties": {
+              "eMailDetail": {
+                "required": ["eMailRecipients"],
+                "type": "object",
+                "properties": {
+                  "eMailRecipients": {
+                    "type": "array",
+                    "description": "Indicates the shipping document email recipients.",
+                    "items": {
+                      "required": ["recipientType"],
+                      "type": "object",
+                      "properties": {
+                        "emailAddress": {
+                          "type": "string",
+                          "description": "Specifies the email address.<br> Example: email@fedex.com",
+                          "example": "email@fedex.com"
+                        },
+                        "recipientType": {
+                          "type": "string",
+                          "description": "Specify the email notification recipient type.",
+                          "example": "THIRD_PARTY",
+                          "enum": ["BROKER", "OTHER", "RECIPIENT", "SHIPPER", "THIRD_PARTY", "OTHER1", "OTHER2"]
+                        }
+                      }
+                    }
+                  },
+                  "locale": {
+                    "type": "string",
+                    "description": "These are locale details.<br>Example: 'en_US'<br><a onclick='loadDocReference(\"locales\")'>click here to see locales</a><br>Note: If the locale is left blank or an invalid locale is entered, an error message is returned in response.",
+                    "example": "en_US"
+                  },
+                  "grouping": {
+                    "type": "string",
+                    "description": "Identifies the convention by which documents are to be grouped as email attachment.",
+                    "example": "NONE",
+                    "enum": ["BY_RECIPIENT", "NONE"]
+                  }
+                },
+                "description": "Specifies how to e-mail shipping documents."
+              },
+              "dispositionType": {
+                "type": "string",
+                "description": "Specify how to create and return the document.",
+                "example": "CONFIRMED",
+                "enum": [
+                  "CONFIRMED",
+                  "DEFERRED_QUEUED",
+                  "DEFERRED_RETURNED",
+                  "DEFERRED_STORED",
+                  "EMAILED",
+                  "QUEUED",
+                  "RETURNED",
+                  "STORED"
+                ]
+              }
+            },
+            "description": "These are document diposition details. Each occurrence of this class specifies a particular way in which a kind of shipping document is to be produced and provided."
+          }
+        },
+        "locale": {
+          "type": "string",
+          "description": "These are locale details.<br>example: 'en_US'<br><a onclick='loadDocReference(\"locales\")'>click here to see Locales</a><br>Note: If the locale is left blank or an invalid locale is entered, an error message is returned in response.",
+          "example": "en_US\""
+        },
+        "docType": {
+          "type": "string",
+          "description": "Specify the image format used for shipping document.<br><a onclick='loadDocReference(\"labelstocktypes\")'>click here to see label format types</a>",
+          "example": "PNG",
+          "enum": ["PNG", "PDF"]
+        }
+      },
+      "description": "These are characteristics of a shipping document to be produced."
+    }
+  },
+  "description": "These are return instruction details which will be returned in the transaction to be printed on Return Label.",
+  "default": {
+    "customText": "This is additional text printed on Return instr",
+    "documentFormat": {
+      "provideInstructions": true,
+      "optionsRequested": {
+        "options": ["SUPPRESS_ADDITIONAL_LANGUAGES", "SHIPPING_LABEL_LAST"]
+      },
+      "stockType": "PAPER_LETTER",
+      "dispositions": [
+        {
+          "eMailDetail": {
+            "eMailRecipients": [
+              {
+                "emailAddress": "email@fedex.com",
+                "recipientType": "THIRD_PARTY"
+              }
+            ],
+            "locale": "en_US",
+            "grouping": "NONE"
+          },
+          "dispositionType": "CONFIRMED"
+        }
+      ],
+      "locale": "en_US\"",
+      "docType": "PNG"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

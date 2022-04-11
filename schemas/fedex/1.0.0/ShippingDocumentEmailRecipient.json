@@ -1,0 +1,22 @@
+{
+  "required": ["recipientType"],
+  "type": "object",
+  "properties": {
+    "emailAddress": {
+      "type": "string",
+      "description": "Specifies the email address.<br> Example: email@fedex.com",
+      "example": "email@fedex.com"
+    },
+    "recipientType": {
+      "type": "string",
+      "description": "Specify the email notification recipient type.",
+      "example": "THIRD_PARTY",
+      "enum": ["BROKER", "OTHER", "RECIPIENT", "SHIPPER", "THIRD_PARTY", "OTHER1", "OTHER2"]
+    }
+  },
+  "default": {
+    "emailAddress": "email@fedex.com",
+    "recipientType": "THIRD_PARTY"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

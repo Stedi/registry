@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "properties": {
+    "documentType": {
+      "type": "string",
+      "description": "Specify document type for the uploaded document. It should match with the type of uploaded document associated with documentId.",
+      "example": "PRO_FORMA_INVOICE",
+      "enum": [
+        "CERTIFICATE_OF_ORIGIN",
+        "COMMERCIAL_INVOICE",
+        "ETD_LABEL",
+        "USMCA_CERTIFICATION_OF_ORIGIN",
+        "OTHER",
+        "PRO_FORMA_INVOICE",
+        "USMCA_COMMERCIAL_INVOICE_CERTIFICATION_OF_ORIGIN"
+      ]
+    },
+    "documentReference": {
+      "type": "string",
+      "description": "Specify the reference for the uploaded document.This is for the customer to reference their uploaded docs when they retrieve them. Could be anything, order number, po number, whatever the customer used to tie the document to something they would use.<br>Note: Ensure to supply document references in case of  Pre-Shipment document upload.</br><br>Example: Reference",
+      "example": "DocumentReference"
+    },
+    "description": {
+      "type": "string",
+      "description": "Specify additional information about the uploaded document for better understanding.<br>Example: Certificate of Origin is uploaded for country of manufacturing verification.",
+      "example": "PRO FORMA INVOICE"
+    },
+    "documentId": {
+      "type": "string",
+      "description": "This is the uploaded document ID value.<br>Example: 090927d680038c61",
+      "example": "090927d680038c61"
+    }
+  },
+  "description": "Specify the document upload reference details.",
+  "default": {
+    "documentType": "PRO_FORMA_INVOICE",
+    "documentReference": "DocumentReference",
+    "description": "PRO FORMA INVOICE",
+    "documentId": "090927d680038c61"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

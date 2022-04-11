@@ -1,0 +1,229 @@
+{
+  "type": "object",
+  "properties": {
+    "maskedData": {
+      "type": "array",
+      "description": "Specify which data/sections on the label to be masked.<br>Note: <ul><li>SECONDARY_BARCODE &ndash; This is used for Smartpost shipment labels.</li><li>SHIPPER_INFORMATION &ndash; This is used for Third Party Consignee, Intra-UK shipments.</li><li>TOTAL_WEIGHT &ndash; This replaces the Total weight with Actual Weight in Master label and AWB copies.</li></ul>",
+      "example": ["CUSTOMS_VALUE", "TOTAL_WEIGHT"],
+      "items": {
+        "type": "string",
+        "default": "SHIPPER_INFORMATION",
+        "enum": [
+          "CUSTOMS_VALUE",
+          "DIMENSIONS",
+          "DUTIES_AND_TAXES_PAYOR_ACCOUNT_NUMBER",
+          "INSURED_VALUE",
+          "SECONDARY_BARCODE",
+          "SHIPPER_INFORMATION",
+          "TERMS_AND_CONDITIONS",
+          "TOTAL_WEIGHT",
+          "TRANSPORTATION_CHARGES_PAYOR_ACCOUNT_NUMBER"
+        ]
+      }
+    },
+    "regulatoryLabels": {
+      "type": "array",
+      "description": "Specify how the regulatory details to be provided on the labels.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "generationOptions": {
+            "type": "string",
+            "description": "Specify the regulatory content preference to be displayed on the label.",
+            "example": "CONTENT_ON_SHIPPING_LABEL_ONLY",
+            "enum": [
+              "CONTENT_ON_SHIPPING_LABEL_PREFERRED",
+              "CONTENT_ON_SUPPLEMENTAL_LABEL_ONLY",
+              "CONTENT_ON_SHIPPING_LABEL_ONLY"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "description": "Specify the type of regulatory content to be added on the label.",
+            "example": "ALCOHOL_SHIPMENT_LABEL",
+            "enum": ["ALCOHOL_SHIPMENT_LABEL"]
+          }
+        }
+      }
+    },
+    "additionalLabels": {
+      "type": "array",
+      "description": "Specify how the additional details to be provided on the labels.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Specify the type of additional  details to be added on the label.",
+            "example": "CONSIGNEE",
+            "enum": [
+              "BROKER",
+              "CONSIGNEE",
+              "CUSTOMS",
+              "DESTINATION",
+              "DESTINATION_CONTROL_STATEMENT",
+              "FREIGHT_REFERENCE",
+              "MANIFEST",
+              "ORIGIN",
+              "RECIPIENT",
+              "SECOND_ADDRESS",
+              "SHIPPER"
+            ]
+          },
+          "count": {
+            "type": "integer",
+            "description": "Specifies the count of label to return.",
+            "example": 1
+          }
+        }
+      }
+    },
+    "docTabContent": {
+      "type": "object",
+      "properties": {
+        "docTabContentType": {
+          "type": "string",
+          "description": "Indicates the content type of the doc tab.",
+          "example": "BARCODED",
+          "enum": ["BARCODED", "CUSTOM", "MINIMUM", "STANDARD", "ZONE001"]
+        },
+        "zone001": {
+          "type": "object",
+          "properties": {
+            "docTabZoneSpecifications": {
+              "type": "array",
+              "description": "Indicate the doc tab specifications for the individual doc tab zone on the label.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "zoneNumber": {
+                    "type": "integer",
+                    "description": "It is a non-negative integer that represents the portion of doc-tab in a label.<br>Example: 1",
+                    "format": "int32"
+                  },
+                  "header": {
+                    "type": "string",
+                    "description": "Indicates the parameter name in the header for the doc tab zone.<br>Example:  WHT"
+                  },
+                  "dataField": {
+                    "type": "string",
+                    "description": "Indicate the path request/reply element to be printed on doc tab.<br>Example:<ul><li>REQUEST/SHIPMENT/ShipTimestamp</li><li>REQUEST/PACKAGE/weight/Value</li><li>REQUEST/PACKAGE/InsuredValue/Amount</li><li>REQUEST/SHIPMENT/SpecialServicesRequested/CodDetail/CodCollectionAmount/Amount</li><li>REQUEST/SHIPMENT/Shipper/Address/StreetLines[1]</li><li>CLIENT/MeterNumber</li><li>TRANSACTION/CustomerTransactionId</li><li>REQUEST/SHIPMENT/TotalWeight/Value</li><li>REQUEST/SHIPMENT/ShipTimestamp</li><li>REQUEST/SHIPMENT/Recipient/Contact/PersonName</li><li>REPLY/SHIPMENT/OperationalDetail/DeliveryDate</li><li>REPLY/PACKAGE/RATE/ACTUAL/BaseCharge/Amount</li><li>REPLY/PACKAGE/RATE/ACTUAL/TotalFreightDiscounts/Amount</li><li>REPLY/PACKAGE/RATE/ACTUAL/TotalSurcharges/Amount</li><li>REPLY/PACKAGE/RATE/ACTUAL/NetCharge/AmountREPLY</li><li>/SHIPMENT/RATES/PAYOR_ACCOUNT/TotalSurcharges/Amount</li></ul>"
+                  },
+                  "literalValue": {
+                    "type": "string",
+                    "description": "Indicates the actual data to be printed in the label<br>"
+                  },
+                  "justification": {
+                    "type": "string",
+                    "description": "Indicates the justification format for the string.",
+                    "example": "RIGHT",
+                    "enum": ["LEFT", "RIGHT"]
+                  }
+                },
+                "description": "Indicates the doc tab zone specification."
+              }
+            }
+          },
+          "description": "Indicate the doc tab specification for different zones on the label. The specification includes zone number, header and data field to be displayed on the label."
+        },
+        "barcoded": {
+          "type": "object",
+          "properties": {
+            "symbology": {
+              "type": "string",
+              "description": "Indicates the type of barcode symbology used on FedEx documents and labels.",
+              "example": "UCC128",
+              "enum": [
+                "CODABAR",
+                "CODE128",
+                "CODE128_WIDEBAR",
+                "CODE128B",
+                "CODE128C",
+                "CODE39",
+                "CODE93",
+                "I2OF5",
+                "MANUAL",
+                "PDF417",
+                "POSTNET",
+                "QR_CODE",
+                "UCC128"
+              ]
+            },
+            "specification": {
+              "type": "object",
+              "properties": {
+                "zoneNumber": {
+                  "type": "integer",
+                  "description": "It is a non-negative integer that represents the portion of doc-tab in a label.<br>Example: 1",
+                  "format": "int32"
+                },
+                "header": {
+                  "type": "string",
+                  "description": "Indicates the parameter name in the header for the doc tab zone.<br>Example:  WHT"
+                },
+                "dataField": {
+                  "type": "string",
+                  "description": "Indicate the path request/reply element to be printed on doc tab.<br>Example:<ul><li>REQUEST/SHIPMENT/ShipTimestamp</li><li>REQUEST/PACKAGE/weight/Value</li><li>REQUEST/PACKAGE/InsuredValue/Amount</li><li>REQUEST/SHIPMENT/SpecialServicesRequested/CodDetail/CodCollectionAmount/Amount</li><li>REQUEST/SHIPMENT/Shipper/Address/StreetLines[1]</li><li>CLIENT/MeterNumber</li><li>TRANSACTION/CustomerTransactionId</li><li>REQUEST/SHIPMENT/TotalWeight/Value</li><li>REQUEST/SHIPMENT/ShipTimestamp</li><li>REQUEST/SHIPMENT/Recipient/Contact/PersonName</li><li>REPLY/SHIPMENT/OperationalDetail/DeliveryDate</li><li>REPLY/PACKAGE/RATE/ACTUAL/BaseCharge/Amount</li><li>REPLY/PACKAGE/RATE/ACTUAL/TotalFreightDiscounts/Amount</li><li>REPLY/PACKAGE/RATE/ACTUAL/TotalSurcharges/Amount</li><li>REPLY/PACKAGE/RATE/ACTUAL/NetCharge/AmountREPLY</li><li>/SHIPMENT/RATES/PAYOR_ACCOUNT/TotalSurcharges/Amount</li></ul>"
+                },
+                "literalValue": {
+                  "type": "string",
+                  "description": "Indicates the actual data to be printed in the label<br>"
+                },
+                "justification": {
+                  "type": "string",
+                  "description": "Indicates the justification format for the string.",
+                  "example": "RIGHT",
+                  "enum": ["LEFT", "RIGHT"]
+                }
+              },
+              "description": "Indicates the doc tab zone specification."
+            }
+          },
+          "description": "It is a doc tab content type which is in barcoded format."
+        }
+      },
+      "description": "Specifies details of doc tab content."
+    }
+  },
+  "description": "This object allows the control of label content for customization.",
+  "default": {
+    "maskedData": ["CUSTOMS_VALUE", "TOTAL_WEIGHT"],
+    "regulatoryLabels": [
+      {
+        "generationOptions": "CONTENT_ON_SHIPPING_LABEL_ONLY",
+        "type": "ALCOHOL_SHIPMENT_LABEL"
+      }
+    ],
+    "additionalLabels": [
+      {
+        "type": "CONSIGNEE",
+        "count": 1
+      }
+    ],
+    "docTabContent": {
+      "docTabContentType": "BARCODED",
+      "zone001": {
+        "docTabZoneSpecifications": [
+          {
+            "zoneNumber": 1,
+            "header": "string",
+            "dataField": "string",
+            "literalValue": "string",
+            "justification": "RIGHT"
+          }
+        ]
+      },
+      "barcoded": {
+        "symbology": "UCC128",
+        "specification": {
+          "zoneNumber": 1,
+          "header": "string",
+          "dataField": "string",
+          "literalValue": "string",
+          "justification": "RIGHT"
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

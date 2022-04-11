@@ -1,0 +1,50 @@
+{
+  "required": ["type"],
+  "type": "object",
+  "properties": {
+    "licenseOrPermitExpirationDate": {
+      "type": "string",
+      "description": "Indicate the expiration date for the license or permit. The format is YYYY-MM-DD.<br>Example: \"2019-12-03\"",
+      "example": "2019-12-03"
+    },
+    "licenseOrPermitNumber": {
+      "type": "string",
+      "description": "Indicate License Or Permit Number for the commodity being exported.<br>Example: 11",
+      "example": "11"
+    },
+    "entryNumber": {
+      "type": "string",
+      "description": "Indicate Entry Number for the export.<br>Example: 125",
+      "example": "125"
+    },
+    "foreignTradeZoneCode": {
+      "type": "string",
+      "description": "Indicate the Foreign Trade Zone Code.<br>Example: US",
+      "example": "US"
+    },
+    "type": {
+      "type": "string",
+      "description": "Indicate International Controlled Export Type.",
+      "example": "WAREHOUSE_WITHDRAWAL",
+      "enum": [
+        "DEA_036",
+        "DEA_236",
+        "DSP_05",
+        "DSP_61",
+        "DSP_73",
+        "DSP_85",
+        "DSP_LICENSE_AGREEMENT",
+        "WAREHOUSE_WITHDRAWAL"
+      ]
+    }
+  },
+  "description": "Use this object to specify International Controlled Export shipment Details.<br>Note: licenseOrPermitExpirationDate and licenseOrPermitNumber are not required when type is WAREHOUSE_WITHDRAWAL.",
+  "default": {
+    "licenseOrPermitExpirationDate": "2019-12-03",
+    "licenseOrPermitNumber": "11",
+    "entryNumber": "125",
+    "foreignTradeZoneCode": "US",
+    "type": "WAREHOUSE_WITHDRAWAL"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

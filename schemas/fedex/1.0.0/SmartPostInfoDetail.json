@@ -1,0 +1,43 @@
+{
+  "required": ["hubId", "indicia"],
+  "type": "object",
+  "properties": {
+    "ancillaryEndorsement": {
+      "type": "string",
+      "description": "Indicate the type of ancillary endorsement. Is required for Presorted Standard but not for returns or parcel select. <br>Note: Not all are usable for all ancillary endorsements.<br>For more information, refer to the <a href = 'https://www.fedex.com/en-us/shipping/fedex-smartpost/rates-zones.html' target='_blank'>FedEx SmartPost®</a>.",
+      "example": "RETURN_SERVICE",
+      "enum": [
+        "ADDRESS_CORRECTION",
+        "CARRIER_LEAVE_IF_NO_RESPONSE",
+        "CHANGE_SERVICE",
+        "FORWARDING_SERVICE",
+        "RETURN_SERVICE"
+      ]
+    },
+    "hubId": {
+      "type": "string",
+      "description": "Specify the four-digit numeric Hub ID value used for smartport shipments.<br><a onclick='loadDocReference(\"smartposthubids\")'>click here to see Hub Ids</a>",
+      "example": "5015"
+    },
+    "indicia": {
+      "type": "string",
+      "description": "Specify the indicia type.<br>Available options include:<ul><li>MEDIA_MAIL</li><li>PARCEL_SELECT (1 LB through 70 LB)</li><li>PRESORTED_BOUND_PRINTED_MATTER</li><li>PRESORTED_STANDARD (less than 1 LB)</li><li>PARCEL_RETURN</li></ul>",
+      "example": "PRESORTED_STANDARD",
+      "enum": ["MEDIA_MAIL", "PARCEL_RETURN", "PARCEL_SELECT", "PRESORTED_BOUND_PRINTED_MATTER", "PRESORTED_STANDARD"]
+    },
+    "specialServices": {
+      "type": "string",
+      "description": "Specify the special handling associated with Smartpost Shipment.",
+      "example": "USPS_DELIVERY_CONFIRMATION",
+      "enum": ["USPS_DELIVERY_CONFIRMATION"]
+    }
+  },
+  "description": "Use this object to specify the smartpost shipment details. <br>Required for SMARTPOST service. If SmartPostInfoDetail is indicated, the elements below it are also required.",
+  "default": {
+    "ancillaryEndorsement": "RETURN_SERVICE",
+    "hubId": "5015",
+    "indicia": "PRESORTED_STANDARD",
+    "specialServices": "USPS_DELIVERY_CONFIRMATION"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
