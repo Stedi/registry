@@ -6,18 +6,18 @@ In this guide you will get an overview on how to contribute schemas to the Stedi
 
 There are two ways to contribute schemas to the registry:
 
-- By adding a _Provider_ which is a Typescript program that can generate schemas in an automated, repeatable and consistent fashion by sourcing and unbunding them from some other source like a hosted OpenAPI specification or a Postman collection.
-- By adding schemas manually, if schemas cannot be extracted in an automated way (e.g. when the service is not exposing API definition in a machine-readable way)
+- By adding a _Provider_, which is a TypeScript program that can generate schemas in an automated, repeatable and consistent fashion by sourcing and unbunding them from another source (e.g. a hosted OpenAPI specification or a Postman collection)
+- By adding schemas manually, if schemas cannot be extracted in an automated way (e.g. when the service is not exposing API definition in a machine-readable way).
 
 ### Adding a Provider
 
 To add a new provider, please create a new file in the `src/providers` repository. The file name should be the provider name + `.ts` suffix. The file should contain a class implementing `BaseProvider` (or inheriting an other class that already implements `BaseProvider`).
 
-A typial provider consists of few things:
+A typical provider consists of few things:
 
 - metadata - the `name`, `description`, `logoURL` and `versions` of the API
 - `async getSchema(version: string): Promise<APISchema>` function - logic responsible for fetching spec from some URL
-- `async unbundle(bundle: unknown): Promise<EntitySchema[]>` function - logic responsible for sanitization and breaking down the spec into multiple JSONSchemas
+- `async unbundle(bundle: unknown): Promise<EntitySchema[]>` function - logic responsible for sanitization and breaking down the spec into multiple JSON Schemas.
 
 Please see generic [OpenAPI Provider](https://github.com/Stedi/registry/blob/main/src/providers/openapi.ts) to see an example implementation of the `BaseProvider`.
 
@@ -42,7 +42,7 @@ export class MyCompanyNewProvider extends OpenAPIProvider {
 ```
 
 
-If the entities generated as a result of `npm run generate` command contain non-standard fields or formats not recognized by JSONSchema, you can supply a custom `sanitizeSchema(schema: unknown) => unknown` function to remove unwanted properties from the generated JSONSchemas.
+If the entities generated as a result of `npm run generate` command contain non-standard fields or formats not recognized by JSON Schema, you can supply a custom `sanitizeSchema(schema: unknown) => unknown` function to remove unwanted properties from the generated JSON Schemas.
 
 Sometimes the unbundled schema exports too many entities. Many of them may not be necessary from the registry's perspective - they can be virtual, meaningless or not providing any value. If that's the case, supply an optional `entities: string[]` array argument with the list of entity names that should be exclusively generated.
 
@@ -50,4 +50,4 @@ After writing your provider, please also add it to the `src/providers/index.ts` 
 
 Lastly, run `npm run generate` to generate the schemas. You can also run `npm run validate` to ensure that generated schemas are valid and will be accepted by [Mappings](https://www.stedi.com/products/mappings).
 
-If the _validate_ task succeeds, you can commit your changes to branch or fork and create a pull request. We will review your pull request and if it's accepted, we will add your provider to the registry.
+If the _validate_ task succeeds, you can commit your changes to branch or fork and create a pull request. We will review your pull request – if it's accepted, we will add your provider to the registry.
