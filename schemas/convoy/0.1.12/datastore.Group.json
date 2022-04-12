@@ -1,0 +1,122 @@
+{
+  "properties": {
+    "config": {
+      "properties": {
+        "disable_endpoint": {
+          "type": "boolean"
+        },
+        "replay_attacks": {
+          "type": "boolean"
+        },
+        "signature": {
+          "properties": {
+            "hash": {
+              "type": "string"
+            },
+            "header": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "strategy": {
+          "properties": {
+            "default": {
+              "properties": {
+                "intervalSeconds": {
+                  "type": "integer"
+                },
+                "retryLimit": {
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "exponentialBackoff": {
+              "properties": {
+                "retryLimit": {
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "deleted_at": {
+      "type": "string"
+    },
+    "logo_url": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "rate_limit": {
+      "type": "integer"
+    },
+    "rate_limit_duration": {
+      "type": "string"
+    },
+    "statistics": {
+      "properties": {
+        "messages_sent": {
+          "type": "integer"
+        },
+        "total_apps": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "uid": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "default": {
+    "config": {
+      "disable_endpoint": true,
+      "replay_attacks": true,
+      "signature": {
+        "hash": "string",
+        "header": "string"
+      },
+      "strategy": {
+        "default": {
+          "intervalSeconds": 1,
+          "retryLimit": 1
+        },
+        "exponentialBackoff": {
+          "retryLimit": 1
+        },
+        "type": "string"
+      }
+    },
+    "created_at": "string",
+    "deleted_at": "string",
+    "logo_url": "string",
+    "name": "string",
+    "rate_limit": 1,
+    "rate_limit_duration": "string",
+    "statistics": {
+      "messages_sent": 1,
+      "total_apps": 1
+    },
+    "uid": "string",
+    "updated_at": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

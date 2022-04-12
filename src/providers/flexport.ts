@@ -12,7 +12,7 @@ export class FlexportProvider extends OpenAPIProvider {
         "Flexport is a full-service global freight forwarder and logistics platform using modern software to fix the user experience in global trade.",
       logoUrl: "https://logo.clearbit.com/flexport.com",
       versions: ["v2"],
-      baseUrl: "https://klaviyo-openapi.s3.amazonaws.com/spec.json",
+      baseUrl: "https://github.com/distributeaid/flexport-sdk-js/blob/saga/api-docs/v2.yaml",
       entities: [
         "person",
         "metric",
@@ -33,7 +33,7 @@ export class FlexportProvider extends OpenAPIProvider {
     return {
       type: "openapi-v3",
       versionName: version,
-      value: yaml.load(definition),
+      value: yaml.load(definition as string),
       entities: ["Container", "Shipment", "Invoice", "Product", "Document"],
     };
   }

@@ -14,9 +14,11 @@ import { UPSFreightShipProvider } from "./ups/freightShip";
 import { UPSShipmentProvider } from "./ups/shipment";
 import { UPSTrackProvider } from "./ups/track";
 import { FedexShipProvider } from "./fedex/ship";
+import { ConvoyProvider } from "./convoy";
 
 export default {
   baton: new BatonProvider(),
+  convoy: new ConvoyProvider(),
   fedexShip: new FedexShipProvider(),
   flexport: new FlexportProvider(),
   klaviyo: new KlaviyoProvider(),

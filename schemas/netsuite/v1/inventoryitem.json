@@ -317,8 +317,8 @@
             "AQ",
             "AR",
             "AS",
-            "AT",
             "RE",
+            "AT",
             "AU",
             "AW",
             "AX",
@@ -328,8 +328,8 @@
             "BB",
             "RS",
             "BD",
-            "BE",
             "RU",
+            "BE",
             "BF",
             "BG",
             "RW",
@@ -373,16 +373,16 @@
             "CG",
             "CH",
             "SX",
-            "CI",
             "SY",
+            "CI",
             "SZ",
             "CK",
             "CL",
             "CM",
             "CN",
             "CO",
-            "CR",
             "TC",
+            "CR",
             "TD",
             "CS",
             "TF",
@@ -392,8 +392,8 @@
             "CW",
             "TH",
             "CX",
-            "CY",
             "TJ",
+            "CY",
             "TK",
             "CZ",
             "TL",
@@ -405,8 +405,8 @@
             "DE",
             "TV",
             "TW",
-            "DJ",
             "TZ",
+            "DJ",
             "DK",
             "DM",
             "DO",
@@ -423,11 +423,11 @@
             "UY",
             "UZ",
             "VA",
-            "ER",
             "VC",
+            "ER",
             "ES",
-            "ET",
             "VE",
+            "ET",
             "VG",
             "VI",
             "VN",
@@ -464,8 +464,8 @@
             "HM",
             "HN",
             "HR",
-            "HT",
             "YE",
+            "HT",
             "HU",
             "IC",
             "ID",
@@ -585,7 +585,7 @@
       "description": "Enter alternative search keywords that customers might use to find this item using your Web store’s internal search. These can include synonyms, acronyms, alternate languages or misspellings. These keywords are seen as equally important as the item name when searches are conducted."
     },
     "isOnline": {
-      "title": "Display in Web Site",
+      "title": "Display in Website",
       "type": "boolean",
       "description": "Check this box to make this item available online in your Web site. You cannot sell this item online unless you check this box. If the item is of the Other Charge for Sale or Resale subtype, checking this box does not make it available in the web store catalog. However, it becomes available during web store checkout."
     },
@@ -638,15 +638,15 @@
       "description": "Enter or accept the total value of this item. NetSuite generates this amount by multiplying your purchase price and your quantity on hand. As you buy and sell additional inventory, NetSuite continues to calculate the total value.",
       "format": "double"
     },
-    "storeDetailedDescription": {
-      "title": "Detailed Description",
-      "type": "string",
-      "description": "Enter a detailed description for this item. When your customers click an item&apos;s store display name for more information, they see this description. You can enter letters, numbers or basic HTML code. If you are using Internet Explorer, you can also clear the View Source box below to enter and format text using the formatting options above. This eliminates the need for HTML code. If you do not see the View Source box, make sure Rich Text Editing is enabled at Home &gt; Set Preferences &gt; Appearance."
-    },
     "salesDescription": {
       "title": "Sales Description",
       "type": "string",
       "description": "Enter a sales description for this item. You can enter letters and numbers. There is a 999 character limit. The sales description displays on transactions such as sales orders, cash sales and invoices. If you use the Web Store feature, the sales description displays immediately under the item&apos;s store display name on item list pages in your store or site, if you have not entered a store description for an item. Enter the store description on the Store subtab of the item record. The sales description also displays by default when the item is in the Web store shopping cart."
+    },
+    "storeDetailedDescription": {
+      "title": "Detailed Description",
+      "type": "string",
+      "description": "Enter a detailed description for this item. When your customers click an item&apos;s store display name for more information, they see this description. You can enter letters, numbers or basic HTML code. If you are using Internet Explorer, you can also clear the View Source box below to enter and format text using the formatting options above. This eliminates the need for HTML code. If you do not see the View Source box, make sure Rich Text Editing is enabled at Home &gt; Set Preferences &gt; Appearance."
     },
     "costEstimateUnits": {
       "title": "Est. Cost Unit",
@@ -723,15 +723,15 @@
       "type": "string",
       "description": "Enter up to 999 characters of text for a description of this item to appear on vendor orders. Include the unit of measure in this description."
     },
-    "metaTagHtml": {
-      "title": "Meta Tag HTML",
-      "type": "string",
-      "description": "Enter the Meta Tag HTML you want to appear in the &lt; head &gt; section of this item page. Meta tags enable your Web site to be found by search engines."
-    },
     "roundUpAsComponent": {
       "title": "Round Up Quantity as Component",
       "type": "boolean",
       "description": "If you use the component yield preference, depending on your settings, the component yield calculation may result in a fractional quantity. You can use this setting so that the quantity for a component on a work order automatically rounds up to a whole number in base units. For example, you have an assembly that requires 2 units of Component A. The component yield is 99%. To build 5 of these assemblies requires 10.1 units of Component A. Since you can consume components only in whole numbers, you cannot consume 10.1 units. Therefore, you need to round up to the next highest whole number in base units. Check the Round Up Quantity as Component box to enable NetSuite to round up the quantity consumed for this item. Clear this box if you do not want NetSuite to round up the quantity consumed for this item."
+    },
+    "metaTagHtml": {
+      "title": "Meta Tag HTML",
+      "type": "string",
+      "description": "Enter the Meta Tag HTML you want to appear in the &lt; head &gt; section of this item page. Meta tags enable your Web site to be found by search engines."
     },
     "dontShowPrice": {
       "title": "Don't Show Price",
@@ -833,6 +833,11 @@
       "title": "Weight Units",
       "type": "string"
     },
+    "autoPreferredStockLevel": {
+      "title": "Auto-Calculate",
+      "type": "boolean",
+      "description": "The preferred stock level is the optimum quantity to maintain in stock of an item. The quantity you enter here is used to determine your replenishment needs on the Order Items page. It is the quantity you want to have in stock after an order is placed. * Auto-Calculating – Check the Auto-Calculate box if you want NetSuite to calculate the preferred stock level based on demand for the item. The preferred stock level is calculated as: (daily demand * number of days supply preferred). If no preferred stock level is identified, then the default preferred stock level is used from the Set Up Inventory Management page. * Manually Calculating – Clear the Auto-Calculate box to manually enter the preferred stock quantity. The preferred stock level you set is used to calculate the quantity of items to be ordered on the Order Items page."
+    },
     "lastModifiedDate": {
       "title": "Last Modified",
       "type": "string",
@@ -851,11 +856,6 @@
           "type": "string"
         }
       }
-    },
-    "autoPreferredStockLevel": {
-      "title": "Auto-Calculate",
-      "type": "boolean",
-      "description": "The preferred stock level is the optimum quantity to maintain in stock of an item. The quantity you enter here is used to determine your replenishment needs on the Order Items page. It is the quantity you want to have in stock after an order is placed. * Auto-Calculating – Check the Auto-Calculate box if you want NetSuite to calculate the preferred stock level based on demand for the item. The preferred stock level is calculated as: (daily demand * number of days supply preferred). If no preferred stock level is identified, then the default preferred stock level is used from the Set Up Inventory Management page. * Manually Calculating – Clear the Auto-Calculate box to manually enter the preferred stock quantity. The preferred stock level you set is used to calculate the quantity of items to be ordered on the Order Items page."
     },
     "amortizationPeriod": {
       "title": "Amortization Period",
@@ -911,6 +911,20 @@
         }
       }
     },
+    "siteMapPriority": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Internal identifier",
+          "type": "string",
+          "enum": ["", "0.0", "0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1.0"]
+        },
+        "refName": {
+          "title": "Reference Name",
+          "type": "string"
+        }
+      }
+    },
     "itemType": {
       "type": "object",
       "properties": {
@@ -939,20 +953,6 @@
             "Assembly",
             "SubscriPlan"
           ]
-        },
-        "refName": {
-          "title": "Reference Name",
-          "type": "string"
-        }
-      }
-    },
-    "siteMapPriority": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "title": "Internal identifier",
-          "type": "string",
-          "enum": ["", "0.0", "0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1.0"]
         },
         "refName": {
           "title": "Reference Name",
@@ -1860,14 +1860,14 @@
                 "type": "number",
                 "format": "double"
               },
-              "itemNKeyFld": {
-                "title": "Item",
-                "type": "string"
-              },
               "purchaseRateFld": {
                 "title": "Overall Purchase Rate",
                 "type": "number",
                 "format": "double"
+              },
+              "itemNKeyFld": {
+                "title": "Item",
+                "type": "string"
               },
               "countFld": {
                 "title": "Count",
@@ -1888,7 +1888,7 @@
         }
       }
     },
-    "shipPackage": {
+    "quantityPricingSchedule": {
       "type": "object",
       "properties": {
         "id": {
@@ -1925,7 +1925,7 @@
         }
       }
     },
-    "quantityPricingSchedule": {
+    "shipPackage": {
       "type": "object",
       "properties": {
         "id": {
@@ -3936,8 +3936,8 @@
     "custitem_pfc_framewidth": 0,
     "custitem_popup": "string",
     "totalValue": 0,
-    "storeDetailedDescription": "string",
     "salesDescription": "string",
+    "storeDetailedDescription": "string",
     "costEstimateUnits": "string",
     "custitem_custom_altimage1": "string",
     "baseUnit": "string",
@@ -3953,8 +3953,8 @@
     "vendorName": "string",
     "isInactive": true,
     "purchaseDescription": "string",
-    "metaTagHtml": "string",
     "roundUpAsComponent": true,
+    "metaTagHtml": "string",
     "dontShowPrice": true,
     "atpMethod": {
       "id": "CUMULATIVE_ATP_WITH_LOOK_AHEAD",
@@ -3977,12 +3977,12 @@
     "cost": 0,
     "excludeFromSiteMap": true,
     "weightUnits": "string",
+    "autoPreferredStockLevel": true,
     "lastModifiedDate": "1970-01-01T00:00:00.000Z",
     "costingMethod": {
       "id": "SERIAL",
       "refName": "string"
     },
-    "autoPreferredStockLevel": true,
     "amortizationPeriod": 1,
     "yahooProductFeed": true,
     "reorderMultiple": 1,
@@ -3995,12 +3995,12 @@
       "id": "DISABLE",
       "refName": "string"
     },
-    "itemType": {
-      "id": "Group",
-      "refName": "string"
-    },
     "siteMapPriority": {
       "id": "",
+      "refName": "string"
+    },
+    "itemType": {
+      "id": "Group",
       "refName": "string"
     },
     "costEstimate": 0,
@@ -4256,15 +4256,15 @@
             }
           ],
           "liftFld": 0,
-          "itemNKeyFld": "string",
           "purchaseRateFld": 0,
+          "itemNKeyFld": "string",
           "countFld": 1,
           "correlationFld": 0,
           "refName": "string"
         }
       ]
     },
-    "shipPackage": {
+    "quantityPricingSchedule": {
       "id": "string",
       "refName": "string",
       "externalId": "string",
@@ -4275,7 +4275,7 @@
         }
       ]
     },
-    "quantityPricingSchedule": {
+    "shipPackage": {
       "id": "string",
       "refName": "string",
       "externalId": "string",
