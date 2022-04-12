@@ -13,8 +13,10 @@ import { ShipbobProvider } from "./shipbob";
 import { UPSFreightShipProvider } from "./ups/freightShip";
 import { UPSShipmentProvider } from "./ups/shipment";
 import { UPSTrackProvider } from "./ups/track";
+import { ConvoyProvider } from "./convoy";
 
 export default {
+  convoy: new ConvoyProvider(),
   stripe: new StripeProvider(),
   shopify: new ShopifyProvider(),
   twilio: new TwilioProvider(),
