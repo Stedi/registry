@@ -13,11 +13,11 @@ import { ShipbobProvider } from "./shipbob";
 import { UPSFreightShipProvider } from "./ups/freightShip";
 import { UPSShipmentProvider } from "./ups/shipment";
 import { UPSTrackProvider } from "./ups/track";
-import { FedexProvider } from "./fedex";
+import { FedexShipProvider } from "./fedex/ship";
 
 export default {
   baton: new BatonProvider(),
-  fedex: new FedexProvider(),
+  fedexShip: new FedexShipProvider(),
   flexport: new FlexportProvider(),
   klaviyo: new KlaviyoProvider(),
   maersk: new MaerskProvider(),

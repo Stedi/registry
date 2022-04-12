@@ -46,6 +46,8 @@ If the entities generated as a result of `unbundle` logic contain non-standard f
 
 Sometimes the unbundled schema exports too many entities. Many of them may not be necessary from the registry's perspective. If that's the case, supply an optional `entities: string[]` array argument with the list of entity names that should be exclusively generated.
 
+If a provider (e.g. FedEx, UPS) has multiple APIs, you can use `customPath` to specify where a generated schema is going to land in the registry.
+
 After writing your provider, please also add it to the `src/providers/index.ts` file.
 
 Lastly, run `npm run generate` to generate the schemas and update the `providers.json` file. You can also run `npm run validate` to ensure that generated schemas are valid and will be accepted by [Mappings](https://www.stedi.com/products/mappings).
