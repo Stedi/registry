@@ -11,15 +11,12 @@ export class WebCargoProvider extends OpenAPIProvider {
       logoUrl: "https://www.webcargo.co/wp-content/uploads/2019/05/horizontal-color-logo-with-white-text.png",
       name: "WebCargo",
       versions: ["1.0"],
+      sanitizeSchema,
       entities: [
-        "AccountIDList",
-        "AcknowledgmentResponse",
         "AdditionalInformation",
         "Attachments",
         "BookingRequest",
-        "BookingResponse",
         "Dimensions",
-        "ErrorResponse",
         "EventDate",
         "FeeBreaks",
         "FeeTypeShipmentCharges",
@@ -34,9 +31,25 @@ export class WebCargoProvider extends OpenAPIProvider {
         "SpecialHandlingCodes",
         "TrackingInfo",
         "TrackingMessage",
-        "TrackingResponse",
         "TransportationMode",
       ],
     });
   }
+}
+
+function sanitizeSchema(schema: unknown) {
+  return JSON.parse(
+    JSON.stringify(schema, (key, value) => {
+      // Some WebCargo schemas contain xml fields with are not compatible with JSONSchema spec
+      if (value?.xml) {
+        delete value.xml;
+      }
+
+      if (value?.["x-className"]) {
+        delete value["x-className"];
+      }
+
+      return value;
+    }),
+  );
 }
