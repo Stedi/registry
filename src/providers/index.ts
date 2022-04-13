@@ -13,6 +13,7 @@ import { ShipbobProvider } from "./shipbob";
 import { UPSFreightShipProvider } from "./ups/freightShip";
 import { UPSShipmentProvider } from "./ups/shipment";
 import { UPSTrackProvider } from "./ups/track";
+import { QuickbooksProvider } from "./quickbooks";
 
 export default {
   stripe: new StripeProvider(),
@@ -27,6 +28,7 @@ export default {
   baton: new BatonProvider(),
   square: new SquareProvider(),
   shipbob: new ShipbobProvider(),
+  quickbooks: new QuickbooksProvider(),
   upsFreightShip: new UPSFreightShipProvider(),
   upsShipment: new UPSShipmentProvider(),
   upsTrack: new UPSTrackProvider(),

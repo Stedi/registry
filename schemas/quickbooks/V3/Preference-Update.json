@@ -1,0 +1,475 @@
+{
+  "description": "Update the preference object endpoint",
+  "type": "object",
+  "title": "Preference-Update",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "type": "object",
+    "properties": {
+      "AccountingInfoPrefs": {
+        "type": "object",
+        "properties": {
+          "TrackDepartments": {
+            "type": "boolean"
+          },
+          "DepartmentTerminology": {
+            "type": "string"
+          },
+          "ClassTrackingPerTxn": {
+            "type": "boolean"
+          },
+          "ClassTrackingPerTxnLine": {
+            "type": "boolean"
+          },
+          "CustomerTerminology": {
+            "type": "string"
+          }
+        }
+      },
+      "ProductAndServicesPrefs": {
+        "type": "object",
+        "properties": {
+          "ForSales": {
+            "type": "boolean"
+          },
+          "ForPurchase": {
+            "type": "boolean"
+          },
+          "QuantityWithPriceAndRate": {
+            "type": "boolean"
+          },
+          "QuantityOnHand": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SalesFormsPrefs": {
+        "type": "object",
+        "properties": {
+          "CustomField": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "CustomField": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "CustomTxnNumbers": {
+            "type": "boolean"
+          },
+          "AllowDeposit": {
+            "type": "boolean"
+          },
+          "AllowDiscount": {
+            "type": "boolean"
+          },
+          "DefaultDiscountAccount": {
+            "type": "string",
+            "format": "utc-millisec"
+          },
+          "AllowEstimates": {
+            "type": "boolean"
+          },
+          "ETransactionEnabledStatus": {
+            "type": "string"
+          },
+          "ETransactionAttachPDF": {
+            "type": "boolean"
+          },
+          "ETransactionPaymentEnabled": {
+            "type": "boolean"
+          },
+          "IPNSupportEnabled": {
+            "type": "boolean"
+          },
+          "AllowServiceDate": {
+            "type": "boolean"
+          },
+          "AllowShipping": {
+            "type": "boolean"
+          },
+          "DefaultTerms": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "format": "utc-millisec"
+              }
+            }
+          },
+          "DefaultCustomerMessage": {
+            "type": "string"
+          }
+        }
+      },
+      "EmailMessagesPrefs": {
+        "type": "object",
+        "properties": {
+          "InvoiceMessage": {
+            "type": "object",
+            "properties": {
+              "Subject": {
+                "type": "string"
+              },
+              "Message": {
+                "type": "string"
+              }
+            }
+          },
+          "EstimateMessage": {
+            "type": "object",
+            "properties": {
+              "Subject": {
+                "type": "string"
+              },
+              "Message": {
+                "type": "string"
+              }
+            }
+          },
+          "SalesReceiptMessage": {
+            "type": "object",
+            "properties": {
+              "Subject": {
+                "type": "string"
+              },
+              "Message": {
+                "type": "string"
+              }
+            }
+          },
+          "StatementMessage": {
+            "type": "object",
+            "properties": {
+              "Subject": {
+                "type": "string"
+              },
+              "Message": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "VendorAndPurchasesPrefs": {
+        "type": "object",
+        "properties": {
+          "TrackingByCustomer": {
+            "type": "boolean"
+          },
+          "BillableExpenseTracking": {
+            "type": "boolean"
+          },
+          "POCustomField": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "CustomField": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "TimeTrackingPrefs": {
+        "type": "object",
+        "properties": {
+          "UseServices": {
+            "type": "boolean"
+          },
+          "BillCustomers": {
+            "type": "boolean"
+          },
+          "ShowBillRateToAll": {
+            "type": "boolean"
+          },
+          "WorkWeekStartDate": {
+            "type": "string"
+          },
+          "MarkTimeEntriesBillable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "TaxPrefs": {
+        "type": "object",
+        "properties": {
+          "UsingSalesTax": {
+            "type": "boolean"
+          },
+          "TaxGroupCodeRef": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "format": "utc-millisec"
+              }
+            }
+          }
+        }
+      },
+      "CurrencyPrefs": {
+        "type": "object",
+        "properties": {
+          "MultiCurrencyEnabled": {
+            "type": "boolean"
+          },
+          "HomeCurrency": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "ReportPrefs": {
+        "type": "object",
+        "properties": {
+          "ReportBasis": {
+            "type": "string"
+          },
+          "CalcAgingReportFromTxnDate": {
+            "type": "boolean"
+          }
+        }
+      },
+      "OtherPrefs": {
+        "type": "object",
+        "properties": {
+          "NameValue": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "domain": {
+        "type": "string"
+      },
+      "sparse": {
+        "type": "boolean"
+      },
+      "Id": {
+        "type": "string",
+        "format": "utc-millisec"
+      },
+      "SyncToken": {
+        "type": "string",
+        "format": "utc-millisec"
+      },
+      "MetaData": {
+        "type": "object",
+        "properties": {
+          "CreateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "LastUpdatedTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  },
+  "default": {
+    "AccountingInfoPrefs": {
+      "TrackDepartments": true,
+      "DepartmentTerminology": "Location",
+      "ClassTrackingPerTxn": false,
+      "ClassTrackingPerTxnLine": true,
+      "CustomerTerminology": "Customers"
+    },
+    "ProductAndServicesPrefs": {
+      "ForSales": true,
+      "ForPurchase": true,
+      "QuantityWithPriceAndRate": true,
+      "QuantityOnHand": true
+    },
+    "SalesFormsPrefs": {
+      "CustomField": [
+        {
+          "CustomField": [
+            {
+              "Name": "SalesFormsPrefs.UseSalesCustom3",
+              "Type": "BooleanType",
+              "BooleanValue": false
+            },
+            {
+              "Name": "SalesFormsPrefs.UseSalesCustom2",
+              "Type": "BooleanType",
+              "BooleanValue": false
+            },
+            {
+              "Name": "SalesFormsPrefs.UseSalesCustom1",
+              "Type": "BooleanType",
+              "BooleanValue": true
+            }
+          ]
+        },
+        {
+          "CustomField": [
+            {
+              "Name": "SalesFormsPrefs.SalesCustomName1",
+              "Type": "StringType",
+              "StringValue": "Crew #"
+            }
+          ]
+        }
+      ],
+      "CustomTxnNumbers": false,
+      "AllowDeposit": true,
+      "AllowDiscount": true,
+      "DefaultDiscountAccount": "86",
+      "AllowEstimates": true,
+      "ETransactionEnabledStatus": "NotApplicable",
+      "ETransactionAttachPDF": false,
+      "ETransactionPaymentEnabled": false,
+      "IPNSupportEnabled": false,
+      "AllowServiceDate": false,
+      "AllowShipping": false,
+      "DefaultTerms": {
+        "value": "3"
+      },
+      "DefaultCustomerMessage": "Thank you for your business and have a great day!"
+    },
+    "EmailMessagesPrefs": {
+      "InvoiceMessage": {
+        "Subject": "Invoice from Craig's Design and Landscaping Services",
+        "Message": "Your invoice is attached.  Please remit payment at your earliest convenience.\nThank you for your business - we appreciate it very much.\n\nSincerely,\nCraig's Design and Landscaping Services"
+      },
+      "EstimateMessage": {
+        "Subject": "Estimate from Craig's Design and Landscaping Services",
+        "Message": "Please review the estimate below.  Feel free to contact us if you have any questions.\nWe look forward to working with you.\n\nSincerely,\nCraig's Design and Landscaping Services"
+      },
+      "SalesReceiptMessage": {
+        "Subject": "Sales Receipt from Craig's Design and Landscaping Services",
+        "Message": "Your sales receipt is attached.\nThank you for your business - we appreciate it very much.\n\nSincerely,\nCraig's Design and Landscaping Services"
+      },
+      "StatementMessage": {
+        "Subject": "Statement from Craig's Design and Landscaping Services",
+        "Message": "Your statement is attached.  Please remit payment at your earliest convenience.\nThank you for your business - we appreciate it very much.\n\nSincerely,\nCraig's Design and Landscaping Services"
+      }
+    },
+    "VendorAndPurchasesPrefs": {
+      "TrackingByCustomer": true,
+      "BillableExpenseTracking": true,
+      "POCustomField": [
+        {
+          "CustomField": [
+            {
+              "Name": "PurchasePrefs.UsePurchaseCustom3",
+              "Type": "BooleanType",
+              "BooleanValue": false
+            },
+            {
+              "Name": "PurchasePrefs.UsePurchaseCustom2",
+              "Type": "BooleanType",
+              "BooleanValue": true
+            },
+            {
+              "Name": "PurchasePrefs.UsePurchaseCustom1",
+              "Type": "BooleanType",
+              "BooleanValue": true
+            }
+          ]
+        },
+        {
+          "CustomField": [
+            {
+              "Name": "PurchasePrefs.PurchaseCustomName2",
+              "Type": "StringType",
+              "StringValue": "Sales Rep"
+            },
+            {
+              "Name": "PurchasePrefs.PurchaseCustomName1",
+              "Type": "StringType",
+              "StringValue": "Crew #"
+            }
+          ]
+        }
+      ]
+    },
+    "TimeTrackingPrefs": {
+      "UseServices": true,
+      "BillCustomers": true,
+      "ShowBillRateToAll": false,
+      "WorkWeekStartDate": "Monday",
+      "MarkTimeEntriesBillable": true
+    },
+    "TaxPrefs": {
+      "UsingSalesTax": true,
+      "TaxGroupCodeRef": {
+        "value": "2"
+      }
+    },
+    "CurrencyPrefs": {
+      "MultiCurrencyEnabled": true,
+      "HomeCurrency": {
+        "value": "USD"
+      }
+    },
+    "ReportPrefs": {
+      "ReportBasis": "Accrual",
+      "CalcAgingReportFromTxnDate": false
+    },
+    "OtherPrefs": {
+      "NameValue": [
+        {
+          "Name": "SalesFormsPrefs.DefaultCustomerMessage",
+          "Value": "Thank you for your business and have a great day!"
+        },
+        {
+          "Name": "SalesFormsPrefs.DefaultItem",
+          "Value": "1"
+        },
+        {
+          "Name": "DTXCopyMemo",
+          "Value": "false"
+        },
+        {
+          "Name": "UncategorizedAssetAccountId",
+          "Value": "32"
+        },
+        {
+          "Name": "UncategorizedIncomeAccountId",
+          "Value": "30"
+        },
+        {
+          "Name": "UncategorizedExpenseAccountId",
+          "Value": "31"
+        },
+        {
+          "Name": "MasAccountId",
+          "Value": "35"
+        },
+        {
+          "Name": "SFCEnabled",
+          "Value": "true"
+        }
+      ]
+    },
+    "domain": "QBO",
+    "sparse": false,
+    "Id": "1",
+    "SyncToken": "4",
+    "MetaData": {
+      "CreateTime": "2016-01-13T01:07:08-08:00",
+      "LastUpdatedTime": "2016-08-23T20:12:45-07:00"
+    }
+  }
+}

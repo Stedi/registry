@@ -1,0 +1,51 @@
+{
+  "description": "Multiple operations using batch query",
+  "type": "object",
+  "title": "Batch",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "type": "object",
+    "properties": {
+      "BatchItemRequest": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "default": {
+    "BatchItemRequest": [
+      {
+        "bId": "bid1",
+        "operation": "create",
+        "Vendor": {
+          "DisplayName": "Smith Family Store"
+        }
+      },
+      {
+        "bId": "bid2",
+        "operation": "delete",
+        "Invoice": {
+          "Id": "129",
+          "SyncToken": "0"
+        }
+      },
+      {
+        "bId": "bid3",
+        "operation": "update",
+        "SalesReceipt": {
+          "domain": "QBO",
+          "sparse": true,
+          "Id": "11",
+          "SyncToken": "0",
+          "PrivateNote": "A private note."
+        }
+      },
+      {
+        "bId": "bid4",
+        "Query": "select * from SalesReceipt"
+      }
+    ]
+  }
+}

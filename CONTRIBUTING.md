@@ -41,12 +41,49 @@ export class MyCompanyNewProvider extends OpenAPIProvider {
 }
 ```
 
+After writing your provider, please also add it to the `src/providers/index.ts` file.
+
+#### Postman-based Provider
+
+If the API you want to add to the Registry exposes [Postman](https://www.openapis.org) specification, you can add it to the registry in two steps:
+
+1. Import desired collection to the Stedi's ["registry" workspace](https://www.postman.com/stedi-inc/workspace/registry/overview) in Postman.
+2. Use following template to create a provider:
+
+```ts
+import { PostmanProvider } from "./postman";
+
+export class MyPostmanBasedProvider extends PostmanProvider {
+  constructor() {
+    super({
+      name: "MyPostmanBasedProvider",
+      description: "This company uses Postman",
+      logoUrl: "https://logo.clearbit.com/postman.com",
+      versions: ["1"],
+      postmanCollectionId: "12143221-f27bc33f-082f-45f6-b143-cd3c7d4241da",
+      docsLink: "https://developer.intuit.com/app/developer/qbo/docs/develop",
+    });
+  }
+}
+```
+
+After writing your provider, please also add it to the `src/providers/index.ts` file. Please also make sure to have an environment variable `POSTMAN_API_KEY` set that has access to the Postman workspace.
+
+#### Postprocessing
+
 If the entities generated as a result of `unbundle` logic contain non-standard fields or formats not recognized by JSONSchema, you can supply a custom `sanitizeSchema(schema: unknown) => unknown` function to remove unwanted properties from the generated JSONSchemas.
 
 Sometimes the unbundled schema exports too many entities. Many of them may not be necessary from the registry's perspective. If that's the case, supply an optional `entities: string[]` array argument with the list of entity names that should be exclusively generated.
 
-After writing your provider, please also add it to the `src/providers/index.ts` file.
+#### Finalizing
 
 Lastly, run `npm run generate` to generate the schemas and update the `providers.json` file. You can also run `npm run validate` to ensure that generated schemas are valid and will be accepted by [Mappings](https://www.stedi.com/products/mappings).
 
 If the _validate_ task succeeds, you can commit your changes to branch or fork and create a pull request. We will review your pull request and if it's accepted, we will add your provider to the registry.
+
+#### Best practices
+
+- Try to keep the contributions scoped only to the Provider you're currently working on. If `npm run generate` results in changes introduced in other providers, please exclude them. To keep things simple, the drift should be addressed in a separate PR.
+- Include only meaningful schemas. Providers can sometimes generate schemas that are not useful for the registry, they can provide minimal value, be empty or broken. Try to exclude them by passing custom `entities` parameter to the `BaseProvider` constructor.
+- Leverage existing abstractions. If you want to a provider that's based on OpenAPI or Postman, you can use existing providers as a base.
+- Provide as much detail as possible. Do not remove important information from the schemas. Remove only the things that aren't passing validation.

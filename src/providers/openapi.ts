@@ -37,7 +37,7 @@ export class OpenAPIProvider implements BaseProvider {
   /**
    * Custom function to sanitize the schema, e.g. remove unsupported keywords or custom formats.
    */
-  private readonly sanitizeSchemaFunction?: (schema: unknown) => unknown;
+  protected readonly sanitizeSchemaFunction?: (schema: unknown) => unknown;
 
   constructor({
     versions,
