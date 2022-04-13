@@ -1,0 +1,103 @@
+{
+  "type": "object",
+  "properties": {
+    "info": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "hazardClassID": {
+            "description": "Classification of dangerous goods is broken down into classes according to the type of danger materials or items present.\n Such as (Explosives,Gases,Flammable",
+            "type": "string"
+          },
+          "description": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "languageID": {
+                "description": "The identifier of the language used in the corresponding text string (e.g EN)",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            },
+            "description": "Name of Class"
+          },
+          "packingInstruction": {
+            "description": "Free text to instruct the carrier how to pack and handle the material",
+            "type": "object",
+            "properties": {
+              "instructionLine": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "string"
+                    },
+                    "languageID": {
+                      "description": "The identifier of the language used in the corresponding text string (e.g EN)",
+                      "type": "string",
+                      "xml": {
+                        "attribute": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "toxicityZoneCode": {
+            "description": "Hazard Zones A through D",
+            "type": "string"
+          },
+          "temperature": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "format": "double",
+                "type": "number"
+              },
+              "unitCode": {
+                "description": "The type of unit of measure (e.g kg, cm, days)",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            },
+            "description": "Recommendation for transportation temperature"
+          }
+        }
+      }
+    }
+  },
+  "default": {
+    "info": [
+      {
+        "hazardClassID": "string",
+        "description": {
+          "value": "string",
+          "languageID": "string"
+        },
+        "packingInstruction": {
+          "instructionLine": [
+            {
+              "value": "string",
+              "languageID": "string"
+            }
+          ]
+        },
+        "toxicityZoneCode": "string",
+        "temperature": {
+          "value": 0,
+          "unitCode": "string"
+        }
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

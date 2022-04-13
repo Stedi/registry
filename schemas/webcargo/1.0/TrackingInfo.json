@@ -1,0 +1,45 @@
+{
+  "type": "object",
+  "properties": {
+    "trackingTokens": {
+      "type": "array",
+      "items": {
+        "required": ["tokenID", "tokenType"],
+        "type": "object",
+        "properties": {
+          "tokenType": {
+            "type": "string",
+            "xml": {
+              "name": "TokenType"
+            }
+          },
+          "tokenID": {
+            "type": "string",
+            "xml": {
+              "name": "TokenID"
+            }
+          },
+          "issuingStation": {
+            "type": "string",
+            "xml": {
+              "name": "IssuingStation"
+            }
+          }
+        }
+      },
+      "xml": {
+        "name": "TrackingTokens"
+      }
+    }
+  },
+  "default": {
+    "trackingTokens": [
+      {
+        "tokenType": "string",
+        "tokenID": "string",
+        "issuingStation": "string"
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

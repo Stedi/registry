@@ -1,0 +1,1252 @@
+{
+  "required": ["leg"],
+  "type": "object",
+  "properties": {
+    "leg": {
+      "type": "array",
+      "items": {
+        "required": ["destination", "origin"],
+        "type": "object",
+        "properties": {
+          "origin": {
+            "xml": {
+              "name": "Origin"
+            },
+            "required": [],
+            "type": "object",
+            "properties": {
+              "locationTypeCode": {
+                "description": "Type of the location",
+                "enum": ["Seaport", "Airport", "Address"]
+              },
+              "locationCode": {
+                "description": "For port locations: \n3-letters IATA airport code;\n5-letter UN/LOCODE seaport code;\n",
+                "type": "string"
+              },
+              "locationName": {
+                "description": "Name of the location \n",
+                "type": "string"
+              },
+              "terminalCode": {
+                "description": "Terminal Identifier",
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  },
+                  "listID": {
+                    "description": "The identification of a list of codes",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listAgencyID": {
+                    "description": "An agency that maintains one or more code lists",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listAgencyName": {
+                    "description": "The name of the agency that maintains the code list",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listName": {
+                    "description": "The name of a list of codes",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listVersionID": {
+                    "description": "The version of the code list",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "name": {
+                    "description": "The textual equivalent of the code content",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "languageID": {
+                    "description": "The identifier of the language used in the corresponding text string",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listURI": {
+                    "description": "The Uniform Resource Identifier that identifies where the code list is located",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listSchemeURI": {
+                    "description": "The Uniform Resource Identifier that identifies where the code list scheme is located",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  }
+                }
+              },
+              "terminalName": {
+                "description": "Name of the terminal \n",
+                "type": "string"
+              },
+              "id": {
+                "description": "airport code, sea port code",
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  },
+                  "schemeID": {
+                    "description": "The identification of the identification scheme",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "schemeName": {
+                    "description": "The name of the identification scheme",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "schemeAgencyID": {
+                    "description": "The identification of the agency that maintains the identification scheme",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "schemeAgencyName": {
+                    "description": "The name of the agency that maintains the identification scheme",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "schemeVersionID": {
+                    "description": "The version of the identification scheme",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "schemeDataURI": {
+                    "description": "The Uniform Resource Identifier that identifies where the identification scheme data is located",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "schemeURI": {
+                    "description": "The Uniform Resource Identifier that identifies where the identification scheme is located",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  }
+                }
+              },
+              "addressFormatCode": {
+                "description": "Structured, Unstructured",
+                "type": "string"
+              },
+              "countryID": {
+                "description": "Country code",
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "description": "2 letters ISO 3166-1 alpha-2 codes",
+                    "enum": [
+                      "AD",
+                      "AE",
+                      "AF",
+                      "AG",
+                      "AI",
+                      "AL",
+                      "AM",
+                      "AO",
+                      "AQ",
+                      "AR",
+                      "AS",
+                      "AT",
+                      "AU",
+                      "AW",
+                      "AX",
+                      "AZ",
+                      "BA",
+                      "BB",
+                      "BD",
+                      "BE",
+                      "BF",
+                      "BG",
+                      "BH",
+                      "BI",
+                      "BJ",
+                      "BL",
+                      "BM",
+                      "BN",
+                      "BO",
+                      "BQ",
+                      "BR",
+                      "BS",
+                      "BT",
+                      "BV",
+                      "BW",
+                      "BY",
+                      "BZ",
+                      "CA",
+                      "CC",
+                      "CD",
+                      "CF",
+                      "CG",
+                      "CH",
+                      "CI",
+                      "CK",
+                      "CL",
+                      "CM",
+                      "CN",
+                      "CO",
+                      "CR",
+                      "CU",
+                      "CV",
+                      "CW",
+                      "CX",
+                      "CY",
+                      "CZ",
+                      "DE",
+                      "DJ",
+                      "DK",
+                      "DM",
+                      "DO",
+                      "DZ",
+                      "EC",
+                      "EE",
+                      "EG",
+                      "EH",
+                      "ER",
+                      "ES",
+                      "ET",
+                      "FI",
+                      "FJ",
+                      "FK",
+                      "FM",
+                      "FO",
+                      "FR",
+                      "GA",
+                      "GB",
+                      "GD",
+                      "GE",
+                      "GF",
+                      "GG",
+                      "GH",
+                      "GI",
+                      "GL",
+                      "GM",
+                      "GN",
+                      "GP",
+                      "GQ",
+                      "GR",
+                      "GS",
+                      "GT",
+                      "GU",
+                      "GW",
+                      "GY",
+                      "HK",
+                      "HM",
+                      "HN",
+                      "HR",
+                      "HT",
+                      "HU",
+                      "ID",
+                      "IE",
+                      "IL",
+                      "IM",
+                      "IN",
+                      "IO",
+                      "IQ",
+                      "IR",
+                      "IS",
+                      "IT",
+                      "JE",
+                      "JM",
+                      "JO",
+                      "JP",
+                      "KE",
+                      "KG",
+                      "KH",
+                      "KI",
+                      "KM",
+                      "KN",
+                      "KP",
+                      "KR",
+                      "KW",
+                      "KY",
+                      "KZ",
+                      "LA",
+                      "LB",
+                      "LC",
+                      "LI",
+                      "LK",
+                      "LR",
+                      "LS",
+                      "LT",
+                      "LU",
+                      "LV",
+                      "LY",
+                      "MA",
+                      "MC",
+                      "MD",
+                      "ME",
+                      "MF",
+                      "MG",
+                      "MH",
+                      "MK",
+                      "ML",
+                      "MM",
+                      "MN",
+                      "MO",
+                      "MP",
+                      "MQ",
+                      "MR",
+                      "MS",
+                      "MT",
+                      "MU",
+                      "MV",
+                      "MW",
+                      "MX",
+                      "MY",
+                      "MZ",
+                      "NA",
+                      "NC",
+                      "NE",
+                      "NF",
+                      "NG",
+                      "NI",
+                      "NL",
+                      "NO",
+                      "NP",
+                      "NR",
+                      "NU",
+                      "NZ",
+                      "OM",
+                      "PA",
+                      "PE",
+                      "PF",
+                      "PG",
+                      "PH",
+                      "PK",
+                      "PL",
+                      "PM",
+                      "PN",
+                      "PR",
+                      "PS",
+                      "PT",
+                      "PW",
+                      "PY",
+                      "QA",
+                      "RE",
+                      "RO",
+                      "RS",
+                      "RU",
+                      "RW",
+                      "SA",
+                      "SB",
+                      "SC",
+                      "SD",
+                      "SE",
+                      "SG",
+                      "SH",
+                      "SI",
+                      "SJ",
+                      "SK",
+                      "SL",
+                      "SM",
+                      "SN",
+                      "SO",
+                      "SR",
+                      "SS",
+                      "ST",
+                      "SV",
+                      "SX",
+                      "SY",
+                      "SZ",
+                      "TC",
+                      "TD",
+                      "TF",
+                      "TG",
+                      "TH",
+                      "TJ",
+                      "TK",
+                      "TL",
+                      "TM",
+                      "TN",
+                      "TO",
+                      "TR",
+                      "TT",
+                      "TV",
+                      "TW",
+                      "TZ",
+                      "UA",
+                      "UG",
+                      "UM",
+                      "US",
+                      "UY",
+                      "UZ",
+                      "VA",
+                      "VC",
+                      "VE",
+                      "VG",
+                      "VI",
+                      "VN",
+                      "VU",
+                      "WF",
+                      "WS",
+                      "YE",
+                      "YT",
+                      "ZA",
+                      "ZM",
+                      "ZW"
+                    ],
+                    "type": "string"
+                  }
+                }
+              },
+              "countryName": {
+                "description": "Name of country",
+                "type": "string"
+              },
+              "stateOrProvince": {
+                "description": "State or Province code ",
+                "type": "string"
+              },
+              "cityID": {
+                "description": "City code",
+                "type": "string"
+              },
+              "cityName": {
+                "description": "City Name",
+                "type": "string"
+              },
+              "streetName": {
+                "description": "Street Name",
+                "type": "string"
+              },
+              "postalCode": {
+                "description": "\nPostal or Zip code\n",
+                "type": "string"
+              },
+              "addressLines": {
+                "description": "Free text",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "locationCoordinate": {
+                "description": "LAT and Long (applicable for address locationType only)",
+                "type": "object",
+                "properties": {
+                  "coordinateSystemCode": {
+                    "type": "string",
+                    "xml": {
+                      "name": "CoordinateSystemCode"
+                    }
+                  },
+                  "latitudeDegreesMeasure": {
+                    "xml": {
+                      "name": "LatitudeDegreesMeasure"
+                    },
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "format": "double",
+                        "type": "number"
+                      },
+                      "unitCode": {
+                        "description": "The type of unit of measure (e.g kg, cm, days)",
+                        "type": "string",
+                        "xml": {
+                          "attribute": true
+                        }
+                      }
+                    }
+                  },
+                  "latitudeMinutesMeasure": {
+                    "xml": {
+                      "name": "LatitudeMinutesMeasure"
+                    },
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "format": "double",
+                        "type": "number"
+                      },
+                      "unitCode": {
+                        "description": "The type of unit of measure (e.g kg, cm, days)",
+                        "type": "string",
+                        "xml": {
+                          "attribute": true
+                        }
+                      }
+                    }
+                  },
+                  "longitudeDegreesMeasure": {
+                    "xml": {
+                      "name": "LongitudeDegreesMeasure"
+                    },
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "format": "double",
+                        "type": "number"
+                      },
+                      "unitCode": {
+                        "description": "The type of unit of measure (e.g kg, cm, days)",
+                        "type": "string",
+                        "xml": {
+                          "attribute": true
+                        }
+                      }
+                    }
+                  },
+                  "longitudeMinutesMeasure": {
+                    "xml": {
+                      "name": "LongitudeMinutesMeasure"
+                    },
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "format": "double",
+                        "type": "number"
+                      },
+                      "unitCode": {
+                        "description": "The type of unit of measure (e.g kg, cm, days)",
+                        "type": "string",
+                        "xml": {
+                          "attribute": true
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "timezoneOffset": {
+                "description": "Time offset from Universal Coordinated Time (UTC)",
+                "type": "string"
+              }
+            }
+          },
+          "scheduledTimeOfDeparture": {
+            "format": "date-time",
+            "type": "string",
+            "xml": {
+              "name": "ScheduledTimeOfDeparture"
+            }
+          },
+          "scheduledTimeOfArrival": {
+            "format": "date-time",
+            "type": "string",
+            "xml": {
+              "name": "ScheduledTimeOfArrival"
+            }
+          },
+          "destination": {
+            "xml": {
+              "name": "Destination"
+            },
+            "required": [],
+            "type": "object",
+            "properties": {
+              "locationTypeCode": {
+                "description": "Type of the location",
+                "enum": ["Seaport", "Airport", "Address"]
+              },
+              "locationCode": {
+                "description": "For port locations: \n3-letters IATA airport code;\n5-letter UN/LOCODE seaport code;\n",
+                "type": "string"
+              },
+              "locationName": {
+                "description": "Name of the location \n",
+                "type": "string"
+              },
+              "terminalCode": {
+                "description": "Terminal Identifier",
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  },
+                  "listID": {
+                    "description": "The identification of a list of codes",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listAgencyID": {
+                    "description": "An agency that maintains one or more code lists",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listAgencyName": {
+                    "description": "The name of the agency that maintains the code list",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listName": {
+                    "description": "The name of a list of codes",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listVersionID": {
+                    "description": "The version of the code list",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "name": {
+                    "description": "The textual equivalent of the code content",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "languageID": {
+                    "description": "The identifier of the language used in the corresponding text string",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listURI": {
+                    "description": "The Uniform Resource Identifier that identifies where the code list is located",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listSchemeURI": {
+                    "description": "The Uniform Resource Identifier that identifies where the code list scheme is located",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  }
+                }
+              },
+              "terminalName": {
+                "description": "Name of the terminal \n",
+                "type": "string"
+              },
+              "id": {
+                "description": "airport code, sea port code",
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  },
+                  "schemeID": {
+                    "description": "The identification of the identification scheme",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "schemeName": {
+                    "description": "The name of the identification scheme",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "schemeAgencyID": {
+                    "description": "The identification of the agency that maintains the identification scheme",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "schemeAgencyName": {
+                    "description": "The name of the agency that maintains the identification scheme",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "schemeVersionID": {
+                    "description": "The version of the identification scheme",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "schemeDataURI": {
+                    "description": "The Uniform Resource Identifier that identifies where the identification scheme data is located",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "schemeURI": {
+                    "description": "The Uniform Resource Identifier that identifies where the identification scheme is located",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  }
+                }
+              },
+              "addressFormatCode": {
+                "description": "Structured, Unstructured",
+                "type": "string"
+              },
+              "countryID": {
+                "description": "Country code",
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "description": "2 letters ISO 3166-1 alpha-2 codes",
+                    "enum": [
+                      "AD",
+                      "AE",
+                      "AF",
+                      "AG",
+                      "AI",
+                      "AL",
+                      "AM",
+                      "AO",
+                      "AQ",
+                      "AR",
+                      "AS",
+                      "AT",
+                      "AU",
+                      "AW",
+                      "AX",
+                      "AZ",
+                      "BA",
+                      "BB",
+                      "BD",
+                      "BE",
+                      "BF",
+                      "BG",
+                      "BH",
+                      "BI",
+                      "BJ",
+                      "BL",
+                      "BM",
+                      "BN",
+                      "BO",
+                      "BQ",
+                      "BR",
+                      "BS",
+                      "BT",
+                      "BV",
+                      "BW",
+                      "BY",
+                      "BZ",
+                      "CA",
+                      "CC",
+                      "CD",
+                      "CF",
+                      "CG",
+                      "CH",
+                      "CI",
+                      "CK",
+                      "CL",
+                      "CM",
+                      "CN",
+                      "CO",
+                      "CR",
+                      "CU",
+                      "CV",
+                      "CW",
+                      "CX",
+                      "CY",
+                      "CZ",
+                      "DE",
+                      "DJ",
+                      "DK",
+                      "DM",
+                      "DO",
+                      "DZ",
+                      "EC",
+                      "EE",
+                      "EG",
+                      "EH",
+                      "ER",
+                      "ES",
+                      "ET",
+                      "FI",
+                      "FJ",
+                      "FK",
+                      "FM",
+                      "FO",
+                      "FR",
+                      "GA",
+                      "GB",
+                      "GD",
+                      "GE",
+                      "GF",
+                      "GG",
+                      "GH",
+                      "GI",
+                      "GL",
+                      "GM",
+                      "GN",
+                      "GP",
+                      "GQ",
+                      "GR",
+                      "GS",
+                      "GT",
+                      "GU",
+                      "GW",
+                      "GY",
+                      "HK",
+                      "HM",
+                      "HN",
+                      "HR",
+                      "HT",
+                      "HU",
+                      "ID",
+                      "IE",
+                      "IL",
+                      "IM",
+                      "IN",
+                      "IO",
+                      "IQ",
+                      "IR",
+                      "IS",
+                      "IT",
+                      "JE",
+                      "JM",
+                      "JO",
+                      "JP",
+                      "KE",
+                      "KG",
+                      "KH",
+                      "KI",
+                      "KM",
+                      "KN",
+                      "KP",
+                      "KR",
+                      "KW",
+                      "KY",
+                      "KZ",
+                      "LA",
+                      "LB",
+                      "LC",
+                      "LI",
+                      "LK",
+                      "LR",
+                      "LS",
+                      "LT",
+                      "LU",
+                      "LV",
+                      "LY",
+                      "MA",
+                      "MC",
+                      "MD",
+                      "ME",
+                      "MF",
+                      "MG",
+                      "MH",
+                      "MK",
+                      "ML",
+                      "MM",
+                      "MN",
+                      "MO",
+                      "MP",
+                      "MQ",
+                      "MR",
+                      "MS",
+                      "MT",
+                      "MU",
+                      "MV",
+                      "MW",
+                      "MX",
+                      "MY",
+                      "MZ",
+                      "NA",
+                      "NC",
+                      "NE",
+                      "NF",
+                      "NG",
+                      "NI",
+                      "NL",
+                      "NO",
+                      "NP",
+                      "NR",
+                      "NU",
+                      "NZ",
+                      "OM",
+                      "PA",
+                      "PE",
+                      "PF",
+                      "PG",
+                      "PH",
+                      "PK",
+                      "PL",
+                      "PM",
+                      "PN",
+                      "PR",
+                      "PS",
+                      "PT",
+                      "PW",
+                      "PY",
+                      "QA",
+                      "RE",
+                      "RO",
+                      "RS",
+                      "RU",
+                      "RW",
+                      "SA",
+                      "SB",
+                      "SC",
+                      "SD",
+                      "SE",
+                      "SG",
+                      "SH",
+                      "SI",
+                      "SJ",
+                      "SK",
+                      "SL",
+                      "SM",
+                      "SN",
+                      "SO",
+                      "SR",
+                      "SS",
+                      "ST",
+                      "SV",
+                      "SX",
+                      "SY",
+                      "SZ",
+                      "TC",
+                      "TD",
+                      "TF",
+                      "TG",
+                      "TH",
+                      "TJ",
+                      "TK",
+                      "TL",
+                      "TM",
+                      "TN",
+                      "TO",
+                      "TR",
+                      "TT",
+                      "TV",
+                      "TW",
+                      "TZ",
+                      "UA",
+                      "UG",
+                      "UM",
+                      "US",
+                      "UY",
+                      "UZ",
+                      "VA",
+                      "VC",
+                      "VE",
+                      "VG",
+                      "VI",
+                      "VN",
+                      "VU",
+                      "WF",
+                      "WS",
+                      "YE",
+                      "YT",
+                      "ZA",
+                      "ZM",
+                      "ZW"
+                    ],
+                    "type": "string"
+                  }
+                }
+              },
+              "countryName": {
+                "description": "Name of country",
+                "type": "string"
+              },
+              "stateOrProvince": {
+                "description": "State or Province code ",
+                "type": "string"
+              },
+              "cityID": {
+                "description": "City code",
+                "type": "string"
+              },
+              "cityName": {
+                "description": "City Name",
+                "type": "string"
+              },
+              "streetName": {
+                "description": "Street Name",
+                "type": "string"
+              },
+              "postalCode": {
+                "description": "\nPostal or Zip code\n",
+                "type": "string"
+              },
+              "addressLines": {
+                "description": "Free text",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "locationCoordinate": {
+                "description": "LAT and Long (applicable for address locationType only)",
+                "type": "object",
+                "properties": {
+                  "coordinateSystemCode": {
+                    "type": "string",
+                    "xml": {
+                      "name": "CoordinateSystemCode"
+                    }
+                  },
+                  "latitudeDegreesMeasure": {
+                    "xml": {
+                      "name": "LatitudeDegreesMeasure"
+                    },
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "format": "double",
+                        "type": "number"
+                      },
+                      "unitCode": {
+                        "description": "The type of unit of measure (e.g kg, cm, days)",
+                        "type": "string",
+                        "xml": {
+                          "attribute": true
+                        }
+                      }
+                    }
+                  },
+                  "latitudeMinutesMeasure": {
+                    "xml": {
+                      "name": "LatitudeMinutesMeasure"
+                    },
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "format": "double",
+                        "type": "number"
+                      },
+                      "unitCode": {
+                        "description": "The type of unit of measure (e.g kg, cm, days)",
+                        "type": "string",
+                        "xml": {
+                          "attribute": true
+                        }
+                      }
+                    }
+                  },
+                  "longitudeDegreesMeasure": {
+                    "xml": {
+                      "name": "LongitudeDegreesMeasure"
+                    },
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "format": "double",
+                        "type": "number"
+                      },
+                      "unitCode": {
+                        "description": "The type of unit of measure (e.g kg, cm, days)",
+                        "type": "string",
+                        "xml": {
+                          "attribute": true
+                        }
+                      }
+                    }
+                  },
+                  "longitudeMinutesMeasure": {
+                    "xml": {
+                      "name": "LongitudeMinutesMeasure"
+                    },
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "format": "double",
+                        "type": "number"
+                      },
+                      "unitCode": {
+                        "description": "The type of unit of measure (e.g kg, cm, days)",
+                        "type": "string",
+                        "xml": {
+                          "attribute": true
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "timezoneOffset": {
+                "description": "Time offset from Universal Coordinated Time (UTC)",
+                "type": "string"
+              }
+            }
+          },
+          "legID": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Leg"
+        }
+      },
+      "xml": {
+        "name": "Leg"
+      }
+    }
+  },
+  "default": {
+    "leg": [
+      {
+        "origin": {
+          "locationTypeCode": "Seaport",
+          "locationCode": "string",
+          "locationName": "string",
+          "terminalCode": {
+            "value": "string",
+            "listID": "string",
+            "listAgencyID": "string",
+            "listAgencyName": "string",
+            "listName": "string",
+            "listVersionID": "string",
+            "name": "string",
+            "languageID": "string",
+            "listURI": "string",
+            "listSchemeURI": "string"
+          },
+          "terminalName": "string",
+          "id": {
+            "value": "string",
+            "schemeID": "string",
+            "schemeName": "string",
+            "schemeAgencyID": "string",
+            "schemeAgencyName": "string",
+            "schemeVersionID": "string",
+            "schemeDataURI": "string",
+            "schemeURI": "string"
+          },
+          "addressFormatCode": "string",
+          "countryID": {
+            "value": "AD"
+          },
+          "countryName": "string",
+          "stateOrProvince": "string",
+          "cityID": "string",
+          "cityName": "string",
+          "streetName": "string",
+          "postalCode": "string",
+          "addressLines": ["string"],
+          "locationCoordinate": {
+            "coordinateSystemCode": "string",
+            "latitudeDegreesMeasure": {
+              "value": 0,
+              "unitCode": "string"
+            },
+            "latitudeMinutesMeasure": {
+              "value": 0,
+              "unitCode": "string"
+            },
+            "longitudeDegreesMeasure": {
+              "value": 0,
+              "unitCode": "string"
+            },
+            "longitudeMinutesMeasure": {
+              "value": 0,
+              "unitCode": "string"
+            }
+          },
+          "timezoneOffset": "string"
+        },
+        "scheduledTimeOfDeparture": "1970-01-01T00:00:00.000Z",
+        "scheduledTimeOfArrival": "1970-01-01T00:00:00.000Z",
+        "destination": {
+          "locationTypeCode": "Seaport",
+          "locationCode": "string",
+          "locationName": "string",
+          "terminalCode": {
+            "value": "string",
+            "listID": "string",
+            "listAgencyID": "string",
+            "listAgencyName": "string",
+            "listName": "string",
+            "listVersionID": "string",
+            "name": "string",
+            "languageID": "string",
+            "listURI": "string",
+            "listSchemeURI": "string"
+          },
+          "terminalName": "string",
+          "id": {
+            "value": "string",
+            "schemeID": "string",
+            "schemeName": "string",
+            "schemeAgencyID": "string",
+            "schemeAgencyName": "string",
+            "schemeVersionID": "string",
+            "schemeDataURI": "string",
+            "schemeURI": "string"
+          },
+          "addressFormatCode": "string",
+          "countryID": {
+            "value": "AD"
+          },
+          "countryName": "string",
+          "stateOrProvince": "string",
+          "cityID": "string",
+          "cityName": "string",
+          "streetName": "string",
+          "postalCode": "string",
+          "addressLines": ["string"],
+          "locationCoordinate": {
+            "coordinateSystemCode": "string",
+            "latitudeDegreesMeasure": {
+              "value": 0,
+              "unitCode": "string"
+            },
+            "latitudeMinutesMeasure": {
+              "value": 0,
+              "unitCode": "string"
+            },
+            "longitudeDegreesMeasure": {
+              "value": 0,
+              "unitCode": "string"
+            },
+            "longitudeMinutesMeasure": {
+              "value": 0,
+              "unitCode": "string"
+            }
+          },
+          "timezoneOffset": "string"
+        },
+        "legID": "string"
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
