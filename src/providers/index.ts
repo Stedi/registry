@@ -15,12 +15,14 @@ import { UPSShipmentProvider } from "./ups/shipment";
 import { UPSTrackProvider } from "./ups/track";
 import { FedexShipProvider } from "./fedex/ship";
 import { ConvoyProvider } from "./convoy";
+import { FreightOSProvider } from "./freightos";
 
 export default {
   baton: new BatonProvider(),
   convoy: new ConvoyProvider(),
   fedexShip: new FedexShipProvider(),
   flexport: new FlexportProvider(),
+  freightos: new FreightOSProvider(),
   klaviyo: new KlaviyoProvider(),
   maersk: new MaerskProvider(),
   netsuite: new NetsuiteProvider(),

@@ -1,0 +1,183 @@
+{
+  "required": ["documentIdentifier"],
+  "type": "object",
+  "properties": {
+    "documentIdentifier": {
+      "type": "array",
+      "items": {
+        "xml": {
+          "name": "DocumentIdentifier"
+        },
+        "required": ["documentType"],
+        "type": "object",
+        "properties": {
+          "documentType": {
+            "description": "Document exchanged type",
+            "enum": [
+              "AWB",
+              "MAWB",
+              "HAWB",
+              "MBOL",
+              "HBOL",
+              "BOL",
+              "POA",
+              "PL",
+              "CI",
+              "CB",
+              "MSDS",
+              "ISF",
+              "AN",
+              "INSURANCE",
+              "OTHER"
+            ],
+            "type": "string",
+            "xml": {
+              "name": "DocumentType"
+            }
+          },
+          "documentID": {
+            "description": "Text Type",
+            "type": "object",
+            "properties": {
+              "value": {
+                "description": "Value",
+                "type": "string"
+              },
+              "languageID": {
+                "description": "Language 2-digit code based upon ISO 639-1 standards used in the corresponding text string (e.g. EN)",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            },
+            "xml": {
+              "name": "DocumentID"
+            }
+          },
+          "documentURL": {
+            "description": "Provided in case of electronic documents",
+            "type": "string",
+            "xml": {
+              "name": "DocumentURL"
+            }
+          },
+          "issueDate": {
+            "format": "date-time",
+            "description": "Document creation type",
+            "type": "string",
+            "xml": {
+              "name": "IssueDate"
+            }
+          },
+          "additionalID": {
+            "description": "Additional id of document if needed",
+            "xml": {
+              "name": "AdditionalID"
+            },
+            "type": "object",
+            "properties": {
+              "value": {
+                "description": "Value",
+                "type": "string"
+              },
+              "schemeID": {
+                "description": "The identification of the identification scheme",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              },
+              "schemeName": {
+                "description": "The name of the identification scheme",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              },
+              "schemeAgencyID": {
+                "description": "The identification of the agency that maintains the identification scheme",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              },
+              "schemeAgencyName": {
+                "description": "The name of the agency that maintains the identification scheme",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              },
+              "schemeVersionID": {
+                "description": "The version of the identification scheme",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              },
+              "schemeDataURI": {
+                "description": "The Uniform Resource Identifier that identifies where the identification scheme data is located",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              },
+              "schemeURI": {
+                "description": "The Uniform Resource Identifier that identifies where the identification scheme is located",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            }
+          },
+          "electronicDocument": {
+            "description": "Indicator if this document is electronic",
+            "type": "boolean",
+            "xml": {
+              "name": "ElectronicDocument"
+            }
+          },
+          "documentName": {
+            "description": "",
+            "type": "string"
+          },
+          "documentContent": {
+            "description": ""
+          }
+        }
+      },
+      "xml": {
+        "name": "DocumentIdentifier"
+      }
+    }
+  },
+  "default": {
+    "documentIdentifier": [
+      {
+        "documentType": "AWB",
+        "documentID": {
+          "value": "string",
+          "languageID": "string"
+        },
+        "documentURL": "string",
+        "issueDate": "1970-01-01T00:00:00.000Z",
+        "additionalID": {
+          "value": "string",
+          "schemeID": "string",
+          "schemeName": "string",
+          "schemeAgencyID": "string",
+          "schemeAgencyName": "string",
+          "schemeVersionID": "string",
+          "schemeDataURI": "string",
+          "schemeURI": "string"
+        },
+        "electronicDocument": true,
+        "documentName": "string",
+        "documentContent": {}
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

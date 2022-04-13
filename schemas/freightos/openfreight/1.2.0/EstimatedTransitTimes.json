@@ -1,0 +1,76 @@
+{
+  "type": "object",
+  "properties": {
+    "estimatedTransitTime": {
+      "type": "array",
+      "items": {
+        "xml": {
+          "name": "EstimatedTransitTime"
+        },
+        "type": "object",
+        "properties": {
+          "from": {
+            "description": "Minimum time to complete an event",
+            "xml": {
+              "name": "From"
+            },
+            "type": "object",
+            "properties": {
+              "value": {
+                "format": "double",
+                "description": "Value of the measure",
+                "type": "number"
+              },
+              "unitCode": {
+                "description": "The unit type of the measure value (e.g kg, cm)",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            }
+          },
+          "to": {
+            "description": "Maximum time to complete an event",
+            "xml": {
+              "name": "To"
+            },
+            "type": "object",
+            "properties": {
+              "value": {
+                "format": "double",
+                "description": "Value of the measure",
+                "type": "number"
+              },
+              "unitCode": {
+                "description": "The unit type of the measure value (e.g kg, cm)",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "xml": {
+        "name": "EstimatedTransitTime"
+      }
+    }
+  },
+  "default": {
+    "estimatedTransitTime": [
+      {
+        "from": {
+          "value": 0,
+          "unitCode": "string"
+        },
+        "to": {
+          "value": 0,
+          "unitCode": "string"
+        }
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

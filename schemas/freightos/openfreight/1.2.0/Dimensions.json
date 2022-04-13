@@ -1,0 +1,126 @@
+{
+  "required": ["dimension"],
+  "type": "object",
+  "properties": {
+    "dimension": {
+      "type": "array",
+      "items": {
+        "xml": {
+          "name": "Dimension"
+        },
+        "type": "object",
+        "properties": {
+          "width": {
+            "description": "Width determined by measuring an object along with the unit of measure specified or implied in the attributes of data type - UOM could be cm , ft",
+            "xml": {
+              "name": "Width"
+            },
+            "type": "object",
+            "properties": {
+              "value": {
+                "format": "double",
+                "description": "Value of the measure",
+                "type": "number"
+              },
+              "unitCode": {
+                "description": "The unit type of the measure value (e.g kg, cm)",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            }
+          },
+          "length": {
+            "description": "Length determined by measuring an object along with the unit of measure specified or implied in the attributes of data type - UOM could be cm , ft",
+            "xml": {
+              "name": "Length"
+            },
+            "type": "object",
+            "properties": {
+              "value": {
+                "format": "double",
+                "description": "Value of the measure",
+                "type": "number"
+              },
+              "unitCode": {
+                "description": "The unit type of the measure value (e.g kg, cm)",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            }
+          },
+          "height": {
+            "description": "Width determined by measuring an object along with the unit of measure specified or implied in the attributes of data type - UOM could be cm , ft",
+            "xml": {
+              "name": "Height"
+            },
+            "type": "object",
+            "properties": {
+              "value": {
+                "format": "double",
+                "description": "Value of the measure",
+                "type": "number"
+              },
+              "unitCode": {
+                "description": "The unit type of the measure value (e.g kg, cm)",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            }
+          },
+          "description": {
+            "description": "Text Type",
+            "type": "object",
+            "properties": {
+              "value": {
+                "description": "Value",
+                "type": "string"
+              },
+              "languageID": {
+                "description": "Language 2-digit code based upon ISO 639-1 standards used in the corresponding text string (e.g. EN)",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            },
+            "xml": {
+              "name": "Description"
+            }
+          }
+        }
+      },
+      "xml": {
+        "name": "Dimension"
+      }
+    }
+  },
+  "default": {
+    "dimension": [
+      {
+        "width": {
+          "value": 0,
+          "unitCode": "string"
+        },
+        "length": {
+          "value": 0,
+          "unitCode": "string"
+        },
+        "height": {
+          "value": 0,
+          "unitCode": "string"
+        },
+        "description": {
+          "value": "string",
+          "languageID": "string"
+        }
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

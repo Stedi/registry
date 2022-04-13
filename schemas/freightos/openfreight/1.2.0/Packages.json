@@ -1,0 +1,1156 @@
+{
+  "description": "Description of Packages",
+  "type": "object",
+  "properties": {
+    "package": {
+      "description": "Array of Packages",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "packagingType": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "listID": {
+                "description": "The identification of a list of codes",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              },
+              "listAgencyID": {
+                "description": "An agency that maintains one or more code lists",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              },
+              "listAgencyName": {
+                "description": "The name of the agency that maintains the code list",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              },
+              "listName": {
+                "description": "The name of a list of codes",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              },
+              "listVersionID": {
+                "description": "The version of the code list",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              },
+              "name": {
+                "description": "The textual equivalent of the code content",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              },
+              "languageID": {
+                "description": "The identifier of the language used in the corresponding text string",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              },
+              "listURI": {
+                "description": "The Uniform Resource Identifier that identifies where the code list is located",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              },
+              "listSchemeURI": {
+                "description": "The Uniform Resource Identifier that identifies where the code list scheme is located",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            },
+            "description": "The code in Airline cargo indicates if the load is bulk or containerized (ULD)",
+            "xml": {
+              "name": "PackagingType"
+            }
+          },
+          "weight": {
+            "description": "Weight of the package",
+            "xml": {
+              "name": "Weight"
+            },
+            "type": "object",
+            "properties": {
+              "value": {
+                "format": "double",
+                "description": "Value of the measure",
+                "type": "number"
+              },
+              "unitCode": {
+                "description": "The unit type of the measure value (e.g kg, cm)",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            }
+          },
+          "chargeableWeightMeasure": {
+            "description": "The chargeable weight is whichever of the following is greater:\nThe gross weight (including the product, packaging, pallet, etc.), or\nThe volumetric weight\n",
+            "xml": {
+              "name": "ChargeableWeightMeasure"
+            },
+            "type": "object",
+            "properties": {
+              "value": {
+                "format": "double",
+                "description": "Value of the measure",
+                "type": "number"
+              },
+              "unitCode": {
+                "description": "The unit type of the measure value (e.g kg, cm)",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            }
+          },
+          "quantity": {
+            "description": "Number of pieces",
+            "xml": {
+              "name": "Quantity"
+            },
+            "type": "object",
+            "properties": {
+              "value": {
+                "format": "double",
+                "description": "Value",
+                "type": "number"
+              },
+              "unitCode": {
+                "description": "Unit Code for Quantity",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            }
+          },
+          "freightClass": {
+            "description": "Text Type",
+            "type": "object",
+            "properties": {
+              "value": {
+                "description": "Value",
+                "type": "string"
+              },
+              "languageID": {
+                "description": "Language 2-digit code based upon ISO 639-1 standards used in the corresponding text string (e.g. EN)",
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            },
+            "xml": {
+              "name": "FreightClass"
+            }
+          },
+          "dimensions": {
+            "description": "Used to calculate the Volumetric Weight",
+            "xml": {
+              "name": "Dimensions"
+            },
+            "required": ["dimension"],
+            "type": "object",
+            "properties": {
+              "dimension": {
+                "type": "array",
+                "items": {
+                  "xml": {
+                    "name": "Dimension"
+                  },
+                  "type": "object",
+                  "properties": {
+                    "width": {
+                      "description": "Width determined by measuring an object along with the unit of measure specified or implied in the attributes of data type - UOM could be cm , ft",
+                      "xml": {
+                        "name": "Width"
+                      },
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "format": "double",
+                          "description": "Value of the measure",
+                          "type": "number"
+                        },
+                        "unitCode": {
+                          "description": "The unit type of the measure value (e.g kg, cm)",
+                          "type": "string",
+                          "xml": {
+                            "attribute": true
+                          }
+                        }
+                      }
+                    },
+                    "length": {
+                      "description": "Length determined by measuring an object along with the unit of measure specified or implied in the attributes of data type - UOM could be cm , ft",
+                      "xml": {
+                        "name": "Length"
+                      },
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "format": "double",
+                          "description": "Value of the measure",
+                          "type": "number"
+                        },
+                        "unitCode": {
+                          "description": "The unit type of the measure value (e.g kg, cm)",
+                          "type": "string",
+                          "xml": {
+                            "attribute": true
+                          }
+                        }
+                      }
+                    },
+                    "height": {
+                      "description": "Width determined by measuring an object along with the unit of measure specified or implied in the attributes of data type - UOM could be cm , ft",
+                      "xml": {
+                        "name": "Height"
+                      },
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "format": "double",
+                          "description": "Value of the measure",
+                          "type": "number"
+                        },
+                        "unitCode": {
+                          "description": "The unit type of the measure value (e.g kg, cm)",
+                          "type": "string",
+                          "xml": {
+                            "attribute": true
+                          }
+                        }
+                      }
+                    },
+                    "description": {
+                      "description": "Text Type",
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "description": "Value",
+                          "type": "string"
+                        },
+                        "languageID": {
+                          "description": "Language 2-digit code based upon ISO 639-1 standards used in the corresponding text string (e.g. EN)",
+                          "type": "string",
+                          "xml": {
+                            "attribute": true
+                          }
+                        }
+                      },
+                      "xml": {
+                        "name": "Description"
+                      }
+                    }
+                  }
+                },
+                "xml": {
+                  "name": "Dimension"
+                }
+              }
+            }
+          },
+          "density": {
+            "format": "double",
+            "description": "Cubage of a cargo divided by its weight",
+            "type": "number",
+            "xml": {
+              "name": "Density"
+            }
+          },
+          "stackable": {
+            "description": "For fragile and non stackable stackable is false",
+            "type": "boolean",
+            "xml": {
+              "name": "Stackable"
+            }
+          },
+          "dangerousGood": {
+            "description": "Indicator if the item is dangerous. If true the information should be provided in the hazardous information",
+            "type": "boolean",
+            "xml": {
+              "name": "DangerousGood"
+            }
+          },
+          "uld": {
+            "description": "Unit load device information (deprecated as of version 1.2.0/2.0.3)\nUse transportEquipments instead",
+            "xml": {
+              "name": "ULD"
+            },
+            "type": "object",
+            "properties": {
+              "position": {
+                "description": "E.g. AKE 0 0 1",
+                "xml": {
+                  "name": "Position"
+                },
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  },
+                  "listID": {
+                    "description": "The identification of a list of codes",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listAgencyID": {
+                    "description": "An agency that maintains one or more code lists",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listAgencyName": {
+                    "description": "The name of the agency that maintains the code list",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listName": {
+                    "description": "The name of a list of codes",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listVersionID": {
+                    "description": "The version of the code list",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "name": {
+                    "description": "The textual equivalent of the code content",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "languageID": {
+                    "description": "The identifier of the language used in the corresponding text string",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listURI": {
+                    "description": "The Uniform Resource Identifier that identifies where the code list is located",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listSchemeURI": {
+                    "description": "The Uniform Resource Identifier that identifies where the code list scheme is located",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  }
+                }
+              },
+              "grossWeight": {
+                "xml": {
+                  "name": "GrossWeight"
+                },
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "format": "double",
+                    "description": "Value of the measure",
+                    "type": "number"
+                  },
+                  "unitCode": {
+                    "description": "The unit type of the measure value (e.g kg, cm)",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  }
+                }
+              },
+              "unitQuantity": {
+                "xml": {
+                  "name": "UnitQuantity"
+                },
+                "description": "Quantity",
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "format": "double",
+                    "description": "Value",
+                    "type": "number"
+                  },
+                  "unitCode": {
+                    "description": "Unit Code for Quantity",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  }
+                }
+              },
+              "uldtype": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  },
+                  "listID": {
+                    "description": "The identification of a list of codes",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listAgencyID": {
+                    "description": "An agency that maintains one or more code lists",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listAgencyName": {
+                    "description": "The name of the agency that maintains the code list",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listName": {
+                    "description": "The name of a list of codes",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listVersionID": {
+                    "description": "The version of the code list",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "name": {
+                    "description": "The textual equivalent of the code content",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "languageID": {
+                    "description": "The identifier of the language used in the corresponding text string",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listURI": {
+                    "description": "The Uniform Resource Identifier that identifies where the code list is located",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listSchemeURI": {
+                    "description": "The Uniform Resource Identifier that identifies where the code list scheme is located",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "turnable": {
+            "description": "Is the shipment turnable?",
+            "type": "boolean",
+            "xml": {
+              "name": "Turnable"
+            }
+          },
+          "hazardousInfo": {
+            "description": "Detailed Information about the dangerous goods",
+            "xml": {
+              "name": "HazardousInfo"
+            },
+            "type": "object",
+            "properties": {
+              "hazardClassID": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  },
+                  "listID": {
+                    "description": "The identification of a list of codes",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listAgencyID": {
+                    "description": "An agency that maintains one or more code lists",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listAgencyName": {
+                    "description": "The name of the agency that maintains the code list",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listName": {
+                    "description": "The name of a list of codes",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listVersionID": {
+                    "description": "The version of the code list",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "name": {
+                    "description": "The textual equivalent of the code content",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "languageID": {
+                    "description": "The identifier of the language used in the corresponding text string",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listURI": {
+                    "description": "The Uniform Resource Identifier that identifies where the code list is located",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listSchemeURI": {
+                    "description": "The Uniform Resource Identifier that identifies where the code list scheme is located",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  }
+                },
+                "description": "Classification of dangerous goods is broken down into classes according to the type of danger materials or items present. (i.e. Explosives, Gases, Flammable)",
+                "xml": {
+                  "name": "HazardClassID"
+                }
+              },
+              "description": {
+                "description": "Text Type",
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "description": "Value",
+                    "type": "string"
+                  },
+                  "languageID": {
+                    "description": "Language 2-digit code based upon ISO 639-1 standards used in the corresponding text string (e.g. EN)",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  }
+                },
+                "xml": {
+                  "name": "Description"
+                }
+              },
+              "packingInstruction": {
+                "description": "Free text of instructions regarding how to pack and handle the material",
+                "xml": {
+                  "name": "PackingInstruction"
+                },
+                "required": ["instructionLine"],
+                "type": "object",
+                "properties": {
+                  "instructionLine": {
+                    "description": "Free text with instructions for packing and handling",
+                    "type": "array",
+                    "items": {
+                      "description": "Text Type",
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "description": "Value",
+                          "type": "string"
+                        },
+                        "languageID": {
+                          "description": "Language 2-digit code based upon ISO 639-1 standards used in the corresponding text string (e.g. EN)",
+                          "type": "string",
+                          "xml": {
+                            "attribute": true
+                          }
+                        }
+                      },
+                      "xml": {
+                        "name": "InstructionLine"
+                      }
+                    },
+                    "xml": {
+                      "name": "InstructionLine"
+                    }
+                  }
+                }
+              },
+              "toxicityZoneCode": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  },
+                  "listID": {
+                    "description": "The identification of a list of codes",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listAgencyID": {
+                    "description": "An agency that maintains one or more code lists",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listAgencyName": {
+                    "description": "The name of the agency that maintains the code list",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listName": {
+                    "description": "The name of a list of codes",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listVersionID": {
+                    "description": "The version of the code list",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "name": {
+                    "description": "The textual equivalent of the code content",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "languageID": {
+                    "description": "The identifier of the language used in the corresponding text string",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listURI": {
+                    "description": "The Uniform Resource Identifier that identifies where the code list is located",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "listSchemeURI": {
+                    "description": "The Uniform Resource Identifier that identifies where the code list scheme is located",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  }
+                },
+                "description": "Hazard Zones A through D",
+                "xml": {
+                  "name": "ToxicityZoneCode"
+                }
+              },
+              "temperature": {
+                "description": "Recommendation for transportation temperature",
+                "xml": {
+                  "name": "Temperature"
+                },
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "format": "double",
+                    "description": "Value of the measure",
+                    "type": "number"
+                  },
+                  "unitCode": {
+                    "description": "The unit type of the measure value (e.g kg, cm)",
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "handlingInstructions": {
+            "description": "Parent tag to describe how goods should be handled",
+            "xml": {
+              "name": "HandlingInstructions"
+            },
+            "required": ["instructionLine"],
+            "type": "object",
+            "properties": {
+              "instructionLine": {
+                "description": "Free text with instructions for packing and handling",
+                "type": "array",
+                "items": {
+                  "description": "Text Type",
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "description": "Value",
+                      "type": "string"
+                    },
+                    "languageID": {
+                      "description": "Language 2-digit code based upon ISO 639-1 standards used in the corresponding text string (e.g. EN)",
+                      "type": "string",
+                      "xml": {
+                        "attribute": true
+                      }
+                    }
+                  },
+                  "xml": {
+                    "name": "InstructionLine"
+                  }
+                },
+                "xml": {
+                  "name": "InstructionLine"
+                }
+              }
+            }
+          },
+          "declaredValue": {
+            "description": "Shipment declared value",
+            "xml": {
+              "name": "DeclaredValue"
+            },
+            "type": "object",
+            "properties": {
+              "value": {
+                "format": "double",
+                "description": "Value of Item",
+                "type": "number"
+              },
+              "currencyID": {
+                "description": "Currency 3-digit codes based upon ISO 4217 standards (e.g. USD)",
+                "enum": [
+                  "AED",
+                  "AFN",
+                  "ALL",
+                  "AMD",
+                  "ANG",
+                  "AOA",
+                  "ARS",
+                  "AUD",
+                  "AWG",
+                  "AZN",
+                  "BAM",
+                  "BBD",
+                  "BDT",
+                  "BGN",
+                  "BHD",
+                  "BIF",
+                  "BMD",
+                  "BND",
+                  "BOB",
+                  "BOV",
+                  "BRL",
+                  "BSD",
+                  "BTN",
+                  "BWP",
+                  "BYR",
+                  "BZD",
+                  "CAD",
+                  "CDF",
+                  "CHE",
+                  "CHF",
+                  "CHW",
+                  "CLF",
+                  "CLP",
+                  "CNY",
+                  "COP",
+                  "COU",
+                  "CRC",
+                  "CUC",
+                  "CUP",
+                  "CVE",
+                  "CZK",
+                  "DJF",
+                  "DKK",
+                  "DOP",
+                  "DZD",
+                  "EEK",
+                  "EGP",
+                  "ERN",
+                  "ETB",
+                  "EUR",
+                  "FJD",
+                  "FKP",
+                  "GBP",
+                  "GEL",
+                  "GHS",
+                  "GIP",
+                  "GMD",
+                  "GNF",
+                  "GTQ",
+                  "GWP",
+                  "GYD",
+                  "HKD",
+                  "HNL",
+                  "HRK",
+                  "HTG",
+                  "HUF",
+                  "IDR",
+                  "ILS",
+                  "INR",
+                  "IQD",
+                  "IRR",
+                  "ISK",
+                  "JMD",
+                  "JOD",
+                  "JPY",
+                  "KES",
+                  "KGS",
+                  "KHR",
+                  "KMF",
+                  "KPW",
+                  "KRW",
+                  "KWD",
+                  "KYD",
+                  "KZT",
+                  "LAK",
+                  "LBP",
+                  "LKR",
+                  "LRD",
+                  "LSL",
+                  "LTL",
+                  "LVL",
+                  "LYD",
+                  "MAD",
+                  "MDL",
+                  "MGA",
+                  "MKD",
+                  "MMK",
+                  "MNT",
+                  "MOP",
+                  "MRO",
+                  "MUR",
+                  "MVR",
+                  "MWK",
+                  "MXN",
+                  "MXV",
+                  "MYR",
+                  "MZN",
+                  "NAD",
+                  "NGN",
+                  "NIO",
+                  "NOK",
+                  "NPR",
+                  "NZD",
+                  "OMR",
+                  "PAB",
+                  "PEN",
+                  "PGK",
+                  "PHP",
+                  "PKR",
+                  "PLN",
+                  "PYG",
+                  "QAR",
+                  "RON",
+                  "RSD",
+                  "RUB",
+                  "RWF",
+                  "SAR",
+                  "SBD",
+                  "SCR",
+                  "SDG",
+                  "SEK",
+                  "SGD",
+                  "SHP",
+                  "SLL",
+                  "SOS",
+                  "SRD",
+                  "STD",
+                  "SVC",
+                  "SYP",
+                  "SZL",
+                  "THB",
+                  "TJS",
+                  "TMT",
+                  "TND",
+                  "TOP",
+                  "TRY",
+                  "TTD",
+                  "TWD",
+                  "TZS",
+                  "UAH",
+                  "UGX",
+                  "USD",
+                  "USN",
+                  "USS",
+                  "UYI",
+                  "UYU",
+                  "UZS",
+                  "VEF",
+                  "VND",
+                  "VUV",
+                  "WST",
+                  "XAF",
+                  "XAG",
+                  "XAU",
+                  "XBA",
+                  "XBB",
+                  "XBC",
+                  "XBD",
+                  "XCD",
+                  "XDR",
+                  "XFU",
+                  "XOF",
+                  "XPD",
+                  "XPF",
+                  "XPT",
+                  "XTS",
+                  "XXX",
+                  "YER",
+                  "ZAR",
+                  "ZMK",
+                  "ZWL"
+                ],
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            }
+          },
+          "transportTemperature": {
+            "description": "Indicator of preferred temperature of transportation",
+            "type": "boolean",
+            "xml": {
+              "name": "TransportTemperature"
+            }
+          },
+          "overDimensionIndicator": {
+            "description": "Is an dimension shipment",
+            "type": "boolean",
+            "xml": {
+              "name": "OverDimensionIndicator"
+            }
+          },
+          "overWeightIndicator": {
+            "description": "Is an overweight shipment",
+            "type": "boolean",
+            "xml": {
+              "name": "OverWeightIndicator"
+            }
+          }
+        }
+      }
+    }
+  },
+  "default": {
+    "package": [
+      {
+        "packagingType": {
+          "value": "string",
+          "listID": "string",
+          "listAgencyID": "string",
+          "listAgencyName": "string",
+          "listName": "string",
+          "listVersionID": "string",
+          "name": "string",
+          "languageID": "string",
+          "listURI": "string",
+          "listSchemeURI": "string"
+        },
+        "weight": {
+          "value": 0,
+          "unitCode": "string"
+        },
+        "chargeableWeightMeasure": {
+          "value": 0,
+          "unitCode": "string"
+        },
+        "quantity": {
+          "value": 0,
+          "unitCode": "string"
+        },
+        "freightClass": {
+          "value": "string",
+          "languageID": "string"
+        },
+        "dimensions": {
+          "dimension": [
+            {
+              "width": {
+                "value": 0,
+                "unitCode": "string"
+              },
+              "length": {
+                "value": 0,
+                "unitCode": "string"
+              },
+              "height": {
+                "value": 0,
+                "unitCode": "string"
+              },
+              "description": {
+                "value": "string",
+                "languageID": "string"
+              }
+            }
+          ]
+        },
+        "density": 0,
+        "stackable": true,
+        "dangerousGood": true,
+        "uld": {
+          "position": {
+            "value": "string",
+            "listID": "string",
+            "listAgencyID": "string",
+            "listAgencyName": "string",
+            "listName": "string",
+            "listVersionID": "string",
+            "name": "string",
+            "languageID": "string",
+            "listURI": "string",
+            "listSchemeURI": "string"
+          },
+          "grossWeight": {
+            "value": 0,
+            "unitCode": "string"
+          },
+          "unitQuantity": {
+            "value": 0,
+            "unitCode": "string"
+          },
+          "uldtype": {
+            "value": "string",
+            "listID": "string",
+            "listAgencyID": "string",
+            "listAgencyName": "string",
+            "listName": "string",
+            "listVersionID": "string",
+            "name": "string",
+            "languageID": "string",
+            "listURI": "string",
+            "listSchemeURI": "string"
+          }
+        },
+        "turnable": true,
+        "hazardousInfo": {
+          "hazardClassID": {
+            "value": "string",
+            "listID": "string",
+            "listAgencyID": "string",
+            "listAgencyName": "string",
+            "listName": "string",
+            "listVersionID": "string",
+            "name": "string",
+            "languageID": "string",
+            "listURI": "string",
+            "listSchemeURI": "string"
+          },
+          "description": {
+            "value": "string",
+            "languageID": "string"
+          },
+          "packingInstruction": {
+            "instructionLine": [
+              {
+                "value": "string",
+                "languageID": "string"
+              }
+            ]
+          },
+          "toxicityZoneCode": {
+            "value": "string",
+            "listID": "string",
+            "listAgencyID": "string",
+            "listAgencyName": "string",
+            "listName": "string",
+            "listVersionID": "string",
+            "name": "string",
+            "languageID": "string",
+            "listURI": "string",
+            "listSchemeURI": "string"
+          },
+          "temperature": {
+            "value": 0,
+            "unitCode": "string"
+          }
+        },
+        "handlingInstructions": {
+          "instructionLine": [
+            {
+              "value": "string",
+              "languageID": "string"
+            }
+          ]
+        },
+        "declaredValue": {
+          "value": 0,
+          "currencyID": "AED"
+        },
+        "transportTemperature": true,
+        "overDimensionIndicator": true,
+        "overWeightIndicator": true
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
