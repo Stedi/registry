@@ -15,10 +15,6 @@
       "title": "External ID",
       "type": "string"
     },
-    "subscriptionPlanName": {
-      "title": "Subscription Plan",
-      "type": "string"
-    },
     "advanceRenewalPeriodUnit": {
       "type": "object",
       "properties": {
@@ -32,6 +28,10 @@
           "type": "string"
         }
       }
+    },
+    "subscriptionPlanName": {
+      "title": "Subscription Plan",
+      "type": "string"
     },
     "startDate": {
       "title": "Start Date",
@@ -112,16 +112,16 @@
       "title": "Internal ID",
       "type": "string"
     },
-    "billingAccountStartDate": {
-      "title": "Start Date",
-      "type": "string",
-      "description": "The Billing Account start date.",
-      "format": "date"
-    },
     "lastBillCycleDate": {
       "title": "Last Bill Cycle Date",
       "type": "string",
       "description": "The start date for the next billing cycle.",
+      "format": "date"
+    },
+    "billingAccountStartDate": {
+      "title": "Start Date",
+      "type": "string",
+      "description": "The Billing Account start date.",
       "format": "date"
     },
     "defaultRenewalMethod": {
@@ -343,15 +343,15 @@
                 "type": "number",
                 "format": "double"
               },
-              "includedQuantity": {
-                "title": "Included Quantity",
-                "type": "number",
-                "format": "float"
-              },
               "startDate": {
                 "title": "Start Date",
                 "type": "string",
                 "format": "date"
+              },
+              "includedQuantity": {
+                "title": "Included Quantity",
+                "type": "number",
+                "format": "float"
               },
               "repeatEvery": {
                 "title": "Repeat Every",
@@ -391,6 +391,20 @@
                   }
                 }
               },
+              "proratebyoption": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "title": "Internal identifier",
+                    "type": "string",
+                    "enum": ["1", "2"]
+                  },
+                  "refName": {
+                    "title": "Reference Name",
+                    "type": "string"
+                  }
+                }
+              },
               "recurringAmount": {
                 "title": "Recurring Amount",
                 "type": "number",
@@ -421,7 +435,7 @@
                   "id": {
                     "title": "Internal identifier",
                     "type": "string",
-                    "enum": ["", "DAY", "MONTH"]
+                    "enum": ["MONTH", "DAY"]
                   },
                   "refName": {
                     "title": "Reference Name",
@@ -429,15 +443,15 @@
                   }
                 }
               },
-              "startOffsetValue": {
-                "title": "Start On",
-                "type": "integer",
-                "format": "int64"
-              },
               "totalintervalvalue": {
                 "title": "Total Interval Value",
                 "type": "number",
                 "format": "double"
+              },
+              "startOffsetValue": {
+                "title": "Start On",
+                "type": "integer",
+                "format": "int64"
               },
               "status": {
                 "type": "object",
@@ -1438,11 +1452,11 @@
     "idNumber": "string",
     "renewalNumber": 1,
     "externalId": "string",
-    "subscriptionPlanName": "string",
     "advanceRenewalPeriodUnit": {
       "id": "DAYS",
       "refName": "string"
     },
+    "subscriptionPlanName": "string",
     "startDate": "1970-01-01",
     "nextBillCycleDate": "1970-01-01",
     "frequency": {
@@ -1457,8 +1471,8 @@
     "advanceRenewalPeriodNumber": 1,
     "subscriptionRevision": 1,
     "id": "string",
-    "billingAccountStartDate": "1970-01-01",
     "lastBillCycleDate": "1970-01-01",
+    "billingAccountStartDate": "1970-01-01",
     "defaultRenewalMethod": {
       "id": "",
       "refName": "string"
@@ -1517,11 +1531,15 @@
           "subscriptionPlanLineNumber": 1,
           "quantity": 0,
           "discount": 0,
-          "includedQuantity": 0,
           "startDate": "1970-01-01",
+          "includedQuantity": 0,
           "repeatEvery": 1,
           "frequency": {
             "id": "SEMIMONTHLY",
+            "refName": "string"
+          },
+          "proratebyoption": {
+            "id": "1",
             "refName": "string"
           },
           "recurringAmount": 0,
@@ -1531,11 +1549,11 @@
             "refName": "string"
           },
           "prorateBy": {
-            "id": "",
+            "id": "MONTH",
             "refName": "string"
           },
-          "startOffsetValue": 1,
           "totalintervalvalue": 0,
+          "startOffsetValue": 1,
           "status": {
             "id": "NOT_INCLUDED",
             "refName": "string"

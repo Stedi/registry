@@ -31,11 +31,12 @@ import { OpenAPIProvider } from "./openapi";
 export class MyCompanyNewProvider extends OpenAPIProvider {
   constructor() {
     super({
-      name: "MyCompany",
-      logoUrl: "https://logo.clearbit.com/my-company.com",
-      description: "My Company is a company...",
-      versions: ["v1"],
       baseUrl: "https://docs.my-company.com/meta/v1/openapi.json",
+      description: "My Company is a company...",
+      docsLink: "https://docs.my-company.com/meta/v1/docs",
+      logoUrl: "https://logo.clearbit.com/my-company.com",
+      name: "MyCompany",
+      versions: ["v1"],
     });
   }
 }
@@ -74,6 +75,8 @@ After writing your provider, please also add it to the `src/providers/index.ts` 
 If the entities generated as a result of `unbundle` logic contain non-standard fields or formats not recognized by JSONSchema, you can supply a custom `sanitizeSchema(schema: unknown) => unknown` function to remove unwanted properties from the generated JSONSchemas.
 
 Sometimes the unbundled schema exports too many entities. Many of them may not be necessary from the registry's perspective. If that's the case, supply an optional `entities: string[]` array argument with the list of entity names that should be exclusively generated.
+
+If a provider (e.g. FedEx, UPS) has multiple APIs, you can use `customPath` to specify where a generated schema is going to land in the registry.
 
 #### Finalizing
 

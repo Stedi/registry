@@ -1,0 +1,58 @@
+{
+  "type": "object",
+  "properties": {
+    "estimatedTransitTime": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "description": "Minimum time to complete an event",
+            "type": "object",
+            "properties": {
+              "value": {
+                "format": "double",
+                "description": "Value of the measure",
+                "type": "number"
+              },
+              "unitCode": {
+                "description": "The unit type of the measure value (e.g kg, cm)",
+                "type": "string"
+              }
+            }
+          },
+          "to": {
+            "description": "Maximum time to complete an event",
+            "type": "object",
+            "properties": {
+              "value": {
+                "format": "double",
+                "description": "Value of the measure",
+                "type": "number"
+              },
+              "unitCode": {
+                "description": "The unit type of the measure value (e.g kg, cm)",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "default": {
+    "estimatedTransitTime": [
+      {
+        "from": {
+          "value": 0,
+          "unitCode": "string"
+        },
+        "to": {
+          "value": 0,
+          "unitCode": "string"
+        }
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

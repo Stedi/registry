@@ -1,0 +1,34 @@
+{
+  "description": "Array of Text Fields building towards the address including building / apartment number.",
+  "required": ["addressLine"],
+  "type": "object",
+  "properties": {
+    "addressLine": {
+      "description": "Array of object TextType representing the first lines in an Address Block.",
+      "type": "array",
+      "items": {
+        "description": "Text Type",
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "Value",
+            "type": "string"
+          },
+          "languageID": {
+            "description": "Language 2-digit code based upon ISO 639-1 standards used in the corresponding text string (e.g. EN)",
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "default": {
+    "addressLine": [
+      {
+        "value": "string",
+        "languageID": "string"
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
