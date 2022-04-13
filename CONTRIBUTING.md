@@ -90,3 +90,4 @@ If the _validate_ task succeeds, you can commit your changes to branch or fork a
 - Include only meaningful schemas. Providers can sometimes generate schemas that are not useful for the registry, they can provide minimal value, be empty or broken. Try to exclude them by passing custom `entities` parameter to the `BaseProvider` constructor.
 - Leverage existing abstractions. If you want to a provider that's based on OpenAPI or Postman, you can use existing providers as a base.
 - Provide as much detail as possible. Do not remove important information from the schemas. Remove only the things that aren't passing validation.
+- Prefer using OpenAPI providers over Postman providers. OpenAPI Providers provide more complete picture because its specification is JSONSchema-based while the Postman provider infers JSONSchema from examples. Moreover, Postman collections often lack response examples so using it produces only request schemas.
