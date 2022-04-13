@@ -17,6 +17,7 @@ import { QuickbooksProvider } from "./quickbooks";
 import { FedexShipProvider } from "./fedex/ship";
 import { ConvoyProvider } from "./convoy";
 import { FreightOSProvider } from "./freightos";
+import { WebCargoProvider } from "./webcargo";
 
 export default {
   baton: new BatonProvider(),
@@ -37,5 +38,6 @@ export default {
   upsFreightShip: new UPSFreightShipProvider(),
   upsShipment: new UPSShipmentProvider(),
   upsTrack: new UPSTrackProvider(),
+  webCargo: new WebCargoProvider(),
   xpoLogistics: new XPOLogisticsProvider(),
 };

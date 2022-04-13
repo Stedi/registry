@@ -45,7 +45,7 @@ export class FreightOSProvider extends OpenAPIProvider {
 function sanitizeSchema(schema: unknown) {
   return JSON.parse(
     JSON.stringify(schema, (key, value) => {
-      // FreightOS schema contains xml fields with are not compatible with JSONSchema spec
+      // Some FreightOS schemas contain xml fields with are not compatible with JSONSchema spec
       if (value?.xml) {
         delete value.xml;
       }
