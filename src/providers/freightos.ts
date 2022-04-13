@@ -11,6 +11,7 @@ export class FreightOSProvider extends OpenAPIProvider {
       name: "FreightOS OpenFreight",
       versions: ["1.2.0"],
       customPath: "freightos/openfreight/1.2.0/",
+      sanitizeSchema,
       entities: [
         "Accessorials",
         "AccountIDList",
@@ -39,4 +40,17 @@ export class FreightOSProvider extends OpenAPIProvider {
       ],
     });
   }
+}
+
+function sanitizeSchema(schema: unknown) {
+  return JSON.parse(
+    JSON.stringify(schema, (key, value) => {
+      // FreightOS schema contains xml fields with are not compatible with JSONSchema spec
+      if (value?.xml) {
+        delete value.xml;
+      }
+
+      return value;
+    }),
+  );
 }
