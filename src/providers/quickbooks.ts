@@ -9,7 +9,7 @@ export class QuickbooksProvider extends PostmanProvider {
       logoUrl: "https://logo.clearbit.com/quickbooks.com",
       versions: ["V3"],
       postmanCollectionId: "12143221-f27bc33f-082f-45f6-b143-cd3c7d4241da",
-      docsLink: "https://developers.klaviyo.com/en/reference/api-overview",
+      docsLink: "https://developer.intuit.com/app/developer/qbo/docs/develop",
     });
   }
 }
