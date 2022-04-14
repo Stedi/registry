@@ -46,7 +46,7 @@ After writing your provider, please also add it to the `src/providers/index.ts` 
 
 #### Postman-based Provider
 
-If the API you want to add to the Registry exposes [Postman](https://www.openapis.org) specification, you can add it to the registry in two steps:
+If the API you want to add to the Registry exposes [Postman](https://www.postman.com) Collection, you can add it to the registry in two steps:
 
 1. Import desired collection to the Stedi's ["registry" workspace](https://www.postman.com/stedi-inc/workspace/registry/overview) in Postman.
 2. Use following template to create a provider:
@@ -90,7 +90,6 @@ If the _validate_ task succeeds, you can commit your changes to branch or fork a
 
 - Try to keep the contributions scoped only to the Provider you're currently working on. If `npm run generate` results in changes introduced in other providers, please exclude them. To keep things simple, the drift should be addressed in a separate PR.
 - Include only meaningful schemas. Providers can sometimes generate schemas that are not useful for the registry, they can provide minimal value, be empty or broken. Try to exclude them by passing custom `entities` parameter to the `BaseProvider` constructor.
-- Leverage existing abstractions. If you want to a provider that's based on OpenAPI or Postman, you can use existing providers as a base.
+- Leverage existing abstractions. If you want to add a provider that's based on OpenAPI or Postman, you can use existing providers as a base.
 - Provide as much detail as possible. Do not remove important information from the schemas. Remove only the things that aren't passing validation.
 - Prefer using OpenAPI providers over Postman providers. OpenAPI Providers provide more complete picture because its specification is JSONSchema-based while the Postman provider infers JSONSchema from examples. Moreover, Postman collections often lack response examples so using it produces only request schemas.
-

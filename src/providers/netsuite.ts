@@ -33,7 +33,7 @@ export class NetsuiteProvider implements BaseProvider {
     return ["v1"];
   }
 
-  async getSchema(version: string): Promise<APISchema> {
+  async getSchema(version: string): Promise<APISchema<null>> {
     return {
       type: "netsuite",
       versionName: version,

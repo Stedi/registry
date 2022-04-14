@@ -1,30 +1,26 @@
+import { JSONSchema } from "json-schema-typed/draft-2020-12";
+import { OpenAPIV3 } from "openapi-types";
 import { NetsuiteProvider } from "./providers/netsuite";
 import { OpenAPIProvider } from "./providers/openapi";
 
 export interface EntitySchema {
   name: string;
-  schema: unknown;
+  schema: JSONSchema;
 }
 
-export interface APISchema {
+export interface APISchema<T> {
   type: string;
   versionName: string;
-  value: unknown;
+  value: T;
   /**
    * List of Schemas that should be included. If not specified, all schemas will be included.
    */
   entities?: string[];
 }
 
-export interface OpenAPI3Schema extends APISchema {
-  type: "openapi-v3";
-}
+export interface OpenAPI3Schema extends APISchema<OpenAPIV3.Document> {}
 
-export interface GraphQLIntrospectionSchema extends APISchema {
-  type: "graphql";
-}
-
-export type SchemaPackage = OpenAPI3Schema | GraphQLIntrospectionSchema;
+export interface GraphQLIntrospectionSchema extends APISchema<any> {}
 
 export type BaseProvider = {
   isEnabled(): boolean;
@@ -42,6 +38,6 @@ export type BaseProvider = {
 export type Provider = GraphQLProvider | OpenAPIProvider | NetsuiteProvider;
 
 export interface GraphQLProvider extends BaseProvider {
-  getSchema: (version: string) => Promise<APISchema>;
+  getSchema: (version: string) => Promise<APISchema<GraphQLIntrospectionSchema>>;
   unbundle: (bundle: GraphQLIntrospectionSchema) => Promise<EntitySchema[]>;
 }

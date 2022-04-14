@@ -2,6 +2,7 @@ import { BaseProvider, EntitySchema, OpenAPI3Schema } from "../provider";
 import _ from "lodash";
 import axios from "axios";
 import openAPIParser from "@readme/openapi-parser";
+import { JSONSchema } from "json-schema-typed/draft-2020-12";
 
 export interface OpenAPIProviderProps {
   name: string;
@@ -11,7 +12,7 @@ export interface OpenAPIProviderProps {
   baseUrl?: string;
   entities?: string[];
   customPath?: string;
-  sanitizeSchema?: (schema: unknown) => unknown;
+  sanitizeSchema?: (schema: JSONSchema) => JSONSchema;
   docsLink: string | ((schemaName: string) => string);
 }
 
@@ -37,7 +38,7 @@ export class OpenAPIProvider implements BaseProvider {
   /**
    * Custom function to sanitize the schema, e.g. remove unsupported keywords or custom formats.
    */
-  protected readonly sanitizeSchemaFunction?: (schema: unknown) => unknown;
+  public readonly sanitizeSchemaFunction?: (schema: JSONSchema) => JSONSchema;
 
   constructor({
     versions,
@@ -102,7 +103,7 @@ export class OpenAPIProvider implements BaseProvider {
   async unbundle(bundle: OpenAPI3Schema): Promise<EntitySchema[]> {
     const dereferenced = await openAPIParser.dereference(bundle.value as any);
 
-    const components =
+    const components: Record<string, JSONSchema> =
       (dereferenced as any).definitions ??
       (dereferenced as any).components?.models ??
       (dereferenced as any).components?.schemas;
@@ -118,7 +119,7 @@ export class OpenAPIProvider implements BaseProvider {
   }
 }
 
-function sanitizeSchema(schema: unknown) {
+function sanitizeSchema(schema: JSONSchema): JSONSchema {
   return JSON.parse(
     JSON.stringify(schema, (_, value) => {
       return value;

@@ -3,8 +3,9 @@ import yaml from "js-yaml";
 import postmanToOpenApi from "postman-to-openapi";
 import _ from "lodash";
 import axios from "axios";
-import { JSONSchema7 } from "json-schema";
 import toJsonSchema from "to-json-schema";
+import { JSONSchema } from "json-schema-typed/draft-2020-12";
+import { OpenAPIV3 } from "openapi-types";
 
 export interface PostmanProviderProps {
   name: string;
@@ -14,7 +15,7 @@ export interface PostmanProviderProps {
   postmanCollectionId: string;
   entities?: string[];
   customPath?: string;
-  sanitizeSchema?: (schema: unknown) => unknown;
+  sanitizeSchema?: (schema: JSONSchema) => JSONSchema;
   docsLink: string | ((schemaName: string) => string);
 }
 
@@ -36,7 +37,7 @@ export class PostmanProvider implements BaseProvider {
   /**
    * Custom function to sanitize the schema, e.g. remove unsupported keywords or custom formats.
    */
-  protected readonly sanitizeSchemaFunction?: (schema: unknown) => unknown;
+  public readonly sanitizeSchemaFunction?: (schema: JSONSchema) => JSONSchema;
 
   /**
    * ID of the Postman collection to be fetched from the [Stedi's registry workspace](https://www.postman.com/stedi-inc/workspace/registry)
@@ -68,10 +69,10 @@ export class PostmanProvider implements BaseProvider {
   }
 
   /**
-   * Returns status of provider. Enabled only if POSTMAN_API_KEY environement variable is set.
+   * Returns status of provider. Enabled only if POSTMAN_API_KEY environment variable is set.
    */
   isEnabled(): boolean {
-    return !!this.postmanCollectionId;
+    return !!this.postmanCollectionId && !!this.postmanApiKey;
   }
 
   /**
@@ -87,10 +88,6 @@ export class PostmanProvider implements BaseProvider {
    * @returns OpenAPI3Schema object containing the OpenAPI definition with the entities to be processed
    */
   async getSchema(version: string): Promise<OpenAPI3Schema> {
-    if (!this.postmanCollectionId) {
-      throw new Error('Neither "postmanCollectionId" wasn\'t provided, nor method "getSchema" was overriden');
-    }
-
     const url = `https://api.getpostman.com/collections/${this.postmanCollectionId}`;
     const collection = await axios.get(url, {
       headers: {
@@ -99,7 +96,7 @@ export class PostmanProvider implements BaseProvider {
     });
 
     const yamlOpenApiSchema: string = await postmanToOpenApi(JSON.stringify(collection.data));
-    const jsonOpenApiSchema: unknown = yaml.load(yamlOpenApiSchema);
+    const jsonOpenApiSchema: OpenAPIV3.Document = yaml.load(yamlOpenApiSchema) as OpenAPIV3.Document;
 
     return {
       type: "openapi-v3",
@@ -110,65 +107,63 @@ export class PostmanProvider implements BaseProvider {
   }
 
   async unbundle({ value }: OpenAPI3Schema): Promise<EntitySchema[]> {
-    const results: JSONSchema7[] = [...extractRequestBodies(value), ...extractResponseSchemas(value)];
+    const results: JSONSchema[] = [...extractRequestBodies(value), ...extractResponseSchemas(value)];
 
-    return results.map((value) => ({
-      name: value.title as string,
+    return results.map((value: JSONSchema) => ({
+      name: (value as any).title as string,
       schema: this.sanitizeSchemaFunction ? this.sanitizeSchemaFunction(value) : value,
     }));
   }
 }
 
-/**
- * Goes through POST requests and extracts request bodies as JSONSchemas
- */
-function extractRequestBodies(value: unknown): JSONSchema7[] {
-  const results: JSONSchema7[] = [];
+function extractRequestBodies(value: unknown): JSONSchema[] {
+  const results: JSONSchema[] = [];
 
   for (const [_path, info] of Object.entries((value as any).paths)) {
-    if ((info as any).post) {
-      const { summary: title, description, requestBody } = (info as any).post;
-      const { type, example } = requestBody.content["application/json"].schema;
-
-      const entitySchema: JSONSchema7 = {
-        description: description.includes("\n") ? description.split("\n")[0] : description,
-        type,
-        title,
-        $schema: "https://json-schema.org/draft/2020-12/schema",
-        properties: toJsonSchema(example),
-        default: example,
-      };
-
-      results.push(entitySchema);
+    if (!(info as any).post) {
+      continue;
     }
+
+    const { summary: title, description, requestBody } = (info as any).post;
+    const { type, example } = requestBody.content["application/json"].schema;
+
+    const entitySchema: JSONSchema = {
+      description: description.includes("\n") ? description.split("\n")[0] : description,
+      type,
+      title,
+      $schema: "https://json-schema.org/draft/2020-12/schema",
+      properties: toJsonSchema(example),
+      default: example,
+    };
+
+    results.push(entitySchema);
   }
 
   return results;
 }
 
-/**
- * Goes through GET requests and extracts response bodies as JSONSchemas
- */
-function extractResponseSchemas(value: unknown): JSONSchema7[] {
-  const results: JSONSchema7[] = [];
+function extractResponseSchemas(value: unknown): JSONSchema[] {
+  const results: JSONSchema[] = [];
 
   for (const [_path, info] of Object.entries((value as any).paths)) {
     if ((info as any).get) {
-      const { summary: title, description, responses } = (info as any).get;
-      const { schema } = responses["200"].content["application/json"];
+      continue;
+    }
 
-      if (schema) {
-        const entitySchema: JSONSchema7 = {
-          description: description.includes("\n") ? description.split("\n")[0] : description,
-          type: schema.type,
-          title,
-          $schema: "https://json-schema.org/draft/2020-12/schema",
-          properties: toJsonSchema(schema.example),
-          default: schema.example,
-        };
+    const { summary: title, description, responses } = (info as any).get;
+    const { schema } = responses["200"].content["application/json"];
 
-        results.push(entitySchema);
-      }
+    if (schema) {
+      const entitySchema: JSONSchema = {
+        description: description.includes("\n") ? description.split("\n")[0] : description,
+        type: schema.type,
+        title,
+        $schema: "https://json-schema.org/draft/2020-12/schema",
+        properties: toJsonSchema(schema.example),
+        default: schema.example,
+      };
+
+      results.push(entitySchema);
     }
   }
 
