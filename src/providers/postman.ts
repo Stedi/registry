@@ -132,7 +132,7 @@ function extractRequestBodies(value: unknown): JSONSchema[] {
       type,
       title,
       $schema: "https://json-schema.org/draft/2020-12/schema",
-      properties: toJsonSchema(example),
+      properties: toJsonSchema(example).properties as any,
       default: example,
     };
 
@@ -146,11 +146,14 @@ function extractResponseSchemas(value: unknown): JSONSchema[] {
   const results: JSONSchema[] = [];
 
   for (const [_path, info] of Object.entries((value as any).paths)) {
-    if ((info as any).get) {
+    const getResponse = (info as any).get;
+    if (!getResponse || !getResponse.responses) {
       continue;
     }
 
-    const { summary: title, description, responses } = (info as any).get;
+    const title = getResponse.title;
+    const description = getResponse.description;
+    const responses = getResponse.responses;
     const { schema } = responses["200"].content["application/json"];
 
     if (schema) {
@@ -159,7 +162,7 @@ function extractResponseSchemas(value: unknown): JSONSchema[] {
         type: schema.type,
         title,
         $schema: "https://json-schema.org/draft/2020-12/schema",
-        properties: toJsonSchema(schema.example),
+        properties: toJsonSchema(schema.example).properties as any,
         default: schema.example,
       };
 

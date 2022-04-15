@@ -4,66 +4,63 @@
   "title": "BillPayment-Update",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "properties": {
-    "type": "object",
-    "properties": {
-      "VendorRef": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string",
-            "format": "utc-millisec"
-          },
-          "name": {
-            "type": "string"
-          }
+    "VendorRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "utc-millisec"
+        },
+        "name": {
+          "type": "string"
         }
-      },
-      "PayType": {
-        "type": "string"
-      },
-      "CheckPayment": {
-        "type": "object",
-        "properties": {
-          "BankAccountRef": {
-            "type": "object",
-            "properties": {
-              "value": {
-                "type": "string",
-                "format": "utc-millisec"
-              },
-              "name": {
-                "type": "string"
-              }
+      }
+    },
+    "PayType": {
+      "type": "string"
+    },
+    "CheckPayment": {
+      "type": "object",
+      "properties": {
+        "BankAccountRef": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "string",
+              "format": "utc-millisec"
+            },
+            "name": {
+              "type": "string"
             }
           }
         }
-      },
-      "TotalAmt": {
-        "type": "integer"
-      },
-      "PrivateNote": {
-        "type": "string"
-      },
-      "Line": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "Amount": {
-              "type": "integer"
-            },
-            "LinkedTxn": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "TxnId": {
-                    "type": "string",
-                    "format": "color"
-                  },
-                  "TxnType": {
-                    "type": "string"
-                  }
+      }
+    },
+    "TotalAmt": {
+      "type": "integer"
+    },
+    "PrivateNote": {
+      "type": "string"
+    },
+    "Line": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Amount": {
+            "type": "integer"
+          },
+          "LinkedTxn": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "TxnId": {
+                  "type": "string",
+                  "format": "color"
+                },
+                "TxnType": {
+                  "type": "string"
                 }
               }
             }
