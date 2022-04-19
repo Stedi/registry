@@ -1,0 +1,87 @@
+{
+  "properties": {
+    "SourceTransactionID": {
+      "description": "Filter by the SourceTransactionID. Get all the linked transactions created from a particular ACCPAY invoice",
+      "type": "string",
+      "format": "uuid"
+    },
+    "SourceLineItemID": {
+      "description": "The line item identifier from the source transaction.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "ContactID": {
+      "description": "Filter by the combination of ContactID and Status. Get all the linked transactions that have been assigned to a particular customer and have a particular status e.g. GET /LinkedTransactions?ContactID=4bb34b03-3378-4bb2-a0ed-6345abf3224e&Status=APPROVED.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "TargetTransactionID": {
+      "description": "Filter by the TargetTransactionID. Get all the linked transactions  allocated to a particular ACCREC invoice",
+      "type": "string",
+      "format": "uuid"
+    },
+    "TargetLineItemID": {
+      "description": "The line item identifier from the target transaction. It is possible  to link multiple billable expenses to the same TargetLineItemID.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "LinkedTransactionID": {
+      "description": "The Xero identifier for an Linked Transaction e.g./LinkedTransactions/297c2dc5-cc47-4afd-8ec8-74990b8761e9",
+      "type": "string",
+      "format": "uuid"
+    },
+    "Status": {
+      "description": "Filter by the combination of ContactID and Status. Get all the linked transactions that have been assigned to a particular customer and have a particular status e.g. GET /LinkedTransactions?ContactID=4bb34b03-3378-4bb2-a0ed-6345abf3224e&Status=APPROVED.",
+      "type": "string",
+      "enum": ["APPROVED", "DRAFT", "ONDRAFT", "BILLED", "VOIDED"]
+    },
+    "Type": {
+      "description": "This will always be BILLABLEEXPENSE. More types may be added in future.",
+      "type": "string",
+      "enum": ["BILLABLEEXPENSE"]
+    },
+    "UpdatedDateUTC": {
+      "description": "The last modified date in UTC format",
+      "type": "string",
+      "example": "/Date(1573755038314)/",
+      "readOnly": true
+    },
+    "SourceTransactionTypeCode": {
+      "description": "The Type of the source tranasction. This will be ACCPAY if the linked transaction was created from an invoice and SPEND if it was created from a bank transaction.",
+      "type": "string",
+      "enum": ["ACCPAY", "SPEND"]
+    },
+    "ValidationErrors": {
+      "description": "Displays array of validation error messages from the API",
+      "type": "array",
+      "items": {
+        "properties": {
+          "Message": {
+            "description": "Validation error message",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "type": "object",
+  "default": {
+    "SourceTransactionID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "SourceLineItemID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "ContactID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "TargetTransactionID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "TargetLineItemID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "LinkedTransactionID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "Status": "APPROVED",
+    "Type": "BILLABLEEXPENSE",
+    "UpdatedDateUTC": "/Date(1573755038314)/",
+    "SourceTransactionTypeCode": "ACCPAY",
+    "ValidationErrors": [
+      {
+        "Message": "string"
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

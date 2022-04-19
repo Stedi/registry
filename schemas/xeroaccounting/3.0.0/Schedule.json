@@ -1,0 +1,52 @@
+{
+  "properties": {
+    "Period": {
+      "description": "Integer used with the unit e.g. 1 (every 1 week), 2 (every 2 months)",
+      "type": "integer"
+    },
+    "Unit": {
+      "description": "One of the following - WEEKLY or MONTHLY",
+      "type": "string",
+      "enum": ["WEEKLY", "MONTHLY"]
+    },
+    "DueDate": {
+      "description": "Integer used with due date type e.g 20 (of following month), 31 (of current month)",
+      "type": "integer"
+    },
+    "DueDateType": {
+      "description": "the payment terms",
+      "type": "string",
+      "enum": [
+        "DAYSAFTERBILLDATE",
+        "DAYSAFTERBILLMONTH",
+        "DAYSAFTERINVOICEDATE",
+        "DAYSAFTERINVOICEMONTH",
+        "OFCURRENTMONTH",
+        "OFFOLLOWINGMONTH"
+      ]
+    },
+    "StartDate": {
+      "description": "Date the first invoice of the current version of the repeating schedule was generated (changes when repeating invoice is edited)",
+      "type": "string"
+    },
+    "NextScheduledDate": {
+      "description": "The calendar date of the next invoice in the schedule to be generated",
+      "type": "string"
+    },
+    "EndDate": {
+      "description": "Invoice end date – only returned if the template has an end date set",
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "default": {
+    "Period": 1,
+    "Unit": "WEEKLY",
+    "DueDate": 1,
+    "DueDateType": "DAYSAFTERBILLDATE",
+    "StartDate": "string",
+    "NextScheduledDate": "string",
+    "EndDate": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

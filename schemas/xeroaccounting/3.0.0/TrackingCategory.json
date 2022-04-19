@@ -1,0 +1,75 @@
+{
+  "properties": {
+    "TrackingCategoryID": {
+      "description": "The Xero identifier for a tracking category e.g. 297c2dc5-cc47-4afd-8ec8-74990b8761e9",
+      "type": "string",
+      "format": "uuid"
+    },
+    "TrackingOptionID": {
+      "description": "The Xero identifier for a tracking option e.g. dc54c220-0140-495a-b925-3246adc0075f",
+      "type": "string",
+      "format": "uuid"
+    },
+    "Name": {
+      "description": "The name of the tracking category e.g. Department, Region (max length = 100)",
+      "maxLength": 100,
+      "type": "string"
+    },
+    "Option": {
+      "description": "The option name of the tracking option e.g. East, West (max length = 100)",
+      "maxLength": 100,
+      "type": "string"
+    },
+    "Status": {
+      "description": "The status of a tracking category",
+      "type": "string",
+      "enum": ["ACTIVE", "ARCHIVED", "DELETED"]
+    },
+    "Options": {
+      "description": "See Tracking Options",
+      "type": "array",
+      "items": {
+        "properties": {
+          "TrackingOptionID": {
+            "description": "The Xero identifier for a tracking option e.g. ae777a87-5ef3-4fa0-a4f0-d10e1f13073a",
+            "type": "string",
+            "format": "uuid"
+          },
+          "Name": {
+            "description": "The name of the tracking option e.g. Marketing, East (max length = 100)",
+            "maxLength": 100,
+            "type": "string"
+          },
+          "Status": {
+            "description": "The status of a tracking option",
+            "type": "string",
+            "enum": ["ACTIVE", "ARCHIVED", "DELETED"]
+          },
+          "TrackingCategoryID": {
+            "description": "Filter by a tracking category e.g. 297c2dc5-cc47-4afd-8ec8-74990b8761e9",
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "type": "object",
+  "default": {
+    "TrackingCategoryID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "TrackingOptionID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "Name": "string",
+    "Option": "string",
+    "Status": "ACTIVE",
+    "Options": [
+      {
+        "TrackingOptionID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "Name": "string",
+        "Status": "ACTIVE",
+        "TrackingCategoryID": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
