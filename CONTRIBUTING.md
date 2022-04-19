@@ -42,7 +42,6 @@ export class MyCompanyNewProvider extends OpenAPIProvider {
 }
 ```
 
-
 If the entities generated as a result of `npm run generate` command contain non-standard fields or formats not recognized by JSON Schema, you can supply a custom `sanitizeSchema(schema: unknown) => unknown` function to remove unwanted properties from the generated JSON Schemas.
 
 Sometimes the unbundled schema exports too many entities. Many of them may not be necessary from the registry's perspective - they can be virtual, meaningless or not providing any value. If that's the case, supply an optional `entities: string[]` array argument with the list of entity names that should be exclusively generated.

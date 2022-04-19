@@ -26,9 +26,6 @@ export class XeroAccountingProvider extends OpenAPIProvider {
       value: yaml.load(definition as string),
       entities: [
         "AccountType",
-        "AccountsPayable",
-        "AccountsReceivable",
-        "Action",
         "Address",
         "AddressForOrganisation",
         "Attachment",
