@@ -1,0 +1,78 @@
+{
+  "description": "Retrieve an attachable object by Id\nAccept:application/json\nMethod - GET",
+  "type": "object",
+  "title": "Attachable-ReadById",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "Note": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "sparse": {
+      "type": "boolean"
+    },
+    "Id": {
+      "type": "string"
+    },
+    "SyncToken": {
+      "type": "string"
+    },
+    "MetaData": {
+      "type": "object",
+      "properties": {
+        "CreateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "LastUpdatedTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "AttachableRef": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "EntityRef": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            }
+          },
+          "IncludeOnSend": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "default": {
+    "Note": "This is an attached note. Updated",
+    "domain": "QBO",
+    "sparse": false,
+    "Id": "5000000000000029383",
+    "SyncToken": "0",
+    "MetaData": {
+      "CreateTime": "2016-08-18T00:18:04-07:00",
+      "LastUpdatedTime": "2016-08-18T00:18:04-07:00"
+    },
+    "AttachableRef": [
+      {
+        "EntityRef": {
+          "value": "130",
+          "type": "Invoice"
+        },
+        "IncludeOnSend": false
+      }
+    ]
+  }
+}

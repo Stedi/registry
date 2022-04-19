@@ -1,0 +1,71 @@
+{
+  "description": "Create a puchase object\nMethod : POST\n",
+  "type": "object",
+  "title": "Purchase-Create",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "AccountRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "PaymentType": {
+      "type": "string"
+    },
+    "Line": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Amount": {
+            "type": "integer"
+          },
+          "DetailType": {
+            "type": "string"
+          },
+          "AccountBasedExpenseLineDetail": {
+            "type": "object",
+            "properties": {
+              "AccountRef": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "default": {
+    "AccountRef": {
+      "value": "42",
+      "name": "Visa"
+    },
+    "PaymentType": "CreditCard",
+    "Line": [
+      {
+        "Amount": 10,
+        "DetailType": "AccountBasedExpenseLineDetail",
+        "AccountBasedExpenseLineDetail": {
+          "AccountRef": {
+            "name": "Meals and Entertainment",
+            "value": "13"
+          }
+        }
+      }
+    ]
+  }
+}

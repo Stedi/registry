@@ -1,0 +1,117 @@
+{
+  "description": "Update an journalentry object\nMethod : POST\n",
+  "type": "object",
+  "title": "JournalEntry-Update",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "Adjustment": {
+      "type": "boolean"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "sparse": {
+      "type": "boolean"
+    },
+    "Id": {
+      "type": "string"
+    },
+    "SyncToken": {
+      "type": "string"
+    },
+    "TxnDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "CurrencyRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ExchangeRate": {
+      "type": "integer"
+    },
+    "Line": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "Amount": {
+            "type": "integer"
+          },
+          "DetailType": {
+            "type": "string"
+          },
+          "JournalEntryLineDetail": {
+            "type": "object",
+            "properties": {
+              "PostingType": {
+                "type": "string"
+              },
+              "AccountRef": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "TxnTaxDetail": {
+      "type": "object"
+    }
+  },
+  "default": {
+    "Adjustment": false,
+    "domain": "QBO",
+    "sparse": false,
+    "Id": "167",
+    "SyncToken": "0",
+    "TxnDate": "2016-08-19",
+    "CurrencyRef": {
+      "value": "USD",
+      "name": "United States Dollar"
+    },
+    "ExchangeRate": 1,
+    "Line": [
+      {
+        "Id": "0",
+        "Description": "nov portion of rider insurance-updated",
+        "Amount": 100,
+        "DetailType": "JournalEntryLineDetail",
+        "JournalEntryLineDetail": {
+          "PostingType": "Debit",
+          "AccountRef": {
+            "value": "39",
+            "name": "Truck:Depreciation"
+          }
+        }
+      },
+      {
+        "Id": "1",
+        "Description": "nov portion of rider insurance-updated",
+        "Amount": 100,
+        "DetailType": "JournalEntryLineDetail",
+        "JournalEntryLineDetail": {
+          "PostingType": "Credit",
+          "AccountRef": {
+            "value": "44",
+            "name": "Notes Payable"
+          }
+        }
+      }
+    ],
+    "TxnTaxDetail": {}
+  }
+}

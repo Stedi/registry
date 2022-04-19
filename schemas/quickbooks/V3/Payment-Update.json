@@ -1,0 +1,198 @@
+{
+  "description": "Update an payment object\nMethod : POST\n",
+  "type": "object",
+  "title": "Payment-Update",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "CustomerRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "DepositToAccountRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "TotalAmt": {
+      "type": "integer"
+    },
+    "UnappliedAmt": {
+      "type": "integer"
+    },
+    "ProcessPayment": {
+      "type": "boolean"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "sparse": {
+      "type": "boolean"
+    },
+    "Id": {
+      "type": "string"
+    },
+    "SyncToken": {
+      "type": "string"
+    },
+    "TxnDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "CurrencyRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ExchangeRate": {
+      "type": "integer"
+    },
+    "Line": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Amount": {
+            "type": "integer"
+          },
+          "LinkedTxn": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "TxnId": {
+                  "type": "string"
+                },
+                "TxnType": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "LineEx": {
+            "type": "object",
+            "properties": {
+              "any": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "declaredType": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "object"
+                    },
+                    "nil": {
+                      "type": "boolean"
+                    },
+                    "globalScope": {
+                      "type": "boolean"
+                    },
+                    "typeSubstituted": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "default": {
+    "CustomerRef": {
+      "value": "58",
+      "name": "TEST123"
+    },
+    "DepositToAccountRef": {
+      "value": "4"
+    },
+    "TotalAmt": 100,
+    "UnappliedAmt": 0,
+    "ProcessPayment": false,
+    "domain": "QBO",
+    "sparse": false,
+    "Id": "174",
+    "SyncToken": "0",
+    "TxnDate": "2016-08-29",
+    "CurrencyRef": {
+      "value": "USD",
+      "name": "United States Dollar"
+    },
+    "ExchangeRate": 1,
+    "Line": [
+      {
+        "Amount": 100,
+        "LinkedTxn": [
+          {
+            "TxnId": "173",
+            "TxnType": "Invoice"
+          }
+        ],
+        "LineEx": {
+          "any": [
+            {
+              "name": "{http://schema.intuit.com/finance/v3}NameValue",
+              "declaredType": "com.intuit.schema.finance.v3.NameValue",
+              "scope": "javax.xml.bind.JAXBElement$GlobalScope",
+              "value": {
+                "Name": "txnId",
+                "Value": "173"
+              },
+              "nil": false,
+              "globalScope": true,
+              "typeSubstituted": false
+            },
+            {
+              "name": "{http://schema.intuit.com/finance/v3}NameValue",
+              "declaredType": "com.intuit.schema.finance.v3.NameValue",
+              "scope": "javax.xml.bind.JAXBElement$GlobalScope",
+              "value": {
+                "Name": "txnOpenBalance",
+                "Value": "100.00"
+              },
+              "nil": false,
+              "globalScope": true,
+              "typeSubstituted": false
+            },
+            {
+              "name": "{http://schema.intuit.com/finance/v3}NameValue",
+              "declaredType": "com.intuit.schema.finance.v3.NameValue",
+              "scope": "javax.xml.bind.JAXBElement$GlobalScope",
+              "value": {
+                "Name": "txnReferenceNumber",
+                "Value": "1043"
+              },
+              "nil": false,
+              "globalScope": true,
+              "typeSubstituted": false
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

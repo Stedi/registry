@@ -1,0 +1,68 @@
+{
+  "description": "Create a customer\nMethod : POST",
+  "type": "object",
+  "title": "Customer-Create",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "BillAddr": {
+      "type": "object",
+      "properties": {
+        "Line1": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Country": {
+          "type": "string"
+        },
+        "CountrySubDivisionCode": {
+          "type": "string"
+        },
+        "PostalCode": {
+          "type": "string"
+        }
+      }
+    },
+    "Notes": {
+      "type": "string"
+    },
+    "DisplayName": {
+      "type": "string"
+    },
+    "PrimaryPhone": {
+      "type": "object",
+      "properties": {
+        "FreeFormNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "PrimaryEmailAddr": {
+      "type": "object",
+      "properties": {
+        "Address": {
+          "type": "string",
+          "format": "email"
+        }
+      }
+    }
+  },
+  "default": {
+    "BillAddr": {
+      "Line1": "123 Main Street",
+      "City": "Mountain View",
+      "Country": "USA",
+      "CountrySubDivisionCode": "CA",
+      "PostalCode": "94042"
+    },
+    "Notes": "Here are other details.",
+    "DisplayName": "King's Groceries1",
+    "PrimaryPhone": {
+      "FreeFormNumber": "(555) 555-5555"
+    },
+    "PrimaryEmailAddr": {
+      "Address": "jdrew@myemail.com"
+    }
+  }
+}

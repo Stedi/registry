@@ -2,6 +2,7 @@ import { JSONSchema } from "json-schema-typed/draft-2020-12";
 import { OpenAPIV3 } from "openapi-types";
 import { NetsuiteProvider } from "./providers/netsuite";
 import { OpenAPIProvider } from "./providers/openapi";
+import Postman from "postman-collection";
 
 export interface EntitySchema {
   name: string;
@@ -19,6 +20,8 @@ export interface APISchema<T> {
 }
 
 export interface OpenAPI3Schema extends APISchema<OpenAPIV3.Document> {}
+
+export interface PostmanSchema extends APISchema<Postman.Collection> {}
 
 export interface GraphQLIntrospectionSchema extends APISchema<any> {}
 

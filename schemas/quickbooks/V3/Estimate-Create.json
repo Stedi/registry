@@ -1,0 +1,118 @@
+{
+  "description": "Create an Estimate object\nMethod : POST\n",
+  "type": "object",
+  "title": "Estimate-Create",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "Line": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "TxnTaxDetail": {
+      "type": "object",
+      "properties": {
+        "TotalTax": {
+          "type": "integer"
+        }
+      }
+    },
+    "CustomerRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "CustomerMemo": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "TotalAmt": {
+      "type": "number"
+    },
+    "ApplyTaxAfterDiscount": {
+      "type": "boolean"
+    },
+    "PrintStatus": {
+      "type": "string"
+    },
+    "EmailStatus": {
+      "type": "string"
+    },
+    "BillEmail": {
+      "type": "object",
+      "properties": {
+        "Address": {
+          "type": "string",
+          "format": "email"
+        }
+      }
+    }
+  },
+  "default": {
+    "Line": [
+      {
+        "Id": "1",
+        "LineNum": 1,
+        "Description": "Pest Control Services",
+        "Amount": 35,
+        "DetailType": "SalesItemLineDetail",
+        "SalesItemLineDetail": {
+          "ItemRef": {
+            "value": "10",
+            "name": "Pest Control"
+          },
+          "UnitPrice": 35,
+          "Qty": 1,
+          "TaxCodeRef": {
+            "value": "NON"
+          }
+        }
+      },
+      {
+        "Amount": 35,
+        "DetailType": "SubTotalLineDetail",
+        "SubTotalLineDetail": {}
+      },
+      {
+        "Amount": 3.5,
+        "DetailType": "DiscountLineDetail",
+        "DiscountLineDetail": {
+          "PercentBased": true,
+          "DiscountPercent": 10,
+          "DiscountAccountRef": {
+            "value": "86",
+            "name": "Discounts given"
+          }
+        }
+      }
+    ],
+    "TxnTaxDetail": {
+      "TotalTax": 0
+    },
+    "CustomerRef": {
+      "value": "3",
+      "name": "Cool Cars"
+    },
+    "CustomerMemo": {
+      "value": "Thank you for your business and have a great day!"
+    },
+    "TotalAmt": 31.5,
+    "ApplyTaxAfterDiscount": false,
+    "PrintStatus": "NeedToPrint",
+    "EmailStatus": "NotSet",
+    "BillEmail": {
+      "Address": "Cool_Cars@intuit.com"
+    }
+  }
+}

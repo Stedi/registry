@@ -1,0 +1,63 @@
+{
+  "description": "Retrieve a bill by Id\nAccept:application/json\nMethod - GET",
+  "type": "object",
+  "title": "Bill-GetById",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "Line": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "Amount": {
+            "type": "integer"
+          },
+          "DetailType": {
+            "type": "string"
+          },
+          "AccountBasedExpenseLineDetail": {
+            "type": "object",
+            "properties": {
+              "AccountRef": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "VendorRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "default": {
+    "Line": [
+      {
+        "Id": "1",
+        "Amount": 200,
+        "DetailType": "AccountBasedExpenseLineDetail",
+        "AccountBasedExpenseLineDetail": {
+          "AccountRef": {
+            "value": "7"
+          }
+        }
+      }
+    ],
+    "VendorRef": {
+      "value": "56"
+    }
+  }
+}

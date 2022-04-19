@@ -1,0 +1,124 @@
+{
+  "description": "Create a puchase-order object\nMethod : POST\n",
+  "type": "object",
+  "title": "PurchaseOrder-Create",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "Line": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Amount": {
+            "type": "integer"
+          },
+          "DetailType": {
+            "type": "string"
+          },
+          "ItemBasedExpenseLineDetail": {
+            "type": "object",
+            "properties": {
+              "CustomerRef": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "BillableStatus": {
+                "type": "string"
+              },
+              "ItemRef": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "UnitPrice": {
+                "type": "integer"
+              },
+              "Qty": {
+                "type": "integer"
+              },
+              "TaxCodeRef": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "VendorRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "APAccountRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "TotalAmt": {
+      "type": "integer"
+    }
+  },
+  "default": {
+    "Line": [
+      {
+        "Amount": 25,
+        "DetailType": "ItemBasedExpenseLineDetail",
+        "ItemBasedExpenseLineDetail": {
+          "CustomerRef": {
+            "value": "3",
+            "name": "Cool Cars"
+          },
+          "BillableStatus": "NotBillable",
+          "ItemRef": {
+            "value": "11",
+            "name": "Pump"
+          },
+          "UnitPrice": 25,
+          "Qty": 1,
+          "TaxCodeRef": {
+            "value": "NON"
+          }
+        }
+      }
+    ],
+    "VendorRef": {
+      "value": "41",
+      "name": "Hicks Hardware"
+    },
+    "APAccountRef": {
+      "value": "33",
+      "name": "Accounts Payable (A/P)"
+    },
+    "TotalAmt": 25
+  }
+}

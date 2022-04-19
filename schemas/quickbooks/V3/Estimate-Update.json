@@ -1,0 +1,264 @@
+{
+  "description": "Update an Estimate object\nMethod : POST\n",
+  "type": "object",
+  "title": "Estimate-Update",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "domain": {
+      "type": "string"
+    },
+    "sparse": {
+      "type": "boolean"
+    },
+    "Id": {
+      "type": "string"
+    },
+    "SyncToken": {
+      "type": "string"
+    },
+    "CustomField": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "DefinitionId": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Type": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DocNumber": {
+      "type": "string"
+    },
+    "TxnDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "CurrencyRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ExchangeRate": {
+      "type": "integer"
+    },
+    "TxnStatus": {
+      "type": "string"
+    },
+    "Line": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "TxnTaxDetail": {
+      "type": "object",
+      "properties": {
+        "TotalTax": {
+          "type": "integer"
+        }
+      }
+    },
+    "CustomerRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "CustomerMemo": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "BillAddr": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Line1": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "CountrySubDivisionCode": {
+          "type": "string"
+        },
+        "PostalCode": {
+          "type": "string"
+        },
+        "Lat": {
+          "type": "string"
+        },
+        "Long": {
+          "type": "string"
+        }
+      }
+    },
+    "ShipAddr": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Line1": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "CountrySubDivisionCode": {
+          "type": "string"
+        },
+        "PostalCode": {
+          "type": "string"
+        },
+        "Lat": {
+          "type": "string"
+        },
+        "Long": {
+          "type": "string"
+        }
+      }
+    },
+    "TotalAmt": {
+      "type": "number"
+    },
+    "HomeTotalAmt": {
+      "type": "number"
+    },
+    "ApplyTaxAfterDiscount": {
+      "type": "boolean"
+    },
+    "PrintStatus": {
+      "type": "string"
+    },
+    "EmailStatus": {
+      "type": "string"
+    },
+    "BillEmail": {
+      "type": "object",
+      "properties": {
+        "Address": {
+          "type": "string",
+          "format": "email"
+        }
+      }
+    }
+  },
+  "default": {
+    "domain": "QBO",
+    "sparse": false,
+    "Id": "163",
+    "SyncToken": "0",
+    "CustomField": [
+      {
+        "DefinitionId": "1",
+        "Name": "Crew #",
+        "Type": "StringType"
+      }
+    ],
+    "DocNumber": "1001-Updated",
+    "TxnDate": "2016-08-18",
+    "CurrencyRef": {
+      "value": "USD",
+      "name": "United States Dollar"
+    },
+    "ExchangeRate": 1,
+    "TxnStatus": "Pending",
+    "Line": [
+      {
+        "Id": "1",
+        "LineNum": 1,
+        "Description": "Pest Control Services",
+        "Amount": 35,
+        "DetailType": "SalesItemLineDetail",
+        "SalesItemLineDetail": {
+          "ItemRef": {
+            "value": "10",
+            "name": "Pest Control"
+          },
+          "UnitPrice": 35,
+          "Qty": 1,
+          "TaxCodeRef": {
+            "value": "NON"
+          }
+        }
+      },
+      {
+        "Amount": 35,
+        "DetailType": "SubTotalLineDetail",
+        "SubTotalLineDetail": {}
+      },
+      {
+        "Amount": 3.5,
+        "DetailType": "DiscountLineDetail",
+        "DiscountLineDetail": {
+          "PercentBased": true,
+          "DiscountPercent": 10,
+          "DiscountAccountRef": {
+            "value": "86",
+            "name": "Discounts given"
+          }
+        }
+      }
+    ],
+    "TxnTaxDetail": {
+      "TotalTax": 0
+    },
+    "CustomerRef": {
+      "value": "3",
+      "name": "Cool Cars"
+    },
+    "CustomerMemo": {
+      "value": "Thank you for your business and have a great day!"
+    },
+    "BillAddr": {
+      "Id": "4",
+      "Line1": "65 Ocean Dr.",
+      "City": "Half Moon Bay",
+      "CountrySubDivisionCode": "CA",
+      "PostalCode": "94213",
+      "Lat": "37.4300318",
+      "Long": "-122.4336537"
+    },
+    "ShipAddr": {
+      "Id": "4",
+      "Line1": "65 Ocean Dr.",
+      "City": "Half Moon Bay",
+      "CountrySubDivisionCode": "CA",
+      "PostalCode": "94213",
+      "Lat": "37.4300318",
+      "Long": "-122.4336537"
+    },
+    "TotalAmt": 31.5,
+    "HomeTotalAmt": 31.5,
+    "ApplyTaxAfterDiscount": false,
+    "PrintStatus": "NeedToPrint",
+    "EmailStatus": "NotSet",
+    "BillEmail": {
+      "Address": "Cool_Cars@intuit.com"
+    }
+  }
+}

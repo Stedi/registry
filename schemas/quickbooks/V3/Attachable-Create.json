@@ -1,0 +1,45 @@
+{
+  "description": "Create an attachable object\nConent-Type:application/json\nMethod - POST",
+  "type": "object",
+  "title": "Attachable-Create",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "AttachableRef": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "EntityRef": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            }
+          },
+          "IncludeOnSend": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Note": {
+      "type": "string"
+    }
+  },
+  "default": {
+    "AttachableRef": [
+      {
+        "EntityRef": {
+          "value": "130",
+          "type": "Invoice"
+        },
+        "IncludeOnSend": "false"
+      }
+    ],
+    "Note": "This is an attached note."
+  }
+}

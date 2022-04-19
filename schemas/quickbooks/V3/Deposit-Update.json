@@ -1,0 +1,119 @@
+{
+  "description": "Update a deposit object\nMethod : POST",
+  "type": "object",
+  "title": "Deposit-Update",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "DepositToAccountRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "TotalAmt": {
+      "type": "integer"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "sparse": {
+      "type": "boolean"
+    },
+    "Id": {
+      "type": "string"
+    },
+    "SyncToken": {
+      "type": "string"
+    },
+    "TxnDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "CurrencyRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ExchangeRate": {
+      "type": "integer"
+    },
+    "Line": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "LineNum": {
+            "type": "integer"
+          },
+          "Amount": {
+            "type": "integer"
+          },
+          "DetailType": {
+            "type": "string"
+          },
+          "DepositLineDetail": {
+            "type": "object",
+            "properties": {
+              "AccountRef": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "default": {
+    "DepositToAccountRef": {
+      "value": "35",
+      "name": "Checking"
+    },
+    "TotalAmt": 205,
+    "domain": "QBO",
+    "sparse": false,
+    "Id": "162",
+    "SyncToken": "0",
+    "TxnDate": "2016-08-18",
+    "CurrencyRef": {
+      "value": "USD",
+      "name": "United States Dollar"
+    },
+    "ExchangeRate": 1,
+    "Line": [
+      {
+        "Id": "1",
+        "LineNum": 1,
+        "Amount": 205,
+        "DetailType": "DepositLineDetail",
+        "DepositLineDetail": {
+          "AccountRef": {
+            "value": "87",
+            "name": "Unapplied Cash Payment Income"
+          }
+        }
+      }
+    ]
+  }
+}

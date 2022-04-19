@@ -1,11 +1,9 @@
-import { BaseProvider, EntitySchema, OpenAPI3Schema } from "../provider";
-import yaml from "js-yaml";
-import postmanToOpenApi from "postman-to-openapi";
+import { BaseProvider, EntitySchema, OpenAPI3Schema, PostmanSchema } from "../provider";
 import _ from "lodash";
 import axios from "axios";
 import toJsonSchema from "to-json-schema";
 import { JSONSchema } from "json-schema-typed/draft-2020-12";
-import { OpenAPIV3 } from "openapi-types";
+import { CollectionDefinition, ItemDefinition } from "postman-collection";
 
 export interface PostmanProviderProps {
   name: string;
@@ -87,7 +85,7 @@ export class PostmanProvider implements BaseProvider {
    * Fetches Postman collection based on the postmanCollectionId and transforms it to OpenAPI definition
    * @returns OpenAPI3Schema object containing the OpenAPI definition with the entities to be processed
    */
-  async getSchema(version: string): Promise<OpenAPI3Schema> {
+  async getSchema(version: string): Promise<PostmanSchema> {
     const url = `https://api.getpostman.com/collections/${this.postmanCollectionId}`;
     const collection = await axios.get(url, {
       headers: {
@@ -95,80 +93,64 @@ export class PostmanProvider implements BaseProvider {
       },
     });
 
-    const yamlOpenApiSchema: string = await postmanToOpenApi(JSON.stringify(collection.data));
-    const jsonOpenApiSchema: OpenAPIV3.Document = yaml.load(yamlOpenApiSchema) as OpenAPIV3.Document;
-
     return {
-      type: "openapi-v3",
+      type: "postman",
       versionName: version,
-      value: jsonOpenApiSchema,
+      value: collection.data,
       entities: this.entities,
     };
   }
 
-  async unbundle({ value }: OpenAPI3Schema): Promise<EntitySchema[]> {
-    const results: JSONSchema[] = [...extractRequestBodies(value), ...extractResponseSchemas(value)];
+  async unbundle({ value }: PostmanSchema): Promise<EntitySchema[]> {
+    const results: JSONSchema[] = [...extractRequestBodies(value)];
 
-    return results.map((value: JSONSchema) => ({
-      name: (value as any).title as string,
-      schema: this.sanitizeSchemaFunction ? this.sanitizeSchemaFunction(value) : value,
-    }));
+    return results
+      .filter(({ title }: any) => !this.entities || this.entities.includes(title))
+      .map((value: JSONSchema) => ({
+        name: (value as any).title as string,
+        schema: this.sanitizeSchemaFunction ? this.sanitizeSchemaFunction(value) : value,
+      }));
   }
 }
 
-function extractRequestBodies(value: unknown): JSONSchema[] {
+function extractRequestBodies(collectionDefinition: CollectionDefinition): JSONSchema[] {
   const results: JSONSchema[] = [];
 
-  for (const [_path, info] of Object.entries((value as any).paths)) {
-    if (!(info as any).post) {
-      continue;
-    }
-
-    const { summary: title, description, requestBody } = (info as any).post;
-    const { type, example } = requestBody.content["application/json"].schema;
-
-    const entitySchema: JSONSchema = {
-      description: description.includes("\n") ? description.split("\n")[0] : description,
-      type,
-      title,
-      $schema: "https://json-schema.org/draft/2020-12/schema",
-      properties: toJsonSchema(example).properties as any,
-      default: example,
-    };
-
-    results.push(entitySchema);
+  const value: CollectionDefinition = (collectionDefinition as any).collection;
+  if (!value.item) {
+    return [];
   }
 
-  return results;
-}
+  value.item.forEach((category) => {
+    const item = (category as any).item;
 
-function extractResponseSchemas(value: unknown): JSONSchema[] {
-  const results: JSONSchema[] = [];
-
-  for (const [_path, info] of Object.entries((value as any).paths)) {
-    const getResponse = (info as any).get;
-    if (!getResponse || !getResponse.responses) {
-      continue;
+    if (!item) {
+      return;
     }
 
-    const title = getResponse.title;
-    const description = getResponse.description;
-    const responses = getResponse.responses;
-    const { schema } = responses["200"].content["application/json"];
+    item.forEach((operation: ItemDefinition) => {
+      const request = operation.request;
+      if (!request) {
+        return;
+      }
 
-    if (schema) {
-      const entitySchema: JSONSchema = {
-        description: description.includes("\n") ? description.split("\n")[0] : description,
-        type: schema.type,
-        title,
-        $schema: "https://json-schema.org/draft/2020-12/schema",
-        properties: toJsonSchema(schema.example).properties as any,
-        default: schema.example,
-      };
+      try {
+        const parsedBody = JSON.parse(request.body?.raw ?? "{}");
+        const entitySchema: JSONSchema = {
+          description: (request.description as string) ?? "Description missing",
+          type: "object",
+          title: operation.name,
+          $schema: "https://json-schema.org/draft/2020-12/schema",
+          properties: toJsonSchema(parsedBody).properties as any,
+          default: parsedBody,
+        };
 
-      results.push(entitySchema);
-    }
-  }
+        results.push(entitySchema);
+      } catch (e) {
+        // Fail silently, doesn't matter
+      }
+    });
+  });
 
   return results;
 }

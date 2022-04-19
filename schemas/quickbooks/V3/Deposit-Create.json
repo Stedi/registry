@@ -1,0 +1,67 @@
+{
+  "description": "Create a deposit object\nMethod : POST",
+  "type": "object",
+  "title": "Deposit-Create",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "DepositToAccountRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Line": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Amount": {
+            "type": "integer"
+          },
+          "DetailType": {
+            "type": "string"
+          },
+          "DepositLineDetail": {
+            "type": "object",
+            "properties": {
+              "AccountRef": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "default": {
+    "DepositToAccountRef": {
+      "value": "35",
+      "name": "Checking"
+    },
+    "Line": [
+      {
+        "Amount": 20,
+        "DetailType": "DepositLineDetail",
+        "DepositLineDetail": {
+          "AccountRef": {
+            "value": "87",
+            "name": "Unapplied Cash Payment Income"
+          }
+        }
+      }
+    ]
+  }
+}

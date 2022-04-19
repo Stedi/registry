@@ -1,0 +1,95 @@
+{
+  "description": "Create a BillPayment against a pre-created bill\nContent-Type:application/json\nMethod - POST",
+  "type": "object",
+  "title": "BillPayment-Create",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "VendorRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "PayType": {
+      "type": "string"
+    },
+    "CheckPayment": {
+      "type": "object",
+      "properties": {
+        "BankAccountRef": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "TotalAmt": {
+      "type": "integer"
+    },
+    "PrivateNote": {
+      "type": "string"
+    },
+    "Line": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Amount": {
+            "type": "integer"
+          },
+          "LinkedTxn": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "TxnId": {
+                  "type": "string"
+                },
+                "TxnType": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "default": {
+    "VendorRef": {
+      "value": "62",
+      "name": "Test"
+    },
+    "PayType": "Check",
+    "CheckPayment": {
+      "BankAccountRef": {
+        "value": "35",
+        "name": "Checking"
+      }
+    },
+    "TotalAmt": 100,
+    "PrivateNote": "Acct. 1JK90",
+    "Line": [
+      {
+        "Amount": 100,
+        "LinkedTxn": [
+          {
+            "TxnId": "153",
+            "TxnType": "Bill"
+          }
+        ]
+      }
+    ]
+  }
+}

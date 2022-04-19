@@ -1,0 +1,65 @@
+{
+  "description": "Create an payment object\nMethod : POST\n",
+  "type": "object",
+  "title": "Payment-Create",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "CustomerRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "TotalAmt": {
+      "type": "integer"
+    },
+    "Line": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Amount": {
+            "type": "integer"
+          },
+          "LinkedTxn": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "TxnId": {
+                  "type": "string"
+                },
+                "TxnType": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "default": {
+    "CustomerRef": {
+      "value": "58",
+      "name": "TEST123"
+    },
+    "TotalAmt": 100,
+    "Line": [
+      {
+        "Amount": 100,
+        "LinkedTxn": [
+          {
+            "TxnId": "173",
+            "TxnType": "Invoice"
+          }
+        ]
+      }
+    ]
+  }
+}

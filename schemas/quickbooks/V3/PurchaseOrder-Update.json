@@ -1,0 +1,218 @@
+{
+  "description": "Update a puchase-order object\nMethod : POST\n",
+  "type": "object",
+  "title": "PurchaseOrder-Update",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "domain": {
+      "type": "string"
+    },
+    "sparse": {
+      "type": "boolean"
+    },
+    "Id": {
+      "type": "string"
+    },
+    "SyncToken": {
+      "type": "string"
+    },
+    "MetaData": {
+      "type": "object",
+      "properties": {
+        "CreateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "LastUpdatedTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CustomField": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "DefinitionId": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Type": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DocNumber": {
+      "type": "string"
+    },
+    "TxnDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "CurrencyRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ExchangeRate": {
+      "type": "integer"
+    },
+    "Line": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "Amount": {
+            "type": "integer"
+          },
+          "DetailType": {
+            "type": "string"
+          },
+          "ItemBasedExpenseLineDetail": {
+            "type": "object",
+            "properties": {
+              "CustomerRef": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "BillableStatus": {
+                "type": "string"
+              },
+              "ItemRef": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "UnitPrice": {
+                "type": "integer"
+              },
+              "Qty": {
+                "type": "integer"
+              },
+              "TaxCodeRef": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "VendorRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "APAccountRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "TotalAmt": {
+      "type": "integer"
+    }
+  },
+  "default": {
+    "domain": "QBO",
+    "sparse": false,
+    "Id": "179",
+    "SyncToken": "0",
+    "MetaData": {
+      "CreateTime": "2016-08-23T23:18:26-07:00",
+      "LastUpdatedTime": "2016-08-23T23:18:26-07:00"
+    },
+    "CustomField": [
+      {
+        "DefinitionId": "1",
+        "Name": "Crew #",
+        "Type": "StringType"
+      },
+      {
+        "DefinitionId": "2",
+        "Name": "Sales Rep",
+        "Type": "StringType"
+      }
+    ],
+    "DocNumber": "1006-Updated",
+    "TxnDate": "2016-08-23",
+    "CurrencyRef": {
+      "value": "USD",
+      "name": "United States Dollar"
+    },
+    "ExchangeRate": 1,
+    "Line": [
+      {
+        "Id": "1",
+        "Amount": 25,
+        "DetailType": "ItemBasedExpenseLineDetail",
+        "ItemBasedExpenseLineDetail": {
+          "CustomerRef": {
+            "value": "3",
+            "name": "Cool Cars"
+          },
+          "BillableStatus": "NotBillable",
+          "ItemRef": {
+            "value": "11",
+            "name": "Pump"
+          },
+          "UnitPrice": 25,
+          "Qty": 1,
+          "TaxCodeRef": {
+            "value": "NON"
+          }
+        }
+      }
+    ],
+    "VendorRef": {
+      "value": "41",
+      "name": "Hicks Hardware"
+    },
+    "APAccountRef": {
+      "value": "33",
+      "name": "Accounts Payable (A/P)"
+    },
+    "TotalAmt": 25
+  }
+}

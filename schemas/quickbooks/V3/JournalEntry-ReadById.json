@@ -1,0 +1,43 @@
+{
+  "description": "Read an journalentry object by Id\nMethod : POST\n",
+  "type": "object",
+  "title": "JournalEntry-ReadById",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "Line": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "default": {
+    "Line": [
+      {
+        "Id": "0",
+        "Description": "nov portion of rider insurance",
+        "Amount": 100,
+        "DetailType": "JournalEntryLineDetail",
+        "JournalEntryLineDetail": {
+          "PostingType": "Debit",
+          "AccountRef": {
+            "value": "39",
+            "name": "Opening Bal Equity"
+          }
+        }
+      },
+      {
+        "Description": "nov portion of rider insurance",
+        "Amount": 100,
+        "DetailType": "JournalEntryLineDetail",
+        "JournalEntryLineDetail": {
+          "PostingType": "Credit",
+          "AccountRef": {
+            "value": "44",
+            "name": "Notes Payable"
+          }
+        }
+      }
+    ]
+  }
+}

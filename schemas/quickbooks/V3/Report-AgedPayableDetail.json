@@ -1,0 +1,63 @@
+{
+  "description": "Report - AgedPayable aging detail\nMethod : GET\n\nThe information below provides a reference on how to access the AP Aging summary report from the QuickBooks Online Report Service.\n\n\n\n",
+  "type": "object",
+  "title": "Report-AgedPayableDetail",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "Line": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Amount": {
+            "type": "integer"
+          },
+          "DetailType": {
+            "type": "string"
+          },
+          "SalesItemLineDetail": {
+            "type": "object",
+            "properties": {
+              "ItemRef": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DepositToAccountRef": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "default": {
+    "Line": [
+      {
+        "Amount": 420,
+        "DetailType": "SalesItemLineDetail",
+        "SalesItemLineDetail": {
+          "ItemRef": {
+            "value": "2"
+          }
+        }
+      }
+    ],
+    "DepositToAccountRef": {
+      "value": "35",
+      "name": "Checking"
+    }
+  }
+}
