@@ -1,0 +1,47 @@
+{
+  "properties": {
+    "UserID": {
+      "description": "Xero identifier",
+      "type": "string",
+      "format": "uuid"
+    },
+    "EmailAddress": {
+      "description": "Email address of user",
+      "type": "string"
+    },
+    "FirstName": {
+      "description": "First name of user",
+      "type": "string"
+    },
+    "LastName": {
+      "description": "Last name of user",
+      "type": "string"
+    },
+    "UpdatedDateUTC": {
+      "description": "Timestamp of last change to user",
+      "type": "string",
+      "example": "/Date(1573755038314)/",
+      "readOnly": true
+    },
+    "IsSubscriber": {
+      "description": "Boolean to indicate if user is the subscriber",
+      "type": "boolean"
+    },
+    "OrganisationRole": {
+      "description": "User role that defines permissions in Xero and via API (READONLY, INVOICEONLY, STANDARD, FINANCIALADVISER, etc)",
+      "type": "string",
+      "enum": ["READONLY", "INVOICEONLY", "STANDARD", "FINANCIALADVISER", "MANAGEDCLIENT", "CASHBOOKCLIENT", "UNKNOWN"]
+    }
+  },
+  "type": "object",
+  "default": {
+    "UserID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "EmailAddress": "string",
+    "FirstName": "string",
+    "LastName": "string",
+    "UpdatedDateUTC": "/Date(1573755038314)/",
+    "IsSubscriber": true,
+    "OrganisationRole": "READONLY"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

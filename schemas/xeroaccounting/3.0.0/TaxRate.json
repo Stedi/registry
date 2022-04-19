@@ -1,0 +1,183 @@
+{
+  "properties": {
+    "Name": {
+      "description": "Name of tax rate",
+      "type": "string"
+    },
+    "TaxType": {
+      "description": "The tax type",
+      "type": "string"
+    },
+    "TaxComponents": {
+      "description": "See TaxComponents",
+      "type": "array",
+      "items": {
+        "properties": {
+          "Name": {
+            "description": "Name of Tax Component",
+            "type": "string"
+          },
+          "Rate": {
+            "description": "Tax Rate (up to 4dp)",
+            "type": "number",
+            "format": "double"
+          },
+          "IsCompound": {
+            "description": "Boolean to describe if Tax rate is compounded.",
+            "type": "boolean"
+          },
+          "IsNonRecoverable": {
+            "description": "Boolean to describe if tax rate is non-recoverable. Non-recoverable rates are only applicable to Canadian organisations",
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "Status": {
+      "description": "See Status Codes",
+      "type": "string",
+      "enum": ["ACTIVE", "DELETED", "ARCHIVED", "PENDING"]
+    },
+    "ReportTaxType": {
+      "description": "See ReportTaxTypes",
+      "type": "string",
+      "enum": [
+        "AVALARA",
+        "BASEXCLUDED",
+        "CAPITALSALESOUTPUT",
+        "CAPITALEXPENSESINPUT",
+        "ECOUTPUT",
+        "ECOUTPUTSERVICES",
+        "ECINPUT",
+        "ECACQUISITIONS",
+        "EXEMPTEXPENSES",
+        "EXEMPTINPUT",
+        "EXEMPTOUTPUT",
+        "GSTONIMPORTS",
+        "INPUT",
+        "INPUTTAXED",
+        "MOSSSALES",
+        "NONE",
+        "NONEOUTPUT",
+        "OUTPUT",
+        "PURCHASESINPUT",
+        "SALESOUTPUT",
+        "EXEMPTCAPITAL",
+        "EXEMPTEXPORT",
+        "CAPITALEXINPUT",
+        "GSTONCAPIMPORTS",
+        "GSTONCAPITALIMPORTS",
+        "REVERSECHARGES",
+        "PAYMENTS",
+        "INVOICE",
+        "CASH",
+        "ACCRUAL",
+        "FLATRATECASH",
+        "FLATRATEACCRUAL",
+        "ACCRUALS",
+        "TXCA",
+        "SRCAS",
+        "DSOUTPUT",
+        "BLINPUT2",
+        "EPINPUT",
+        "IMINPUT2",
+        "MEINPUT",
+        "IGDSINPUT2",
+        "ESN33OUTPUT",
+        "OPINPUT",
+        "OSOUTPUT",
+        "TXN33INPUT",
+        "TXESSINPUT",
+        "TXREINPUT",
+        "TXPETINPUT",
+        "NRINPUT",
+        "ES33OUTPUT",
+        "ZERORATEDINPUT",
+        "ZERORATEDOUTPUT",
+        "DRCHARGESUPPLY",
+        "DRCHARGE",
+        "CAPINPUT",
+        "CAPIMPORTS",
+        "IMINPUT",
+        "INPUT2",
+        "CIUINPUT",
+        "SRINPUT",
+        "OUTPUT2",
+        "SROUTPUT",
+        "CAPOUTPUT",
+        "SROUTPUT2",
+        "CIUOUTPUT",
+        "ZROUTPUT",
+        "ZREXPORT",
+        "ACC28PLUS",
+        "ACCUPTO28",
+        "OTHEROUTPUT",
+        "SHOUTPUT",
+        "ZRINPUT",
+        "BADDEBT",
+        "OTHERINPUT"
+      ]
+    },
+    "CanApplyToAssets": {
+      "description": "Boolean to describe if tax rate can be used for asset accounts i.e.  true,false",
+      "readOnly": true,
+      "type": "boolean"
+    },
+    "CanApplyToEquity": {
+      "description": "Boolean to describe if tax rate can be used for equity accounts i.e true,false",
+      "readOnly": true,
+      "type": "boolean"
+    },
+    "CanApplyToExpenses": {
+      "description": "Boolean to describe if tax rate can be used for expense accounts  i.e. true,false",
+      "readOnly": true,
+      "type": "boolean"
+    },
+    "CanApplyToLiabilities": {
+      "description": "Boolean to describe if tax rate can be used for liability accounts  i.e. true,false",
+      "readOnly": true,
+      "type": "boolean"
+    },
+    "CanApplyToRevenue": {
+      "description": "Boolean to describe if tax rate can be used for revenue accounts i.e. true,false",
+      "readOnly": true,
+      "type": "boolean"
+    },
+    "DisplayTaxRate": {
+      "description": "Tax Rate (decimal to 4dp) e.g 12.5000",
+      "readOnly": true,
+      "type": "number",
+      "format": "double"
+    },
+    "EffectiveRate": {
+      "description": "Effective Tax Rate (decimal to 4dp) e.g 12.5000",
+      "readOnly": true,
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "type": "object",
+  "default": {
+    "Name": "string",
+    "TaxType": "string",
+    "TaxComponents": [
+      {
+        "Name": "string",
+        "Rate": 0,
+        "IsCompound": true,
+        "IsNonRecoverable": true
+      }
+    ],
+    "Status": "ACTIVE",
+    "ReportTaxType": "AVALARA",
+    "CanApplyToAssets": true,
+    "CanApplyToEquity": true,
+    "CanApplyToExpenses": true,
+    "CanApplyToLiabilities": true,
+    "CanApplyToRevenue": true,
+    "DisplayTaxRate": 0,
+    "EffectiveRate": 0
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
