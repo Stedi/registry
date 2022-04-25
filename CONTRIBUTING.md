@@ -28,17 +28,17 @@ If the API you want to add to the Registry exposes [OpenAPI](https://www.openapi
 ```ts
 import { OpenAPIProvider } from "./openapi";
 
-export class MyCompanyNewProvider extends OpenAPIProvider {
- constructor() {
- super({
- baseUrl: "https://docs.my-company.com/meta/v1/openapi.json",
- description: "My Company is a company...",
- docsLink: "https://docs.my-company.com/meta/v1/docs",
- logoUrl: "https://logo.clearbit.com/my-company.com",
- name: "MyCompany",
- versions: ["v1"],
- });
- }
+export class MyPostmanBasedProvider extends PostmanProvider {
+  constructor() {
+    super({
+      name: "MyPostmanBasedProvider",
+      description: "This company uses Postman",
+      logoUrl: "https://logo.clearbit.com/postman.com",
+      versions: ["1"],
+      postmanCollectionId: "12143221-f27bc33f-082f-45f6-b143-cd3c7d4241da",
+      docsLink: "https://developer.intuit.com/app/developer/qbo/docs/develop",
+    });
+  }
 }
 ```
 
@@ -55,16 +55,16 @@ If the API you want to add to the Registry exposes [Postman](https://www.postman
 import { PostmanProvider } from "./postman";
 
 export class MyPostmanBasedProvider extends PostmanProvider {
- constructor() {
- super({
- name: "MyPostmanBasedProvider",
- description: "This company uses Postman",
- logoUrl: "https://logo.clearbit.com/postman.com",
- versions: ["1"],
- postmanCollectionId: "12143221-f27bc33f-082f-45f6-b143-cd3c7d4241da",
- docsLink: "https://developer.intuit.com/app/developer/qbo/docs/develop",
- });
- }
+  constructor() {
+    super({
+      name: "MyPostmanBasedProvider",
+      description: "This company uses Postman",
+      logoUrl: "https://logo.clearbit.com/postman.com",
+      versions: ["1"],
+      postmanCollectionId: "12143221-f27bc33f-082f-45f6-b143-cd3c7d4241da",
+      docsLink: "https://developer.intuit.com/app/developer/qbo/docs/develop",
+    });
+  }
 }
 ```
 
@@ -93,4 +93,3 @@ If the _validate_ task succeeds, you can commit your changes to the branch or fo
 - Leverage existing abstractions. If you want to add a provider based on OpenAPI or Postman, you can use existing providers as a base.
 - Provide as much detail as possible. Do not remove important information from the schemas. Remove only the things that aren't passing validation.
 - Prefer using OpenAPI providers over Postman providers. OpenAPI Providers provide a complete picture because their specification is JSONSchema-based, while the Postman provider infers JSONSchema from examples. Moreover, Postman collections often lack response examples, so using it produces only request schemas.
-
