@@ -9,6 +9,16 @@ There are two ways to contribute schemas to the registry:
 - By adding a _Provider_, which is a TypeScript program that can generate schemas in an automated, repeatable and consistent fashion by sourcing and unbunding them from another source (e.g. a hosted OpenAPI specification or a Postman collection)
 - By adding schemas manually, if schemas cannot be extracted in an automated way (e.g. when the service is not exposing API definition in a machine-readable way).
 
+## Before you start
+
+To make sure you are always using the recommended version of the Node to contribute to this project, install [Volta](https://github.com/volta-cli/volta):
+
+```
+curl https://get.volta.sh | bash
+```
+
+and start your terminal session. From this point, `volta` will always ensure you're using correct version of Node.
+
 ### Adding a Provider
 
 To add a new provider, please create a new file in the `src/providers` repository. The file name should be the provider name + `.ts` suffix. The file should contain a class implementing `BaseProvider` (or inheriting an other class that already implements `BaseProvider`).
