@@ -24,13 +24,13 @@ export class SquareProvider extends OpenAPIProvider {
     return {
       type: "openapi-v3",
       versionName: version,
-      value: fixOpenAPIJsonSyntax(definition.data),
+      value: definition.data,
       entities: this.entities,
     };
   }
 
   override async unbundle(bundle: OpenAPI3Schema): Promise<EntitySchema[]> {
-    const parsedBundle = JSON.parse(bundle.value as any);
+    const parsedBundle = bundle.value;
     addMissingDefinitionPointers(parsedBundle);
     const dereferenced = await openAPIParser.dereference(parsedBundle);
 
@@ -88,14 +88,9 @@ function addMissingDefinitionPointers(parsedBundle: any) {
   parsedBundle.definitions.Field = {
     type: "string",
   };
-}
-
-/**
- * OpenAPI JSON from Github contains a syntax error.
- * This function removes faulty line making it JSON parsable once again
- */
-function fixOpenAPIJsonSyntax(definition: string): unknown {
-  return definition.replace(`"description")",`, "");
+  parsedBundle.definitions.squareuppaymentbalancesActivityType = {
+    type: "string",
+  };
 }
 
 function sanitizeSchema(schema: unknown) {

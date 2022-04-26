@@ -3,6 +3,7 @@ import { OpenAPIV3 } from "openapi-types";
 import { NetsuiteProvider } from "./providers/netsuite";
 import { OpenAPIProvider } from "./providers/openapi";
 import Postman from "postman-collection";
+import { PostmanProvider } from "./providers/postman";
 
 export interface EntitySchema {
   name: string;
@@ -28,6 +29,7 @@ export interface GraphQLIntrospectionSchema extends APISchema<any> {}
 export type BaseProvider = {
   isEnabled(): boolean;
   getVersions: () => Promise<string[]>;
+  getSchemasPath: () => string;
   /**
    * Either link to a general documentation or a function pointing to a specific entity documentation if possible.
    */
@@ -38,7 +40,7 @@ export type BaseProvider = {
   customPath?: string;
 };
 
-export type Provider = GraphQLProvider | OpenAPIProvider | NetsuiteProvider;
+export type Provider = GraphQLProvider | OpenAPIProvider | PostmanProvider | NetsuiteProvider;
 
 export interface GraphQLProvider extends BaseProvider {
   getSchema: (version: string) => Promise<APISchema<GraphQLIntrospectionSchema>>;

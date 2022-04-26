@@ -1,6 +1,7 @@
 import "dotenv/config";
 import providers from "./providers";
 import path from "path";
+import glob from "glob";
 import fs from "fs";
 import rimraf from "rimraf";
 import { OpenAPIV3 } from "openapi-types";
@@ -100,10 +101,32 @@ function generateProvidersJson() {
   fs.writeFileSync("providers.json", JSON.stringify(providersJson, null, 2));
 }
 
+function generateManifestJson() {
+  console.log("Writing manifest.json...");
+
+  const manifestJson = Object.keys(providers).map((name) => {
+    const provider: Provider = providers[name as keyof typeof providers];
+    const schemasPaths = glob.sync(`${provider.getSchemasPath()}/**/*.json`);
+    const rawGithubUrlPaths = schemasPaths.map(
+      (path) => `https://raw.githubusercontent.com/Stedi/registry/main/${path}`,
+    );
+
+    return {
+      name: provider.name,
+      logoUrl: provider.logoUrl,
+      description: provider.description,
+      schemas: rawGithubUrlPaths,
+    };
+  });
+
+  fs.writeFileSync("manifest.json", JSON.stringify(manifestJson, null, 2));
+}
+
 (async () => {
   await Promise.all(
     Object.keys(providers).map((providerName) => generateAll(providers[providerName as keyof typeof providers])),
   );
 
   generateProvidersJson();
+  generateManifestJson();
 })();

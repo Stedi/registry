@@ -20,6 +20,10 @@ export class ShopifyProvider implements GraphQLProvider {
     return ["2022-01"];
   }
 
+  getSchemasPath(): string {
+    return `schemas/${this.name.toLowerCase()}`;
+  }
+
   async unbundle(bundle: GraphQLIntrospectionSchema): Promise<EntitySchema[]> {
     const jsonSchema = fromIntrospectionQuery(bundle.value as IntrospectionQuery, {
       ignoreInternals: true,

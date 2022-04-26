@@ -1,8 +1,5 @@
 import { BatonProvider } from "./baton";
-import { ConvoyProvider } from "./convoy";
-import { FedexShipProvider } from "./fedex/ship";
 import { FlexportProvider } from "./flexport";
-import { FreightOSProvider } from "./freightos";
 import { KlaviyoProvider } from "./klaviyo";
 import { MaerskProvider } from "./maersk";
 import { NetsuiteProvider } from "./netsuite";

@@ -81,6 +81,14 @@ export class PostmanProvider implements BaseProvider {
     return this.versions;
   }
 
+  getSchemasPath(): string {
+    if (this.customPath) {
+      return `schemas/${this.customPath}`;
+    }
+
+    return `schemas/${this.name.toLowerCase()}`;
+  }
+
   /**
    * Fetches Postman collection based on the postmanCollectionId and transforms it to OpenAPI definition
    * @returns OpenAPI3Schema object containing the OpenAPI definition with the entities to be processed

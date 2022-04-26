@@ -15,7 +15,7 @@ export class NetsuiteProvider implements BaseProvider {
   description: string =
     "NetSuite provides a suite of cloud-based financials / Enterprise Resource Planning (ERP), HR and omnichannel commerce software";
   logoUrl: string = "https://logo.clearbit.com/netsuite.com";
-  customPath?: string | undefined;
+
   docsLink: string = "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/chapter_1540391670.html";
 
   isEnabled(): boolean {
@@ -57,6 +57,10 @@ export class NetsuiteProvider implements BaseProvider {
         "itemfulfillment",
       ],
     };
+  }
+
+  getSchemasPath(): string {
+    return `schemas/${this.name.toLowerCase()}`;
   }
 
   async unbundle({ entities, versionName }: { entities: string[]; versionName: string }): Promise<EntitySchema[]> {

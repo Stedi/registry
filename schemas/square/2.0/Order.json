@@ -29,7 +29,7 @@
     "customer_id": {
       "maxLength": 191,
       "type": "string",
-      "description": "The ID of the [customer](https://developer.squareup.com/reference/square_2022-03-16/objects/Customer) associated with the order.\n\n__IMPORTANT:__ You should specify a `customer_id` if you want the corresponding payment transactions\nto be explicitly linked to the customer in the Seller Dashboard. If this field is omitted, the \n`customer_id` assigned to any underlying `Payment` objects is ignored and might result in the \ncreation of new [instant profiles](https://developer.squareup.com/docs/customers-api/what-it-does#instant-profiles)."
+      "description": "The ID of the [customer](https://developer.squareup.com/reference/square_2022-04-20/objects/Customer) associated with the order.\n\n__IMPORTANT:__ You should specify a `customer_id` if you want the corresponding payment transactions\nto be explicitly linked to the customer in the Seller Dashboard. If this field is omitted, the \n`customer_id` assigned to any underlying `Payment` objects is ignored and might result in the \ncreation of new [instant profiles](https://developer.squareup.com/docs/customers-api/what-it-does#instant-profiles)."
     },
     "line_items": {
       "type": "array",
@@ -58,7 +58,7 @@
             "type": "object",
             "properties": {
               "measurement_unit": {
-                "description": "A [MeasurementUnit](https://developer.squareup.com/reference/square_2022-03-16/objects/MeasurementUnit) that represents the\nunit of measure for the quantity.",
+                "description": "A [MeasurementUnit](https://developer.squareup.com/reference/square_2022-04-20/objects/MeasurementUnit) that represents the\nunit of measure for the quantity.",
                 "type": "object",
                 "properties": {
                   "custom_unit": {
@@ -112,7 +112,7 @@
               },
               "catalog_object_id": {
                 "type": "string",
-                "description": "The catalog object ID referencing the\n[CatalogMeasurementUnit](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogMeasurementUnit).\n\nThis field is set when this is a catalog-backed measurement unit."
+                "description": "The catalog object ID referencing the\n[CatalogMeasurementUnit](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogMeasurementUnit).\n\nThis field is set when this is a catalog-backed measurement unit."
               },
               "catalog_version": {
                 "type": "integer",
@@ -129,7 +129,7 @@
           "catalog_object_id": {
             "maxLength": 192,
             "type": "string",
-            "description": "The [CatalogItemVariation](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogItemVariation) ID applied to this line item."
+            "description": "The [CatalogItemVariation](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogItemVariation) ID applied to this line item."
           },
           "catalog_version": {
             "type": "integer",
@@ -165,7 +165,7 @@
                 "catalog_object_id": {
                   "maxLength": 192,
                   "type": "string",
-                  "description": "The catalog object ID referencing [CatalogModifier](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogModifier)."
+                  "description": "The catalog object ID referencing [CatalogModifier](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogModifier)."
                 },
                 "catalog_version": {
                   "type": "integer",
@@ -177,8 +177,12 @@
                   "type": "string",
                   "description": "The name of the item modifier."
                 },
+                "quantity": {
+                  "type": "string",
+                  "description": "The quantity of the line item modifier. The modifier quantity can be 0 or more. \nFor example, suppose a restaurant offers a cheeseburger on the menu. When a buyer orders \nthis item, the restaurant records the purchase by creating an `Order` object with a line item \nfor a burger. The line item includes a line item modifier: the name is cheese and the quantity \nis 1. The buyer has the option to order extra cheese (or no cheese). If the buyer chooses \nthe extra cheese option, the modifier quantity increases to 2. If the buyer does not want \nany cheese, the modifier quantity is set to 0."
+                },
                 "base_price_money": {
-                  "description": "The base price for the modifier.\n\n`base_price_money` is required for ad hoc modifiers.\nIf both `catalog_object_id` and `base_price_money` are set, `base_price_money` will\noverride the predefined [CatalogModifier](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogModifier) price.",
+                  "description": "The base price for the modifier.\n\n`base_price_money` is required for ad hoc modifiers.\nIf both `catalog_object_id` and `base_price_money` are set, `base_price_money` will\noverride the predefined [CatalogModifier](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogModifier) price.",
                   "type": "object",
                   "properties": {
                     "amount": {
@@ -188,7 +192,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 },
@@ -203,7 +207,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 },
@@ -215,9 +219,9 @@
                   "description": "Application-defined data attached to this order. Metadata fields are intended\nto store descriptive references or associations with an entity in another system or store brief\ninformation about the object. Square does not process this field; it only stores and returns it\nin relevant API calls. Do not use metadata to store any sensitive information (such as personally\nidentifiable information or card details).\n\nKeys written by applications must be 60 characters or less and must be in the character set\n`[a-zA-Z0-9_-]`. Entries can also include metadata generated by Square. These keys are prefixed\nwith a namespace, separated from the key with a ':' character.\n\nValues have a maximum length of 255 characters.\n\nAn application can have up to 10 entries per metadata field.\n\nEntries written by applications are private and can only be read or modified by the same\napplication.\n\nFor more information, see  [Metadata](https://developer.squareup.com/docs/build-basics/metadata)."
                 }
               },
-              "description": "A [CatalogModifier](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogModifier)."
+              "description": "A [CatalogModifier](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogModifier)."
             },
-            "description": "The [CatalogModifier](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogModifier)s applied to this line item."
+            "description": "The [CatalogModifier](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogModifier)s applied to this line item."
           },
           "applied_taxes": {
             "type": "array",
@@ -247,7 +251,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 }
@@ -284,7 +288,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 }
@@ -304,7 +308,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -319,7 +323,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -334,7 +338,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -349,7 +353,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -364,7 +368,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -379,7 +383,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -457,7 +461,7 @@
           "catalog_object_id": {
             "maxLength": 192,
             "type": "string",
-            "description": "The catalog object ID referencing [CatalogTax](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogTax)."
+            "description": "The catalog object ID referencing [CatalogTax](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogTax)."
           },
           "catalog_version": {
             "type": "integer",
@@ -496,7 +500,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -526,7 +530,7 @@
           "catalog_object_id": {
             "maxLength": 192,
             "type": "string",
-            "description": "The catalog object ID referencing [CatalogDiscount](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogDiscount)."
+            "description": "The catalog object ID referencing [CatalogDiscount](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogDiscount)."
           },
           "catalog_version": {
             "type": "integer",
@@ -558,7 +562,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -573,7 +577,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -597,7 +601,7 @@
           },
           "pricing_rule_id": {
             "type": "string",
-            "description": "The object ID of a [pricing rule](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogPricingRule) to be applied \nautomatically to this discount. The specification and application of the discounts, to \nwhich a `pricing_rule_id` is assigned, are completely controlled by the corresponding \npricing rule."
+            "description": "The object ID of a [pricing rule](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogPricingRule) to be applied \nautomatically to this discount. The specification and application of the discounts, to \nwhich a `pricing_rule_id` is assigned, are completely controlled by the corresponding \npricing rule."
           }
         },
         "description": "Represents a discount that applies to one or more line items in an\norder.\n\nFixed-amount, order-scoped discounts are distributed across all non-zero line item totals.\nThe amount distributed to each line item is relative to the\namount contributed by the item to the order subtotal."
@@ -622,7 +626,7 @@
           "catalog_object_id": {
             "maxLength": 192,
             "type": "string",
-            "description": "The catalog object ID referencing the service charge [CatalogObject](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogObject)."
+            "description": "The catalog object ID referencing the service charge [CatalogObject](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogObject)."
           },
           "catalog_version": {
             "type": "integer",
@@ -645,7 +649,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -660,7 +664,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -675,7 +679,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -690,7 +694,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -730,7 +734,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 }
@@ -1153,7 +1157,7 @@
                   "type": "object",
                   "properties": {
                     "measurement_unit": {
-                      "description": "A [MeasurementUnit](https://developer.squareup.com/reference/square_2022-03-16/objects/MeasurementUnit) that represents the\nunit of measure for the quantity.",
+                      "description": "A [MeasurementUnit](https://developer.squareup.com/reference/square_2022-04-20/objects/MeasurementUnit) that represents the\nunit of measure for the quantity.",
                       "type": "object",
                       "properties": {
                         "custom_unit": {
@@ -1207,7 +1211,7 @@
                     },
                     "catalog_object_id": {
                       "type": "string",
-                      "description": "The catalog object ID referencing the\n[CatalogMeasurementUnit](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogMeasurementUnit).\n\nThis field is set when this is a catalog-backed measurement unit."
+                      "description": "The catalog object ID referencing the\n[CatalogMeasurementUnit](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogMeasurementUnit).\n\nThis field is set when this is a catalog-backed measurement unit."
                     },
                     "catalog_version": {
                       "type": "integer",
@@ -1224,7 +1228,7 @@
                 "catalog_object_id": {
                   "maxLength": 192,
                   "type": "string",
-                  "description": "The [CatalogItemVariation](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogItemVariation) ID applied to this return line item."
+                  "description": "The [CatalogItemVariation](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogItemVariation) ID applied to this return line item."
                 },
                 "catalog_version": {
                   "type": "integer",
@@ -1258,7 +1262,7 @@
                       "catalog_object_id": {
                         "maxLength": 192,
                         "type": "string",
-                        "description": "The catalog object ID referencing [CatalogModifier](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogModifier)."
+                        "description": "The catalog object ID referencing [CatalogModifier](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogModifier)."
                       },
                       "catalog_version": {
                         "type": "integer",
@@ -1271,7 +1275,7 @@
                         "description": "The name of the item modifier."
                       },
                       "base_price_money": {
-                        "description": "The base price for the modifier.\n\n`base_price_money` is required for ad hoc modifiers.\nIf both `catalog_object_id` and `base_price_money` are set, `base_price_money` overrides the predefined [CatalogModifier](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogModifier) price.",
+                        "description": "The base price for the modifier.\n\n`base_price_money` is required for ad hoc modifiers.\nIf both `catalog_object_id` and `base_price_money` are set, `base_price_money` overrides the predefined [CatalogModifier](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogModifier) price.",
                         "type": "object",
                         "properties": {
                           "amount": {
@@ -1281,7 +1285,7 @@
                           },
                           "currency": {
                             "type": "string",
-                            "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                            "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                           }
                         }
                       },
@@ -1296,14 +1300,14 @@
                           },
                           "currency": {
                             "type": "string",
-                            "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                            "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                           }
                         }
                       }
                     },
                     "description": "A line item modifier being returned."
                   },
-                  "description": "The [CatalogModifier](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogModifier)s applied to this line item."
+                  "description": "The [CatalogModifier](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogModifier)s applied to this line item."
                 },
                 "applied_taxes": {
                   "type": "array",
@@ -1333,7 +1337,7 @@
                           },
                           "currency": {
                             "type": "string",
-                            "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                            "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                           }
                         }
                       }
@@ -1370,7 +1374,7 @@
                           },
                           "currency": {
                             "type": "string",
-                            "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                            "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                           }
                         }
                       }
@@ -1390,7 +1394,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 },
@@ -1405,7 +1409,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 },
@@ -1420,7 +1424,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 },
@@ -1435,7 +1439,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 },
@@ -1450,7 +1454,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 },
@@ -1465,7 +1469,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 }
@@ -1497,7 +1501,7 @@
                 "catalog_object_id": {
                   "maxLength": 192,
                   "type": "string",
-                  "description": "The catalog object ID of the associated [OrderServiceCharge](https://developer.squareup.com/reference/square_2022-03-16/objects/OrderServiceCharge)."
+                  "description": "The catalog object ID of the associated [OrderServiceCharge](https://developer.squareup.com/reference/square_2022-04-20/objects/OrderServiceCharge)."
                 },
                 "catalog_version": {
                   "type": "integer",
@@ -1520,7 +1524,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 },
@@ -1535,7 +1539,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 },
@@ -1550,7 +1554,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 },
@@ -1565,7 +1569,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 },
@@ -1605,7 +1609,7 @@
                           },
                           "currency": {
                             "type": "string",
-                            "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                            "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                           }
                         }
                       }
@@ -1637,7 +1641,7 @@
                 "catalog_object_id": {
                   "maxLength": 192,
                   "type": "string",
-                  "description": "The catalog object ID referencing [CatalogTax](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogTax)."
+                  "description": "The catalog object ID referencing [CatalogTax](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogTax)."
                 },
                 "catalog_version": {
                   "type": "integer",
@@ -1669,7 +1673,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 },
@@ -1700,7 +1704,7 @@
                 "catalog_object_id": {
                   "maxLength": 192,
                   "type": "string",
-                  "description": "The catalog object ID referencing [CatalogDiscount](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogDiscount)."
+                  "description": "The catalog object ID referencing [CatalogDiscount](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogDiscount)."
                 },
                 "catalog_version": {
                   "type": "integer",
@@ -1732,7 +1736,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 },
@@ -1747,7 +1751,7 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 },
@@ -1784,7 +1788,7 @@
                   },
                   "currency": {
                     "type": "string",
-                    "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                    "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                   }
                 }
               }
@@ -1805,7 +1809,7 @@
                   },
                   "currency": {
                     "type": "string",
-                    "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                    "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                   }
                 }
               },
@@ -1820,7 +1824,7 @@
                   },
                   "currency": {
                     "type": "string",
-                    "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                    "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                   }
                 }
               },
@@ -1835,7 +1839,7 @@
                   },
                   "currency": {
                     "type": "string",
-                    "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                    "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                   }
                 }
               },
@@ -1850,7 +1854,7 @@
                   },
                   "currency": {
                     "type": "string",
-                    "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                    "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                   }
                 }
               },
@@ -1865,7 +1869,7 @@
                   },
                   "currency": {
                     "type": "string",
-                    "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                    "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                   }
                 }
               }
@@ -1891,7 +1895,7 @@
             },
             "currency": {
               "type": "string",
-              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
             }
           }
         },
@@ -1906,7 +1910,7 @@
             },
             "currency": {
               "type": "string",
-              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
             }
           }
         },
@@ -1921,7 +1925,7 @@
             },
             "currency": {
               "type": "string",
-              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
             }
           }
         },
@@ -1936,7 +1940,7 @@
             },
             "currency": {
               "type": "string",
-              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
             }
           }
         },
@@ -1951,7 +1955,7 @@
             },
             "currency": {
               "type": "string",
-              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
             }
           }
         }
@@ -1972,7 +1976,7 @@
             },
             "currency": {
               "type": "string",
-              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
             }
           }
         },
@@ -1987,7 +1991,7 @@
             },
             "currency": {
               "type": "string",
-              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
             }
           }
         },
@@ -2002,7 +2006,7 @@
             },
             "currency": {
               "type": "string",
-              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
             }
           }
         },
@@ -2017,7 +2021,7 @@
             },
             "currency": {
               "type": "string",
-              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
             }
           }
         },
@@ -2032,7 +2036,7 @@
             },
             "currency": {
               "type": "string",
-              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
             }
           }
         }
@@ -2062,7 +2066,7 @@
             },
             "currency": {
               "type": "string",
-              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+              "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
             }
           }
         }
@@ -2077,7 +2081,7 @@
           "id": {
             "maxLength": 192,
             "type": "string",
-            "description": "The tender's unique ID."
+            "description": "The tender's unique ID. It is the associated payment ID."
           },
           "location_id": {
             "maxLength": 50,
@@ -2100,7 +2104,7 @@
             "description": "An optional note associated with the tender at the time of payment."
           },
           "amount_money": {
-            "description": "The total amount of the tender, including `tip_money`. If the tender has a `payment_id`,\nthe `total_money` of the corresponding [Payment](https://developer.squareup.com/reference/square_2022-03-16/objects/Payment) will be equal to the\n`amount_money` of the tender.",
+            "description": "The total amount of the tender, including `tip_money`. If the tender has a `payment_id`,\nthe `total_money` of the corresponding [Payment](https://developer.squareup.com/reference/square_2022-04-20/objects/Payment) will be equal to the\n`amount_money` of the tender.",
             "type": "object",
             "properties": {
               "amount": {
@@ -2110,7 +2114,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -2125,7 +2129,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -2140,7 +2144,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -2159,7 +2163,7 @@
             "properties": {
               "status": {
                 "type": "string",
-                "description": "The credit card payment's current state (such as `AUTHORIZED` or\n`CAPTURED`). See [TenderCardDetailsStatus](https://developer.squareup.com/reference/square_2022-03-16/enums/TenderCardDetailsStatus)\nfor possible values."
+                "description": "The credit card payment's current state (such as `AUTHORIZED` or\n`CAPTURED`). See [TenderCardDetailsStatus](https://developer.squareup.com/reference/square_2022-04-20/enums/TenderCardDetailsStatus)\nfor possible values."
               },
               "card": {
                 "type": "object",
@@ -2295,7 +2299,7 @@
                   },
                   "currency": {
                     "type": "string",
-                    "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                    "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                   }
                 }
               },
@@ -2310,7 +2314,7 @@
                   },
                   "currency": {
                     "type": "string",
-                    "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                    "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                   }
                 }
               }
@@ -2344,14 +2348,14 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 },
                 "receivable_id": {
                   "maxLength": 192,
                   "type": "string",
-                  "description": "The unique ID for this [AdditionalRecipientReceivable](https://developer.squareup.com/reference/square_2022-03-16/objects/AdditionalRecipientReceivable), assigned by the server."
+                  "description": "The unique ID for this [AdditionalRecipientReceivable](https://developer.squareup.com/reference/square_2022-04-20/objects/AdditionalRecipientReceivable), assigned by the server."
                 }
               },
               "description": "Represents an additional recipient (other than the merchant) receiving a portion of this tender."
@@ -2361,7 +2365,7 @@
           "payment_id": {
             "maxLength": 192,
             "type": "string",
-            "description": "The ID of the [Payment](https://developer.squareup.com/reference/square_2022-03-16/objects/Payment) that corresponds to this tender.\nThis value is only present for payments created with the v2 Payments API."
+            "description": "The ID of the [Payment](https://developer.squareup.com/reference/square_2022-04-20/objects/Payment) that corresponds to this tender.\nThis value is only present for payments created with the v2 Payments API."
           }
         },
         "description": "Represents a tender (i.e., a method of payment) used in a Square transaction."
@@ -2372,7 +2376,7 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "location_id", "transaction_id", "tender_id", "reason", "amount_money", "status"],
+        "required": ["id", "location_id", "tender_id", "reason", "amount_money", "status"],
         "properties": {
           "id": {
             "maxLength": 255,
@@ -2415,7 +2419,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -2434,7 +2438,7 @@
               },
               "currency": {
                 "type": "string",
-                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
               }
             }
           },
@@ -2466,14 +2470,14 @@
                     },
                     "currency": {
                       "type": "string",
-                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+                      "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
                     }
                   }
                 },
                 "receivable_id": {
                   "maxLength": 192,
                   "type": "string",
-                  "description": "The unique ID for this [AdditionalRecipientReceivable](https://developer.squareup.com/reference/square_2022-03-16/objects/AdditionalRecipientReceivable), assigned by the server."
+                  "description": "The unique ID for this [AdditionalRecipientReceivable](https://developer.squareup.com/reference/square_2022-04-20/objects/AdditionalRecipientReceivable), assigned by the server."
                 }
               },
               "description": "Represents an additional recipient (other than the merchant) receiving a portion of this tender."
@@ -2502,7 +2506,7 @@
     },
     "closed_at": {
       "type": "string",
-      "description": "The timestamp for when the order reached a terminal [state](https://developer.squareup.com/reference/square_2022-03-16/enums/OrderState), in RFC 3339 format (for example \"2016-09-04T23:59:33.123Z\")."
+      "description": "The timestamp for when the order reached a terminal [state](https://developer.squareup.com/reference/square_2022-04-20/enums/OrderState), in RFC 3339 format (for example \"2016-09-04T23:59:33.123Z\")."
     },
     "state": {
       "type": "string",
@@ -2523,7 +2527,7 @@
         },
         "currency": {
           "type": "string",
-          "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+          "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
         }
       }
     },
@@ -2538,7 +2542,7 @@
         },
         "currency": {
           "type": "string",
-          "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+          "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
         }
       }
     },
@@ -2553,7 +2557,7 @@
         },
         "currency": {
           "type": "string",
-          "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+          "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
         }
       }
     },
@@ -2568,7 +2572,7 @@
         },
         "currency": {
           "type": "string",
-          "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+          "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
         }
       }
     },
@@ -2583,7 +2587,7 @@
         },
         "currency": {
           "type": "string",
-          "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-03-16/enums/Currency) for possible values."
+          "description": "The type of currency, in __ISO 4217 format__. For example, the currency\ncode for US dollars is `USD`.\n\nSee [Currency](https://developer.squareup.com/reference/square_2022-04-20/enums/Currency) for possible values."
         }
       }
     },
@@ -2593,7 +2597,7 @@
       "description": "A short-term identifier for the order (such as a customer first name, table number, or\nauto-generated order number that resets daily). For orders created in Square Point of Sale, the `ticket_name` is\nprinted on in-person tickets and stubs. It converts to the `kitchen_printing.name` field in the\nbill cart feature details."
     },
     "pricing_options": {
-      "description": "Pricing options for an order. The options affect how the order's price is calculated.\nThey can be used, for example, to apply automatic price adjustments that are based on \npreconfigured [pricing rules](https://developer.squareup.com/reference/square_2022-03-16/objects/CatalogPricingRule).",
+      "description": "Pricing options for an order. The options affect how the order's price is calculated.\nThey can be used, for example, to apply automatic price adjustments that are based on \npreconfigured [pricing rules](https://developer.squareup.com/reference/square_2022-04-20/objects/CatalogPricingRule).",
       "type": "object",
       "properties": {
         "auto_apply_discounts": {
@@ -2672,6 +2676,7 @@
             "catalog_object_id": "string",
             "catalog_version": 1,
             "name": "string",
+            "quantity": "string",
             "base_price_money": {
               "amount": 1,
               "currency": "string"

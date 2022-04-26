@@ -78,6 +78,14 @@ export class OpenAPIProvider implements BaseProvider {
     return this.versions;
   }
 
+  getSchemasPath(): string {
+    if (this.customPath) {
+      return `schemas/${this.customPath}`;
+    }
+
+    return `schemas/${this.name.toLowerCase()}`;
+  }
+
   /**
    * Fetches OpenAPI definition from the provider's base URL and returns it
    * @returns OpenAPI3Schema object containing the OpenAPI definition with the entities to be processed
