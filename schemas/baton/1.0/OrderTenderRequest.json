@@ -4,7 +4,7 @@
     "reference": {
       "type": "string",
       "description": "The customer reference number for this order.",
-      "example": "ORDER-123"
+      "examples": ["ORDER-123"]
     },
     "stops": {
       "type": "array",
@@ -16,13 +16,13 @@
             "type": "string",
             "format": "date-time",
             "description": "The appointment window's start time in UTC with timezone.",
-            "example": "2020-01-01 15:00:00-08:00"
+            "examples": ["2020-01-01 15:00:00-08:00"]
           },
           "appt_end": {
             "type": "string",
             "format": "date-time",
             "description": "The appointment window's ending time in UTC with timezone.",
-            "example": "2020-01-01 16:00:00-08:00"
+            "examples": ["2020-01-01 16:00:00-08:00"]
           },
           "actions": {
             "type": "array",
@@ -33,17 +33,17 @@
                 "action": {
                   "type": "integer",
                   "description": "\n            A value describing what action should be performed at this stop:\n            HOOK = 1\n            DROP = 2\n            LOAD = 3\n            UNLOAD = 4\n            ",
-                  "example": 1
+                  "examples": [1]
                 },
                 "trailer": {
                   "type": "string",
                   "description": "The trailer for the action at this stop.",
-                  "example": "T123456"
+                  "examples": ["T123456"]
                 },
                 "trailer_type": {
                   "type": "integer",
                   "description": "A value describing the type of trailer. NONE = 0 REEFER = 1 DRY_VAN = 2 FLATBED = 3 OTHER = 4",
-                  "example": 2
+                  "examples": [2]
                 }
               },
               "type": "object"
@@ -52,30 +52,30 @@
           "commodity": {
             "type": "string",
             "description": "The contents of the trailer.",
-            "example": "Foodstuffs"
+            "examples": ["Foodstuffs"]
           },
           "weight": {
             "type": "number",
             "description": "The weight of the trailer.",
-            "example": 40000
+            "examples": [40000]
           },
           "temperature": {
             "type": "number",
             "description": "The temperature of the trailer, in Farenheit.",
-            "example": 38.1
+            "examples": [38.1]
           },
           "notes": {
             "type": "string",
             "description": "Additional notes for this stop.",
-            "example": "Oversize load"
+            "examples": ["Oversize load"]
           },
           "reference_numbers": {
             "type": "array",
             "description": "Reference numbers for this stop.",
-            "example": ["REF123456"],
             "items": {
               "type": "string"
-            }
+            },
+            "examples": [["REF123456"]]
           },
           "facility": {
             "required": ["city", "customer_facility_id", "state", "street_address", "zipcode"],
@@ -83,33 +83,33 @@
               "name": {
                 "type": "string",
                 "description": "The name of the facility.",
-                "example": "Baton HQ"
+                "examples": ["Baton HQ"]
               },
               "street_address": {
                 "type": "string",
                 "description": "An address in the form 123 Main Street.",
-                "example": "123 Main Street"
+                "examples": ["123 Main Street"]
               },
               "zipcode": {
                 "type": "string",
                 "description": "A zip code in the form 94111.",
-                "example": "94111",
-                "pattern": "([0-9]{5})?$"
+                "pattern": "([0-9]{5})?$",
+                "examples": ["94111"]
               },
               "city": {
                 "type": "string",
                 "description": "A city, like San Francisco.",
-                "example": "San Francisco"
+                "examples": ["San Francisco"]
               },
               "state": {
                 "type": "string",
                 "description": "The two-letter abbreviation for the state, like CA.",
-                "example": "CA"
+                "examples": ["CA"]
               },
               "customer_facility_id": {
                 "type": "string",
                 "description": "The unique identifier for this stop's facility.",
-                "example": "TMS_123456"
+                "examples": ["TMS_123456"]
               }
             },
             "type": "object"
@@ -120,13 +120,13 @@
               "name": {
                 "type": "string",
                 "description": "The Baton name for this dropzone.",
-                "example": "FONTANA",
-                "enum": ["FONTANA", "SFS", "BANANA"]
+                "enum": ["FONTANA", "SFS", "BANANA"],
+                "examples": ["FONTANA"]
               },
               "customer_facility_id": {
                 "type": "string",
                 "description": "The unique identifier for this stop's facility.",
-                "example": "TMS_123456"
+                "examples": ["TMS_123456"]
               }
             },
             "type": "object"
@@ -136,19 +136,19 @@
               "name": {
                 "type": "string",
                 "description": "The contact's first and last name.",
-                "example": "Andrew Robert"
+                "examples": ["Andrew Robert"]
               },
               "phone": {
                 "type": "string",
                 "description": "The contact's phone number in the form +11234567890.",
-                "example": "+11234567890",
-                "pattern": "(\\+?[0-9]{1,3})?([0-9]{10})$"
+                "pattern": "(\\+?[0-9]{1,3})?([0-9]{10})$",
+                "examples": ["+11234567890"]
               },
               "email": {
                 "type": "string",
                 "description": "The contact's email in the form name@domain.tld",
-                "example": "andrew.robert@baton.io",
-                "pattern": "[\\w\\.]+@\\w+.\\w+"
+                "pattern": "[\\w\\.]+@\\w+.\\w+",
+                "examples": ["andrew.robert@baton.io"]
               }
             },
             "type": "object"
@@ -164,26 +164,26 @@
     "rate": {
       "type": "integer",
       "description": "The value in cents USD paid for this order.",
-      "example": 21000
+      "examples": [21000]
     },
     "contact": {
       "properties": {
         "name": {
           "type": "string",
           "description": "The contact's first and last name.",
-          "example": "Andrew Robert"
+          "examples": ["Andrew Robert"]
         },
         "phone": {
           "type": "string",
           "description": "The contact's phone number in the form +11234567890.",
-          "example": "+11234567890",
-          "pattern": "(\\+?[0-9]{1,3})?([0-9]{10})$"
+          "pattern": "(\\+?[0-9]{1,3})?([0-9]{10})$",
+          "examples": ["+11234567890"]
         },
         "email": {
           "type": "string",
           "description": "The contact's email in the form name@domain.tld",
-          "example": "andrew.robert@baton.io",
-          "pattern": "[\\w\\.]+@\\w+.\\w+"
+          "pattern": "[\\w\\.]+@\\w+.\\w+",
+          "examples": ["andrew.robert@baton.io"]
         }
       },
       "type": "object"

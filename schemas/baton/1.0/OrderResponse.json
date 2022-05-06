@@ -4,17 +4,17 @@
     "reference": {
       "type": "string",
       "description": "The customer reference number for this order.",
-      "example": "ORDER-123"
+      "examples": ["ORDER-123"]
     },
     "customer_name": {
       "type": "string",
       "description": "The customer name for this order.",
-      "example": "Baton"
+      "examples": ["Baton"]
     },
     "order_name": {
       "type": "string",
       "description": "The Baton name for this order.",
-      "example": "B01234"
+      "examples": ["B01234"]
     },
     "stops": {
       "type": "array",
@@ -24,29 +24,29 @@
           "status": {
             "type": "string",
             "description": "Describes the status of this stop. [Scheduled|Arrived|Completed]",
-            "example": "Scheduled"
+            "examples": ["Scheduled"]
           },
           "entrance_time": {
             "type": "string",
             "format": "date-time",
             "description": "The local time of entrance for this stop.",
-            "example": "2020-01-01 15:00:00"
+            "examples": ["2020-01-01 15:00:00"]
           },
           "exit_time": {
             "type": "string",
             "format": "date-time",
             "description": "The local time of exit for this stop.",
-            "example": "2020-01-01 16:00:00"
+            "examples": ["2020-01-01 16:00:00"]
           },
           "action": {
             "type": "string",
             "description": "A value describing what action was performed at this stop. [Hook|Drop|Load|Unload]",
-            "example": "Drop"
+            "examples": ["Drop"]
           },
           "trailer_unit": {
             "type": "string",
             "description": "The trailer for the action at this stop.",
-            "example": "T123456"
+            "examples": ["T123456"]
           },
           "facility": {
             "required": ["city", "customer_facility_id", "state", "street_address", "zipcode"],
@@ -54,33 +54,33 @@
               "name": {
                 "type": "string",
                 "description": "The name of the facility.",
-                "example": "Baton HQ"
+                "examples": ["Baton HQ"]
               },
               "street_address": {
                 "type": "string",
                 "description": "An address in the form 123 Main Street.",
-                "example": "123 Main Street"
+                "examples": ["123 Main Street"]
               },
               "zipcode": {
                 "type": "string",
                 "description": "A zip code in the form 94111.",
-                "example": "94111",
-                "pattern": "([0-9]{5})?$"
+                "pattern": "([0-9]{5})?$",
+                "examples": ["94111"]
               },
               "city": {
                 "type": "string",
                 "description": "A city, like San Francisco.",
-                "example": "San Francisco"
+                "examples": ["San Francisco"]
               },
               "state": {
                 "type": "string",
                 "description": "The two-letter abbreviation for the state, like CA.",
-                "example": "CA"
+                "examples": ["CA"]
               },
               "customer_facility_id": {
                 "type": "string",
                 "description": "The unique identifier for this stop's facility.",
-                "example": "TMS_123456"
+                "examples": ["TMS_123456"]
               }
             },
             "type": "object"
@@ -92,10 +92,10 @@
     "bol_urls": {
       "type": "array",
       "description": "A list of URLs with BOL images for this order.",
-      "example": ["https://anton-nginx.baton.io/uploads/orders/ABCDEF"],
       "items": {
         "type": "string"
-      }
+      },
+      "examples": [["https://anton-nginx.baton.io/uploads/orders/ABCDEF"]]
     }
   },
   "type": "object",
