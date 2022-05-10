@@ -85,6 +85,8 @@ function generateEntitySchema(schema: EntitySchema, baseDir: string) {
     JSON.stringify(
       schema.schema,
       (key, value) => {
+        // Replacing OpenAPI example field with JSONSchema examples
+        // https://datatracker.ietf.org/doc/html/draft-bhutton-json-schema-validation-00#section-9.5
         if (value?.example !== undefined) {
           value.examples = [value.example];
           delete value.example;
