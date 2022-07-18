@@ -1,0 +1,57 @@
+{
+  "title": "TaskStatusBlock",
+  "type": "object",
+  "properties": {
+    "OpsTask": {
+      "type": "array",
+      "items": {
+        "title": "OpsTaskItem",
+        "type": "object",
+        "properties": {
+          "TaskName": {
+            "type": "string"
+          },
+          "TaskStatus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "TaskStatusName": {
+            "type": "string"
+          },
+          "taskBookingDetail": {
+            "title": "TaskBookingDetail",
+            "type": "object",
+            "properties": {
+              "bookingStatus": {
+                "type": "string",
+                "enum": ["DELIVERY", "EQUIPMENT_PICKUP", "IN", "INVALID", "OUT", "RECEIPT"]
+              },
+              "locationDetails": {
+                "type": "string"
+              }
+            }
+          },
+          "taskStatusDetail": {
+            "type": "string",
+            "enum": ["CLOSED", "INPROGRESS", "INVALID", "OPEN"]
+          }
+        }
+      }
+    }
+  },
+  "default": {
+    "OpsTask": [
+      {
+        "TaskName": "string",
+        "TaskStatus": 1,
+        "TaskStatusName": "string",
+        "taskBookingDetail": {
+          "bookingStatus": "DELIVERY",
+          "locationDetails": "string"
+        },
+        "taskStatusDetail": "CLOSED"
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
