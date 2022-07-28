@@ -1,0 +1,55 @@
+{
+  "properties": {
+    "equipment_type": {
+      "description": "Shipment EquipmentType id",
+      "type": "integer"
+    },
+    "shipment": {
+      "description": "Shipment being priced by the request",
+      "format": "uuid",
+      "type": "string"
+    },
+    "stops": {
+      "items": {
+        "properties": {
+          "country": {
+            "type": "string"
+          },
+          "is_pickup": {
+            "type": "boolean"
+          },
+          "planned_date": {
+            "format": "date",
+            "type": "string"
+          },
+          "postal_code": {
+            "type": "string"
+          },
+          "state_province": {
+            "type": "string"
+          }
+        },
+        "required": ["postal_code", "state_province", "country", "is_pickup"],
+        "type": "object"
+      },
+      "title": "Stops",
+      "type": "array"
+    }
+  },
+  "required": ["equipment_type", "stops"],
+  "type": "object",
+  "default": {
+    "equipment_type": 1,
+    "shipment": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "stops": [
+      {
+        "country": "string",
+        "is_pickup": true,
+        "planned_date": "1970-01-01",
+        "postal_code": "string",
+        "state_province": "string"
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

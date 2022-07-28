@@ -1,0 +1,44 @@
+{
+  "properties": {
+    "invoice": {
+      "description": "Invoice that was emailed",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "resource_type": {
+          "enum": ["invoice"],
+          "type": "string"
+        },
+        "self_link": {
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "message": {
+      "description": "What happened with the email request",
+      "type": "string"
+    },
+    "recipients": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "default": {
+    "invoice": {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "resource_type": "invoice",
+      "self_link": "https://example.com/path"
+    },
+    "message": "string",
+    "recipients": ["string"]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

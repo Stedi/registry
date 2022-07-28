@@ -1,0 +1,112 @@
+{
+  "allOf": [
+    {
+      "allOf": [
+        {
+          "properties": {
+            "created_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "first_name": {
+              "type": "string"
+            },
+            "id": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "job_title": {
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            },
+            "phone_number": {
+              "type": "string"
+            },
+            "updated_at": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "required": ["first_name"],
+          "type": "object"
+        },
+        {
+          "properties": {
+            "load_board_enabled": {
+              "type": "boolean"
+            },
+            "load_board_invite_last_sent_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "preferences": {
+              "properties": {
+                "cancellation": {
+                  "type": "boolean"
+                },
+                "delayed": {
+                  "type": "boolean"
+                },
+                "delivered": {
+                  "type": "boolean"
+                },
+                "eta_changed": {
+                  "type": "boolean"
+                },
+                "picked_up": {
+                  "type": "boolean"
+                },
+                "receive_bol_on_shipment_booked": {
+                  "type": "boolean"
+                },
+                "shipment_booked": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "cancellation",
+                "delayed",
+                "delivered",
+                "eta_changed",
+                "picked_up",
+                "receive_bol_on_shipment_booked",
+                "shipment_booked"
+              ],
+              "type": "object"
+            },
+            "user": {
+              "description": "Id of the user that this PointOfContact refers",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "required": ["preferences"],
+          "type": "object"
+        }
+      ]
+    },
+    {
+      "properties": {
+        "job_title": {
+          "enum": ["ADMIN", "BILLING", "OWNER_OPERATOR", "DRIVER", "DISPATCHER", "OTHER"],
+          "type": "string"
+        },
+        "should_send_email": {
+          "type": "boolean"
+        }
+      },
+      "required": ["job_title"],
+      "type": "object"
+    }
+  ],
+  "default": {
+    "job_title": "ADMIN",
+    "should_send_email": true
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,105 @@
+{
+  "allOf": [
+    {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "job_title": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "phone_number": {
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": ["first_name"],
+      "type": "object"
+    },
+    {
+      "properties": {
+        "load_board_enabled": {
+          "type": "boolean"
+        },
+        "load_board_invite_last_sent_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "preferences": {
+          "properties": {
+            "cancellation": {
+              "type": "boolean"
+            },
+            "delayed": {
+              "type": "boolean"
+            },
+            "delivered": {
+              "type": "boolean"
+            },
+            "eta_changed": {
+              "type": "boolean"
+            },
+            "picked_up": {
+              "type": "boolean"
+            },
+            "receive_bol_on_shipment_booked": {
+              "type": "boolean"
+            },
+            "shipment_booked": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "cancellation",
+            "delayed",
+            "delivered",
+            "eta_changed",
+            "picked_up",
+            "receive_bol_on_shipment_booked",
+            "shipment_booked"
+          ],
+          "type": "object"
+        },
+        "user": {
+          "description": "Id of the user that this PointOfContact refers",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "required": ["preferences"],
+      "type": "object"
+    }
+  ],
+  "default": {
+    "load_board_enabled": true,
+    "load_board_invite_last_sent_at": "1970-01-01T00:00:00.000Z",
+    "preferences": {
+      "cancellation": true,
+      "delayed": true,
+      "delivered": true,
+      "eta_changed": true,
+      "picked_up": true,
+      "receive_bol_on_shipment_booked": true,
+      "shipment_booked": true
+    },
+    "user": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

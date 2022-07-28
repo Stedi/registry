@@ -1,0 +1,270 @@
+{
+  "description": "Rate table for calculating fuel surcharge based on market fuel prices",
+  "properties": {
+    "additional_instructions": {
+      "type": "string"
+    },
+    "base_fuel_price": {
+      "type": "number"
+    },
+    "calculation_rows": {
+      "items": {
+        "description": "Specification for how much fuel surcharge should cost for a given range of fuel cost",
+        "properties": {
+          "fuel_price_lower_bound": {
+            "type": "number"
+          },
+          "fuel_surcharge": {
+            "type": "number"
+          },
+          "table": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": ["fuel_price_lower_bound", "fuel_surcharge"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "carrier_relationships": {
+      "items": {
+        "format": "uuid",
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "company": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "created_by_user": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "current_us_dept_of_energy_per_gallon_rate": {
+      "type": "number"
+    },
+    "destinations": {
+      "items": {
+        "properties": {
+          "address_1": {
+            "type": "string"
+          },
+          "address_2": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "formatted_address": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "latitude": {
+            "format": "float",
+            "type": "number"
+          },
+          "longitude": {
+            "format": "float",
+            "type": "number"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "postal_code": {
+            "type": "string"
+          },
+          "state_province": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "end_date": {
+      "format": "date",
+      "type": "string"
+    },
+    "equipment_types": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "external_reference": {
+      "description": "Unique identifier for the rate table within an external system",
+      "type": "string"
+    },
+    "miles_per_gallon": {
+      "type": "integer"
+    },
+    "modes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "name": {
+      "type": "string"
+    },
+    "origins": {
+      "items": {
+        "properties": {
+          "address_1": {
+            "type": "string"
+          },
+          "address_2": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "formatted_address": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "latitude": {
+            "format": "float",
+            "type": "number"
+          },
+          "longitude": {
+            "format": "float",
+            "type": "number"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "postal_code": {
+            "type": "string"
+          },
+          "state_province": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "rates_updated_day_of_week": {
+      "enum": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"],
+      "type": "string"
+    },
+    "rates_updated_interval": {
+      "enum": ["MONTH", "WEEK"],
+      "type": "string"
+    },
+    "rates_updated_time_of_day": {
+      "format": "time",
+      "type": "string"
+    },
+    "start_date": {
+      "format": "date",
+      "type": "string"
+    },
+    "status": {
+      "enum": ["ACTIVE", "INACTIVE"],
+      "type": "string"
+    }
+  },
+  "required": ["calculation_rows", "name", "rates_updated_interval", "status"],
+  "type": "object",
+  "default": {
+    "additional_instructions": "string",
+    "base_fuel_price": 0,
+    "calculation_rows": [
+      {
+        "fuel_price_lower_bound": 0,
+        "fuel_surcharge": 0,
+        "table": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      }
+    ],
+    "carrier_relationships": ["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
+    "company": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "created_by_user": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "current_us_dept_of_energy_per_gallon_rate": 0,
+    "destinations": [
+      {
+        "address_1": "string",
+        "address_2": "string",
+        "city": "string",
+        "country": "string",
+        "created_at": "1970-01-01T00:00:00.000Z",
+        "formatted_address": "string",
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "latitude": 0,
+        "longitude": 0,
+        "phone_number": "string",
+        "postal_code": "string",
+        "state_province": "string",
+        "timezone": "string",
+        "updated_at": "1970-01-01T00:00:00.000Z"
+      }
+    ],
+    "end_date": "1970-01-01",
+    "equipment_types": ["string"],
+    "external_reference": "string",
+    "miles_per_gallon": 1,
+    "modes": ["string"],
+    "name": "string",
+    "origins": [
+      {
+        "address_1": "string",
+        "address_2": "string",
+        "city": "string",
+        "country": "string",
+        "created_at": "1970-01-01T00:00:00.000Z",
+        "formatted_address": "string",
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "latitude": 0,
+        "longitude": 0,
+        "phone_number": "string",
+        "postal_code": "string",
+        "state_province": "string",
+        "timezone": "string",
+        "updated_at": "1970-01-01T00:00:00.000Z"
+      }
+    ],
+    "rates_updated_day_of_week": "MONDAY",
+    "rates_updated_interval": "MONTH",
+    "rates_updated_time_of_day": "10:05:08-02:30",
+    "start_date": "1970-01-01",
+    "status": "ACTIVE"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

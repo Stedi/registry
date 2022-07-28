@@ -1,0 +1,35 @@
+{
+  "description": "Send documents to recipient list via email",
+  "properties": {
+    "documents": {
+      "description": "List of document ids to attach to email",
+      "items": {
+        "format": "uuid",
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "message": {
+      "type": "string"
+    },
+    "recipient_emails": {
+      "description": "List of email addresses of recipients",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "subject": {
+      "type": "string"
+    }
+  },
+  "required": ["documents", "message", "recipient_emails", "subject"],
+  "type": "object",
+  "default": {
+    "documents": ["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
+    "message": "string",
+    "recipient_emails": ["string"],
+    "subject": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

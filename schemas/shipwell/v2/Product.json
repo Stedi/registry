@@ -1,0 +1,540 @@
+{
+  "allOf": [
+    {
+      "properties": {
+        "country_of_manufacture": {
+          "example": "US",
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "freight_class": {
+          "enum": [
+            "50",
+            "55",
+            "60",
+            "65",
+            "70",
+            "77.5",
+            "85",
+            "92.5",
+            "100",
+            "110",
+            "125",
+            "150",
+            "175",
+            "200",
+            "250",
+            "300",
+            "400",
+            "500"
+          ],
+          "type": "string"
+        },
+        "hazmat_hazard_class": {
+          "type": "string"
+        },
+        "hazmat_identification_number": {
+          "type": "string"
+        },
+        "hazmat_packing_group": {
+          "enum": ["I", "II", "III"],
+          "type": "string"
+        },
+        "hazmat_proper_shipping_name": {
+          "type": "string"
+        },
+        "height": {
+          "format": "float",
+          "type": "number"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "length": {
+          "format": "float",
+          "type": "number"
+        },
+        "length_unit": {
+          "enum": ["CM", "IN"],
+          "type": "string"
+        },
+        "nmfc_item_code": {
+          "type": "string"
+        },
+        "nmfc_sub_code": {
+          "type": "string"
+        },
+        "package_type": {
+          "enum": [
+            "BAG",
+            "BALE",
+            "BOX",
+            "BUCKET",
+            "BUNDLE",
+            "CAN",
+            "CARTON",
+            "CASE",
+            "COIL",
+            "CRATE",
+            "CYLINDER",
+            "DRUM",
+            "FLOOR_LOADED",
+            "PAIL",
+            "PACKAGE",
+            "PIECES",
+            "PKG",
+            "PLT",
+            "REEL",
+            "ROLL",
+            "SKID",
+            "TUBE"
+          ],
+          "type": "string"
+        },
+        "package_weight": {
+          "format": "float",
+          "type": "number"
+        },
+        "piece_type": {
+          "enum": [
+            "BAG",
+            "BALE",
+            "BOX",
+            "BUCKET",
+            "BUNDLE",
+            "CAN",
+            "CARTON",
+            "CASE",
+            "COIL",
+            "CRATE",
+            "CYLINDER",
+            "DRUM",
+            "PAIL",
+            "PACKAGE",
+            "PIECES",
+            "REEL",
+            "ROLL",
+            "SKID",
+            "TUBE"
+          ],
+          "type": "string"
+        },
+        "product_ref": {
+          "type": "string"
+        },
+        "provider_specific_packaging": {
+          "description": "Provider-specific type of packaging used for the product",
+          "type": "string"
+        },
+        "refrigeration_max_temp": {
+          "format": "float",
+          "type": "number"
+        },
+        "refrigeration_min_temp": {
+          "format": "float",
+          "type": "number"
+        },
+        "refrigeration_required": {
+          "type": "boolean"
+        },
+        "stackable": {
+          "type": "boolean"
+        },
+        "temp_unit": {
+          "enum": ["F", "C"],
+          "type": "string"
+        },
+        "value_per_piece": {
+          "format": "float",
+          "type": "number"
+        },
+        "value_per_piece_currency": {
+          "enum": ["CAD", "USD"],
+          "type": "string"
+        },
+        "weight_unit": {
+          "enum": ["KG", "LB"],
+          "type": "string"
+        },
+        "width": {
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    {
+      "properties": {
+        "external_can_quote": {
+          "type": "boolean"
+        },
+        "external_id": {
+          "type": "string"
+        },
+        "external_pickup_address": {
+          "properties": {
+            "accessorials": {
+              "items": {
+                "description": "Accessorial code, price, and description",
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "currency_unit": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "format": "int32",
+                    "type": "integer"
+                  },
+                  "is_charge_code": {
+                    "type": "boolean"
+                  },
+                  "long_description": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "format": "float",
+                    "type": "number"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "code",
+                  "description",
+                  "long_description",
+                  "type",
+                  "is_charge_code",
+                  "price",
+                  "currency_unit"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "address": {
+              "properties": {
+                "address_1": {
+                  "type": "string"
+                },
+                "address_2": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "created_at": {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "formatted_address": {
+                  "type": "string"
+                },
+                "id": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "latitude": {
+                  "format": "float",
+                  "type": "number"
+                },
+                "longitude": {
+                  "format": "float",
+                  "type": "number"
+                },
+                "phone_number": {
+                  "type": "string"
+                },
+                "postal_code": {
+                  "type": "string"
+                },
+                "state_province": {
+                  "type": "string"
+                },
+                "timezone": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "format": "date-time",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "company_name": {
+              "type": "string"
+            },
+            "created_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "custom_data": {
+              "additionalProperties": true,
+              "description": "Custom data for Location",
+              "type": "object"
+            },
+            "default_appointment_type": {
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "id": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": ["id", "code", "name"],
+              "type": "object"
+            },
+            "dock_external_id": {
+              "type": "string"
+            },
+            "dock_hours_end": {
+              "format": "time",
+              "type": "string"
+            },
+            "dock_hours_start": {
+              "format": "time",
+              "type": "string"
+            },
+            "external_reference": {
+              "type": "string"
+            },
+            "id": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "is_default_origin": {
+              "type": "boolean"
+            },
+            "location_name": {
+              "type": "string"
+            },
+            "location_type": {
+              "properties": {
+                "id": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": ["name"],
+              "type": "object"
+            },
+            "notes": {
+              "type": "string"
+            },
+            "point_of_contacts": {
+              "items": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "created_at": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "first_name": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "job_title": {
+                        "type": "string"
+                      },
+                      "last_name": {
+                        "type": "string"
+                      },
+                      "phone_number": {
+                        "type": "string"
+                      },
+                      "updated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                      }
+                    },
+                    "required": ["first_name"],
+                    "type": "object"
+                  },
+                  {
+                    "properties": {
+                      "load_board_enabled": {
+                        "type": "boolean"
+                      },
+                      "load_board_invite_last_sent_at": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "preferences": {
+                        "properties": {
+                          "cancellation": {
+                            "type": "boolean"
+                          },
+                          "delayed": {
+                            "type": "boolean"
+                          },
+                          "delivered": {
+                            "type": "boolean"
+                          },
+                          "eta_changed": {
+                            "type": "boolean"
+                          },
+                          "picked_up": {
+                            "type": "boolean"
+                          },
+                          "receive_bol_on_shipment_booked": {
+                            "type": "boolean"
+                          },
+                          "shipment_booked": {
+                            "type": "boolean"
+                          }
+                        },
+                        "required": [
+                          "cancellation",
+                          "delayed",
+                          "delivered",
+                          "eta_changed",
+                          "picked_up",
+                          "receive_bol_on_shipment_booked",
+                          "shipment_booked"
+                        ],
+                        "type": "object"
+                      },
+                      "user": {
+                        "description": "Id of the user that this PointOfContact refers",
+                        "format": "uuid",
+                        "type": "string"
+                      }
+                    },
+                    "required": ["preferences"],
+                    "type": "object"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            "updated_at": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "required": ["address", "is_default_origin", "location_name"],
+          "type": "object"
+        },
+        "filename": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "max_pieces_per_package": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "source": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  ],
+  "required": ["id", "product_ref", "description"],
+  "type": "object",
+  "default": {
+    "external_can_quote": true,
+    "external_id": "string",
+    "external_pickup_address": {
+      "accessorials": [
+        {
+          "code": "string",
+          "currency_unit": "string",
+          "description": "string",
+          "id": 1,
+          "is_charge_code": true,
+          "long_description": "string",
+          "price": 0,
+          "type": "string"
+        }
+      ],
+      "address": {
+        "address_1": "string",
+        "address_2": "string",
+        "city": "string",
+        "country": "string",
+        "created_at": "1970-01-01T00:00:00.000Z",
+        "formatted_address": "string",
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "latitude": 0,
+        "longitude": 0,
+        "phone_number": "string",
+        "postal_code": "string",
+        "state_province": "string",
+        "timezone": "string",
+        "updated_at": "1970-01-01T00:00:00.000Z"
+      },
+      "company_name": "string",
+      "created_at": "1970-01-01T00:00:00.000Z",
+      "custom_data": {},
+      "default_appointment_type": {
+        "code": "string",
+        "id": 1,
+        "name": "string"
+      },
+      "dock_external_id": "string",
+      "dock_hours_end": "10:05:08-02:30",
+      "dock_hours_start": "10:05:08-02:30",
+      "external_reference": "string",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "is_default_origin": true,
+      "location_name": "string",
+      "location_type": {
+        "id": 1,
+        "name": "string"
+      },
+      "notes": "string",
+      "point_of_contacts": [
+        {
+          "load_board_enabled": true,
+          "load_board_invite_last_sent_at": "1970-01-01T00:00:00.000Z",
+          "preferences": {
+            "cancellation": true,
+            "delayed": true,
+            "delivered": true,
+            "eta_changed": true,
+            "picked_up": true,
+            "receive_bol_on_shipment_booked": true,
+            "shipment_booked": true
+          },
+          "user": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        }
+      ],
+      "updated_at": "1970-01-01T00:00:00.000Z"
+    },
+    "filename": "string",
+    "image": "string",
+    "max_pieces_per_package": 1,
+    "source": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

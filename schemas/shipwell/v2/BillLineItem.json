@@ -1,0 +1,52 @@
+{
+  "properties": {
+    "amount": {
+      "description": "Effective amount of the line item, or unit_amount times quantity minus prepaid_amount\n",
+      "format": "float",
+      "type": "number"
+    },
+    "category": {
+      "description": "Categorization of the item, e.g. LH for Line Haul",
+      "type": "string"
+    },
+    "custom_data": {
+      "additionalProperties": {},
+      "description": "Custom data for a bill line item",
+      "title": "BillLineItemCustomData",
+      "type": "object"
+    },
+    "description": {
+      "description": "If not specified, defaults to the shipment reference id",
+      "type": "string"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "prepaid_amount": {
+      "format": "float",
+      "type": "number"
+    },
+    "unit_amount": {
+      "format": "float",
+      "type": "number"
+    },
+    "unit_quantity": {
+      "format": "float",
+      "type": "number"
+    }
+  },
+  "required": ["unit_amount", "unit_quantity", "category"],
+  "type": "object",
+  "default": {
+    "amount": 0,
+    "category": "string",
+    "custom_data": {},
+    "description": "string",
+    "id": "string",
+    "prepaid_amount": 0,
+    "unit_amount": 0,
+    "unit_quantity": 0
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,190 @@
+{
+  "allOf": [
+    {
+      "description": "An event that took place during the life of the shipment",
+      "properties": {
+        "actor": {
+          "properties": {
+            "avatar": {
+              "type": "string"
+            },
+            "company_id": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "completed_onboarding": {
+              "type": "boolean"
+            },
+            "created_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "custom_data": {
+              "additionalProperties": {},
+              "description": "Custom data for User",
+              "type": "object"
+            },
+            "default_shipment_tags": {
+              "description": "List of ShipmentTag ids",
+              "items": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "email": {
+              "type": "string"
+            },
+            "feature_flag_new_shipment_details": {
+              "type": "boolean"
+            },
+            "feature_flag_new_ui": {
+              "type": "boolean"
+            },
+            "first_name": {
+              "type": "string"
+            },
+            "id": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "is_quoting_limited_user": {
+              "type": "boolean"
+            },
+            "last_login": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "permissions": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "phone_number": {
+              "type": "string"
+            },
+            "subscribed_to_loadboard": {
+              "type": "boolean"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "updated_at": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "required": ["first_name", "last_name", "email"],
+          "type": "object"
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "custom_data": {
+          "additionalProperties": {},
+          "description": "Custom data for ShipmentTimelineEvents",
+          "type": "object"
+        },
+        "description": {
+          "type": "string"
+        },
+        "event_sub_type": {
+          "enum": [
+            "AT_DELIVERY",
+            "AT_LOCATION",
+            "AT_PICKUP",
+            "AT_STOP",
+            "CANCELED",
+            "DELAYED",
+            "DELIVERED",
+            "DELIVERED_EXCEPTION",
+            "DELIVERY",
+            "DELIVERY_APPOINTMENT",
+            "DELIVERY_MISSED",
+            "DEPARTED",
+            "DEPARTED_STOP",
+            "DEPARTURE",
+            "DEPARTURE_MISSED",
+            "DISPATCHED",
+            "EN_ROUTE",
+            "EXCEPTION",
+            "HELD",
+            "IN_TRANSIT",
+            "INFO",
+            "INTERLINE",
+            "INTERLINE_DELIVERED",
+            "INTERLINE_MISSED",
+            "OUT_FOR_DELIVERY",
+            "PICKED_UP",
+            "PICKUP",
+            "PICKUP_MISSED",
+            "STOP_CANCELLED",
+            "STOP_COMPLETED"
+          ],
+          "type": "string"
+        },
+        "event_type": {
+          "enum": [
+            "AT_DELIVERY",
+            "AT_PICKUP",
+            "BOOKED",
+            "CANCELLED",
+            "CARRIER_MATCHED",
+            "DELIVERED",
+            "DETAILS_CHANGED",
+            "DISPATCHED",
+            "DRIVER_ASSIGNED",
+            "ETA_CHANGED",
+            "INFO",
+            "LOCATION_UPDATED",
+            "PICKED_UP",
+            "TRACK_RECEIVED",
+            "STOP_COMPLETED",
+            "STOP_EVENT"
+          ],
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": ["description", "event_type"],
+      "type": "object"
+    },
+    {
+      "properties": {
+        "actor": {
+          "description": "ID of the User who took the action described in the event\n",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  ],
+  "type": "object",
+  "default": {
+    "actor": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,248 @@
+{
+  "allOf": [
+    {
+      "description": "Data about a shipment invoice",
+      "properties": {
+        "balance": {
+          "format": "float",
+          "type": "number"
+        },
+        "created_at": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "custom_data": {
+          "additionalProperties": {},
+          "description": "Custom data for Invoice",
+          "type": "object"
+        },
+        "customer_memo": {
+          "type": "string"
+        },
+        "documents": {
+          "items": {
+            "allOf": [
+              {
+                "description": "Metadata about a document",
+                "properties": {
+                  "created_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "created_by_id": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "created_by_name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "file": {
+                    "type": "string"
+                  },
+                  "filename": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "updated_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "company": {
+                    "type": "string"
+                  },
+                  "driver": {
+                    "description": "Id of the driver who created the document, if one exists",
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "is_carrier_document": {
+                    "type": "boolean"
+                  },
+                  "shipment": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "type": {
+                    "enum": [
+                      "BOL",
+                      "FUEL",
+                      "LUMPER",
+                      "HOS",
+                      "SIGNATURE",
+                      "RATE_CONFIRMATION",
+                      "CUSTOMER_TENDER",
+                      "DELIVERY_RECEIPT",
+                      "WEIGHT_CERTIFICATE",
+                      "OVERAGES_SHORTAGES_AND_DAMAGES",
+                      "INVOICE",
+                      "INSURANCE",
+                      "SHIPPING_LABEL",
+                      "CUSTOMS_PAPERWORK",
+                      "PACKING_SLIPS",
+                      "OTHER"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            ],
+            "description": "Metadata about a document",
+            "type": "object"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "due_date": {
+          "format": "date",
+          "type": "string"
+        },
+        "error_description": {
+          "description": "If an error occurred during processing, this field will be set",
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "invoice_number": {
+          "type": "string"
+        },
+        "line_items": {
+          "items": {
+            "properties": {
+              "amount": {
+                "format": "float",
+                "type": "number"
+              },
+              "category": {
+                "enum": [
+                  "ACC",
+                  "ADJUSTMENT",
+                  "DETENTION",
+                  "FSC",
+                  "FUEL",
+                  "INSURANCE",
+                  "LAYOVER",
+                  "LH",
+                  "OTHER",
+                  "SF",
+                  "TAX",
+                  "TEAMDRIVERS",
+                  "TONU",
+                  "VARIANCE"
+                ],
+                "type": "string"
+              },
+              "custom_data": {
+                "additionalProperties": {},
+                "title": "InvoiceLineItemCustomData",
+                "type": "object"
+              },
+              "description": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "prepaid_amount": {
+                "format": "float",
+                "type": "number"
+              },
+              "service_date": {
+                "format": "date",
+                "type": "string"
+              },
+              "unit_amount": {
+                "format": "float",
+                "type": "number"
+              },
+              "unit_quantity": {
+                "format": "float",
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "payment_status": {
+          "default": "Not paid",
+          "enum": ["Fully paid", "Partially paid", "Not paid"],
+          "readOnly": true,
+          "type": "string"
+        },
+        "processing_status": {
+          "description": "The status of the processing the invoice with the third party system",
+          "enum": ["PROCESSING", "SUCCESS", "ERROR"]
+        },
+        "service_date": {
+          "description": "When the service took place, defaults to the `due_date` of the related Shipment",
+          "format": "date",
+          "type": "string"
+        },
+        "shipment": {
+          "properties": {
+            "bol_number": {
+              "type": "string"
+            },
+            "id": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "pro_number": {
+              "type": "string"
+            },
+            "purchase_order_number": {
+              "type": "string"
+            },
+            "reference_id": {
+              "type": "string"
+            }
+          },
+          "readOnly": true,
+          "type": "object"
+        },
+        "total_amount": {
+          "format": "float",
+          "readOnly": true,
+          "type": "number"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "voided": {
+          "readOnly": true,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    {
+      "required": ["invoice_number", "due_date", "processing_status", "balance", "total_amount"]
+    }
+  ],
+  "default": {},
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

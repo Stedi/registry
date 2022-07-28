@@ -1,0 +1,38 @@
+{
+  "allOf": [
+    {
+      "properties": {
+        "comments": {
+          "type": "string"
+        },
+        "recommendation_id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "type": {
+          "enum": ["good", "bad_for_shipment", "should_never_recommend"],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    {
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "user_id": {
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  ],
+  "default": {
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

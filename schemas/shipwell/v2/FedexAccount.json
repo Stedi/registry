@@ -1,0 +1,82 @@
+{
+  "properties": {
+    "account_nickname": {
+      "type": "string"
+    },
+    "account_number": {
+      "type": "string"
+    },
+    "company": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "freight_account": {
+      "allOf": [
+        {
+          "properties": {
+            "city": {
+              "type": "string"
+            },
+            "country_code": {
+              "type": "string"
+            },
+            "line_1": {
+              "type": "string"
+            },
+            "line_2": {
+              "type": "string"
+            },
+            "postal_code": {
+              "type": "string"
+            },
+            "state_or_province": {
+              "type": "string"
+            }
+          },
+          "required": ["line_1", "city", "state_or_province", "postal_code", "country_code"],
+          "type": "object"
+        },
+        {
+          "properties": {
+            "freight_account_number": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    "id": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "key": {
+      "type": "string"
+    },
+    "meter_number": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string"
+    },
+    "smart_post_hub_id": {
+      "type": "integer"
+    }
+  },
+  "type": "object",
+  "default": {
+    "account_nickname": "string",
+    "account_number": "string",
+    "company": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "freight_account": {
+      "freight_account_number": "string"
+    },
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "key": "string",
+    "meter_number": "string",
+    "password": "string",
+    "smart_post_hub_id": 1
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

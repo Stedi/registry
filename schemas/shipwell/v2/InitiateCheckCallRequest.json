@@ -1,0 +1,21 @@
+{
+  "description": "Request body to initiate a check call on a shipment",
+  "properties": {
+    "automation_event_sub_type": {
+      "description": "What type of check call to make",
+      "enum": ["LOCATION_CHECK_IN", "PRE_PICKUP"],
+      "type": "string"
+    },
+    "phone_number": {
+      "description": "Phone number to call",
+      "type": "string"
+    }
+  },
+  "required": ["automation_event_sub_type", "phone_number"],
+  "type": "object",
+  "default": {
+    "automation_event_sub_type": "LOCATION_CHECK_IN",
+    "phone_number": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

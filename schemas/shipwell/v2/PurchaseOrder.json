@@ -1,0 +1,1058 @@
+{
+  "properties": {
+    "actual_delivery_datetime": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "actual_pickup_datetime": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "company": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "created_by_user": {
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "phone_number": {
+          "type": "string"
+        }
+      },
+      "required": ["first_name", "last_name", "email"],
+      "type": "object"
+    },
+    "custom_data": {
+      "additionalProperties": {},
+      "description": "Custom data for PurchaseOrder",
+      "type": "object"
+    },
+    "customer_external_id": {
+      "type": "string"
+    },
+    "customer_name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "destination_address": {
+      "properties": {
+        "address_1": {
+          "type": "string"
+        },
+        "address_2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "formatted_address": {
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "latitude": {
+          "format": "float",
+          "type": "number"
+        },
+        "longitude": {
+          "format": "float",
+          "type": "number"
+        },
+        "phone_number": {
+          "type": "string"
+        },
+        "postal_code": {
+          "type": "string"
+        },
+        "state_province": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "destination_address_book_entry": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "destination_dock_external_id": {
+      "description": "Destination dock id of the purchase order from the company's external system",
+      "type": "string"
+    },
+    "destination_stop": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "destination_stop_alerts": {
+      "items": {
+        "properties": {
+          "alert_type": {
+            "enum": ["AT_RISK", "DELAYED", "EARLY", "LATE", "OTHER", "WAITING", "DETENTION"],
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "created_by_driver": {
+            "description": "Read-only. The driver that created the StopAlert.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "created_by_user": {
+            "description": "Read-only. The user that created the StopAlert.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "expiration": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "location": {
+            "properties": {
+              "address_1": {
+                "type": "string"
+              },
+              "address_2": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "created_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "formatted_address": {
+                "type": "string"
+              },
+              "id": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "latitude": {
+                "format": "float",
+                "type": "number"
+              },
+              "longitude": {
+                "format": "float",
+                "type": "number"
+              },
+              "phone_number": {
+                "type": "string"
+              },
+              "postal_code": {
+                "type": "string"
+              },
+              "state_province": {
+                "type": "string"
+              },
+              "timezone": {
+                "type": "string"
+              },
+              "updated_at": {
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "occurred_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "reason_code": {
+            "enum": [
+              "ACCIDENT",
+              "ALTERNATE_CARRIER_DELIVERED",
+              "ALTERNATE_CARRIER_PICKED_UP",
+              "AWAITING_IMPORT",
+              "BORDER_CLEARANCE",
+              "CARRIER_KEYING_ERROR",
+              "CARRIER_RELATED",
+              "CASH_NOT_AVAILABLE_FROM_CONSIGNEE",
+              "CIVIL_EVENT",
+              "COLLECT_ON_DELIVERY_REQUIRED",
+              "CONSIGNEE_CLOSED",
+              "CONSIGNEE_RELATED",
+              "CONTAMINATED",
+              "CREDIT_HOLD",
+              "CUSTOMER_REQUESTED_DIFFERENT_DELIVERY_WINDOW",
+              "CUSTOMS_DOCUMENTATION_PROBLEM",
+              "CUSTOMS_DOCUMENTATION_PROBLEMS",
+              "DAMAGED",
+              "DELIVERY_SHORTAGE",
+              "DRIVER_NOT_AVAILABLE",
+              "DRIVER_RELATED",
+              "EQUIPMENT_SHORTAGE",
+              "EQUIPMENT_VOLUME_NOT_AVAILABLE",
+              "EXCEEDS_SERVICE_LIMITATIONS",
+              "FAILED_TO_RELEASE_BILLING",
+              "HELD_FOR_FULL_CARRIER_LOAD",
+              "HELD_FOR_PAYMENT",
+              "HELD_FOR_PROTECTIVE_SERVICE",
+              "HELD_PENDING_APPOINTMENT",
+              "HOLIDAY_CLOSED",
+              "IMPROPER_FACILITY_OR_EQUIPMENT",
+              "IMPROPER_TEMPERATURE",
+              "INCONSISTENT_WEIGHT",
+              "INCORRECT_ADDRESS",
+              "INSUFFICIENT_DELIVERY_TIME",
+              "INSUFFICIENT_PICKUP_TIME",
+              "INSUFFICIENT_TRAVEL_TIME_DETECTED",
+              "INTERNATIONAL_NON_CARRIER_DELAY",
+              "MECHANICAL_BREAKDOWN",
+              "MISSING_DOCUMENTS",
+              "MIS_SORT",
+              "NON_EXPRESS_CLEARANCE_DELAY",
+              "NORMAL_APPOINTMENT",
+              "NORMAL_STATUS",
+              "NO_APPOINTMENT_SCHEDULED",
+              "NO_REQUESTED_ARRIVAL_DATE_OR_TIME",
+              "OTHER",
+              "PAST_CUT_OFF_TIME",
+              "PROCESSING_DELAY",
+              "RAILROAD_FAILED_TO_MEET_SCHEDULE",
+              "RECIPIENT_UNAVAILABLE",
+              "RECONSIGNED",
+              "RESTRICTED_ARTICLES_UNACCEPTABLE",
+              "RETURNED_TO_SHIPPER",
+              "ROAD_CONDITIONS",
+              "SHIPMENT_OVERWEIGHT",
+              "SHIPPER_RELATED",
+              "TRACKING_EVENT_AUTOMATED_CALL",
+              "TRACKING_EVENT_EDI_UPDATE",
+              "TRACKING_EVENT_ELD_UPDATE",
+              "TRACKING_EVENT_GEOFENCE_BREACH",
+              "TRACKING_EVENT_MANUAL_LOCATION_UPDATED",
+              "TRACKING_EVENT_MOBILE_APP",
+              "TRACKING_EVENT_MOBILE_APP_UPDATED_BY_DRIVER",
+              "TRAIN_DERAILMENT",
+              "UNABLE_TO_CONTACT_RECIPIENT",
+              "UNABLE_TO_LOCATE",
+              "UNKNOWN",
+              "WAITING_FOR_CUSTOMER_PICKUP",
+              "WAITING_INSPECTION",
+              "WAITING_SHIPPING_INSTRUCTIONS",
+              "WEATHER_OR_NATURAL_DISASTER"
+            ],
+            "type": "string"
+          },
+          "stop": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": ["alert_type"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "id": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "invoice_external_id": {
+      "type": "string"
+    },
+    "line_items": {
+      "items": {
+        "allOf": [
+          {
+            "properties": {
+              "country_of_manufacture": {
+                "example": "US",
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "freight_class": {
+                "enum": [
+                  "50",
+                  "55",
+                  "60",
+                  "65",
+                  "70",
+                  "77.5",
+                  "85",
+                  "92.5",
+                  "100",
+                  "110",
+                  "125",
+                  "150",
+                  "175",
+                  "200",
+                  "250",
+                  "300",
+                  "400",
+                  "500"
+                ],
+                "type": "string"
+              },
+              "hazmat_hazard_class": {
+                "type": "string"
+              },
+              "hazmat_identification_number": {
+                "type": "string"
+              },
+              "hazmat_packing_group": {
+                "enum": ["I", "II", "III"],
+                "type": "string"
+              },
+              "hazmat_proper_shipping_name": {
+                "type": "string"
+              },
+              "height": {
+                "format": "float",
+                "type": "number"
+              },
+              "id": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "length": {
+                "format": "float",
+                "type": "number"
+              },
+              "length_unit": {
+                "enum": ["CM", "IN"],
+                "type": "string"
+              },
+              "nmfc_item_code": {
+                "type": "string"
+              },
+              "nmfc_sub_code": {
+                "type": "string"
+              },
+              "package_type": {
+                "enum": [
+                  "BAG",
+                  "BALE",
+                  "BOX",
+                  "BUCKET",
+                  "BUNDLE",
+                  "CAN",
+                  "CARTON",
+                  "CASE",
+                  "COIL",
+                  "CRATE",
+                  "CYLINDER",
+                  "DRUM",
+                  "FLOOR_LOADED",
+                  "PAIL",
+                  "PACKAGE",
+                  "PIECES",
+                  "PKG",
+                  "PLT",
+                  "REEL",
+                  "ROLL",
+                  "SKID",
+                  "TUBE"
+                ],
+                "type": "string"
+              },
+              "package_weight": {
+                "format": "float",
+                "type": "number"
+              },
+              "piece_type": {
+                "enum": [
+                  "BAG",
+                  "BALE",
+                  "BOX",
+                  "BUCKET",
+                  "BUNDLE",
+                  "CAN",
+                  "CARTON",
+                  "CASE",
+                  "COIL",
+                  "CRATE",
+                  "CYLINDER",
+                  "DRUM",
+                  "PAIL",
+                  "PACKAGE",
+                  "PIECES",
+                  "REEL",
+                  "ROLL",
+                  "SKID",
+                  "TUBE"
+                ],
+                "type": "string"
+              },
+              "product_ref": {
+                "type": "string"
+              },
+              "provider_specific_packaging": {
+                "description": "Provider-specific type of packaging used for the product",
+                "type": "string"
+              },
+              "refrigeration_max_temp": {
+                "format": "float",
+                "type": "number"
+              },
+              "refrigeration_min_temp": {
+                "format": "float",
+                "type": "number"
+              },
+              "refrigeration_required": {
+                "type": "boolean"
+              },
+              "stackable": {
+                "type": "boolean"
+              },
+              "temp_unit": {
+                "enum": ["F", "C"],
+                "type": "string"
+              },
+              "value_per_piece": {
+                "format": "float",
+                "type": "number"
+              },
+              "value_per_piece_currency": {
+                "enum": ["CAD", "USD"],
+                "type": "string"
+              },
+              "weight_unit": {
+                "enum": ["KG", "LB"],
+                "type": "string"
+              },
+              "width": {
+                "format": "float",
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          {
+            "properties": {
+              "custom_data": {
+                "additionalProperties": {},
+                "description": "Custom data for PurchaseOrderLineItem",
+                "type": "object"
+              },
+              "description": {
+                "type": "string"
+              },
+              "product_ref": {
+                "type": "string"
+              },
+              "purchase_order": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "total_line_item_weight": {
+                "description": "Read-only weight of the PurchaseOrderLineItem",
+                "format": "float",
+                "type": "number"
+              },
+              "total_packages": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "total_pieces": {
+                "format": "int32",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          }
+        ],
+        "required": ["id"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "name": {
+      "type": "string"
+    },
+    "order_number": {
+      "type": "string"
+    },
+    "origin_address": {
+      "properties": {
+        "address_1": {
+          "type": "string"
+        },
+        "address_2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "formatted_address": {
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "latitude": {
+          "format": "float",
+          "type": "number"
+        },
+        "longitude": {
+          "format": "float",
+          "type": "number"
+        },
+        "phone_number": {
+          "type": "string"
+        },
+        "postal_code": {
+          "type": "string"
+        },
+        "state_province": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "origin_address_book_entry": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "origin_dock_external_id": {
+      "description": "Origin dock id of the purchase order from the company's external system",
+      "type": "string"
+    },
+    "origin_stop": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "origin_stop_alerts": {
+      "items": {
+        "properties": {
+          "alert_type": {
+            "enum": ["AT_RISK", "DELAYED", "EARLY", "LATE", "OTHER", "WAITING", "DETENTION"],
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "created_by_driver": {
+            "description": "Read-only. The driver that created the StopAlert.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "created_by_user": {
+            "description": "Read-only. The user that created the StopAlert.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "expiration": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "location": {
+            "properties": {
+              "address_1": {
+                "type": "string"
+              },
+              "address_2": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "created_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "formatted_address": {
+                "type": "string"
+              },
+              "id": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "latitude": {
+                "format": "float",
+                "type": "number"
+              },
+              "longitude": {
+                "format": "float",
+                "type": "number"
+              },
+              "phone_number": {
+                "type": "string"
+              },
+              "postal_code": {
+                "type": "string"
+              },
+              "state_province": {
+                "type": "string"
+              },
+              "timezone": {
+                "type": "string"
+              },
+              "updated_at": {
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "occurred_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "reason_code": {
+            "enum": [
+              "ACCIDENT",
+              "ALTERNATE_CARRIER_DELIVERED",
+              "ALTERNATE_CARRIER_PICKED_UP",
+              "AWAITING_IMPORT",
+              "BORDER_CLEARANCE",
+              "CARRIER_KEYING_ERROR",
+              "CARRIER_RELATED",
+              "CASH_NOT_AVAILABLE_FROM_CONSIGNEE",
+              "CIVIL_EVENT",
+              "COLLECT_ON_DELIVERY_REQUIRED",
+              "CONSIGNEE_CLOSED",
+              "CONSIGNEE_RELATED",
+              "CONTAMINATED",
+              "CREDIT_HOLD",
+              "CUSTOMER_REQUESTED_DIFFERENT_DELIVERY_WINDOW",
+              "CUSTOMS_DOCUMENTATION_PROBLEM",
+              "CUSTOMS_DOCUMENTATION_PROBLEMS",
+              "DAMAGED",
+              "DELIVERY_SHORTAGE",
+              "DRIVER_NOT_AVAILABLE",
+              "DRIVER_RELATED",
+              "EQUIPMENT_SHORTAGE",
+              "EQUIPMENT_VOLUME_NOT_AVAILABLE",
+              "EXCEEDS_SERVICE_LIMITATIONS",
+              "FAILED_TO_RELEASE_BILLING",
+              "HELD_FOR_FULL_CARRIER_LOAD",
+              "HELD_FOR_PAYMENT",
+              "HELD_FOR_PROTECTIVE_SERVICE",
+              "HELD_PENDING_APPOINTMENT",
+              "HOLIDAY_CLOSED",
+              "IMPROPER_FACILITY_OR_EQUIPMENT",
+              "IMPROPER_TEMPERATURE",
+              "INCONSISTENT_WEIGHT",
+              "INCORRECT_ADDRESS",
+              "INSUFFICIENT_DELIVERY_TIME",
+              "INSUFFICIENT_PICKUP_TIME",
+              "INSUFFICIENT_TRAVEL_TIME_DETECTED",
+              "INTERNATIONAL_NON_CARRIER_DELAY",
+              "MECHANICAL_BREAKDOWN",
+              "MISSING_DOCUMENTS",
+              "MIS_SORT",
+              "NON_EXPRESS_CLEARANCE_DELAY",
+              "NORMAL_APPOINTMENT",
+              "NORMAL_STATUS",
+              "NO_APPOINTMENT_SCHEDULED",
+              "NO_REQUESTED_ARRIVAL_DATE_OR_TIME",
+              "OTHER",
+              "PAST_CUT_OFF_TIME",
+              "PROCESSING_DELAY",
+              "RAILROAD_FAILED_TO_MEET_SCHEDULE",
+              "RECIPIENT_UNAVAILABLE",
+              "RECONSIGNED",
+              "RESTRICTED_ARTICLES_UNACCEPTABLE",
+              "RETURNED_TO_SHIPPER",
+              "ROAD_CONDITIONS",
+              "SHIPMENT_OVERWEIGHT",
+              "SHIPPER_RELATED",
+              "TRACKING_EVENT_AUTOMATED_CALL",
+              "TRACKING_EVENT_EDI_UPDATE",
+              "TRACKING_EVENT_ELD_UPDATE",
+              "TRACKING_EVENT_GEOFENCE_BREACH",
+              "TRACKING_EVENT_MANUAL_LOCATION_UPDATED",
+              "TRACKING_EVENT_MOBILE_APP",
+              "TRACKING_EVENT_MOBILE_APP_UPDATED_BY_DRIVER",
+              "TRAIN_DERAILMENT",
+              "UNABLE_TO_CONTACT_RECIPIENT",
+              "UNABLE_TO_LOCATE",
+              "UNKNOWN",
+              "WAITING_FOR_CUSTOMER_PICKUP",
+              "WAITING_INSPECTION",
+              "WAITING_SHIPPING_INSTRUCTIONS",
+              "WEATHER_OR_NATURAL_DISASTER"
+            ],
+            "type": "string"
+          },
+          "stop": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": ["alert_type"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "overall_status": {
+      "description": "Read-only status of a purchase order that, if no transit_status exists, will describe shipment assignment",
+      "enum": ["ASSIGNED", "UNASSIGNED", "PICKED_UP", "IN_TRANSIT", "DELIVERED", "EXCEPTIONS", "CANCELLED"],
+      "type": "string"
+    },
+    "planned_delivery_end_datetime": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "planned_delivery_start_datetime": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "planned_pickup_end_datetime": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "planned_pickup_start_datetime": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "shipment": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "source": {
+      "enum": ["MAGENTO", "SHIPWELL_WEB", "SHOPIFY", "IMPORT", "TENDER", "SHIPWELL_WEB_UNAUTH"],
+      "type": "string"
+    },
+    "source_system_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "subtotal_amount": {
+      "type": "number"
+    },
+    "subtotal_amount_currency": {
+      "default": "USD",
+      "enum": ["CAD", "USD"],
+      "type": "string"
+    },
+    "supplier_external_id": {
+      "type": "string"
+    },
+    "supplier_name": {
+      "type": "string"
+    },
+    "tax_amount": {
+      "type": "number"
+    },
+    "tax_amount_currency": {
+      "default": "USD",
+      "enum": ["CAD", "USD"],
+      "type": "string"
+    },
+    "transit_status": {
+      "enum": ["PICKED_UP", "IN_TRANSIT", "DELIVERED", "EXCEPTIONS", "CANCELLED"],
+      "type": "string"
+    },
+    "transit_status_reason_code": {
+      "enum": [
+        "ACCIDENT",
+        "ALTERNATE_CARRIER_DELIVERED",
+        "ALTERNATE_CARRIER_PICKED_UP",
+        "AWAITING_IMPORT",
+        "BORDER_CLEARANCE",
+        "CARRIER_KEYING_ERROR",
+        "CARRIER_RELATED",
+        "CASH_NOT_AVAILABLE_FROM_CONSIGNEE",
+        "CIVIL_EVENT",
+        "COLLECT_ON_DELIVERY_REQUIRED",
+        "CONSIGNEE_CLOSED",
+        "CONSIGNEE_RELATED",
+        "CONTAMINATED",
+        "CREDIT_HOLD",
+        "CUSTOMER_REQUESTED_DIFFERENT_DELIVERY_WINDOW",
+        "CUSTOMS_DOCUMENTATION_PROBLEM",
+        "CUSTOMS_DOCUMENTATION_PROBLEMS",
+        "DAMAGED",
+        "DELIVERY_SHORTAGE",
+        "DRIVER_NOT_AVAILABLE",
+        "DRIVER_RELATED",
+        "EQUIPMENT_SHORTAGE",
+        "EQUIPMENT_VOLUME_NOT_AVAILABLE",
+        "EXCEEDS_SERVICE_LIMITATIONS",
+        "FAILED_TO_RELEASE_BILLING",
+        "HELD_FOR_FULL_CARRIER_LOAD",
+        "HELD_FOR_PAYMENT",
+        "HELD_FOR_PROTECTIVE_SERVICE",
+        "HELD_PENDING_APPOINTMENT",
+        "HOLIDAY_CLOSED",
+        "IMPROPER_FACILITY_OR_EQUIPMENT",
+        "IMPROPER_TEMPERATURE",
+        "INCONSISTENT_WEIGHT",
+        "INCORRECT_ADDRESS",
+        "INSUFFICIENT_DELIVERY_TIME",
+        "INSUFFICIENT_PICKUP_TIME",
+        "INSUFFICIENT_TRAVEL_TIME_DETECTED",
+        "INTERNATIONAL_NON_CARRIER_DELAY",
+        "MECHANICAL_BREAKDOWN",
+        "MISSING_DOCUMENTS",
+        "MIS_SORT",
+        "NON_EXPRESS_CLEARANCE_DELAY",
+        "NORMAL_APPOINTMENT",
+        "NORMAL_STATUS",
+        "NO_APPOINTMENT_SCHEDULED",
+        "NO_REQUESTED_ARRIVAL_DATE_OR_TIME",
+        "OTHER",
+        "PAST_CUT_OFF_TIME",
+        "PROCESSING_DELAY",
+        "RAILROAD_FAILED_TO_MEET_SCHEDULE",
+        "RECIPIENT_UNAVAILABLE",
+        "RECONSIGNED",
+        "RESTRICTED_ARTICLES_UNACCEPTABLE",
+        "RETURNED_TO_SHIPPER",
+        "ROAD_CONDITIONS",
+        "SHIPMENT_OVERWEIGHT",
+        "SHIPPER_RELATED",
+        "TRACKING_EVENT_AUTOMATED_CALL",
+        "TRACKING_EVENT_EDI_UPDATE",
+        "TRACKING_EVENT_ELD_UPDATE",
+        "TRACKING_EVENT_GEOFENCE_BREACH",
+        "TRACKING_EVENT_MANUAL_LOCATION_UPDATED",
+        "TRACKING_EVENT_MOBILE_APP",
+        "TRACKING_EVENT_MOBILE_APP_UPDATED_BY_DRIVER",
+        "TRAIN_DERAILMENT",
+        "UNABLE_TO_CONTACT_RECIPIENT",
+        "UNABLE_TO_LOCATE",
+        "UNKNOWN",
+        "WAITING_FOR_CUSTOMER_PICKUP",
+        "WAITING_INSPECTION",
+        "WAITING_SHIPPING_INSTRUCTIONS",
+        "WEATHER_OR_NATURAL_DISASTER"
+      ],
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "type": "string"
+    }
+  },
+  "required": ["order_number", "destination_address", "origin_address", "source"],
+  "type": "object",
+  "default": {
+    "actual_delivery_datetime": "1970-01-01T00:00:00.000Z",
+    "actual_pickup_datetime": "1970-01-01T00:00:00.000Z",
+    "company": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "created_at": "1970-01-01T00:00:00.000Z",
+    "created_by_user": {
+      "email": "string",
+      "first_name": "string",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "last_name": "string",
+      "phone_number": "string"
+    },
+    "custom_data": {},
+    "customer_external_id": "string",
+    "customer_name": "string",
+    "description": "string",
+    "destination_address": {
+      "address_1": "string",
+      "address_2": "string",
+      "city": "string",
+      "country": "string",
+      "created_at": "1970-01-01T00:00:00.000Z",
+      "formatted_address": "string",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "latitude": 0,
+      "longitude": 0,
+      "phone_number": "string",
+      "postal_code": "string",
+      "state_province": "string",
+      "timezone": "string",
+      "updated_at": "1970-01-01T00:00:00.000Z"
+    },
+    "destination_address_book_entry": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "destination_dock_external_id": "string",
+    "destination_stop": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "destination_stop_alerts": [
+      {
+        "alert_type": "AT_RISK",
+        "created_at": "1970-01-01T00:00:00.000Z",
+        "created_by_driver": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "created_by_user": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "description": "string",
+        "expiration": "1970-01-01T00:00:00.000Z",
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "location": {
+          "address_1": "string",
+          "address_2": "string",
+          "city": "string",
+          "country": "string",
+          "created_at": "1970-01-01T00:00:00.000Z",
+          "formatted_address": "string",
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "latitude": 0,
+          "longitude": 0,
+          "phone_number": "string",
+          "postal_code": "string",
+          "state_province": "string",
+          "timezone": "string",
+          "updated_at": "1970-01-01T00:00:00.000Z"
+        },
+        "occurred_at": "1970-01-01T00:00:00.000Z",
+        "reason_code": "ACCIDENT",
+        "stop": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "updated_at": "1970-01-01T00:00:00.000Z"
+      }
+    ],
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "invoice_external_id": "string",
+    "line_items": [
+      {
+        "custom_data": {},
+        "description": "string",
+        "product_ref": "string",
+        "purchase_order": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "total_line_item_weight": 0,
+        "total_packages": 1,
+        "total_pieces": 1
+      }
+    ],
+    "name": "string",
+    "order_number": "string",
+    "origin_address": {
+      "address_1": "string",
+      "address_2": "string",
+      "city": "string",
+      "country": "string",
+      "created_at": "1970-01-01T00:00:00.000Z",
+      "formatted_address": "string",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "latitude": 0,
+      "longitude": 0,
+      "phone_number": "string",
+      "postal_code": "string",
+      "state_province": "string",
+      "timezone": "string",
+      "updated_at": "1970-01-01T00:00:00.000Z"
+    },
+    "origin_address_book_entry": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "origin_dock_external_id": "string",
+    "origin_stop": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "origin_stop_alerts": [
+      {
+        "alert_type": "AT_RISK",
+        "created_at": "1970-01-01T00:00:00.000Z",
+        "created_by_driver": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "created_by_user": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "description": "string",
+        "expiration": "1970-01-01T00:00:00.000Z",
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "location": {
+          "address_1": "string",
+          "address_2": "string",
+          "city": "string",
+          "country": "string",
+          "created_at": "1970-01-01T00:00:00.000Z",
+          "formatted_address": "string",
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "latitude": 0,
+          "longitude": 0,
+          "phone_number": "string",
+          "postal_code": "string",
+          "state_province": "string",
+          "timezone": "string",
+          "updated_at": "1970-01-01T00:00:00.000Z"
+        },
+        "occurred_at": "1970-01-01T00:00:00.000Z",
+        "reason_code": "ACCIDENT",
+        "stop": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "updated_at": "1970-01-01T00:00:00.000Z"
+      }
+    ],
+    "overall_status": "ASSIGNED",
+    "planned_delivery_end_datetime": "1970-01-01T00:00:00.000Z",
+    "planned_delivery_start_datetime": "1970-01-01T00:00:00.000Z",
+    "planned_pickup_end_datetime": "1970-01-01T00:00:00.000Z",
+    "planned_pickup_start_datetime": "1970-01-01T00:00:00.000Z",
+    "shipment": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "source": "MAGENTO",
+    "source_system_id": "string",
+    "status": "string",
+    "subtotal_amount": 0,
+    "subtotal_amount_currency": "USD",
+    "supplier_external_id": "string",
+    "supplier_name": "string",
+    "tax_amount": 0,
+    "tax_amount_currency": "USD",
+    "transit_status": "PICKED_UP",
+    "transit_status_reason_code": "ACCIDENT",
+    "updated_at": "1970-01-01T00:00:00.000Z"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

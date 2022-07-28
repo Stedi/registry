@@ -1,0 +1,178 @@
+{
+  "properties": {
+    "coverages": {
+      "items": {
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "effective_date": {
+            "format": "date",
+            "type": "string"
+          },
+          "expiration_date": {
+            "format": "date",
+            "type": "string"
+          },
+          "limit": {
+            "properties": {
+              "amount": {
+                "type": "number"
+              },
+              "currency": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "policy_number": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "underwriter": {
+            "type": "string"
+          },
+          "underwriting_rating": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "dot": {
+      "properties": {
+        "broker_authority": {
+          "type": "boolean"
+        },
+        "broker_authority_revocation": {
+          "type": "boolean"
+        },
+        "common_authority": {
+          "type": "boolean"
+        },
+        "common_authority_revocation": {
+          "type": "boolean"
+        },
+        "contract_authority": {
+          "type": "boolean"
+        },
+        "contract_authority_revocation": {
+          "type": "boolean"
+        },
+        "pending_broker_authority": {
+          "type": "boolean"
+        },
+        "pending_common_authority": {
+          "type": "boolean"
+        },
+        "pending_contract_authority": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "dot_testing_info": {
+      "properties": {
+        "latest_authority_grant_date": {
+          "format": "date",
+          "type": "string"
+        },
+        "operating_status": {
+          "enum": [
+            "ACTIVE",
+            "AUTHORIZED_FOR_HHG",
+            "AUTHORIZED_FOR_PASSENGER",
+            "AUTHORIZED_FOR_PROPERTY",
+            "INACTIVE_USDOT_NUMBER",
+            "NOT_AUTHORIZED",
+            "OUT_OF_SERVICE"
+          ],
+          "type": "string"
+        },
+        "out_of_service_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "safety_rating": {
+          "type": "string"
+        },
+        "safety_rating_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "safety_review_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "safety_review_type": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "non_certified_reasons": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "status": {
+      "enum": ["CERTIFIED", "NOT_CERTIFIED", "UNKNOWN"],
+      "type": "string"
+    },
+    "status_date": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "default": {
+    "coverages": [
+      {
+        "description": "string",
+        "effective_date": "1970-01-01",
+        "expiration_date": "1970-01-01",
+        "limit": {
+          "amount": 0,
+          "currency": "string"
+        },
+        "policy_number": "string",
+        "status": "string",
+        "underwriter": "string",
+        "underwriting_rating": "string"
+      }
+    ],
+    "dot": {
+      "broker_authority": true,
+      "broker_authority_revocation": true,
+      "common_authority": true,
+      "common_authority_revocation": true,
+      "contract_authority": true,
+      "contract_authority_revocation": true,
+      "pending_broker_authority": true,
+      "pending_common_authority": true,
+      "pending_contract_authority": true
+    },
+    "dot_testing_info": {
+      "latest_authority_grant_date": "1970-01-01",
+      "operating_status": "ACTIVE",
+      "out_of_service_date": "1970-01-01T00:00:00.000Z",
+      "safety_rating": "string",
+      "safety_rating_date": "1970-01-01T00:00:00.000Z",
+      "safety_review_date": "1970-01-01T00:00:00.000Z",
+      "safety_review_type": "string"
+    },
+    "non_certified_reasons": ["string"],
+    "status": "CERTIFIED",
+    "status_date": "1970-01-01T00:00:00.000Z",
+    "updated_at": "1970-01-01T00:00:00.000Z"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

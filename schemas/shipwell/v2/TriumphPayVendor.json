@@ -1,0 +1,281 @@
+{
+  "description": "Triumph Pay vendor list details",
+  "properties": {
+    "created_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "freight_authority_vendor_relationship_details": {
+      "properties": {
+        "freight_authority": {
+          "type": "string"
+        },
+        "vendor_name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "id": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "triumph_carrier_accounts": {
+      "items": {
+        "description": "Triumph Pay vendor payments accounts synced",
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "is_default": {
+            "type": "boolean"
+          },
+          "mail_check_data": {
+            "properties": {
+              "address": {
+                "properties": {
+                  "address_1": {
+                    "type": "string"
+                  },
+                  "address_2": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "created_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "formatted_address": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "latitude": {
+                    "format": "float",
+                    "type": "number"
+                  },
+                  "longitude": {
+                    "format": "float",
+                    "type": "number"
+                  },
+                  "phone_number": {
+                    "type": "string"
+                  },
+                  "postal_code": {
+                    "type": "string"
+                  },
+                  "state_province": {
+                    "type": "string"
+                  },
+                  "timezone": {
+                    "type": "string"
+                  },
+                  "updated_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "mail_to_name": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "payment_type": {
+            "enum": ["ACH_BANK", "MAIL_CHECK", "FACTOR"],
+            "type": "string"
+          },
+          "vendor_factor_company": {
+            "properties": {
+              "address": {
+                "properties": {
+                  "address_1": {
+                    "type": "string"
+                  },
+                  "address_2": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "created_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "formatted_address": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "latitude": {
+                    "format": "float",
+                    "type": "number"
+                  },
+                  "longitude": {
+                    "format": "float",
+                    "type": "number"
+                  },
+                  "phone_number": {
+                    "type": "string"
+                  },
+                  "postal_code": {
+                    "type": "string"
+                  },
+                  "state_province": {
+                    "type": "string"
+                  },
+                  "timezone": {
+                    "type": "string"
+                  },
+                  "updated_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "company_name": {
+                "type": "string"
+              },
+              "created_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "email": {
+                "format": "email",
+                "type": "string"
+              },
+              "id": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "triumph_pay_key": {
+                "type": "string"
+              },
+              "updated_at": {
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "required": ["company_name", "address"],
+            "type": "object"
+          }
+        },
+        "required": ["payment_type"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "triumph_carrier_invoices": {
+      "items": {
+        "description": "Triumph Pay vendor invoices submitted",
+        "properties": {
+          "external_key": {
+            "type": "string"
+          },
+          "is_paid": {
+            "type": "boolean"
+          },
+          "source_bill": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "vendor": {
+      "format": "uuid",
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "default": {
+    "created_at": "1970-01-01T00:00:00.000Z",
+    "freight_authority_vendor_relationship_details": {
+      "freight_authority": "string",
+      "vendor_name": "string"
+    },
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "triumph_carrier_accounts": [
+      {
+        "created_at": "1970-01-01T00:00:00.000Z",
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "is_default": true,
+        "mail_check_data": {
+          "address": {
+            "address_1": "string",
+            "address_2": "string",
+            "city": "string",
+            "country": "string",
+            "created_at": "1970-01-01T00:00:00.000Z",
+            "formatted_address": "string",
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "latitude": 0,
+            "longitude": 0,
+            "phone_number": "string",
+            "postal_code": "string",
+            "state_province": "string",
+            "timezone": "string",
+            "updated_at": "1970-01-01T00:00:00.000Z"
+          },
+          "mail_to_name": "string"
+        },
+        "payment_type": "ACH_BANK",
+        "vendor_factor_company": {
+          "address": {
+            "address_1": "string",
+            "address_2": "string",
+            "city": "string",
+            "country": "string",
+            "created_at": "1970-01-01T00:00:00.000Z",
+            "formatted_address": "string",
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "latitude": 0,
+            "longitude": 0,
+            "phone_number": "string",
+            "postal_code": "string",
+            "state_province": "string",
+            "timezone": "string",
+            "updated_at": "1970-01-01T00:00:00.000Z"
+          },
+          "company_name": "string",
+          "created_at": "1970-01-01T00:00:00.000Z",
+          "email": "user@example.com",
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "triumph_pay_key": "string",
+          "updated_at": "1970-01-01T00:00:00.000Z"
+        }
+      }
+    ],
+    "triumph_carrier_invoices": [
+      {
+        "external_key": "string",
+        "is_paid": true,
+        "source_bill": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      }
+    ],
+    "vendor": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

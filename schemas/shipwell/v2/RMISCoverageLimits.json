@@ -1,0 +1,46 @@
+{
+  "properties": {
+    "amount": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "details": {
+      "items": {
+        "properties": {
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": ["description"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "is_auto_synonym": {
+      "type": "boolean"
+    },
+    "is_cargo_synonym": {
+      "type": "boolean"
+    }
+  },
+  "required": ["description", "amount", "is_cargo_synonym", "is_auto_synonym"],
+  "type": "object",
+  "default": {
+    "amount": 0,
+    "currency": "string",
+    "description": "string",
+    "details": [
+      {
+        "description": "string"
+      }
+    ],
+    "is_auto_synonym": true,
+    "is_cargo_synonym": true
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

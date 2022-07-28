@@ -1,0 +1,157 @@
+{
+  "properties": {
+    "dropoff_city": {
+      "type": "string"
+    },
+    "dropoff_lat": {
+      "maximum": 90,
+      "minimum": -90,
+      "type": "number"
+    },
+    "dropoff_long": {
+      "maximum": 180,
+      "minimum": -180,
+      "type": "number"
+    },
+    "dropoff_state": {
+      "description": "Two letter abreviation of dropoff state",
+      "maxLength": 2,
+      "minLength": 2,
+      "type": "string"
+    },
+    "equipment_type": {
+      "description": "Type of equipment required.",
+      "enum": [
+        "AUTO_CARRIER",
+        "AUTOHAULER",
+        "B_TRAIN",
+        "BULK",
+        "CONESTOGA",
+        "CONTAINER",
+        "CONTAINER_BREAK_BULK",
+        "CONTAINER_STANDARD_20_FOOT",
+        "CONTAINER_STANDARD_40_FOOT",
+        "CONTAINER_FLAT_TRACK_20_FOOT",
+        "CONTAINER_FLAT_TRACK_40_FOOT",
+        "CONTAINER_HEAVY_TESTED_20_FOOT",
+        "CONTAINER_HIGH_CUBE_40_FOOT",
+        "CONTAINER_HIGH_CUBE_45_FOOT",
+        "CONTAINER_INSULATED",
+        "CONTAINER_ISO_TANK_20_FOOT",
+        "CONTAINER_ISO_TANK_24_FOOT",
+        "CONTAINER_ISO_TANK_40_FOOT",
+        "CONTAINER_OPEN_TOP_20_FOOT",
+        "CONTAINER_OPEN_TOP_40_FOOT",
+        "CONTAINER_REEFER_20_FOOT",
+        "CONTAINER_REEFER_40_FOOT",
+        "CONTAINER_REFRIGERATED",
+        "CONVEYOR",
+        "CURTAIN_SIDE",
+        "DOUBLE_DROP",
+        "DROP_DECK",
+        "DROP_DECK_LANDOLL",
+        "DRY_VAN",
+        "DUMP_TRAILER",
+        "FLATBED",
+        "FLATBED_53_FOOT",
+        "FLATBED_AIR_RIDE",
+        "FLATBED_CONESTOGA",
+        "FLATBED_DOUBLE",
+        "FLATBED_HOTSHOT",
+        "FLATBED_MAXI",
+        "FLATBED_OVERDIMENSION",
+        "HOPPER",
+        "HOPPER_BOTTOM",
+        "INSULATED_VAN",
+        "LOWBOY",
+        "LOWBOY_OVERDIMENSION",
+        "MOVING_VAN",
+        "OTHER",
+        "PNEUMATIC",
+        "POWER_ONLY",
+        "REEFER",
+        "REEFER_AIR_RIDE",
+        "REEFER_DOUBLE",
+        "REEFER_INTERMODAL",
+        "REMOVABLE_GOOSENECK",
+        "STEP_DECK",
+        "STEPDECK_CONESTOGA",
+        "STRAIGHT_BOX_TRUCK",
+        "STRETCH_TRAILER",
+        "TANKER",
+        "TANKER_ALUMINUM",
+        "TANKER_INTERMODAL",
+        "TANKER_STEEL",
+        "TILT",
+        "TRUCK_AND_TRAILER",
+        "VAN_AIR_RIDE",
+        "VAN_DOUBLE",
+        "VAN_INSULATED",
+        "VAN_INTERMODAL",
+        "VAN_OPEN_TOP",
+        "VAN_ROLLER_BED",
+        "VAN_SPRINTER",
+        "VAN_TRIPLE",
+        "VAN_VENTED",
+        "VAN_WITH_CURTAINS"
+      ],
+      "type": "string"
+    },
+    "external_shipment_id": {
+      "description": "Shipment id in external system.",
+      "format": "uuid",
+      "type": "string"
+    },
+    "pickup_city": {
+      "type": "string"
+    },
+    "pickup_lat": {
+      "maximum": 90,
+      "minimum": -90,
+      "type": "number"
+    },
+    "pickup_long": {
+      "maximum": 180,
+      "minimum": -180,
+      "type": "number"
+    },
+    "pickup_state": {
+      "description": "Two letter abreviation of pickup state",
+      "maxLength": 2,
+      "minLength": 2,
+      "type": "string"
+    },
+    "pickup_time": {
+      "description": "Pickup time in ISO-8601 (yyyy-mm-ddThh:mm:ss.sssss+tz.info)",
+      "type": "string"
+    }
+  },
+  "required": [
+    "external_shipment_id",
+    "equipment_type",
+    "dropoff_city",
+    "dropoff_state",
+    "dropoff_lat",
+    "dropoff_long",
+    "pickup_city",
+    "pickup_state",
+    "pickup_lat",
+    "pickup_long",
+    "pickup_time"
+  ],
+  "type": "object",
+  "default": {
+    "dropoff_city": "string",
+    "dropoff_lat": 0,
+    "dropoff_long": 0,
+    "dropoff_state": "st",
+    "equipment_type": "AUTO_CARRIER",
+    "external_shipment_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "pickup_city": "string",
+    "pickup_lat": 0,
+    "pickup_long": 0,
+    "pickup_state": "st",
+    "pickup_time": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

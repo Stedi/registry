@@ -1,0 +1,44 @@
+{
+  "properties": {
+    "charge_category": {
+      "allOf": [
+        {
+          "enum": [
+            "ACC",
+            "ADJUSTMENT",
+            "DETENTION",
+            "FSC",
+            "FUEL",
+            "INSURANCE",
+            "LAYOVER",
+            "LH",
+            "OTHER",
+            "SF",
+            "TAX",
+            "TEAMDRIVERS",
+            "TONU",
+            "VARIANCE"
+          ],
+          "type": "string"
+        }
+      ],
+      "description": "Shipwell category for the mapping"
+    },
+    "netsuite_id": {
+      "description": "Netsuite category id for the mapping",
+      "type": "string"
+    },
+    "shipment_mode": {
+      "description": "Shipment mode this mapping is relevant for. If null, this is apart of the default mappings",
+      "type": "string"
+    }
+  },
+  "required": ["charge_category", "netsuite_id"],
+  "type": "object",
+  "default": {
+    "charge_category": "ACC",
+    "netsuite_id": "string",
+    "shipment_mode": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

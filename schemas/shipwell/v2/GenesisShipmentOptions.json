@@ -1,0 +1,54 @@
+{
+  "properties": {
+    "bill_to_account_number": {
+      "type": "string"
+    },
+    "bill_to_country_code": {
+      "type": "string"
+    },
+    "bill_to_payment_type": {
+      "enum": ["COLLECT", "RECIPIENT", "SENDER", "THIRD_PARTY"],
+      "type": "string"
+    },
+    "bill_to_postal_code": {
+      "type": "string"
+    },
+    "cod_collection_amount": {
+      "format": "float",
+      "type": "number"
+    },
+    "cod_collection_currency": {
+      "default": "USD",
+      "enum": ["CAD", "USD"],
+      "type": "string"
+    },
+    "cod_collection_type": {
+      "enum": ["ANY", "COMPANY_CHECK", "GUARANTEED_FUNDS", "PERSONAL_CHECK"],
+      "type": "string"
+    },
+    "customer_transaction_id": {
+      "type": "string"
+    },
+    "signature_option_release_number": {
+      "type": "string"
+    },
+    "signature_option_signature_type": {
+      "enum": ["ADULT_SIGNATURE", "DIRECT_SIGNATURE", "NO_SIGNATURE", "INDIRECT_SIGNATURE", "SERVICE_DEFAULT"],
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "default": {
+    "bill_to_account_number": "string",
+    "bill_to_country_code": "string",
+    "bill_to_payment_type": "COLLECT",
+    "bill_to_postal_code": "string",
+    "cod_collection_amount": 0,
+    "cod_collection_currency": "USD",
+    "cod_collection_type": "ANY",
+    "customer_transaction_id": "string",
+    "signature_option_release_number": "string",
+    "signature_option_signature_type": "ADULT_SIGNATURE"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -17,6 +17,7 @@ import { FedexShipProvider } from "./fedex/ship";
 import { ConvoyProvider } from "./convoy";
 import { FreightOSProvider } from "./freightos";
 import { WebCargoProvider } from "./webcargo";
+import { ShipwellProvider } from "./shipwell";
 import { XeroAccountingProvider } from "./xero/accounting";
 import { XPOLogisticsProvider } from "./xpoLogistics";
 
@@ -31,6 +32,7 @@ export default {
   netsuite: new NetsuiteProvider(),
   ramp: new RampProvider(),
   shipbob: new ShipbobProvider(),
+  shipwell: new ShipwellProvider(),
   quickbooks: new QuickbooksProvider(),
   shopify: new ShopifyProvider(),
   square: new SquareProvider(),

@@ -1,0 +1,92 @@
+{
+  "allOf": [
+    {
+      "properties": {
+        "bill_to_account_number": {
+          "type": "string"
+        },
+        "bill_to_country_code": {
+          "type": "string"
+        },
+        "bill_to_payment_type": {
+          "enum": ["COLLECT", "RECIPIENT", "SENDER", "THIRD_PARTY"],
+          "type": "string"
+        },
+        "bill_to_postal_code": {
+          "type": "string"
+        },
+        "cod_collection_amount": {
+          "format": "float",
+          "type": "number"
+        },
+        "cod_collection_currency": {
+          "default": "USD",
+          "enum": ["CAD", "USD"],
+          "type": "string"
+        },
+        "cod_collection_type": {
+          "enum": ["ANY", "COMPANY_CHECK", "GUARANTEED_FUNDS", "PERSONAL_CHECK"],
+          "type": "string"
+        },
+        "customer_transaction_id": {
+          "type": "string"
+        },
+        "signature_option_release_number": {
+          "type": "string"
+        },
+        "signature_option_signature_type": {
+          "enum": ["ADULT_SIGNATURE", "DIRECT_SIGNATURE", "NO_SIGNATURE", "INDIRECT_SIGNATURE", "SERVICE_DEFAULT"],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    {
+      "properties": {
+        "account": {
+          "description": "Id of the USPSAccount to dispatch or rate",
+          "format": "uuid",
+          "type": "string"
+        },
+        "packaging": {
+          "enum": [
+            "USPS_LETTER",
+            "USPS_FLAT",
+            "USPS_FLAT_RATE_ENVELOPE",
+            "USPS_FLAT_RATE_LEGAL_ENVELOPE",
+            "USPS_FLAT_RATE_PADDED_ENVELOPE",
+            "USPS_PARCEL",
+            "USPS_IRREGULAR_PARCEL",
+            "USPS_SOFT_PACK",
+            "USPS_SMALL_FLAT_RATE_BOX",
+            "USPS_MEDIUM_FLAT_RATE_BOX",
+            "USPS_LARGE_FLAT_RATE_BOX",
+            "USPS_LARGE_FLAT_RATE_BOX_APOFPO",
+            "USPS_REGIONAL_RATE_BOX_A",
+            "USPS_REGIONAL_RATE_BOX_B",
+            "USPS_LARGE_PARCEL",
+            "USPS_FLAT_RATE_GIFT_CARD_ENVELOPE",
+            "USPS_FLAT_RATE_WINDOW_ENVELOPE",
+            "USPS_FLAT_RATE_CARDBOARD_ENVELOPE",
+            "USPS_SMALL_FLAT_RATE_ENVELOPE",
+            "USPS_LARGE_FLAT_RATE_BOARD_GAME_BOX",
+            "YOUR_PACKAGING"
+          ],
+          "type": "string"
+        },
+        "service_code": {
+          "enum": ["FIRST", "PRIORITY", "EXPRESS", "PARCEL_SELECT", "LIBRARY_MAIL", "MEDIA_MAIL"],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  ],
+  "description": "Shipment rating and dispatch options specific to USPS",
+  "default": {
+    "account": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "packaging": "USPS_LETTER",
+    "service_code": "FIRST"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

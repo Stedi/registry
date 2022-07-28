@@ -1,0 +1,327 @@
+{
+  "properties": {
+    "customer": {
+      "properties": {
+        "duns": {
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "TenderRequestCustomer",
+      "type": "object"
+    },
+    "events": {
+      "properties": {
+        "appointment": {
+          "items": {
+            "properties": {
+              "created_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "notes": {
+                "type": "string"
+              },
+              "recorded_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "stop_sequence_id": {
+                "minimum": 1,
+                "type": "number"
+              },
+              "window_end": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "window_start": {
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "required": ["stop_sequence_id", "recorded_at", "window_start", "window_end"],
+            "title": "TenderAppointmentEventRequest",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "equipment": {
+          "items": {
+            "properties": {
+              "equipment_id": {
+                "type": "string"
+              },
+              "notes": {
+                "type": "string"
+              },
+              "recorded_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "type_code": {
+                "enum": [
+                  "BULK",
+                  "CONTAINER",
+                  "CONESTOGA",
+                  "DRY_VAN",
+                  "DOUBLE_DROP",
+                  "DROP_DECK",
+                  "FLATBED",
+                  "FLATBED_CONESTOGA",
+                  "OTHER",
+                  "REEFER",
+                  "TRUCK_AND_TRAILER",
+                  "VAN_VENTED"
+                ],
+                "type": "string"
+              }
+            },
+            "title": "TenderEquipmentEventRequest",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "eta": {
+          "items": {
+            "properties": {
+              "created_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "notes": {
+                "type": "string"
+              },
+              "recorded_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "stop_sequence_id": {
+                "minimum": 1,
+                "type": "number"
+              },
+              "window_end": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "window_start": {
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "required": ["stop_sequence_id", "recorded_at", "window_start", "window_end"],
+            "title": "TenderEtaEventRequest",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "location": {
+          "items": {
+            "properties": {
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "geo_location": {
+                "properties": {
+                  "lat": {
+                    "format": "float",
+                    "type": "number"
+                  },
+                  "lon": {
+                    "format": "float",
+                    "type": "number"
+                  }
+                },
+                "type": "object"
+              },
+              "notes": {
+                "type": "string"
+              },
+              "postal_code": {
+                "type": "string"
+              },
+              "recorded_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              }
+            },
+            "required": ["city", "state", "country", "geo_location"],
+            "title": "TenderLocationEventRequest",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "shipment_state": {
+          "items": {
+            "properties": {
+              "recorded_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "status": {
+                "enum": ["TENDERED_FOR_DELIVERY", "IN_TRANSIT", "CANCELLED", "LOADING", "DELAYED", "DELIVERED", "HELD"],
+                "type": "string"
+              }
+            },
+            "required": ["recorded_at", "status"],
+            "title": "TenderStopLocationEventRequest",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "stop_location_event": {
+          "items": {
+            "properties": {
+              "event_type": {
+                "enum": ["ARRIVAL", "AT_LOCATION", "ATTEMPT", "COMPLETED", "DEPARTURE", "EXCEPTION", "MISSED"],
+                "type": "string"
+              },
+              "notes": {
+                "type": "string"
+              },
+              "recorded_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "stop_sequence_id": {
+                "minimum": 1,
+                "type": "number"
+              }
+            },
+            "required": ["stop_sequence_id", "recorded_at", "event_type"],
+            "title": "TenderStopLocationEventRequest",
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "tender_id": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "vendor": {
+      "properties": {
+        "ff": {
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "mc": {
+          "type": "string"
+        },
+        "mx": {
+          "type": "string"
+        },
+        "nsc": {
+          "type": "string"
+        },
+        "scac": {
+          "type": "string"
+        },
+        "usdot": {
+          "type": "string"
+        }
+      },
+      "title": "TenderRequestVendor",
+      "type": "object"
+    }
+  },
+  "required": ["customer", "vendor", "tender_id", "events"],
+  "title": "TenderEventRequest",
+  "type": "object",
+  "default": {
+    "customer": {
+      "duns": "string",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "name": "string"
+    },
+    "events": {
+      "appointment": [
+        {
+          "created_at": "1970-01-01T00:00:00.000Z",
+          "notes": "string",
+          "recorded_at": "1970-01-01T00:00:00.000Z",
+          "stop_sequence_id": 0,
+          "window_end": "1970-01-01T00:00:00.000Z",
+          "window_start": "1970-01-01T00:00:00.000Z"
+        }
+      ],
+      "equipment": [
+        {
+          "equipment_id": "string",
+          "notes": "string",
+          "recorded_at": "1970-01-01T00:00:00.000Z",
+          "type_code": "BULK"
+        }
+      ],
+      "eta": [
+        {
+          "created_at": "1970-01-01T00:00:00.000Z",
+          "notes": "string",
+          "recorded_at": "1970-01-01T00:00:00.000Z",
+          "stop_sequence_id": 0,
+          "window_end": "1970-01-01T00:00:00.000Z",
+          "window_start": "1970-01-01T00:00:00.000Z"
+        }
+      ],
+      "location": [
+        {
+          "city": "string",
+          "country": "string",
+          "description": "string",
+          "geo_location": {
+            "lat": 0,
+            "lon": 0
+          },
+          "notes": "string",
+          "postal_code": "string",
+          "recorded_at": "1970-01-01T00:00:00.000Z",
+          "state": "string"
+        }
+      ],
+      "shipment_state": [
+        {
+          "recorded_at": "1970-01-01T00:00:00.000Z",
+          "status": "TENDERED_FOR_DELIVERY"
+        }
+      ],
+      "stop_location_event": [
+        {
+          "event_type": "ARRIVAL",
+          "notes": "string",
+          "recorded_at": "1970-01-01T00:00:00.000Z",
+          "stop_sequence_id": 0
+        }
+      ]
+    },
+    "tender_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "vendor": {
+      "ff": "string",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "mc": "string",
+      "mx": "string",
+      "nsc": "string",
+      "scac": "string",
+      "usdot": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

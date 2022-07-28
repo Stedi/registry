@@ -1,0 +1,100 @@
+{
+  "allOf": [
+    {
+      "properties": {
+        "amount": {
+          "description": "Total amount of the line item, or unit_amount times unit_quantity\n",
+          "format": "float",
+          "type": "number"
+        },
+        "category": {
+          "enum": [
+            "ACC",
+            "ADJUSTMENT",
+            "DETENTION",
+            "FSC",
+            "FUEL",
+            "INSURANCE",
+            "LAYOVER",
+            "LH",
+            "OTHER",
+            "SF",
+            "TAX",
+            "TEAMDRIVERS",
+            "TONU",
+            "VARIANCE"
+          ],
+          "type": "string"
+        },
+        "charge_code": {
+          "description": "Standardized code for a type of line item charge",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "id": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "unit_amount": {
+          "description": "Cost of one unit of the line item",
+          "format": "float",
+          "type": "number"
+        },
+        "unit_amount_currency": {
+          "default": "USD",
+          "enum": ["CAD", "USD"],
+          "type": "string"
+        },
+        "unit_name": {
+          "description": "Descriptor for one unit of the line item",
+          "type": "string"
+        },
+        "unit_quantity": {
+          "default": 1,
+          "format": "float",
+          "type": "number"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": ["category", "unit_amount", "unit_quantity"],
+      "type": "object"
+    },
+    {
+      "properties": {
+        "is_provider_markup": {
+          "type": "boolean"
+        },
+        "quote": {
+          "description": "Id of the Quote to which this line item is related",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  ],
+  "type": "object",
+  "default": {
+    "is_provider_markup": true,
+    "quote": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,64 @@
+{
+  "properties": {
+    "equipment_type": {
+      "description": "Shipment EquipmentType id",
+      "type": "integer"
+    },
+    "is_contract": {
+      "type": "boolean"
+    },
+    "pickup_date_gte": {
+      "format": "date",
+      "type": "string"
+    },
+    "predictive_sources": {
+      "items": {
+        "enum": ["shipwell_market_carrier", "shipwell_internal_shipper"],
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "query": {
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "enum": ["chainalytics_spot", "dat_spot", "shipwell_internal", "shipwell_market"],
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "stops": {
+      "items": {
+        "properties": {
+          "country": {
+            "type": "string"
+          },
+          "zip": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "title": "Stops",
+      "type": "array"
+    }
+  },
+  "required": ["equipment_type", "stops", "sources"],
+  "type": "object",
+  "default": {
+    "equipment_type": 1,
+    "is_contract": true,
+    "pickup_date_gte": "1970-01-01",
+    "predictive_sources": ["shipwell_market_carrier"],
+    "query": "string",
+    "sources": ["chainalytics_spot"],
+    "stops": [
+      {
+        "country": "string",
+        "zip": "string"
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

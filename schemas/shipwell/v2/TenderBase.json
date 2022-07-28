@@ -1,0 +1,114 @@
+{
+  "properties": {
+    "charge_line_items": {
+      "items": {
+        "properties": {
+          "category": {
+            "description": "Code the charge category for this line item",
+            "type": "string"
+          },
+          "unit_amount": {
+            "description": "Amount of a single unit of this line item",
+            "type": "number"
+          },
+          "unit_amount_currency": {
+            "description": "3 letter code of currency for this line item. If not provided, assumed to be USD.",
+            "maxLength": 3,
+            "minLength": 3,
+            "type": "string"
+          },
+          "unit_name": {
+            "description": "Name of charge",
+            "type": "string"
+          },
+          "unit_quantity": {
+            "description": "Quantity of this line item",
+            "type": "number"
+          }
+        },
+        "required": ["unit_amount", "unit_name", "unit_quantity"],
+        "title": "TenderChargeLineItem",
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "delivery_date": {
+      "description": "requested delivery date for this tender (in YYYY-MM-DD format)",
+      "format": "date",
+      "type": "string"
+    },
+    "earliest_pickup_date": {
+      "description": "Earliest date tender is available for pickup (in YYYY-MM-DD format)",
+      "format": "date",
+      "type": "string"
+    },
+    "earliest_pickup_time": {
+      "description": "Earliest time tender is available for pickup (in HH:MM:SS format)",
+      "type": "string"
+    },
+    "equipment_type": {
+      "description": "machine_readable string of the EquipmentType requested for this tender.",
+      "type": "string"
+    },
+    "error_message": {
+      "description": "Open-ended field for error information regarding this tender",
+      "type": "string"
+    },
+    "expires_at": {
+      "description": "Datetime that this tender expires at.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "info_message": {
+      "description": "Open-ended field for other information regarding this tender e.g special instructions",
+      "type": "string"
+    },
+    "lane_type": {
+      "description": "machine_readable string of the LaneType (formerly QuoteLaneType) requested for this tender.",
+      "enum": ["DIRECT", "INTERLINE", "UNSPECIFIED"],
+      "type": "string"
+    },
+    "latest_pickup_date": {
+      "description": "Latest date tender is available for pickup (in YYYY-MM-DD format)",
+      "format": "date",
+      "type": "string"
+    },
+    "latest_pickup_time": {
+      "description": "Latest time tender is available for pickup (in HH:MM:SS format)",
+      "type": "string"
+    },
+    "reference_number": {
+      "description": "Reference number/string for this tender. Primarially for references from external systems.",
+      "type": "string"
+    },
+    "transit_days": {
+      "description": "Number of days scheduled for transit",
+      "type": "integer"
+    }
+  },
+  "type": "object",
+  "default": {
+    "charge_line_items": [
+      {
+        "category": "string",
+        "unit_amount": 0,
+        "unit_amount_currency": "str",
+        "unit_name": "string",
+        "unit_quantity": 0
+      }
+    ],
+    "delivery_date": "1970-01-01",
+    "earliest_pickup_date": "1970-01-01",
+    "earliest_pickup_time": "string",
+    "equipment_type": "string",
+    "error_message": "string",
+    "expires_at": "1970-01-01T00:00:00.000Z",
+    "info_message": "string",
+    "lane_type": "DIRECT",
+    "latest_pickup_date": "1970-01-01",
+    "latest_pickup_time": "string",
+    "reference_number": "string",
+    "transit_days": 1
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

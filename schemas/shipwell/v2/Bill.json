@@ -1,0 +1,412 @@
+{
+  "properties": {
+    "balance": {
+      "description": "Current balance of the bill",
+      "format": "float",
+      "type": "number"
+    },
+    "bill_number": {
+      "description": "Reference to the bill in the external FMS, defaults to the Shipment reference number if left blank",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": "string"
+    },
+    "custom_data": {
+      "additionalProperties": {},
+      "description": "Custom data for a bill",
+      "title": "BillCustomData",
+      "type": "object"
+    },
+    "documents": {
+      "items": {
+        "properties": {
+          "content_object": {
+            "allOf": [
+              {
+                "description": "Metadata about a document",
+                "properties": {
+                  "created_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "created_by_id": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "created_by_name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "file": {
+                    "type": "string"
+                  },
+                  "filename": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "updated_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "company": {
+                    "type": "string"
+                  },
+                  "driver": {
+                    "description": "Id of the driver who created the document, if one exists",
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "is_carrier_document": {
+                    "type": "boolean"
+                  },
+                  "shipment": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "type": {
+                    "enum": [
+                      "BOL",
+                      "FUEL",
+                      "LUMPER",
+                      "HOS",
+                      "SIGNATURE",
+                      "RATE_CONFIRMATION",
+                      "CUSTOMER_TENDER",
+                      "DELIVERY_RECEIPT",
+                      "WEIGHT_CERTIFICATE",
+                      "OVERAGES_SHORTAGES_AND_DAMAGES",
+                      "INVOICE",
+                      "INSURANCE",
+                      "SHIPPING_LABEL",
+                      "CUSTOMS_PAPERWORK",
+                      "PACKING_SLIPS",
+                      "OTHER"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            ],
+            "description": "Metadata about a document",
+            "type": "object"
+          },
+          "content_type": {
+            "enum": ["shipment document"],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "readOnly": true,
+      "type": "array"
+    },
+    "due_date": {
+      "description": "When this bill is due",
+      "format": "date",
+      "type": "string"
+    },
+    "error_description": {
+      "description": "If an error occurred during processing, this field will be set",
+      "type": "string"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "line_items": {
+      "items": {
+        "properties": {
+          "amount": {
+            "description": "Effective amount of the line item, or unit_amount times quantity minus prepaid_amount\n",
+            "format": "float",
+            "type": "number"
+          },
+          "category": {
+            "description": "Categorization of the item, e.g. LH for Line Haul",
+            "type": "string"
+          },
+          "custom_data": {
+            "additionalProperties": {},
+            "description": "Custom data for a bill line item",
+            "title": "BillLineItemCustomData",
+            "type": "object"
+          },
+          "description": {
+            "description": "If not specified, defaults to the shipment reference id",
+            "type": "string"
+          },
+          "id": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "prepaid_amount": {
+            "format": "float",
+            "type": "number"
+          },
+          "unit_amount": {
+            "format": "float",
+            "type": "number"
+          },
+          "unit_quantity": {
+            "format": "float",
+            "type": "number"
+          }
+        },
+        "required": ["unit_amount", "unit_quantity", "category"],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "payment_status": {
+      "description": "Readable description of a non-zero balance",
+      "enum": ["Due in {Number of days} days", "Overdue by {Number of days} days", "Paid"]
+    },
+    "processing_status": {
+      "description": "The status of the processing the bill with the third party system",
+      "enum": ["PROCESSING", "SUCCESS", "ERROR"],
+      "readOnly": true
+    },
+    "remit_to": {
+      "description": "Where the bill needs to be paid to",
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "relationship": {
+          "description": "If SELF, carrier will be remit_to person.\nIf FACTOR_COMPANY and remit_to_info has id of existing carrier factoring, the factoring company will be the remit_to.\nIf FACTOR_COMPANY and remit_to_info does not have an id of an existing carrier factoring company, a new factor company will be created and\nadded as remit_to.\nIf FACTOR_COMPANY and no remit_to_info, the vendor_factoring_company on carrier relationship will be the remit_to.\nOtherwise carrier will be set as remit_to.\n",
+          "enum": ["SELF", "FACTOR_COMPANY"],
+          "type": "string"
+        },
+        "remit_to_info": {
+          "properties": {
+            "address": {
+              "properties": {
+                "address_1": {
+                  "type": "string"
+                },
+                "address_2": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "created_at": {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "formatted_address": {
+                  "type": "string"
+                },
+                "id": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "latitude": {
+                  "format": "float",
+                  "type": "number"
+                },
+                "longitude": {
+                  "format": "float",
+                  "type": "number"
+                },
+                "phone_number": {
+                  "type": "string"
+                },
+                "postal_code": {
+                  "type": "string"
+                },
+                "state_province": {
+                  "type": "string"
+                },
+                "timezone": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "format": "date-time",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "company_name": {
+              "type": "string"
+            },
+            "created_at": {
+              "format": "date-time",
+              "readOnly": true,
+              "type": "string"
+            },
+            "email": {
+              "format": "email",
+              "type": "string"
+            },
+            "id": {
+              "format": "uuid",
+              "readOnly": true,
+              "type": "string"
+            },
+            "updated_at": {
+              "format": "date-time",
+              "readOnly": true,
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "shipment": {
+      "properties": {
+        "bol_number": {
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "pro_number": {
+          "type": "string"
+        },
+        "purchase_order_number": {
+          "type": "string"
+        },
+        "reference_id": {
+          "type": "string"
+        }
+      },
+      "readOnly": true,
+      "type": "object"
+    },
+    "total_amount": {
+      "description": "How much the bill is worth, the summation of all of the line items",
+      "format": "float",
+      "type": "number"
+    },
+    "transaction_date": {
+      "description": "When the transaction occurred that generated the bill",
+      "format": "date",
+      "type": "string"
+    },
+    "transaction_number": {
+      "description": "Always a generated field of the transaction field from the financial management system",
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "default": {
+    "balance": 0,
+    "bill_number": "string",
+    "created_at": "1970-01-01T00:00:00.000Z",
+    "custom_data": {},
+    "documents": [
+      {
+        "content_object": {
+          "company": "string",
+          "driver": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "is_carrier_document": true,
+          "shipment": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "type": "BOL"
+        },
+        "content_type": "shipment document"
+      }
+    ],
+    "due_date": "1970-01-01",
+    "error_description": "string",
+    "id": "string",
+    "line_items": [
+      {
+        "amount": 0,
+        "category": "string",
+        "custom_data": {},
+        "description": "string",
+        "id": "string",
+        "prepaid_amount": 0,
+        "unit_amount": 0,
+        "unit_quantity": 0
+      }
+    ],
+    "payment_status": "Due in {Number of days} days",
+    "processing_status": "PROCESSING",
+    "remit_to": {
+      "created_at": "1970-01-01T00:00:00.000Z",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "relationship": "SELF",
+      "remit_to_info": {
+        "address": {
+          "address_1": "string",
+          "address_2": "string",
+          "city": "string",
+          "country": "string",
+          "created_at": "1970-01-01T00:00:00.000Z",
+          "formatted_address": "string",
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "latitude": 0,
+          "longitude": 0,
+          "phone_number": "string",
+          "postal_code": "string",
+          "state_province": "string",
+          "timezone": "string",
+          "updated_at": "1970-01-01T00:00:00.000Z"
+        },
+        "company_name": "string",
+        "created_at": "1970-01-01T00:00:00.000Z",
+        "email": "user@example.com",
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "updated_at": "1970-01-01T00:00:00.000Z"
+      },
+      "updated_at": "1970-01-01T00:00:00.000Z"
+    },
+    "shipment": {
+      "bol_number": "string",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "name": "string",
+      "pro_number": "string",
+      "purchase_order_number": "string",
+      "reference_id": "string"
+    },
+    "total_amount": 0,
+    "transaction_date": "1970-01-01",
+    "transaction_number": "string",
+    "updated_at": "1970-01-01T00:00:00.000Z"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

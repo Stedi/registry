@@ -1,0 +1,39 @@
+{
+  "description": "All available custom fields from Netsuite",
+  "properties": {
+    "fields": {
+      "description": "All valid Netsuite custom fields",
+      "items": {
+        "description": "Custom field from Netsuite",
+        "properties": {
+          "field_name": {
+            "description": "Human-readable field name",
+            "type": "string"
+          },
+          "id": {
+            "description": "Internal Netsuite ID",
+            "type": "string"
+          },
+          "type": {
+            "description": "Where this custom field can appear within Netsuite. `entityCustomField` can display anywhere (like for customers vendors) whereas `transactionBodyCustomField` displays on an Invoice or Bill",
+            "enum": ["entityCustomField", "transactionBodyCustomField"],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "default": {
+    "fields": [
+      {
+        "field_name": "string",
+        "id": "string",
+        "type": "entityCustomField"
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

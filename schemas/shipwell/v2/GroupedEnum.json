@@ -1,0 +1,54 @@
+{
+  "properties": {
+    "groups": {
+      "items": {
+        "properties": {
+          "code": {
+            "description": "Machine-readable code for the group that enum values belong to",
+            "type": "string"
+          },
+          "description": {
+            "description": "Human-readable code for the group that enum values belong to",
+            "type": "string"
+          }
+        },
+        "required": ["code", "description"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "values": {
+      "items": {
+        "properties": {
+          "group": {
+            "description": "Reference to the machine-readable group identifer to which the enum value belongs",
+            "type": "string"
+          },
+          "name": {
+            "description": "Unique identifier for an enum member",
+            "type": "string"
+          }
+        },
+        "required": ["group", "name"],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "default": {
+    "groups": [
+      {
+        "code": "string",
+        "description": "string"
+      }
+    ],
+    "values": [
+      {
+        "group": "string",
+        "name": "string"
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

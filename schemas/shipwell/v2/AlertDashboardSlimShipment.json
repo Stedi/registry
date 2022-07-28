@@ -1,0 +1,3145 @@
+{
+  "properties": {
+    "additional_bol_recipients": {
+      "description": "Additional email address to send the BOL to upon booking",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "alert_types": {
+      "items": {
+        "enum": [
+          "LATE_PICKUP",
+          "LATE_DELIVERY",
+          "RUNNING_LATE",
+          "CARRIER_NOT_ASSIGNED",
+          "NOT_TRACKING",
+          "INACTIVE_CARRIER",
+          "TAGGED_SHIPMENT",
+          "WATCHED_SHIPMENT"
+        ],
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "current_address": {
+      "allOf": [
+        {
+          "properties": {
+            "address_1": {
+              "type": "string"
+            },
+            "address_2": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "created_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "formatted_address": {
+              "type": "string"
+            },
+            "id": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "latitude": {
+              "format": "float",
+              "type": "number"
+            },
+            "longitude": {
+              "format": "float",
+              "type": "number"
+            },
+            "phone_number": {
+              "type": "string"
+            },
+            "postal_code": {
+              "type": "string"
+            },
+            "state_province": {
+              "type": "string"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "updated_at": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        {
+          "properties": {
+            "reported_at": {
+              "description": "Time when the shipment was at the address",
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    "customer": {
+      "properties": {
+        "billing_emails": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "brokerage": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "carrier": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "dba_name": {
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "is_shipwell": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "primary_email": {
+          "type": "string"
+        },
+        "shipper": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": ["name"],
+      "type": "object"
+    },
+    "documents_count": {
+      "type": "integer"
+    },
+    "id": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "is_watched": {
+      "type": "boolean"
+    },
+    "line_items": {
+      "items": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "purchase_order": {
+            "properties": {
+              "id": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "order_number": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "messages_count": {
+      "type": "integer"
+    },
+    "metadata": {
+      "description": "Contextual metadata about a shipment",
+      "properties": {
+        "alert_level": {
+          "enum": ["HIGH", "MEDIUM", "LOW"],
+          "type": "string"
+        },
+        "alert_message": {
+          "type": "string"
+        },
+        "archived": {
+          "type": "boolean"
+        },
+        "automation_enabled": {
+          "type": "boolean"
+        },
+        "bill_to_override": {
+          "description": "Collection of bill-to information that will render on Shipment documents\n",
+          "properties": {
+            "company_address": {
+              "type": "string"
+            },
+            "company_name": {
+              "type": "string"
+            },
+            "contact_email": {
+              "type": "string"
+            },
+            "contact_phone": {
+              "type": "string"
+            },
+            "created_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "direction": {
+              "enum": ["PREPAID", "COLLECT", "3RD_PARTY"],
+              "type": "string"
+            },
+            "id": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "updated_at": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "required": ["company_address", "company_name", "contact_email", "contact_phone", "direction"],
+          "type": "object"
+        },
+        "buy_it_now_amount": {
+          "format": "float",
+          "type": "number"
+        },
+        "buy_it_now_amount_currency": {
+          "enum": ["CAD", "USD"],
+          "type": "string"
+        },
+        "custom_data": {
+          "additionalProperties": {},
+          "description": "Custom data for ShipmentMetadata",
+          "type": "object"
+        },
+        "customer_side_accessorial_charge_table": {
+          "description": "Link to the AccessorialChargeTable used to access charges on the shipment customer",
+          "format": "uuid",
+          "type": "string"
+        },
+        "customer_side_fuel_surcharge_table": {
+          "description": "Link to the FuelSurchargeTable used to access charges on the shipment customer",
+          "format": "uuid",
+          "type": "string"
+        },
+        "has_open_auction": {
+          "type": "boolean"
+        },
+        "load_board_enabled": {
+          "type": "boolean"
+        },
+        "load_board_id": {
+          "type": "string"
+        },
+        "max_buy_amount": {
+          "type": "number"
+        },
+        "max_buy_amount_currency": {
+          "enum": ["CAD", "USD"],
+          "type": "string"
+        },
+        "open": {
+          "type": "boolean"
+        },
+        "pending_tender_acceptance": {
+          "type": "boolean"
+        },
+        "tags": {
+          "description": "List of ShipmentTag ids",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "vendor_side_accessorial_charge_table": {
+          "description": "Link to the AccessorialChargeTable used to access charges on the shipment vendor",
+          "format": "uuid",
+          "type": "string"
+        },
+        "vendor_side_fuel_surcharge_table": {
+          "description": "Link to the FuelSurchargeTable used to access charges on the shipment vendor",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "required": ["open", "tags"],
+      "type": "object"
+    },
+    "next_planned_stop_id": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "notes_count": {
+      "type": "integer"
+    },
+    "reference_id": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "relationship_to_vendor": {
+      "allOf": [
+        {
+          "properties": {
+            "carrier_reference_code": {
+              "type": "string"
+            },
+            "created_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "customer": {
+              "allOf": [
+                {
+                  "properties": {
+                    "billing_emails": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "brokerage": {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "carrier": {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "dba_name": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "is_shipwell": {
+                      "type": "boolean"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "primary_email": {
+                      "type": "string"
+                    },
+                    "shipper": {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["name"],
+                  "type": "object"
+                },
+                {
+                  "properties": {
+                    "billing_address": {
+                      "properties": {
+                        "address_1": {
+                          "type": "string"
+                        },
+                        "address_2": {
+                          "type": "string"
+                        },
+                        "city": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "formatted_address": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "latitude": {
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "longitude": {
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "phone_number": {
+                          "type": "string"
+                        },
+                        "postal_code": {
+                          "type": "string"
+                        },
+                        "state_province": {
+                          "type": "string"
+                        },
+                        "timezone": {
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "brokerage": {
+                      "properties": {
+                        "billing_address": {
+                          "properties": {
+                            "address_1": {
+                              "type": "string"
+                            },
+                            "address_2": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "formatted_address": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "format": "uuid",
+                              "type": "string"
+                            },
+                            "latitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "longitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "type": "string"
+                            },
+                            "state_province": {
+                              "type": "string"
+                            },
+                            "timezone": {
+                              "type": "string"
+                            },
+                            "updated_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "created_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "dba_name": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "is_3pl": {
+                          "description": "True if the Brokerage is actually a 3PL\n",
+                          "type": "boolean"
+                        },
+                        "mailing_address": {
+                          "properties": {
+                            "address_1": {
+                              "type": "string"
+                            },
+                            "address_2": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "formatted_address": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "format": "uuid",
+                              "type": "string"
+                            },
+                            "latitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "longitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "type": "string"
+                            },
+                            "state_province": {
+                              "type": "string"
+                            },
+                            "timezone": {
+                              "type": "string"
+                            },
+                            "updated_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "primary_email": {
+                          "type": "string"
+                        },
+                        "primary_phone_number": {
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "carrier": {
+                      "properties": {
+                        "accounts_receivable_email": {
+                          "type": "string"
+                        },
+                        "approved_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "billing_address": {
+                          "properties": {
+                            "address_1": {
+                              "type": "string"
+                            },
+                            "address_2": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "formatted_address": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "format": "uuid",
+                              "type": "string"
+                            },
+                            "latitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "longitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "type": "string"
+                            },
+                            "state_province": {
+                              "type": "string"
+                            },
+                            "timezone": {
+                              "type": "string"
+                            },
+                            "updated_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "created_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "custom_data": {
+                          "additionalProperties": {},
+                          "description": "Custom data for CarrierCustomData",
+                          "type": "object"
+                        },
+                        "dba_name": {
+                          "type": "string"
+                        },
+                        "display_name": {
+                          "description": "Read-only name of the Carrier which will be its dba_name if one\nexists, else the Carrier's Company's name\n",
+                          "type": "string"
+                        },
+                        "display_primary_email": {
+                          "description": "Read-only email of the Carrier which will be its email if one\nexists, else the Carrier's Company's email\n",
+                          "type": "string"
+                        },
+                        "display_primary_phone_number": {
+                          "description": "Read-only phone number of the Carrier which will be its phone number if one\nexists, else the Carrier's Company's phone number\n",
+                          "type": "string"
+                        },
+                        "eld_providers": {
+                          "items": {
+                            "properties": {
+                              "id": {
+                                "format": "uuid",
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "enum": ["Active", "Inactive"],
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "id": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "mailing_address": {
+                          "properties": {
+                            "address_1": {
+                              "type": "string"
+                            },
+                            "address_2": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "formatted_address": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "format": "uuid",
+                              "type": "string"
+                            },
+                            "latitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "longitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "type": "string"
+                            },
+                            "state_province": {
+                              "type": "string"
+                            },
+                            "timezone": {
+                              "type": "string"
+                            },
+                            "updated_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "pickup_request_email": {
+                          "type": "string"
+                        },
+                        "primary_email": {
+                          "type": "string"
+                        },
+                        "primary_phone_number": {
+                          "type": "string"
+                        },
+                        "service_center_lookup_url": {
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "usdot_number": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "custom_data": {
+                      "additionalProperties": {},
+                      "description": "Custom data for CompanyCustomData",
+                      "type": "object"
+                    },
+                    "feature_flags": {
+                      "description": "Read-only set of boolean flags that describe what features\na Company has enabled\n",
+                      "properties": {
+                        "alerts_dashboard_enabled": {
+                          "description": "Flag that allows a company to use alerts dashboard",
+                          "type": "boolean"
+                        },
+                        "analytics_enabled": {
+                          "description": "Flag that enables analytics capability",
+                          "type": "boolean"
+                        },
+                        "automatic_carrier_policy_enabled": {
+                          "description": "Flag that allows for automatic carrier policy feature to be enabled",
+                          "type": "boolean"
+                        },
+                        "bid_manager_enabled": {
+                          "description": "Flag that allows users to use the bid manager feature",
+                          "type": "boolean"
+                        },
+                        "can_book_manual_shipments": {
+                          "description": "Flag that notifies the frontend whether or not\nit should display manual shipment booking pages\n",
+                          "type": "boolean"
+                        },
+                        "can_initiate_mobile_ping_tracking": {
+                          "description": "Flag that allows a company to initiate cell phone ping tracking requests\n",
+                          "type": "boolean"
+                        },
+                        "can_override_bill_to_for_automated_ltl": {
+                          "description": "Flag that notifies the frontend whether or not to render\nbill-to override dialog for autobook LTL shipments\n",
+                          "type": "boolean"
+                        },
+                        "carrier_prioritization_enabled": {
+                          "description": "Flag that allows users of the company to access the carrier prioritization features.",
+                          "type": "boolean"
+                        },
+                        "ch_robinson_enabled": {
+                          "description": "Flag that allows shipments created by Company to create and delete CHR Orders if CHR customer code is also set",
+                          "type": "boolean"
+                        },
+                        "company": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "contracts_enabled": {
+                          "description": "Flag that allows user to use contracts and SLAs",
+                          "type": "boolean"
+                        },
+                        "datadocks_enabled": {
+                          "description": "Flag that enables DataDocks integration\n",
+                          "type": "boolean"
+                        },
+                        "edi_invoicing_enabled": {
+                          "description": "Flag that allows a company to dispatch invoices via EDI",
+                          "type": "boolean"
+                        },
+                        "fedex_enabled": {
+                          "description": "Flag that enables Fedex capabilities",
+                          "type": "boolean"
+                        },
+                        "freightwaves_driver_texts_enabled": {
+                          "description": "Temp flag that allows user to see the freightwaves demo functionality",
+                          "type": "boolean"
+                        },
+                        "ftl_instant_rates_enabled": {
+                          "description": "Flag that enables a companies usage of FTL Instant Rates",
+                          "type": "boolean"
+                        },
+                        "genesis_ltl_enabled": {
+                          "description": "Flag that allows a company to access Genesis LTL",
+                          "type": "boolean"
+                        },
+                        "historical_pricing_enabled": {
+                          "description": "Flag that allows user to view historical pricing data visualization",
+                          "type": "boolean"
+                        },
+                        "integrations_enabled": {
+                          "description": "Flag that enables third party applications supported on the platform capability",
+                          "type": "boolean"
+                        },
+                        "invoicing_enabled": {
+                          "description": "Flag that allows users of the company to access invoicing features.",
+                          "type": "boolean"
+                        },
+                        "load_board_enabled": {
+                          "description": "Flag that allows users of the company to post shipments to the load board",
+                          "type": "boolean"
+                        },
+                        "netsuite_enabled": {
+                          "description": "Flag that allows a company to use Netsuite",
+                          "type": "boolean"
+                        },
+                        "new_dashboard_enabled": {
+                          "description": "Flag that allows user to see the new dashboard views",
+                          "type": "boolean"
+                        },
+                        "order_consolidation_workflows_enabled": {
+                          "description": "Flag that allows a company to use order consolidation workflows",
+                          "type": "boolean"
+                        },
+                        "policies_enabled": {
+                          "description": "Flag that allows user to use policies",
+                          "type": "boolean"
+                        },
+                        "purchase_orders_enabled": {
+                          "description": "Flag that enables purchase order capability",
+                          "type": "boolean"
+                        },
+                        "rate_tables_enabled": {
+                          "description": "Flag that allows fuel and accessorial rate tables to be rendered",
+                          "type": "boolean"
+                        },
+                        "rmis_enabled": {
+                          "description": "Flag that enables syncing carrier profile data from RMIS",
+                          "type": "boolean"
+                        },
+                        "saferwatch_enabled": {
+                          "description": "Flag that enables syncing carrier profile data from SaferWatch",
+                          "type": "boolean"
+                        },
+                        "send_shipwell_network_enabled": {
+                          "description": "Flag that allows users to send quotes to the shipwell network",
+                          "type": "boolean"
+                        },
+                        "shipment_details_redesign_enabled": {
+                          "description": "Flag that allows for enabling usage of newly redesigned shipment detail",
+                          "type": "boolean"
+                        },
+                        "show_load_board": {
+                          "description": "Flag that notifies the frontend whether or not to display the load board",
+                          "type": "boolean"
+                        },
+                        "stop_status_enabled": {
+                          "description": "Flag that allows stop statuses to be enabled",
+                          "type": "boolean"
+                        },
+                        "supplier_invites_enabled": {
+                          "description": "Flag that enables a company from sending supplier invite links",
+                          "type": "boolean"
+                        },
+                        "triumph_pay_enabled": {
+                          "description": "Flag that enables company to use the Triumph Pay integration",
+                          "type": "boolean"
+                        },
+                        "ups_enabled": {
+                          "description": "Flag that enables UPS capabilities",
+                          "type": "boolean"
+                        },
+                        "uses_3pl_quoting_flow": {
+                          "description": "Flag that instructs frontend to render the 3PL-specific quoting flow",
+                          "type": "boolean"
+                        },
+                        "usps_enabled": {
+                          "description": "Flag that enables USPS capabilities",
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "identifying_codes": {
+                      "items": {
+                        "properties": {
+                          "created_at": {
+                            "format": "date-time",
+                            "type": "string"
+                          },
+                          "id": {
+                            "format": "uuid",
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "updated_at": {
+                            "format": "date-time",
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["type", "value"],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "insurance_expires_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "insurance_policy_number": {
+                      "type": "string"
+                    },
+                    "insurance_provider_name": {
+                      "type": "string"
+                    },
+                    "insurance_provider_phone": {
+                      "type": "string"
+                    },
+                    "insurance_validated_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "mailing_address": {
+                      "properties": {
+                        "address_1": {
+                          "type": "string"
+                        },
+                        "address_2": {
+                          "type": "string"
+                        },
+                        "city": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "formatted_address": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "latitude": {
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "longitude": {
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "phone_number": {
+                          "type": "string"
+                        },
+                        "postal_code": {
+                          "type": "string"
+                        },
+                        "state_province": {
+                          "type": "string"
+                        },
+                        "timezone": {
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "primary_phone_number": {
+                      "type": "string"
+                    },
+                    "shipper": {
+                      "properties": {
+                        "billing_address": {
+                          "properties": {
+                            "address_1": {
+                              "type": "string"
+                            },
+                            "address_2": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "formatted_address": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "format": "uuid",
+                              "type": "string"
+                            },
+                            "latitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "longitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "type": "string"
+                            },
+                            "state_province": {
+                              "type": "string"
+                            },
+                            "timezone": {
+                              "type": "string"
+                            },
+                            "updated_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "created_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "dba_name": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "mailing_address": {
+                          "properties": {
+                            "address_1": {
+                              "type": "string"
+                            },
+                            "address_2": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "formatted_address": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "format": "uuid",
+                              "type": "string"
+                            },
+                            "latitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "longitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "type": "string"
+                            },
+                            "state_province": {
+                              "type": "string"
+                            },
+                            "timezone": {
+                              "type": "string"
+                            },
+                            "updated_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "primary_email": {
+                          "type": "string"
+                        },
+                        "primary_phone_number": {
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "subdomain": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              ],
+              "required": ["primary_phone_number", "primary_email"],
+              "type": "object"
+            },
+            "customer_charge_line_items": {
+              "description": "Costs owed to vendor as the customer records them,\nreadable by both customer and vendor but writable\nonly by the customer\n",
+              "items": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "amount": {
+                        "description": "Total amount of the line item, or unit_amount times unit_quantity\n",
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "category": {
+                        "enum": [
+                          "ACC",
+                          "ADJUSTMENT",
+                          "DETENTION",
+                          "FSC",
+                          "FUEL",
+                          "INSURANCE",
+                          "LAYOVER",
+                          "LH",
+                          "OTHER",
+                          "SF",
+                          "TAX",
+                          "TEAMDRIVERS",
+                          "TONU",
+                          "VARIANCE"
+                        ],
+                        "type": "string"
+                      },
+                      "charge_code": {
+                        "description": "Standardized code for a type of line item charge",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "format": "int32",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "created_at": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "id": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "unit_amount": {
+                        "description": "Cost of one unit of the line item",
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "unit_amount_currency": {
+                        "default": "USD",
+                        "enum": ["CAD", "USD"],
+                        "type": "string"
+                      },
+                      "unit_name": {
+                        "description": "Descriptor for one unit of the line item",
+                        "type": "string"
+                      },
+                      "unit_quantity": {
+                        "default": 1,
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "updated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                      }
+                    },
+                    "required": ["category", "unit_amount", "unit_quantity"],
+                    "type": "object"
+                  },
+                  {
+                    "properties": {
+                      "created_at": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "prepaid_amount": {
+                        "description": "Amount on the charge line item that is prepaid. Assumed to always be in the currency of the unit amount",
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "updated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "vendor_assignment": {
+                        "description": "Id of the VendorAssignment to which this line item is related",
+                        "format": "uuid",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "description": "Line item recording a charge that some vendor is charging\ntheir customer for a shipment\n",
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "id": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "is_assigned_carrier": {
+              "type": "boolean"
+            },
+            "updated_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "vendor": {
+              "allOf": [
+                {
+                  "properties": {
+                    "billing_emails": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "brokerage": {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "carrier": {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "dba_name": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "is_shipwell": {
+                      "type": "boolean"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "primary_email": {
+                      "type": "string"
+                    },
+                    "shipper": {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["name"],
+                  "type": "object"
+                },
+                {
+                  "properties": {
+                    "billing_address": {
+                      "properties": {
+                        "address_1": {
+                          "type": "string"
+                        },
+                        "address_2": {
+                          "type": "string"
+                        },
+                        "city": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "formatted_address": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "latitude": {
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "longitude": {
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "phone_number": {
+                          "type": "string"
+                        },
+                        "postal_code": {
+                          "type": "string"
+                        },
+                        "state_province": {
+                          "type": "string"
+                        },
+                        "timezone": {
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "brokerage": {
+                      "properties": {
+                        "billing_address": {
+                          "properties": {
+                            "address_1": {
+                              "type": "string"
+                            },
+                            "address_2": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "formatted_address": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "format": "uuid",
+                              "type": "string"
+                            },
+                            "latitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "longitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "type": "string"
+                            },
+                            "state_province": {
+                              "type": "string"
+                            },
+                            "timezone": {
+                              "type": "string"
+                            },
+                            "updated_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "created_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "dba_name": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "is_3pl": {
+                          "description": "True if the Brokerage is actually a 3PL\n",
+                          "type": "boolean"
+                        },
+                        "mailing_address": {
+                          "properties": {
+                            "address_1": {
+                              "type": "string"
+                            },
+                            "address_2": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "formatted_address": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "format": "uuid",
+                              "type": "string"
+                            },
+                            "latitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "longitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "type": "string"
+                            },
+                            "state_province": {
+                              "type": "string"
+                            },
+                            "timezone": {
+                              "type": "string"
+                            },
+                            "updated_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "primary_email": {
+                          "type": "string"
+                        },
+                        "primary_phone_number": {
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "carrier": {
+                      "properties": {
+                        "accounts_receivable_email": {
+                          "type": "string"
+                        },
+                        "approved_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "billing_address": {
+                          "properties": {
+                            "address_1": {
+                              "type": "string"
+                            },
+                            "address_2": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "formatted_address": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "format": "uuid",
+                              "type": "string"
+                            },
+                            "latitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "longitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "type": "string"
+                            },
+                            "state_province": {
+                              "type": "string"
+                            },
+                            "timezone": {
+                              "type": "string"
+                            },
+                            "updated_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "created_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "custom_data": {
+                          "additionalProperties": {},
+                          "description": "Custom data for CarrierCustomData",
+                          "type": "object"
+                        },
+                        "dba_name": {
+                          "type": "string"
+                        },
+                        "display_name": {
+                          "description": "Read-only name of the Carrier which will be its dba_name if one\nexists, else the Carrier's Company's name\n",
+                          "type": "string"
+                        },
+                        "display_primary_email": {
+                          "description": "Read-only email of the Carrier which will be its email if one\nexists, else the Carrier's Company's email\n",
+                          "type": "string"
+                        },
+                        "display_primary_phone_number": {
+                          "description": "Read-only phone number of the Carrier which will be its phone number if one\nexists, else the Carrier's Company's phone number\n",
+                          "type": "string"
+                        },
+                        "eld_providers": {
+                          "items": {
+                            "properties": {
+                              "id": {
+                                "format": "uuid",
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "enum": ["Active", "Inactive"],
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "id": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "mailing_address": {
+                          "properties": {
+                            "address_1": {
+                              "type": "string"
+                            },
+                            "address_2": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "formatted_address": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "format": "uuid",
+                              "type": "string"
+                            },
+                            "latitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "longitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "type": "string"
+                            },
+                            "state_province": {
+                              "type": "string"
+                            },
+                            "timezone": {
+                              "type": "string"
+                            },
+                            "updated_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "pickup_request_email": {
+                          "type": "string"
+                        },
+                        "primary_email": {
+                          "type": "string"
+                        },
+                        "primary_phone_number": {
+                          "type": "string"
+                        },
+                        "service_center_lookup_url": {
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "usdot_number": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "custom_data": {
+                      "additionalProperties": {},
+                      "description": "Custom data for CompanyCustomData",
+                      "type": "object"
+                    },
+                    "feature_flags": {
+                      "description": "Read-only set of boolean flags that describe what features\na Company has enabled\n",
+                      "properties": {
+                        "alerts_dashboard_enabled": {
+                          "description": "Flag that allows a company to use alerts dashboard",
+                          "type": "boolean"
+                        },
+                        "analytics_enabled": {
+                          "description": "Flag that enables analytics capability",
+                          "type": "boolean"
+                        },
+                        "automatic_carrier_policy_enabled": {
+                          "description": "Flag that allows for automatic carrier policy feature to be enabled",
+                          "type": "boolean"
+                        },
+                        "bid_manager_enabled": {
+                          "description": "Flag that allows users to use the bid manager feature",
+                          "type": "boolean"
+                        },
+                        "can_book_manual_shipments": {
+                          "description": "Flag that notifies the frontend whether or not\nit should display manual shipment booking pages\n",
+                          "type": "boolean"
+                        },
+                        "can_initiate_mobile_ping_tracking": {
+                          "description": "Flag that allows a company to initiate cell phone ping tracking requests\n",
+                          "type": "boolean"
+                        },
+                        "can_override_bill_to_for_automated_ltl": {
+                          "description": "Flag that notifies the frontend whether or not to render\nbill-to override dialog for autobook LTL shipments\n",
+                          "type": "boolean"
+                        },
+                        "carrier_prioritization_enabled": {
+                          "description": "Flag that allows users of the company to access the carrier prioritization features.",
+                          "type": "boolean"
+                        },
+                        "ch_robinson_enabled": {
+                          "description": "Flag that allows shipments created by Company to create and delete CHR Orders if CHR customer code is also set",
+                          "type": "boolean"
+                        },
+                        "company": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "contracts_enabled": {
+                          "description": "Flag that allows user to use contracts and SLAs",
+                          "type": "boolean"
+                        },
+                        "datadocks_enabled": {
+                          "description": "Flag that enables DataDocks integration\n",
+                          "type": "boolean"
+                        },
+                        "edi_invoicing_enabled": {
+                          "description": "Flag that allows a company to dispatch invoices via EDI",
+                          "type": "boolean"
+                        },
+                        "fedex_enabled": {
+                          "description": "Flag that enables Fedex capabilities",
+                          "type": "boolean"
+                        },
+                        "freightwaves_driver_texts_enabled": {
+                          "description": "Temp flag that allows user to see the freightwaves demo functionality",
+                          "type": "boolean"
+                        },
+                        "ftl_instant_rates_enabled": {
+                          "description": "Flag that enables a companies usage of FTL Instant Rates",
+                          "type": "boolean"
+                        },
+                        "genesis_ltl_enabled": {
+                          "description": "Flag that allows a company to access Genesis LTL",
+                          "type": "boolean"
+                        },
+                        "historical_pricing_enabled": {
+                          "description": "Flag that allows user to view historical pricing data visualization",
+                          "type": "boolean"
+                        },
+                        "integrations_enabled": {
+                          "description": "Flag that enables third party applications supported on the platform capability",
+                          "type": "boolean"
+                        },
+                        "invoicing_enabled": {
+                          "description": "Flag that allows users of the company to access invoicing features.",
+                          "type": "boolean"
+                        },
+                        "load_board_enabled": {
+                          "description": "Flag that allows users of the company to post shipments to the load board",
+                          "type": "boolean"
+                        },
+                        "netsuite_enabled": {
+                          "description": "Flag that allows a company to use Netsuite",
+                          "type": "boolean"
+                        },
+                        "new_dashboard_enabled": {
+                          "description": "Flag that allows user to see the new dashboard views",
+                          "type": "boolean"
+                        },
+                        "order_consolidation_workflows_enabled": {
+                          "description": "Flag that allows a company to use order consolidation workflows",
+                          "type": "boolean"
+                        },
+                        "policies_enabled": {
+                          "description": "Flag that allows user to use policies",
+                          "type": "boolean"
+                        },
+                        "purchase_orders_enabled": {
+                          "description": "Flag that enables purchase order capability",
+                          "type": "boolean"
+                        },
+                        "rate_tables_enabled": {
+                          "description": "Flag that allows fuel and accessorial rate tables to be rendered",
+                          "type": "boolean"
+                        },
+                        "rmis_enabled": {
+                          "description": "Flag that enables syncing carrier profile data from RMIS",
+                          "type": "boolean"
+                        },
+                        "saferwatch_enabled": {
+                          "description": "Flag that enables syncing carrier profile data from SaferWatch",
+                          "type": "boolean"
+                        },
+                        "send_shipwell_network_enabled": {
+                          "description": "Flag that allows users to send quotes to the shipwell network",
+                          "type": "boolean"
+                        },
+                        "shipment_details_redesign_enabled": {
+                          "description": "Flag that allows for enabling usage of newly redesigned shipment detail",
+                          "type": "boolean"
+                        },
+                        "show_load_board": {
+                          "description": "Flag that notifies the frontend whether or not to display the load board",
+                          "type": "boolean"
+                        },
+                        "stop_status_enabled": {
+                          "description": "Flag that allows stop statuses to be enabled",
+                          "type": "boolean"
+                        },
+                        "supplier_invites_enabled": {
+                          "description": "Flag that enables a company from sending supplier invite links",
+                          "type": "boolean"
+                        },
+                        "triumph_pay_enabled": {
+                          "description": "Flag that enables company to use the Triumph Pay integration",
+                          "type": "boolean"
+                        },
+                        "ups_enabled": {
+                          "description": "Flag that enables UPS capabilities",
+                          "type": "boolean"
+                        },
+                        "uses_3pl_quoting_flow": {
+                          "description": "Flag that instructs frontend to render the 3PL-specific quoting flow",
+                          "type": "boolean"
+                        },
+                        "usps_enabled": {
+                          "description": "Flag that enables USPS capabilities",
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "identifying_codes": {
+                      "items": {
+                        "properties": {
+                          "created_at": {
+                            "format": "date-time",
+                            "type": "string"
+                          },
+                          "id": {
+                            "format": "uuid",
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "updated_at": {
+                            "format": "date-time",
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["type", "value"],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "insurance_expires_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "insurance_policy_number": {
+                      "type": "string"
+                    },
+                    "insurance_provider_name": {
+                      "type": "string"
+                    },
+                    "insurance_provider_phone": {
+                      "type": "string"
+                    },
+                    "insurance_validated_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "mailing_address": {
+                      "properties": {
+                        "address_1": {
+                          "type": "string"
+                        },
+                        "address_2": {
+                          "type": "string"
+                        },
+                        "city": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "formatted_address": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "latitude": {
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "longitude": {
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "phone_number": {
+                          "type": "string"
+                        },
+                        "postal_code": {
+                          "type": "string"
+                        },
+                        "state_province": {
+                          "type": "string"
+                        },
+                        "timezone": {
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "primary_phone_number": {
+                      "type": "string"
+                    },
+                    "shipper": {
+                      "properties": {
+                        "billing_address": {
+                          "properties": {
+                            "address_1": {
+                              "type": "string"
+                            },
+                            "address_2": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "formatted_address": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "format": "uuid",
+                              "type": "string"
+                            },
+                            "latitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "longitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "type": "string"
+                            },
+                            "state_province": {
+                              "type": "string"
+                            },
+                            "timezone": {
+                              "type": "string"
+                            },
+                            "updated_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "created_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "dba_name": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "mailing_address": {
+                          "properties": {
+                            "address_1": {
+                              "type": "string"
+                            },
+                            "address_2": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "formatted_address": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "format": "uuid",
+                              "type": "string"
+                            },
+                            "latitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "longitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "type": "string"
+                            },
+                            "state_province": {
+                              "type": "string"
+                            },
+                            "timezone": {
+                              "type": "string"
+                            },
+                            "updated_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "primary_email": {
+                          "type": "string"
+                        },
+                        "primary_phone_number": {
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "subdomain": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              ],
+              "required": ["primary_phone_number", "primary_email"],
+              "type": "object"
+            },
+            "vendor_charge_line_items": {
+              "description": "Costs owed to vendor as the vendor records them,\nreadable by both customer and vendor but writable\nonly by the vendor\n",
+              "items": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "amount": {
+                        "description": "Total amount of the line item, or unit_amount times unit_quantity\n",
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "category": {
+                        "enum": [
+                          "ACC",
+                          "ADJUSTMENT",
+                          "DETENTION",
+                          "FSC",
+                          "FUEL",
+                          "INSURANCE",
+                          "LAYOVER",
+                          "LH",
+                          "OTHER",
+                          "SF",
+                          "TAX",
+                          "TEAMDRIVERS",
+                          "TONU",
+                          "VARIANCE"
+                        ],
+                        "type": "string"
+                      },
+                      "charge_code": {
+                        "description": "Standardized code for a type of line item charge",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "format": "int32",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "created_at": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "id": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "unit_amount": {
+                        "description": "Cost of one unit of the line item",
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "unit_amount_currency": {
+                        "default": "USD",
+                        "enum": ["CAD", "USD"],
+                        "type": "string"
+                      },
+                      "unit_name": {
+                        "description": "Descriptor for one unit of the line item",
+                        "type": "string"
+                      },
+                      "unit_quantity": {
+                        "default": 1,
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "updated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                      }
+                    },
+                    "required": ["category", "unit_amount", "unit_quantity"],
+                    "type": "object"
+                  },
+                  {
+                    "properties": {
+                      "created_at": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "prepaid_amount": {
+                        "description": "Amount on the charge line item that is prepaid. Assumed to always be in the currency of the unit amount",
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "updated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "vendor_assignment": {
+                        "description": "Id of the VendorAssignment to which this line item is related",
+                        "format": "uuid",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "description": "Line item recording a charge that some vendor is charging\ntheir customer for a shipment\n",
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "vendor_point_of_contact": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "required": ["vendor", "charge_line_items"],
+          "type": "object"
+        },
+        {
+          "properties": {
+            "carrier_status": {
+              "enum": ["ACTIVE", "INACTIVE", "DO_NOT_USE"],
+              "type": "string"
+            },
+            "freight_authority_vendor_relationship": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "state": {
+      "enum": [
+        "appointment_pending",
+        "at_pickup",
+        "at_delivery",
+        "auction_running",
+        "cancelled",
+        "carrier_confirmed",
+        "delayed",
+        "delivered",
+        "dispatched",
+        "draft",
+        "in_transit",
+        "out_for_delivery",
+        "quote_accepted",
+        "quoting",
+        "reconciled",
+        "scheduled",
+        "tendered"
+      ],
+      "type": "string"
+    },
+    "stops": {
+      "items": {
+        "properties": {
+          "accessorials": {
+            "items": {
+              "description": "Accessorial code, price, and description",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "currency_unit": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "id": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "is_charge_code": {
+                  "type": "boolean"
+                },
+                "long_description": {
+                  "type": "string"
+                },
+                "price": {
+                  "format": "float",
+                  "type": "number"
+                },
+                "type": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "code",
+                "description",
+                "long_description",
+                "type",
+                "is_charge_code",
+                "price",
+                "currency_unit"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "alerts": {
+            "items": {
+              "properties": {
+                "alert_type": {
+                  "enum": ["AT_RISK", "DELAYED", "EARLY", "LATE", "OTHER", "WAITING", "DETENTION"],
+                  "type": "string"
+                },
+                "created_at": {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "created_by_driver": {
+                  "description": "Read-only. The driver that created the StopAlert.",
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "created_by_user": {
+                  "description": "Read-only. The user that created the StopAlert.",
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "expiration": {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "id": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "location": {
+                  "properties": {
+                    "address_1": {
+                      "type": "string"
+                    },
+                    "address_2": {
+                      "type": "string"
+                    },
+                    "city": {
+                      "type": "string"
+                    },
+                    "country": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "formatted_address": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "latitude": {
+                      "format": "float",
+                      "type": "number"
+                    },
+                    "longitude": {
+                      "format": "float",
+                      "type": "number"
+                    },
+                    "phone_number": {
+                      "type": "string"
+                    },
+                    "postal_code": {
+                      "type": "string"
+                    },
+                    "state_province": {
+                      "type": "string"
+                    },
+                    "timezone": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "occurred_at": {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "reason_code": {
+                  "enum": [
+                    "ACCIDENT",
+                    "ALTERNATE_CARRIER_DELIVERED",
+                    "ALTERNATE_CARRIER_PICKED_UP",
+                    "AWAITING_IMPORT",
+                    "BORDER_CLEARANCE",
+                    "CARRIER_KEYING_ERROR",
+                    "CARRIER_RELATED",
+                    "CASH_NOT_AVAILABLE_FROM_CONSIGNEE",
+                    "CIVIL_EVENT",
+                    "COLLECT_ON_DELIVERY_REQUIRED",
+                    "CONSIGNEE_CLOSED",
+                    "CONSIGNEE_RELATED",
+                    "CONTAMINATED",
+                    "CREDIT_HOLD",
+                    "CUSTOMER_REQUESTED_DIFFERENT_DELIVERY_WINDOW",
+                    "CUSTOMS_DOCUMENTATION_PROBLEM",
+                    "CUSTOMS_DOCUMENTATION_PROBLEMS",
+                    "DAMAGED",
+                    "DELIVERY_SHORTAGE",
+                    "DRIVER_NOT_AVAILABLE",
+                    "DRIVER_RELATED",
+                    "EQUIPMENT_SHORTAGE",
+                    "EQUIPMENT_VOLUME_NOT_AVAILABLE",
+                    "EXCEEDS_SERVICE_LIMITATIONS",
+                    "FAILED_TO_RELEASE_BILLING",
+                    "HELD_FOR_FULL_CARRIER_LOAD",
+                    "HELD_FOR_PAYMENT",
+                    "HELD_FOR_PROTECTIVE_SERVICE",
+                    "HELD_PENDING_APPOINTMENT",
+                    "HOLIDAY_CLOSED",
+                    "IMPROPER_FACILITY_OR_EQUIPMENT",
+                    "IMPROPER_TEMPERATURE",
+                    "INCONSISTENT_WEIGHT",
+                    "INCORRECT_ADDRESS",
+                    "INSUFFICIENT_DELIVERY_TIME",
+                    "INSUFFICIENT_PICKUP_TIME",
+                    "INSUFFICIENT_TRAVEL_TIME_DETECTED",
+                    "INTERNATIONAL_NON_CARRIER_DELAY",
+                    "MECHANICAL_BREAKDOWN",
+                    "MISSING_DOCUMENTS",
+                    "MIS_SORT",
+                    "NON_EXPRESS_CLEARANCE_DELAY",
+                    "NORMAL_APPOINTMENT",
+                    "NORMAL_STATUS",
+                    "NO_APPOINTMENT_SCHEDULED",
+                    "NO_REQUESTED_ARRIVAL_DATE_OR_TIME",
+                    "OTHER",
+                    "PAST_CUT_OFF_TIME",
+                    "PROCESSING_DELAY",
+                    "RAILROAD_FAILED_TO_MEET_SCHEDULE",
+                    "RECIPIENT_UNAVAILABLE",
+                    "RECONSIGNED",
+                    "RESTRICTED_ARTICLES_UNACCEPTABLE",
+                    "RETURNED_TO_SHIPPER",
+                    "ROAD_CONDITIONS",
+                    "SHIPMENT_OVERWEIGHT",
+                    "SHIPPER_RELATED",
+                    "TRACKING_EVENT_AUTOMATED_CALL",
+                    "TRACKING_EVENT_EDI_UPDATE",
+                    "TRACKING_EVENT_ELD_UPDATE",
+                    "TRACKING_EVENT_GEOFENCE_BREACH",
+                    "TRACKING_EVENT_MANUAL_LOCATION_UPDATED",
+                    "TRACKING_EVENT_MOBILE_APP",
+                    "TRACKING_EVENT_MOBILE_APP_UPDATED_BY_DRIVER",
+                    "TRAIN_DERAILMENT",
+                    "UNABLE_TO_CONTACT_RECIPIENT",
+                    "UNABLE_TO_LOCATE",
+                    "UNKNOWN",
+                    "WAITING_FOR_CUSTOMER_PICKUP",
+                    "WAITING_INSPECTION",
+                    "WAITING_SHIPPING_INSTRUCTIONS",
+                    "WEATHER_OR_NATURAL_DISASTER"
+                  ],
+                  "type": "string"
+                },
+                "stop": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "updated_at": {
+                  "format": "date-time",
+                  "type": "string"
+                }
+              },
+              "required": ["alert_type"],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "appointment_type": {
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "id": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": ["id", "code", "name"],
+            "type": "object"
+          },
+          "carrier_specified_eta": {
+            "properties": {
+              "created_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "initial_window_end": {
+                "description": "End of the initial estimate of ETA window",
+                "format": "date-time",
+                "type": "string"
+              },
+              "initial_window_start": {
+                "description": "Start of the initial estimate of ETA window",
+                "format": "date-time",
+                "type": "string"
+              },
+              "running_window_end": {
+                "description": "Start of the most recent estimate of ETA window",
+                "format": "date-time",
+                "type": "string"
+              },
+              "running_window_start": {
+                "description": "Start of the most recent estimate of ETA window",
+                "format": "date-time",
+                "type": "string"
+              },
+              "updated_at": {
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "confirmed_arrival_at": {
+            "description": "Optional of when the driver first arrived at the Stop",
+            "format": "date-time",
+            "type": "string"
+          },
+          "confirmed_departure_at": {
+            "description": "Optional of when the Stop was departed",
+            "format": "date-time",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "custom_data": {
+            "additionalProperties": {},
+            "description": "Custom data for Stop",
+            "type": "object"
+          },
+          "display_eta_window": {
+            "type": "string"
+          },
+          "display_planned_window": {
+            "type": "string"
+          },
+          "display_schedule": {
+            "type": "string"
+          },
+          "eta_overridden_by": {
+            "description": "ID of user who marked ETA as overridden, if exists",
+            "format": "uuid",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "internal_notes": {
+            "type": "string"
+          },
+          "is_completed": {
+            "description": "Whether or not the Stop was completed",
+            "type": "boolean"
+          },
+          "is_dropoff": {
+            "type": "boolean"
+          },
+          "is_pickup": {
+            "type": "boolean"
+          },
+          "location": {
+            "properties": {
+              "address": {
+                "properties": {
+                  "address_1": {
+                    "type": "string"
+                  },
+                  "address_2": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "created_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "formatted_address": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "latitude": {
+                    "format": "float",
+                    "type": "number"
+                  },
+                  "longitude": {
+                    "format": "float",
+                    "type": "number"
+                  },
+                  "phone_number": {
+                    "type": "string"
+                  },
+                  "postal_code": {
+                    "type": "string"
+                  },
+                  "state_province": {
+                    "type": "string"
+                  },
+                  "timezone": {
+                    "type": "string"
+                  },
+                  "updated_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "company_name": {
+                "type": "string"
+              },
+              "created_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "dock_external_id": {
+                "type": "string"
+              },
+              "dock_hours_end": {
+                "format": "time",
+                "type": "string"
+              },
+              "dock_hours_start": {
+                "format": "time",
+                "type": "string"
+              },
+              "id": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "identification_code": {
+                "type": "string"
+              },
+              "location_name": {
+                "type": "string"
+              },
+              "location_type": {
+                "properties": {
+                  "id": {
+                    "format": "int32",
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name"],
+                "type": "object"
+              },
+              "notes": {
+                "type": "string"
+              },
+              "point_of_contacts": {
+                "items": {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "created_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "first_name": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "job_title": {
+                          "type": "string"
+                        },
+                        "last_name": {
+                          "type": "string"
+                        },
+                        "phone_number": {
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "required": ["first_name"],
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "load_board_enabled": {
+                          "type": "boolean"
+                        },
+                        "load_board_invite_last_sent_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "preferences": {
+                          "properties": {
+                            "cancellation": {
+                              "type": "boolean"
+                            },
+                            "delayed": {
+                              "type": "boolean"
+                            },
+                            "delivered": {
+                              "type": "boolean"
+                            },
+                            "eta_changed": {
+                              "type": "boolean"
+                            },
+                            "picked_up": {
+                              "type": "boolean"
+                            },
+                            "receive_bol_on_shipment_booked": {
+                              "type": "boolean"
+                            },
+                            "shipment_booked": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "cancellation",
+                            "delayed",
+                            "delivered",
+                            "eta_changed",
+                            "picked_up",
+                            "receive_bol_on_shipment_booked",
+                            "shipment_booked"
+                          ],
+                          "type": "object"
+                        },
+                        "user": {
+                          "description": "Id of the user that this PointOfContact refers",
+                          "format": "uuid",
+                          "type": "string"
+                        }
+                      },
+                      "required": ["preferences"],
+                      "type": "object"
+                    }
+                  ]
+                },
+                "type": "array"
+              },
+              "updated_at": {
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "required": ["address", "location_name"],
+            "type": "object"
+          },
+          "ordinal_index": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "planned_date": {
+            "description": "Planned date of the stop, in string of the form YYYY-MM-DD",
+            "type": "string"
+          },
+          "planned_time_window_end": {
+            "format": "time",
+            "type": "string"
+          },
+          "planned_time_window_start": {
+            "format": "time",
+            "type": "string"
+          },
+          "predictive_model_eta": {
+            "properties": {
+              "created_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "initial_window_end": {
+                "description": "End of the initial estimate of ETA window",
+                "format": "date-time",
+                "type": "string"
+              },
+              "initial_window_start": {
+                "description": "Start of the initial estimate of ETA window",
+                "format": "date-time",
+                "type": "string"
+              },
+              "running_window_end": {
+                "description": "Start of the most recent estimate of ETA window",
+                "format": "date-time",
+                "type": "string"
+              },
+              "running_window_start": {
+                "description": "Start of the most recent estimate of ETA window",
+                "format": "date-time",
+                "type": "string"
+              },
+              "updated_at": {
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "type": "object",
+            "deprecated": true
+          },
+          "status": {
+            "enum": ["AT_STOP", "CANCELLED", "DEPARTED", "EN_ROUTE"],
+            "type": "string"
+          },
+          "status_reason_code": {
+            "enum": [
+              "ACCIDENT",
+              "ALTERNATE_CARRIER_DELIVERED",
+              "ALTERNATE_CARRIER_PICKED_UP",
+              "AWAITING_IMPORT",
+              "BORDER_CLEARANCE",
+              "CARRIER_KEYING_ERROR",
+              "CARRIER_RELATED",
+              "CASH_NOT_AVAILABLE_FROM_CONSIGNEE",
+              "CIVIL_EVENT",
+              "COLLECT_ON_DELIVERY_REQUIRED",
+              "CONSIGNEE_CLOSED",
+              "CONSIGNEE_RELATED",
+              "CONTAMINATED",
+              "CREDIT_HOLD",
+              "CUSTOMER_REQUESTED_DIFFERENT_DELIVERY_WINDOW",
+              "CUSTOMS_DOCUMENTATION_PROBLEM",
+              "CUSTOMS_DOCUMENTATION_PROBLEMS",
+              "DAMAGED",
+              "DELIVERY_SHORTAGE",
+              "DRIVER_NOT_AVAILABLE",
+              "DRIVER_RELATED",
+              "EQUIPMENT_SHORTAGE",
+              "EQUIPMENT_VOLUME_NOT_AVAILABLE",
+              "EXCEEDS_SERVICE_LIMITATIONS",
+              "FAILED_TO_RELEASE_BILLING",
+              "HELD_FOR_FULL_CARRIER_LOAD",
+              "HELD_FOR_PAYMENT",
+              "HELD_FOR_PROTECTIVE_SERVICE",
+              "HELD_PENDING_APPOINTMENT",
+              "HOLIDAY_CLOSED",
+              "IMPROPER_FACILITY_OR_EQUIPMENT",
+              "IMPROPER_TEMPERATURE",
+              "INCONSISTENT_WEIGHT",
+              "INCORRECT_ADDRESS",
+              "INSUFFICIENT_DELIVERY_TIME",
+              "INSUFFICIENT_PICKUP_TIME",
+              "INSUFFICIENT_TRAVEL_TIME_DETECTED",
+              "INTERNATIONAL_NON_CARRIER_DELAY",
+              "MECHANICAL_BREAKDOWN",
+              "MISSING_DOCUMENTS",
+              "MIS_SORT",
+              "NON_EXPRESS_CLEARANCE_DELAY",
+              "NORMAL_APPOINTMENT",
+              "NORMAL_STATUS",
+              "NO_APPOINTMENT_SCHEDULED",
+              "NO_REQUESTED_ARRIVAL_DATE_OR_TIME",
+              "OTHER",
+              "PAST_CUT_OFF_TIME",
+              "PROCESSING_DELAY",
+              "RAILROAD_FAILED_TO_MEET_SCHEDULE",
+              "RECIPIENT_UNAVAILABLE",
+              "RECONSIGNED",
+              "RESTRICTED_ARTICLES_UNACCEPTABLE",
+              "RETURNED_TO_SHIPPER",
+              "ROAD_CONDITIONS",
+              "SHIPMENT_OVERWEIGHT",
+              "SHIPPER_RELATED",
+              "TRACKING_EVENT_AUTOMATED_CALL",
+              "TRACKING_EVENT_EDI_UPDATE",
+              "TRACKING_EVENT_ELD_UPDATE",
+              "TRACKING_EVENT_GEOFENCE_BREACH",
+              "TRACKING_EVENT_MANUAL_LOCATION_UPDATED",
+              "TRACKING_EVENT_MOBILE_APP",
+              "TRACKING_EVENT_MOBILE_APP_UPDATED_BY_DRIVER",
+              "TRAIN_DERAILMENT",
+              "UNABLE_TO_CONTACT_RECIPIENT",
+              "UNABLE_TO_LOCATE",
+              "UNKNOWN",
+              "WAITING_FOR_CUSTOMER_PICKUP",
+              "WAITING_INSPECTION",
+              "WAITING_SHIPPING_INSTRUCTIONS",
+              "WEATHER_OR_NATURAL_DISASTER"
+            ],
+            "type": "string"
+          },
+          "trip_management_eta": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "unconfirmed_arrival_at": {
+            "description": "Read-only. Geofence arrival time",
+            "format": "date-time",
+            "type": "string"
+          },
+          "unconfirmed_departure_at": {
+            "description": "Read-only. Geofence departure time",
+            "format": "date-time",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": ["id", "location", "ordinal_index", "is_dropoff", "is_pickup"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "tracking_type": {
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "default": {
+    "additional_bol_recipients": ["string"],
+    "alert_types": ["LATE_PICKUP"],
+    "current_address": {
+      "reported_at": "1970-01-01T00:00:00.000Z"
+    },
+    "customer": {
+      "billing_emails": ["string"],
+      "brokerage": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "carrier": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "created_at": "1970-01-01T00:00:00.000Z",
+      "dba_name": "string",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "is_shipwell": true,
+      "name": "string",
+      "primary_email": "string",
+      "shipper": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "updated_at": "1970-01-01T00:00:00.000Z"
+    },
+    "documents_count": 1,
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "is_watched": true,
+    "line_items": [
+      {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "purchase_order": {
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "order_number": "string"
+        }
+      }
+    ],
+    "messages_count": 1,
+    "metadata": {
+      "alert_level": "HIGH",
+      "alert_message": "string",
+      "archived": true,
+      "automation_enabled": true,
+      "bill_to_override": {
+        "company_address": "string",
+        "company_name": "string",
+        "contact_email": "string",
+        "contact_phone": "string",
+        "created_at": "1970-01-01T00:00:00.000Z",
+        "direction": "PREPAID",
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "updated_at": "1970-01-01T00:00:00.000Z"
+      },
+      "buy_it_now_amount": 0,
+      "buy_it_now_amount_currency": "CAD",
+      "custom_data": {},
+      "customer_side_accessorial_charge_table": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "customer_side_fuel_surcharge_table": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "has_open_auction": true,
+      "load_board_enabled": true,
+      "load_board_id": "string",
+      "max_buy_amount": 0,
+      "max_buy_amount_currency": "CAD",
+      "open": true,
+      "pending_tender_acceptance": true,
+      "tags": ["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
+      "vendor_side_accessorial_charge_table": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "vendor_side_fuel_surcharge_table": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    },
+    "next_planned_stop_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "notes_count": 1,
+    "reference_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "relationship_to_vendor": {
+      "carrier_status": "ACTIVE",
+      "freight_authority_vendor_relationship": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    },
+    "state": "appointment_pending",
+    "stops": [
+      {
+        "accessorials": [
+          {
+            "code": "string",
+            "currency_unit": "string",
+            "description": "string",
+            "id": 1,
+            "is_charge_code": true,
+            "long_description": "string",
+            "price": 0,
+            "type": "string"
+          }
+        ],
+        "alerts": [
+          {
+            "alert_type": "AT_RISK",
+            "created_at": "1970-01-01T00:00:00.000Z",
+            "created_by_driver": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "created_by_user": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "description": "string",
+            "expiration": "1970-01-01T00:00:00.000Z",
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "location": {
+              "address_1": "string",
+              "address_2": "string",
+              "city": "string",
+              "country": "string",
+              "created_at": "1970-01-01T00:00:00.000Z",
+              "formatted_address": "string",
+              "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "latitude": 0,
+              "longitude": 0,
+              "phone_number": "string",
+              "postal_code": "string",
+              "state_province": "string",
+              "timezone": "string",
+              "updated_at": "1970-01-01T00:00:00.000Z"
+            },
+            "occurred_at": "1970-01-01T00:00:00.000Z",
+            "reason_code": "ACCIDENT",
+            "stop": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "updated_at": "1970-01-01T00:00:00.000Z"
+          }
+        ],
+        "appointment_type": {
+          "code": "string",
+          "id": 1,
+          "name": "string"
+        },
+        "carrier_specified_eta": {
+          "created_at": "1970-01-01T00:00:00.000Z",
+          "initial_window_end": "1970-01-01T00:00:00.000Z",
+          "initial_window_start": "1970-01-01T00:00:00.000Z",
+          "running_window_end": "1970-01-01T00:00:00.000Z",
+          "running_window_start": "1970-01-01T00:00:00.000Z",
+          "updated_at": "1970-01-01T00:00:00.000Z"
+        },
+        "confirmed_arrival_at": "1970-01-01T00:00:00.000Z",
+        "confirmed_departure_at": "1970-01-01T00:00:00.000Z",
+        "created_at": "1970-01-01T00:00:00.000Z",
+        "custom_data": {},
+        "display_eta_window": "string",
+        "display_planned_window": "string",
+        "display_schedule": "string",
+        "eta_overridden_by": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "instructions": "string",
+        "internal_notes": "string",
+        "is_completed": true,
+        "is_dropoff": true,
+        "is_pickup": true,
+        "location": {
+          "address": {
+            "address_1": "string",
+            "address_2": "string",
+            "city": "string",
+            "country": "string",
+            "created_at": "1970-01-01T00:00:00.000Z",
+            "formatted_address": "string",
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "latitude": 0,
+            "longitude": 0,
+            "phone_number": "string",
+            "postal_code": "string",
+            "state_province": "string",
+            "timezone": "string",
+            "updated_at": "1970-01-01T00:00:00.000Z"
+          },
+          "company_name": "string",
+          "created_at": "1970-01-01T00:00:00.000Z",
+          "dock_external_id": "string",
+          "dock_hours_end": "10:05:08-02:30",
+          "dock_hours_start": "10:05:08-02:30",
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "identification_code": "string",
+          "location_name": "string",
+          "location_type": {
+            "id": 1,
+            "name": "string"
+          },
+          "notes": "string",
+          "point_of_contacts": [
+            {
+              "load_board_enabled": true,
+              "load_board_invite_last_sent_at": "1970-01-01T00:00:00.000Z",
+              "preferences": {
+                "cancellation": true,
+                "delayed": true,
+                "delivered": true,
+                "eta_changed": true,
+                "picked_up": true,
+                "receive_bol_on_shipment_booked": true,
+                "shipment_booked": true
+              },
+              "user": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+            }
+          ],
+          "updated_at": "1970-01-01T00:00:00.000Z"
+        },
+        "ordinal_index": 1,
+        "planned_date": "string",
+        "planned_time_window_end": "10:05:08-02:30",
+        "planned_time_window_start": "10:05:08-02:30",
+        "predictive_model_eta": {
+          "created_at": "1970-01-01T00:00:00.000Z",
+          "initial_window_end": "1970-01-01T00:00:00.000Z",
+          "initial_window_start": "1970-01-01T00:00:00.000Z",
+          "running_window_end": "1970-01-01T00:00:00.000Z",
+          "running_window_start": "1970-01-01T00:00:00.000Z",
+          "updated_at": "1970-01-01T00:00:00.000Z"
+        },
+        "status": "AT_STOP",
+        "status_reason_code": "ACCIDENT",
+        "trip_management_eta": "1970-01-01T00:00:00.000Z",
+        "unconfirmed_arrival_at": "1970-01-01T00:00:00.000Z",
+        "unconfirmed_departure_at": "1970-01-01T00:00:00.000Z",
+        "updated_at": "1970-01-01T00:00:00.000Z"
+      }
+    ],
+    "tracking_type": "string",
+    "updated_at": "1970-01-01T00:00:00.000Z"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

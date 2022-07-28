@@ -1,0 +1,1291 @@
+{
+  "properties": {
+    "address_1": {
+      "type": "string"
+    },
+    "address_2": {
+      "type": "string"
+    },
+    "agreement": {
+      "properties": {
+        "agree": {
+          "type": "boolean"
+        },
+        "contact": {
+          "type": "string"
+        },
+        "date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": ["date", "contact", "agree"],
+      "type": "object"
+    },
+    "certified_status_date": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "client_carrier_agreement_rule_overrides": {
+      "items": {
+        "properties": {
+          "agreement_title": {
+            "type": "string"
+          },
+          "client_agreement_id": {
+            "type": "integer"
+          },
+          "expiration_date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "override_date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "override_edit_by": {
+            "type": "string"
+          }
+        },
+        "required": ["client_agreement_id", "agreement_title", "expiration_date", "override_date", "override_edit_by"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "client_carrier_agreements": {
+      "items": {
+        "properties": {
+          "agree": {
+            "type": "boolean"
+          },
+          "agreement_id": {
+            "type": "number"
+          },
+          "contact": {
+            "type": "string"
+          },
+          "contact_title": {
+            "type": "string"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": ["title", "date", "contact", "contact_title", "agree"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "clients_carrier_id": {
+      "type": "string"
+    },
+    "contact": {
+      "type": "string"
+    },
+    "contacts": {
+      "items": {
+        "properties": {
+          "cell": {
+            "type": "string"
+          },
+          "company_name": {
+            "type": "string"
+          },
+          "contact_type": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "fax": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": ["contact_type"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "coverages": {
+      "items": {
+        "properties": {
+          "am_best_company_number": {
+            "type": "string"
+          },
+          "cancel_date": {
+            "format": "date",
+            "type": "string"
+          },
+          "confidence": {
+            "type": "string"
+          },
+          "confidence_msg": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "effective_date": {
+            "format": "date",
+            "type": "string"
+          },
+          "expiration_date": {
+            "format": "date",
+            "type": "string"
+          },
+          "is_renewal": {
+            "type": "boolean"
+          },
+          "last_cert_update": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "limits": {
+            "items": {
+              "properties": {
+                "amount": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "details": {
+                  "items": {
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["description"],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "is_auto_synonym": {
+                  "type": "boolean"
+                },
+                "is_cargo_synonym": {
+                  "type": "boolean"
+                }
+              },
+              "required": ["description", "amount", "is_cargo_synonym", "is_auto_synonym"],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "naic_company_number": {
+            "type": "string"
+          },
+          "policy_number": {
+            "type": "string"
+          },
+          "producer": {
+            "type": "string"
+          },
+          "producer_address": {
+            "type": "string"
+          },
+          "producer_city": {
+            "type": "string"
+          },
+          "producer_email": {
+            "type": "string"
+          },
+          "producer_fax": {
+            "type": "string"
+          },
+          "producer_phone": {
+            "type": "string"
+          },
+          "producer_state": {
+            "type": "string"
+          },
+          "producer_zip": {
+            "type": "string"
+          },
+          "renewal_on_file_cert_id": {
+            "type": "integer"
+          },
+          "renewal_on_file_effective_date": {
+            "format": "date",
+            "type": "string"
+          },
+          "renewal_on_file_expiration_date": {
+            "format": "date",
+            "type": "string"
+          },
+          "renewal_on_file_image_id": {
+            "type": "integer"
+          },
+          "rmis_cert_id": {
+            "type": "string"
+          },
+          "rmis_covg_id": {
+            "type": "string"
+          },
+          "rmis_image_id": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "underwriter": {
+            "type": "string"
+          },
+          "underwriting_rating": {
+            "type": "string"
+          }
+        },
+        "required": ["description", "is_renewal"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "documents": {
+      "items": {
+        "properties": {
+          "create_date_pst": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "document_id": {
+            "type": "integer"
+          },
+          "file_size": {
+            "type": "string"
+          },
+          "file_type": {
+            "type": "string"
+          },
+          "upload_by": {
+            "type": "string"
+          },
+          "upload_mode": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "document_id",
+          "description",
+          "create_date_pst",
+          "file_type",
+          "file_size",
+          "upload_by",
+          "upload_mode"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "dot": {
+      "properties": {
+        "address_status": {
+          "type": "boolean"
+        },
+        "bipd_on_file": {
+          "type": "string"
+        },
+        "bipd_required": {
+          "type": "string"
+        },
+        "bond_surety_on_file": {
+          "type": "boolean"
+        },
+        "bond_surety_required": {
+          "type": "boolean"
+        },
+        "broker_authority": {
+          "type": "boolean"
+        },
+        "broker_authority_revocation": {
+          "type": "boolean"
+        },
+        "business_address": {
+          "type": "string"
+        },
+        "business_city": {
+          "type": "string"
+        },
+        "business_country": {
+          "type": "string"
+        },
+        "business_fax": {
+          "type": "string"
+        },
+        "business_phone": {
+          "type": "string"
+        },
+        "business_state": {
+          "type": "string"
+        },
+        "business_zip": {
+          "type": "string"
+        },
+        "cargo_on_file": {
+          "type": "boolean"
+        },
+        "cargo_required": {
+          "type": "boolean"
+        },
+        "common_authority": {
+          "type": "boolean"
+        },
+        "common_authority_revocation": {
+          "type": "boolean"
+        },
+        "contract_authority": {
+          "type": "boolean"
+        },
+        "contract_authority_revocation": {
+          "type": "boolean"
+        },
+        "dba_name": {
+          "type": "string"
+        },
+        "docket_number": {
+          "type": "string"
+        },
+        "household_goods": {
+          "type": "boolean"
+        },
+        "last_updated": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "legal_name": {
+          "type": "string"
+        },
+        "mailing_address": {
+          "type": "string"
+        },
+        "mailing_city": {
+          "type": "string"
+        },
+        "mailing_country": {
+          "type": "string"
+        },
+        "mailing_fax": {
+          "type": "string"
+        },
+        "mailing_phone": {
+          "type": "string"
+        },
+        "mailing_state": {
+          "type": "string"
+        },
+        "mailing_zip": {
+          "type": "string"
+        },
+        "passenger": {
+          "type": "boolean"
+        },
+        "pending_broker_authority": {
+          "type": "boolean"
+        },
+        "pending_common_authority": {
+          "type": "boolean"
+        },
+        "pending_contract_authority": {
+          "type": "boolean"
+        },
+        "us_dot_number": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "docket_number",
+        "us_dot_number",
+        "common_authority",
+        "contract_authority",
+        "broker_authority",
+        "pending_common_authority",
+        "pending_contract_authority",
+        "pending_broker_authority",
+        "common_authority_revocation",
+        "contract_authority_revocation",
+        "broker_authority_revocation"
+      ],
+      "type": "object"
+    },
+    "dot_number": {
+      "type": "string"
+    },
+    "dot_sms_safety": {
+      "properties": {
+        "controlled_substance_basic_alert": {
+          "type": "boolean"
+        },
+        "controlled_substance_percentile": {
+          "type": "number"
+        },
+        "controlled_substance_roadside_alert": {
+          "type": "boolean"
+        },
+        "controlled_substance_serious_violation": {
+          "type": "boolean"
+        },
+        "driver_fitness_basic_alert": {
+          "type": "boolean"
+        },
+        "driver_fitness_percentile": {
+          "type": "number"
+        },
+        "driver_fitness_roadside_alert": {
+          "type": "boolean"
+        },
+        "driver_fitness_serious_violation": {
+          "type": "boolean"
+        },
+        "driver_insp_total": {
+          "type": "number"
+        },
+        "driver_oos_insp_total": {
+          "type": "number"
+        },
+        "fatigued_driver_percentile": {
+          "type": "number"
+        },
+        "fatigued_driving_basic_alert": {
+          "type": "boolean"
+        },
+        "fatigued_driving_serious_violation": {
+          "type": "boolean"
+        },
+        "fatigued_unsafe_driving_roadside_alert": {
+          "type": "boolean"
+        },
+        "insp_total": {
+          "type": "number"
+        },
+        "unsafe_driving_basic_alert": {
+          "type": "boolean"
+        },
+        "unsafe_driving_percentile": {
+          "type": "number"
+        },
+        "unsafe_driving_roadside_alert": {
+          "type": "boolean"
+        },
+        "unsafe_driving_serious_violation": {
+          "type": "boolean"
+        },
+        "update_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "us_dot_number": {
+          "type": "string"
+        },
+        "vehicle_insp_total": {
+          "type": "number"
+        },
+        "vehicle_maint_basic_alert": {
+          "type": "boolean"
+        },
+        "vehicle_maint_percentile": {
+          "type": "number"
+        },
+        "vehicle_maint_roadside_alert": {
+          "type": "boolean"
+        },
+        "vehicle_maint_serious_violation": {
+          "type": "boolean"
+        },
+        "vehicle_oos_insp_total": {
+          "type": "number"
+        }
+      },
+      "required": ["us_dot_number"],
+      "type": "object"
+    },
+    "dot_testing_info": {
+      "properties": {
+        "latest_authority_grant_date": {
+          "format": "date",
+          "type": "string"
+        },
+        "latest_authority_reinstated_date": {
+          "format": "date",
+          "type": "string"
+        },
+        "operating_status": {
+          "enum": [
+            "ACTIVE",
+            "AUTHORIZED_FOR_HHG",
+            "AUTHORIZED_FOR_PASSENGER",
+            "AUTHORIZED_FOR_PROPERTY",
+            "INACTIVE_USDOT_NUMBER",
+            "NOT_AUTHORIZED",
+            "OUT_OF_SERVICE"
+          ],
+          "type": "string"
+        },
+        "original_authority_grant_date": {
+          "format": "date",
+          "type": "string"
+        },
+        "out_of_service_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "safer_active": {
+          "type": "boolean"
+        },
+        "safer_active_last_check_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "safety_rating": {
+          "type": "string"
+        },
+        "safety_rating_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "safety_review_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "safety_review_type": {
+          "type": "string"
+        },
+        "tot_pwr": {
+          "type": "number"
+        },
+        "tot_trucks": {
+          "type": "number"
+        }
+      },
+      "required": ["safer_active"],
+      "type": "object"
+    },
+    "duns": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "equipment_types": {
+      "items": {
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "date_added": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": ["description", "code", "date_added"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "insd_intra_state_number": {
+      "type": "string"
+    },
+    "insd_intra_state_state": {
+      "type": "string"
+    },
+    "is_certified": {
+      "type": "boolean"
+    },
+    "mc_number": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "non_certified_reasons": {
+      "items": {
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": ["reason"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "overrides": {
+      "items": {
+        "properties": {
+          "authorized_by": {
+            "type": "string"
+          },
+          "create_date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "expiration_date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "required": ["type", "create_date", "expiration_date", "authorized_by", "created_by"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "pay_to": {
+      "type": "string"
+    },
+    "pay_to_address": {
+      "type": "string"
+    },
+    "pay_to_address_2": {
+      "type": "string"
+    },
+    "pay_to_city": {
+      "type": "string"
+    },
+    "pay_to_country": {
+      "type": "string"
+    },
+    "pay_to_email": {
+      "type": "string"
+    },
+    "pay_to_state": {
+      "type": "string"
+    },
+    "pay_to_zip": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "profile": {
+      "properties": {
+        "bulk_trailer_count": {
+          "type": "integer"
+        },
+        "cargo_vans": {
+          "type": "integer"
+        },
+        "company_drivers": {
+          "type": "integer"
+        },
+        "company_rep": {
+          "type": "string"
+        },
+        "diversity_cert_agency": {
+          "type": "string"
+        },
+        "double_drops": {
+          "type": "integer"
+        },
+        "dry_vans": {
+          "type": "integer"
+        },
+        "dump": {
+          "type": "integer"
+        },
+        "email_received": {
+          "type": "boolean"
+        },
+        "expected_first_move_time": {
+          "type": "string"
+        },
+        "flat_bed_48_foot": {
+          "type": "integer"
+        },
+        "flat_bed_53_foot": {
+          "type": "integer"
+        },
+        "flat_beds": {
+          "type": "integer"
+        },
+        "garment_trailer": {
+          "type": "integer"
+        },
+        "has_can_auth": {
+          "type": "boolean"
+        },
+        "has_carb_cert": {
+          "type": "boolean"
+        },
+        "has_ctpat_cert": {
+          "type": "boolean"
+        },
+        "has_fast_cert": {
+          "type": "boolean"
+        },
+        "has_mex_interchange": {
+          "type": "boolean"
+        },
+        "has_safety_permit_hm_32": {
+          "type": "boolean"
+        },
+        "has_smartway_cert": {
+          "type": "boolean"
+        },
+        "has_twice_cert": {
+          "type": "boolean"
+        },
+        "hazmat_cert_verified_by_rmis": {
+          "type": "boolean"
+        },
+        "hazmat_certified": {
+          "type": "boolean"
+        },
+        "heated_vans": {
+          "type": "integer"
+        },
+        "hopper": {
+          "type": "integer"
+        },
+        "intermodal_trailer_count": {
+          "type": "integer"
+        },
+        "is_factoring": {
+          "type": "boolean"
+        },
+        "is_special_contract": {
+          "type": "boolean"
+        },
+        "maxi": {
+          "type": "integer"
+        },
+        "minority_women_owned": {
+          "type": "string"
+        },
+        "no_w9": {
+          "type": "boolean"
+        },
+        "open_top": {
+          "type": "integer"
+        },
+        "other_trailer_count": {
+          "type": "integer"
+        },
+        "owner_operators": {
+          "type": "integer"
+        },
+        "pad_wrap": {
+          "type": "boolean"
+        },
+        "payee_type": {
+          "type": "string"
+        },
+        "payment_type": {
+          "type": "string"
+        },
+        "primary_equipment_type": {
+          "type": "string"
+        },
+        "reefer_48_foot": {
+          "type": "integer"
+        },
+        "reefer_53_foot": {
+          "type": "integer"
+        },
+        "refrigerated_vans": {
+          "type": "integer"
+        },
+        "rgn": {
+          "type": "integer"
+        },
+        "scac": {
+          "type": "string"
+        },
+        "small_business_type": {
+          "type": "string"
+        },
+        "step_decks": {
+          "type": "integer"
+        },
+        "straight_trucks": {
+          "type": "integer"
+        },
+        "straps": {
+          "type": "boolean"
+        },
+        "super_van": {
+          "type": "integer"
+        },
+        "tanker_trailer_count": {
+          "type": "integer"
+        },
+        "teams": {
+          "type": "integer"
+        },
+        "tractor_count": {
+          "type": "integer"
+        },
+        "tri_axle_vans": {
+          "type": "boolean"
+        },
+        "vans_48_foot": {
+          "type": "integer"
+        },
+        "vans_53_foot": {
+          "type": "integer"
+        },
+        "vented_vans": {
+          "type": "boolean"
+        },
+        "walking_floor": {
+          "type": "integer"
+        },
+        "wc_waiver_contact": {
+          "type": "string"
+        },
+        "wc_waiver_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "years_in_business": {
+          "type": "integer"
+        }
+      },
+      "required": ["hazmat_cert_verified_by_rmis"],
+      "type": "object"
+    },
+    "rmis_carrier_id": {
+      "type": "integer"
+    },
+    "state": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "w9": {
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "business_name": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "co_name": {
+          "type": "string"
+        },
+        "company_type": {
+          "type": "string"
+        },
+        "contact_name": {
+          "type": "string"
+        },
+        "exempt_fata_code": {
+          "type": "string"
+        },
+        "exempt_payee_code": {
+          "type": "string"
+        },
+        "is_exempt_payee": {
+          "type": "boolean"
+        },
+        "is_limited_liab_co": {
+          "type": "boolean"
+        },
+        "limited_liab_tax_class": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "tax_id": {
+          "type": "string"
+        },
+        "tax_id_ein": {
+          "type": "string"
+        },
+        "tax_id_ssn": {
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "tin_checked_by": {
+          "type": "string"
+        },
+        "tin_checked_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "tin_class_other": {
+          "type": "string"
+        },
+        "tin_is_valid": {
+          "type": "boolean"
+        },
+        "tin_validation_reason": {
+          "type": "string"
+        },
+        "w9_id": {
+          "type": "integer"
+        },
+        "zip": {
+          "type": "string"
+        }
+      },
+      "required": ["timestamp", "tax_id", "co_name"],
+      "type": "object"
+    },
+    "zip": {
+      "type": "string"
+    }
+  },
+  "required": ["name", "rmis_carrier_id"],
+  "type": "object",
+  "default": {
+    "address_1": "string",
+    "address_2": "string",
+    "agreement": {
+      "agree": true,
+      "contact": "string",
+      "date": "1970-01-01T00:00:00.000Z",
+      "title": "string"
+    },
+    "certified_status_date": "1970-01-01T00:00:00.000Z",
+    "city": "string",
+    "client_carrier_agreement_rule_overrides": [
+      {
+        "agreement_title": "string",
+        "client_agreement_id": 1,
+        "expiration_date": "1970-01-01T00:00:00.000Z",
+        "note": "string",
+        "override_date": "1970-01-01T00:00:00.000Z",
+        "override_edit_by": "string"
+      }
+    ],
+    "client_carrier_agreements": [
+      {
+        "agree": true,
+        "agreement_id": 0,
+        "contact": "string",
+        "contact_title": "string",
+        "date": "1970-01-01T00:00:00.000Z",
+        "title": "string"
+      }
+    ],
+    "clients_carrier_id": "string",
+    "contact": "string",
+    "contacts": [
+      {
+        "cell": "string",
+        "company_name": "string",
+        "contact_type": "string",
+        "email": "string",
+        "fax": "string",
+        "name": "string",
+        "phone": "string",
+        "title": "string"
+      }
+    ],
+    "coverages": [
+      {
+        "am_best_company_number": "string",
+        "cancel_date": "1970-01-01",
+        "confidence": "string",
+        "confidence_msg": "string",
+        "description": "string",
+        "effective_date": "1970-01-01",
+        "expiration_date": "1970-01-01",
+        "is_renewal": true,
+        "last_cert_update": "1970-01-01T00:00:00.000Z",
+        "limits": [
+          {
+            "amount": 0,
+            "currency": "string",
+            "description": "string",
+            "details": [
+              {
+                "description": "string"
+              }
+            ],
+            "is_auto_synonym": true,
+            "is_cargo_synonym": true
+          }
+        ],
+        "naic_company_number": "string",
+        "policy_number": "string",
+        "producer": "string",
+        "producer_address": "string",
+        "producer_city": "string",
+        "producer_email": "string",
+        "producer_fax": "string",
+        "producer_phone": "string",
+        "producer_state": "string",
+        "producer_zip": "string",
+        "renewal_on_file_cert_id": 1,
+        "renewal_on_file_effective_date": "1970-01-01",
+        "renewal_on_file_expiration_date": "1970-01-01",
+        "renewal_on_file_image_id": 1,
+        "rmis_cert_id": "string",
+        "rmis_covg_id": "string",
+        "rmis_image_id": 1,
+        "status": "string",
+        "underwriter": "string",
+        "underwriting_rating": "string"
+      }
+    ],
+    "documents": [
+      {
+        "create_date_pst": "1970-01-01T00:00:00.000Z",
+        "description": "string",
+        "document_id": 1,
+        "file_size": "string",
+        "file_type": "string",
+        "upload_by": "string",
+        "upload_mode": "string"
+      }
+    ],
+    "dot": {
+      "address_status": true,
+      "bipd_on_file": "string",
+      "bipd_required": "string",
+      "bond_surety_on_file": true,
+      "bond_surety_required": true,
+      "broker_authority": true,
+      "broker_authority_revocation": true,
+      "business_address": "string",
+      "business_city": "string",
+      "business_country": "string",
+      "business_fax": "string",
+      "business_phone": "string",
+      "business_state": "string",
+      "business_zip": "string",
+      "cargo_on_file": true,
+      "cargo_required": true,
+      "common_authority": true,
+      "common_authority_revocation": true,
+      "contract_authority": true,
+      "contract_authority_revocation": true,
+      "dba_name": "string",
+      "docket_number": "string",
+      "household_goods": true,
+      "last_updated": "1970-01-01T00:00:00.000Z",
+      "legal_name": "string",
+      "mailing_address": "string",
+      "mailing_city": "string",
+      "mailing_country": "string",
+      "mailing_fax": "string",
+      "mailing_phone": "string",
+      "mailing_state": "string",
+      "mailing_zip": "string",
+      "passenger": true,
+      "pending_broker_authority": true,
+      "pending_common_authority": true,
+      "pending_contract_authority": true,
+      "us_dot_number": "string"
+    },
+    "dot_number": "string",
+    "dot_sms_safety": {
+      "controlled_substance_basic_alert": true,
+      "controlled_substance_percentile": 0,
+      "controlled_substance_roadside_alert": true,
+      "controlled_substance_serious_violation": true,
+      "driver_fitness_basic_alert": true,
+      "driver_fitness_percentile": 0,
+      "driver_fitness_roadside_alert": true,
+      "driver_fitness_serious_violation": true,
+      "driver_insp_total": 0,
+      "driver_oos_insp_total": 0,
+      "fatigued_driver_percentile": 0,
+      "fatigued_driving_basic_alert": true,
+      "fatigued_driving_serious_violation": true,
+      "fatigued_unsafe_driving_roadside_alert": true,
+      "insp_total": 0,
+      "unsafe_driving_basic_alert": true,
+      "unsafe_driving_percentile": 0,
+      "unsafe_driving_roadside_alert": true,
+      "unsafe_driving_serious_violation": true,
+      "update_date": "1970-01-01T00:00:00.000Z",
+      "us_dot_number": "string",
+      "vehicle_insp_total": 0,
+      "vehicle_maint_basic_alert": true,
+      "vehicle_maint_percentile": 0,
+      "vehicle_maint_roadside_alert": true,
+      "vehicle_maint_serious_violation": true,
+      "vehicle_oos_insp_total": 0
+    },
+    "dot_testing_info": {
+      "latest_authority_grant_date": "1970-01-01",
+      "latest_authority_reinstated_date": "1970-01-01",
+      "operating_status": "ACTIVE",
+      "original_authority_grant_date": "1970-01-01",
+      "out_of_service_date": "1970-01-01T00:00:00.000Z",
+      "safer_active": true,
+      "safer_active_last_check_date": "1970-01-01T00:00:00.000Z",
+      "safety_rating": "string",
+      "safety_rating_date": "1970-01-01T00:00:00.000Z",
+      "safety_review_date": "1970-01-01T00:00:00.000Z",
+      "safety_review_type": "string",
+      "tot_pwr": 0,
+      "tot_trucks": 0
+    },
+    "duns": "string",
+    "email": "string",
+    "equipment_types": [
+      {
+        "code": "string",
+        "date_added": "1970-01-01T00:00:00.000Z",
+        "description": "string"
+      }
+    ],
+    "insd_intra_state_number": "string",
+    "insd_intra_state_state": "string",
+    "is_certified": true,
+    "mc_number": "string",
+    "name": "string",
+    "non_certified_reasons": [
+      {
+        "reason": "string"
+      }
+    ],
+    "overrides": [
+      {
+        "authorized_by": "string",
+        "create_date": "1970-01-01T00:00:00.000Z",
+        "created_by": "string",
+        "expiration_date": "1970-01-01T00:00:00.000Z",
+        "type": "string"
+      }
+    ],
+    "pay_to": "string",
+    "pay_to_address": "string",
+    "pay_to_address_2": "string",
+    "pay_to_city": "string",
+    "pay_to_country": "string",
+    "pay_to_email": "string",
+    "pay_to_state": "string",
+    "pay_to_zip": "string",
+    "phone": "string",
+    "profile": {
+      "bulk_trailer_count": 1,
+      "cargo_vans": 1,
+      "company_drivers": 1,
+      "company_rep": "string",
+      "diversity_cert_agency": "string",
+      "double_drops": 1,
+      "dry_vans": 1,
+      "dump": 1,
+      "email_received": true,
+      "expected_first_move_time": "string",
+      "flat_bed_48_foot": 1,
+      "flat_bed_53_foot": 1,
+      "flat_beds": 1,
+      "garment_trailer": 1,
+      "has_can_auth": true,
+      "has_carb_cert": true,
+      "has_ctpat_cert": true,
+      "has_fast_cert": true,
+      "has_mex_interchange": true,
+      "has_safety_permit_hm_32": true,
+      "has_smartway_cert": true,
+      "has_twice_cert": true,
+      "hazmat_cert_verified_by_rmis": true,
+      "hazmat_certified": true,
+      "heated_vans": 1,
+      "hopper": 1,
+      "intermodal_trailer_count": 1,
+      "is_factoring": true,
+      "is_special_contract": true,
+      "maxi": 1,
+      "minority_women_owned": "string",
+      "no_w9": true,
+      "open_top": 1,
+      "other_trailer_count": 1,
+      "owner_operators": 1,
+      "pad_wrap": true,
+      "payee_type": "string",
+      "payment_type": "string",
+      "primary_equipment_type": "string",
+      "reefer_48_foot": 1,
+      "reefer_53_foot": 1,
+      "refrigerated_vans": 1,
+      "rgn": 1,
+      "scac": "string",
+      "small_business_type": "string",
+      "step_decks": 1,
+      "straight_trucks": 1,
+      "straps": true,
+      "super_van": 1,
+      "tanker_trailer_count": 1,
+      "teams": 1,
+      "tractor_count": 1,
+      "tri_axle_vans": true,
+      "vans_48_foot": 1,
+      "vans_53_foot": 1,
+      "vented_vans": true,
+      "walking_floor": 1,
+      "wc_waiver_contact": "string",
+      "wc_waiver_date": "1970-01-01T00:00:00.000Z",
+      "years_in_business": 1
+    },
+    "rmis_carrier_id": 1,
+    "state": "string",
+    "title": "string",
+    "w9": {
+      "address": "string",
+      "business_name": "string",
+      "city": "string",
+      "co_name": "string",
+      "company_type": "string",
+      "contact_name": "string",
+      "exempt_fata_code": "string",
+      "exempt_payee_code": "string",
+      "is_exempt_payee": true,
+      "is_limited_liab_co": true,
+      "limited_liab_tax_class": "string",
+      "state": "string",
+      "tax_id": "string",
+      "tax_id_ein": "string",
+      "tax_id_ssn": "string",
+      "timestamp": "1970-01-01T00:00:00.000Z",
+      "tin_checked_by": "string",
+      "tin_checked_date": "1970-01-01T00:00:00.000Z",
+      "tin_class_other": "string",
+      "tin_is_valid": true,
+      "tin_validation_reason": "string",
+      "w9_id": 1,
+      "zip": "string"
+    },
+    "zip": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

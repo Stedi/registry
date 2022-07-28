@@ -1,0 +1,100 @@
+{
+  "allOf": [
+    {
+      "properties": {
+        "account_nickname": {
+          "type": "string"
+        },
+        "account_number": {
+          "type": "string"
+        },
+        "company": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "freight_account": {
+          "allOf": [
+            {
+              "properties": {
+                "city": {
+                  "type": "string"
+                },
+                "country_code": {
+                  "type": "string"
+                },
+                "line_1": {
+                  "type": "string"
+                },
+                "line_2": {
+                  "type": "string"
+                },
+                "postal_code": {
+                  "type": "string"
+                },
+                "state_or_province": {
+                  "type": "string"
+                }
+              },
+              "required": ["line_1", "city", "state_or_province", "postal_code", "country_code"],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "freight_account_number": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          ],
+          "type": "object"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "meter_number": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "smart_post_hub_id": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    {
+      "properties": {
+        "is_connected": {
+          "properties": {
+            "error": {
+              "type": "string"
+            },
+            "freight": {
+              "type": "boolean"
+            },
+            "parcel": {
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  ],
+  "type": "object",
+  "default": {
+    "is_connected": {
+      "error": "string",
+      "freight": true,
+      "parcel": true
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

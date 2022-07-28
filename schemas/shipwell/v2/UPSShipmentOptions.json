@@ -1,0 +1,99 @@
+{
+  "allOf": [
+    {
+      "properties": {
+        "bill_to_account_number": {
+          "type": "string"
+        },
+        "bill_to_country_code": {
+          "type": "string"
+        },
+        "bill_to_payment_type": {
+          "enum": ["COLLECT", "RECIPIENT", "SENDER", "THIRD_PARTY"],
+          "type": "string"
+        },
+        "bill_to_postal_code": {
+          "type": "string"
+        },
+        "cod_collection_amount": {
+          "format": "float",
+          "type": "number"
+        },
+        "cod_collection_currency": {
+          "default": "USD",
+          "enum": ["CAD", "USD"],
+          "type": "string"
+        },
+        "cod_collection_type": {
+          "enum": ["ANY", "COMPANY_CHECK", "GUARANTEED_FUNDS", "PERSONAL_CHECK"],
+          "type": "string"
+        },
+        "customer_transaction_id": {
+          "type": "string"
+        },
+        "signature_option_release_number": {
+          "type": "string"
+        },
+        "signature_option_signature_type": {
+          "enum": ["ADULT_SIGNATURE", "DIRECT_SIGNATURE", "NO_SIGNATURE", "INDIRECT_SIGNATURE", "SERVICE_DEFAULT"],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    {
+      "properties": {
+        "account": {
+          "description": "Id of the UPSAccount to dispatch or rate",
+          "format": "uuid",
+          "type": "string"
+        },
+        "alcohol_recipient_type": {
+          "enum": ["CONSUMER", "LICENSEE"],
+          "type": "string"
+        },
+        "packaging": {
+          "enum": [
+            "UPS_LETTER",
+            "UPS_EXPRESS_BOX",
+            "UPS_25KG_BOX",
+            "UPS_10_KG_BOX",
+            "UPS_TUBE",
+            "UPS_PAK",
+            "UPS_SMALL_EXPRESS_BOX",
+            "UPS_MEDIUM_EXPRESS_BOX",
+            "UPS_LARGE_EXPRESS_BOX",
+            "YOUR_PACKAGING"
+          ],
+          "type": "string"
+        },
+        "service_code": {
+          "enum": [
+            "GROUND",
+            "UPS_STANDARD",
+            "UPS_SAVER",
+            "EXPRESS",
+            "EXPRESS_PLUS",
+            "EXPEDITED",
+            "NEXT_DAY_AIR",
+            "NEXT_DAY_AIR_SAVER",
+            "NEXT_DAY_AIR_EARLY_AM",
+            "SECOND_DAY_AIR",
+            "SECOND_DAY_AIR_AM",
+            "THREE_DAY_SELECT"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  ],
+  "description": "Shipment rating and dispatch options specific to UPS",
+  "default": {
+    "account": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "alcohol_recipient_type": "CONSUMER",
+    "packaging": "UPS_LETTER",
+    "service_code": "GROUND"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,89 @@
+{
+  "allOf": [
+    {
+      "description": "Metadata about a document",
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "created_by_id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "created_by_name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string"
+        },
+        "filename": {
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    {
+      "properties": {
+        "company": {
+          "type": "string"
+        },
+        "driver": {
+          "description": "Id of the driver who created the document, if one exists",
+          "format": "uuid",
+          "type": "string"
+        },
+        "is_carrier_document": {
+          "type": "boolean"
+        },
+        "shipment": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "BOL",
+            "FUEL",
+            "LUMPER",
+            "HOS",
+            "SIGNATURE",
+            "RATE_CONFIRMATION",
+            "CUSTOMER_TENDER",
+            "DELIVERY_RECEIPT",
+            "WEIGHT_CERTIFICATE",
+            "OVERAGES_SHORTAGES_AND_DAMAGES",
+            "INVOICE",
+            "INSURANCE",
+            "SHIPPING_LABEL",
+            "CUSTOMS_PAPERWORK",
+            "PACKING_SLIPS",
+            "OTHER"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  ],
+  "description": "Metadata about a document",
+  "type": "object",
+  "default": {
+    "company": "string",
+    "driver": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "is_carrier_document": true,
+    "shipment": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "type": "BOL"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

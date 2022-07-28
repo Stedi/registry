@@ -1,0 +1,3056 @@
+{
+  "allOf": [
+    {
+      "properties": {
+        "autoquote": {
+          "description": "Whether or not this RFQ should perform an autoquoting process\n",
+          "type": "boolean"
+        },
+        "company_owner_id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "creator": {
+          "properties": {
+            "avatar": {
+              "type": "string"
+            },
+            "company_id": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "completed_onboarding": {
+              "type": "boolean"
+            },
+            "created_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "custom_data": {
+              "additionalProperties": {},
+              "description": "Custom data for User",
+              "type": "object"
+            },
+            "default_shipment_tags": {
+              "description": "List of ShipmentTag ids",
+              "items": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "email": {
+              "type": "string"
+            },
+            "feature_flag_new_shipment_details": {
+              "type": "boolean"
+            },
+            "feature_flag_new_ui": {
+              "type": "boolean"
+            },
+            "first_name": {
+              "type": "string"
+            },
+            "id": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "is_quoting_limited_user": {
+              "type": "boolean"
+            },
+            "last_login": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "permissions": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "phone_number": {
+              "type": "string"
+            },
+            "subscribed_to_loadboard": {
+              "type": "boolean"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "updated_at": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "required": ["first_name", "last_name", "email"],
+          "type": "object"
+        },
+        "did_finish_autoquote": {
+          "description": "Whether or not this RFQ completed an autoquoting process",
+          "type": "boolean"
+        },
+        "equipment_types": {
+          "items": {
+            "description": "Equipment type",
+            "properties": {
+              "id": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "machine_readable": {
+                "enum": [
+                  "AUTO_CARRIER",
+                  "AUTOHAULER",
+                  "B_TRAIN",
+                  "BULK",
+                  "CONESTOGA",
+                  "CONTAINER",
+                  "CONTAINER_BREAK_BULK",
+                  "CONTAINER_STANDARD_20_FOOT",
+                  "CONTAINER_STANDARD_40_FOOT",
+                  "CONTAINER_FLAT_TRACK_20_FOOT",
+                  "CONTAINER_FLAT_TRACK_40_FOOT",
+                  "CONTAINER_HEAVY_TESTED_20_FOOT",
+                  "CONTAINER_HIGH_CUBE_40_FOOT",
+                  "CONTAINER_HIGH_CUBE_45_FOOT",
+                  "CONTAINER_INSULATED",
+                  "CONTAINER_ISO_TANK_20_FOOT",
+                  "CONTAINER_ISO_TANK_24_FOOT",
+                  "CONTAINER_ISO_TANK_40_FOOT",
+                  "CONTAINER_OPEN_TOP_20_FOOT",
+                  "CONTAINER_OPEN_TOP_40_FOOT",
+                  "CONTAINER_REEFER_20_FOOT",
+                  "CONTAINER_REEFER_40_FOOT",
+                  "CONTAINER_REFRIGERATED",
+                  "CONVEYOR",
+                  "CURTAIN_SIDE",
+                  "DOUBLE_DROP",
+                  "DROP_DECK",
+                  "DROP_DECK_LANDOLL",
+                  "DRY_VAN",
+                  "DUMP_TRAILER",
+                  "FLATBED",
+                  "FLATBED_53_FOOT",
+                  "FLATBED_AIR_RIDE",
+                  "FLATBED_CONESTOGA",
+                  "FLATBED_DOUBLE",
+                  "FLATBED_HOTSHOT",
+                  "FLATBED_MAXI",
+                  "FLATBED_OVERDIMENSION",
+                  "HOPPER",
+                  "HOPPER_BOTTOM",
+                  "INSULATED_VAN",
+                  "LOWBOY",
+                  "LOWBOY_OVERDIMENSION",
+                  "MOVING_VAN",
+                  "OTHER",
+                  "PNEUMATIC",
+                  "POWER_ONLY",
+                  "REEFER",
+                  "REEFER_AIR_RIDE",
+                  "REEFER_DOUBLE",
+                  "REEFER_INTERMODAL",
+                  "REMOVABLE_GOOSENECK",
+                  "STEP_DECK",
+                  "STEPDECK_CONESTOGA",
+                  "STRAIGHT_BOX_TRUCK",
+                  "STRETCH_TRAILER",
+                  "TANKER",
+                  "TANKER_ALUMINUM",
+                  "TANKER_INTERMODAL",
+                  "TANKER_STEEL",
+                  "TILT",
+                  "TRUCK_AND_TRAILER",
+                  "VAN_AIR_RIDE",
+                  "VAN_DOUBLE",
+                  "VAN_INSULATED",
+                  "VAN_INTERMODAL",
+                  "VAN_OPEN_TOP",
+                  "VAN_ROLLER_BED",
+                  "VAN_SPRINTER",
+                  "VAN_TRIPLE",
+                  "VAN_VENTED",
+                  "VAN_WITH_CURTAINS"
+                ],
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": ["id", "name", "machine_readable"],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "has_parent_rfq": {
+          "type": "boolean"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "restrict_autoquote_to_companies": {
+          "description": "Array of Companies that, if provided, the autoquoting process\nwill restrict its quote results to only rates that come\nfrom those vendor companies\n",
+          "items": {
+            "properties": {
+              "billing_emails": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "brokerage": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "carrier": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "created_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "dba_name": {
+                "type": "string"
+              },
+              "id": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "is_shipwell": {
+                "type": "boolean"
+              },
+              "name": {
+                "type": "string"
+              },
+              "primary_email": {
+                "type": "string"
+              },
+              "shipper": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "updated_at": {
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "required": ["name"],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "shipment": {
+          "description": "Id of the Shipment for which this RFQ was created",
+          "format": "uuid",
+          "type": "string"
+        },
+        "shipment_modes": {
+          "items": {
+            "description": "Standardized code for a shipment mode",
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "id": {
+                "format": "int32",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "spot_negotiations": {
+          "description": "All SpotNegotiation ids of the RFQ",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": ["autoquote", "shipment"],
+      "type": "object"
+    },
+    {
+      "properties": {
+        "fedex_specific_options": {
+          "allOf": [
+            {
+              "properties": {
+                "bill_to_account_number": {
+                  "type": "string"
+                },
+                "bill_to_country_code": {
+                  "type": "string"
+                },
+                "bill_to_payment_type": {
+                  "enum": ["COLLECT", "RECIPIENT", "SENDER", "THIRD_PARTY"],
+                  "type": "string"
+                },
+                "bill_to_postal_code": {
+                  "type": "string"
+                },
+                "cod_collection_amount": {
+                  "format": "float",
+                  "type": "number"
+                },
+                "cod_collection_currency": {
+                  "default": "USD",
+                  "enum": ["CAD", "USD"],
+                  "type": "string"
+                },
+                "cod_collection_type": {
+                  "enum": ["ANY", "COMPANY_CHECK", "GUARANTEED_FUNDS", "PERSONAL_CHECK"],
+                  "type": "string"
+                },
+                "customer_transaction_id": {
+                  "type": "string"
+                },
+                "signature_option_release_number": {
+                  "type": "string"
+                },
+                "signature_option_signature_type": {
+                  "enum": [
+                    "ADULT_SIGNATURE",
+                    "DIRECT_SIGNATURE",
+                    "NO_SIGNATURE",
+                    "INDIRECT_SIGNATURE",
+                    "SERVICE_DEFAULT"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            {
+              "properties": {
+                "account": {
+                  "description": "Id of the FedexAccount to dispatch or rate with, if using FedEx direct rating or dispatch",
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "alcohol_recipient_type": {
+                  "enum": ["CONSUMER", "LICENSEE"],
+                  "type": "string"
+                },
+                "battery_material_type": {
+                  "enum": ["LITHIUM_ION", "LITHIUM_METAL"],
+                  "type": "string"
+                },
+                "battery_packaging_type": {
+                  "enum": ["CONTAINED_IN_EQUIPMENT", "PACKED_WITH_EQUIPMENT"],
+                  "type": "string"
+                },
+                "dropoff_type": {
+                  "enum": ["REGULAR_PICKUP", "STATION", "REQUEST_COURIER", "BUSINESS_SERVICE_CENTER", "DROP_BOX"],
+                  "type": "string"
+                },
+                "home_delivery_date": {
+                  "format": "date-'date-time'",
+                  "type": "string"
+                },
+                "home_delivery_phone_number": {
+                  "type": "string"
+                },
+                "home_delivery_type": {
+                  "enum": ["APPOINTMENT", "DATE_CERTAIN", "EVENING"],
+                  "type": "string"
+                },
+                "packaging": {
+                  "type": "string"
+                },
+                "service_code": {
+                  "enum": [
+                    "FEDEX_1_DAY_FREIGHT",
+                    "FEDEX_2_DAY",
+                    "FEDEX_2_DAY_AM",
+                    "FEDEX_2_DAY_FREIGHT",
+                    "FEDEX_3_DAY_FREIGHT",
+                    "FEDEX_EXPRESS_SAVER",
+                    "FEDEX_FIRST_FREIGHT",
+                    "FEDEX_FREIGHT_ECONOMY",
+                    "FEDEX_FREIGHT_PRIORITY",
+                    "FEDEX_GROUND",
+                    "FIRST_OVERNIGHT",
+                    "GROUND_HOME_DELIVERY",
+                    "INTERNATIONAL_ECONOMY",
+                    "INTERNATIONAL_ECONOMY_FREIGHT",
+                    "INTERNATIONAL_FIRST",
+                    "INTERNATIONAL_PRIORITY",
+                    "INTERNATIONAL_PRIORITY_EXPRESS",
+                    "INTERNATIONAL_PRIORITY_FREIGHT",
+                    "PRIORITY_OVERNIGHT",
+                    "SMART_POST",
+                    "STANDARD_OVERNIGHT",
+                    "EUROPE_FIRST_INTERNATIONAL_PRIORITY",
+                    "FEDEX_DISTANCE_DEFERRED",
+                    "FEDEX_NEXT_DAY_AFTERNOON",
+                    "FEDEX_NEXT_DAY_EARLY_MORNING",
+                    "FEDEX_NEXT_DAY_END_OF_DAY",
+                    "FEDEX_NEXT_DAY_FREIGHT",
+                    "FEDEX_NEXT_DAY_MID_MORNING",
+                    "SAME_DAY",
+                    "SAME_DAY_CITY"
+                  ],
+                  "type": "string"
+                },
+                "shipment_services": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "smart_post_indicia_type": {
+                  "enum": [
+                    "MEDIA_MAIL",
+                    "PARCEL_SELECT",
+                    "PRESORTED_BOUND_PRINTED_MATTER",
+                    "PRESORTED_STANDARD",
+                    "PARCEL_RETURN"
+                  ],
+                  "type": "string"
+                },
+                "use_preferred_rates": {
+                  "default": false,
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          ],
+          "description": "Shipment rating and dispatch options specific to FedEx"
+        },
+        "parent_rfq": {
+          "properties": {
+            "autoquote": {
+              "description": "Whether or not this RFQ should perform an autoquoting process\n",
+              "type": "boolean"
+            },
+            "company_owner_id": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "created_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "creator": {
+              "properties": {
+                "avatar": {
+                  "type": "string"
+                },
+                "company_id": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "completed_onboarding": {
+                  "type": "boolean"
+                },
+                "created_at": {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "custom_data": {
+                  "additionalProperties": {},
+                  "description": "Custom data for User",
+                  "type": "object"
+                },
+                "default_shipment_tags": {
+                  "description": "List of ShipmentTag ids",
+                  "items": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "feature_flag_new_shipment_details": {
+                  "type": "boolean"
+                },
+                "feature_flag_new_ui": {
+                  "type": "boolean"
+                },
+                "first_name": {
+                  "type": "string"
+                },
+                "id": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "is_quoting_limited_user": {
+                  "type": "boolean"
+                },
+                "last_login": {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "last_name": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "permissions": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "phone_number": {
+                  "type": "string"
+                },
+                "subscribed_to_loadboard": {
+                  "type": "boolean"
+                },
+                "timezone": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "format": "date-time",
+                  "type": "string"
+                }
+              },
+              "required": ["first_name", "last_name", "email"],
+              "type": "object"
+            },
+            "did_finish_autoquote": {
+              "description": "Whether or not this RFQ completed an autoquoting process",
+              "type": "boolean"
+            },
+            "equipment_types": {
+              "items": {
+                "description": "Equipment type",
+                "properties": {
+                  "id": {
+                    "format": "int32",
+                    "type": "integer"
+                  },
+                  "machine_readable": {
+                    "enum": [
+                      "AUTO_CARRIER",
+                      "AUTOHAULER",
+                      "B_TRAIN",
+                      "BULK",
+                      "CONESTOGA",
+                      "CONTAINER",
+                      "CONTAINER_BREAK_BULK",
+                      "CONTAINER_STANDARD_20_FOOT",
+                      "CONTAINER_STANDARD_40_FOOT",
+                      "CONTAINER_FLAT_TRACK_20_FOOT",
+                      "CONTAINER_FLAT_TRACK_40_FOOT",
+                      "CONTAINER_HEAVY_TESTED_20_FOOT",
+                      "CONTAINER_HIGH_CUBE_40_FOOT",
+                      "CONTAINER_HIGH_CUBE_45_FOOT",
+                      "CONTAINER_INSULATED",
+                      "CONTAINER_ISO_TANK_20_FOOT",
+                      "CONTAINER_ISO_TANK_24_FOOT",
+                      "CONTAINER_ISO_TANK_40_FOOT",
+                      "CONTAINER_OPEN_TOP_20_FOOT",
+                      "CONTAINER_OPEN_TOP_40_FOOT",
+                      "CONTAINER_REEFER_20_FOOT",
+                      "CONTAINER_REEFER_40_FOOT",
+                      "CONTAINER_REFRIGERATED",
+                      "CONVEYOR",
+                      "CURTAIN_SIDE",
+                      "DOUBLE_DROP",
+                      "DROP_DECK",
+                      "DROP_DECK_LANDOLL",
+                      "DRY_VAN",
+                      "DUMP_TRAILER",
+                      "FLATBED",
+                      "FLATBED_53_FOOT",
+                      "FLATBED_AIR_RIDE",
+                      "FLATBED_CONESTOGA",
+                      "FLATBED_DOUBLE",
+                      "FLATBED_HOTSHOT",
+                      "FLATBED_MAXI",
+                      "FLATBED_OVERDIMENSION",
+                      "HOPPER",
+                      "HOPPER_BOTTOM",
+                      "INSULATED_VAN",
+                      "LOWBOY",
+                      "LOWBOY_OVERDIMENSION",
+                      "MOVING_VAN",
+                      "OTHER",
+                      "PNEUMATIC",
+                      "POWER_ONLY",
+                      "REEFER",
+                      "REEFER_AIR_RIDE",
+                      "REEFER_DOUBLE",
+                      "REEFER_INTERMODAL",
+                      "REMOVABLE_GOOSENECK",
+                      "STEP_DECK",
+                      "STEPDECK_CONESTOGA",
+                      "STRAIGHT_BOX_TRUCK",
+                      "STRETCH_TRAILER",
+                      "TANKER",
+                      "TANKER_ALUMINUM",
+                      "TANKER_INTERMODAL",
+                      "TANKER_STEEL",
+                      "TILT",
+                      "TRUCK_AND_TRAILER",
+                      "VAN_AIR_RIDE",
+                      "VAN_DOUBLE",
+                      "VAN_INSULATED",
+                      "VAN_INTERMODAL",
+                      "VAN_OPEN_TOP",
+                      "VAN_ROLLER_BED",
+                      "VAN_SPRINTER",
+                      "VAN_TRIPLE",
+                      "VAN_VENTED",
+                      "VAN_WITH_CURTAINS"
+                    ],
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": ["id", "name", "machine_readable"],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "has_parent_rfq": {
+              "type": "boolean"
+            },
+            "id": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "restrict_autoquote_to_companies": {
+              "description": "Array of Companies that, if provided, the autoquoting process\nwill restrict its quote results to only rates that come\nfrom those vendor companies\n",
+              "items": {
+                "properties": {
+                  "billing_emails": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "brokerage": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "carrier": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "created_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "dba_name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "is_shipwell": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "primary_email": {
+                    "type": "string"
+                  },
+                  "shipper": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "updated_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                },
+                "required": ["name"],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "shipment": {
+              "description": "Id of the Shipment for which this RFQ was created",
+              "format": "uuid",
+              "type": "string"
+            },
+            "shipment_modes": {
+              "items": {
+                "description": "Standardized code for a shipment mode",
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "format": "int32",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "spot_negotiations": {
+              "description": "All SpotNegotiation ids of the RFQ",
+              "items": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "updated_at": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "required": ["autoquote", "shipment"],
+          "type": "object"
+        },
+        "quotes": {
+          "description": "All Quotes extended to this RFQ",
+          "items": {
+            "properties": {
+              "accepted_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "approved_by_rfq_at": {
+                "description": "Not implemented",
+                "format": "date-time",
+                "type": "string"
+              },
+              "can_dispatch": {
+                "type": "boolean"
+              },
+              "carrier": {
+                "properties": {
+                  "accounts_receivable_email": {
+                    "type": "string"
+                  },
+                  "approved_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "billing_address": {
+                    "properties": {
+                      "address_1": {
+                        "type": "string"
+                      },
+                      "address_2": {
+                        "type": "string"
+                      },
+                      "city": {
+                        "type": "string"
+                      },
+                      "country": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "formatted_address": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "latitude": {
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "longitude": {
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "phone_number": {
+                        "type": "string"
+                      },
+                      "postal_code": {
+                        "type": "string"
+                      },
+                      "state_province": {
+                        "type": "string"
+                      },
+                      "timezone": {
+                        "type": "string"
+                      },
+                      "updated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "created_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "custom_data": {
+                    "additionalProperties": {},
+                    "description": "Custom data for CarrierCustomData",
+                    "type": "object"
+                  },
+                  "dba_name": {
+                    "type": "string"
+                  },
+                  "display_name": {
+                    "description": "Read-only name of the Carrier which will be its dba_name if one\nexists, else the Carrier's Company's name\n",
+                    "type": "string"
+                  },
+                  "display_primary_email": {
+                    "description": "Read-only email of the Carrier which will be its email if one\nexists, else the Carrier's Company's email\n",
+                    "type": "string"
+                  },
+                  "display_primary_phone_number": {
+                    "description": "Read-only phone number of the Carrier which will be its phone number if one\nexists, else the Carrier's Company's phone number\n",
+                    "type": "string"
+                  },
+                  "eld_providers": {
+                    "items": {
+                      "properties": {
+                        "id": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "enum": ["Active", "Inactive"],
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "id": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "mailing_address": {
+                    "properties": {
+                      "address_1": {
+                        "type": "string"
+                      },
+                      "address_2": {
+                        "type": "string"
+                      },
+                      "city": {
+                        "type": "string"
+                      },
+                      "country": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "formatted_address": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "latitude": {
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "longitude": {
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "phone_number": {
+                        "type": "string"
+                      },
+                      "postal_code": {
+                        "type": "string"
+                      },
+                      "state_province": {
+                        "type": "string"
+                      },
+                      "timezone": {
+                        "type": "string"
+                      },
+                      "updated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "pickup_request_email": {
+                    "type": "string"
+                  },
+                  "primary_email": {
+                    "type": "string"
+                  },
+                  "primary_phone_number": {
+                    "type": "string"
+                  },
+                  "service_center_lookup_url": {
+                    "type": "string"
+                  },
+                  "updated_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "usdot_number": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "charge_line_items": {
+                "items": {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "amount": {
+                          "description": "Total amount of the line item, or unit_amount times unit_quantity\n",
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "category": {
+                          "enum": [
+                            "ACC",
+                            "ADJUSTMENT",
+                            "DETENTION",
+                            "FSC",
+                            "FUEL",
+                            "INSURANCE",
+                            "LAYOVER",
+                            "LH",
+                            "OTHER",
+                            "SF",
+                            "TAX",
+                            "TEAMDRIVERS",
+                            "TONU",
+                            "VARIANCE"
+                          ],
+                          "type": "string"
+                        },
+                        "charge_code": {
+                          "description": "Standardized code for a type of line item charge",
+                          "properties": {
+                            "code": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "format": "int32",
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "created_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "id": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "unit_amount": {
+                          "description": "Cost of one unit of the line item",
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "unit_amount_currency": {
+                          "default": "USD",
+                          "enum": ["CAD", "USD"],
+                          "type": "string"
+                        },
+                        "unit_name": {
+                          "description": "Descriptor for one unit of the line item",
+                          "type": "string"
+                        },
+                        "unit_quantity": {
+                          "default": 1,
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "updated_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "required": ["category", "unit_amount", "unit_quantity"],
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "is_provider_markup": {
+                          "type": "boolean"
+                        },
+                        "quote": {
+                          "description": "Id of the Quote to which this line item is related",
+                          "format": "uuid",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "created_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "created_by_company": {
+                "properties": {
+                  "billing_emails": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "brokerage": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "carrier": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "created_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "dba_name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "is_shipwell": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "primary_email": {
+                    "type": "string"
+                  },
+                  "shipper": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "updated_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                },
+                "required": ["name"],
+                "type": "object"
+              },
+              "created_by_user": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "currency": {
+                "default": "USD",
+                "description": "Read-only currency code describing the currency of line items on the quote",
+                "enum": ["CAD", "USD"],
+                "type": "string"
+              },
+              "customer_markup": {
+                "description": "Markup charge to the end customer, obfuscated so only authorized\nusers can read/write its true value\n",
+                "format": "float",
+                "type": "number"
+              },
+              "delivery_date": {
+                "description": "Planned delivery date of the shipment, in string of the form YYYY-MM-DD",
+                "type": "string"
+              },
+              "display_earliest_pickup": {
+                "description": "Human-readable date/time of earliest pickup, if one exists",
+                "type": "string"
+              },
+              "earliest_pickup_date": {
+                "description": "Earliest date the shipment could be run, in string of the form YYYY-MM-DD",
+                "type": "string"
+              },
+              "earliest_pickup_time": {
+                "description": "Earliest time the shipment could be run",
+                "format": "time",
+                "type": "string"
+              },
+              "equipment_type": {
+                "description": "Equipment type",
+                "properties": {
+                  "id": {
+                    "format": "int32",
+                    "type": "integer"
+                  },
+                  "machine_readable": {
+                    "enum": [
+                      "AUTO_CARRIER",
+                      "AUTOHAULER",
+                      "B_TRAIN",
+                      "BULK",
+                      "CONESTOGA",
+                      "CONTAINER",
+                      "CONTAINER_BREAK_BULK",
+                      "CONTAINER_STANDARD_20_FOOT",
+                      "CONTAINER_STANDARD_40_FOOT",
+                      "CONTAINER_FLAT_TRACK_20_FOOT",
+                      "CONTAINER_FLAT_TRACK_40_FOOT",
+                      "CONTAINER_HEAVY_TESTED_20_FOOT",
+                      "CONTAINER_HIGH_CUBE_40_FOOT",
+                      "CONTAINER_HIGH_CUBE_45_FOOT",
+                      "CONTAINER_INSULATED",
+                      "CONTAINER_ISO_TANK_20_FOOT",
+                      "CONTAINER_ISO_TANK_24_FOOT",
+                      "CONTAINER_ISO_TANK_40_FOOT",
+                      "CONTAINER_OPEN_TOP_20_FOOT",
+                      "CONTAINER_OPEN_TOP_40_FOOT",
+                      "CONTAINER_REEFER_20_FOOT",
+                      "CONTAINER_REEFER_40_FOOT",
+                      "CONTAINER_REFRIGERATED",
+                      "CONVEYOR",
+                      "CURTAIN_SIDE",
+                      "DOUBLE_DROP",
+                      "DROP_DECK",
+                      "DROP_DECK_LANDOLL",
+                      "DRY_VAN",
+                      "DUMP_TRAILER",
+                      "FLATBED",
+                      "FLATBED_53_FOOT",
+                      "FLATBED_AIR_RIDE",
+                      "FLATBED_CONESTOGA",
+                      "FLATBED_DOUBLE",
+                      "FLATBED_HOTSHOT",
+                      "FLATBED_MAXI",
+                      "FLATBED_OVERDIMENSION",
+                      "HOPPER",
+                      "HOPPER_BOTTOM",
+                      "INSULATED_VAN",
+                      "LOWBOY",
+                      "LOWBOY_OVERDIMENSION",
+                      "MOVING_VAN",
+                      "OTHER",
+                      "PNEUMATIC",
+                      "POWER_ONLY",
+                      "REEFER",
+                      "REEFER_AIR_RIDE",
+                      "REEFER_DOUBLE",
+                      "REEFER_INTERMODAL",
+                      "REMOVABLE_GOOSENECK",
+                      "STEP_DECK",
+                      "STEPDECK_CONESTOGA",
+                      "STRAIGHT_BOX_TRUCK",
+                      "STRETCH_TRAILER",
+                      "TANKER",
+                      "TANKER_ALUMINUM",
+                      "TANKER_INTERMODAL",
+                      "TANKER_STEEL",
+                      "TILT",
+                      "TRUCK_AND_TRAILER",
+                      "VAN_AIR_RIDE",
+                      "VAN_DOUBLE",
+                      "VAN_INSULATED",
+                      "VAN_INTERMODAL",
+                      "VAN_OPEN_TOP",
+                      "VAN_ROLLER_BED",
+                      "VAN_SPRINTER",
+                      "VAN_TRIPLE",
+                      "VAN_VENTED",
+                      "VAN_WITH_CURTAINS"
+                    ],
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": ["id", "name", "machine_readable"],
+                "type": "object"
+              },
+              "error_message": {
+                "description": "Error that happened during quoting",
+                "type": "string"
+              },
+              "expires_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "fedex_direct_quote": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "carrier_code": {
+                        "type": "string"
+                      },
+                      "service_code": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ]
+              },
+              "id": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "info_message": {
+                "description": "Description of caveats about the quote",
+                "type": "string"
+              },
+              "is_csp_rate": {
+                "description": "True iff Quote originated from a rate that a Brokerage negotiated\non behalf of one of their FreightAuthorities\n",
+                "type": "boolean"
+              },
+              "is_failure": {
+                "description": "if true, this Quote does not represent an actual price\nbut instead a failure to provide a Quote to an RFQ\n",
+                "type": "boolean"
+              },
+              "lane_type": {
+                "default": "UNSPECIFIED",
+                "enum": ["DIRECT", "INTERLINE", "UNSPECIFIED"],
+                "type": "string"
+              },
+              "mode": {
+                "description": "Standardized code for a shipment mode",
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "format": "int32",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "provider_logo_url": {
+                "description": "URL for the logo of the quote provider",
+                "type": "string"
+              },
+              "quoted_non_dispatchable_accessorials": {
+                "items": {
+                  "description": "Accessorial code, price, and description",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "currency_unit": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "is_charge_code": {
+                      "type": "boolean"
+                    },
+                    "long_description": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "format": "float",
+                      "type": "number"
+                    },
+                    "type": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "code",
+                    "description",
+                    "long_description",
+                    "type",
+                    "is_charge_code",
+                    "price",
+                    "currency_unit"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "reference_number": {
+                "type": "string"
+              },
+              "revoked_at": {
+                "description": "Not implemented",
+                "format": "date-time",
+                "type": "string"
+              },
+              "rfq": {
+                "description": "Id of the RFQ to which this quote is related",
+                "format": "uuid",
+                "type": "string"
+              },
+              "service_level": {
+                "description": "Standardized code for a shipment service level",
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "format": "int32",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "source_type": {
+                "enum": ["INSTANT", "MANUAL", "PRIVATE_MARKETPLACE"],
+                "type": "string"
+              },
+              "spot_negotiation_quote": {
+                "properties": {
+                  "declined_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "spot_negotiation": {
+                    "format": "uuid",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "total": {
+                "description": "Sum of all the charge line items of this quote",
+                "format": "float",
+                "type": "number"
+              },
+              "transit_days": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "updated_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "ups_direct_quote": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "carrier_code": {
+                        "type": "string"
+                      },
+                      "service_code": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ]
+              },
+              "usps_direct_quote": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "carrier_code": {
+                        "type": "string"
+                      },
+                      "service_code": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ]
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "spot_negotiations": {
+          "description": "All the active SpotNegotiations of the RFQ",
+          "items": {
+            "properties": {
+              "carrier_status": {
+                "enum": ["ACTIVE", "INACTIVE", "DO_NOT_USE"],
+                "type": "string"
+              },
+              "closed_by_customer_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "closed_by_vendor_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "created_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "customer": {
+                "properties": {
+                  "billing_emails": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "brokerage": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "carrier": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "created_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "dba_name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "is_shipwell": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "primary_email": {
+                    "type": "string"
+                  },
+                  "shipper": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "updated_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                },
+                "required": ["name"],
+                "type": "object"
+              },
+              "id": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "involved_customer_users": {
+                "items": {
+                  "properties": {
+                    "avatar": {
+                      "type": "string"
+                    },
+                    "company_id": {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "completed_onboarding": {
+                      "type": "boolean"
+                    },
+                    "created_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "custom_data": {
+                      "additionalProperties": {},
+                      "description": "Custom data for User",
+                      "type": "object"
+                    },
+                    "default_shipment_tags": {
+                      "description": "List of ShipmentTag ids",
+                      "items": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "feature_flag_new_shipment_details": {
+                      "type": "boolean"
+                    },
+                    "feature_flag_new_ui": {
+                      "type": "boolean"
+                    },
+                    "first_name": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "is_quoting_limited_user": {
+                      "type": "boolean"
+                    },
+                    "last_login": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "last_name": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    },
+                    "permissions": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "phone_number": {
+                      "type": "string"
+                    },
+                    "subscribed_to_loadboard": {
+                      "type": "boolean"
+                    },
+                    "timezone": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["first_name", "last_name", "email"],
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "involved_vendor_users": {
+                "items": {
+                  "properties": {
+                    "avatar": {
+                      "type": "string"
+                    },
+                    "company_id": {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "completed_onboarding": {
+                      "type": "boolean"
+                    },
+                    "created_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "custom_data": {
+                      "additionalProperties": {},
+                      "description": "Custom data for User",
+                      "type": "object"
+                    },
+                    "default_shipment_tags": {
+                      "description": "List of ShipmentTag ids",
+                      "items": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "feature_flag_new_shipment_details": {
+                      "type": "boolean"
+                    },
+                    "feature_flag_new_ui": {
+                      "type": "boolean"
+                    },
+                    "first_name": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "is_quoting_limited_user": {
+                      "type": "boolean"
+                    },
+                    "last_login": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "last_name": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    },
+                    "permissions": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "phone_number": {
+                      "type": "string"
+                    },
+                    "subscribed_to_loadboard": {
+                      "type": "boolean"
+                    },
+                    "timezone": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["first_name", "last_name", "email"],
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "is_most_recent_winner": {
+                "type": "boolean"
+              },
+              "message_count": {
+                "type": "integer"
+              },
+              "quotes": {
+                "description": "Optional list of quotes included on this spot negotiation",
+                "items": {
+                  "properties": {
+                    "accepted_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "approved_by_rfq_at": {
+                      "description": "Not implemented",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "can_dispatch": {
+                      "type": "boolean"
+                    },
+                    "carrier": {
+                      "properties": {
+                        "accounts_receivable_email": {
+                          "type": "string"
+                        },
+                        "approved_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "billing_address": {
+                          "properties": {
+                            "address_1": {
+                              "type": "string"
+                            },
+                            "address_2": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "formatted_address": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "format": "uuid",
+                              "type": "string"
+                            },
+                            "latitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "longitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "type": "string"
+                            },
+                            "state_province": {
+                              "type": "string"
+                            },
+                            "timezone": {
+                              "type": "string"
+                            },
+                            "updated_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "created_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "custom_data": {
+                          "additionalProperties": {},
+                          "description": "Custom data for CarrierCustomData",
+                          "type": "object"
+                        },
+                        "dba_name": {
+                          "type": "string"
+                        },
+                        "display_name": {
+                          "description": "Read-only name of the Carrier which will be its dba_name if one\nexists, else the Carrier's Company's name\n",
+                          "type": "string"
+                        },
+                        "display_primary_email": {
+                          "description": "Read-only email of the Carrier which will be its email if one\nexists, else the Carrier's Company's email\n",
+                          "type": "string"
+                        },
+                        "display_primary_phone_number": {
+                          "description": "Read-only phone number of the Carrier which will be its phone number if one\nexists, else the Carrier's Company's phone number\n",
+                          "type": "string"
+                        },
+                        "eld_providers": {
+                          "items": {
+                            "properties": {
+                              "id": {
+                                "format": "uuid",
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "enum": ["Active", "Inactive"],
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "id": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "mailing_address": {
+                          "properties": {
+                            "address_1": {
+                              "type": "string"
+                            },
+                            "address_2": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "formatted_address": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "format": "uuid",
+                              "type": "string"
+                            },
+                            "latitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "longitude": {
+                              "format": "float",
+                              "type": "number"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "postal_code": {
+                              "type": "string"
+                            },
+                            "state_province": {
+                              "type": "string"
+                            },
+                            "timezone": {
+                              "type": "string"
+                            },
+                            "updated_at": {
+                              "format": "date-time",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "pickup_request_email": {
+                          "type": "string"
+                        },
+                        "primary_email": {
+                          "type": "string"
+                        },
+                        "primary_phone_number": {
+                          "type": "string"
+                        },
+                        "service_center_lookup_url": {
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "usdot_number": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "charge_line_items": {
+                      "items": {
+                        "allOf": [
+                          {
+                            "properties": {
+                              "amount": {
+                                "description": "Total amount of the line item, or unit_amount times unit_quantity\n",
+                                "format": "float",
+                                "type": "number"
+                              },
+                              "category": {
+                                "enum": [
+                                  "ACC",
+                                  "ADJUSTMENT",
+                                  "DETENTION",
+                                  "FSC",
+                                  "FUEL",
+                                  "INSURANCE",
+                                  "LAYOVER",
+                                  "LH",
+                                  "OTHER",
+                                  "SF",
+                                  "TAX",
+                                  "TEAMDRIVERS",
+                                  "TONU",
+                                  "VARIANCE"
+                                ],
+                                "type": "string"
+                              },
+                              "charge_code": {
+                                "description": "Standardized code for a type of line item charge",
+                                "properties": {
+                                  "code": {
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "id": {
+                                    "format": "int32",
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "created_at": {
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              "id": {
+                                "format": "uuid",
+                                "type": "string"
+                              },
+                              "unit_amount": {
+                                "description": "Cost of one unit of the line item",
+                                "format": "float",
+                                "type": "number"
+                              },
+                              "unit_amount_currency": {
+                                "default": "USD",
+                                "enum": ["CAD", "USD"],
+                                "type": "string"
+                              },
+                              "unit_name": {
+                                "description": "Descriptor for one unit of the line item",
+                                "type": "string"
+                              },
+                              "unit_quantity": {
+                                "default": 1,
+                                "format": "float",
+                                "type": "number"
+                              },
+                              "updated_at": {
+                                "format": "date-time",
+                                "type": "string"
+                              }
+                            },
+                            "required": ["category", "unit_amount", "unit_quantity"],
+                            "type": "object"
+                          },
+                          {
+                            "properties": {
+                              "is_provider_markup": {
+                                "type": "boolean"
+                              },
+                              "quote": {
+                                "description": "Id of the Quote to which this line item is related",
+                                "format": "uuid",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "created_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "created_by_company": {
+                      "properties": {
+                        "billing_emails": {
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "brokerage": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "carrier": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "dba_name": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "is_shipwell": {
+                          "type": "boolean"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "primary_email": {
+                          "type": "string"
+                        },
+                        "shipper": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "required": ["name"],
+                      "type": "object"
+                    },
+                    "created_by_user": {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "currency": {
+                      "default": "USD",
+                      "description": "Read-only currency code describing the currency of line items on the quote",
+                      "enum": ["CAD", "USD"],
+                      "type": "string"
+                    },
+                    "customer_markup": {
+                      "description": "Markup charge to the end customer, obfuscated so only authorized\nusers can read/write its true value\n",
+                      "format": "float",
+                      "type": "number"
+                    },
+                    "delivery_date": {
+                      "description": "Planned delivery date of the shipment, in string of the form YYYY-MM-DD",
+                      "type": "string"
+                    },
+                    "display_earliest_pickup": {
+                      "description": "Human-readable date/time of earliest pickup, if one exists",
+                      "type": "string"
+                    },
+                    "earliest_pickup_date": {
+                      "description": "Earliest date the shipment could be run, in string of the form YYYY-MM-DD",
+                      "type": "string"
+                    },
+                    "earliest_pickup_time": {
+                      "description": "Earliest time the shipment could be run",
+                      "format": "time",
+                      "type": "string"
+                    },
+                    "equipment_type": {
+                      "description": "Equipment type",
+                      "properties": {
+                        "id": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "machine_readable": {
+                          "enum": [
+                            "AUTO_CARRIER",
+                            "AUTOHAULER",
+                            "B_TRAIN",
+                            "BULK",
+                            "CONESTOGA",
+                            "CONTAINER",
+                            "CONTAINER_BREAK_BULK",
+                            "CONTAINER_STANDARD_20_FOOT",
+                            "CONTAINER_STANDARD_40_FOOT",
+                            "CONTAINER_FLAT_TRACK_20_FOOT",
+                            "CONTAINER_FLAT_TRACK_40_FOOT",
+                            "CONTAINER_HEAVY_TESTED_20_FOOT",
+                            "CONTAINER_HIGH_CUBE_40_FOOT",
+                            "CONTAINER_HIGH_CUBE_45_FOOT",
+                            "CONTAINER_INSULATED",
+                            "CONTAINER_ISO_TANK_20_FOOT",
+                            "CONTAINER_ISO_TANK_24_FOOT",
+                            "CONTAINER_ISO_TANK_40_FOOT",
+                            "CONTAINER_OPEN_TOP_20_FOOT",
+                            "CONTAINER_OPEN_TOP_40_FOOT",
+                            "CONTAINER_REEFER_20_FOOT",
+                            "CONTAINER_REEFER_40_FOOT",
+                            "CONTAINER_REFRIGERATED",
+                            "CONVEYOR",
+                            "CURTAIN_SIDE",
+                            "DOUBLE_DROP",
+                            "DROP_DECK",
+                            "DROP_DECK_LANDOLL",
+                            "DRY_VAN",
+                            "DUMP_TRAILER",
+                            "FLATBED",
+                            "FLATBED_53_FOOT",
+                            "FLATBED_AIR_RIDE",
+                            "FLATBED_CONESTOGA",
+                            "FLATBED_DOUBLE",
+                            "FLATBED_HOTSHOT",
+                            "FLATBED_MAXI",
+                            "FLATBED_OVERDIMENSION",
+                            "HOPPER",
+                            "HOPPER_BOTTOM",
+                            "INSULATED_VAN",
+                            "LOWBOY",
+                            "LOWBOY_OVERDIMENSION",
+                            "MOVING_VAN",
+                            "OTHER",
+                            "PNEUMATIC",
+                            "POWER_ONLY",
+                            "REEFER",
+                            "REEFER_AIR_RIDE",
+                            "REEFER_DOUBLE",
+                            "REEFER_INTERMODAL",
+                            "REMOVABLE_GOOSENECK",
+                            "STEP_DECK",
+                            "STEPDECK_CONESTOGA",
+                            "STRAIGHT_BOX_TRUCK",
+                            "STRETCH_TRAILER",
+                            "TANKER",
+                            "TANKER_ALUMINUM",
+                            "TANKER_INTERMODAL",
+                            "TANKER_STEEL",
+                            "TILT",
+                            "TRUCK_AND_TRAILER",
+                            "VAN_AIR_RIDE",
+                            "VAN_DOUBLE",
+                            "VAN_INSULATED",
+                            "VAN_INTERMODAL",
+                            "VAN_OPEN_TOP",
+                            "VAN_ROLLER_BED",
+                            "VAN_SPRINTER",
+                            "VAN_TRIPLE",
+                            "VAN_VENTED",
+                            "VAN_WITH_CURTAINS"
+                          ],
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["id", "name", "machine_readable"],
+                      "type": "object"
+                    },
+                    "error_message": {
+                      "description": "Error that happened during quoting",
+                      "type": "string"
+                    },
+                    "expires_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "fedex_direct_quote": {
+                      "allOf": [
+                        {
+                          "properties": {
+                            "carrier_code": {
+                              "type": "string"
+                            },
+                            "service_code": {
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "id": {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "info_message": {
+                      "description": "Description of caveats about the quote",
+                      "type": "string"
+                    },
+                    "is_csp_rate": {
+                      "description": "True iff Quote originated from a rate that a Brokerage negotiated\non behalf of one of their FreightAuthorities\n",
+                      "type": "boolean"
+                    },
+                    "is_failure": {
+                      "description": "if true, this Quote does not represent an actual price\nbut instead a failure to provide a Quote to an RFQ\n",
+                      "type": "boolean"
+                    },
+                    "lane_type": {
+                      "default": "UNSPECIFIED",
+                      "enum": ["DIRECT", "INTERLINE", "UNSPECIFIED"],
+                      "type": "string"
+                    },
+                    "mode": {
+                      "description": "Standardized code for a shipment mode",
+                      "properties": {
+                        "code": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "provider_logo_url": {
+                      "description": "URL for the logo of the quote provider",
+                      "type": "string"
+                    },
+                    "quoted_non_dispatchable_accessorials": {
+                      "items": {
+                        "description": "Accessorial code, price, and description",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "currency_unit": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "format": "int32",
+                            "type": "integer"
+                          },
+                          "is_charge_code": {
+                            "type": "boolean"
+                          },
+                          "long_description": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "format": "float",
+                            "type": "number"
+                          },
+                          "type": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "code",
+                          "description",
+                          "long_description",
+                          "type",
+                          "is_charge_code",
+                          "price",
+                          "currency_unit"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "reference_number": {
+                      "type": "string"
+                    },
+                    "revoked_at": {
+                      "description": "Not implemented",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "rfq": {
+                      "description": "Id of the RFQ to which this quote is related",
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "service_level": {
+                      "description": "Standardized code for a shipment service level",
+                      "properties": {
+                        "code": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "source_type": {
+                      "enum": ["INSTANT", "MANUAL", "PRIVATE_MARKETPLACE"],
+                      "type": "string"
+                    },
+                    "spot_negotiation_quote": {
+                      "properties": {
+                        "declined_at": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "spot_negotiation": {
+                          "format": "uuid",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "total": {
+                      "description": "Sum of all the charge line items of this quote",
+                      "format": "float",
+                      "type": "number"
+                    },
+                    "transit_days": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "updated_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "ups_direct_quote": {
+                      "allOf": [
+                        {
+                          "properties": {
+                            "carrier_code": {
+                              "type": "string"
+                            },
+                            "service_code": {
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "usps_direct_quote": {
+                      "allOf": [
+                        {
+                          "properties": {
+                            "carrier_code": {
+                              "type": "string"
+                            },
+                            "service_code": {
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "updated_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "vendor": {
+                "properties": {
+                  "billing_emails": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "brokerage": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "carrier": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "created_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "dba_name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "is_shipwell": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "primary_email": {
+                    "type": "string"
+                  },
+                  "shipper": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "updated_at": {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                },
+                "required": ["name"],
+                "type": "object"
+              }
+            },
+            "required": ["involved_customer_users", "involved_vendor_users"],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "ups_specific_options": {
+          "allOf": [
+            {
+              "properties": {
+                "bill_to_account_number": {
+                  "type": "string"
+                },
+                "bill_to_country_code": {
+                  "type": "string"
+                },
+                "bill_to_payment_type": {
+                  "enum": ["COLLECT", "RECIPIENT", "SENDER", "THIRD_PARTY"],
+                  "type": "string"
+                },
+                "bill_to_postal_code": {
+                  "type": "string"
+                },
+                "cod_collection_amount": {
+                  "format": "float",
+                  "type": "number"
+                },
+                "cod_collection_currency": {
+                  "default": "USD",
+                  "enum": ["CAD", "USD"],
+                  "type": "string"
+                },
+                "cod_collection_type": {
+                  "enum": ["ANY", "COMPANY_CHECK", "GUARANTEED_FUNDS", "PERSONAL_CHECK"],
+                  "type": "string"
+                },
+                "customer_transaction_id": {
+                  "type": "string"
+                },
+                "signature_option_release_number": {
+                  "type": "string"
+                },
+                "signature_option_signature_type": {
+                  "enum": [
+                    "ADULT_SIGNATURE",
+                    "DIRECT_SIGNATURE",
+                    "NO_SIGNATURE",
+                    "INDIRECT_SIGNATURE",
+                    "SERVICE_DEFAULT"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            {
+              "properties": {
+                "account": {
+                  "description": "Id of the UPSAccount to dispatch or rate",
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "alcohol_recipient_type": {
+                  "enum": ["CONSUMER", "LICENSEE"],
+                  "type": "string"
+                },
+                "packaging": {
+                  "enum": [
+                    "UPS_LETTER",
+                    "UPS_EXPRESS_BOX",
+                    "UPS_25KG_BOX",
+                    "UPS_10_KG_BOX",
+                    "UPS_TUBE",
+                    "UPS_PAK",
+                    "UPS_SMALL_EXPRESS_BOX",
+                    "UPS_MEDIUM_EXPRESS_BOX",
+                    "UPS_LARGE_EXPRESS_BOX",
+                    "YOUR_PACKAGING"
+                  ],
+                  "type": "string"
+                },
+                "service_code": {
+                  "enum": [
+                    "GROUND",
+                    "UPS_STANDARD",
+                    "UPS_SAVER",
+                    "EXPRESS",
+                    "EXPRESS_PLUS",
+                    "EXPEDITED",
+                    "NEXT_DAY_AIR",
+                    "NEXT_DAY_AIR_SAVER",
+                    "NEXT_DAY_AIR_EARLY_AM",
+                    "SECOND_DAY_AIR",
+                    "SECOND_DAY_AIR_AM",
+                    "THREE_DAY_SELECT"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          ],
+          "description": "Shipment rating and dispatch options specific to UPS"
+        },
+        "usps_specific_options": {
+          "allOf": [
+            {
+              "properties": {
+                "bill_to_account_number": {
+                  "type": "string"
+                },
+                "bill_to_country_code": {
+                  "type": "string"
+                },
+                "bill_to_payment_type": {
+                  "enum": ["COLLECT", "RECIPIENT", "SENDER", "THIRD_PARTY"],
+                  "type": "string"
+                },
+                "bill_to_postal_code": {
+                  "type": "string"
+                },
+                "cod_collection_amount": {
+                  "format": "float",
+                  "type": "number"
+                },
+                "cod_collection_currency": {
+                  "default": "USD",
+                  "enum": ["CAD", "USD"],
+                  "type": "string"
+                },
+                "cod_collection_type": {
+                  "enum": ["ANY", "COMPANY_CHECK", "GUARANTEED_FUNDS", "PERSONAL_CHECK"],
+                  "type": "string"
+                },
+                "customer_transaction_id": {
+                  "type": "string"
+                },
+                "signature_option_release_number": {
+                  "type": "string"
+                },
+                "signature_option_signature_type": {
+                  "enum": [
+                    "ADULT_SIGNATURE",
+                    "DIRECT_SIGNATURE",
+                    "NO_SIGNATURE",
+                    "INDIRECT_SIGNATURE",
+                    "SERVICE_DEFAULT"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            {
+              "properties": {
+                "account": {
+                  "description": "Id of the USPSAccount to dispatch or rate",
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "packaging": {
+                  "enum": [
+                    "USPS_LETTER",
+                    "USPS_FLAT",
+                    "USPS_FLAT_RATE_ENVELOPE",
+                    "USPS_FLAT_RATE_LEGAL_ENVELOPE",
+                    "USPS_FLAT_RATE_PADDED_ENVELOPE",
+                    "USPS_PARCEL",
+                    "USPS_IRREGULAR_PARCEL",
+                    "USPS_SOFT_PACK",
+                    "USPS_SMALL_FLAT_RATE_BOX",
+                    "USPS_MEDIUM_FLAT_RATE_BOX",
+                    "USPS_LARGE_FLAT_RATE_BOX",
+                    "USPS_LARGE_FLAT_RATE_BOX_APOFPO",
+                    "USPS_REGIONAL_RATE_BOX_A",
+                    "USPS_REGIONAL_RATE_BOX_B",
+                    "USPS_LARGE_PARCEL",
+                    "USPS_FLAT_RATE_GIFT_CARD_ENVELOPE",
+                    "USPS_FLAT_RATE_WINDOW_ENVELOPE",
+                    "USPS_FLAT_RATE_CARDBOARD_ENVELOPE",
+                    "USPS_SMALL_FLAT_RATE_ENVELOPE",
+                    "USPS_LARGE_FLAT_RATE_BOARD_GAME_BOX",
+                    "YOUR_PACKAGING"
+                  ],
+                  "type": "string"
+                },
+                "service_code": {
+                  "enum": ["FIRST", "PRIORITY", "EXPRESS", "PARCEL_SELECT", "LIBRARY_MAIL", "MEDIA_MAIL"],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          ],
+          "description": "Shipment rating and dispatch options specific to USPS"
+        }
+      },
+      "type": "object"
+    }
+  ],
+  "type": "object",
+  "default": {
+    "fedex_specific_options": {
+      "account": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "alcohol_recipient_type": "CONSUMER",
+      "battery_material_type": "LITHIUM_ION",
+      "battery_packaging_type": "CONTAINED_IN_EQUIPMENT",
+      "dropoff_type": "REGULAR_PICKUP",
+      "home_delivery_date": "string",
+      "home_delivery_phone_number": "string",
+      "home_delivery_type": "APPOINTMENT",
+      "packaging": "string",
+      "service_code": "FEDEX_1_DAY_FREIGHT",
+      "shipment_services": ["string"],
+      "smart_post_indicia_type": "MEDIA_MAIL",
+      "use_preferred_rates": true
+    },
+    "parent_rfq": {
+      "autoquote": true,
+      "company_owner_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "created_at": "1970-01-01T00:00:00.000Z",
+      "creator": {
+        "avatar": "string",
+        "company_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "completed_onboarding": true,
+        "created_at": "1970-01-01T00:00:00.000Z",
+        "custom_data": {},
+        "default_shipment_tags": ["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
+        "email": "string",
+        "feature_flag_new_shipment_details": true,
+        "feature_flag_new_ui": true,
+        "first_name": "string",
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "is_quoting_limited_user": true,
+        "last_login": "1970-01-01T00:00:00.000Z",
+        "last_name": "string",
+        "password": "string",
+        "permissions": ["string"],
+        "phone_number": "string",
+        "subscribed_to_loadboard": true,
+        "timezone": "string",
+        "updated_at": "1970-01-01T00:00:00.000Z"
+      },
+      "did_finish_autoquote": true,
+      "equipment_types": [
+        {
+          "id": 1,
+          "machine_readable": "AUTO_CARRIER",
+          "name": "string"
+        }
+      ],
+      "has_parent_rfq": true,
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "restrict_autoquote_to_companies": [
+        {
+          "billing_emails": ["string"],
+          "brokerage": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "carrier": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "created_at": "1970-01-01T00:00:00.000Z",
+          "dba_name": "string",
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "is_shipwell": true,
+          "name": "string",
+          "primary_email": "string",
+          "shipper": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "updated_at": "1970-01-01T00:00:00.000Z"
+        }
+      ],
+      "shipment": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "shipment_modes": [
+        {
+          "code": "string",
+          "description": "string",
+          "id": 1
+        }
+      ],
+      "spot_negotiations": ["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
+      "updated_at": "1970-01-01T00:00:00.000Z"
+    },
+    "quotes": [
+      {
+        "accepted_at": "1970-01-01T00:00:00.000Z",
+        "approved_by_rfq_at": "1970-01-01T00:00:00.000Z",
+        "can_dispatch": true,
+        "carrier": {
+          "accounts_receivable_email": "string",
+          "approved_at": "1970-01-01T00:00:00.000Z",
+          "billing_address": {
+            "address_1": "string",
+            "address_2": "string",
+            "city": "string",
+            "country": "string",
+            "created_at": "1970-01-01T00:00:00.000Z",
+            "formatted_address": "string",
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "latitude": 0,
+            "longitude": 0,
+            "phone_number": "string",
+            "postal_code": "string",
+            "state_province": "string",
+            "timezone": "string",
+            "updated_at": "1970-01-01T00:00:00.000Z"
+          },
+          "created_at": "1970-01-01T00:00:00.000Z",
+          "custom_data": {},
+          "dba_name": "string",
+          "display_name": "string",
+          "display_primary_email": "string",
+          "display_primary_phone_number": "string",
+          "eld_providers": [
+            {
+              "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "name": "string",
+              "status": "Active"
+            }
+          ],
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "mailing_address": {
+            "address_1": "string",
+            "address_2": "string",
+            "city": "string",
+            "country": "string",
+            "created_at": "1970-01-01T00:00:00.000Z",
+            "formatted_address": "string",
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "latitude": 0,
+            "longitude": 0,
+            "phone_number": "string",
+            "postal_code": "string",
+            "state_province": "string",
+            "timezone": "string",
+            "updated_at": "1970-01-01T00:00:00.000Z"
+          },
+          "pickup_request_email": "string",
+          "primary_email": "string",
+          "primary_phone_number": "string",
+          "service_center_lookup_url": "string",
+          "updated_at": "1970-01-01T00:00:00.000Z",
+          "usdot_number": "string"
+        },
+        "charge_line_items": [
+          {
+            "is_provider_markup": true,
+            "quote": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          }
+        ],
+        "created_at": "1970-01-01T00:00:00.000Z",
+        "created_by_company": {
+          "billing_emails": ["string"],
+          "brokerage": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "carrier": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "created_at": "1970-01-01T00:00:00.000Z",
+          "dba_name": "string",
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "is_shipwell": true,
+          "name": "string",
+          "primary_email": "string",
+          "shipper": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "updated_at": "1970-01-01T00:00:00.000Z"
+        },
+        "created_by_user": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "currency": "USD",
+        "customer_markup": 0,
+        "delivery_date": "string",
+        "display_earliest_pickup": "string",
+        "earliest_pickup_date": "string",
+        "earliest_pickup_time": "10:05:08-02:30",
+        "equipment_type": {
+          "id": 1,
+          "machine_readable": "AUTO_CARRIER",
+          "name": "string"
+        },
+        "error_message": "string",
+        "expires_at": "1970-01-01T00:00:00.000Z",
+        "fedex_direct_quote": {
+          "carrier_code": "string",
+          "service_code": "string"
+        },
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "info_message": "string",
+        "is_csp_rate": true,
+        "is_failure": true,
+        "lane_type": "UNSPECIFIED",
+        "mode": {
+          "code": "string",
+          "description": "string",
+          "id": 1
+        },
+        "provider_logo_url": "string",
+        "quoted_non_dispatchable_accessorials": [
+          {
+            "code": "string",
+            "currency_unit": "string",
+            "description": "string",
+            "id": 1,
+            "is_charge_code": true,
+            "long_description": "string",
+            "price": 0,
+            "type": "string"
+          }
+        ],
+        "reference_number": "string",
+        "revoked_at": "1970-01-01T00:00:00.000Z",
+        "rfq": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "service_level": {
+          "code": "string",
+          "description": "string",
+          "id": 1
+        },
+        "source_type": "INSTANT",
+        "spot_negotiation_quote": {
+          "declined_at": "1970-01-01T00:00:00.000Z",
+          "spot_negotiation": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "total": 0,
+        "transit_days": 1,
+        "updated_at": "1970-01-01T00:00:00.000Z",
+        "ups_direct_quote": {
+          "carrier_code": "string",
+          "service_code": "string"
+        },
+        "usps_direct_quote": {
+          "carrier_code": "string",
+          "service_code": "string"
+        }
+      }
+    ],
+    "spot_negotiations": [
+      {
+        "carrier_status": "ACTIVE",
+        "closed_by_customer_at": "1970-01-01T00:00:00.000Z",
+        "closed_by_vendor_at": "1970-01-01T00:00:00.000Z",
+        "created_at": "1970-01-01T00:00:00.000Z",
+        "customer": {
+          "billing_emails": ["string"],
+          "brokerage": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "carrier": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "created_at": "1970-01-01T00:00:00.000Z",
+          "dba_name": "string",
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "is_shipwell": true,
+          "name": "string",
+          "primary_email": "string",
+          "shipper": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "updated_at": "1970-01-01T00:00:00.000Z"
+        },
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "involved_customer_users": [
+          {
+            "avatar": "string",
+            "company_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "completed_onboarding": true,
+            "created_at": "1970-01-01T00:00:00.000Z",
+            "custom_data": {},
+            "default_shipment_tags": ["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
+            "email": "string",
+            "feature_flag_new_shipment_details": true,
+            "feature_flag_new_ui": true,
+            "first_name": "string",
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "is_quoting_limited_user": true,
+            "last_login": "1970-01-01T00:00:00.000Z",
+            "last_name": "string",
+            "password": "string",
+            "permissions": ["string"],
+            "phone_number": "string",
+            "subscribed_to_loadboard": true,
+            "timezone": "string",
+            "updated_at": "1970-01-01T00:00:00.000Z"
+          }
+        ],
+        "involved_vendor_users": [
+          {
+            "avatar": "string",
+            "company_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "completed_onboarding": true,
+            "created_at": "1970-01-01T00:00:00.000Z",
+            "custom_data": {},
+            "default_shipment_tags": ["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
+            "email": "string",
+            "feature_flag_new_shipment_details": true,
+            "feature_flag_new_ui": true,
+            "first_name": "string",
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "is_quoting_limited_user": true,
+            "last_login": "1970-01-01T00:00:00.000Z",
+            "last_name": "string",
+            "password": "string",
+            "permissions": ["string"],
+            "phone_number": "string",
+            "subscribed_to_loadboard": true,
+            "timezone": "string",
+            "updated_at": "1970-01-01T00:00:00.000Z"
+          }
+        ],
+        "is_most_recent_winner": true,
+        "message_count": 1,
+        "quotes": [
+          {
+            "accepted_at": "1970-01-01T00:00:00.000Z",
+            "approved_by_rfq_at": "1970-01-01T00:00:00.000Z",
+            "can_dispatch": true,
+            "carrier": {
+              "accounts_receivable_email": "string",
+              "approved_at": "1970-01-01T00:00:00.000Z",
+              "billing_address": {
+                "address_1": "string",
+                "address_2": "string",
+                "city": "string",
+                "country": "string",
+                "created_at": "1970-01-01T00:00:00.000Z",
+                "formatted_address": "string",
+                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                "latitude": 0,
+                "longitude": 0,
+                "phone_number": "string",
+                "postal_code": "string",
+                "state_province": "string",
+                "timezone": "string",
+                "updated_at": "1970-01-01T00:00:00.000Z"
+              },
+              "created_at": "1970-01-01T00:00:00.000Z",
+              "custom_data": {},
+              "dba_name": "string",
+              "display_name": "string",
+              "display_primary_email": "string",
+              "display_primary_phone_number": "string",
+              "eld_providers": [
+                {
+                  "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                  "name": "string",
+                  "status": "Active"
+                }
+              ],
+              "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "mailing_address": {
+                "address_1": "string",
+                "address_2": "string",
+                "city": "string",
+                "country": "string",
+                "created_at": "1970-01-01T00:00:00.000Z",
+                "formatted_address": "string",
+                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                "latitude": 0,
+                "longitude": 0,
+                "phone_number": "string",
+                "postal_code": "string",
+                "state_province": "string",
+                "timezone": "string",
+                "updated_at": "1970-01-01T00:00:00.000Z"
+              },
+              "pickup_request_email": "string",
+              "primary_email": "string",
+              "primary_phone_number": "string",
+              "service_center_lookup_url": "string",
+              "updated_at": "1970-01-01T00:00:00.000Z",
+              "usdot_number": "string"
+            },
+            "charge_line_items": [
+              {
+                "is_provider_markup": true,
+                "quote": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+              }
+            ],
+            "created_at": "1970-01-01T00:00:00.000Z",
+            "created_by_company": {
+              "billing_emails": ["string"],
+              "brokerage": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "carrier": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "created_at": "1970-01-01T00:00:00.000Z",
+              "dba_name": "string",
+              "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "is_shipwell": true,
+              "name": "string",
+              "primary_email": "string",
+              "shipper": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "updated_at": "1970-01-01T00:00:00.000Z"
+            },
+            "created_by_user": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "currency": "USD",
+            "customer_markup": 0,
+            "delivery_date": "string",
+            "display_earliest_pickup": "string",
+            "earliest_pickup_date": "string",
+            "earliest_pickup_time": "10:05:08-02:30",
+            "equipment_type": {
+              "id": 1,
+              "machine_readable": "AUTO_CARRIER",
+              "name": "string"
+            },
+            "error_message": "string",
+            "expires_at": "1970-01-01T00:00:00.000Z",
+            "fedex_direct_quote": {
+              "carrier_code": "string",
+              "service_code": "string"
+            },
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "info_message": "string",
+            "is_csp_rate": true,
+            "is_failure": true,
+            "lane_type": "UNSPECIFIED",
+            "mode": {
+              "code": "string",
+              "description": "string",
+              "id": 1
+            },
+            "provider_logo_url": "string",
+            "quoted_non_dispatchable_accessorials": [
+              {
+                "code": "string",
+                "currency_unit": "string",
+                "description": "string",
+                "id": 1,
+                "is_charge_code": true,
+                "long_description": "string",
+                "price": 0,
+                "type": "string"
+              }
+            ],
+            "reference_number": "string",
+            "revoked_at": "1970-01-01T00:00:00.000Z",
+            "rfq": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "service_level": {
+              "code": "string",
+              "description": "string",
+              "id": 1
+            },
+            "source_type": "INSTANT",
+            "spot_negotiation_quote": {
+              "declined_at": "1970-01-01T00:00:00.000Z",
+              "spot_negotiation": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+            },
+            "total": 0,
+            "transit_days": 1,
+            "updated_at": "1970-01-01T00:00:00.000Z",
+            "ups_direct_quote": {
+              "carrier_code": "string",
+              "service_code": "string"
+            },
+            "usps_direct_quote": {
+              "carrier_code": "string",
+              "service_code": "string"
+            }
+          }
+        ],
+        "updated_at": "1970-01-01T00:00:00.000Z",
+        "vendor": {
+          "billing_emails": ["string"],
+          "brokerage": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "carrier": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "created_at": "1970-01-01T00:00:00.000Z",
+          "dba_name": "string",
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "is_shipwell": true,
+          "name": "string",
+          "primary_email": "string",
+          "shipper": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "updated_at": "1970-01-01T00:00:00.000Z"
+        }
+      }
+    ],
+    "ups_specific_options": {
+      "account": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "alcohol_recipient_type": "CONSUMER",
+      "packaging": "UPS_LETTER",
+      "service_code": "GROUND"
+    },
+    "usps_specific_options": {
+      "account": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "packaging": "USPS_LETTER",
+      "service_code": "FIRST"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

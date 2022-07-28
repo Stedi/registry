@@ -1,0 +1,114 @@
+{
+  "description": "FMCSA census vendor data",
+  "properties": {
+    "active": {
+      "type": "boolean"
+    },
+    "cdl_drivers": {
+      "format": "int32",
+      "type": "integer"
+    },
+    "hazmat_indicator": {
+      "type": "boolean"
+    },
+    "identification_codes": {
+      "items": {
+        "description": "Enum of special reserved IdentyfingCode types",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "name"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "operating_authority": {
+      "items": {
+        "description": "Operating authority details for a carrier or broker",
+        "properties": {
+          "broker_status": {
+            "type": "string"
+          },
+          "common_status": {
+            "type": "string"
+          },
+          "contract_status": {
+            "type": "string"
+          },
+          "id_code_type": {
+            "type": "string"
+          },
+          "id_code_value": {
+            "type": "string"
+          }
+        },
+        "required": ["id_code_type", "id_code_value", "common_status", "contract_status", "broker_status"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "revoked": {
+      "type": "boolean"
+    },
+    "safety_rating": {
+      "type": "string"
+    },
+    "safety_rating_date": {
+      "type": "string"
+    },
+    "total_buses": {
+      "format": "int32",
+      "type": "integer"
+    },
+    "total_drivers": {
+      "format": "int32",
+      "type": "integer"
+    },
+    "total_power_units": {
+      "format": "int32",
+      "type": "integer"
+    },
+    "total_trucks": {
+      "format": "int32",
+      "type": "integer"
+    },
+    "usdot": {
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "default": {
+    "active": true,
+    "cdl_drivers": 1,
+    "hazmat_indicator": true,
+    "identification_codes": [
+      {
+        "id": "string",
+        "name": "string"
+      }
+    ],
+    "operating_authority": [
+      {
+        "broker_status": "string",
+        "common_status": "string",
+        "contract_status": "string",
+        "id_code_type": "string",
+        "id_code_value": "string"
+      }
+    ],
+    "revoked": true,
+    "safety_rating": "string",
+    "safety_rating_date": "string",
+    "total_buses": 1,
+    "total_drivers": 1,
+    "total_power_units": 1,
+    "total_trucks": 1,
+    "usdot": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,108 @@
+{
+  "description": "Custom Field configuration",
+  "properties": {
+    "allowed_values": {
+      "items": {
+        "description": "Allowed values for the Custom Field Selection field type",
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": ["label", "value"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "company": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "default_value": {
+      "type": "string"
+    },
+    "display_order": {
+      "format": "int32",
+      "type": "integer"
+    },
+    "entity_types": {
+      "items": {
+        "enum": [
+          "purchase_order",
+          "purchase_order_line_item",
+          "purchase_order_stop",
+          "shipment",
+          "shipment_line_item",
+          "shipment_stop"
+        ],
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "field_type": {
+      "enum": ["STRING", "BOOLEAN", "DATETIME", "SELECTION"],
+      "type": "string"
+    },
+    "id": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "type": "string"
+    }
+  },
+  "required": ["entity_type", "name", "label", "field_type", "display_order"],
+  "type": "object",
+  "default": {
+    "allowed_values": [
+      {
+        "created_at": "1970-01-01T00:00:00.000Z",
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "label": "string",
+        "updated_at": "1970-01-01T00:00:00.000Z",
+        "value": "string"
+      }
+    ],
+    "company": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "created_at": "1970-01-01T00:00:00.000Z",
+    "default_value": "string",
+    "display_order": 1,
+    "entity_types": ["purchase_order"],
+    "field_type": "STRING",
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "label": "string",
+    "name": "string",
+    "required": true,
+    "updated_at": "1970-01-01T00:00:00.000Z"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,153 @@
+{
+  "properties": {
+    "account_number": {
+      "type": "string"
+    },
+    "billing_address": {
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "country_code": {
+          "type": "string"
+        },
+        "line_1": {
+          "type": "string"
+        },
+        "line_2": {
+          "type": "string"
+        },
+        "postal_code": {
+          "type": "string"
+        },
+        "state_or_province": {
+          "type": "string"
+        }
+      },
+      "required": ["line_1", "city", "state_or_province", "postal_code", "country_code"],
+      "type": "object"
+    },
+    "contact": {
+      "properties": {
+        "company_name": {
+          "type": "string"
+        },
+        "email_address": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "phone_number": {
+          "type": "string"
+        }
+      },
+      "required": ["first_name", "last_name", "company_name", "phone_number", "email_address"],
+      "type": "object"
+    },
+    "freight_account": {
+      "allOf": [
+        {
+          "properties": {
+            "city": {
+              "type": "string"
+            },
+            "country_code": {
+              "type": "string"
+            },
+            "line_1": {
+              "type": "string"
+            },
+            "line_2": {
+              "type": "string"
+            },
+            "postal_code": {
+              "type": "string"
+            },
+            "state_or_province": {
+              "type": "string"
+            }
+          },
+          "required": ["line_1", "city", "state_or_province", "postal_code", "country_code"],
+          "type": "object"
+        },
+        {
+          "properties": {
+            "freight_account_number": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    "secondary_email": {
+      "type": "string"
+    },
+    "shipping_address": {
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "country_code": {
+          "type": "string"
+        },
+        "line_1": {
+          "type": "string"
+        },
+        "line_2": {
+          "type": "string"
+        },
+        "postal_code": {
+          "type": "string"
+        },
+        "state_or_province": {
+          "type": "string"
+        }
+      },
+      "required": ["line_1", "city", "state_or_province", "postal_code", "country_code"],
+      "type": "object"
+    },
+    "smart_post_hub_id": {
+      "type": "integer"
+    }
+  },
+  "required": ["account_number", "shipping_address", "contact", "billing_address"],
+  "type": "object",
+  "default": {
+    "account_number": "string",
+    "billing_address": {
+      "city": "string",
+      "country_code": "string",
+      "line_1": "string",
+      "line_2": "string",
+      "postal_code": "string",
+      "state_or_province": "string"
+    },
+    "contact": {
+      "company_name": "string",
+      "email_address": "string",
+      "first_name": "string",
+      "last_name": "string",
+      "phone_number": "string"
+    },
+    "freight_account": {
+      "freight_account_number": "string"
+    },
+    "secondary_email": "string",
+    "shipping_address": {
+      "city": "string",
+      "country_code": "string",
+      "line_1": "string",
+      "line_2": "string",
+      "postal_code": "string",
+      "state_or_province": "string"
+    },
+    "smart_post_hub_id": 1
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

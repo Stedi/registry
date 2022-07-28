@@ -1,0 +1,29 @@
+{
+  "properties": {
+    "event_type": {
+      "enum": ["ARRIVAL", "AT_LOCATION", "ATTEMPT", "COMPLETED", "DEPARTURE", "EXCEPTION", "MISSED"],
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "stop_sequence_id": {
+      "minimum": 1,
+      "type": "number"
+    }
+  },
+  "required": ["stop_sequence_id", "recorded_at", "event_type"],
+  "title": "TenderStopLocationEventRequest",
+  "type": "object",
+  "default": {
+    "event_type": "ARRIVAL",
+    "notes": "string",
+    "recorded_at": "1970-01-01T00:00:00.000Z",
+    "stop_sequence_id": 0
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

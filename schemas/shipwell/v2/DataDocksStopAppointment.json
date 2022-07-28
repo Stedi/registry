@@ -1,0 +1,66 @@
+{
+  "properties": {
+    "appointment": {
+      "description": "Appointment info coming from DataDocks",
+      "properties": {
+        "appointment_number": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "booking_information": {
+          "description": "Booking window for a DataDocks event",
+          "properties": {
+            "time_in": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "time_out": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "has_scheduled_times": {
+          "description": "If true, this appointment has all in/out times scheduled",
+          "type": "boolean"
+        },
+        "purchase_orders": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "status": {
+          "enum": ["booked", "cancelled", "drop", "late", "needs_time", "no_show", "pending", "unscheduled"],
+          "type": "string"
+        },
+        "type_of_shipment": {
+          "enum": ["inbound", "other", "outbound"],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "stop": {
+      "description": "Id of the stop that may have an appointment",
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "default": {
+    "appointment": {
+      "appointment_number": 1,
+      "booking_information": {
+        "time_in": "1970-01-01T00:00:00.000Z",
+        "time_out": "1970-01-01T00:00:00.000Z"
+      },
+      "has_scheduled_times": true,
+      "purchase_orders": ["string"],
+      "status": "booked",
+      "type_of_shipment": "inbound"
+    },
+    "stop": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

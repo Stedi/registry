@@ -1,0 +1,157 @@
+{
+  "allOf": [
+    {
+      "properties": {
+        "bill_to_account_number": {
+          "type": "string"
+        },
+        "bill_to_country_code": {
+          "type": "string"
+        },
+        "bill_to_payment_type": {
+          "enum": ["COLLECT", "RECIPIENT", "SENDER", "THIRD_PARTY"],
+          "type": "string"
+        },
+        "bill_to_postal_code": {
+          "type": "string"
+        },
+        "cod_collection_amount": {
+          "format": "float",
+          "type": "number"
+        },
+        "cod_collection_currency": {
+          "default": "USD",
+          "enum": ["CAD", "USD"],
+          "type": "string"
+        },
+        "cod_collection_type": {
+          "enum": ["ANY", "COMPANY_CHECK", "GUARANTEED_FUNDS", "PERSONAL_CHECK"],
+          "type": "string"
+        },
+        "customer_transaction_id": {
+          "type": "string"
+        },
+        "signature_option_release_number": {
+          "type": "string"
+        },
+        "signature_option_signature_type": {
+          "enum": ["ADULT_SIGNATURE", "DIRECT_SIGNATURE", "NO_SIGNATURE", "INDIRECT_SIGNATURE", "SERVICE_DEFAULT"],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    {
+      "properties": {
+        "account": {
+          "description": "Id of the FedexAccount to dispatch or rate with, if using FedEx direct rating or dispatch",
+          "format": "uuid",
+          "type": "string"
+        },
+        "alcohol_recipient_type": {
+          "enum": ["CONSUMER", "LICENSEE"],
+          "type": "string"
+        },
+        "battery_material_type": {
+          "enum": ["LITHIUM_ION", "LITHIUM_METAL"],
+          "type": "string"
+        },
+        "battery_packaging_type": {
+          "enum": ["CONTAINED_IN_EQUIPMENT", "PACKED_WITH_EQUIPMENT"],
+          "type": "string"
+        },
+        "dropoff_type": {
+          "enum": ["REGULAR_PICKUP", "STATION", "REQUEST_COURIER", "BUSINESS_SERVICE_CENTER", "DROP_BOX"],
+          "type": "string"
+        },
+        "home_delivery_date": {
+          "format": "date-'date-time'",
+          "type": "string"
+        },
+        "home_delivery_phone_number": {
+          "type": "string"
+        },
+        "home_delivery_type": {
+          "enum": ["APPOINTMENT", "DATE_CERTAIN", "EVENING"],
+          "type": "string"
+        },
+        "packaging": {
+          "type": "string"
+        },
+        "service_code": {
+          "enum": [
+            "FEDEX_1_DAY_FREIGHT",
+            "FEDEX_2_DAY",
+            "FEDEX_2_DAY_AM",
+            "FEDEX_2_DAY_FREIGHT",
+            "FEDEX_3_DAY_FREIGHT",
+            "FEDEX_EXPRESS_SAVER",
+            "FEDEX_FIRST_FREIGHT",
+            "FEDEX_FREIGHT_ECONOMY",
+            "FEDEX_FREIGHT_PRIORITY",
+            "FEDEX_GROUND",
+            "FIRST_OVERNIGHT",
+            "GROUND_HOME_DELIVERY",
+            "INTERNATIONAL_ECONOMY",
+            "INTERNATIONAL_ECONOMY_FREIGHT",
+            "INTERNATIONAL_FIRST",
+            "INTERNATIONAL_PRIORITY",
+            "INTERNATIONAL_PRIORITY_EXPRESS",
+            "INTERNATIONAL_PRIORITY_FREIGHT",
+            "PRIORITY_OVERNIGHT",
+            "SMART_POST",
+            "STANDARD_OVERNIGHT",
+            "EUROPE_FIRST_INTERNATIONAL_PRIORITY",
+            "FEDEX_DISTANCE_DEFERRED",
+            "FEDEX_NEXT_DAY_AFTERNOON",
+            "FEDEX_NEXT_DAY_EARLY_MORNING",
+            "FEDEX_NEXT_DAY_END_OF_DAY",
+            "FEDEX_NEXT_DAY_FREIGHT",
+            "FEDEX_NEXT_DAY_MID_MORNING",
+            "SAME_DAY",
+            "SAME_DAY_CITY"
+          ],
+          "type": "string"
+        },
+        "shipment_services": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "smart_post_indicia_type": {
+          "enum": [
+            "MEDIA_MAIL",
+            "PARCEL_SELECT",
+            "PRESORTED_BOUND_PRINTED_MATTER",
+            "PRESORTED_STANDARD",
+            "PARCEL_RETURN"
+          ],
+          "type": "string"
+        },
+        "use_preferred_rates": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  ],
+  "description": "Shipment rating and dispatch options specific to FedEx",
+  "default": {
+    "account": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "alcohol_recipient_type": "CONSUMER",
+    "battery_material_type": "LITHIUM_ION",
+    "battery_packaging_type": "CONTAINED_IN_EQUIPMENT",
+    "dropoff_type": "REGULAR_PICKUP",
+    "home_delivery_date": "string",
+    "home_delivery_phone_number": "string",
+    "home_delivery_type": "APPOINTMENT",
+    "packaging": "string",
+    "service_code": "FEDEX_1_DAY_FREIGHT",
+    "shipment_services": ["string"],
+    "smart_post_indicia_type": "MEDIA_MAIL",
+    "use_preferred_rates": true
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

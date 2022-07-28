@@ -1,0 +1,234 @@
+{
+  "allOf": [
+    {
+      "properties": {
+        "country_of_manufacture": {
+          "example": "US",
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "freight_class": {
+          "enum": [
+            "50",
+            "55",
+            "60",
+            "65",
+            "70",
+            "77.5",
+            "85",
+            "92.5",
+            "100",
+            "110",
+            "125",
+            "150",
+            "175",
+            "200",
+            "250",
+            "300",
+            "400",
+            "500"
+          ],
+          "type": "string"
+        },
+        "hazmat_hazard_class": {
+          "type": "string"
+        },
+        "hazmat_identification_number": {
+          "type": "string"
+        },
+        "hazmat_packing_group": {
+          "enum": ["I", "II", "III"],
+          "type": "string"
+        },
+        "hazmat_proper_shipping_name": {
+          "type": "string"
+        },
+        "height": {
+          "format": "float",
+          "type": "number"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "length": {
+          "format": "float",
+          "type": "number"
+        },
+        "length_unit": {
+          "enum": ["CM", "IN"],
+          "type": "string"
+        },
+        "nmfc_item_code": {
+          "type": "string"
+        },
+        "nmfc_sub_code": {
+          "type": "string"
+        },
+        "package_type": {
+          "enum": [
+            "BAG",
+            "BALE",
+            "BOX",
+            "BUCKET",
+            "BUNDLE",
+            "CAN",
+            "CARTON",
+            "CASE",
+            "COIL",
+            "CRATE",
+            "CYLINDER",
+            "DRUM",
+            "FLOOR_LOADED",
+            "PAIL",
+            "PACKAGE",
+            "PIECES",
+            "PKG",
+            "PLT",
+            "REEL",
+            "ROLL",
+            "SKID",
+            "TUBE"
+          ],
+          "type": "string"
+        },
+        "package_weight": {
+          "format": "float",
+          "type": "number"
+        },
+        "piece_type": {
+          "enum": [
+            "BAG",
+            "BALE",
+            "BOX",
+            "BUCKET",
+            "BUNDLE",
+            "CAN",
+            "CARTON",
+            "CASE",
+            "COIL",
+            "CRATE",
+            "CYLINDER",
+            "DRUM",
+            "PAIL",
+            "PACKAGE",
+            "PIECES",
+            "REEL",
+            "ROLL",
+            "SKID",
+            "TUBE"
+          ],
+          "type": "string"
+        },
+        "product_ref": {
+          "type": "string"
+        },
+        "provider_specific_packaging": {
+          "description": "Provider-specific type of packaging used for the product",
+          "type": "string"
+        },
+        "refrigeration_max_temp": {
+          "format": "float",
+          "type": "number"
+        },
+        "refrigeration_min_temp": {
+          "format": "float",
+          "type": "number"
+        },
+        "refrigeration_required": {
+          "type": "boolean"
+        },
+        "stackable": {
+          "type": "boolean"
+        },
+        "temp_unit": {
+          "enum": ["F", "C"],
+          "type": "string"
+        },
+        "value_per_piece": {
+          "format": "float",
+          "type": "number"
+        },
+        "value_per_piece_currency": {
+          "enum": ["CAD", "USD"],
+          "type": "string"
+        },
+        "weight_unit": {
+          "enum": ["KG", "LB"],
+          "type": "string"
+        },
+        "width": {
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    {
+      "properties": {
+        "custom_data": {
+          "additionalProperties": {},
+          "description": "Custom data for ShipmentLineItem",
+          "type": "object"
+        },
+        "dry_ice_unit": {
+          "default": "LB",
+          "type": "string"
+        },
+        "dry_ice_weight": {
+          "format": "float",
+          "type": "number"
+        },
+        "insured_value": {
+          "type": "number"
+        },
+        "insured_value_currency": {
+          "default": "USD",
+          "enum": ["CAD", "USD"],
+          "type": "string"
+        },
+        "purchase_order": {
+          "description": "Optional id of PurchaseOrder to which line item is associated",
+          "format": "uuid",
+          "type": "string"
+        },
+        "purchase_order_line_item_id": {
+          "description": "Optional id of PurchaseOrderLineItem to which shipment line item is associated",
+          "format": "uuid",
+          "type": "string"
+        },
+        "total_line_item_weight": {
+          "description": "Read-only weight of the ShipmentLineItem",
+          "format": "float",
+          "type": "number"
+        },
+        "total_packages": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "total_pieces": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  ],
+  "required": ["id"],
+  "type": "object",
+  "default": {
+    "custom_data": {},
+    "dry_ice_unit": "LB",
+    "dry_ice_weight": 0,
+    "insured_value": 0,
+    "insured_value_currency": "USD",
+    "purchase_order": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "purchase_order_line_item_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "total_line_item_weight": 0,
+    "total_packages": 1,
+    "total_pieces": 1
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

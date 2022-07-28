@@ -1,0 +1,182 @@
+{
+  "description": "Details of a Shipment pickup",
+  "properties": {
+    "address": {
+      "properties": {
+        "address_1": {
+          "type": "string"
+        },
+        "address_2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "formatted_address": {
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "latitude": {
+          "format": "float",
+          "type": "number"
+        },
+        "longitude": {
+          "format": "float",
+          "type": "number"
+        },
+        "phone_number": {
+          "type": "string"
+        },
+        "postal_code": {
+          "type": "string"
+        },
+        "state_province": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "fedex_account": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "is_regularly_scheduled": {
+      "type": "boolean"
+    },
+    "point_of_contact": {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "job_title": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "phone_number": {
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": ["first_name"],
+      "type": "object"
+    },
+    "provider_carrier_code": {
+      "type": "string"
+    },
+    "provider_code": {
+      "type": "string"
+    },
+    "scheduled_date": {
+      "format": "date",
+      "type": "string"
+    },
+    "shipments": {
+      "items": {
+        "format": "uuid",
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "special_instructions": {
+      "type": "string"
+    },
+    "time_window_end": {
+      "format": "time",
+      "type": "string"
+    },
+    "time_window_start": {
+      "format": "time",
+      "type": "string"
+    },
+    "ups_account": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "usps_account": {
+      "format": "uuid",
+      "type": "string"
+    }
+  },
+  "required": [
+    "scheduled_date",
+    "time_window_start",
+    "time_window_end",
+    "point_of_contact",
+    "provider_code",
+    "address"
+  ],
+  "type": "object",
+  "default": {
+    "address": {
+      "address_1": "string",
+      "address_2": "string",
+      "city": "string",
+      "country": "string",
+      "created_at": "1970-01-01T00:00:00.000Z",
+      "formatted_address": "string",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "latitude": 0,
+      "longitude": 0,
+      "phone_number": "string",
+      "postal_code": "string",
+      "state_province": "string",
+      "timezone": "string",
+      "updated_at": "1970-01-01T00:00:00.000Z"
+    },
+    "fedex_account": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "is_regularly_scheduled": true,
+    "point_of_contact": {
+      "created_at": "1970-01-01T00:00:00.000Z",
+      "email": "string",
+      "first_name": "string",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "job_title": "string",
+      "last_name": "string",
+      "phone_number": "string",
+      "updated_at": "1970-01-01T00:00:00.000Z"
+    },
+    "provider_carrier_code": "string",
+    "provider_code": "string",
+    "scheduled_date": "1970-01-01",
+    "shipments": ["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
+    "special_instructions": "string",
+    "time_window_end": "10:05:08-02:30",
+    "time_window_start": "10:05:08-02:30",
+    "ups_account": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "usps_account": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

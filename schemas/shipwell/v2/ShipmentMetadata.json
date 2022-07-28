@@ -1,0 +1,150 @@
+{
+  "description": "Contextual metadata about a shipment",
+  "properties": {
+    "alert_level": {
+      "enum": ["HIGH", "MEDIUM", "LOW"],
+      "type": "string"
+    },
+    "alert_message": {
+      "type": "string"
+    },
+    "archived": {
+      "type": "boolean"
+    },
+    "automation_enabled": {
+      "type": "boolean"
+    },
+    "bill_to_override": {
+      "description": "Collection of bill-to information that will render on Shipment documents\n",
+      "properties": {
+        "company_address": {
+          "type": "string"
+        },
+        "company_name": {
+          "type": "string"
+        },
+        "contact_email": {
+          "type": "string"
+        },
+        "contact_phone": {
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "direction": {
+          "enum": ["PREPAID", "COLLECT", "3RD_PARTY"],
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": ["company_address", "company_name", "contact_email", "contact_phone", "direction"],
+      "type": "object"
+    },
+    "buy_it_now_amount": {
+      "format": "float",
+      "type": "number"
+    },
+    "buy_it_now_amount_currency": {
+      "enum": ["CAD", "USD"],
+      "type": "string"
+    },
+    "custom_data": {
+      "additionalProperties": {},
+      "description": "Custom data for ShipmentMetadata",
+      "type": "object"
+    },
+    "customer_side_accessorial_charge_table": {
+      "description": "Link to the AccessorialChargeTable used to access charges on the shipment customer",
+      "format": "uuid",
+      "type": "string"
+    },
+    "customer_side_fuel_surcharge_table": {
+      "description": "Link to the FuelSurchargeTable used to access charges on the shipment customer",
+      "format": "uuid",
+      "type": "string"
+    },
+    "has_open_auction": {
+      "type": "boolean"
+    },
+    "load_board_enabled": {
+      "type": "boolean"
+    },
+    "load_board_id": {
+      "type": "string"
+    },
+    "max_buy_amount": {
+      "type": "number"
+    },
+    "max_buy_amount_currency": {
+      "enum": ["CAD", "USD"],
+      "type": "string"
+    },
+    "open": {
+      "type": "boolean"
+    },
+    "pending_tender_acceptance": {
+      "type": "boolean"
+    },
+    "tags": {
+      "description": "List of ShipmentTag ids",
+      "items": {
+        "format": "uuid",
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "vendor_side_accessorial_charge_table": {
+      "description": "Link to the AccessorialChargeTable used to access charges on the shipment vendor",
+      "format": "uuid",
+      "type": "string"
+    },
+    "vendor_side_fuel_surcharge_table": {
+      "description": "Link to the FuelSurchargeTable used to access charges on the shipment vendor",
+      "format": "uuid",
+      "type": "string"
+    }
+  },
+  "required": ["open", "tags"],
+  "type": "object",
+  "default": {
+    "alert_level": "HIGH",
+    "alert_message": "string",
+    "archived": true,
+    "automation_enabled": true,
+    "bill_to_override": {
+      "company_address": "string",
+      "company_name": "string",
+      "contact_email": "string",
+      "contact_phone": "string",
+      "created_at": "1970-01-01T00:00:00.000Z",
+      "direction": "PREPAID",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "updated_at": "1970-01-01T00:00:00.000Z"
+    },
+    "buy_it_now_amount": 0,
+    "buy_it_now_amount_currency": "CAD",
+    "custom_data": {},
+    "customer_side_accessorial_charge_table": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "customer_side_fuel_surcharge_table": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "has_open_auction": true,
+    "load_board_enabled": true,
+    "load_board_id": "string",
+    "max_buy_amount": 0,
+    "max_buy_amount_currency": "CAD",
+    "open": true,
+    "pending_tender_acceptance": true,
+    "tags": ["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
+    "vendor_side_accessorial_charge_table": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "vendor_side_fuel_surcharge_table": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

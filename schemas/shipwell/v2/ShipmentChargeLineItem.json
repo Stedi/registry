@@ -1,0 +1,113 @@
+{
+  "allOf": [
+    {
+      "properties": {
+        "amount": {
+          "description": "Total amount of the line item, or unit_amount times unit_quantity\n",
+          "format": "float",
+          "type": "number"
+        },
+        "category": {
+          "enum": [
+            "ACC",
+            "ADJUSTMENT",
+            "DETENTION",
+            "FSC",
+            "FUEL",
+            "INSURANCE",
+            "LAYOVER",
+            "LH",
+            "OTHER",
+            "SF",
+            "TAX",
+            "TEAMDRIVERS",
+            "TONU",
+            "VARIANCE"
+          ],
+          "type": "string"
+        },
+        "charge_code": {
+          "description": "Standardized code for a type of line item charge",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "id": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "unit_amount": {
+          "description": "Cost of one unit of the line item",
+          "format": "float",
+          "type": "number"
+        },
+        "unit_amount_currency": {
+          "default": "USD",
+          "enum": ["CAD", "USD"],
+          "type": "string"
+        },
+        "unit_name": {
+          "description": "Descriptor for one unit of the line item",
+          "type": "string"
+        },
+        "unit_quantity": {
+          "default": 1,
+          "format": "float",
+          "type": "number"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": ["category", "unit_amount", "unit_quantity"],
+      "type": "object"
+    },
+    {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "prepaid_amount": {
+          "description": "Amount on the charge line item that is prepaid. Assumed to always be in the currency of the unit amount",
+          "format": "float",
+          "type": "number"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "vendor_assignment": {
+          "description": "Id of the VendorAssignment to which this line item is related",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  ],
+  "description": "Line item recording a charge that some vendor is charging\ntheir customer for a shipment\n",
+  "type": "object",
+  "default": {
+    "created_at": "1970-01-01T00:00:00.000Z",
+    "prepaid_amount": 0,
+    "updated_at": "1970-01-01T00:00:00.000Z",
+    "vendor_assignment": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

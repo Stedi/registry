@@ -1,0 +1,66 @@
+{
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "resolve_description": {
+      "type": "string"
+    },
+    "short_description": {
+      "type": "string"
+    },
+    "threshold_definition": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "max": {
+          "type": "integer"
+        },
+        "min": {
+          "type": "integer"
+        },
+        "type": {
+          "enum": ["COUNTER", "TAG"],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "title": {
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "LATE_PICKUP",
+        "LATE_DELIVERY",
+        "RUNNING_LATE",
+        "CARRIER_NOT_ASSIGNED",
+        "NOT_TRACKING",
+        "INACTIVE_CARRIER",
+        "TAGGED_SHIPMENT",
+        "WATCHED_SHIPMENT"
+      ],
+      "type": "string"
+    },
+    "unique": {
+      "type": "boolean"
+    }
+  },
+  "type": "object",
+  "default": {
+    "description": "string",
+    "resolve_description": "string",
+    "short_description": "string",
+    "threshold_definition": {
+      "description": "string",
+      "max": 1,
+      "min": 1,
+      "type": "COUNTER"
+    },
+    "title": "string",
+    "type": "LATE_PICKUP",
+    "unique": true
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

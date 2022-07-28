@@ -1,0 +1,622 @@
+{
+  "properties": {
+    "customer": {
+      "properties": {
+        "duns": {
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "TenderRequestCustomer",
+      "type": "object"
+    },
+    "equipment": {
+      "properties": {
+        "temperature_control": {
+          "properties": {
+            "lower_limit": {
+              "properties": {
+                "unit": {
+                  "enum": ["C", "F"],
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                }
+              },
+              "required": ["unit", "value"],
+              "title": "TenderRequestTemperature",
+              "type": "object"
+            },
+            "upper_limit": {
+              "properties": {
+                "unit": {
+                  "enum": ["C", "F"],
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                }
+              },
+              "required": ["unit", "value"],
+              "title": "TenderRequestTemperature",
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "type_code": {
+          "enum": [
+            "BULK",
+            "CONTAINER",
+            "CONESTOGA",
+            "DRY_VAN",
+            "DOUBLE_DROP",
+            "DROP_DECK",
+            "FLATBED",
+            "FLATBED_CONESTOGA",
+            "OTHER",
+            "REEFER",
+            "TRUCK_AND_TRAILER",
+            "VAN_VENTED"
+          ],
+          "type": "string"
+        }
+      },
+      "required": ["type_code"],
+      "title": "TenderRequestEquipment",
+      "type": "object"
+    },
+    "isa": {
+      "properties": {
+        "external_edi_system_isa_id": {
+          "maxLength": 16,
+          "type": "string"
+        },
+        "external_edi_system_isa_id_qualifier": {
+          "maxLength": 2,
+          "type": "string"
+        }
+      },
+      "required": ["external_edi_system_isa_id", "external_edi_system_isa_id_qualifier"],
+      "title": "TenderExternalEDISystem",
+      "type": "object"
+    },
+    "shipment": {
+      "properties": {
+        "accessorials": {
+          "items": {
+            "enum": ["GUARANTEED", "HAZMAT", "NOTIFY_BEFORE_DELIVERY"],
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "bol_number": {
+          "maxLength": 256,
+          "type": "string"
+        },
+        "charges": {
+          "items": {
+            "properties": {
+              "category": {
+                "enum": [
+                  "ACC",
+                  "ADJUSTMENT",
+                  "DETENTION",
+                  "FSC",
+                  "FUEL",
+                  "INSURANCE",
+                  "LAYOVER",
+                  "LH",
+                  "OTHER",
+                  "SF",
+                  "TAX",
+                  "TEAMDRIVERS",
+                  "TONU",
+                  "VARIANCE"
+                ],
+                "type": "string"
+              },
+              "unit_amount": {
+                "format": "float",
+                "minimum": 0,
+                "type": "number"
+              },
+              "unit_name": {
+                "maxLength": 256,
+                "type": "string"
+              },
+              "unit_quantity": {
+                "format": "int64",
+                "minimum": 1,
+                "type": "number"
+              }
+            },
+            "required": ["unit_name", "unit_quantity", "unit_amount", "category"],
+            "title": "TenderRequestCharge",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "drayage_booking_number": {
+          "maxLength": 256,
+          "type": "string"
+        },
+        "drayage_chassis_number": {
+          "maxLength": 256,
+          "type": "string"
+        },
+        "drayage_container_number": {
+          "maxLength": 256,
+          "type": "string"
+        },
+        "drayage_seal_number": {
+          "maxLength": 256,
+          "type": "string"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "external_edi_system_shipment_id": {
+          "description": "The identifier for the shipment in an external EDI system",
+          "type": "string"
+        },
+        "pickup_number": {
+          "maxLength": 256,
+          "type": "string"
+        },
+        "pro_number": {
+          "maxLength": 256,
+          "type": "string"
+        },
+        "purchase_order_number": {
+          "maxLength": 256,
+          "type": "string"
+        },
+        "shipment_reference_id": {
+          "maxLength": 20,
+          "type": "string"
+        },
+        "shipper_reference_id": {
+          "maxLength": 256,
+          "type": "string"
+        },
+        "special_instructions": {
+          "type": "string"
+        },
+        "stops": {
+          "items": {
+            "properties": {
+              "accessorials": {
+                "items": {
+                  "enum": [
+                    "APPOINTMENT_REQUESTED",
+                    "LIFTGATE",
+                    "CONVENTION_TRADESHOW",
+                    "CONSTRUCTION_SITE",
+                    "INSIDE_PICKUP_DELIVERY",
+                    "LIMITED_ACCESS",
+                    "FARM"
+                  ],
+                  "type": "string"
+                },
+                "type": "array",
+                "uniqueItems": true
+              },
+              "address": {
+                "properties": {
+                  "city": {
+                    "maxLength": 128,
+                    "type": "string"
+                  },
+                  "country": {
+                    "maxLength": 2,
+                    "type": "string"
+                  },
+                  "identification_code": {
+                    "maxLength": 256,
+                    "type": "string"
+                  },
+                  "line_1": {
+                    "maxLength": 256,
+                    "type": "string"
+                  },
+                  "line_2": {
+                    "maxLength": 256,
+                    "type": "string"
+                  },
+                  "postal_code": {
+                    "maxLength": 20,
+                    "type": "string"
+                  },
+                  "state_or_province": {
+                    "maxLength": 2,
+                    "type": "string"
+                  },
+                  "timezone": {
+                    "maxLength": 48,
+                    "type": "string"
+                  }
+                },
+                "required": ["line_1", "city", "state_or_province", "country", "postal_code"],
+                "title": "TenderRequestShipmentStopAddress",
+                "type": "object"
+              },
+              "company_name": {
+                "type": "string"
+              },
+              "contacts": {
+                "items": {
+                  "properties": {
+                    "email": {
+                      "format": "email",
+                      "type": "string"
+                    },
+                    "first_name": {
+                      "maxLength": 45,
+                      "type": "string"
+                    },
+                    "last_name": {
+                      "maxLength": 45,
+                      "type": "string"
+                    },
+                    "phone": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["first_name"],
+                  "title": "TenderRequestShipmentStopContact",
+                  "type": "object"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "earliest_pickup": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "latest_pickup": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "line_items": {
+                "items": {
+                  "properties": {
+                    "description": {
+                      "maxLength": 256,
+                      "type": "string"
+                    },
+                    "height": {
+                      "properties": {
+                        "unit": {
+                          "enum": ["IN", "FT"],
+                          "type": "string"
+                        },
+                        "value": {
+                          "format": "float",
+                          "minimum": 0,
+                          "type": "number"
+                        }
+                      },
+                      "required": ["unit", "value"],
+                      "title": "TenderRequestLength",
+                      "type": "object"
+                    },
+                    "length": {
+                      "properties": {
+                        "unit": {
+                          "enum": ["IN", "FT"],
+                          "type": "string"
+                        },
+                        "value": {
+                          "format": "float",
+                          "minimum": 0,
+                          "type": "number"
+                        }
+                      },
+                      "required": ["unit", "value"],
+                      "title": "TenderRequestLength",
+                      "type": "object"
+                    },
+                    "package_quantity": {
+                      "format": "int32",
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "package_type": {
+                      "enum": [
+                        "BAG",
+                        "BALE",
+                        "BOX",
+                        "BUCKET",
+                        "BUNDLE",
+                        "CAN",
+                        "CARTON",
+                        "CASE",
+                        "COIL",
+                        "CRATE",
+                        "CYLINDER",
+                        "DRUM",
+                        "FLOOR_LOADED",
+                        "PAIL",
+                        "PIECES",
+                        "PKG",
+                        "PLT",
+                        "REEL",
+                        "ROLL",
+                        "SKID",
+                        "TUBE"
+                      ],
+                      "type": "string"
+                    },
+                    "piece_quantity": {
+                      "format": "int32",
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "piece_type": {
+                      "enum": [
+                        "BAG",
+                        "BALE",
+                        "BOX",
+                        "BUCKET",
+                        "BUNDLE",
+                        "CAN",
+                        "CARTON",
+                        "CASE",
+                        "COIL",
+                        "CRATE",
+                        "CYLINDER",
+                        "DRUM",
+                        "PAIL",
+                        "PIECES",
+                        "REEL",
+                        "ROLL",
+                        "SKID",
+                        "TUBE"
+                      ],
+                      "type": "string"
+                    },
+                    "weight": {
+                      "properties": {
+                        "unit": {
+                          "enum": ["KG", "LBS"],
+                          "type": "string"
+                        },
+                        "value": {
+                          "minimum": 0,
+                          "type": "number"
+                        }
+                      },
+                      "required": ["unit", "value"],
+                      "title": "TenderRequestWeight",
+                      "type": "object"
+                    },
+                    "width": {
+                      "properties": {
+                        "unit": {
+                          "enum": ["IN", "FT"],
+                          "type": "string"
+                        },
+                        "value": {
+                          "format": "float",
+                          "minimum": 0,
+                          "type": "number"
+                        }
+                      },
+                      "required": ["unit", "value"],
+                      "title": "TenderRequestLength",
+                      "type": "object"
+                    }
+                  },
+                  "title": "TenderRequestShipmentStopLineItem",
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "reason": {
+                "enum": ["LOAD", "UNLOAD"],
+                "type": "string"
+              },
+              "sequence_id": {
+                "minimum": 1,
+                "type": "number"
+              },
+              "special_instructions": {
+                "type": "string"
+              }
+            },
+            "required": ["sequence_id", "reason", "address", "contacts"],
+            "title": "TenderRequestShipmentStop",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "tender_id": {
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "total_declared_value": {
+          "maxLength": 256,
+          "type": "string"
+        },
+        "weight": {
+          "properties": {
+            "unit": {
+              "enum": ["KG", "LBS"],
+              "type": "string"
+            },
+            "value": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": ["unit", "value"],
+          "title": "TenderRequestWeight",
+          "type": "object"
+        }
+      },
+      "required": ["stops", "charges"],
+      "title": "TenderRequestShipment",
+      "type": "object"
+    },
+    "vendor": {
+      "properties": {
+        "ff": {
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "mc": {
+          "type": "string"
+        },
+        "mx": {
+          "type": "string"
+        },
+        "nsc": {
+          "type": "string"
+        },
+        "scac": {
+          "type": "string"
+        },
+        "usdot": {
+          "type": "string"
+        }
+      },
+      "title": "TenderRequestVendor",
+      "type": "object"
+    }
+  },
+  "required": ["customer", "vendor", "shipment", "equipment"],
+  "title": "TenderRequest",
+  "type": "object",
+  "default": {
+    "customer": {
+      "duns": "string",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "name": "string"
+    },
+    "equipment": {
+      "temperature_control": {
+        "lower_limit": {
+          "unit": "C",
+          "value": 0
+        },
+        "upper_limit": {
+          "unit": "C",
+          "value": 0
+        }
+      },
+      "type_code": "BULK"
+    },
+    "isa": {
+      "external_edi_system_isa_id": "string",
+      "external_edi_system_isa_id_qualifier": "st"
+    },
+    "shipment": {
+      "accessorials": ["GUARANTEED"],
+      "bol_number": "string",
+      "charges": [
+        {
+          "category": "ACC",
+          "unit_amount": 0,
+          "unit_name": "string",
+          "unit_quantity": 0
+        }
+      ],
+      "drayage_booking_number": "string",
+      "drayage_chassis_number": "string",
+      "drayage_container_number": "string",
+      "drayage_seal_number": "string",
+      "expires_at": "1970-01-01T00:00:00.000Z",
+      "external_edi_system_shipment_id": "string",
+      "pickup_number": "string",
+      "pro_number": "string",
+      "purchase_order_number": "string",
+      "shipment_reference_id": "string",
+      "shipper_reference_id": "string",
+      "special_instructions": "string",
+      "stops": [
+        {
+          "accessorials": ["APPOINTMENT_REQUESTED"],
+          "address": {
+            "city": "string",
+            "country": "st",
+            "identification_code": "string",
+            "line_1": "string",
+            "line_2": "string",
+            "postal_code": "string",
+            "state_or_province": "st",
+            "timezone": "string"
+          },
+          "company_name": "string",
+          "contacts": [
+            {
+              "email": "user@example.com",
+              "first_name": "string",
+              "last_name": "string",
+              "phone": "string"
+            }
+          ],
+          "earliest_pickup": "1970-01-01T00:00:00.000Z",
+          "latest_pickup": "1970-01-01T00:00:00.000Z",
+          "line_items": [
+            {
+              "description": "string",
+              "height": {
+                "unit": "IN",
+                "value": 0
+              },
+              "length": {
+                "unit": "IN",
+                "value": 0
+              },
+              "package_quantity": 1,
+              "package_type": "BAG",
+              "piece_quantity": 1,
+              "piece_type": "BAG",
+              "weight": {
+                "unit": "KG",
+                "value": 0
+              },
+              "width": {
+                "unit": "IN",
+                "value": 0
+              }
+            }
+          ],
+          "reason": "LOAD",
+          "sequence_id": 0,
+          "special_instructions": "string"
+        }
+      ],
+      "tender_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "total_declared_value": "string",
+      "weight": {
+        "unit": "KG",
+        "value": 0
+      }
+    },
+    "vendor": {
+      "ff": "string",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "mc": "string",
+      "mx": "string",
+      "nsc": "string",
+      "scac": "string",
+      "usdot": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,199 @@
+{
+  "allOf": [
+    {
+      "description": "Triumph Pay vendor payment account create or update data",
+      "properties": {
+        "account_name": {
+          "description": "A nickname to identify the account. Only required for ACH_BANK payment type",
+          "type": "string"
+        },
+        "bank_account_data": {
+          "description": "Bank account data if payment_type is ACH_BANK",
+          "properties": {
+            "bank_account_number": {
+              "type": "string"
+            },
+            "bank_routing_number": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "payment_type": {
+          "description": "The payment type information to update",
+          "enum": ["ACH_BANK", "MAIL_CHECK", "FACTOR"],
+          "type": "string"
+        },
+        "vendor_billing_address": {
+          "allOf": [
+            {
+              "properties": {
+                "address_1": {
+                  "type": "string"
+                },
+                "address_2": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "created_at": {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "formatted_address": {
+                  "type": "string"
+                },
+                "id": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "latitude": {
+                  "format": "float",
+                  "type": "number"
+                },
+                "longitude": {
+                  "format": "float",
+                  "type": "number"
+                },
+                "phone_number": {
+                  "type": "string"
+                },
+                "postal_code": {
+                  "type": "string"
+                },
+                "state_province": {
+                  "type": "string"
+                },
+                "timezone": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "format": "date-time",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          ],
+          "description": "Mailing address data if payment_type is MAIL_CHECK"
+        },
+        "vendor_factor_company": {
+          "allOf": [
+            {
+              "properties": {
+                "address": {
+                  "properties": {
+                    "address_1": {
+                      "type": "string"
+                    },
+                    "address_2": {
+                      "type": "string"
+                    },
+                    "city": {
+                      "type": "string"
+                    },
+                    "country": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "formatted_address": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "latitude": {
+                      "format": "float",
+                      "type": "number"
+                    },
+                    "longitude": {
+                      "format": "float",
+                      "type": "number"
+                    },
+                    "phone_number": {
+                      "type": "string"
+                    },
+                    "postal_code": {
+                      "type": "string"
+                    },
+                    "state_province": {
+                      "type": "string"
+                    },
+                    "timezone": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "company_name": {
+                  "type": "string"
+                },
+                "created_at": {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "email": {
+                  "format": "email",
+                  "type": "string"
+                },
+                "id": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "triumph_pay_key": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "format": "date-time",
+                  "type": "string"
+                }
+              },
+              "required": ["company_name", "address"],
+              "type": "object"
+            }
+          ],
+          "description": "Factoring company data if payment_type is FACTOR"
+        }
+      },
+      "required": ["payment_type"],
+      "type": "object"
+    },
+    {
+      "properties": {
+        "id": {
+          "description": "Id of the particular payment account",
+          "format": "uuid",
+          "type": "string"
+        },
+        "letter_of_release_document": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "notice_of_assignment_document": {
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  ],
+  "type": "object",
+  "default": {
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "letter_of_release_document": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "notice_of_assignment_document": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

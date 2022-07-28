@@ -1,0 +1,200 @@
+{
+  "description": "Event which was automatically done by the shipwell system",
+  "properties": {
+    "answered_by_machine": {
+      "type": "boolean"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "conversation_status": {
+      "enum": ["busy", "canceled", "completed", "failed", "in-progress", "no-answer", "queued", "ringing"],
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "estimated_eta": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "estimated_location_name": {
+      "type": "string"
+    },
+    "id": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "parsed_message": {
+      "type": "string"
+    },
+    "recorded_audio": {
+      "description": "URL to an mp3 file holding recorded audio of the conversation of the event, if exists",
+      "type": "string"
+    },
+    "response_message": {
+      "type": "string"
+    },
+    "resulting_alert_level": {
+      "enum": ["HIGH", "MEDIUM", "LOW"],
+      "type": "string"
+    },
+    "scheduled_by_user": {
+      "properties": {
+        "avatar": {
+          "type": "string"
+        },
+        "company_id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "completed_onboarding": {
+          "type": "boolean"
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "custom_data": {
+          "additionalProperties": {},
+          "description": "Custom data for User",
+          "type": "object"
+        },
+        "default_shipment_tags": {
+          "description": "List of ShipmentTag ids",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "email": {
+          "type": "string"
+        },
+        "feature_flag_new_shipment_details": {
+          "type": "boolean"
+        },
+        "feature_flag_new_ui": {
+          "type": "boolean"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "is_quoting_limited_user": {
+          "type": "boolean"
+        },
+        "last_login": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "permissions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "phone_number": {
+          "type": "string"
+        },
+        "subscribed_to_loadboard": {
+          "type": "boolean"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": ["first_name", "last_name", "email"],
+      "type": "object"
+    },
+    "scheduled_for": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "shipment": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "source": {
+      "enum": ["CALL", "TEXT", "EMAIL"],
+      "type": "string"
+    },
+    "sub_type": {
+      "enum": ["LOCATION_CHECK_IN", "PRE_PICKUP"],
+      "type": "string"
+    },
+    "timeline_ordering_timestamp": {
+      "description": "Timestamp used in the default ordering of events.\nWill use completed_at if it is not null, otherwise\nwill fall back on scheduled_for.\n",
+      "format": "date-time",
+      "type": "string"
+    },
+    "type": {
+      "enum": ["CALL", "TEXT", "EMAIL"],
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "type": "string"
+    }
+  },
+  "required": ["scheduled_for", "source", "type", "sub_type"],
+  "type": "object",
+  "default": {
+    "answered_by_machine": true,
+    "completed_at": "1970-01-01T00:00:00.000Z",
+    "conversation_status": "busy",
+    "created_at": "1970-01-01T00:00:00.000Z",
+    "estimated_eta": "1970-01-01T00:00:00.000Z",
+    "estimated_location_name": "string",
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "parsed_message": "string",
+    "recorded_audio": "string",
+    "response_message": "string",
+    "resulting_alert_level": "HIGH",
+    "scheduled_by_user": {
+      "avatar": "string",
+      "company_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "completed_onboarding": true,
+      "created_at": "1970-01-01T00:00:00.000Z",
+      "custom_data": {},
+      "default_shipment_tags": ["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
+      "email": "string",
+      "feature_flag_new_shipment_details": true,
+      "feature_flag_new_ui": true,
+      "first_name": "string",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "is_quoting_limited_user": true,
+      "last_login": "1970-01-01T00:00:00.000Z",
+      "last_name": "string",
+      "password": "string",
+      "permissions": ["string"],
+      "phone_number": "string",
+      "subscribed_to_loadboard": true,
+      "timezone": "string",
+      "updated_at": "1970-01-01T00:00:00.000Z"
+    },
+    "scheduled_for": "1970-01-01T00:00:00.000Z",
+    "shipment": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "source": "CALL",
+    "sub_type": "LOCATION_CHECK_IN",
+    "timeline_ordering_timestamp": "1970-01-01T00:00:00.000Z",
+    "type": "CALL",
+    "updated_at": "1970-01-01T00:00:00.000Z"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

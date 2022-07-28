@@ -1,0 +1,75 @@
+{
+  "description": "Preferences associated with a company",
+  "properties": {
+    "auto_archive_shipment_days": {
+      "format": "int32",
+      "type": "integer"
+    },
+    "auto_archive_shipment_states": {
+      "enum": [
+        "appointment_pending",
+        "at_pickup",
+        "at_delivery",
+        "auction_running",
+        "cancelled",
+        "carrier_confirmed",
+        "delayed",
+        "delivered",
+        "dispatched",
+        "draft",
+        "in_transit",
+        "out_for_delivery",
+        "quote_accepted",
+        "quoting",
+        "reconciled",
+        "scheduled",
+        "tendered"
+      ],
+      "type": "string"
+    },
+    "automated_check_calling_enabled": {
+      "type": "boolean"
+    },
+    "billing_instructions": {
+      "type": "string"
+    },
+    "country": {
+      "enum": ["US", "CA"],
+      "type": "string"
+    },
+    "custom_carrier_invoicing_instructions": {
+      "type": "string"
+    },
+    "default_carrier_status": {
+      "enum": ["ACTIVE", "INACTIVE", "DO_NOT_USE"],
+      "type": "string"
+    },
+    "rate_confirmation_terms": {
+      "type": "string"
+    },
+    "send_bol_to_vendor": {
+      "type": "boolean"
+    },
+    "send_rate_confirmation_to_vendor": {
+      "type": "boolean"
+    },
+    "use_custom_carrier_invoicing_instructions": {
+      "type": "boolean"
+    }
+  },
+  "type": "object",
+  "default": {
+    "auto_archive_shipment_days": 1,
+    "auto_archive_shipment_states": "appointment_pending",
+    "automated_check_calling_enabled": true,
+    "billing_instructions": "string",
+    "country": "US",
+    "custom_carrier_invoicing_instructions": "string",
+    "default_carrier_status": "ACTIVE",
+    "rate_confirmation_terms": "string",
+    "send_bol_to_vendor": true,
+    "send_rate_confirmation_to_vendor": true,
+    "use_custom_carrier_invoicing_instructions": true
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

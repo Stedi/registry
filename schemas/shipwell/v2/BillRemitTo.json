@@ -1,0 +1,135 @@
+{
+  "description": "Where the bill needs to be paid to",
+  "properties": {
+    "created_at": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": "string"
+    },
+    "id": {
+      "format": "uuid",
+      "readOnly": true,
+      "type": "string"
+    },
+    "relationship": {
+      "description": "If SELF, carrier will be remit_to person.\nIf FACTOR_COMPANY and remit_to_info has id of existing carrier factoring, the factoring company will be the remit_to.\nIf FACTOR_COMPANY and remit_to_info does not have an id of an existing carrier factoring company, a new factor company will be created and\nadded as remit_to.\nIf FACTOR_COMPANY and no remit_to_info, the vendor_factoring_company on carrier relationship will be the remit_to.\nOtherwise carrier will be set as remit_to.\n",
+      "enum": ["SELF", "FACTOR_COMPANY"],
+      "type": "string"
+    },
+    "remit_to_info": {
+      "properties": {
+        "address": {
+          "properties": {
+            "address_1": {
+              "type": "string"
+            },
+            "address_2": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "created_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "formatted_address": {
+              "type": "string"
+            },
+            "id": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "latitude": {
+              "format": "float",
+              "type": "number"
+            },
+            "longitude": {
+              "format": "float",
+              "type": "number"
+            },
+            "phone_number": {
+              "type": "string"
+            },
+            "postal_code": {
+              "type": "string"
+            },
+            "state_province": {
+              "type": "string"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "updated_at": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "company_name": {
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "email": {
+          "format": "email",
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "default": {
+    "created_at": "1970-01-01T00:00:00.000Z",
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "relationship": "SELF",
+    "remit_to_info": {
+      "address": {
+        "address_1": "string",
+        "address_2": "string",
+        "city": "string",
+        "country": "string",
+        "created_at": "1970-01-01T00:00:00.000Z",
+        "formatted_address": "string",
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "latitude": 0,
+        "longitude": 0,
+        "phone_number": "string",
+        "postal_code": "string",
+        "state_province": "string",
+        "timezone": "string",
+        "updated_at": "1970-01-01T00:00:00.000Z"
+      },
+      "company_name": "string",
+      "created_at": "1970-01-01T00:00:00.000Z",
+      "email": "user@example.com",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "updated_at": "1970-01-01T00:00:00.000Z"
+    },
+    "updated_at": "1970-01-01T00:00:00.000Z"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

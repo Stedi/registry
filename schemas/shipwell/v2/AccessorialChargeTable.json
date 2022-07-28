@@ -1,0 +1,238 @@
+{
+  "description": "Rate table for calculating accessorial prices",
+  "properties": {
+    "additional_instructions": {
+      "type": "string"
+    },
+    "calculation_rows": {
+      "items": {
+        "description": "Specification for how a price for a certain accessorial should be determined",
+        "properties": {
+          "accessorial": {
+            "type": "string"
+          },
+          "calculation_description": {
+            "type": "string"
+          }
+        },
+        "required": ["accessorial", "calculation_description"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "carrier_relationships": {
+      "items": {
+        "format": "uuid",
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "company": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "created_by_user": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "destinations": {
+      "items": {
+        "properties": {
+          "address_1": {
+            "type": "string"
+          },
+          "address_2": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "formatted_address": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "latitude": {
+            "format": "float",
+            "type": "number"
+          },
+          "longitude": {
+            "format": "float",
+            "type": "number"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "postal_code": {
+            "type": "string"
+          },
+          "state_province": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "end_date": {
+      "format": "date",
+      "type": "string"
+    },
+    "equipment_types": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "external_reference": {
+      "description": "Unique identifier for the rate table within an external system",
+      "type": "string"
+    },
+    "modes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "name": {
+      "type": "string"
+    },
+    "origins": {
+      "items": {
+        "properties": {
+          "address_1": {
+            "type": "string"
+          },
+          "address_2": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "formatted_address": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "latitude": {
+            "format": "float",
+            "type": "number"
+          },
+          "longitude": {
+            "format": "float",
+            "type": "number"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "postal_code": {
+            "type": "string"
+          },
+          "state_province": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "start_date": {
+      "format": "date",
+      "type": "string"
+    },
+    "status": {
+      "enum": ["ACTIVE", "INACTIVE"],
+      "type": "string"
+    }
+  },
+  "required": ["calculation_rows", "name", "status"],
+  "type": "object",
+  "default": {
+    "additional_instructions": "string",
+    "calculation_rows": [
+      {
+        "accessorial": "string",
+        "calculation_description": "string"
+      }
+    ],
+    "carrier_relationships": ["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
+    "company": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "created_by_user": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "destinations": [
+      {
+        "address_1": "string",
+        "address_2": "string",
+        "city": "string",
+        "country": "string",
+        "created_at": "1970-01-01T00:00:00.000Z",
+        "formatted_address": "string",
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "latitude": 0,
+        "longitude": 0,
+        "phone_number": "string",
+        "postal_code": "string",
+        "state_province": "string",
+        "timezone": "string",
+        "updated_at": "1970-01-01T00:00:00.000Z"
+      }
+    ],
+    "end_date": "1970-01-01",
+    "equipment_types": ["string"],
+    "external_reference": "string",
+    "modes": ["string"],
+    "name": "string",
+    "origins": [
+      {
+        "address_1": "string",
+        "address_2": "string",
+        "city": "string",
+        "country": "string",
+        "created_at": "1970-01-01T00:00:00.000Z",
+        "formatted_address": "string",
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "latitude": 0,
+        "longitude": 0,
+        "phone_number": "string",
+        "postal_code": "string",
+        "state_province": "string",
+        "timezone": "string",
+        "updated_at": "1970-01-01T00:00:00.000Z"
+      }
+    ],
+    "start_date": "1970-01-01",
+    "status": "ACTIVE"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

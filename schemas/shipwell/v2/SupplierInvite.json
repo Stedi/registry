@@ -1,0 +1,80 @@
+{
+  "description": "A user's supplier invite",
+  "properties": {
+    "allow_autobook": {
+      "type": "boolean"
+    },
+    "booked_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "company": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "customer": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "express_delivery": {
+      "type": "boolean"
+    },
+    "key": {
+      "type": "string"
+    },
+    "message_to_supplier": {
+      "type": "string"
+    },
+    "po_number": {
+      "type": "string"
+    },
+    "revoked_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "sent_by_user": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "shipment": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "shipment_created_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "status": {
+      "enum": ["BOOKED", "CANCELLED", "REQUESTED", "UNABLE_TO_BOOK", "PENDING_BOOKING"],
+      "type": "string"
+    },
+    "supplier_email_address": {
+      "format": "email",
+      "type": "string"
+    }
+  },
+  "required": ["supplier_email_address"],
+  "type": "object",
+  "default": {
+    "allow_autobook": true,
+    "booked_at": "1970-01-01T00:00:00.000Z",
+    "company": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "created_at": "1970-01-01T00:00:00.000Z",
+    "customer": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "express_delivery": true,
+    "key": "string",
+    "message_to_supplier": "string",
+    "po_number": "string",
+    "revoked_at": "1970-01-01T00:00:00.000Z",
+    "sent_by_user": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "shipment": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "shipment_created_at": "1970-01-01T00:00:00.000Z",
+    "status": "BOOKED",
+    "supplier_email_address": "user@example.com"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

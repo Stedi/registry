@@ -1,0 +1,57 @@
+{
+  "properties": {
+    "error": {
+      "type": "string"
+    },
+    "error_description": {
+      "type": "string"
+    },
+    "field_errors": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "type": "object"
+    },
+    "field_errors_condensed": {
+      "items": {
+        "properties": {
+          "field_errors": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "field_name": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "non_field_errors": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "required": ["error", "error_description"],
+  "type": "object",
+  "default": {
+    "error": "string",
+    "error_description": "string",
+    "field_errors": {},
+    "field_errors_condensed": [
+      {
+        "field_errors": ["string"],
+        "field_name": "string"
+      }
+    ],
+    "non_field_errors": ["string"]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

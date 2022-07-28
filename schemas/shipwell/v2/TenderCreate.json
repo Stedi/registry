@@ -1,0 +1,141 @@
+{
+  "allOf": [
+    {
+      "properties": {
+        "charge_line_items": {
+          "items": {
+            "properties": {
+              "category": {
+                "description": "Code the charge category for this line item",
+                "type": "string"
+              },
+              "unit_amount": {
+                "description": "Amount of a single unit of this line item",
+                "type": "number"
+              },
+              "unit_amount_currency": {
+                "description": "3 letter code of currency for this line item. If not provided, assumed to be USD.",
+                "maxLength": 3,
+                "minLength": 3,
+                "type": "string"
+              },
+              "unit_name": {
+                "description": "Name of charge",
+                "type": "string"
+              },
+              "unit_quantity": {
+                "description": "Quantity of this line item",
+                "type": "number"
+              }
+            },
+            "required": ["unit_amount", "unit_name", "unit_quantity"],
+            "title": "TenderChargeLineItem",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "delivery_date": {
+          "description": "requested delivery date for this tender (in YYYY-MM-DD format)",
+          "format": "date",
+          "type": "string"
+        },
+        "earliest_pickup_date": {
+          "description": "Earliest date tender is available for pickup (in YYYY-MM-DD format)",
+          "format": "date",
+          "type": "string"
+        },
+        "earliest_pickup_time": {
+          "description": "Earliest time tender is available for pickup (in HH:MM:SS format)",
+          "type": "string"
+        },
+        "equipment_type": {
+          "description": "machine_readable string of the EquipmentType requested for this tender.",
+          "type": "string"
+        },
+        "error_message": {
+          "description": "Open-ended field for error information regarding this tender",
+          "type": "string"
+        },
+        "expires_at": {
+          "description": "Datetime that this tender expires at.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "info_message": {
+          "description": "Open-ended field for other information regarding this tender e.g special instructions",
+          "type": "string"
+        },
+        "lane_type": {
+          "description": "machine_readable string of the LaneType (formerly QuoteLaneType) requested for this tender.",
+          "enum": ["DIRECT", "INTERLINE", "UNSPECIFIED"],
+          "type": "string"
+        },
+        "latest_pickup_date": {
+          "description": "Latest date tender is available for pickup (in YYYY-MM-DD format)",
+          "format": "date",
+          "type": "string"
+        },
+        "latest_pickup_time": {
+          "description": "Latest time tender is available for pickup (in HH:MM:SS format)",
+          "type": "string"
+        },
+        "reference_number": {
+          "description": "Reference number/string for this tender. Primarially for references from external systems.",
+          "type": "string"
+        },
+        "transit_days": {
+          "description": "Number of days scheduled for transit",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    {
+      "properties": {
+        "carrier": {
+          "description": "UUID of the carrier for the company the shipment is being tendered to",
+          "format": "uuid",
+          "type": "string"
+        },
+        "involved_tender_to_company_users": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "mode": {
+          "description": "Id of the shipment mode",
+          "format": "int32",
+          "type": "integer"
+        },
+        "service_level": {
+          "description": "Id of the service level type",
+          "format": "int32",
+          "type": "integer"
+        },
+        "shipment": {
+          "description": "UUID of the shipment this tender is for",
+          "format": "uuid",
+          "type": "string"
+        },
+        "tender_to_company": {
+          "description": "UUID of the company to tender this shipment to",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "required": ["shipment", "tender_to_company"],
+      "type": "object"
+    }
+  ],
+  "default": {
+    "carrier": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "involved_tender_to_company_users": ["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
+    "mode": 1,
+    "service_level": 1,
+    "shipment": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "tender_to_company": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

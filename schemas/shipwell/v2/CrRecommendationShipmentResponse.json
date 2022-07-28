@@ -1,0 +1,257 @@
+{
+  "allOf": [
+    {
+      "properties": {
+        "dropoff_city": {
+          "type": "string"
+        },
+        "dropoff_lat": {
+          "maximum": 90,
+          "minimum": -90,
+          "type": "number"
+        },
+        "dropoff_long": {
+          "maximum": 180,
+          "minimum": -180,
+          "type": "number"
+        },
+        "dropoff_state": {
+          "description": "Two letter abreviation of dropoff state",
+          "maxLength": 2,
+          "minLength": 2,
+          "type": "string"
+        },
+        "equipment_type": {
+          "description": "Type of equipment required.",
+          "enum": [
+            "AUTO_CARRIER",
+            "AUTOHAULER",
+            "B_TRAIN",
+            "BULK",
+            "CONESTOGA",
+            "CONTAINER",
+            "CONTAINER_BREAK_BULK",
+            "CONTAINER_STANDARD_20_FOOT",
+            "CONTAINER_STANDARD_40_FOOT",
+            "CONTAINER_FLAT_TRACK_20_FOOT",
+            "CONTAINER_FLAT_TRACK_40_FOOT",
+            "CONTAINER_HEAVY_TESTED_20_FOOT",
+            "CONTAINER_HIGH_CUBE_40_FOOT",
+            "CONTAINER_HIGH_CUBE_45_FOOT",
+            "CONTAINER_INSULATED",
+            "CONTAINER_ISO_TANK_20_FOOT",
+            "CONTAINER_ISO_TANK_24_FOOT",
+            "CONTAINER_ISO_TANK_40_FOOT",
+            "CONTAINER_OPEN_TOP_20_FOOT",
+            "CONTAINER_OPEN_TOP_40_FOOT",
+            "CONTAINER_REEFER_20_FOOT",
+            "CONTAINER_REEFER_40_FOOT",
+            "CONTAINER_REFRIGERATED",
+            "CONVEYOR",
+            "CURTAIN_SIDE",
+            "DOUBLE_DROP",
+            "DROP_DECK",
+            "DROP_DECK_LANDOLL",
+            "DRY_VAN",
+            "DUMP_TRAILER",
+            "FLATBED",
+            "FLATBED_53_FOOT",
+            "FLATBED_AIR_RIDE",
+            "FLATBED_CONESTOGA",
+            "FLATBED_DOUBLE",
+            "FLATBED_HOTSHOT",
+            "FLATBED_MAXI",
+            "FLATBED_OVERDIMENSION",
+            "HOPPER",
+            "HOPPER_BOTTOM",
+            "INSULATED_VAN",
+            "LOWBOY",
+            "LOWBOY_OVERDIMENSION",
+            "MOVING_VAN",
+            "OTHER",
+            "PNEUMATIC",
+            "POWER_ONLY",
+            "REEFER",
+            "REEFER_AIR_RIDE",
+            "REEFER_DOUBLE",
+            "REEFER_INTERMODAL",
+            "REMOVABLE_GOOSENECK",
+            "STEP_DECK",
+            "STEPDECK_CONESTOGA",
+            "STRAIGHT_BOX_TRUCK",
+            "STRETCH_TRAILER",
+            "TANKER",
+            "TANKER_ALUMINUM",
+            "TANKER_INTERMODAL",
+            "TANKER_STEEL",
+            "TILT",
+            "TRUCK_AND_TRAILER",
+            "VAN_AIR_RIDE",
+            "VAN_DOUBLE",
+            "VAN_INSULATED",
+            "VAN_INTERMODAL",
+            "VAN_OPEN_TOP",
+            "VAN_ROLLER_BED",
+            "VAN_SPRINTER",
+            "VAN_TRIPLE",
+            "VAN_VENTED",
+            "VAN_WITH_CURTAINS"
+          ],
+          "type": "string"
+        },
+        "external_shipment_id": {
+          "description": "Shipment id in external system.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "pickup_city": {
+          "type": "string"
+        },
+        "pickup_lat": {
+          "maximum": 90,
+          "minimum": -90,
+          "type": "number"
+        },
+        "pickup_long": {
+          "maximum": 180,
+          "minimum": -180,
+          "type": "number"
+        },
+        "pickup_state": {
+          "description": "Two letter abreviation of pickup state",
+          "maxLength": 2,
+          "minLength": 2,
+          "type": "string"
+        },
+        "pickup_time": {
+          "description": "Pickup time in ISO-8601 (yyyy-mm-ddThh:mm:ss.sssss+tz.info)",
+          "type": "string"
+        }
+      },
+      "required": [
+        "external_shipment_id",
+        "equipment_type",
+        "dropoff_city",
+        "dropoff_state",
+        "dropoff_lat",
+        "dropoff_long",
+        "pickup_city",
+        "pickup_state",
+        "pickup_lat",
+        "pickup_long",
+        "pickup_time"
+      ],
+      "type": "object"
+    },
+    {
+      "properties": {
+        "id": {
+          "description": "id of RecommendationShipment created on server.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "recommendations": {
+          "items": {
+            "properties": {
+              "carrier_city": {
+                "description": "Carrier HQ city",
+                "type": "string"
+              },
+              "carrier_name": {
+                "description": "Name of carrier",
+                "type": "string"
+              },
+              "carrier_phone": {
+                "description": "Contact phone information of carrier",
+                "type": "string"
+              },
+              "carrier_state": {
+                "description": "Carrier HQ state",
+                "type": "string"
+              },
+              "closest_driver_distance": {
+                "description": "Distance of closest asset of carrier from pickup (miles)",
+                "type": "number"
+              },
+              "destination_area_code_matched": {
+                "description": "True if carrier phone area code has overlap with pickup location",
+                "type": "boolean"
+              },
+              "destination_carrier_distance": {
+                "description": "Distance of carrier HQ from dropoff (miles)",
+                "type": "number"
+              },
+              "external_shipment_id": {
+                "description": "External id of shipment assocaited with.",
+                "format": "uuid",
+                "type": "string"
+              },
+              "id": {
+                "description": "id of this recommendation",
+                "format": "uuid",
+                "type": "string"
+              },
+              "number_of_drivers_close": {
+                "description": "Number of assets of carrier within a specified radius of pickup",
+                "type": "number"
+              },
+              "number_of_trucks": {
+                "description": "Total number of assets carrier owns",
+                "type": "integer"
+              },
+              "origin_area_code_matched": {
+                "description": "True if carrier phone area code has overlap with pickup location",
+                "type": "boolean"
+              },
+              "origin_carrier_distance": {
+                "description": "Distance of carrier HQ from pickup (miles)",
+                "type": "number"
+              },
+              "recommendation_score": {
+                "description": "rating of this recommendation. On a scale of 0-5",
+                "type": "number"
+              },
+              "shipwell_lane_shipments_count": {
+                "description": "Number of times carrier covered this lane for SW",
+                "type": "number"
+              },
+              "shipwell_shipments_count": {
+                "description": "Number of times carrier covered ANY lane for SW",
+                "type": "number"
+              }
+            },
+            "required": ["external_shipment_id", "carrier_name", "carrier_phone"],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["id", "recommendations"],
+      "type": "object"
+    }
+  ],
+  "default": {
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "recommendations": [
+      {
+        "carrier_city": "string",
+        "carrier_name": "string",
+        "carrier_phone": "string",
+        "carrier_state": "string",
+        "closest_driver_distance": 0,
+        "destination_area_code_matched": true,
+        "destination_carrier_distance": 0,
+        "external_shipment_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "number_of_drivers_close": 0,
+        "number_of_trucks": 1,
+        "origin_area_code_matched": true,
+        "origin_carrier_distance": 0,
+        "recommendation_score": 0,
+        "shipwell_lane_shipments_count": 0,
+        "shipwell_shipments_count": 0
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

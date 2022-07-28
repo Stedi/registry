@@ -122,15 +122,7 @@ export class OpenAPIProvider implements BaseProvider {
       .filter(([key]) => !bundle.entities || bundle.entities.includes(key))
       .map(([key, value]) => ({
         name: key,
-        schema: this.sanitizeSchemaFunction ? this.sanitizeSchemaFunction(value) : sanitizeSchema(value),
+        schema: this.sanitizeSchemaFunction ? this.sanitizeSchemaFunction(value) : value,
       }));
   }
-}
-
-function sanitizeSchema(schema: JSONSchema): JSONSchema {
-  return JSON.parse(
-    JSON.stringify(schema, (_, value) => {
-      return value;
-    }),
-  );
 }

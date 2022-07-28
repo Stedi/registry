@@ -1,0 +1,73 @@
+{
+  "allOf": [
+    {
+      "properties": {
+        "address": {
+          "properties": {
+            "city": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "postal_code": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "event_description": {
+          "type": "string"
+        },
+        "lat": {
+          "format": "float",
+          "type": "number"
+        },
+        "location_name": {
+          "description": "Friendly name if available e.g. Austin, TX",
+          "type": "string"
+        },
+        "lon": {
+          "format": "float",
+          "type": "number"
+        },
+        "odometer": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "speed": {
+          "description": "GPS speed in Km/h",
+          "format": "int32",
+          "type": "integer"
+        },
+        "update_time": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": ["update_time"],
+      "type": "object"
+    },
+    {
+      "properties": {
+        "unit_id": {
+          "type": "string"
+        },
+        "vehicle_id": {
+          "type": "string"
+        }
+      },
+      "required": ["vehicle_id"],
+      "type": "object"
+    }
+  ],
+  "description": "Vehicle Location Data",
+  "default": {
+    "unit_id": "string",
+    "vehicle_id": "string"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
